@@ -32,7 +32,7 @@ class Category(models.Model):
         ('Both', 'Both'),
     )
     name = models.CharField(max_length=200)
-    model = models.CharField(max_length=1, choices=MODELS)
+    model = models.CharField(max_length=8, choices=MODELS)
     class Meta:
         verbose_name_plural = 'categories'
     def __unicode__(self):
