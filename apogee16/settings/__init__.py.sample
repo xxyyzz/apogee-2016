@@ -1,0 +1,5 @@
+from .local import *
+SECRET_KEY = 'key'
+DATABASE_NAME = 'name'
+DATABASE_USER = 'user'
+DATABASE_PASSWORD = 'password'
