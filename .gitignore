@@ -1,3 +1,4 @@
 /apogee16/settings/__init__.py
 db.sqlite3
 *.pyc
+/media/
