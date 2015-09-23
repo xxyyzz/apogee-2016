@@ -2,8 +2,14 @@ from registrations import views
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^$', views.home)
-    #url(r'^username/select/$', views.username_select),
+    url(r'^$', views.home),
+    url(r'^papers/instructions/$', views.papersInstructions),
+    url(r'^papers/form/$', views.papersForm),
+    url(r'^projects/instructions/$', views.projectsInstructions),
+    url(r'^projects/form/$', views.projectsForm),
+    
+
+
     #url(r'^username/set/(?P<user_id>\d+)/$', views.username_set),
     #url(r'^username/save/(?P<user_id>\d+)/$', views.username_save),
     #url(r'^dashboard/$', views.dashboard, name='dashboard'),
