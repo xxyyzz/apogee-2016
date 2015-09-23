@@ -118,7 +118,7 @@ function prep_papers() {
 
 function init_papers_instr(obj) {
 	$.ajax({
-		url : '2016/registrations/papers/instructions/',
+		url : 'papers/instructions/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
@@ -129,7 +129,7 @@ function init_papers_instr(obj) {
 
 function init_papers_form(obj) {
 	$.ajax({
-		url : '2016/registrations/papers/forms/',
+		url : 'papers/forms/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
@@ -152,7 +152,7 @@ function prep_projects() {
 
 function init_projects_instr(obj) {
 	$.ajax({
-		url : '2016/registrations/projects/instructions/',
+		url : 'projects/instructions/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
@@ -163,7 +163,7 @@ function init_projects_instr(obj) {
 
 function init_projects_form(obj) {
 	$.ajax({
-		url : '2016/registrations/projects/forms/',
+		url : 'projects/forms/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
