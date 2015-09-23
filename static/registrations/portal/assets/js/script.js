@@ -186,7 +186,7 @@ function prep_check() {
 
 function init_check_form(obj) {
 	$.ajax({
-		url : 'assets/partials/check_form.html',
+		url : 'assets/partials/check/form/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
