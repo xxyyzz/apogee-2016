@@ -11,13 +11,13 @@ def papersInstructions(request) :
 	return render(request, "portal/partials/papers_main.html")
 
 def papersForm(request) :
-	return render(request, "portal/papers_form.html")
+	return render(request, "portal/partials/papers_form.html")
 
 def projectsInstructions(request) :
 	return render(request, "portal/partials/projects_main.html")
 
 def projectsForm(request) :
-	return render(request, "portal/projects_form.html")
+	return render(request, "portal/partials/projects_form.html")
 
 def checkForm(request) :
 	return render(request, "portal/partials/check_form.html")

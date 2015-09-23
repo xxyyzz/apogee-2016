@@ -129,7 +129,7 @@ function init_papers_instr(obj) {
 
 function init_papers_form(obj) {
 	$.ajax({
-		url : 'papers/forms/',
+		url : 'papers/form/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
@@ -163,7 +163,7 @@ function init_projects_instr(obj) {
 
 function init_projects_form(obj) {
 	$.ajax({
-		url : 'projects/forms/',
+		url : 'projects/form/',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);
