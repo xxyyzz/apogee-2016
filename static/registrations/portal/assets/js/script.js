@@ -180,13 +180,13 @@ function init_projects_status(obj) {
 /* ------------------------ FUNCTION FOR CHECK STATUS --------------------------------*/
 
 function prep_check() {
-	changeLinkFocus('projects');
-	createRipple('#0277BD');
+	changeLinkFocus('check');
+	createRipple('#c92b3c');
 }
 
 function init_check_form(obj) {
 	$.ajax({
-		url : 'assets/partials/projects_form.html',
+		url : 'assets/partials/check_form.html',
 		method : 'GET',
 		success : function(data) {
 			$(".body-box").html(data);

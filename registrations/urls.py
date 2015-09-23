@@ -7,7 +7,9 @@ urlpatterns = [
     url(r'^papers/form/$', views.papersForm),
     url(r'^projects/instructions/$', views.projectsInstructions),
     url(r'^projects/form/$', views.projectsForm),
-    
+    url(r'^check/form/$', views.checkForm),
+    url(r'^check/status/$', views.checkStatus),
+        
 
 
     #url(r'^username/set/(?P<user_id>\d+)/$', views.username_set),

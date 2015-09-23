@@ -19,5 +19,11 @@ def projectsInstructions(request) :
 def projectsForm(request) :
 	return render(request, "portal/projects_form.html")
 
+def checkForm(request) :
+	return render(request, "portal/partials/check_form.html")
+
+def checkStatus(request) :
+	return render(request, "portal/check_status.html")
+
 
 # Create your views here.
