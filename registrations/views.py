@@ -5,6 +5,7 @@ from django.template import Context
 from django.http import HttpResponse
 from registrations.models import *
 
+
 def home(request) :
 	return render(request, "portal/index.html")
 
@@ -17,6 +18,9 @@ def papersForm(request) :
 	context['categories'] = list(a)
 	return render(request, "portal/partials/papers_form.html",context)
 
+def papersStatus(request) : 
+	return HttpResponse("hi !")
+
 def projectsInstructions(request) :
 	return render(request, "portal/partials/projects_main.html")
 
@@ -27,6 +31,9 @@ def projectsForm(request) :
 	b = Association.objects.all()
 	context['assocs'] = list(b)
 	return render(request, "portal/partials/projects_form.html", context)
+
+def projectsStatus(request) : 
+	return HttpResponse("h1 !")
 
 def checkForm(request) :
 	return render(request, "portal/partials/check_form.html")

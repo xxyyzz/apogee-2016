@@ -1,76 +1,197 @@
-<div class="col-md-6 col-md-offset-5 col-sm-10 col-sm-offset-1 form-wrapper">
-	<div class="row">
-		<div class="input-field">
-			<div class="col-xs-12 form-subhead">
-				NAME OF THE PAPER
-			</div>
-			<div class="input-field col s12 no-label">
-         		<textarea id="paper-name" class="materialize-textarea"></textarea>
-        	</div>
-		</div>
-		<div class="col-xs-12 form-subhead">
-			AUTHOR
-		</div>
-		<div class="input-field col-sm-6">
-     		<input id="name" type="text" >
-      		<label for="name">Name</label>
-    	</div>
-    	<div class="input-field col-sm-6">
-     		<input id="phone" type="text" >
-      		<label for="phone">Phone</label>
-    	</div>
-    	<div class="input-field col-sm-12">
-     		<input id="email" type="text" >
-      		<label for="email">Email Address</label>
-    	</div>
-    	<div class="input-field col-sm-12">
-     		<textarea id="address" class="materialize-textarea"></textarea>
-     		<label for="address">Postal Address for Correspondence</label>
-    	</div>
-    	<div class="col-xs-12 form-subhead">
-			CO-AUTHOR
-		</div>
-		<div class="input-field col-sm-6">
-     		<input id="name" type="text" >
-      		<label for="name">Name</label>
-    	</div>
-    	<div class="input-field col-sm-6">
-     		<input id="phone" type="text" >
-      		<label for="phone">Phone</label>
-    	</div>
-    	<div class="input-field col-sm-12">
-     		<input id="email" type="text" >
-      		<label for="email">Email Address</label>
-    	</div>
-    	<div class="col-xs-12 form-subhead">
-			COLLEGE 
-		</div>
-		<div class="input-field no-label col-sm-12">
-     		<input id="name" type="text" >
-    	</div>
-    	<div class="col-xs-6 form-subhead">
-			CATEGORY 
-		</div>
-		<div class=" no-label col-sm-12">
-     		<select class="browser-default">
-		      <option value="" disabled selected>...</option>
-              {% for cat in categories %}
-		      <option value="{{cat}}">{{cat}}</option>
-		      {% endfor %}
-    		</select>
-    	</div>
-    	<br><br>
-    	<div class="col-xs-6 form-subhead">
-			UPLOAD ABSTRACT 
-		</div>
-    	<div class="file-field input-field col-sm-12">
-    		<div class="waves-effect red darken-3 btn">
-        		<span>File</span>
-        		<input type="file">
-      		</div>
-      		<div class="file-path-wrapper">
-        		<input class="file-path validate" type="text">
-      		</div>
-    	</div>
-	</div>                
+<div class="col-md-5 form-head">
+    Paper Abstract Submission
 </div>
+<div class="col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 form-wrapper">
+    <form id="paper-abstract-form">
+    	<div class="row">
+    		<div class="input-field">
+    			<div class="col-xs-12 form-subhead">
+    				NAME OF THE PAPER
+    			</div>
+    			<div class="input-field col s12 no-label">
+             		<textarea id="paper-name" required class="materialize-textarea"></textarea>
+            	</div>
+    		</div>
+    		<div class="col-xs-12 form-subhead">
+    			AUTHOR
+    		</div>
+    		<div class="input-field col-sm-6">
+         		<input id="author-name" required type="text" >
+          		<label for="author-name">Name</label>
+        	</div>
+        	<div class="input-field col-sm-6">
+         		<input id="author-phone" required type="text" >
+          		<label for="author-phone">Phone</label>
+        	</div>
+        	<div class="input-field col-sm-12">
+         		<input id="author-email" required type="text" >
+          		<label for="author-email">Email Address</label>
+        	</div>
+        	<div class="input-field col-sm-12">
+         		<textarea id="author-address" required class="materialize-textarea"></textarea>
+         		<label for="author-address">Postal Address for Correspondence</label>
+        	</div>
+        	<div class="col-xs-12 form-subhead">
+    			CO-AUTHOR
+    		</div>
+    		<div class="input-field col-sm-6">
+         		<input id="co-author-name" type="text" >
+          		<label for="co-author-name">Name</label>
+        	</div>
+        	<div class="input-field col-sm-6">
+         		<input id="co-author-phone" type="text" >
+          		<label for="co-author-phone">Phone</label>
+        	</div>
+        	<div class="input-field col-sm-12">
+         		<input id="co-author-email" type="text" >
+          		<label for="co-author-email">Email Address</label>
+        	</div>
+        	<div class="col-xs-12 form-subhead">
+    			COLLEGE 
+    		</div>
+    		<div class="input-field no-label col-sm-12">
+         		<input id="college" requied type="text" >
+        	</div>
+        	<div class="col-xs-6 form-subhead">
+    			CATEGORY 
+    		</div>
+    		<div class=" no-label col-sm-12">
+         		<select id="category" requred class="browser-default">
+    		      <option value="" disabled selected>...</option>
+                  {% for cat in categories %}
+    		      <option value="{{cat}}">{{cat}}</option>
+    		      {% endfor %}
+        		</select>
+        	</div>
+        	<br><br>
+        	<div class="col-xs-6 form-subhead">
+    			UPLOAD ABSTRACT 
+    		</div>
+        	<div class="file-field input-field col-sm-12">
+        		<div class="waves-effect  light-blue darken-3 btn">
+            		<span>File</span>
+            		<input required id="abstract-file" type="file">
+          		</div>
+          		<div class="file-path-wrapper">
+            		<input class="file-path" type="text">
+          		</div>
+        	</div>
+    	</div>  
+        <div class="row">
+        <br>
+            <div class="col-xs-12" style="text-align: center">
+                <input class="waves-effect red darken-3 btn" type="submit">
+            </div>
+        </div>
+    </form>              
+</div>
+
+<script>
+    var abstract;
+
+    $("input#abstract-file").on('change', function(e) {
+        abstract = event.target.files;
+    });
+ 
+
+    $("form#paper-abstract-form").submit(function(e) {
+        e.preventDefault();
+        if(validate_paper_submit() == 0) {
+            var dat = collect_data();
+
+            $.ajax({
+            url: 'papers/status/',
+            type: 'POST',
+            data: dat,
+            cache: false,
+            headers : {
+                "X-CSRFToken" : getCookie('csrftoken')
+            },
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+
+            success: function(data)
+            {
+                console.log(data);
+            }
+        });
+        }
+    });
+
+
+    function collect_data() {
+        var data = new FormData() ;
+        data.append('paper-name', $("textarea#paper-name").val());
+        data.append('author-name', $("input#author-name").val());
+        data.append('author-phone', $("input#author-phone").val());
+        data.append('author-email', $("input#author-email").val());
+        data.append('author-address', $("textarea#author-address").val());
+        data.append('co-author-name', $("input#co-author-name").val());
+        data.append('co-author-phone', $("input#co-author-phone").val());
+        data.append('co-author-email', $("input#co-author-email").val());
+        data.append('college', $("input#college").val());
+        data.append('category', $("select#category").val());
+
+        $.each(abstract, function(key, value)
+        {
+            data.append(key, value);
+        });
+
+        return data;
+    }
+
+
+    function validate_paper_submit() {
+        var count = 0;
+
+        // Check for email...
+        var re_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        var en_email1 = $("input#author-email").val();
+        if(!(re_email.test(en_email1))) {
+            // author email error
+            count++;
+        }
+        if($("input#co-author-email").val() != "") {
+            var en_email2 = $("input#co-author-email").val();
+            if(!(re_email.test(en_email2))) {
+                //co-author email error
+                count++;
+            }
+        }
+
+        // Check for phone...
+        var re_phone = /^([0-9]{10})$/i;
+        var en_phone1 = $("input#author-phone").val();
+        if(!(re_phone.test(en_phone1))) {
+            // error check for author phone number
+            count++;
+        }
+        if($("input#co-author-phone").val() != "") {
+            var en_phone2 = $("input#co-author-phone").val();
+            if(!(re_phone.test(en_phone2))) {
+                // error check for author phone number
+                count++;
+            }
+        }
+
+        //format check 
+        var file = $("input#abstract-file").val();
+        var extn = file.substring(file.lastIndexOf(".")+1);
+        if(extn != "pdf" && extn != "PDF" ) {
+            // error check for invalid file format
+            count++;
+        }
+
+        //category check 
+        if($("select#category").val() == null) {
+            // error check for category
+            count++;
+        }
+
+        console.log(count);
+
+        return count;
+    }
+
+</script>
