@@ -174,3 +174,7 @@ select {
 		display: none;
 	}
 }
+
+.add-member {
+	cursor: pointer;
+}

@@ -2,70 +2,248 @@
     Project Abstract Submission
 </div>
 <div class="col-md-6 col-sm-10 col-md-offset-0 col-sm-offset-1 form-wrapper">
-	<div class="row">
-		<div class="input-field">
-			<div class="col-xs-12 form-subhead">
-				NAME OF THE PROJECT
-			</div>
-			<div class="input-field col s12 no-label">
-         		<textarea id="project-name" class="materialize-textarea"></textarea>
+    <form id="project-abstract-form">
+    	<div class="row">
+    		<div class="input-field">
+    			<div class="col-xs-12 form-subhead">
+    				NAME OF THE PROJECT
+    			</div>
+    			<div class="input-field col s12 no-label">
+             		<textarea id="project-name" required class="materialize-textarea"></textarea>
+            	</div>
+    		</div>
+
+    		<div class="col-xs-12 form-subhead">
+    			TEAM LEADER 
+    		</div>
+    		<div class="input-field col-sm-6">
+         		<input id="tl-name" required type="text" >
+          		<label for="name">Name</label>
         	</div>
-		</div>
-		<div class="col-xs-12 form-subhead">
-			TEAM LEADER 
-		</div>
-		<div class="input-field col-sm-6">
-     		<input id="name" type="text" >
-      		<label for="name">Name</label>
+        	<div class="input-field col-sm-6">
+         		<input id="tl-phone" required type="text" >
+          		<label for="phone">Phone</label>
+        	</div>
+        	<div class="input-field col-sm-12">
+         		<input id="tl-email" required type="text" >
+          		<label for="email">Email Address</label>
+        	</div>
+        	
+            <div class="col-xs-12 form-subhead add-member-wraprer">
+                <div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD MEMBER</div> 
+            </div>
+
+            <div class="members-wrapper">
+                
+            </div>
+            
+            <div class="col-xs-12 form-subhead">
+    			COLLEGE 
+    		</div>
+    		<div class="input-field no-label col-sm-12">
+         		<input id="college" required type="text" >
+        	</div>
+
+        	
+            <div class="col-xs-6 form-subhead">
+    			CATEGORY 
+    		</div>
+    		
+            <div class="col-xs-6 form-subhead">
+    			ASSOCIATION 
+    		</div>
+    		
+            <div class=" no-label col-sm-6">
+         		<select id="category" required class="browser-default">
+    		      <option value="" disabled selected>...</option>
+                  {% for cat in categories %}
+    		      <option value="{{cat}}">{{cat}}</option>
+                  {% endfor %}
+        		</select>
+        	</div>
+    		
+            <div class=" no-label col-sm-6">
+         		<select id="association" required class="browser-default">
+    		      <option value="" disabled selected>...</option>
+    		      {% for assoc in assocs %}
+                  <option value="{{assoc}}">{{assoc}}</option>
+                  {% endfor %}
+        		</select>
+        	</div>
+        	
+            <br><br>
+        	<div class="col-xs-6 form-subhead">
+    			UPLOAD ABSTRACT 
+    		</div>
+        	<div class="file-field input-field col-sm-12">
+        		<div class="waves-effect red darken-3 btn">
+            		<span>File</span>
+            		<input id="abstract-file" required type="file">
+          		</div>
+          		<div class="file-path-wrapper">
+            		<input class="file-path validate" type="text">
+          		</div>
+        	</div>
     	</div>
-    	<div class="input-field col-sm-6">
-     		<input id="phone" type="text" >
-      		<label for="phone">Phone</label>
-    	</div>
-    	<div class="input-field col-sm-12">
-     		<input id="email" type="text" >
-      		<label for="email">Email Address</label>
-    	</div>
-    	<div class="col-xs-12 form-subhead">
-			COLLEGE 
-		</div>
-		<div class="input-field no-label col-sm-12">
-     		<input id="name" type="text" >
-    	</div>
-    	<div class="col-xs-6 form-subhead">
-			CATEGORY 
-		</div>
-		<div class="col-xs-6 form-subhead">
-			ASSOCIATION 
-		</div>
-		<div class=" no-label col-sm-6">
-     		<select class="browser-default">
-		      <option value="" disabled selected>...</option>
-              {% for cat in categories %}
-		      <option value="{{cat}}">{{cat}}</option>
-              {% endfor %}
-    		</select>
-    	</div>
-		<div class=" no-label col-sm-6">
-     		<select class="browser-default">
-		      <option value="" disabled selected>...</option>
-		      {% for assoc in assocs %}
-              <option value="{{assoc}}">{{assoc}}</option>
-              {% endfor %}
-    		</select>
-    	</div>
-    	<br><br>
-    	<div class="col-xs-6 form-subhead">
-			UPLOAD ABSTRACT 
-		</div>
-    	<div class="file-field input-field col-sm-12">
-    		<div class="waves-effect red darken-3 btn">
-        		<span>File</span>
-        		<input type="file">
-      		</div>
-      		<div class="file-path-wrapper">
-        		<input class="file-path validate" type="text">
-      		</div>
-    	</div>
-	</div>                
+        <div class="row">
+        <br>
+            <div class="col-xs-12" style="text-align: center">
+                <input class="waves-effect red darken-3 btn" type="submit">
+            </div>
+        </div>      
+    </form>          
 </div>
+
+<script>
+    var members = 0;
+
+    $(".add-member").click(function() {
+        if(members < 5) {
+            members++;
+
+            var context = '<div class="mem-'+members+'-wrapper"><div class="col-xs-12 form-subhead">MEMBER '+members+'<div class="pull-right"><i id="mem-'+members+'-delete" value="'+members+'" class="fa fa-times member-delete"></i></div></div><div class="input-field col-sm-6"><input id="mem-'+members+'-name" required type="text" >\n<label for="mem-'+members+'name">Name</label></div><div class="input-field col-sm-6"><input id="mem-'+members+'-phone" required type="text" >\n<label for="mem-'+members+'phone">Phone</label></div><div class="input-field col-sm-12"><input id="mem-'+members+'-email" required type="text" >\n<label for="mem-'+members+'email">Email Address</label></div></div>';
+
+            $(".members-wrapper").append(context);
+
+            $("#mem-"+members+"-delete").click(function() {
+                var value = $(this).attr("value");
+                if(members == value) {
+                    $(".mem-"+value+"-wrapper").remove();
+                    members--;
+                }
+                else 
+                    alert("Delete members from the bottom of the list !");
+            });
+
+            if(members == 5 ) {
+                $(".add-member-wraprer").hide();
+            }
+        }
+
+    });
+
+
+    var abstract;
+
+    $("input#abstract-file").on('change', function(e) {
+        abstract = event.target.files;
+    });
+ 
+
+    $("form#project-abstract-form").submit(function(e) {
+        e.preventDefault();
+        if(validate_project_submit() == 0) {
+            var dat = collect_data();
+
+            $.ajax({
+            url: 'projects/status/',
+            type: 'POST',
+            data: dat,
+            cache: false,
+            headers : {
+                "X-CSRFToken" : getCookie('csrftoken')
+            },
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+
+            success: function(data)
+            {
+                console.log(data);
+            }
+        });
+        }
+    });
+
+    function collect_data() {
+        var data = new FormData() ;
+        data.append('project-name', $("textarea#project-name").val());
+        data.append('tl-name', $("input#tl-name").val());
+        data.append('tl-phone', $("input#tl-phone").val());
+        data.append('tl-email', $("input#tl-email").val());
+        
+        for(var z=1;z<=members;z++) {
+            data.append('mem-'+z+'-name', $("input#mem-"+z+"-name").val());
+            data.append('mem-'+z+'-phone', $("input#mem-"+z+"-phone").val());
+            data.append('mem-'+z+'-email', $("input#mem-"+z+"-email").val());
+        }
+        
+        data.append('college', $("input#college").val());
+        data.append('category', $("select#category").val());
+        data.append('association', $("select#association").val());
+
+        $.each(abstract, function(key, value)
+        {
+            data.append(key, value);
+        });
+
+        return data;
+    }
+
+
+
+    function validate_project_submit() {
+        var count = 0;
+
+        // Check for email...
+        var re_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        var en_email1 = $("input#tl-email").val();
+        if(!(re_email.test(en_email1))) {
+            // author email error
+            count++;
+        }
+        for(var i=1;i<=members;i++) {
+            if($("input#mem-"+i+"-email").val() != "") {
+                var tmp_email = $("input#mem-"+i+"-email").val();
+                if(!(re_email.test(tmp_email))) {
+                    //co-author email error
+                    count++;
+                }
+            }    
+        }
+        
+        // Check for phone...
+        var re_phone = /^([0-9]{10})$/i;
+        var en_phone1 = $("input#tl-phone").val();
+        if(!(re_phone.test(en_phone1))) {
+            // error check for author phone number
+            count++;
+        }
+        for(var i=1;i<=members;i++) {
+            if($("input#mem-"+i+"-phone").val() != "") {
+                var tmp_phone = $("input#mem-"+i+"-phone").val();
+                if(!(re_phone.test(tmp_phone))) {
+                    //co-author email error
+                    count++;
+                }
+            }    
+        }
+
+        //format check 
+        var file = $("input#abstract-file").val();
+        var extn = file.substring(file.lastIndexOf(".")+1);
+        if(extn != "pdf" && extn != "PDF" ) {
+            // error check for invalid file format
+            count++;
+        }
+
+        //category check 
+        if($("select#category").val() == null) {
+            // error check for category
+            count++;
+        }
+
+        //assoc check 
+        if($("select#association").val() == null) {
+            // error check for category
+            count++;
+        }
+
+
+        console.log(count);
+
+        return count;
+    }
+
+</script>
+
