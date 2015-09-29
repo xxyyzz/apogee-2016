@@ -2,10 +2,11 @@ from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.shortcuts import render
 from registrations.models import *
 from django.template import Context
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from registrations.models import *
 import string, random, os
 from apogee16.settings import *
+from django.template.defaultfilters import slugify
 
 
 def home(request) :
@@ -58,13 +59,19 @@ def papersStatus(request) :
 	model_stub = stubGenerator()
 	abstract.name = model_stub + '.pdf'
 
-	category_directory = os.path.join(MEDIA_ROOT, 'papers/', category)
+
+	slugified_category = slugify(category)
+	category_directory = os.path.join(MEDIA_ROOT, 'papers/', slugified_category)
 	if not os.path.exists(category_directory):
 		os.makedirs(category_directory)
 
 	Paper.objects.create(name=paper_name, address=author_address, author=model_author, co_author=model_co_author, category=model_category, stub=model_stub, abstract=abstract)
 
-	return HttpResponse('done')
+	response = {}
+	response['status'] = 1
+	response['stub'] = model_stub
+
+	return JsonResponse(response)
 
 
 def stubGenerator(size=8, chars=string.ascii_uppercase + string.digits):

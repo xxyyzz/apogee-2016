@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -15,7 +16,8 @@ class Project(models.Model):
         return self.name
 
 def upload_dir(self, filename):
-    path = 'papers/%s/%s' % (self.category, filename)
+    slugified_category = slugify(self.category)
+    path = 'papers/%s/%s' % (slugified_category, filename)
     return path
 
 class Paper(models.Model):
