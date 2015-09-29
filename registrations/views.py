@@ -51,7 +51,7 @@ def papersStatus(request) :
 		try:
 			model_co_author = Participant.objects.get(email=co_author_email)
 		except:
-			model_co_author = Participant.objects.create(name=co_author_name, phone=co_author_phone, email=co_author_email, college=co_model_college)
+			model_co_author = Participant.objects.create(name=co_author_name, phone=co_author_phone, email=co_author_email, college=model_college)
 	else:
 		model_co_author = None
 
