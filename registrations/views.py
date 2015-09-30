@@ -7,6 +7,8 @@ from registrations.models import *
 import string, random, os
 from apogee16.settings import *
 from django.template.defaultfilters import slugify
+from django.utils.datastructures import MultiValueDictKeyError
+
 
 
 def home(request) :
@@ -96,7 +98,83 @@ def projectsForm(request) :
 	return render(request, "portal/partials/projects_form.html", context)
 
 def projectsStatus(request) : 
-	return HttpResponse("h1 !")
+	data = request.POST
+	project_name = data['project-name']
+	tl_name = data['tl-name']
+	tl_phone = data['tl-phone']
+	tl_email = data['tl-email']
+	member = {}
+	for x in range(1,6):
+		member[x] = {}
+		try:
+			key = 'mem-%s-name' % x
+			member[x]['name'] = data[key]
+		except MultiValueDictKeyError:
+			member[x]['name'] = None
+		try:
+			key = 'mem-%s-phone' % x
+			member[x]['phone'] = data[key]
+		except MultiValueDictKeyError:
+			member[x]['phone'] = None
+		try:
+			key = 'mem-%s-email' % x
+			member[x]['email'] = data[key]
+		except MultiValueDictKeyError:
+			member[x]['email'] = None
+
+
+	# return HttpResponse(member[3]['email'])
+
+	college = data['college']
+	category = data['category']
+	assoc = data['association']
+	abstract = request.FILES['0']
+
+
+	try:
+		model_college = College.objects.get(name=college)
+	except:
+		model_college = College.objects.create(name=college)
+
+	try:
+		model_leader = Participant.objects.get(email=tl_email)
+	except:
+		model_leader = Participant.objects.create(name=tl_name, phone=tl_phone, email=tl_email, college=model_college)
+	
+	model_category = Category.objects.get(name=category)
+	model_assoc = Association.objects.get(name=assoc)
+
+	model_member = {}
+	for x in range(1,6):
+		if member[x]['email'] != None:
+			try:
+				model_member[x] = Participant.objects.get(email=member[x]['email'])
+			except:
+				model_member[x] = Participant.objects.create(name=member[x]['name'], phone=member[x]['phone'], email=member[x]['email'], college=model_college)
+		else:
+			model_member[x] = None
+
+	model_stub = stubGenerator()
+	abstract.name = model_stub + '.pdf'
+
+
+	slugified_category = slugify(category)
+	category_directory = os.path.join(MEDIA_ROOT, 'projects/', slugified_category)
+	if not os.path.exists(category_directory):
+		os.makedirs(category_directory)
+
+	model_project = Project.objects.create(name=project_name, leader=model_leader, category=model_category, stub=model_stub, abstract=abstract, assoc=model_assoc)
+
+	for x in range(1,6):
+		if model_member[x] != None:
+			model_project.members.add(model_member[x])
+	model_project.save()
+
+	response = {}
+	response['status'] = 1
+	response['stub'] = model_stub
+
+	return JsonResponse(response)
 
 def checkForm(request) :
 	return render(request, "portal/partials/check_form.html")
