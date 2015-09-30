@@ -73,7 +73,7 @@ def papersStatus(request) :
 	response['status'] = 1
 	response['stub'] = model_stub
 
-	return JsonResponse(response)
+	return render(request, "portal/partials/papers_status.html", response)
 
 
 def stubGenerator(size=8, chars=string.ascii_uppercase + string.digits):

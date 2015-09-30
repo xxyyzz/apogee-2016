@@ -1,0 +1,19 @@
+<div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 form-wrapper'>
+	<div class="check_head">
+		{% if status == 1 %}
+			Your Abstract has been submitted !
+		{% endif %}
+	</div>
+	<br>
+	<div class="row">
+	
+	    Your Reference number is <span class="ref">{{stub}}</span>
+
+    </div>   
+</div>
+
+<script>
+	$(".btn-status").click(function() {
+		wrapLink("/check/status/")
+	});
+</script>
