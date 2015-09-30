@@ -86,7 +86,7 @@
         	</div>
     	</div>
         <div class="row">
-        <br>
+            <div class="col-xs-10 col-xs-offset-1 error-box"></div>
             <div class="col-xs-12" style="text-align: center">
                 <input class="waves-effect red darken-3 btn" type="submit">
             </div>
@@ -133,25 +133,29 @@
     $("form#project-abstract-form").submit(function(e) {
         e.preventDefault();
         if(validate_project_submit() == 0) {
+            $(".error-box").hide();
             var dat = collect_data();
 
             $.ajax({
-            url: 'projects/status/',
-            type: 'POST',
-            data: dat,
-            cache: false,
-            headers : {
-                "X-CSRFToken" : getCookie('csrftoken')
-            },
-            dataType: 'json',
-            processData: false,
-            contentType: false,
+                url: 'projects/status/',
+                type: 'POST',
+                data: dat,
+                cache: false,
+                headers : {
+                    "X-CSRFToken" : getCookie('csrftoken')
+                },
+                dataType: 'html',
+                processData: false,
+                contentType: false,
 
-            success: function(data)
-            {
-                $(".body-box").html(data)
-            }
-        });
+                success: function(data)
+                {
+                    $(".body-box").html(data)
+                }
+            });
+        }
+        else {
+
         }
     });
 
@@ -184,19 +188,20 @@
 
     function validate_project_submit() {
         var count = 0;
+        var errorText = "Following are the errors cited in the form. Please correct them before submitting... <br>";
 
         // Check for email...
         var re_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         var en_email1 = $("input#tl-email").val();
         if(!(re_email.test(en_email1))) {
-            // author email error
+            errorText += "<br>&bull;&nbsp;&nbsp;Team Leader's Email is invalid."
             count++;
         }
         for(var i=1;i<=members;i++) {
             if($("input#mem-"+i+"-email").val() != "") {
                 var tmp_email = $("input#mem-"+i+"-email").val();
                 if(!(re_email.test(tmp_email))) {
-                    //co-author email error
+                    errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Email is invalid."
                     count++;
                 }
             }    
@@ -206,14 +211,14 @@
         var re_phone = /^([0-9]{10})$/i;
         var en_phone1 = $("input#tl-phone").val();
         if(!(re_phone.test(en_phone1))) {
-            // error check for author phone number
+            errorText += "<br>&bull;&nbsp;&nbsp;Team Leaders's Phone no is invalid. Please enter a valid 10 digit mobile number."
             count++;
         }
         for(var i=1;i<=members;i++) {
             if($("input#mem-"+i+"-phone").val() != "") {
                 var tmp_phone = $("input#mem-"+i+"-phone").val();
                 if(!(re_phone.test(tmp_phone))) {
-                    //co-author email error
+                    errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Phone no is invalid. Please enter a valid 10 digit mobile number."
                     count++;
                 }
             }    
@@ -223,24 +228,23 @@
         var file = $("input#abstract-file").val();
         var extn = file.substring(file.lastIndexOf(".")+1);
         if(extn != "pdf" && extn != "PDF" ) {
-            // error check for invalid file format
+            errorText += "<br>&bull;&nbsp;&nbsp;The abstract file can only be of PDF Format."
             count++;
         }
 
         //category check 
         if($("select#category").val() == null) {
-            // error check for category
+            errorText += "<br>&bull;&nbsp;&nbsp;Select a Category."
             count++;
         }
 
         //assoc check 
         if($("select#association").val() == null) {
-            // error check for category
+            errorText += "<br>&bull;&nbsp;&nbsp;Select an Association."
             count++;
         }
 
-
-        console.log(count);
+        $(".error-box").html(errorText).fadeIn(400);
 
         return count;
     }

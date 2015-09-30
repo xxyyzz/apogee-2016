@@ -189,3 +189,13 @@ select {
     padding: 10px;
     font-size: 12px;
 }
+
+.ref {
+	color: #c71313;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.ins-ref {
+    color : #888;
+}

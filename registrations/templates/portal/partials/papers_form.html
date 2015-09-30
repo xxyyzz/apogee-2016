@@ -108,11 +108,12 @@
                 headers : {
                     "X-CSRFToken" : getCookie('csrftoken')
                 },
-                dataType: 'json',
+                dataType: 'html',
                 processData: false,
                 contentType: false,
 
                 success: function(data) {
+                    console.log(data);
                     $(".body-box").html(data);
                 }
             });

@@ -72,6 +72,7 @@ def papersStatus(request) :
 	response = {}
 	response['status'] = 1
 	response['stub'] = model_stub
+	response['type'] = 'Project'
 
 	return render(request, "portal/partials/papers_status.html", response)
 
@@ -173,8 +174,9 @@ def projectsStatus(request) :
 	response = {}
 	response['status'] = 1
 	response['stub'] = model_stub
+	response['type'] = 'Project'
 
-	return JsonResponse(response)
+	return render(request, "portal/partials/projects_status.html", response)
 
 def checkForm(request) :
 	return render(request, "portal/partials/check_form.html")
