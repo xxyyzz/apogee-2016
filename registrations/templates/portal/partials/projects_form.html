@@ -134,6 +134,8 @@
         e.preventDefault();
         if(validate_project_submit() == 0) {
             $(".error-box").hide();
+            $(".submit-button").hide();
+
             var dat = collect_data();
 
             $.ajax({
