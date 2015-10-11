@@ -24,5 +24,6 @@ urlpatterns = [
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^portal/', include('registrations.urls', namespace='registrations')),
+    url(r'^', include('cover.urls', namespace='cover')),
 ]
 
