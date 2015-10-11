@@ -4,7 +4,6 @@ body{
    	margin: 0px;
    	color: white;
    	font-family: 'Open Sans' !important;
-	overflow : hidden;
 	
 }
 
@@ -89,9 +88,8 @@ body{
 	cursor: pointer;
 }
 
-a, .tuned-link{
-	text-transform: none !important;
-	text-decoration: none !important;
-	color: white !important;
+a {
+	text-transform: none;
+	text-decoration: none;
+	color: white;
 }
-
