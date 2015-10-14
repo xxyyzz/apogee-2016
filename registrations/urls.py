@@ -11,6 +11,10 @@ urlpatterns = [
     url(r'^projects/form/$', views.projectsForm),
     url(r'^check/form/$', views.checkForm),
     url(r'^check/status/$', views.checkStatus),
+
+    url(r'^ca/main/$', views.campusAmbassadorMain),
+    url(r'^ca/register/$', views.campusAmbassadorForm),
+    #url(r'^ca/confirm/$', views.campusAmbassadorConfirm),
         
 
 

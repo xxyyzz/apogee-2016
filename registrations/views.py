@@ -178,12 +178,20 @@ def projectsStatus(request) :
 
 	return render(request, "portal/partials/projects_status.html", response)
 
+
 def checkForm(request) :
 	return render(request, "portal/partials/check_form.html")
 
 def checkStatus(request) :
 	data = request.POST
 	return render(request, "portal/check_status.html")
+
+
+def campusAmbassadorMain(request) : 
+	return render(request, "portal/campusAmbassadorMain.html")
+
+def campusAmbassadorForm(request) : 
+	return render(request, "portal/campusAmbassadorForm.html")
 
 
 # Create your views here.
