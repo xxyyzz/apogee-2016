@@ -9,6 +9,7 @@ from apogee16.settings import *
 from django.template.defaultfilters import slugify
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 
 
 
