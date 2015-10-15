@@ -8,6 +8,7 @@ import string, random, os
 from apogee16.settings import *
 from django.template.defaultfilters import slugify
 from django.utils.datastructures import MultiValueDictKeyError
+from django.core.context_processors import csrf
 
 
 
@@ -23,6 +24,7 @@ def papersForm(request) :
 	context['categories'] = list(a)
 	return render(request, "portal/partials/papers_form.html",context)
 
+@csrf_exempt
 def papersStatus(request) : 
 	data = request.POST
 	paper_name = data['paper-name']
@@ -98,6 +100,7 @@ def projectsForm(request) :
 	context['assocs'] = list(b)
 	return render(request, "portal/partials/projects_form.html", context)
 
+@csrf_exempt
 def projectsStatus(request) : 
 	data = request.POST
 	project_name = data['project-name']
