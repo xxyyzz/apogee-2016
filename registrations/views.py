@@ -12,6 +12,8 @@ from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 
 
+def renderUpdates(request) :
+	return render(request, "portal/partials/updates.html")
 
 def home(request) :
 	return render(request, "portal/index.html")

@@ -215,6 +215,14 @@ function init_Contact(obj) {
 function init_Default(obj) {
 	changeLinkFocus('');
 	createRipple('#546E7A');
+	$.ajax({
+		url : 'updates/',
+		method : 'GET',
+		success : function(data) {
+			$(".body-box").html(data);
+			open_body_box();
+		}
+	})
 }
 
 /*-------------------------------- BODY BOX FUNCTIONS ----------------------------*/
