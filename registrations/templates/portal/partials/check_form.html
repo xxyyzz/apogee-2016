@@ -1,31 +1,63 @@
 <div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 form-wrapper'>
-	<div class="check_head">To be available soon...</div>
-	<br>
 	<div class="row">
-	<!--
 	    <div class=" col-sm-10 col-sm-offset-1">
 	    	<div class="input-field ">
-		      	<input id="first_name" type="text" class="validate ">
-		      	<label for="first_name">Reference No.</label>
+		      	<input id="ref" type="text" class="validate">
+		      	<label for="ref">Reference No.</label>
 		    </div>
 	    	<p>
-      			<input name="cat" value="paper" type="radio" id="test1" />
-      			<label for="test1">Paper</label>
+      			<input name="cat" value="paper" type="radio" id="paper" />
+      			<label for="paper">Paper</label>
     		</p>
     		<p>
-      			<input name="cat" value="project" type="radio" id="test2" />
-      			<label for="test2">Project</label>
+      			<input name="cat" value="project" type="radio" id="project" />
+      			<label for="project">Project</label>
     		</p>
     	
     		<button class=" blue darken-2 waves-light btn pull-right btn-status">Status</button>
     	</div>
-    -->
-
     </div>   
 </div>
 
 <script>
+
+	var error = '';
+
 	$(".btn-status").click(function() {
-		wrapLink("/check/status/")
+		error = '';
+		var ref = $("#ref").val();
+		var ref_len = ref.length;
+		if(ref_len < 8 || ref_len > 9) {
+			error += "Invalid format of Reference number."
+		}
+		else if(ref_len == 9) {
+			if(ref.charAt(0) == '#') {
+				ref = ref.substr(1);
+			}
+			else {
+				error += "Invalid format of Reference number."
+			}
+		}
+		else {
+			//valid
+		}
+
+		var cat = $("input[type=radio]:checked").val()
+
+		if(cat != 'paper' && cat != 'project') {
+			error += "\nSelect the category";
+		}
+		else {
+			//valid
+		}
+
+		if(error == '') {
+			status_query['ref'] = ref;
+			status_query['cat'] = cat;
+			wrapLink("/check/status/");
+		}
+		else {
+			alert(error);
+		}
 	});
 </script>

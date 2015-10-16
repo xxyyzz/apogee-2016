@@ -1,0 +1,69 @@
+<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 form-wrapper">
+	<div class="review-project-header">
+		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
+		<div class="status-holder">Abstract Submitted</div>
+	</div>
+    <form id="project-abstract-form">
+    	<div class="row">
+    		<div class="col-xs-12 form-subhead">
+				NAME OF THE PROJECT
+			</div>		
+			<div class="input-field  no-label col-sm-12">
+         		{{title}}
+        	</div>
+		
+    		<div class="col-xs-12 form-subhead">
+    			TEAM LEADER 
+    		</div>
+    		<div class="input-field no-label col-sm-6">
+         		<b>{{tl.name}}</b>
+        	</div>
+        	<div class="input-field no-label col-sm-12">
+         		{{tl.email}}, {{tl.phone}}
+        	</div>
+
+        	<div class="col-xs-12 form-subhead">
+    			MEMBERS 
+    		</div>
+    		{% for member in members %}
+    		<div class="input-field no-label col-sm-12">
+         		<b>{{forloop.counter}}. {{member.name}}</b>, {{member.email}}, +91 {{member.phone}}
+        	</div>
+        	<br>
+        	{% endfor %}
+           
+
+            <div class="col-xs-12 form-subhead">
+    			COLLEGE 
+    		</div>
+    		<div class="input-field no-label col-sm-12">
+         		{{tl.college}}
+        	</div>
+
+        	
+            <div class="col-xs-6 form-subhead">
+    			CATEGORY 
+    		</div>
+    		
+            <div class="col-xs-6 form-subhead">
+    			ASSOCIATION 
+    		</div>
+    		
+            <div class=" no-label col-sm-6">
+         		{{category}}
+        	</div>
+    		
+            <div class=" no-label col-sm-6">
+         		{{assoc}}
+        	</div>
+        	
+        	<div class="col-xs-6 form-subhead">
+    			ABSTRACT 
+    		</div>
+        	<div class=" input-field no-label col-sm-12">
+        		{{abstract}}
+        	</div>
+    	</div>     
+    </form>          
+</div>
+

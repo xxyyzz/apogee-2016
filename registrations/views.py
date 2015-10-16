@@ -188,9 +188,75 @@ def projectsStatus(request) :
 def checkForm(request) :
 	return render(request, "portal/partials/check_form.html")
 
+
+@csrf_exempt
 def checkStatus(request) :
 	data = request.POST
-	return render(request, "portal/check_status.html")
+	response = {}
+	try : 
+		ref = data['ref']
+		cat = data['cat']
+		if cat == 'paper' :
+			entry = Paper.objects.get(stub=ref)
+			try : 
+				response['title'] = entry.name
+				response['category'] = entry.category.name
+				response['stub'] = entry.stub
+				response['address'] = entry.address
+				response['author'] = {}
+				response['author']['name'] = entry.author.name
+				response['author']['phone'] = entry.author.phone
+				response['author']['email'] = entry.author.email
+				response['author']['college'] = entry.author.college.name
+				response['co-author'] = {}
+				response['abstract'] = entry.abstract.file
+				if entry.co_author != None :
+					response['co-author']['name'] = entry.co_author.name
+					response['co-author']['phone'] = entry.co_author.phone
+					response['co-author']['email'] = entry.co_author.email
+					response['co-author']['college'] = entry.co_author.college
+				
+				return render(request, "portal/partials/check_result_paper.html", response)
+
+			except :
+				print 'invalid ref'
+
+		elif cat == 'project' :
+			entry = Project.objects.get(stub=ref)
+			try : 
+				response['title'] = entry.name
+				response['category'] = entry.category.name
+				response['stub'] = entry.stub
+				response['assoc'] = entry.assoc.name
+				response['abstract'] = entry.abstract.file
+				response['tl'] = {}
+				response['tl']['name'] = entry.leader.name
+				response['tl']['phone'] = entry.leader.phone
+				response['tl']['email'] = entry.leader.email
+				response['tl']['college'] = entry.leader.college.name
+				response['members'] = []
+
+				cursor = entry.members.all()
+
+				for member in cursor :
+					mem = {};
+					mem['name'] = member.name
+					mem['phone'] = member.phone
+					mem['email'] = member.email
+					mem['college'] = member.college.name
+					response['members'].append(mem)
+
+				return render(request, "portal/partials/check_result_project.html", response)
+
+			except :
+				print 'invalid ref'
+
+	except : 
+		print 'quit'
+		response["status"] = 0
+		response["text"] = "Invalid Input"
+
+	#return HttpResponse(request.POST)
 
 
 def campusAmbassadorMain(request) : 

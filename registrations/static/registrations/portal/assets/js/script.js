@@ -1,4 +1,9 @@
 
+status_query = {
+	'ref' : 'RADLEH7R',
+	'cat' : 'project'
+}
+
 routes = {
 	'papers' : {
 		'sub' : {
@@ -196,7 +201,15 @@ function init_check_form(obj) {
 }
 
 function init_check_status(obj) {
-	console.log("init projects");
+	$.ajax({
+		url : 'check/status/',
+		method : 'POST',
+		data : status_query,
+		success : function(data) {
+			$(".body-box").html(data);
+			open_body_box();
+		}
+	});
 }
 
 

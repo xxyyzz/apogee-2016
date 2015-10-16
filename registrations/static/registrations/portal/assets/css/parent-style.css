@@ -199,3 +199,31 @@ select {
 .ins-ref {
     color : #888;
 }
+
+.review-project-header {
+	width: calc(100% + 40px);
+	background-color: #eee;
+	margin-top: -20px;
+	margin-left: -20px;
+	padding: 20px 30px;
+	border-radius: 5px;
+	height: 70px;
+}
+
+.ref-num-holder {
+	width: 50%;
+	float: left;
+	font-weight: 800;
+	font-size: 20px;
+	color: #888;
+}
+
+.status-holder {
+	text-align: right;
+	width: 50%;
+	float: right;
+	font-weight: 800;
+	font-size: 20px;
+	color: #888;
+	color: #1CAB39;
+}
