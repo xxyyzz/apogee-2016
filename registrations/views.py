@@ -209,7 +209,7 @@ def checkStatus(request) :
 				response['author']['phone'] = entry.author.phone
 				response['author']['email'] = entry.author.email
 				response['author']['college'] = entry.author.college.name
-				response['co-author'] = {}
+				response['coauthor'] = {}
 				response['abstract'] = entry.abstract.file
 				if entry.co_author != None :
 					response['coauthor']['name'] = entry.co_author.name
