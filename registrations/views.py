@@ -210,7 +210,7 @@ def checkStatus(request) :
 				response['author']['email'] = entry.author.email
 				response['author']['college'] = entry.author.college.name
 				response['coauthor'] = {}
-				response['abstract'] = entry.abstract.file
+				#response['abstract'] = entry.abstract.file
 				if entry.co_author != None :
 					response['coauthor']['name'] = entry.co_author.name
 					response['coauthor']['phone'] = entry.co_author.phone
@@ -231,7 +231,7 @@ def checkStatus(request) :
 				response['category'] = entry.category.name
 				response['stub'] = entry.stub
 				response['assoc'] = entry.assoc.name
-				response['abstract'] = entry.abstract.file
+				#response['abstract'] = entry.abstract.file
 				response['tl'] = {}
 				response['tl']['name'] = entry.leader.name
 				response['tl']['phone'] = entry.leader.phone
