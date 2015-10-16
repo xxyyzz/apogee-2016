@@ -199,6 +199,7 @@ def checkStatus(request) :
 		if cat == 'paper' :
 			entry = Paper.objects.get(stub=ref)
 			try : 
+				response['status'] = 1
 				response['title'] = entry.name
 				response['category'] = entry.category.name
 				response['stub'] = entry.stub
@@ -211,19 +212,21 @@ def checkStatus(request) :
 				response['co-author'] = {}
 				response['abstract'] = entry.abstract.file
 				if entry.co_author != None :
-					response['co-author']['name'] = entry.co_author.name
-					response['co-author']['phone'] = entry.co_author.phone
-					response['co-author']['email'] = entry.co_author.email
-					response['co-author']['college'] = entry.co_author.college
+					response['coauthor']['name'] = entry.co_author.name
+					response['coauthor']['phone'] = entry.co_author.phone
+					response['coauthor']['email'] = entry.co_author.email
+					response['coauthor']['college'] = entry.co_author.college
 				
 				return render(request, "portal/partials/check_result_paper.html", response)
 
 			except :
-				print 'invalid ref'
+				response['status'] = 0
+				return render(request, "portal/partials/check_result_paper.html", response)
 
 		elif cat == 'project' :
 			entry = Project.objects.get(stub=ref)
 			try : 
+				response['status'] = 1
 				response['title'] = entry.name
 				response['category'] = entry.category.name
 				response['stub'] = entry.stub
@@ -249,12 +252,16 @@ def checkStatus(request) :
 				return render(request, "portal/partials/check_result_project.html", response)
 
 			except :
-				print 'invalid ref'
+				response['status'] = 0
+				return render(request, "portal/partials/check_result_project.html", response)
+
 
 	except : 
 		print 'quit'
 		response["status"] = 0
 		response["text"] = "Invalid Input"
+		return render(request, "portal/partials/check_result_project.html", response)
+
 
 	#return HttpResponse(request.POST)
 

@@ -1,7 +1,7 @@
 
 status_query = {
-	'ref' : 'RADLEH7R',
-	'cat' : 'project'
+	'ref' : '',
+	'cat' : ''
 }
 
 routes = {

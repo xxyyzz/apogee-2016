@@ -1,4 +1,5 @@
 <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 form-wrapper">
+	{% if status == 1%}
 	<div class="review-project-header">
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
 		<div class="status-holder">Abstract Submitted</div>
@@ -64,6 +65,9 @@
         		{{abstract}}
         	</div>
     	</div>     
-    </form>          
+    </form> 
+    {% else %}
+    Invalid Reference number. 
+    {% endif %}         
 </div>
 
