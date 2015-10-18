@@ -42,7 +42,6 @@ def papersStatus(request) :
 	co_author_email = data['co-author-email']
 	abstract = request.FILES['0']
 
-
 	try:
 		model_college = College.objects.get(name=college)
 	except:
@@ -65,7 +64,6 @@ def papersStatus(request) :
 
 	model_stub = stubGenerator()
 	abstract.name = model_stub + '.pdf'
-
 
 	slugified_category = slugify(category)
 	category_directory = os.path.join(MEDIA_ROOT, 'papers/', slugified_category)
@@ -92,8 +90,10 @@ def stubGenerator(size=8, chars=string.ascii_uppercase + string.digits):
 			except:
 				return stub
 
+
 def projectsInstructions(request) :
 	return render(request, "portal/partials/projects_main.html")
+
 
 def projectsForm(request) :
 	context = {};
@@ -102,6 +102,7 @@ def projectsForm(request) :
 	b = Association.objects.all()
 	context['assocs'] = list(b)
 	return render(request, "portal/partials/projects_form.html", context)
+
 
 @csrf_exempt
 def projectsStatus(request) : 
@@ -263,14 +264,14 @@ def checkStatus(request) :
 		return render(request, "portal/partials/check_result_project.html", response)
 
 
-	#return HttpResponse(request.POST)
+
+
+# CAMPUS AMBASSADOR VIEWS
 
 
 def campusAmbassadorMain(request) : 
 	return render(request, "portal/campusAmbassadorMain.html")
 
-def campusAmbassadorForm(request) : 
-	return render(request, "portal/campusAmbassadorForm.html")
 
 
 # Create your views here.
