@@ -72,3 +72,16 @@ class College(models.Model):
     name = models.CharField(max_length=200)
     def __unicode__(self):
         return self.name
+
+class CampusAmbassador(models.Model):
+    name = models.CharField(max_length=200)
+    adress = models.CharField(max_length=400)
+    college = models.ForeignKey('College')
+    year = models.CharField(max_length=20)
+    degree = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    phone = models.BigIntegerField()
+    ambassador_quality = models.TextField()
+    root_mail = models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.name
