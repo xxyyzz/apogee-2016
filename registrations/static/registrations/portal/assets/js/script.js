@@ -1,4 +1,9 @@
 
+status_query = {
+	'ref' : '',
+	'cat' : ''
+}
+
 routes = {
 	'papers' : {
 		'sub' : {
@@ -196,7 +201,15 @@ function init_check_form(obj) {
 }
 
 function init_check_status(obj) {
-	console.log("init projects");
+	$.ajax({
+		url : 'check/status/',
+		method : 'POST',
+		data : status_query,
+		success : function(data) {
+			$(".body-box").html(data);
+			open_body_box();
+		}
+	});
 }
 
 
@@ -215,6 +228,14 @@ function init_Contact(obj) {
 function init_Default(obj) {
 	changeLinkFocus('');
 	createRipple('#546E7A');
+	$.ajax({
+		url : 'updates/',
+		method : 'GET',
+		success : function(data) {
+			$(".body-box").html(data);
+			open_body_box();
+		}
+	})
 }
 
 /*-------------------------------- BODY BOX FUNCTIONS ----------------------------*/

@@ -162,11 +162,11 @@ select {
 }
 
 .form-head {
-	color: white;
+	color: rgba(255,255,255,0.6);
 	font-size: 60px;
 	font-weight: 700;
 	text-align: right;
-	opacity: 0.6;
+	opacity: 1;
 }
 
 @media (max-width : 992px) {
@@ -198,4 +198,41 @@ select {
 
 .ins-ref {
     color : #888;
+}
+
+.review-project-header {
+	width: calc(100% + 40px);
+	background-color: #eee;
+	margin-top: -20px;
+	margin-left: -20px;
+	padding: 20px 30px;
+	border-radius: 5px;
+	height: 70px;
+}
+
+.ref-num-holder {
+	width: 50%;
+	float: left;
+	font-weight: 800;
+	font-size: 20px;
+	color: #888;
+}
+
+.status-holder {
+	text-align: right;
+	width: 50%;
+	float: right;
+	font-weight: 800;
+	font-size: 20px;
+	color: #888;
+	color: #1CAB39;
+}
+
+.queries-contact {
+	margin-top: 140px;
+	text-align: left;
+	color: #333;
+	opacity: 1;
+	font-weight: 400;
+	font-size: 17px;
 }
