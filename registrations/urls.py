@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^updates/$', views.renderUpdates),
 
     url(r'^ca/main/$', views.campusAmbassadorMain),
+    url(r'^ca/status/$', views.campusAmbassadorStatus),
     #url(r'^ca/confirm/$', views.campusAmbassadorConfirm),
         
 

@@ -75,7 +75,7 @@ class College(models.Model):
 
 class CampusAmbassador(models.Model):
     name = models.CharField(max_length=200)
-    adress = models.CharField(max_length=400)
+    address = models.CharField(max_length=400)
     college = models.ForeignKey('College')
     year = models.CharField(max_length=20)
     degree = models.CharField(max_length=200)
@@ -83,5 +83,7 @@ class CampusAmbassador(models.Model):
     phone = models.BigIntegerField()
     ambassador_quality = models.TextField()
     root_mail = models.BooleanField(default=False)
+    class Meta:
+        verbose_name_plural = 'Campus Ambassadors'
     def __unicode__(self):
         return self.name

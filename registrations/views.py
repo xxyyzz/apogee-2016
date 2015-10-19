@@ -10,6 +10,7 @@ from django.template.defaultfilters import slugify
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
+from django.db import IntegrityError
 
 
 def renderUpdates(request) :
@@ -272,6 +273,37 @@ def checkStatus(request) :
 def campusAmbassadorMain(request) : 
 	return render(request, "portal/campusAmbassadorMain.html")
 
+@csrf_exempt
+def campusAmbassadorStatus(request):
+	data = request.POST
+	name = data['fname']
+	address = data['address']
+	college = data['college']
+	year = data['year']
+	degree = data['degree']
+	email = data['email']
+	phone = data['phone']
+	ambassador_quality = data['desc']
+	root_mail = data['rmail']
+	if root_mail == 0:
+		root_mail = False
+	elif root_mail == 1:
+		root_mail = True
+	
+	try:
+		model_college = College.objects.get(name=college)
+	except:
+		model_college = College.objects.create(name=college)
+
+	response = {}
+	
+	try:
+		CampusAmbassador.objects.create(name=name, address=address, college=model_college, year=year, degree=degree, email=email, phone=phone, ambassador_quality=ambassador_quality, root_mail=root_mail)
+		response['status'] = 1
+	except IntegrityError:
+		response['status'] = 0
+		response['message'] = "Email already exists!"
 
 
-# Create your views here.
+	# return render(request, "portal/partials/projects_status.html", response)
+	return JsonResponse(response)
