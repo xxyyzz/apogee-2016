@@ -223,7 +223,7 @@
 				error_msg += "Please choose your year of study<br>" ;
 
 
-			if (!(re_email.test(ca_data.rmail)) || !(re_phone.test(ca_data.phone)) || !(ca_data.year))
+			if (!(re_email.test(ca_data.email)) || !(re_phone.test(ca_data.phone)) || (ca_data.year==0) )
 			{
 				return false;
 			}
@@ -244,10 +244,10 @@
 				$('.error-box').fadeOut();
 				$('#ca-submit').fadeOut();
 				$.ajax({
-					method:"POST",
-					url: "/",
+					method:"GET",
+					url: "http://bits-apogee.org/2016/portal/ca/status/",
 					data: ca_data,
-					success: function()
+					success: function(data)
 					{
 
 					}

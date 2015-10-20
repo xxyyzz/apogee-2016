@@ -259,7 +259,7 @@ def checkStatus(request) :
 
 
 	except : 
-		print 'quit'
+		print ('quit')
 		response["status"] = 0
 		response["text"] = "Invalid Input"
 		return render(request, "portal/partials/check_result_project.html", response)
@@ -275,7 +275,7 @@ def campusAmbassadorMain(request) :
 
 @csrf_exempt
 def campusAmbassadorStatus(request):
-	data = request.POST
+	data = request.GET
 	name = data['fname']
 	address = data['address']
 	college = data['college']
