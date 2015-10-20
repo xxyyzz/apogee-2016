@@ -275,7 +275,7 @@ def campusAmbassadorMain(request) :
 
 @csrf_exempt
 def campusAmbassadorStatus(request):
-	data = request.GET
+	data = request.POST
 	name = data['fname']
 	address = data['address']
 	college = data['college']
