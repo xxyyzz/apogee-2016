@@ -86,7 +86,7 @@
 		<div class="row" id="ca_form">
 			<div class="col-md-7 " style=";padding:50px;">
 					<dl>
-					  <dt>What is a Campus Ambassador?</dt>
+					  <dt>What is a Campus Ambassador ?</dt>
 					  <dd>
 					  <p>
 					  A Campus Ambassador is responsible for publicity for APOGEE, the annual technical extravaganza of BITS Pilani, Pilani Campus, and is responsible for introducing and encouraging student participation in the fest, in his/her area or college.</p><p>
@@ -95,11 +95,11 @@
 					  </dd>
 					</dl>
 					<dl>
-					  <dt>Why be a Campus Ambassador?</dt>
+					  <dt>Why be a Campus Ambassador ?</dt>
 					  <dd><p>
 					  Campus Ambassador Program, this time is powered by YOUTH4WORK, an established talent assessment company. A Campus Ambassador will get an official certificate through BITS-Pilani for pursuing a Marketing Internship Programme for 3 months recognized by YOUTH4WORK.</p>
 					  <p style="text-align:center;">
-					  <img src="/2016/static/registrations/portal/assets/img/y4w.png" style="width: 37%;max-width: 300px;min-width: 200px;margin: 10px;" />
+					  <a href="http://www.youth4work.com" target="_tab"><img src="/2016/static/registrations/portal/assets/img/y4w.png" style="width: 37%;max-width: 300px;min-width: 200px;margin: 10px;" /></a>
 					  </p>
 					  <p>
 					  Moreover, he/she will be entitled to awards and special incentives like exemptions from registration fees, exclusive merchandise, recommendations etc. based on their performance in the programme.</p><p>
@@ -249,17 +249,18 @@
 				$('#ca-submit').fadeOut();
 				$.ajax({
 					method:"POST",
-					url: "http://bits-apogee.org/2016/portal/ca/status/",
+					url: "/portal/ca/status/",
 					data: ca_data,
 					success: function(data)
 					{
+						$('body').scrollTop(0);
 						if(data["status"]==1)
 						{
-							$('#form_container').html('<div style="text-align:left;">You have been registered as a contender for campus ambassador.<br> We will contact you shortly.</div>')
+							$('#form_container').html('<div style="text-align:center; margin: 50px 0px;font-size: 20px; font-weight: 900; color: #00a651">You have been registered as a contender for campus ambassador.<br> We will contact you shortly.</div>');
 						}
 						else
 						{
-							$('#form_container').html(data['message']);
+							$('#form_container').html('<div style="text-align:center; margin: 50px 0px;font-size: 20px; font-weight: 900; color: #ce3d3a">'+data['message']+'</div>');
 						}	
 					}
 				});
