@@ -1,6 +1,25 @@
 from django.shortcuts import render
 
 # Create your views here.
+def deepgetattr(obj, attr, default = None):
+    """
+    Get a named attribute from an object; multi_getattr(x, 'a.b.c.d') is
+    equivalent to x.a.b.c.d. When a default argument is given, it is
+    returned when any attribute in the chain doesn't exist; without
+    it, an exception is raised when a missing attribute is encountered.
+
+    """
+    attributes = attr.split(".")
+    for i in attributes:
+        try:
+            obj = getattr(obj, i)
+        except AttributeError:
+            if default:
+                return default
+            else:
+                raise
+    return obj
+
 def paper_stats_xlsx(request):
     from django.http import HttpResponse, HttpResponseRedirect  
     import xlsxwriter
@@ -42,19 +61,19 @@ def paper_stats_xlsx(request):
         for the relevant row. The 3rd arg is a failure message if
         there is no data available"""
 
-        worksheet.write(i+1, 0, getattr(row['obj'], 'id', 'NA'))
-        worksheet.write(i+1, 1, getattr(row['obj'], 'name', 'NA'))
-        worksheet.write(i+1, 2, getattr(row['obj'].category , 'name', 'NA'))
-        worksheet.write(i+1, 3, getattr(row['obj'], 'stub', 'NA'))
-        worksheet.write(i+1, 4, getattr(row['obj'], 'address', 'NA'))
-        worksheet.write(i+1, 5, getattr(row['obj'].author , 'name', 'NA'))
-        worksheet.write(i+1, 6, getattr(row['obj'].author , 'phone', 'NA'))
-        worksheet.write(i+1, 7, getattr(row['obj'].author , 'email', 'NA'))
-        worksheet.write(i+1, 8, getattr(row['obj'].author.college , 'name', 'NA'))
-        worksheet.write(i+1, 9, getattr(row['obj'].co_author , 'name', 'NA'))
-        worksheet.write(i+1, 10, getattr(row['obj'].co_author , 'phone', 'NA'))
-        worksheet.write(i+1, 11, getattr(row['obj'].co_author , 'email', 'NA'))
-        worksheet.write(i+1, 12, getattr(row['obj'].co_author.college , 'name', 'NA'))
+        worksheet.write(i+1, 0, deepgetattr(row['obj'], 'id', 'NA'))
+        worksheet.write(i+1, 1, deepgetattr(row['obj'], 'name', 'NA'))
+        worksheet.write(i+1, 2, deepgetattr(row['obj'] , 'category.name', 'NA'))
+        worksheet.write(i+1, 3, deepgetattr(row['obj'], 'stub', 'NA'))
+        worksheet.write(i+1, 4, deepgetattr(row['obj'], 'address', 'NA'))
+        worksheet.write(i+1, 5, deepgetattr(row['obj'] , 'author.name', 'NA'))
+        worksheet.write(i+1, 6, deepgetattr(row['obj'] , 'author.phone', 'NA'))
+        worksheet.write(i+1, 7, deepgetattr(row['obj'] , 'author.email', 'NA'))
+        worksheet.write(i+1, 8, deepgetattr(row['obj'] , 'author.college.name', 'NA'))
+        worksheet.write(i+1, 9, deepgetattr(row['obj'] , 'co_author.name', 'NA'))
+        worksheet.write(i+1, 10, deepgetattr(row['obj'] , 'co_author.phone', 'NA'))
+        worksheet.write(i+1, 11, deepgetattr(row['obj'] , 'co_author.email', 'NA'))
+        worksheet.write(i+1, 12, deepgetattr(row['obj'] , 'co_author.college.name', 'NA'))
 
     workbook.close()
     filename = 'ExcelReport.xlsx'
