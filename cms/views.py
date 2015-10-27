@@ -27,12 +27,13 @@ def paper_stats_xlsx(request):
         for the relevant row. The 3rd arg is a failure message if
         there is no data available"""
 
-        worksheet.write(i, 0, i+1)
+        worksheet.write(i, 0, getattr(row['obj'], 'id', 'NA'))
         worksheet.write(i, 1, getattr(row['obj'], 'name', 'NA'))
         worksheet.write(i, 2, getattr(row['obj'].category , 'name', 'NA'))
         worksheet.write(i, 3, getattr(row['obj'], 'stub', 'NA'))
         worksheet.write(i, 4, getattr(row['obj'].author , 'name', 'NA'))
         worksheet.write(i, 5, getattr(row['obj'].co_author , 'name', 'NA'))
+        
     workbook.close()
     filename = 'ExcelReport.xlsx'
     output.seek(0)
