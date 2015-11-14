@@ -620,7 +620,7 @@ def mail_selected_amb(request):
 		send_to.append( str( amb.email) )
 
 	# try:
-	email = EmailMessage("Campus Ambassador", body, 'webmaster@bits-apogee.org', send_to)
+	email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to)
 	#poster attachment
 	# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 	#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
