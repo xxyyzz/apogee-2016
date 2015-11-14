@@ -662,7 +662,14 @@ def mail_approved(request):
 
 
 
-
+def stats_ambassadors(request):
+	total_amb = CampusAmbassador.objects.all().count()
+	app_amb = CampusAmbassador.objects.filter(pcr_approved=True).count()
+	amb_stats = str(total_amb)+ " | " +str(app_amb)
+	context= {
+	'amb_stats' : amb_stats,
+	}
+	return render(request,'pcradmin/amb_stats.html', context)
 
 
 
