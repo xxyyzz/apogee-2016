@@ -619,16 +619,16 @@ def mail_selected_amb(request):
 		amb = CampusAmbassador.objects.get(id= aid)
 		send_to.append( str( amb.email) )
 
-	try:
-		email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-oasis.org', send_to)
-		#poster attachment
-		# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
-		#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
-		#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-		email.send()
-		return render(request, 'pcradmin/showmailsent.html')
-	except:
-		return HttpResponse('Mail to selected Ambassadors Error : Contact Satwik 9928823099')		
+	# try:
+	email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-oasis.org', send_to)
+	#poster attachment
+	# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+	#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+	#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+	email.send()
+	return render(request, 'pcradmin/showmailsent.html')
+	# except:
+	# 	return HttpResponse('Mail to selected Ambassadors Error : Contact Satwik 9928823099')		
 
 
 def mail_approved(request):
