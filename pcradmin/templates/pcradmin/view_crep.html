@@ -1,0 +1,62 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>College Representative</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a><br>
+            <a href="../../select/" class="button">Select College</a>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>College</th>
+                        <th>City</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.college }}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.phone_one }} {% if user.phone_two %}<br>{{ user.phone_two }}{% endif %}</td>
+                        <td>{{ user.email_id }}</td>
+                    </tr>
+                </tbody> 
+            </table>
+            
+            
+            <form action="../../save/{{ user.id }}/" method="POST">
+                {% csrf_token %}
+                        <button name="set_rep" value="True" class="button" style="background-color : #009900; color : white;">Set as Representative</button> &nbsp;
+
+            </form>
+
+            <form action="../../crep_email/{{ user.id }}/" method="POST">
+                {% csrf_token %}
+
+                        <button name="mail" value="True" class="button" style="background-color : #CFCF00; color : white;">Compose Mail </button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+
+<!-- 
+                <br>
+                {% if user.user != None %}
+                    {% if user.user.is_active %}
+                    {{ user.name }} has already been given login credentials, which cannot be undone. <br>However, you can freeze {% if user.gender == 'M' %}his{% else %}her{% endif %} account, which will prevent {% if user.gender == 'M' %}him{% else %}her{% endif %} from logging in.<br>
+                        <button name="shortlisted" value="Freeze" class="button" style="background-color : #FF2F00; color : white;">Freeze Account</button>
+                    {% else %}
+                    {{ user.name }}'s account was frozen by you. <br>
+                        <button name="shortlisted" value="Activate" class="button" style="background-color : #74FF00; color : white;">Reactivate Account</button>
+                    {% endif %}
+                {% endif %} -->

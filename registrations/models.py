@@ -83,6 +83,8 @@ class CampusAmbassador(models.Model):
     phone = models.BigIntegerField()
     ambassador_quality = models.TextField()
     root_mail = models.BooleanField(default=False)
+    pcr_approved= models.NullBooleanField(default=False)
+    
     class Meta:
         verbose_name_plural = 'Campus Ambassadors'
     def __unicode__(self):

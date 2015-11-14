@@ -1,0 +1,45 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1> Statistics </h1>
+            <a href="{% url 'pcradmin:stats_eventwise' %}" class="button">EventWise</a>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+            <a href="{% url 'pcradmin:stats' %}" class="button button-primary">Stats Home</a>
+            <a href="{% url 'pcradmin:stats_collegewise' %}" class="button">Collegewise</a>
+        </div>
+    </div>
+    {% if collegewise %} 
+    <div class="row" id="collegewise">
+        <div class="twelve columns">
+            <h4>Collegewise Stats for {{ event }}</h4>
+            <p>Click on a college to view list of participants <br>
+            Stats are of the form "Registered | CR Approved | PCR Approved"</p>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>College</th>
+                        <th>College<br> Representative</th>
+                        <th>Males</th>
+                        <th>Females</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for college in collegewise %}
+                    <tr>
+                        <td><a class="button" href="{% url 'pcradmin:stats_college_event' college.id event.id %}">{{ college.name }}</a></td>
+                        <td>{{ college.college_rep }}</td>
+                        <td>{{ college.males }}</td>
+                        <td>{{ college.females }}</td>
+                        <td>{{ college.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

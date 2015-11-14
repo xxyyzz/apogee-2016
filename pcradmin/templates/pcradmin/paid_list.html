@@ -1,0 +1,77 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<script>
+function toggle(source) {
+  checkboxes = document.getElementsByTagName('input');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+</script>
+<form action="./paid_act" method="POST" id="pcrstatus">
+    {% csrf_token %}
+</form>
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1> Statistics </h1>
+            <a href="{% url 'pcradmin:stats_eventwise' %}" class="button">EventWise</a>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+            <a href="{% url 'pcradmin:stats' %}" class="button button-primary">Stats Home</a>
+            <a href="{% url 'pcradmin:stats_collegewise' %}" class="button">Collegewise</a>
+        </div>
+    </div>
+    <div class="row" id="eventwise">
+        <div class="twelve columns textcenter">
+            <h4>Participant List </h4>
+            <!-- <h4>{{ college }}</h4> -->
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>S. No</th>
+                        <th>Name</th>
+                        <th>Sex</th>
+                        <th>College</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>CR Approval</th>
+                        <th>PCR Approval</th>
+                        <th><input type="checkbox" class="button-primary" onclick="toggle(this)">Toggle All</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for participant in plist %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ participant.name }}</td>
+                        <td>{{ participant.gender }}</td>
+                        <td>{{ participant.college }}</td>
+                        <td>{{ participant.phone_one }}{% if participant.phone_two %}<br>{{ participant.phone_two }}{% endif %}</td>
+                        <td>{{ participant.email_id }}</td>
+                        {% if participant.gl_approval %}
+                        <th style="color: green">Yes</th>
+                        {% else %}
+                        <th style="color: red">No</th>
+                        {% endif %}
+                        {% if participant.pcr_approval %}
+                        <th style="color: green">Yes</th>
+                        {% else %}
+                        <th style="color: red">No</th>
+                        {% endif %}
+                        {% if participant.gl_approval %}
+                        <td><input type="checkbox" name="partid" value="{{ participant.id }}" form="pcrstatus"></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <input class="button button-primary" type="submit" name="request" value="approve" form="pcrstatus">
+            <input class="button button-primary" type="submit" name="request" value="deny" form="pcrstatus">
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

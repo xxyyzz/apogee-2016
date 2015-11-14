@@ -1,0 +1,92 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+<div> 
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Select College</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="initialRegistrationAssets/js/registerScript2.js"></script>
+
+<form action= '../change_req/' method= 'POST' >
+ {% csrf_token %}
+    <br><h4>Entered College : {{clg_name}} </h4>  <button name="newcollege" value="{{clg_name}}" class="button" style="background-color : #00FF00; color : white;">Add This College </button>
+
+</form>
+
+
+<form action= '../change_req/' method= 'POST' >
+ {% csrf_token %}
+
+<input type='hidden' name='oldcollege' value="{{clg_name}}" > 
+
+
+
+College<span style="font-size:9px;">&nbsp;&nbsp;(Type and choose from dropdown list)</span> : 
+<br><input type="text" list="colleges" class="field" name="userSchool" id="userSchool" required>
+                    <datalist id="colleges">
+                        
+                    </datalist><br>
+
+
+
+<button type='submit' value=''  class="button button-primary">  Submit</button>
+</form>
+<h4 style = "text-align:center"> Suggestions </h4>
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>College Name </th>
+
+                    <th>Select</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for clg in pos_list reversed %}
+            <tr>
+
+                <td> {{clg}} </td>
+
+       
+        <form action= '../change_req/' method= 'POST' >
+         {% csrf_token %}
+
+                <input type='hidden' name='oldcollege' value="{{clg_name}}" > 
+                <input type='hidden' name='userSchool' value="{{clg}}" > 
+                <td><button type='submit' value=''  class="button button-primary">    Select </button></td>
+            </form>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(
+        function(){
+            $.ajax({
+                method : "GET",
+                url : "./collegelist/",
+                success : function(colname) {
+                    var collist="";
+                        for(var i=0;i<colname.length;i++) 
+                        {
+                            collist += '<option value="' + colname[i] + '">';
+                        }
+                    $('#colleges').html(collist);
+                    }
+                    
+            })
+
+    });
+</script>
+
+
+{% endblock body %}

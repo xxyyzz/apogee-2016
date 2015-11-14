@@ -1,0 +1,40 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Select College</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>College Name </th>
+                    <th>Status</th>
+                    <th>Select</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for clg in clg_list reversed %}
+            <tr>
+
+                <td> {{clg.0}} </td>
+                <td> {{clg.1}} </td>
+
+                <form action='../plist/'  method = 'POST'>
+                    {% csrf_token %}
+
+                <input type='hidden' name='college' value="{{clg.0}}" > 
+                <td><button type='submit' value=''  class="button button-primary">    Select </button></td>
+            </form>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock body %}

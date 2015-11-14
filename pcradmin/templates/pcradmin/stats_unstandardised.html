@@ -1,0 +1,38 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Unstandardised Participants</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>S. No</th>
+                    <th>College Name </th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for member in participants reversed %}
+            <tr>
+                <td> {{forloop.counter}} </td>
+                <td> {{member.college}} </td>
+                <td> {{member.name}} </td>
+                <td> {{member.gender}} </td>
+                <td> {{member.phone_one}} </td>
+                <td> {{member.email_id}} </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock body %}

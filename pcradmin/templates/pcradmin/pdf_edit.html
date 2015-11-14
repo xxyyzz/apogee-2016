@@ -1,0 +1,82 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<script>
+function toggle(id, source) {
+  checkboxes = document.getElementById(id).getElementsByTagName('input');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+function checkall() {
+  checkboxes = document.getElementsByTagName('input');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = true;
+  }
+}
+function uncheckall() {
+  checkboxes = document.getElementsByTagName('input');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = false;
+  }
+}
+</script>
+    <div class="container">
+        <div class="row">
+            <div class="twelve columns textcenter">
+                <h1>Edit Events</h1>
+                <a href="{% url 'pcradmin:customise_events' %}" class="button">Customise Events Home</a>
+                <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+                <h4>{{ collegerep.details.name }}, {{ collegerep.details.college }}</h4>
+                <p>
+                    Only participants confirmed by PCR are listed here.
+                    Your last selection is already checked for you.
+                    Refresh the page to view currently saved status. Participants who paid using the online portal are highlighted in <span style="color:green">green</span>.
+                </p>
+                {% if saved %}
+                   <p><span style="color : red">Changes saved successfully</span></p> 
+                {% endif %}
+            </div>
+        </div>
+        <div class="row textcenter">
+        <a class="button" href="#" onclick="checkall()">check all</a>
+        <a class="button" href="#" onclick="uncheckall()">uncheck all</a>
+        </div>
+
+        <div class="row">
+            {% for event in events %}
+                <div class="six columns" id="{{ event.name }}">
+                    <h4>{{event.name}}</h4>
+                    <table class="u-full-width">
+                        <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>Name</th>
+                                <th>Sex</th>
+                                <th>PCR Confirm<br><input type="checkbox" class="button-primary" onclick="toggle('{{ event.name }}', this)">Toggle All</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in event.members %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                {% if member.reg_paid %}
+                                <td style="color: green">{{ member.name }}</td>
+                                {% else %}
+                                <td style="color: black">{{ member.name }}</td>
+                                {% endif %}
+                                <td>{{ member.gender }}</td>
+                                <td><input type="checkbox" name="{{ event.id }}" value="{{ member.id }}" form="pdfedit" {% if member.checked %}checked{% endif %}></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% cycle '' '</div><div class="row">' %}
+            {% endfor %}
+        </div>
+        <form action="{% url 'pcradmin:pdf_save' userid %}" method="POST" id="pdfedit">
+            {% csrf_token %}
+            <input class="button button-primary" type="submit" name="submit" value="save">
+        </form>
+    </div>
+{% endblock body %}

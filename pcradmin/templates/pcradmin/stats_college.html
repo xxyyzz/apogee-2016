@@ -1,0 +1,59 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1> Statistics </h1>
+            <a href="{% url 'pcradmin:stats_eventwise' %}" class="button">EventWise</a>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+            <a href="{% url 'pcradmin:stats' %}" class="button button-primary">Stats Home</a>
+            <a href="{% url 'pcradmin:stats_collegewise' %}" class="button">Collegewise</a>
+        </div>
+    </div>
+    {% if eventwise %}
+    <div class="row" id="eventwise">
+        <div class="twelve columns">
+            <h4>EventWise Stats</h4>
+            <h4>{{ college.name }}</h4>
+            <p>Click on an event to view the list of participants <br>
+            Stats are of the form "Registered | CR Approved | PCR Approved"</p>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Category</th>
+                        <th>Males</th>
+                        <th>Females</th>
+                        
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in eventwise %}
+                    <tr>
+                        <td><a class="button" href="{% url 'pcradmin:stats_college_event' college.id event.id %}">{{ event.name }}</a></td>
+                        <!-- <td><button class="button" >{{ event.name }}</button></td> -->
+
+                        {# <td><strong>{{ event.name }}</strong></td> #}
+                        <td> {{event.category}} </td>
+                        <td>{{ event.males }}</td>
+                        <td>{{ event.females }}</td>
+                        
+                        <td>{{ event.total }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Total</th>
+                        <th> </th>
+                        <th>{{ total.males }}</th>
+                        <th>{{ total.females }}</th>
+                        
+                        <th>{{ total.total }}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

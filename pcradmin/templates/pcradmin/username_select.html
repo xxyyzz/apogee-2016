@@ -1,0 +1,49 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Shortlist Participants</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+                <ul>
+                    <b>Status Help</b>
+                    <li><b style="color: green">Shortlisted</b>: The registrant has been given a username, and shortlisted by you for participation</li>
+                    <li><b style="color: red">Rejected</b>: The registrant has been rejected by you, and hasn't been given a username.</li>
+                    <li><b style="color: orange">Unknown</b>: The user is still to be checked by you. Default for new registrations</li>
+                </ul>
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>College</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Select</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for user in users reversed %}
+            <tr>
+                {% if user.shortlisted == True %}
+                    <th style="color: green">Shortlisted</th>
+                {% elif user.shortlisted == None %}
+                    <th style="color: orange">Unknown</th>
+                {% elif user.shortlisted == False %}
+                    <th style="color: red">Rejected</th>
+                {% endif %}
+                <td>{{ user.name }}</td>
+                <td>{{ user.college }}</td>
+                <td>{{ user.email_id }}</td>
+                <td>{{ user.phone_one }}</td>
+                <td><a href="../set/{{ user.id }}/" class="button button-primary">Select</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock body %}

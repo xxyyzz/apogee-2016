@@ -1,0 +1,68 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Campus Ambassadors Applicants</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+            <a href="../mail_approved/" class="button button-primary">Mail to All</a>
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>College Name </th>
+                    <th>Name</th>
+                    <!-- <th>Gender</th> -->
+                    <th>phone</th>
+                    <th>email address</th>
+                    <th>Address</th>
+                    <th>Root Mail</th>
+                    <th>Approved</th>
+                    <!-- <th>Select </th> -->
+
+
+                </tr>
+            </tbody>
+            <tbody>
+            {% for amb in amb_list reversed %}
+            {% if amb.pcr_approved %}
+            <tr>
+
+                <td> {{amb.college}} </td>
+                <td> {{amb.name}} </td>
+                <!-- <td> {{amb.gender}} </td> -->
+                <td> {{amb.phone}} </td>
+                <td> {{amb.email}} </td>
+                <td> {{amb.address}} </td>
+                {% if amb.root_mail %}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+                {% if amb.pcr_approved %}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+
+
+
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock body %}

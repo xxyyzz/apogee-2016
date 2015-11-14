@@ -1,0 +1,41 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div>
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Set User Status</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+            <form action= "../set/" method = "POST">
+                {% csrf_token %}            
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>College</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Edit</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for p in users reversed %}
+            <tr>
+                <td>{{p.details.name}}</td>
+                <td>{{p.details.college}}</td>
+                <td>{{p.user.username}}</td>
+                <td>{{p.details.phone_one}}</td>
+                <!-- <td><input type="radio" name="username" value= {{p.username}} /></td> -->
+                <td><a class="button button-primary" href="../edit/{{ p.id }}">Edit</a></td>        
+            </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+    
+    <!-- <button type="submit">set status</button> -->
+</form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}

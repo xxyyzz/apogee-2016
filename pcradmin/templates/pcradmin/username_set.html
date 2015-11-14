@@ -1,0 +1,66 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Set User Status</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a><br>
+            <a href="../../select/" class="button">Shortlist Home</a>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>College</th>
+                        <th>City</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.college }}</td>
+                        <td>{{ user.city }}</td>
+                        <td>{{ user.phone_one }} {% if user.phone_two %}<br>{{ user.phone_two }}{% endif %}</td>
+                        <td>{{ user.email_id }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <b>Status: </b>
+            {% if user.shortlisted == True %}
+                <b style="color: green">Shortlisted</b>
+            {% elif user.shortlisted == None %}
+                <b style="color: orange">Unknown</b>
+            {% elif user.shortlisted == False %}
+                <b style="color: red">Rejected</b>
+            {% endif %} <br><br>
+            <form action="../../save/{{ user.id }}/" method="POST">
+                {% csrf_token %}
+                {% if user.user == None %}
+                    {% if user.shortlisted == False or user.shortlisted == None %}
+                        <button name="shortlisted" value="True" class="button" style="background-color : #74FF00; color : white;">Shortlist</button>
+                    {% endif %}
+                    {% if user.shortlisted == None %}
+                        <a href="../../select/" class="button" style="background-color : #FFD81A; color : white;">Decide Later</a>
+                    {% endif %}
+                    {% if user.shortlisted == None %}
+                        <button name="shortlisted" value="False" class="button" style="background-color : #FF2F00; color : white;">Reject</button>
+                    {% endif %}
+                {% endif %}
+                <br>
+                {% if user.user != None %}
+                    {% if user.user.is_active %}
+                    {{ user.name }} has already been given login credentials, which cannot be undone. <br>However, you can freeze {% if user.gender == 'M' %}his{% else %}her{% endif %} account, which will prevent {% if user.gender == 'M' %}him{% else %}her{% endif %} from logging in.<br>
+                        <button name="shortlisted" value="Freeze" class="button" style="background-color : #FF2F00; color : white;">Freeze Account</button>
+                    {% else %}
+                    {{ user.name }}'s account was frozen by you. <br>
+                        <button name="shortlisted" value="Activate" class="button" style="background-color : #74FF00; color : white;">Reactivate Account</button>
+                    {% endif %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

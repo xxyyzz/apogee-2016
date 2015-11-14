@@ -26,5 +26,7 @@ urlpatterns = [
     url(r'^portal/', include('registrations.urls', namespace='registrations')),
     url(r'^', include('cover.urls', namespace='cover')),
     url(r'^cms/', include('cms.urls', namespace='cms')),
+    url(r'^pcradmin/', include('pcradmin.urls', namespace='pcradmin')),
+    
 ]
 

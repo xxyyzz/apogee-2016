@@ -1,0 +1,114 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<script>
+function toggle(source) {
+  checkboxes = document.getElementsByTagName('input');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+</script>
+<form action="." method="POST" id="pcrstatus">
+    {% csrf_token %}
+</form>
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1> Statistics </h1>
+            <a href="{% url 'pcradmin:stats_eventwise' %}" class="button">EventWise</a>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+            <a href="{% url 'pcradmin:stats' %}" class="button button-primary">Stats Home</a>
+            <a href="{% url 'pcradmin:stats_collegewise' %}" class="button">Collegewise</a>
+        </div>
+    </div>
+    <div class="row" id="eventwise">
+        <div class="twelve columns textcenter">
+            <h4>Participant List for {{ event }}</h4>
+            <h4>{{ college }}</h4>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>S. No</th>
+                        <th>Name</th>
+                        <th>Sex</th>
+                        <th>College</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>CR Approval</th>
+                        <th>PCR Approval</th>
+                        <th>Online Paid</th>
+                        <th><input type="checkbox" class="button-primary" onclick="toggle(this)">Toggle All</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for participant in participants %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ participant.name }}</td>
+                        <td>{{ participant.gender }}</td>
+                        <td>{{ participant.college }}</td>
+                        <td>{{ participant.phone_one }}{% if participant.phone_two %}<br>{{ participant.phone_two }}{% endif %}</td>
+                        <td>{{ participant.email_id }}</td>
+                        {% if participant.gl_approval %}
+                        <th style="color: green">Yes</th>
+                        {% else %}
+                        <th style="color: red">No</th>
+                        {% endif %}
+                        {% if participant.pcr_approval %}
+                        <th style="color: green">Yes</th>
+                        {% else %}
+                        <th style="color: red">No</th>
+                        {% endif %}
+
+                        {% if participant.reg_paid %}
+                        <th style="color: green">Yes</th>
+                        {% else %}
+                        <th style="color: red">No</th>
+                        {% endif %}
+                        
+                        {% if participant.gl_approval %}
+                        <td><input type="checkbox" name="partid" value="{{ participant.id }}" form="pcrstatus"></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <input class="button button-primary" type="submit" name="request" value="approve" form="pcrstatus">
+            <input class="button button-primary" type="submit" name="request" value="deny" form="pcrstatus">
+        </div>
+    </div>
+    {% if collegewise %} 
+    <div class="row" id="collegewise">
+        <div class="twelve columns">
+            <h4>Collegewise Stats{% if name %} for {{ name }}{% endif %}</h4>
+            <p>Colleges with no registered participants are not listed here.</p>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>College</th>
+                        <th>Males</th>
+                        <th>Females</th>
+                        <th>College<br> Representative</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for college in collegewise %}
+                    <tr>
+                        <td><a class="button" href="{% url 'pcradmin:stats_college' college.collegeid %}">{{ college.college }}</a></td>
+                        <td>{{ college.males }}</td>
+                        <td>{{ college.females }}</td>
+                        <td>{{ college.college_rep }}</td>
+                        <td>{{ college.total }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

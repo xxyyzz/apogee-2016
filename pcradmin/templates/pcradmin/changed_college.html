@@ -1,0 +1,34 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+<div> 
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <br> <br>
+           
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+{% if status == 2 %}
+
+    <br>  <button name="newcollege" value="" class="button" style="background-color : #00FF00; color : white;">College Added Successfully</button>
+
+{% elif status == 1 %}
+    <h4 style = "color:green"> College Name Changed to {{clg_name}} </h4>
+
+    {% else %}
+    <h3 style = "color:red"> Action Failed </h3>
+
+    {% endif %}
+
+
+
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}

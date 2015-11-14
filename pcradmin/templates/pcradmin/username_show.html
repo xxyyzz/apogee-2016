@@ -1,0 +1,32 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Set User Status</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a><br>
+            <a href="../../select/" class="button">Shortlist Home</a><br>
+            Status for <strong>{{ user.name }}</strong> with email <strong>{{ user.email_id }}</strong> changed to
+            {% if user.shortlisted == True %}
+                <b style="color: green">Shortlisted</b>
+            {% elif user.shortlisted == None %}
+                <b style="color: orange">Unknown</b>
+            {% elif user.shortlisted == False %}
+                <b style="color: red">Rejected</b>
+            {% endif %} 
+
+
+            {% if user.shortlisted == True %}
+                <br><br>Username and Password generated
+                <br><strong>{{ user.name }}</strong> has been given the following username <strong>{{ user.email_id }}</strong>
+            {% endif %}
+            <form action = "{% url 'pcradmin:statchange' %}" method= "POST">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ email }}"><br>
+            <input type="hidden" name="status" value="{{ status }}"><br>
+            <input type="submit" value="send alert mail">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

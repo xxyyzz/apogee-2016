@@ -1,0 +1,24 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>College Representative</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a><br>
+            <a href="../../select/" class="button">Select College</a>         
+
+            {% if user.college_rep %}
+                <br><br>Username and Password generated
+                <br><strong>{{ user.name }}</strong> has been given the following username <strong>{{ user.email_id }}</strong>
+            {% endif %}
+            <form action="../../save/{{ user.id }}/" method="POST">
+                {% csrf_token %}
+                        
+                        <button name="mail" value="True" class="button" style="background-color : #00E600; color : white;">Send Mail </button>
+                        <br>
+                        <textarea name='body' style="width:450px;height:250px;"  required>{{mailbody}}</textarea>
+                    </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}
