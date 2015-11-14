@@ -29,9 +29,13 @@ function checkall(gauss){
             <button name="approval" value="2" class="button" style="background-color : #00CC00; color : white;">Approve</button>            
             <button name="approval" value="1" class="button" style="background-color : #FF0000; color : white;">Deny</button>            
 <br>
+{% if no_select %}
+ <p style= 'color:red'> Please select someone </p>
+ {% endif %}
             <table class= "u-full-width">
             <tbody>
                 <tr>
+                    <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th>
                     <th>College Name </th>
                     <th>Name</th>
                     <!-- <th>Gender</th> -->
@@ -40,7 +44,6 @@ function checkall(gauss){
                     <th>Address</th>
                     <th>Root Mail</th>
                     <th>Approved</th>
-                    <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th>
 
 
                 </tr>
@@ -49,6 +52,9 @@ function checkall(gauss){
             {% for amb in amb_list reversed %}
             <tr>
 
+                <td>
+                    <input type = 'checkbox' name='amb_list' value = {{amb.id}}>
+                </td>
                 <td> {{amb.college}} </td>
                 <td> {{amb.name}} </td>
                 <!-- <td> {{amb.gender}} </td> -->
@@ -73,9 +79,6 @@ function checkall(gauss){
                     No
                 </td>
                 {% endif %}
-                <td>
-                    <input type = 'checkbox' name='amb_list' value = {{amb.id}}>
-                </td>
 
 
 

@@ -1,0 +1,25 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>College Representative</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a><br>
+
+
+                <br><h5><strong>Mail to selected Ambassadors</strong></h5>
+
+        <br>
+            <form action="../mail_selected/" method="POST">
+                {% csrf_token %}
+                        <input type = "hidden" name='id_str' value= {{id_str}} >
+                        <button name="mail" value="True" class="button" style="background-color : #00E600; color : white;">Send Mail </button>
+                        <br>
+                        <textarea name='body' style="width:550px;height:350px;"  required>{{mailbody}}</textarea>
+                    </form>
+
+
+        </div>
+    </div>
+</div>
+{% endblock body %}

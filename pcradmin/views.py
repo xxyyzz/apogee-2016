@@ -558,8 +558,16 @@ def app_amb(request):
 	return render(request, 'pcradmin/approved_amb.html', {'amb_list' : amb_obs})	
 
 def amb_act(request):
+	amb_obs = CampusAmbassador.objects.all()	
+
+
 	amb_ids = request.POST.getlist('amb_list')
-	if request.POST['approval']:
+	if amb_ids:
+		no_select=0
+	else:
+		return render(request,'pcradmin/list_ambassadors.html',{'amb_list' : amb_obs, 'no_select' : 1})
+
+	if request.POST.get('approval', False):
 		val = request.POST['approval']
 		val =int(val)
 		if val == 2:
@@ -583,9 +591,74 @@ def amb_act(request):
 				amb.save()	
 		else:
 			return HttpResponse('Error: Decision Value didnt match;   Call Satwik 9928823099  :    ' + str(amb_ids) + ' | ' + str(val))			
+		
+
 		return HttpResponseRedirect('../ambassadors/')
 
+	elif request.POST['mail']:
+		id_str = ','.join(amb_ids)
+		mailbody = 'Default mail body'
+		gauss_check= 0
+		context = {
+		'mailbody' :mailbody,
+		'id_str' : id_str,
+		}	
+		return render(request, 'pcradmin/mail_selected_amb.html', context)		
 
+
+
+
+def mail_selected_amb(request):
+	id_str = request.POST.get('id_str', False)
+	amb_ids = id_str.split(',')
+	body = str( request.POST.get('body' , '') )
+
+	send_to= []
+	for k in amb_ids:
+		aid = int(k)
+		amb = CampusAmbassador.objects.get(id= aid)
+		send_to.append( str( amb.email) )
+
+	try:
+		email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-oasis.org', send_to)
+		#poster attachment
+		# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+		#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+		#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+		email.send()
+		return render(request, 'pcradmin/showmailsent.html')
+	except:
+		return HttpResponse('Mail to selected Ambassadors Error : Contact Satwik 9928823099')		
+
+
+def mail_approved(request):
+	amb_list = CampusAmbassador.objects.filter(pcr_approved=True)
+	if request.POST:
+		body = str(request.POST['body'])
+		send_to = []
+		for amb in amb_list:
+			send_to.append( str(amb.email) )
+		try:
+			email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-oasis.org', send_to)
+			#poster attachment
+			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+			email.send()
+			return render(request, 'pcradmin/showmailsent.html')
+		except:
+			return HttpResponse('Mail Error : Contact Satwik 9928823099')		
+
+	else:
+		mailbody = 'Default mail body'
+		gauss_check= 0
+		if CampusAmbassador.objects.filter(pcr_approved=True):
+			gauss_check= 1
+		context = {
+		'mailbody' :mailbody,
+		'gauss_check' : gauss_check
+		}	
+		return render(request, 'pcradmin/mail_amb.html', context)
 
 
 
