@@ -300,6 +300,44 @@ def campusAmbassadorStatus(request):
 	try:
 		CampusAmbassador.objects.create(name=name, address=address, college=model_college, year=year, degree=degree, email=email, phone=phone, ambassador_quality=ambassador_quality, root_mail=root_mail)
 		response['status'] = 1
+
+		
+		body = """Dear Applicant,
+Greetings from the Department for Publications and Correspondence -APOGEE, BITS Pilani. We are pleased to inform you that your registration for the Campus Ambassador Programme for APOGEE 2016 has been confirmed.
+ 
+Please make sure you go through the following guidelines for better understanding of the programme:
+
+i) Registration Guideline (Make sure you have completed these steps)
+   a) Visit www.youth4work.com and register yourself (with the same email and phone number)
+   b) Visit www.facebook.com/bitsapogee, like and follow the page for future updates
+
+
+ii) Selection Procedure
+   a) Selection will be carried out on a one-one telephonic conversation basis which will be held in last week of December or early January.
+   b) Judgement will be based on your oratory skills, knowledge about APOGEE and your commitment to the Campus Ambassador Program.
+   c) You will be informed about your selection on a later date via email.
+
+iii) Post Selection Tasks
+    a) If you are selected, you automatically get registered as a marketing intern with youth4work, working for APOGEE 2016.
+    b) You will be working with a member from the organizing team who will assign you tasks and keep helping you out with various issues you may face during marketing and publicity of APOGEE in your institute. 
+    c) The final performance of the intern will be judged by how many people he/she can get for APOGEE-2016 from 25th Feb-28th          Feb,2016.
+
+Please note that failing to meet the dedication required for a successful internship without righteous reasons can lead to cancellation of your internship anytime till APOGEE 2016.
+
+You will be contacted shortly by our representatives for the telephonic conversation.
+
+Thank you."""
+		send_to = [email]
+		try:
+			email = EmailMessage("Campus Ambassador Apogee 2016", body, 'noreply@bits-apogee.org', send_to)
+			#poster attachment
+			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+			email.send()
+		except:
+			return HttpResponse('Mail Error : Contact Satwik')
+
 	except IntegrityError:
 		response['status'] = 0
 		response['message'] = "Email already exists!"
