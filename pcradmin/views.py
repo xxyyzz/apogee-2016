@@ -121,17 +121,18 @@ def mail_approved(request):
 		body = str(request.POST['body'])
 		send_to = []
 		for amb in amb_list:
+			send_to=[]
 			send_to.append( str(amb.email) )
-		try:
-			email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to)
+			try:
+				email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to)
+				email.send()
 			#poster attachment
 			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-			email.send()
-			return render(request, 'pcradmin/showmailsent.html')
-		except:
-			return HttpResponse('Mail Error : Contact Satwik 9928823099')		
+			except:
+				return HttpResponse('Mail Error : Contact Satwik 9928823099')		
+		return render(request, 'pcradmin/showmailsent.html')
 
 	else:
 		mailbody = 'Default mail body'
