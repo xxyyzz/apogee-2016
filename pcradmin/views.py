@@ -200,8 +200,8 @@ def stats_ambassadors(request):
 # 	users = User.objects.all()
 # 	return render(request, 'pcradmin/'+pagename+'.html', {'users' : users})
 # @staff_member_required
-# def dashboard(request):
-# 	return render(request, 'pcradmin/dashboard.html')
+def dashboard(request):
+	return render(request, 'pcradmin/dashboard.html')
 
 # # @staff_member_required
 # # def username_select(request):
