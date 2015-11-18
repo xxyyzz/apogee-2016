@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
+from django.core.mail import send_mail, EmailMessage
 from django.shortcuts import render
 from registrations.models import *
 from django.template import Context
@@ -301,7 +302,7 @@ def campusAmbassadorStatus(request):
 		CampusAmbassador.objects.create(name=name, address=address, college=model_college, year=year, degree=degree, email=email, phone=phone, ambassador_quality=ambassador_quality, root_mail=root_mail)
 		response['status'] = 1
 
-		
+
 		body = """Dear Applicant,
 Greetings from the Department for Publications and Correspondence -APOGEE, BITS Pilani. We are pleased to inform you that your registration for the Campus Ambassador Programme for APOGEE 2016 has been confirmed.
  
@@ -327,17 +328,18 @@ Please note that failing to meet the dedication required for a successful intern
 You will be contacted shortly by our representatives for the telephonic conversation.
 
 Thank you."""
-		send_to = [email]
-		try:
-			email = EmailMessage("Campus Ambassador Apogee 2016", body, 'noreply@bits-apogee.org', send_to)
+		send_to = [str(email) ]
+		# try:
+		email = EmailMessage("Campus Ambassador Apogee 2016", body, 'noreply@bits-apogee.org', send_to)
 			#poster attachment
 			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-			email.send()
-		except:
-			return HttpResponse('Mail Error : Contact Satwik')
-
+		email.send()
+		# except:
+		# response['status'] = 0
+		# response['message'] = "Error"
+	
 	except IntegrityError:
 		response['status'] = 0
 		response['message'] = "Email already exists!"
