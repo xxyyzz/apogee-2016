@@ -1,147 +1,23 @@
 from django.shortcuts import render
 
 # Create your views here.
-def deepgetattr(obj, attr, default = None):
-    """
-    Get a named attribute from an object; multi_getattr(x, 'a.b.c.d') is
-    equivalent to x.a.b.c.d. When a default argument is given, it is
-    returned when any attribute in the chain doesn't exist; without
-    it, an exception is raised when a missing attribute is encountered.
-
-    """
-    attributes = attr.split(".")
-    for i in attributes:
-        try:
-            obj = getattr(obj, i)
-        except AttributeError:
-            if default:
-                return default
+def paper_home(request):
+    if request.POST:
+        from django.contrib.auth import authenticate, login
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active and user.is_staff:
+                login(request, user)
+                return HttpResponse('yay')
+                # Redirect to a success page.
             else:
-                raise
-    return obj
-
-def paper_stats_xlsx(request):
-    from django.http import HttpResponse, HttpResponseRedirect  
-    import xlsxwriter
-
-    try:  
-        import cStringIO as StringIO
-    except ImportError:  
-        import StringIO
-    a_list = []
-
-    from registrations.models import Paper
-    papers = Paper.objects.all()
-
-    for p in papers:
-        a_list.append({'obj': p})
-    data = sorted(a_list, key=lambda k: k['obj'].category)
-    output = StringIO.StringIO()
-    workbook = xlsxwriter.Workbook(output)
-    worksheet = workbook.add_worksheet('new-spreadsheet')
-    date_format = workbook.add_format({'num_format': 'mmmm d yyyy'})
-
-    worksheet.write(0, 0, "Paper ID")
-    worksheet.write(0, 1, "Paper Name")
-    worksheet.write(0, 2, "Category")
-    worksheet.write(0, 3, "Reference Code")
-    worksheet.write(0, 4, "Address")
-    worksheet.write(0, 5, "Author Name")
-    worksheet.write(0, 6, "Author Phone")
-    worksheet.write(0, 7, "Author Email")
-    worksheet.write(0, 8, "Author College")
-    worksheet.write(0, 9, "Co-Author Name")
-    worksheet.write(0, 10, "Co-Author Phone")
-    worksheet.write(0, 11, "Co-Author Email")
-    worksheet.write(0, 12, "Co-Author College")
-        
-    for i, row in enumerate(data):
-        """for each object in the date list, attribute1 & attribute2
-        are written to the first & second column respectively,
-        for the relevant row. The 3rd arg is a failure message if
-        there is no data available"""
-
-        worksheet.write(i+1, 0, deepgetattr(row['obj'], 'id', 'NA'))
-        worksheet.write(i+1, 1, deepgetattr(row['obj'], 'name', 'NA'))
-        worksheet.write(i+1, 2, deepgetattr(row['obj'] , 'category.name', 'NA'))
-        worksheet.write(i+1, 3, deepgetattr(row['obj'], 'stub', 'NA'))
-        worksheet.write(i+1, 4, deepgetattr(row['obj'], 'address', 'NA'))
-        worksheet.write(i+1, 5, deepgetattr(row['obj'] , 'author.name', 'NA'))
-        worksheet.write(i+1, 6, deepgetattr(row['obj'] , 'author.phone', 'NA'))
-        worksheet.write(i+1, 7, deepgetattr(row['obj'] , 'author.email', 'NA'))
-        worksheet.write(i+1, 8, deepgetattr(row['obj'] , 'author.college.name', 'NA'))
-        worksheet.write(i+1, 9, deepgetattr(row['obj'] , 'co_author.name', 'NA'))
-        worksheet.write(i+1, 10, deepgetattr(row['obj'] , 'co_author.phone', 'NA'))
-        worksheet.write(i+1, 11, deepgetattr(row['obj'] , 'co_author.email', 'NA'))
-        worksheet.write(i+1, 12, deepgetattr(row['obj'] , 'co_author.college.name', 'NA'))
-
-    workbook.close()
-    filename = 'ExcelReport.xlsx'
-    output.seek(0)
-    response = HttpResponse(output.read(), content_type="application/ms-excel")  
-    response['Content-Disposition'] = 'attachment; filename=%s' % filename
-    return response
-
-def project_stats_xlsx(request):
-    from django.http import HttpResponse, HttpResponseRedirect  
-    import xlsxwriter
-
-    try:  
-        import cStringIO as StringIO
-    except ImportError:  
-        import StringIO
-    a_list = []
-
-    from registrations.models import Project
-    papers = Project.objects.all()
-
-    for p in papers:
-        a_list.append({'obj': p})
-    data = sorted(a_list, key=lambda k: k['obj'].assoc)
-    output = StringIO.StringIO()
-    workbook = xlsxwriter.Workbook(output)
-    worksheet = workbook.add_worksheet('new-spreadsheet')
-    date_format = workbook.add_format({'num_format': 'mmmm d yyyy'})
-
-    worksheet.write(0, 0, "Project ID")
-    worksheet.write(0, 1, "Project Name")
-    worksheet.write(0, 2, "Category")
-    worksheet.write(0, 3, "Assoc")
-    worksheet.write(0, 4, "Reference Code")
-    worksheet.write(0, 5, "Leader Name")
-    worksheet.write(0, 6, "Leader Phone")
-    worksheet.write(0, 7, "Leader Email")
-    worksheet.write(0, 8, "Leader College")
-    for i in range(5):
-        worksheet.write(0, 9+4*i, "Member "+str(i+1)+" Names")
-        worksheet.write(0, 10+4*i, "Member "+str(i+1)+" Phone")
-        worksheet.write(0, 11+4*i, "Member "+str(i+1)+" Email")
-        worksheet.write(0, 12+4*i, "Member "+str(i+1)+" College")
-        
-    for i, row in enumerate(data):
-        """for each object in the date list, attribute1 & attribute2
-        are written to the first & second column respectively,
-        for the relevant row. The 3rd arg is a failure message if
-        there is no data available"""
-
-        worksheet.write(i+1, 0, deepgetattr(row['obj'], 'id', 'NA'))
-        worksheet.write(i+1, 1, deepgetattr(row['obj'], 'name', 'NA'))
-        worksheet.write(i+1, 2, deepgetattr(row['obj'], 'category.name', 'NA'))
-        worksheet.write(i+1, 3, deepgetattr(row['obj'], 'assoc.name', 'NA'))
-        worksheet.write(i+1, 4, deepgetattr(row['obj'], 'stub', 'NA'))
-        worksheet.write(i+1, 5, deepgetattr(row['obj'], 'leader.name', 'NA'))
-        worksheet.write(i+1, 6, deepgetattr(row['obj'], 'leader.phone', 'NA'))
-        worksheet.write(i+1, 7, deepgetattr(row['obj'], 'leader.email', 'NA'))
-        worksheet.write(i+1, 8, deepgetattr(row['obj'], 'leader.college.name', 'NA'))
-        for n, member in enumerate(row['obj'].members.all()):
-            worksheet.write(i+1, 9+4*n, deepgetattr(member, 'name', 'NA'))
-            worksheet.write(i+1, 10+4*n, deepgetattr(member, 'phone', 'NA'))
-            worksheet.write(i+1, 11+4*n, deepgetattr(member, 'email', 'NA'))
-            worksheet.write(i+1, 12+4*n, deepgetattr(member, 'college.name', 'NA'))
-
-    workbook.close()
-    filename = 'ExcelReport.xlsx'
-    output.seek(0)
-    response = HttpResponse(output.read(), content_type="application/ms-excel")  
-    response['Content-Disposition'] = 'attachment; filename=%s' % filename
-    return response
+                # Return a 'disabled account' error message
+                return render(request, 'cms/paper_home.html', {"status": 0})
+        else:
+            # Return an 'invalid login' error message.
+            return render(request, 'cms/paper_home.html', {"status": 0})
+    return render(request, 'cms/paper_home.html')
+def project_home(request):
+    return render(request, 'cms/paper_home.html')
