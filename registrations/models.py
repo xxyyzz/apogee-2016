@@ -27,6 +27,12 @@ class Project(models.Model):
     members = models.ManyToManyField('Participant', related_name='members')
     abstract = models.FileField(default=None, upload_to=upload_project)
     stub = models.CharField(max_length=8, unique=True)
+    STATUSES = (
+        ('0', 'Submitted'),
+        ('1', 'Passed Round 1'),
+        ('2', 'Passed Round 2'),
+    )
+    status = models.CharField(max_length=2, choices=STATUSES, default="0")
     def __unicode__(self):
         return self.name
 

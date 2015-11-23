@@ -23,48 +23,73 @@
         </a>            
     </li>
 {% endblock sidebar_content %}
+{% block main_title %}
+    Papers Management Portal
+{% endblock main_title %}
 {% block main_content %}
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">                   
-                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+    <div class="content">
+        <div class="container-fluid">
+            <form action="." method="POST">
+                <div class="row">  
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Are you worth it? Let's see.</h4>
-                                {% if status == 0 %} <p class="category" style = "color:red">Invalid Credentials. You're not worth it. :(</p>
-                                {% endif %}
+                                <h4 class="title">Initial Entries</h4>
+                                <p class="category">These are the winners for BLAB</p>
                             </div>
-                            <div class="content">
-                                <form method="POST" action=".">
-                                {% csrf_token %}
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Username</label>
-                                                <input name="username" type="text" class="form-control" placeholder="bitspilani">
-                                            </div>        
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input name="password" type="password" class="form-control" placeholder="password">
-                                            </div>        
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-4">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-info btn-fill">Login</button>
-                                            </div>        
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Check</th>
+                                        <th>S.no</th>
+                                        <th>Leader</th>
+                                        <th>College</th>
+                                        <th>Phone</th>
+                                        <th>Members</th>
+                                        <th>Position</th>
+                                        <th>Category</th>
+                                    </thead>
+                                    <tbody>
+                                    
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="winners" value="633" data-toggle="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>1</td>
+                                        <td> PRANAV DIWAKAR</td>
+                                        <td>BITS Pilani</td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>None</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="winners" value="634" data-toggle="checkbox">
+                                            </label>
+                                        </td>
+                                        <td>2</td>
+                                        <td> GAUTHAM VENKATASUBRAMANIAN</td>
+                                        <td>BITS Pilani</td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>None</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td colspan="8">
+                                            <button type="submit" class="btn btn-danger btn-fill" name="remove-winners">Remove Winners</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>  
-                </div>  
-            </div>
-        </div>
+                    </div>
+                </div>
 {% endblock main_content %}
