@@ -101,3 +101,10 @@ class CampusAmbassador(models.Model):
         verbose_name_plural = 'Campus Ambassadors'
     def __unicode__(self):
         return self.name
+
+class InitialRegistration(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    phone = models.BigIntegerField()
+    def __unicode__(self):
+        return self.name
