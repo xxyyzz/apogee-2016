@@ -46,9 +46,9 @@ class Paper(models.Model):
     co_author = models.ForeignKey('Participant', related_name='co_authors', blank=True, null=True)
     abstract = models.FileField(default=None, upload_to=upload_paper)
     STATUSES = (
-        ('0', 'Submitted'),
-        ('1', 'Passed Round 1'),
-        ('2', 'Passed Round 2'),
+        ('0', 'Paper Submitted'),
+        ('1', 'Cleared Round 1'),
+        ('2', 'Cleared Round 2'),
     )
     status = models.CharField(max_length=2, choices=STATUSES, default="0")
     def __unicode__(self):

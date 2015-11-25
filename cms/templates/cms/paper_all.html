@@ -4,16 +4,16 @@
 {% endblock title %}
 {% block sidebar_content %}
     
-    <li>
+    <li class="active">
         <a href="{% url 'cms:paper_home' %}">
             <i class="pe-7s-home"></i> 
-            <p>HOME</p>
+            <p>Initial Entries</p>
         </a>            
     </li>
     <li>
         <a href="{% url 'cms:paper_home' %}">
             <i class="pe-7s-news-paper"></i> 
-            <p>PAPERS</p>
+            <p>Cleared Round 1</p>
         </a>
     </li> 
     <li>
@@ -35,61 +35,50 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Initial Entries</h4>
-                                <p class="category">These are the winners for BLAB</p>
+                                <p class="category">All Entries for Papers</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="pull-right">For Selected <button type="submit" class="btn btn-danger btn-fill pull-right" name="remove-winners">Remove Winners</button></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>Check</th>
-                                        <th>S.no</th>
-                                        <th>Leader</th>
+                                        <th>ID</th>
+                                        <th>Author / Title</th>
                                         <th>College</th>
-                                        <th>Phone</th>
-                                        <th>Members</th>
-                                        <th>Position</th>
-                                        <th>Category</th>
+                                        <th>Code</th>
+                                        <th>Status</th>
+                                        <th>Details</th>
                                     </thead>
                                     <tbody>
-                                    
+                                    {% for paper in papers %}
                                     <tr>
                                         <td>
                                             <label class="checkbox">
                                                 <input type="checkbox" name="winners" value="633" data-toggle="checkbox">
                                             </label>
                                         </td>
-                                        <td>1</td>
-                                        <td> PRANAV DIWAKAR</td>
-                                        <td>BITS Pilani</td>
-                                        <td></td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>None</td>
+                                        <td>{{ paper.id }}</td>
+                                        <td>{{ paper.author.name }}</td>
+                                        <td>{{ paper.author.college }}</td>
+                                        <td>{{ paper.stub }}</td>
+                                        <td>{{ paper.get_status_display }}</td>
+                                        <td>Details</td>
                                     </tr>
-                                    
                                     <tr>
-                                        <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" name="winners" value="634" data-toggle="checkbox">
-                                            </label>
-                                        </td>
-                                        <td>2</td>
-                                        <td> GAUTHAM VENKATASUBRAMANIAN</td>
-                                        <td>BITS Pilani</td>
                                         <td></td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>None</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="8">
-                                            <button type="submit" class="btn btn-danger btn-fill" name="remove-winners">Remove Winners</button>
+                                        <td></td>
+                                        <td colspan="5">
+                                           {{ paper.name }} 
                                         </td>
                                     </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+            </form>
 {% endblock main_content %}

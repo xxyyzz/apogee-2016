@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from registrations.models import *
 
 # Create your views here.
 def login(request):
@@ -20,6 +21,16 @@ def login(request):
             return render(request, 'cms/paper_home.html', {"status": 0})
     return render(request, 'cms/paper_home.html')
 def paper_home(request):
-    return render(request, 'cms/paper_home.html')
+    papers = Paper.objects.all()
+    context = {
+    'papers': papers,
+    }
+    return render(request, 'cms/paper_home.html', context)
+def paper_initial(request):
+    papers = Paper.objects.all()
+    context = {
+    'papers': papers,
+    }
+    return render(request, 'cms/paper_all.html', context)
 def project_home(request):
     return render(request, 'cms/paper_home.html')
