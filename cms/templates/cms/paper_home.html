@@ -87,7 +87,7 @@
                                         <th>College</th>
                                         <th>Code</th>
                                         <th>Status</th>
-                                        <th>Details</th>
+                                        <!--<th>Details</th>-->
                                     </thead>
                                     <tbody>
                                     {% for paper in papers %}
@@ -111,13 +111,19 @@
                                                 <a class="btn btn-fill btn-info">&nbsp;</a>
                                             {% endif %}
                                         </td>
-                                        <td><a href="#" class="btn btn-default">Details</a></td>
+                                        <!--<td><a href="#" class="btn btn-default">Details</a></td>-->
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td></td>
                                         <td colspan="6">
                                            <b>{{ paper.name }}</b> 
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="8" style="text-align:center">
+                                            Nothing in here!
                                         </td>
                                     </tr>
                                     {% endfor %}

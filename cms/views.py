@@ -1,31 +1,45 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, resolve_url
 from registrations.models import *
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse, reverse_lazy
+
+def controls_check(user):
+    if user.id:
+        if user.is_superuser or user.email == 'controls@bits-apogee.org':
+            return True
+        else:
+            return False
+    else:
+        return False
+
+def user_logout(request):
+    logout(request)
+    return redirect('cms:user_login')
+
+def login_url(request):
+    return reverse_lazy('cms:user_login')
 
 # Create your views here.
-def login(request):
+def user_login(request):
     if request.POST:
-        from django.contrib.auth import authenticate, login
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active and user.is_staff:
                 login(request, user)
-                return HttpResponse('yay')
+                return  redirect('cms:paper_home')
                 # Redirect to a success page.
             else:
                 # Return a 'disabled account' error message
-                return render(request, 'cms/paper_home.html', {"status": 0})
+                return render(request, 'cms/login.html', {"status": 0})
         else:
             # Return an 'invalid login' error message.
-            return render(request, 'cms/paper_home.html', {"status": 0})
-    return render(request, 'cms/paper_home.html')
-# def paper_home(request):
-#     papers = Paper.objects.all()
-#     context = {
-#     'papers': papers,
-#     }
-#     return render(request, 'cms/paper_home.html', context)
+            return render(request, 'cms/login.html', {"status": 0})
+    return render(request, 'cms/login.html')
+
+@user_passes_test(controls_check, login_url=reverse_lazy('cms:user_login'), redirect_field_name=None)
 def paper_home(request, status=None):
     if request.POST:
         if "initial" in request.POST:
