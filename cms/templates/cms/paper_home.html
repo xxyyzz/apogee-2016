@@ -4,27 +4,38 @@
 {% endblock title %}
 {% block sidebar_content %}
     
-    <li class="active">
+    <li>
+        <div class="container">
+            <p>Filter Papers</p>
+        </div>
+    </li>
+    <li {% if status == None %}class="active"{% endif %}>
         <a href="{% url 'cms:paper_home' %}">
-            <i class="pe-7s-home"></i> 
+            <i class="pe-7s-news-paper"></i> 
+            <p>All Entries</p>
+        </a>            
+    </li>
+    <li {% if status == '0' %}class="active"{% endif %}>
+        <a href="{% url 'cms:paper_home' '0' %}">
+            <i class="pe-7s-news-paper"></i> 
             <p>Initial Entries</p>
         </a>            
     </li>
-    <li>
-        <a href="{% url 'cms:paper_home' %}">
+    <li {% if status == '1' %}class="active"{% endif %}>
+        <a href="{% url 'cms:paper_home' '1' %}">
             <i class="pe-7s-news-paper"></i> 
             <p>Cleared Round 1</p>
         </a>
     </li> 
-    <li>
-        <a href="../../groupcodes">
-            <i class="pe-7s-folder"></i> 
-            <p>PROJECTS</p>
+    <li {% if status == '2' %}class="active"{% endif %}>
+        <a href="{% url 'cms:paper_home' '2' %}">
+            <i class="pe-7s-news-paper"></i> 
+            <p>Cleared Round 2</p>
         </a>            
     </li>
     <li>
         <div class="container">
-            <p>Actions For Selected Entries</p>
+            <p>Change Status for Selected</p>
         </div>
     </li>
     <!--<li>
@@ -33,8 +44,20 @@
         </a>
     </li>-->
     <li class="active">
-        <a href="#">
-            <button type="button" class="btn btn-fill btn-success btn-block"><b>Clear First Round</b></button>
+        <a>
+            <button type="submit" class="btn btn-fill btn-danger btn-block" name="initial" form="status"><b>0: Initial Entry</b></button>
+        </a>
+    </li>
+    <li class="active">
+        <a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-fill btn-warning btn-block" name="round1" form="status"><b>1: Clear First Round</b></button>
+        </a>
+    </li>
+    <li class="active">
+        <a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-fill btn-info btn-block" name="round2" form="status"><b>2: Clear Second Round</b></button>
         </a>
     </li>
 {% endblock sidebar_content %}
@@ -42,15 +65,17 @@
     Papers Management Portal
 {% endblock main_title %}
 {% block main_content %}
+    <form action="." method="POST" id="status">
+    {% csrf_token %}
+    </form>
     <div class="content">
         <div class="container-fluid">
-            <form action="." method="POST">
                 <div class="row">  
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Initial Entries</h4>
-                                <p class="category">All Entries for Papers</p>
+                                <h4 class="title">Paper Entries</h4>
+                                <p class="category">{{ papers.count }} Entries</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -69,7 +94,7 @@
                                     <tr>
                                         <td>
                                             <label class="checkbox">
-                                                <input type="checkbox" name="winners" value="633" data-toggle="checkbox">
+                                                <input type="checkbox" name="qualifiers" value="{{ paper.id }}" data-toggle="checkbox" form="status">
                                             </label>
                                         </td>
                                         <td>{{ paper.id }}</td>
@@ -77,8 +102,16 @@
                                         <td>{{ paper.co_author }}</td>
                                         <td>{{ paper.author.college }}</td>
                                         <td>{{ paper.stub }}</td>
-                                        <td>{{ paper.get_status_display }}</td>
-                                        <td><a href="#" class="btn btn-danger">Details</a></td>
+                                        <td>
+                                            {% if paper.status == '0' %}
+                                                <a class="btn btn-fill btn-danger">&nbsp;</a>
+                                            {% elif paper.status == '1' %}
+                                                <a class="btn btn-fill btn-warning">&nbsp;</a>
+                                            {% elif paper.status == '2' %}
+                                                <a class="btn btn-fill btn-info">&nbsp;</a>
+                                            {% endif %}
+                                        </td>
+                                        <td><a href="#" class="btn btn-default">Details</a></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -94,5 +127,4 @@
                         </div>
                     </div>
                 </div>
-            </form>
 {% endblock main_content %}
