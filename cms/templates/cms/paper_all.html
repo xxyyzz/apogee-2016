@@ -22,6 +22,21 @@
             <p>PROJECTS</p>
         </a>            
     </li>
+    <li>
+        <div class="container">
+            <p>Actions For Selected Entries</p>
+        </div>
+    </li>
+    <!--<li>
+        <a href="#" class="btn btn-success btn-fill" role="button">
+            <p>Clear First Round</p>
+        </a>
+    </li>-->
+    <li class="active">
+        <a href="#">
+            <button type="button" class="btn btn-fill btn-success btn-block"><b>Clear First Round</b></button>
+        </a>
+    </li>
 {% endblock sidebar_content %}
 {% block main_title %}
     Papers Management Portal
@@ -37,15 +52,13 @@
                                 <h4 class="title">Initial Entries</h4>
                                 <p class="category">All Entries for Papers</p>
                             </div>
-                            <div class="col-md-12">
-                                <p class="pull-right">For Selected <button type="submit" class="btn btn-danger btn-fill pull-right" name="remove-winners">Remove Winners</button></p>
-                            </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>Check</th>
+                                        <th>Select</th>
                                         <th>ID</th>
                                         <th>Author / Title</th>
+                                        <th>Co Author</th>
                                         <th>College</th>
                                         <th>Code</th>
                                         <th>Status</th>
@@ -61,16 +74,17 @@
                                         </td>
                                         <td>{{ paper.id }}</td>
                                         <td>{{ paper.author.name }}</td>
+                                        <td>{{ paper.co_author }}</td>
                                         <td>{{ paper.author.college }}</td>
                                         <td>{{ paper.stub }}</td>
                                         <td>{{ paper.get_status_display }}</td>
-                                        <td>Details</td>
+                                        <td><a href="#" class="btn btn-danger">Details</a></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td colspan="5">
-                                           {{ paper.name }} 
+                                        <td colspan="6">
+                                           <b>{{ paper.name }}</b> 
                                         </td>
                                     </tr>
                                     {% endfor %}
