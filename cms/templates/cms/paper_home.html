@@ -107,11 +107,11 @@
                                         <td>{{ paper.author.college }}</td>
                                         <td>{{ paper.stub }}</td>
                                         <td>
-                                            {% if paper.status == '0' %}
+                                            {% if paper.status == '1' %}
                                                 <a class="btn btn-fill btn-danger">&nbsp;</a>
-                                            {% elif paper.status == '1' %}
-                                                <a class="btn btn-fill btn-warning">&nbsp;</a>
                                             {% elif paper.status == '2' %}
+                                                <a class="btn btn-fill btn-warning">&nbsp;</a>
+                                            {% elif paper.status == '3' %}
                                                 <a class="btn btn-fill btn-info">&nbsp;</a>
                                             {% endif %}
                                         </td>
