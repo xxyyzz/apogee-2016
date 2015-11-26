@@ -49,19 +49,19 @@
     </li>-->
     <li class="active">
         <a>
-            <button type="submit" class="btn btn-fill btn-danger btn-block" name="initial" form="status"><b>1: First Round</b></button>
+            <button type="submit" class="btn btn-fill btn-danger btn-block" name="round1" form="status"><b>1: First Round</b></button>
         </a>
     </li>
     <li class="active">
         <a>
             {% csrf_token %}
-            <button type="submit" class="btn btn-fill btn-warning btn-block" name="round1" form="status"><b>2: Second Round</b></button>
+            <button type="submit" class="btn btn-fill btn-warning btn-block" name="round2" form="status"><b>2: Second Round</b></button>
         </a>
     </li>
     <li class="active">
         <a>
             {% csrf_token %}
-            <button type="submit" class="btn btn-fill btn-info btn-block" name="round2" form="status"><b>3: Third Round</b></button>
+            <button type="submit" class="btn btn-fill btn-info btn-block" name="round3" form="status"><b>3: Third Round</b></button>
         </a>
     </li>
 {% endblock sidebar_content %}
