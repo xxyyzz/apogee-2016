@@ -5,87 +5,135 @@
 {% block sidebar_content %}
     
     <li>
-        <a href="{% url 'cms:paper_home' %}">
-            <i class="pe-7s-home"></i> 
-            <p>HOME</p>
+        <div class="container">
+            <p>Filter Papers</p>
+        </div>
+    </li>
+    <!--<li {% if status == '0' %}class="active"{% endif %}>
+        <a href="{% url 'cms:paper_home' '0' category %}">
+            <i class="pe-7s-news-paper"></i> 
+            <p>All Entries</p>
         </a>            
+    </li>-->
+    <li class="active">
+        
+        <button type="submit" class="btn btn-default btn-fill dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><b>Round</b><span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'cms:paper_home' '0' category %}" class="btn btn-default btn-fill">Any Round</a></li>
+            <li><a href="{% url 'cms:paper_home' '1' category %}" class="btn btn-default btn-fill">First Round</a></li>
+            <li><a href="{% url 'cms:paper_home' '2' category %}" class="btn btn-default btn-fill">Second Round</a></li>
+            <li><a href="{% url 'cms:paper_home' '3' category %}" class="btn btn-default btn-fill">Third Round</a></li>
+        </ul>
+        
+    </li>
+    <li class="active">
+        
+        <button type="submit" class="btn btn-default btn-fill dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><b>Category</b><span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'cms:paper_home' status '0' %}" class="btn btn-default btn-fill">Any Category</a></li>
+            {% for category in categories %}
+            <li><a href="{% url 'cms:paper_home' status category.id %}" class="btn btn-default btn-fill">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        
     </li>
     <li>
-        <a href="{% url 'cms:paper_home' %}">
-            <i class="pe-7s-news-paper"></i> 
-            <p>PAPERS</p>
+        <div class="container">
+            <p>Change Status for Selected</p>
+        </div>
+    </li>
+    <!--<li>
+        <a href="#" class="btn btn-success btn-fill" role="button">
+            <p>Clear First Round</p>
         </a>
-    </li> 
-    <li>
-        <a href="../../groupcodes">
-            <i class="pe-7s-folder"></i> 
-            <p>PROJECTS</p>
-        </a>            
+    </li>-->
+    <li class="active">
+        <a>
+            <button type="submit" class="btn btn-fill btn-danger btn-block" name="round1" form="status"><b>1: First Round</b></button>
+        </a>
+    </li>
+    <li class="active">
+        <a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-fill btn-warning btn-block" name="round2" form="status"><b>2: Second Round</b></button>
+        </a>
+    </li>
+    <li class="active">
+        <a>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-fill btn-info btn-block" name="round3" form="status"><b>3: Third Round</b></button>
+        </a>
     </li>
 {% endblock sidebar_content %}
 {% block main_title %}
     Papers Management Portal
 {% endblock main_title %}
 {% block main_content %}
+    <form action="." method="POST" id="status">
+    {% csrf_token %}
+    </form>
     <div class="content">
         <div class="container-fluid">
-            <form action="." method="POST">
                 <div class="row">  
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Initial Entries</h4>
-                                <p class="category">These are the winners for BLAB</p>
+                                <h4 class="title">Paper Entries</h4>
+                                <p class="category">{{ papers.count }} Entries</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>Check</th>
-                                        <th>S.no</th>
-                                        <th>Leader</th>
+                                        <th>Select</th>
+                                        <th>ID</th>
+                                        <th>Author / Title</th>
+                                        <th>Co Author</th>
                                         <th>College</th>
-                                        <th>Phone</th>
-                                        <th>Members</th>
-                                        <th>Position</th>
-                                        <th>Category</th>
+                                        <th>Code / Category</th>
+                                        <th>Status</th>
+                                        <!--<th>Details</th>-->
                                     </thead>
                                     <tbody>
-                                    
+                                    {% for paper in papers %}
                                     <tr>
                                         <td>
                                             <label class="checkbox">
-                                                <input type="checkbox" name="winners" value="633" data-toggle="checkbox">
+                                                <input type="checkbox" name="qualifiers" value="{{ paper.id }}" data-toggle="checkbox" form="status">
                                             </label>
                                         </td>
-                                        <td>1</td>
-                                        <td> PRANAV DIWAKAR</td>
-                                        <td>BITS Pilani</td>
-                                        <td></td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>None</td>
-                                    </tr>
-                                    
-                                    <tr>
+                                        <td>{{ paper.id }}</td>
+                                        <td>{{ paper.author.name }}</td>
+                                        <td>{{ paper.co_author }}</td>
+                                        <td>{{ paper.author.college }}</td>
+                                        <td>{{ paper.stub }}</td>
                                         <td>
-                                            <label class="checkbox">
-                                                <input type="checkbox" name="winners" value="634" data-toggle="checkbox">
-                                            </label>
+                                            {% if paper.status == '1' %}
+                                                <a class="btn btn-fill btn-danger">&nbsp;</a>
+                                            {% elif paper.status == '2' %}
+                                                <a class="btn btn-fill btn-warning">&nbsp;</a>
+                                            {% elif paper.status == '3' %}
+                                                <a class="btn btn-fill btn-info">&nbsp;</a>
+                                            {% endif %}
                                         </td>
-                                        <td>2</td>
-                                        <td> GAUTHAM VENKATASUBRAMANIAN</td>
-                                        <td>BITS Pilani</td>
-                                        <td></td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>None</td>
+                                        <!--<td><a href="#" class="btn btn-default">Details</a></td>-->
                                     </tr>
-                                    
                                     <tr>
-                                        <td colspan="8">
-                                            <button type="submit" class="btn btn-danger btn-fill" name="remove-winners">Remove Winners</button>
+                                        <td></td>
+                                        <td></td>
+                                        <td colspan="3">
+                                           <b>{{ paper.name }}</b> 
+                                        </td>
+                                        <td colspan="2">
+                                           {{ paper.category.name }}
                                         </td>
                                     </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="8" style="text-align:center">
+                                            Nothing in here!
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
