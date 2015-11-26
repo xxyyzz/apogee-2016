@@ -15,7 +15,7 @@ def controls_check(user):
 
 def pep_check(user):
     if user.id:
-        if user.is_superuser or user.email == 'controls@bits-apogee.org':
+        if user.is_superuser or user.email == 'pep@bits-apogee.org':
             return True
         else:
             return False
