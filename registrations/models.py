@@ -28,11 +28,11 @@ class Project(models.Model):
     abstract = models.FileField(default=None, upload_to=upload_project)
     stub = models.CharField(max_length=8, unique=True)
     STATUSES = (
-        ('0', 'Submitted'),
-        ('1', 'Passed Round 1'),
-        ('2', 'Passed Round 2'),
+        ('1', 'Round 1'),
+        ('2', 'Round 2'),
+        ('3', 'Round 3'),
     )
-    status = models.CharField(max_length=2, choices=STATUSES, default="0")
+    status = models.CharField(max_length=2, choices=STATUSES, default="1")
     def __unicode__(self):
         return self.name
 

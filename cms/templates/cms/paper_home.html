@@ -9,29 +9,33 @@
             <p>Filter Papers</p>
         </div>
     </li>
-    <li {% if status == None %}class="active"{% endif %}>
-        <a href="{% url 'cms:paper_home' %}">
+    <!--<li {% if status == '0' %}class="active"{% endif %}>
+        <a href="{% url 'cms:paper_home' '0' category %}">
             <i class="pe-7s-news-paper"></i> 
             <p>All Entries</p>
         </a>            
+    </li>-->
+    <li class="active">
+        
+        <button type="submit" class="btn btn-default btn-fill dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><b>Round</b><span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'cms:paper_home' '0' category %}" class="btn btn-default btn-fill">Any Round</a></li>
+            <li><a href="{% url 'cms:paper_home' '1' category %}" class="btn btn-default btn-fill">First Round</a></li>
+            <li><a href="{% url 'cms:paper_home' '2' category %}" class="btn btn-default btn-fill">Second Round</a></li>
+            <li><a href="{% url 'cms:paper_home' '3' category %}" class="btn btn-default btn-fill">Third Round</a></li>
+        </ul>
+        
     </li>
-    <li {% if status == '0' %}class="active"{% endif %}>
-        <a href="{% url 'cms:paper_home' '0' %}">
-            <i class="pe-7s-news-paper"></i> 
-            <p>Initial Entries</p>
-        </a>            
-    </li>
-    <li {% if status == '1' %}class="active"{% endif %}>
-        <a href="{% url 'cms:paper_home' '1' %}">
-            <i class="pe-7s-news-paper"></i> 
-            <p>Cleared Round 1</p>
-        </a>
-    </li> 
-    <li {% if status == '2' %}class="active"{% endif %}>
-        <a href="{% url 'cms:paper_home' '2' %}">
-            <i class="pe-7s-news-paper"></i> 
-            <p>Cleared Round 2</p>
-        </a>            
+    <li class="active">
+        
+        <button type="submit" class="btn btn-default btn-fill dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><b>Category</b><span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'cms:paper_home' status '0' %}" class="btn btn-default btn-fill">Any Category</a></li>
+            {% for category in categories %}
+            <li><a href="{% url 'cms:paper_home' status category.id %}" class="btn btn-default btn-fill">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        
     </li>
     <li>
         <div class="container">
@@ -45,19 +49,19 @@
     </li>-->
     <li class="active">
         <a>
-            <button type="submit" class="btn btn-fill btn-danger btn-block" name="initial" form="status"><b>0: Initial Entry</b></button>
+            <button type="submit" class="btn btn-fill btn-danger btn-block" name="initial" form="status"><b>1: First Round</b></button>
         </a>
     </li>
     <li class="active">
         <a>
             {% csrf_token %}
-            <button type="submit" class="btn btn-fill btn-warning btn-block" name="round1" form="status"><b>1: Clear First Round</b></button>
+            <button type="submit" class="btn btn-fill btn-warning btn-block" name="round1" form="status"><b>2: Second Round</b></button>
         </a>
     </li>
     <li class="active">
         <a>
             {% csrf_token %}
-            <button type="submit" class="btn btn-fill btn-info btn-block" name="round2" form="status"><b>2: Clear Second Round</b></button>
+            <button type="submit" class="btn btn-fill btn-info btn-block" name="round2" form="status"><b>3: Third Round</b></button>
         </a>
     </li>
 {% endblock sidebar_content %}
@@ -85,7 +89,7 @@
                                         <th>Author / Title</th>
                                         <th>Co Author</th>
                                         <th>College</th>
-                                        <th>Code</th>
+                                        <th>Code / Category</th>
                                         <th>Status</th>
                                         <!--<th>Details</th>-->
                                     </thead>
@@ -116,8 +120,11 @@
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td colspan="6">
+                                        <td colspan="3">
                                            <b>{{ paper.name }}</b> 
+                                        </td>
+                                        <td colspan="2">
+                                           {{ paper.category.name }}
                                         </td>
                                     </tr>
                                     {% empty %}
