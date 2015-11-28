@@ -27,6 +27,12 @@ class Project(models.Model):
     members = models.ManyToManyField('Participant', related_name='members')
     abstract = models.FileField(default=None, upload_to=upload_project)
     stub = models.CharField(max_length=8, unique=True)
+    STATUSES = (
+        ('1', 'Round 1'),
+        ('2', 'Round 2'),
+        ('3', 'Round 3'),
+    )
+    status = models.CharField(max_length=2, choices=STATUSES, default="1")
     def __unicode__(self):
         return self.name
 
@@ -39,6 +45,12 @@ class Paper(models.Model):
     author = models.ForeignKey('Participant', related_name='authors')
     co_author = models.ForeignKey('Participant', related_name='co_authors', blank=True, null=True)
     abstract = models.FileField(default=None, upload_to=upload_paper)
+    STATUSES = (
+        ('1', 'Round 1'),
+        ('2', 'Round 2'),
+        ('3', 'Round 3'),
+    )
+    status = models.CharField(max_length=2, choices=STATUSES, default="1")
     def __unicode__(self):
         return self.name
 
@@ -87,5 +99,12 @@ class CampusAmbassador(models.Model):
     
     class Meta:
         verbose_name_plural = 'Campus Ambassadors'
+    def __unicode__(self):
+        return self.name
+
+class InitialRegistration(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(unique=True)
+    phone = models.BigIntegerField()
     def __unicode__(self):
         return self.name

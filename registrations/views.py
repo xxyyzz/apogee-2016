@@ -347,3 +347,20 @@ Thank you."""
 
 	# return render(request, "portal/partials/projects_status.html", response)
 	return JsonResponse(response)
+
+@csrf_exempt
+def add_initial_registration(request):
+	data = request.POST
+	name = data['pname']
+	email = data['email']
+	phone = data['phone']
+	response = {}
+	try:
+		InitialRegistration.objects.create(name=name, email=email, phone=phone)
+		response['status']=1
+	
+	except IntegrityError:
+		response['status'] = 0
+		response['message'] = "Email already exists!"
+	
+	return JsonResponse(response)

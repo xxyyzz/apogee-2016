@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^check/form/$', views.checkForm),
     url(r'^check/status/$', views.checkStatus),
     url(r'^updates/$', views.renderUpdates),
-
+    url(r'^initregadd/$', views.add_initial_registration),
     url(r'^ca/main/$', views.campusAmbassadorMain),
     url(r'^ca/status/$', views.campusAmbassadorStatus),
     #url(r'^ca/confirm/$', views.campusAmbassadorConfirm),

@@ -1,0 +1,79 @@
+{% extends "cms/base.html" %}
+{% block title %}
+    Login
+{% endblock title %}
+{% block sidebar_content %}
+    
+    <li>
+        <a href="{% url 'cms:paper_home' %}">
+            <i class="pe-7s-news-paper"></i> 
+            <p>Papers</p>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'cms:project_home' %}">
+            <i class="pe-7s-news-paper"></i> 
+            <p>Projects</p>
+        </a>
+    </li>
+{% endblock sidebar_content %}
+{% block main_content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                    {% if user.is_authenticated == False %}
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Responsibilities Ahead</h4>
+                                {% if status == 0 %} <p class="category" style = "color:red">Invalid Credentials. Looks like you're not worth it. </p>
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <form method="POST" action=".">
+                                {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Username</label>
+                                                <input name="username" type="text" class="form-control" placeholder="nikhilverma">
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input name="password" type="password" class="form-control" placeholder="password">
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-4">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-info btn-fill">Login</button>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    {% elif user.is_authenticated == True %}
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">{{ user.get_full_name }}</h4>
+                                <p class="category">Logged In</p>
+                                <p class="category">Select an option from the sidebar</p>
+                                {% if errors %}
+                                    <p class="category" style="color:red">Please mind your own business</p>
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>  
+                </div>  
+            </div>
+        </div>
+{% endblock main_content %}

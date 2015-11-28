@@ -56,7 +56,7 @@ body{
 	opacity: 1;
 }
 
-.header>.head-text {
+.header .head-text {
 	color: #fff;
 	height: 50px;
 	float: left;
