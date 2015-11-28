@@ -36,7 +36,7 @@ urlpatterns = [
     # url(r'^status/select/$', views.status_select),
     # url(r'^status/set/$', views.status_set),
     # url(r'^status/save/$', views.status_save),
-    # url(r'^logout/$', views.pcr_logout),
+    url(r'^logout/$', views.pcr_logout),
     # # url(r'^sports_limits_changed/$', views.save_sports_limits),
     # # url(r'^setstatus/$', views.set_status),
     # # url(r'^showstatus/$', views.save_status),
