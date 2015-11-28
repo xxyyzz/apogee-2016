@@ -1,0 +1,95 @@
+{% extends "cms/base.html" %}
+{% block title %}
+    Notify
+{% endblock title %}
+{% block sidebar_content %}
+    
+    <li>
+        <a href="{% url 'cms:paper_home' %}">
+            <i class="pe-7s-news-paper"></i> 
+            <p>Notify | APOGEE 2016</p>
+        </a>
+    </li>
+{% endblock sidebar_content %}
+{% block main_content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Modify Email</h4>
+                                {% if status %}
+                                    {{ status }} emails sent
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <form method="POST" action=".">
+                                {% csrf_token %}
+                                    <div class="row table-responsive table-full-width">
+                                        <table class="table table-hover table-striped">
+                                            <div class="header">
+                                                <h5 class="title">Select Recipients</h5>
+                                            </div>
+                                            <thead>
+                                                <th>Select</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Designation</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="recipientids" value="{{ project.leader.id }}" data-toggle="checkbox" checked>
+                                                        </label>
+                                                    </td>
+                                                    <td>{{ project.leader.name }}</td>
+                                                    <td>{{ project.leader.email }}</td>
+                                                    <td>Leader</td>
+                                                </tr>
+                                                {% for member in project.members.all %}
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="recipientids" value="{{ member.id }}" data-toggle="checkbox" checked>
+                                                        </label>
+                                                    </td>
+                                                    <td>{{ member.name }}</td>
+                                                    <td>{{ member.email }}</td>
+                                                    <td>Member</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>  
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="header">
+                                            <h5 class="title">Content</h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea name="content" class="form-control" cols="30" rows="10">
+Dear <recepient_name>,
+We are glad to inform you that the status of your APOGEE Project, {{ project.name }} has changed and is currently in {{ project.get_status_display }} of the pitching sessions.
+Regards,
+Team APOGEE
+BITS Pilani</textarea>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-info btn-fill" name="send">Send Mails</button>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                </div>  
+            </div>
+        </div>
+{% endblock main_content %}

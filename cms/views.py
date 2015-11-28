@@ -3,7 +3,8 @@ from registrations.models import *
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse, reverse_lazy
-
+from django.db.models import Q
+from django.core.mail import send_mass_mail
 def controls_check(user):
     if user.id:
         if user.is_superuser or user.email == 'controls@bits-apogee.org':
@@ -74,7 +75,7 @@ def paper_home(request, status='0', category='0'):
         papers = papers
     else:
         papers = papers.filter(category__id=category)
-    categories = Category.objects.all()
+    categories = Category.objects.filter(Q(model='Paper') | Q(model='Both'))
     context = {
     'papers': papers,
     'status': status,
@@ -82,5 +83,61 @@ def paper_home(request, status='0', category='0'):
     'categories': categories,
     }
     return render(request, 'cms/paper_home.html', context)
-def project_home(request):
-    return render(request, 'cms/paper_home.html')
+
+@user_passes_test(controls_check, login_url=reverse_lazy('cms:user_login'), redirect_field_name=None)
+def project_home(request, status='0', category='0'):
+    if request.POST:
+        if "round1" in request.POST:
+            for projectid in request.POST.getlist("qualifiers"):
+                project = Project.objects.get(id=projectid)
+                project.status = "1"
+                project.save()
+        if "round2" in request.POST:
+            for projectid in request.POST.getlist("qualifiers"):
+                project = Project.objects.get(id=projectid)
+                project.status = "2"
+                project.save()
+        if "round3" in request.POST:
+            for projectid in request.POST.getlist("qualifiers"):
+                project = Project.objects.get(id=projectid)
+                project.status = "3"
+                project.save()
+    if status == None or status == '0':
+        projects = Project.objects.all()
+    else:
+        projects = Project.objects.filter(status=status)
+    if category == None or category == '0':
+        projects = projects
+    else:
+        projects = projects.filter(category__id=category)
+    categories = Category.objects.filter(Q(model='Project') | Q(model='Both'))
+    context = {
+    'projects': projects,
+    'status': status,
+    'category': category,
+    'categories': categories,
+    }
+    return render(request, 'cms/project_home.html', context)
+
+def project_email(request, projectid):
+    project = Project.objects.get(id=projectid)
+    context = {
+    'project': project,
+    }
+    if request.POST:
+        if "send" in request.POST:
+            content = request.POST['content']
+            recipientids = request.POST.getlist('recipientids')
+            datatuple = ()
+            for memberid in recipientids:
+                participant = Participant.objects.get(id=memberid)
+                subject = 'APOGEE 2016 Project Update'
+                message = content.replace('<recepient_name>', participant.name)
+                sender = 'BITS APOGEE 2016'
+                recipient = participant.email
+                subtuple = (subject, message, sender, [recipient])
+                datatuple = (subtuple,) + datatuple
+            print datatuple
+            send_mass_mail(datatuple)
+            context.update({'status': send_mass_mail})
+    return render(request, 'cms/project_email.html', context)

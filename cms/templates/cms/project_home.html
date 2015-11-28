@@ -1,12 +1,12 @@
 {% extends "cms/base.html" %}
 {% block title %}
-    Paper Management Portal
+    Project Management Portal
 {% endblock title %}
 {% block sidebar_content %}
     
     <li>
         <div class="container">
-            <p>Filter Papers</p>
+            <p>Filters</p>
         </div>
     </li>
     <!--<li {% if status == '0' %}class="active"{% endif %}>
@@ -19,10 +19,10 @@
         
         <button type="submit" class="btn btn-default btn-fill dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><b>Round</b><span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li><a href="{% url 'cms:paper_home' '0' category %}" class="btn btn-default btn-fill">Any Round</a></li>
-            <li><a href="{% url 'cms:paper_home' '1' category %}" class="btn btn-default btn-fill">First Round</a></li>
-            <li><a href="{% url 'cms:paper_home' '2' category %}" class="btn btn-default btn-fill">Second Round</a></li>
-            <li><a href="{% url 'cms:paper_home' '3' category %}" class="btn btn-default btn-fill">Third Round</a></li>
+            <li><a href="{% url 'cms:project_home' '0' category %}" class="btn btn-default btn-fill">Any Round</a></li>
+            <li><a href="{% url 'cms:project_home' '1' category %}" class="btn btn-default btn-fill">First Round</a></li>
+            <li><a href="{% url 'cms:project_home' '2' category %}" class="btn btn-default btn-fill">Second Round</a></li>
+            <li><a href="{% url 'cms:project_home' '3' category %}" class="btn btn-default btn-fill">Third Round</a></li>
         </ul>
         
     </li>
@@ -30,9 +30,9 @@
         
         <button type="submit" class="btn btn-default btn-fill dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><b>Category</b><span class="caret"></span></button>
         <ul class="dropdown-menu">
-            <li><a href="{% url 'cms:paper_home' status '0' %}" class="btn btn-default btn-fill">Any Category</a></li>
+            <li><a href="{% url 'cms:project_home' status '0' %}" class="btn btn-default btn-fill">Any Category</a></li>
             {% for category in categories %}
-            <li><a href="{% url 'cms:paper_home' status category.id %}" class="btn btn-default btn-fill">{{ category.name }}</a></li>
+            <li><a href="{% url 'cms:project_home' status category.id %}" class="btn btn-default btn-fill">{{ category.name }}</a></li>
             {% endfor %}
         </ul>
         
@@ -66,7 +66,7 @@
     </li>
 {% endblock sidebar_content %}
 {% block main_title %}
-    Papers Management Portal
+    Project Management Portal
 {% endblock main_title %}
 {% block main_content %}
     <form action="." method="POST" id="status">
@@ -78,40 +78,40 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Paper Entries</h4>
-                                <p class="category">{{ papers.count }} Entries</p>
+                                <h4 class="title">Project Entries</h4>
+                                <p class="category">{{ projects.count }} Entries</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>Select</th>
                                         <th>ID</th>
-                                        <th>Author / Title</th>
-                                        <th>Co Author</th>
+                                        <th>Leader / Title</th>
                                         <th>College</th>
+                                        <th>Members</th>
                                         <th>Code / Category</th>
-                                        <th>Status</th>
+                                        <th>Status / Send Mail</th>
                                         <!--<th>Details</th>-->
                                     </thead>
                                     <tbody>
-                                    {% for paper in papers %}
+                                    {% for project in projects %}
                                     <tr>
                                         <td>
                                             <label class="checkbox">
-                                                <input type="checkbox" name="qualifiers" value="{{ paper.id }}" data-toggle="checkbox" form="status">
+                                                <input type="checkbox" name="qualifiers" value="{{ project.id }}" data-toggle="checkbox" form="status">
                                             </label>
                                         </td>
-                                        <td>{{ paper.id }}</td>
-                                        <td>{{ paper.author.name }}</td>
-                                        <td>{{ paper.co_author }}</td>
-                                        <td>{{ paper.author.college }}</td>
-                                        <td>{{ paper.stub }}</td>
+                                        <td>{{ project.id }}</td>
+                                        <td>{{ project.leader.name }}</td>
+                                        <td>{{ project.leader.college }}</td>
+                                        <td>{{ project.members.all.count }}</td>
+                                        <td>{{ project.stub }}</td>
                                         <td>
-                                            {% if paper.status == '1' %}
+                                            {% if project.status == '1' %}
                                                 <a class="btn btn-fill btn-danger">&nbsp;</a>
-                                            {% elif paper.status == '2' %}
+                                            {% elif project.status == '2' %}
                                                 <a class="btn btn-fill btn-warning">&nbsp;</a>
-                                            {% elif paper.status == '3' %}
+                                            {% elif project.status == '3' %}
                                                 <a class="btn btn-fill btn-info">&nbsp;</a>
                                             {% endif %}
                                         </td>
@@ -121,11 +121,12 @@
                                         <td></td>
                                         <td></td>
                                         <td colspan="3">
-                                           <b>{{ paper.name }}</b> 
+                                           <b>{{ project.name }}</b> 
                                         </td>
-                                        <td colspan="2">
-                                           {{ paper.category.name }}
+                                        <td>
+                                           {{ project.category.name }}
                                         </td>
+                                        <td><a href="{% url 'cms:project_email' project.id %}" class="btn btn-default">Notify</a></td>
                                     </tr>
                                     {% empty %}
                                     <tr>
