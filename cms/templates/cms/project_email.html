@@ -20,7 +20,7 @@
                             <div class="header">
                                 <h4 class="title">Modify Email</h4>
                                 {% if status %}
-                                    <p class="category" style="color:red">{{ status }} emails sent.</p>
+                                    <p class="category" style="color:green">{{ status }} email{{ status|pluralize }} sent.</p>
                                 {% endif %}
                             </div>
                             <div class="content">
@@ -66,7 +66,7 @@
                                     <div class="row">
                                         <div class="header">
                                             <h5 class="title">Content</h5>
-                                            <p class="category" style="color:red">Do not alter the text "&lt;recipient name&gt;"</p>
+                                            <p class="category">Do not alter the text "&lt;recipient name&gt;"</p>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
