@@ -5,9 +5,9 @@
 {% block sidebar_content %}
     
     <li>
-        <a href="{% url 'cms:paper_home' %}">
+        <a href="{% url 'cms:project_home' %}">
             <i class="pe-7s-news-paper"></i> 
-            <p>Notify | APOGEE 2016</p>
+            <p>Projects</p>
         </a>
     </li>
 {% endblock sidebar_content %}
@@ -20,7 +20,7 @@
                             <div class="header">
                                 <h4 class="title">Modify Email</h4>
                                 {% if status %}
-                                    {{ status }} emails sent
+                                    <p class="category" style="color:red">{{ status }} emails sent.</p>
                                 {% endif %}
                             </div>
                             <div class="content">
@@ -66,6 +66,7 @@
                                     <div class="row">
                                         <div class="header">
                                             <h5 class="title">Content</h5>
+                                            <p class="category" style="color:red">Do not alter the text "&lt;recipient name&gt;"</p>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">

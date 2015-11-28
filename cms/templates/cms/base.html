@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="{% static 'cms/img/favicon.ico' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>{% block title %}CMS{% endblock title %}</title>
+    <title>{% block title %}CMS{% endblock title %} | APOGEE 201</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <link href="{% static 'cms/css/bootstrap.min.css' %}" rel="stylesheet" />
@@ -19,8 +19,8 @@
     <div class="sidebar" data-color="black" data-image="/static/regsoft/img/sidebar-4.jpg">  
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
-                    <strong>{% block sidebar_title %}{% endblock sidebar_title %} | APOGEE 2016</strong>
+                <a href="{% url 'cms:user_login' %}" class="simple-text">
+                    <strong>{% block sidebar_title %}APOGEE 2016{% endblock sidebar_title %}</strong>
                 </a>
             </div>
             <ul class="nav">

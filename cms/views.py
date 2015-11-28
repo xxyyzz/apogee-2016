@@ -31,7 +31,10 @@ def login_url(request):
     return reverse_lazy('cms:user_login')
 
 # Create your views here.
-def user_login(request):
+def user_login(request, errors=None):
+    context = {
+        'errors': errors,
+    }
     if request.POST:
         username = request.POST['username']
         password = request.POST['password']
@@ -39,17 +42,17 @@ def user_login(request):
         if user is not None:
             if user.is_active and user.is_staff:
                 login(request, user)
-                return  redirect('cms:paper_home')
+                return render(request, 'cms/login.html', context)
                 # Redirect to a success page.
             else:
                 # Return a 'disabled account' error message
-                return render(request, 'cms/login.html', {"status": 0})
+                return render(request, 'cms/login.html', context.update({"status": 0}))
         else:
             # Return an 'invalid login' error message.
-            return render(request, 'cms/login.html', {"status": 0})
-    return render(request, 'cms/login.html')
+            return render(request, 'cms/login.html', context.update({"status": 0}))
+    return render(request, 'cms/login.html', context)
 
-@user_passes_test(pep_check, login_url=reverse_lazy('cms:user_login'), redirect_field_name=None)
+@user_passes_test(pep_check, login_url=reverse_lazy('cms:user_login', kwargs={'errors': "1"}), redirect_field_name=None)
 def paper_home(request, status='0', category='0'):
     if request.POST:
         if "round1" in request.POST:
@@ -84,7 +87,7 @@ def paper_home(request, status='0', category='0'):
     }
     return render(request, 'cms/paper_home.html', context)
 
-@user_passes_test(controls_check, login_url=reverse_lazy('cms:user_login'), redirect_field_name=None)
+@user_passes_test(controls_check, login_url=reverse_lazy('cms:user_login', kwargs={'errors': "1"}), redirect_field_name=None)
 def project_home(request, status='0', category='0'):
     if request.POST:
         if "round1" in request.POST:
@@ -137,7 +140,6 @@ def project_email(request, projectid):
                 recipient = participant.email
                 subtuple = (subject, message, sender, [recipient])
                 datatuple = (subtuple,) + datatuple
-            print datatuple
-            send_mass_mail(datatuple)
-            context.update({'status': send_mass_mail})
+            status = send_mass_mail(datatuple)
+            context.update({'status': status})
     return render(request, 'cms/project_email.html', context)
