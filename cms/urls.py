@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^projects/email/(?P<projectid>\d+)/$', views.project_email, name='project_email'),
     # url(r'^papers/initial/$', views.paper_initial, name='paper_initial'),
     url(r'^projects/$', views.project_home, name='project_home'),
+    url(r'^', views.user_login, name='user_login'),
 ]
