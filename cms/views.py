@@ -135,7 +135,7 @@ def project_email(request, projectid):
             for memberid in recipientids:
                 participant = Participant.objects.get(id=memberid)
                 subject = 'APOGEE 2016 Project Update'
-                message = content.replace('<recepient_name>', participant.name)
+                message = content.replace('Participant', participant.name)
                 sender = 'BITS APOGEE 2016'
                 recipient = participant.email
                 subtuple = (subject, message, sender, [recipient])

@@ -66,21 +66,26 @@
                                     <div class="row">
                                         <div class="header">
                                             <h5 class="title">Content</h5>
-                                            <p class="category">Do not alter the text "&lt;recipient name&gt;"</p>
+                                            <p class="category">Do not alter the text "Dear Participant"</p>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <textarea name="content" class="form-control" cols="30" rows="10">
-Dear <recepient_name>,
-
+Dear Participant,
+{% if project.status == '1' %}
+The results for the first round of pitching are out and we are sorry to inform you that yor project titled "{{ project.name }}" with reference number #{{ project.stub }} could not make it to the second round.
+{% endif %}{% if project.status == '2' %}
 Congratulations !
 We are glad to inform you that your APOGEE Project, titled "{{ project.name }}" with reference number #{{ project.stub }} has passed the first pitching round.
-
-The Round 2 are expected to happen around last week of January 2016. Please keep checking the portal http://bits-apogee.org/2016/portal for further updates.
+The second round is expected to happen around the last week of January 2016. Please keep checking the portal bits-apogee.org/2016/portal for further updates.  
+{% endif %}
+For further queries, please contact controls@bits-apogee.org
 
 Regards,
 Department of Controls
-BITS Pilani</textarea>
+BITS Pilani
+
+P.S. This is an automated email provided by the Department of Visual Media, BITS Pilani. Any replies to this email are NOT monitored. Please visit bits-apogee.org for further contacts</textarea>
                                             </div>        
                                         </div>
                                     </div>
