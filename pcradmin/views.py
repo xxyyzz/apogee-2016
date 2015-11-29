@@ -200,7 +200,7 @@ def stats_ambassadors(request):
 # def pathfinder(request, pagename):
 # 	users = User.objects.all()
 # 	return render(request, 'pcradmin/'+pagename+'.html', {'users' : users})
-# @staff_member_required
+@staff_member_required
 def dashboard(request):
 	return render(request, 'pcradmin/dashboard.html')
 
@@ -1384,9 +1384,9 @@ def dashboard(request):
 # 	logout(request)
 # 	return redirect('registration:login')
 
-# def pcr_logout(request):
-# 	logout(request)
-# 	return redirect('http://bits-oasis.org/2015/pcradmin')
+def pcr_logout(request):
+	logout(request)
+	return redirect('http://bits-apogee.org/2016/pcradmin/dashboard/')
 
 # @staff_member_required
 # def pedit(request):
