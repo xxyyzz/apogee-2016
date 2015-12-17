@@ -1,5 +1,5 @@
 <div class="col-md-5 form-head">
-    Project Abstract Submission Closed
+    Project Abstract Submission
     <div class="queries-contact">
         <b>For any queries, contact :</b> 
         <br><br>
@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<!--
+
 <div class="col-md-6 col-sm-10 col-md-offset-0 col-sm-offset-1 form-wrapper">
     <form id="project-abstract-form">
     	<div class="row">
@@ -50,19 +50,20 @@
     			COLLEGE 
     		</div>
     		<div class="input-field no-label col-sm-12">
-         		<input id="college" disabled value="Birla Institute of Technology and Science, Pilani" requied type="text" >
+         		<input id="college" value="" requied type="text" >
         	</div>
 
         	
-            <div class="col-xs-6 form-subhead">
+            <div class="col-xs-12 form-subhead">
     			CATEGORY 
     		</div>
-    		
+    		<!--
             <div class="col-xs-6 form-subhead">
     			ASSOCIATION 
     		</div>
+            -->
     		
-            <div class=" no-label col-sm-6">
+            <div class=" no-label col-sm-12">
          		<select id="category" required class="browser-default">
     		      <option value="" disabled selected>...</option>
                   {% for cat in categories %}
@@ -70,7 +71,7 @@
                   {% endfor %}
         		</select>
         	</div>
-    		
+    		<!--
             <div class=" no-label col-sm-6">
          		<select id="association" required class="browser-default">
     		      <option value="" disabled selected>...</option>
@@ -79,6 +80,7 @@
                   {% endfor %}
         		</select>
         	</div>
+            -->
         	
             <br><br>
         	<div class="col-xs-6 form-subhead">
@@ -185,7 +187,7 @@
         
         data.append('college', $("input#college").val());
         data.append('category', $("select#category").val());
-        data.append('association', $("select#association").val());
+        //data.append('association', $("select#association").val());
 
         $.each(abstract, function(key, value)
         {
@@ -248,12 +250,13 @@
             errorText += "<br>&bull;&nbsp;&nbsp;Select a Category."
             count++;
         }
-
+        /*
         //assoc check 
         if($("select#association").val() == null) {
             errorText += "<br>&bull;&nbsp;&nbsp;Select an Association."
             count++;
         }
+        */
 
         $(".error-box").html(errorText).fadeIn(400);
 
@@ -263,4 +266,3 @@
 </script>
 
 
--->
