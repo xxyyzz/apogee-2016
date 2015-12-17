@@ -21,7 +21,7 @@ def upload_dir(self, filename):
 class Project(models.Model):
     name = models.CharField(max_length=500)
     category = models.ForeignKey('Category')
-    assoc = models.ForeignKey('Association')
+    assoc = models.ForeignKey('Association', null=True)
     leader = models.ForeignKey('Participant', related_name='leaders')
     # college = models.ForeignKey('College')
     members = models.ManyToManyField('Participant', related_name='members')

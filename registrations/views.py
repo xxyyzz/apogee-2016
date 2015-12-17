@@ -137,7 +137,10 @@ def projectsStatus(request) :
 
 	college = data['college']
 	category = data['category']
-	assoc = data['association']
+	try:
+		assoc = data['association']
+	except:
+		assoc = None
 	abstract = request.FILES['0']
 
 
@@ -152,7 +155,10 @@ def projectsStatus(request) :
 		model_leader = Participant.objects.create(name=tl_name, phone=tl_phone, email=tl_email, college=model_college)
 	
 	model_category = Category.objects.get(name=category)
-	model_assoc = Association.objects.get(name=assoc)
+	try:
+		model_assoc = Association.objects.get(name=assoc)
+	except:
+		model_assoc = None
 
 	model_member = {}
 	for x in range(1,6):
