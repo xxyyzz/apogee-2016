@@ -35,11 +35,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registrations',
-    'ckeditor',
     'cover',
     'cms',
     'pcradmin',
-    'events',
 )
 
 MIDDLEWARE_CLASSES = (
