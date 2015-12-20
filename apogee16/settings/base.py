@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'cover',
     'cms',
     'pcradmin',
+    'events',
 )
 
 MIDDLEWARE_CLASSES = (
