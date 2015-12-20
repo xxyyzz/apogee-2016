@@ -36,16 +36,11 @@ function checkall(gauss){
             <tbody>
                 <tr>
                     <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th>
-                    <th>College Name </th>
                     <th>Name</th>
-                    <!-- <th>Gender</th> -->
-                    <th>phone</th>
-                    <th>email address</th>
-                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th>Root Mail</th>
                     <th>Approved</th>
-
-
                 </tr>
             </tbody>
             <tbody>
@@ -55,12 +50,9 @@ function checkall(gauss){
                 <td>
                     <input type = 'checkbox' name='amb_list' value = {{amb.id}}>
                 </td>
-                <td> {{amb.college}} </td>
                 <td> {{amb.name}} </td>
-                <!-- <td> {{amb.gender}} </td> -->
-                <td> {{amb.phone}} </td>
                 <td> {{amb.email}} </td>
-                <td> {{amb.address}} </td>
+                <td> {{amb.phone}} </td>
                 {% if amb.root_mail %}
                 <td style='color:green'>
                     Yes
@@ -79,9 +71,12 @@ function checkall(gauss){
                     No
                 </td>
                 {% endif %}
-
-
-
+            </tr>
+            <tr>
+                <td><strong>College:</strong></td>
+                <td colspan="2"> {{ amb.college.name }}</td>
+                <td><strong>Address:</strong></td>
+                <td colspan="2"> {{ amb.address }}</td>
             </tr>
             {% endfor %}
             </tbody>

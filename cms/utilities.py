@@ -145,3 +145,63 @@ def project_stats_xlsx(request):
     response = HttpResponse(output.read(), content_type="application/ms-excel")  
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response
+
+def ambassador_stats_xlsx(request):
+    from django.http import HttpResponse, HttpResponseRedirect  
+    import xlsxwriter
+
+    try:  
+        import cStringIO as StringIO
+    except ImportError:  
+        import StringIO
+    a_list = []
+
+    from registrations.models import CampusAmbassador
+    entries = CampusAmbassador.objects.all()
+
+    for p in entries:
+        a_list.append({'obj': p})
+    data = sorted(a_list, key=lambda k: k['obj'].id)
+    output = StringIO.StringIO()
+    workbook = xlsxwriter.Workbook(output)
+    worksheet = workbook.add_worksheet('new-spreadsheet')
+    date_format = workbook.add_format({'num_format': 'mmmm d yyyy'})
+    worksheet.write(0, 0, "Generated:")
+    from time import gmtime, strftime
+    generated = strftime("%d-%m-%Y %H:%M:%S UTC", gmtime())
+    worksheet.write(0, 1, generated)
+
+    worksheet.write(1, 0, "ID")
+    worksheet.write(1, 1, "Name")
+    worksheet.write(1, 2, "College")
+    worksheet.write(1, 3, "Degree")
+    worksheet.write(1, 4, "Year")
+    worksheet.write(1, 5, "Phone")
+    worksheet.write(1, 6, "Email")
+    worksheet.write(1, 7, "Description")
+    worksheet.write(1, 8, "Root Mail")
+    worksheet.write(1, 9, "PCR Approved")
+        
+    for i, row in enumerate(data):
+        """for each object in the date list, attribute1 & attribute2
+        are written to the first & second column respectively,
+        for the relevant row. The 3rd arg is a failure message if
+        there is no data available"""
+
+        worksheet.write(i+2, 0, deepgetattr(row['obj'], 'id', 'NA'))
+        worksheet.write(i+2, 1, deepgetattr(row['obj'], 'name', 'NA'))
+        worksheet.write(i+2, 2, deepgetattr(row['obj'], 'college.name', 'NA'))
+        worksheet.write(i+2, 3, deepgetattr(row['obj'], 'degree', 'NA'))
+        worksheet.write(i+2, 4, deepgetattr(row['obj'], 'year', 'NA'))
+        worksheet.write(i+2, 5, deepgetattr(row['obj'], 'phone', 'NA'))
+        worksheet.write(i+2, 6, deepgetattr(row['obj'], 'email', 'NA'))
+        worksheet.write(i+2, 7, deepgetattr(row['obj'], 'ambassador_quality', 'NA'))
+        worksheet.write(i+2, 8, deepgetattr(row['obj'], 'root_mail', 'NA'))
+        worksheet.write(i+2, 9, deepgetattr(row['obj'], 'pcr_approved', 'NA'))
+
+    workbook.close()
+    filename = 'ExcelReport.xlsx'
+    output.seek(0)
+    response = HttpResponse(output.read(), content_type="application/ms-excel")  
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response

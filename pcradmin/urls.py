@@ -1,5 +1,6 @@
 from pcradmin import views
 from registrations.views import *
+from cms import utilities
 from django.conf.urls import url, include
 urlpatterns = [
     url(r'^ambassadors/$', views.ambassadors_list),
@@ -54,6 +55,7 @@ urlpatterns = [
     # url(r'^stats/paid_list$', views.paid_list, name='paid'),
     # url(r'^stats/paid_list/paid_act$', views.paid_act, name='paid_act'),
     url(r'^stats/$', views.stats_ambassadors, name='stats'),
+    url(r'^ambassadorxlsx/$', utilities.ambassador_stats_xlsx),
 
     # url(r'^stats/$', views.stats_eventwise, name='stats'),
     # url(r'^stats/eventwise/$', views.stats_eventwise, name='stats_eventwise'),
