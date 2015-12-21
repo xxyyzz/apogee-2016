@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals 
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.shortcuts import render
 from registrations.models import *
@@ -11,7 +13,7 @@ from django.contrib import auth
 from django.db.models import F
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, HttpResponseRedirect
- 
+
 import difflib
   
 
@@ -45,7 +47,7 @@ def amb_act(request):
 	amb_obs = CampusAmbassador.objects.all()	
 
 
-	body = """Hello,
+	body = unicode(u'''Hello,
 
 Greetings from Team APOGEE- BITS Pilani!
 
@@ -109,7 +111,7 @@ help all of us spread the word about APOGEE and ensure healthy participation in 
 
 We wish you a grand success in this endeavor. Let's make APOGEE a grand success together.
 
-Good Luck! """
+Good Luck! ''')
 
 
 	amb_ids = request.POST.getlist('amb_list')
