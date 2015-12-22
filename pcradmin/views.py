@@ -51,65 +51,37 @@ def amb_act(request):
 
 Greetings from Team APOGEE- BITS Pilani!
 
-APOGEE is the annual technical festival of BITS Pilani. For its promotion in other colleges, we have joined hands 
+APOGEE is the annual technical festival of BITS Pilani. For its promotion in other colleges, we have joined hands with the internship platform YOUTH4WORK to recruit Marketing Interns. As a part of the process, you were called and told the about the work (in a broader fashion).
 
-with the internship platform YOUTH4WORK to recruit Marketing Interns. As a part of the process, you were called 
+This is to inform you that you have been selected as a Marketing Intern for APOGEE 2016. You are now a part of APOGEE and YOUTH4WORK family and we expect you to work towards making it a grand success. However, there will be a great influx of responsibilities on your shoulders. We expect you to put in sincere efforts from your side. You will be in touch with one of our members via phone and email periodically.
 
-and told the about the work (in a broader fashion).
-
-This is to inform you that you have been selected as a Marketing Intern for APOGEE 2016. You are now a part 
-
-of APOGEE and YOUTH4WORK family and we expect you to work towards making it a grand success. However, 
-
-there will be a great influx of responsibilities on your shoulders. We expect you to put in sincere efforts from your 
-
-side. You will be in touch with one of our members via phone and email periodically.
 
 Incentives:
 
-1. Marketing Intern Certificate by Youth4work for 2 months is a valuable deliverable by a renowned internship 
+1. Marketing Intern Certificate by Youth4work for 2 months is a valuable deliverable by a renowned internship platform. This recognition will specially be helpful for people looking to sit for placements in the future.
 
-platform. This recognition will specially be helpful for people looking to sit for placements in the future.
-
-2. Based on your performance and how much participation you are able to bring, your registration fee may be 
-
-waivered upto an extent/completely.
+2. Based on your performance and how much participation you are able to bring, your registration fee may be waivered upto an extent/completely.
 
 3. For Exceptional performances, be ready for goodies by Youth4work and APOGEE!
+
 
 The following are expected from you promptly:
 
 1. Please Pre-register and help your friends pre-register on https://www.bits-apogee.org/ .
 
-2. Please reply to this mail with the e-mail address and contact numbers of the NSS head in your college 
+2. Please reply to this mail with the e-mail address and contact numbers of the NSS head in your college along with the Mechanical, Computer Science and Electrical departments’ (if any) student representatives. 
 
-along with the Mechanical, Computer Science and Electrical departments’ (if any) student 
+3. You are expected to share the posts uploaded on the APOGEE Facebook page https://www.facebook.com/bitsapogee ; it will be monitored by one of our members. 
 
-representatives. 
+4. Please subscribe on Youth4Work (website) if you haven’t till now (otherwise you will be not be a recognized Intern).
 
-3. You are expected to share the posts uploaded on the APOGEE Facebook 
+5. From announcing in classrooms and sending out mails to meeting various heads of participating teams, do all that which ensures participation in the events (whose posters will be sent out to you). Any other idea from you will always be received with a great pleasure.
 
-page https://www.facebook.com/bitsapogee ; it will be monitored by one of our members. 
 
-4. Please subscribe on Youth4Work (website) if you haven’t till now (otherwise you will be not be a 
-
-recognized Intern).
-
-5. From announcing in classrooms and sending out mails to meeting various heads of participating teams, do 
-
-all that which ensures participation in the events (whose posters will be sent out to you). Any other idea 
-
-from you will always be received with a great pleasure.
-
-To begin with, we require you to like the APOGEE Facebook page to keep yourself updated and also pre-register 
-
-yourself on the APOGEE website www.bits-apogee.org. From now onwards, you will be regularly updated with 
-
-your responsibilities via email. Do let us know if you have any suggestions specifically for your college that might 
-
-help all of us spread the word about APOGEE and ensure healthy participation in a better way.
+To begin with, we require you to like the APOGEE Facebook page to keep yourself updated and also pre-register yourself on the APOGEE website www.bits-apogee.org. From now onwards, you will be regularly updated with your responsibilities via email. Do let us know if you have any suggestions specifically for your college that might help all of us spread the word about APOGEE and ensure healthy participation in a better way.
 
 We wish you a grand success in this endeavor. Let's make APOGEE a grand success together.
+
 
 Good Luck! ''')
 
