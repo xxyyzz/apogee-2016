@@ -1,4 +1,4 @@
-from aarohan import views
+from aic2016 import views
 from django.conf.urls import url, include
 
 urlpatterns = [
