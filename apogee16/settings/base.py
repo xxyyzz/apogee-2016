@@ -36,11 +36,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'registrations',
     'Event',
-    'ckeditor',
+#    'ckeditor',
     'cover',
     'cms',
     'pcradmin',
-    'aarohan'
+    'aarohan',
+    'aic2016'
 )
 
 MIDDLEWARE_CLASSES = (

@@ -13,7 +13,7 @@
 	padding:0;
 	font-family: Ebrima;
 	font-size:16px;
-	cursor: default;
+	cursor: inherit;
 	color: #444;
 	
 }
@@ -42,6 +42,7 @@ body {
     top: 20px;
     color: #444;
     z-index: 1000;
+    cursor: pointer;
     transition: all ease-in-out 0.2s;
 }
 .go-deep {
@@ -97,6 +98,7 @@ body {
 	margin-right:6px;
 	border-radius:25px;
 	border:3px solid #666;
+
 }
 
 /*---SLIDER----*/
@@ -369,7 +371,7 @@ html.fsvs #fsvs-pagination li:last-child {
 }
 #container-eventa ul li div.wrapper .headline h1 {
 	font-size:80px;
-	font-weight:500;	
+	font-weight:bold;	
 	/*padding-bottom:10px;*/
 	/*margin-left: 130px;*/
 	color:#ffffff;
@@ -377,22 +379,27 @@ html.fsvs #fsvs-pagination li:last-child {
 
 #container-eventa ul li div.wrapper .headline p {
 	font-size:30px;
-	font-weight:500;
+	font-weight:bold;
 	padding-bottom:10px;
 	/*margin-left: 130px;*/
 	color:#ffffff;
 }
 
 #container-eventa ul li div.wrapper .content {
-	margin-top:20px;
+	margin-top:15px;
 	text-align:justify;
-	font-size:20px;
+	font-size:18px;
 	color:#ffffff;
 }
 
 
+
+.codevoyage{
+	background: url("../images/code1.jpg")
+}
+
 #container-eventb {
-	background: url(../images/code1.jpg) center no-repeat;
+	background:rgba(65, 90, 128, 0.65) none repeat scroll 0% 0%;
 	background-size:cover;
 	min-height:100%;
 	color:#FFF;
@@ -410,7 +417,7 @@ html.fsvs #fsvs-pagination li:last-child {
 }
 #container-eventb ul li div.wrapper .headline h1 {
 	font-size:80px;
-	font-weight:500;	
+	font-weight:bold;	
 	/*padding-bottom:10px;*/
 	/*margin-left: 130px;*/
 	color:#ffffff;
@@ -418,7 +425,7 @@ html.fsvs #fsvs-pagination li:last-child {
 
 #container-eventb ul li div.wrapper .headline p {
 	font-size:30px;
-	font-weight:500;
+	font-weight:bold;
 	padding-bottom:10px;
 	/*margin-left: 130px;*/
 	color:#ffffff;
@@ -432,18 +439,18 @@ html.fsvs #fsvs-pagination li:last-child {
 
 
 /*------Contact---*/
-#container-contact {
-	background: #F4f4f4  center no-repeat;
+#container-contact,#payment {
+
 	background-size:cover;
-	min-height:100%;
-	color:#545454;
+	margin: 7% auto;
 	text-align:center;
 }
-#container-contact div.headline h1 {
-	font-weight:500;
-	font-size:40px;
-	padding:25px;
-	font-weight: bold;
+
+div.headline h1 {
+	font-weight:bold;
+	font-size:30px;
+	padding:10px;
+	
 }
 #container-contact .content .headline {
 	padding-top:25px;
@@ -462,9 +469,7 @@ html.fsvs #fsvs-pagination li:last-child {
 }
 
 
-#codevoyage {
-	background-image: url("../images/codevoyage.jpg");
-}
+
 
 
 /*----RESPONSIVENESS----*/
@@ -476,8 +481,32 @@ html.fsvs #fsvs-pagination li:last-child {
 	width:100%;
 	}
 }
+
+
+@media (max-width: 720px){
+
+
+#container-eventa ul li div.wrapper .headline h1 , #container-eventb  ul li div.wrapper .headline h1{
+		font-size:50px; 
+	}
+
+	#container-eventa ul li div.wrapper .headline p , #container-eventb ul li div.wrapper .headline p{
+		font-size: 20px;
+	}
+
+#container-eventa ul li div.wrapper .content,#container-eventb ul li div.wrapper .content{
+	font-size: 14px;
+}
+}
 @media (max-width: 1024px) {
 	* { font-size:15px; }
+
+
+
+
+	.center-content img{
+		width:75%;
+	}
 	#header-logo .headline {
 	font-size:32px;
 	}
@@ -519,10 +548,19 @@ html.fsvs #fsvs-pagination li:last-child {
 	.slide { 
 	         overflow-y:scroll !important;
 	}
+
+	
 }
 
 
+@media (max-width: 560px) {
+	#container-eventa ul li div.wrapper .content,#container-eventb ul li div.wrapper .content{
+	font-size: 9px;
+}
+}
+
 @media (max-width: 600px) {
+
 	* { font-size:13px;
 	 }
 		#content img {
@@ -530,6 +568,42 @@ html.fsvs #fsvs-pagination li:last-child {
 		position: relative;
 		left:-20%;
 	}
+
+	.center-content .center-bottom ul{
+		text-align: inherit;
+	}
+
+	#container-eventa ul li div.wrapper .headline h1 , #container-eventb  ul li div.wrapper .headline h1{
+		font-size:50px; 
+	}
+
+	#container-eventa ul li div.wrapper .headline p , #container-eventb ul li div.wrapper .headline p{
+		font-size: 20px;
+	}
+
+#container-eventa ul li div.wrapper .content , #container-eventb ul li div.wrapper .content{
+	font-size: 14px;
+}
+		.center-content .center-bottom ul li{
+			margin:0px -36.67px 0px 0px;
+			position: relative; left: 0%;
+		}
+
+		.center-content .center-bottom ul li .headline{
+			font-size: 70%;
+		}
+
+		#content {
+			position: absolute; bottom: 5%; width: 90%; left: 19%;
+		}
+		#content .content {
+			display: none;
+		}
+
+
+		#header-logo img{
+			width: 60%;
+		}
 
 	#header {
 	height:100px;
