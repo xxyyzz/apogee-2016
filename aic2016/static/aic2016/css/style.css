@@ -169,10 +169,11 @@ body
 }
 
 .bl {
-        width: 400px;
-    top: 83%;
-    left: 69%;
-    position: relative;
+    min-width: 300px;
+    width: 35%;
+    bottom: 5%;
+    right: 3%;
+    position: absolute;
 }
 
 .page {
