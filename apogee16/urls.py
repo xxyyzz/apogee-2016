@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^pcradmin/', include('pcradmin.urls', namespace='pcradmin')),
     url(r'^manage/', include('cms.urls', namespace='cms')),
     url(r'^aarohan/', include('aarohan.urls', namespace='aarohan')),
+    url(r'^aic/', include('aarohan.urls', namespace='aarohan')),
 ]
 

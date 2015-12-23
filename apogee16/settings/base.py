@@ -38,7 +38,8 @@ INSTALLED_APPS = (
     'cover',
     'cms',
     'pcradmin',
-    'aarohan'
+    'aarohan',
+    'aic2016'
 )
 
 MIDDLEWARE_CLASSES = (
