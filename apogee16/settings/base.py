@@ -35,6 +35,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registrations',
+    'Event',
+    'ckeditor',
     'cover',
     'cms',
     'pcradmin',
