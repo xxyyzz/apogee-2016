@@ -142,20 +142,8 @@
  	</div> 
 
 	<div id="page7" class="page p7">
-			<i class="fa fa-envelope ficon"></i>
- 			<div class="head">FAQs</div>
- 			<div class="info">
- 				<table>
- 				<caption>Geeta Bansal<br><span style="font-size:0.7em">Co-ordinator<span></caption>
-                    <tr>
-                        <td><img src="/2016/static/aic2016/img/mail.png" style="height:20px;"></td>
-                        <td>geetabansal456@gmail.com</td>
-                    </tr><tr>
-                        <td><img src="/2016/static/aic2016/img/phone.png" style="height:30px;"></td>
-                        <td>+91-8503858092</td>
-                    </tr>
-                </table>
- 			</div>
+			<i class="fa fa-question-circle ficon"></i>
+ 			<div class="faqwrapper"></div>
  	</div> 
 
 	<div id="page8" class="page p8">
@@ -322,6 +310,65 @@ if(window.innerWidth < 800) {
     }, 500);
     return false;
 });
+</script>
+
+<script> 
+
+var faqobj = [
+	{ "ques" : "When will the internships take place ?", "ans" : "The internships are mostly going to be taking place in the summer of 2016. However, specific dates and period of the internships are subject to discussion."},
+	{ "ques" : "Can we make teams of students from different years ?", "ans" : "Yes you can. "},
+	{ "ques" : "In what form must the solutions to problem statements be submitted ?", "ans" : "Most of them are to be uploaded as reports in document formats (MS Word, pdf,etc.). Attached excel files, etc. maybe required for some companies."},
+	{ "ques" : "Some companies have multiple problem statements? Which one must we work on?", "ans" : "You can work on any of the problem statements given."},
+	{ "ques" : "Can we solve problem statements for multiple companies?", "ans" : "Yes. Solutions are to be uploaded separately for each company in the upload section."},
+	{ "ques" : "What must the solutions contain?", "ans" : "They must contain a preliminary solution to the problem statement. The more detailed they are, higher the chances of getting selected for the final round."},
+	{ "ques" : "What will be there for the final round?", "ans" : "A detailed presentation on the final solutions must be given by the selected teams during APOGEE 16. Winning teams will be given either internships or cash prizes."},
+	{ "ques" : "Are there any participation certificates?", "ans" : "Participation certificates will be given to all the members of each team which present solutions during APOGEE 16."}
+
+];
+
+var open = 0;
+
+function initFaq() {
+	var content = "";
+	for(var i=1,box="",abox="";i<=faqobj.length;i++,abox="",qbox="") {
+		var q = faqobj[i-1];
+		qbox = "<div class='qbox' noq='"+i+"' id='qbox"+i+"'><i class='fa fa-circle-o'></i>&nbsp;&nbsp;&nbsp;&nbsp;"+q.ques+"</div>";
+		abox = "<div class='abox' id='abox"+i+"'>"+q.ans+"</div>";
+		content += qbox+abox;
+	}
+	$(".faqwrapper").html(content);
+
+	$(".qbox").click(function() {
+
+		var q = parseInt($(this).attr("noq"));
+		if(q == open) {
+			//close all
+			$(".qbox").animate({"margin-top": "0px"}, 400);
+			$(".abox").slideUp();
+			open = 0;
+		} else {
+			if(open == 0) {
+				//init
+				//$(".qbox").animate({"line-height": "30px" }, 400);
+				$("#abox"+q).slideDown();
+				$("#qbox"+q).animate({"margin-top": "20px"}, 400);
+			}
+			else {
+				//swap
+				$(".qbox").animate({"margin-top": "0px"}, 400);
+				$(".abox").slideUp();
+				$("#qbox"+q).animate({"margin-top": "20px"}, 400);
+				$("#abox"+q).slideDown();
+			}
+			open = q;
+		}
+	});
+}
+
+
+
+initFaq();
+
 </script>
 
 
