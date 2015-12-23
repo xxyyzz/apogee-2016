@@ -49,7 +49,7 @@ class events(models.Model):
     img=models.ImageField(blank=True, upload_to="imageuploads")
     thumb=models.ImageField(blank=True, upload_to="imageuploads")
     is_kernel = models.NullBooleanField(null=True,blank=True)
-    online_reg = models.NullBooleanField(null=True,blank=True)
+    # online_reg = models.NullBooleanField(null=True,blank=True)
     org= models.ForeignKey(organization, blank= True, null=True, default=None)
 
     def __unicode__(self):
