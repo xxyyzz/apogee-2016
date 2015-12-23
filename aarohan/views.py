@@ -7,4 +7,4 @@ from apogee16.settings import *
 
 
 def website(request) :
-	return render(request, "index.html")
+	return render(request, "aarohan/index.html")

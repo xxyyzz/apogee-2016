@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'registrations',
     'Event',
-#    'ckeditor',
+    'ckeditor',
     'cover',
     'cms',
     'pcradmin',
