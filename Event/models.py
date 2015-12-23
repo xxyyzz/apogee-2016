@@ -42,13 +42,14 @@ class events(models.Model):
     max_participants = models.IntegerField(null = True,blank = True)
     # facebook_admin_id = models.CharField( max_length = 100 , null = True,blank = True,help_text = 'You can find your facebook id at graph.facebook.com/< your facebook username >, access admin page on your FB -> Account->Manage Pages')
     weight = models.IntegerField( null = True, blank = True)
-    date=models.CharField(max_length = 100,blank=True)
-    startingtime=models.CharField(max_length = 100,blank=True)
-    endingtime=models.CharField(max_length = 100,blank=True)
+    # date=models.CharField(max_length = 100,blank=True)
+    # startingtime=models.CharField(max_length = 100,blank=True)
+    # endingtime=models.CharField(max_length = 100,blank=True)
     venue=models.CharField(max_length = 100,blank=True)
     img=models.ImageField(blank=True, upload_to="imageuploads")
     thumb=models.ImageField(blank=True, upload_to="imageuploads")
     is_kernel = models.NullBooleanField(null=True,blank=True)
+    online_reg = models.NullBooleanField(null=True,blank=True)
     org= models.ForeignKey(organization, blank= True, null=True, default=None)
 
     def __unicode__(self):
