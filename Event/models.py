@@ -18,7 +18,16 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
+class organization(models.Model):
+    user = models.OneToOneField(User)
+    name = models.CharField(max_length= 200, unique=True)
+    cord = models.CharField(max_length=200, blank=True)
+    phone= models.CharField(max_length=12, blank=True)
+    email_id = models.EmailField(unique=True, null=True, blank=True)
+    def __unicode__(self):
+        return self.name
 
+        
 class events(models.Model):
     name = models.CharField(max_length = 100,verbose_name = 'Event Name' ,unique = True)
     category = models.ForeignKey(EventCategory)
@@ -40,6 +49,8 @@ class events(models.Model):
     img=models.ImageField(blank=True, upload_to="imageuploads")
     thumb=models.ImageField(blank=True, upload_to="imageuploads")
     is_kernel = models.NullBooleanField(null=True,blank=True)
+    org= models.ForeignKey(organization, blank= True, null=True, default=None)
+
     def __unicode__(self):
         return self.name
 
@@ -68,4 +79,5 @@ class Tabs(models.Model):
     class Meta:
         verbose_name_plural = 'Tabs'
         verbose_name = 'Tab'
+
 
