@@ -71,7 +71,7 @@ class Heading(models.Model):
 
 class Tabs(models.Model):
     heading = models.ForeignKey(Heading)
-    content = models.TextField(blank = True)
+    content = RichTextField()
     event = models.ForeignKey(events)
 
     def __unicode__(self):
