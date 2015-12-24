@@ -1,1 +1,159 @@
-soft 09
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>AAROHAN 2016</title>
+	<link rel="shortcut icon" href="/2016/static/aarohan/software/media/img/AarohanLogo0.png" type="image/png">
+	<link rel="stylesheet" href="/2016/static/aarohan/software/media/css/main.css"	 />
+	<link rel="stylesheet" href="/2016/static/aarohan/software/media/css/importFonts.css" />
+	<script src="/2016/static/aarohan/software/media/js/jquery.min.js"></script>
+</head>
+<body>
+	<div id="blackout" class="blackout">
+		<div id="closeBox" class="closeBox">CLOSE</div>
+		<div id="blackoutContent" class="blackoutContent">
+			<div id="blackoutContentWrapper" class="blackoutContentWrapper"></div>
+		</div>
+	</div>
+
+	<div id="start_panel" style="">
+		<div id="instrs" class="abs_center">
+			<img id="aarohan_logo" src="/2016/static/aarohan/software/media/img/logo.png">
+			<div id="stu_instr">
+				<h1 style="margin-bottom:5px;">Instructions</h1><hr>
+				<ol style="font-size:1.2em;">
+					<li>
+					The paper consists of 4 sections and 45 Multiple Choice Questions (single correct).
+					<ul>
+						<li>Chemistry (10 questions)</li>
+						<li>Physics (10 questions)</li>
+						<li>Mathematics (10 questions)</li>
+						<li>Logical reasoning and English (15 questions)</li>
+					</ul>
+					</li>
+					<li>All sections are compulsory.</li>
+					<li>READ THE QUESTIONS CAREFULLY. The questions may have variable marks distribution and variable number of options.</li>
+					<li>Unless mentioned otherwise, each question carries 3 marks. 1 mark will be deducted for each wrong answer and 0.5 marks will be awarded for each question not attempted.</li>
+				</ol>
+				<button id="next_instr">Next</button>
+			</div>
+
+			<div id="stu_det" class="feedback_form">
+				<div style="margin-bottom:25px;">Please enter your details.</div>
+				<form  id="detSubmit">
+					<div class="group">      
+						<input id="feedbackName" type="text" required>
+						<span class="highlight"></span>
+						<span class="bar"></span>
+						<label>Name</label>
+					</div>
+					<div class="group">      
+						<input id="feedbackSchool" type="text" required>
+						<span class="highlight"></span>
+						<span class="bar"></span>
+						<label>School</label>
+					</div>
+				</form>
+				<button id="start_test" class="disable_start">START</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="quesanspanel">
+
+		<div id="topBar" class="topBar">
+			<div id="head" class="head">aarohan<span style="font-weight:100;">2016</span></div>
+
+			<div id="quitTest" class="topContainer2">Quit</div>
+			<div id="topContainer1" class="topContainer1"></div>
+
+
+		</div>
+
+		<div id="questions" class="rightBox questions">
+			<div id="questionsHeader" class="header questionsHeader"><img class="rightIcon" src="/2016/static/aarohan/software/media/img/q1.png">QUESTIONS</div>
+			<div id="questionsList" class="questionsList">
+			</div>
+		</div>
+
+		<div id="IOWrapper" class="IOWrapper">
+			<div id="IOHeader" class="IOHeader">
+				<div id="levelBox" class="levelBox"></div>
+				<div id="numQuestion" class="numQuestion">Question <span id="qno"></span></div>
+				<div class="mark_scheme">CORRECT : +<span class="ms_correct" style="color:green"></span>&nbsp;&nbsp;&nbsp;INCORRECT : <span class="ms_incorrect" style="color:red"></span> &nbsp;&nbsp;&nbsp;UNATTEMPTED : +<span class="ms_unattempted" style="color:blue"></span></div>
+			</div>
+			<div id="IOContent" class="IOContent">
+				
+			</div>
+
+			<div id="IOAnswerWrapper" class="IOAnswerWrapper">
+				<button class="answerSubmit" id="back">Back</button>
+				<button class="answerSubmit" id="save">Save and Next</button>
+				<button class="answerSubmit" id="skip">Skip</button>
+				<div id="queslistref">
+					<div class="boxtext"><div class="box" style="background-color:#238DD0;"></div> CURRENT</div>
+					<div class="boxtext"><div class="box" style="background-color:#A9E339;"></div> ATTEMPTED</div>
+					<div class="boxtext"><div class="box" style="background-color:#FF2A4D"></div> VISITED</div>
+					<div class="boxtext"><div class="box" style="background-color:#EEEEEE;"></div> UN-VISITED</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="warnquitpanel">
+		<div class="abs_center" style="height:30%;">
+		<div style="color: #eee;font-size: 40px;">Are you sure you want to quit ? There is no going back... </div>
+		<button id="warnquitreturn">return back</button>
+		<button id="warnquitconfirm">quit</button>
+		</div>
+	</div>
+
+
+	<div id="testendpanel" class="abs_center">
+		<div  class="abs_center" style="height:30%;text-align:center;color: #eee;font-size: 40px;">
+		The test has ended. <br>
+		<button id="scorecalcbutton">Click here to calculate score</button>
+		</div>
+	</div>
+
+	<div id="feedbackpanel" class="abs_center">
+		<!--  
+		display score and feedback form
+		-->
+		<div style="text-align:center;">
+			<div class="scoreHolder">
+			Your score is : <div class="scoreIs"></div>
+			</div>
+			<div class="feedback_form">
+				<div >FEEDBACK</div>
+				<form  id="feedbackSubmit">
+					<div class="group">      
+						<input id="feedbackMail" type="text" required>
+						<span class="highlight"></span>
+						<span class="bar"></span>
+						<label>Email</label>
+					</div>
+					<div class="group">      
+						<input id="feedbackPhno" type="number" required>
+						<span class="highlight"></span>
+						<span class="bar"></span>
+						<label>Phone Number</label>
+					</div>
+					<div class="group">      
+						<textarea id="feedbackField" required></textarea> 
+						<span class="highlight"></span>
+						<span class="bar"></span>
+						<label>Any Improvements or Suggestions regarding AAROHAN 2016 :</label>
+					</div>
+				<button type="submit">SUBMIT</button>
+				</form>
+			</div>
+		</div>	
+	</div>
+
+
+	<script src="/2016/static/aarohan/software/media/js/paper_class11_setB.js"></script>
+	<script src="/2016/static/aarohan/software/media/js/main.js"></script>
+</body>
+</html>
