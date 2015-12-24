@@ -1,0 +1,90 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+
+
+<script type= 'text/javascript'>
+function checkall(gauss){
+  var cbx = document.getElementsByTagName('input');
+  for(var i=0; i< cbx.length ; ++i)
+  {
+    if(cbx[i].type == 'checkbox')
+      cbx[i].checked = gauss.checked;
+
+  }
+}
+</script>
+
+
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Campus Ambassadors Applicants</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+        <form action='../amb_xlsx/' method= 'POST'>
+        {% csrf_token %}            
+            <button name="excel" value="True" class="button button-primary">Download Excel</button>
+
+            
+<br>
+{% if no_select %}
+ <p style= 'color:red'> Please select someone </p>
+ {% endif %}
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Root Mail</th>
+                    <th>Approved</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for amb in amb_list reversed %}
+            <tr>
+
+                <td>
+                    <input type = 'checkbox' name='aids' value = {{amb.id}}>
+                </td>
+                <td> {{amb.name}} </td>
+                <td> {{amb.email}} </td>
+                <td> {{amb.phone}} </td>
+                {% if amb.root_mail %}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+                {% if amb.pcr_approved%}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td><strong>College:</strong></td>
+                <td colspan="2"> {{ amb.college.name }}</td>
+                <td><strong>Address:</strong></td>
+                <td colspan="2"> {{ amb.address }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+        </form>
+
+    </div>
+    </div>
+</div>
+{% endblock body %}
