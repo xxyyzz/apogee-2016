@@ -32,9 +32,9 @@ class events(models.Model):
     name = models.CharField(max_length = 100,verbose_name = 'Event Name' ,unique = True)
     category = models.ForeignKey(EventCategory)
     tag = models.ManyToManyField(Tag,blank=True)
-    overview = models.TextField(blank = 'True')
-    contact = models.TextField(blank = 'True')
-    content = RichTextField() 
+    short_description = RichTextField()
+    # contact = models.TextField(blank = 'True')
+    # content = RichTextField() 
    # attachments=models.FileField(blank=True,upload_to="attachments")
     # author = models.ForeignKey(User, null = True , blank = True)
     register = models.BooleanField(verbose_name = 'Enable online registration')
@@ -71,7 +71,7 @@ class Heading(models.Model):
 
 class Tabs(models.Model):
     heading = models.ForeignKey(Heading)
-    content = models.TextField(blank = True)
+    content = RichTextField()
     event = models.ForeignKey(events)
 
     def __unicode__(self):
