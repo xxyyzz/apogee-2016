@@ -10,6 +10,7 @@
             <table class= "u-full-width">
             <tbody>
                 <tr>
+                    <th>S No. </th>
                     <th>College Name </th>
                     <th>Name</th>
                     <!-- <th>Gender</th> -->
@@ -27,7 +28,7 @@
             {% for amb in amb_list reversed %}
             {% if amb.pcr_approved %}
             <tr>
-
+                <td>{{forloop.counter}}</td>
                 <td> {{amb.college}} </td>
                 <td> {{amb.name}} </td>
                 <!-- <td> {{amb.gender}} </td> -->
