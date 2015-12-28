@@ -69,7 +69,7 @@ The following are expected from you promptly:
 
 1. Please Pre-register and help your friends pre-register on https://www.bits-apogee.org/ .
 
-2. Please reply to this mail with the e-mail address and contact numbers of the NSS head in your college along with the Mechanical, Computer Science and Electrical departments’ (if any) student representatives. 
+2. Please reply to pcr@bits-apogee.org with the e-mail address and contact numbers of the NSS head in your college along with the Mechanical, Computer Science and Electrical departments’ (if any) student representatives. 
 
 3. You are expected to share the posts uploaded on the APOGEE Facebook page https://www.facebook.com/bitsapogee ; it will be monitored by one of our members. 
 
