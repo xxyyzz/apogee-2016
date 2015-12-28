@@ -38,7 +38,7 @@ def ambassadors_list(request):
 	return render(request, 'pcradmin/list_ambassadors.html', {'amb_list' : amb_obs})	
 
 def app_amb(request):
-	amb_obs = CampusAmbassador.objects.all()	
+	amb_obs = CampusAmbassador.objects.filter(pcr_approved=True)	
 	# amb_list=[]
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
 	return render(request, 'pcradmin/approved_amb.html', {'amb_list' : amb_obs})	
