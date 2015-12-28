@@ -6,7 +6,7 @@ urlpatterns = [
     url(r'^ambassadors/$', views.ambassadors_list),
     url(r'^app_amb/$', views.app_amb),
     url(r'^amb_act/$', views.amb_act),
-    url(r'^amb_xlsx/$', views.ambassador_selected_xlsx),
+    url(r'^amb_xlsx/$', views.ambassador_approved_xlsx),
     url(r'^mail_approved/$', views.mail_approved),
 
     url(r'^mail_selected/$', views.mail_selected_amb),
