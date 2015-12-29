@@ -98,7 +98,7 @@ var set =[
             'desc':'1000'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -128,7 +128,7 @@ var set =[
             'desc':'1 m'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -188,7 +188,7 @@ var set =[
             'desc':'7'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -218,7 +218,7 @@ var set =[
             'desc':'4'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -248,7 +248,7 @@ var set =[
             'desc':'7'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -278,7 +278,7 @@ var set =[
             'desc':'Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> can be used in aqueous H<sub>2</sub>SO<sub>4</sub>.'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -308,7 +308,7 @@ var set =[
             'desc':'None of these'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -338,7 +338,7 @@ var set =[
             'desc':'(2m/eB)tan<sup>-1</sup>(mv/eBr)'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -368,7 +368,7 @@ var set =[
             'desc':'v + (evB/m)t'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -398,7 +398,7 @@ var set =[
             'desc':'neither (a) nor (b)'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          3,
          -1,
@@ -428,7 +428,7 @@ var set =[
             'desc':'non-zero outside, non- zero inside but not exactly along the axis of the solenoid as there would be a non-zero component not oriented along the axis'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -3,
@@ -458,7 +458,7 @@ var set =[
             'desc':'4'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          4,
          -4,
@@ -488,7 +488,7 @@ var set =[
             'desc':'4'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          5,
          -5,
@@ -548,7 +548,7 @@ var set =[
             'desc':'4'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -578,7 +578,7 @@ var set =[
             'desc':'aλ(√7 - 1)/3'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -668,7 +668,7 @@ var set =[
             'desc':'5e<sup>5</sup>'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -728,7 +728,7 @@ var set =[
             'desc':'2√(37)'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -758,7 +758,7 @@ var set =[
             'desc':'i + 3j + 2k'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          3,
          -1,
@@ -788,7 +788,7 @@ var set =[
             'desc':'2i + 5j'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -818,7 +818,7 @@ var set =[
             'desc':'( -2/√3 , 2/√3 , -2/√3 )'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -848,7 +848,7 @@ var set =[
             'desc':'(-2, 2, -4)'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          3,
          -1,
@@ -878,7 +878,7 @@ var set =[
             'desc':'x<sup>2</sup> + y<sup>2</sup> + z<sup>2</sup> = 1/9'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -908,7 +908,7 @@ var set =[
             'desc':'3'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          3,
          -1,
@@ -938,7 +938,7 @@ var set =[
             'desc':'Senior surgeons are more effective at decision making than are mid-level doctors.'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -968,7 +968,7 @@ var set =[
             'desc':'The leaves of the raynhu are used in a large number of medical products.'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          3,
          -1,
@@ -1029,7 +1029,7 @@ var set =[
             'desc':'GJRYVEP'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -1059,7 +1059,7 @@ var set =[
             'desc':'Grandfather'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -1089,7 +1089,7 @@ var set =[
             'desc':'/2016/static/aarohan/software/media/qimg/class12_setC/image17.png'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -1119,7 +1119,7 @@ var set =[
             'desc':'Apple'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -1149,7 +1149,7 @@ var set =[
             'desc':'aabba'
          }
       ],
-      'correct':0,
+      'correct':2,
       'scoring':[  
          3,
          -1,
@@ -1209,7 +1209,7 @@ var set =[
             'desc':'129'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -1299,7 +1299,7 @@ var set =[
             'desc':'I remember taken to the museum by my sister.'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
@@ -1329,7 +1329,7 @@ var set =[
             'desc':'By whom is this mess being created?'
          }
       ],
-      'correct':0,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -1359,7 +1359,7 @@ var set =[
             'desc':'Cheerful greeting is done by them every morning to me.'
          }
       ],
-      'correct':0,
+      'correct':1,
       'scoring':[  
          3,
          -1,
