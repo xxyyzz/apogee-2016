@@ -36,15 +36,16 @@ class TabAdmin(admin.ModelAdmin):
 	    # to a User.
 	    given_org = organization.objects.get(user= request.user)
 	    events_list = events.objects.filter(org=given_org)
-	    tabs_list=qs.filter(event=events_list[0])
-	    c=0
-	    for event in events_list:
-	    	if c==0:
-	    		continue
-    		c+=1
-	    	tabs_list= tabs_list + qs.filter(event= event)
+	    return qs.filter(event__in=events_list)
+	    # tabs_list=qs.filter(event__in=events_list)
+	    # c=0
+	    # for event in events_list:
+	    # 	if c==0:
+	    # 		continue
+    	# 	c+=1
+	    # 	tabs_list= tabs_list + qs.filter(event= event)
 
-	    return tabs_list
+	    # return tabs_list
 
 
 class EventCategoryAdmin(admin.ModelAdmin):
