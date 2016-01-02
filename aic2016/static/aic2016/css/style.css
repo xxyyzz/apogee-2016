@@ -259,6 +259,48 @@ a:hover {
     margin-left: 10%;
 }
 
+.company-info {
+    color: #000;
+    font-size: 1.5em;
+    text-align: justify;
+    position: relative;
+    top: 17%;
+    width: 90%;
+    height: 75%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-left: 5%;
+}
+
+.company-block {
+    height: 210px;
+    width: calc(100% - 10px);
+    border: 1px solid white;
+    border-radius: 4px;
+    margin: 10px 0px;
+}
+
+.company-img-block {
+    width: 210px;
+    height: 210px;
+    position: relative;
+    background-color: white;
+    float: left;
+}
+
+.company-txt-block{
+    width: calc(100% - 260px);
+    float: left;
+    height: 170px;
+    position: relative;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.company-img-holder {
+    width: 100%;
+}
+
 .faqwrapper {
     color: #000;
     font-size: 1.5em;

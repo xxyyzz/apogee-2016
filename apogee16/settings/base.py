@@ -108,3 +108,25 @@ EMAIL_HOST_USER = 'noreply@bits-apogee.org'
 EMAIL_HOST_PASSWORD = 'donotreply'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+CKEDITOR_CONFIGS = {
+	'default': {
+	'toolbar_customConfig': [
+	{'name': 'basicstyles', 'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+	{'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+	{'name': 'paragraph', 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock','Language']},
+	{'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+	'/',
+	{'name': 'styles', 'items': ['Styles', 'Format', 'FontSize']},
+	{'name': 'colors', 'items': ['TextColor', 'BGColor']},
+	{'name': 'insert', 'items': ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak',]},
+	{'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+
+	{'name': 'document', 'items': ['Source', '-', 'NewPage', 'Preview', 'Print'] },
+	'/',
+	],
+	'toolbar': 'customConfig', # put selected toolbar config here
+	'tabSpaces': 4,
+	}
+}
