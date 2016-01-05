@@ -305,9 +305,10 @@ def ambassador_approved_xlsx(request):
 
 
 
+################################################################
 
-
-
+def oasis_stats_pcr(request):
+	return HttpResponseRedirect('http://bits-oasis.org/2015/pcradmin/stats/')
 
 
 
