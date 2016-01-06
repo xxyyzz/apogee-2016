@@ -375,42 +375,50 @@ var companyData = [
 	{
 		"name" : "Schneider Electric",
 		"imgl" : "/static/aic2016/companies/Fschneider.jpg",
-		"info" : "Serving countries in over 100 countries helping them make their lives and ecosystems safe, reliable, efficient and sustainable, “The Global Specialist in Energy Management and Automation” improves the way customers manage electrical systems. Get a chance to win cash prizes up to 72k and a chance to be interviewed for the internship from this multinational company this APOGEE!"
+		"info" : "Serving countries in over 100 countries helping them make their lives and ecosystems safe, reliable, efficient and sustainable, “The Global Specialist in Energy Management and Automation” improves the way customers manage electrical systems. Get a chance to win cash prizes up to 72k and a chance to be interviewed for the internship from this multinational company this APOGEE!",
+		"link" : "/static/aic2016/problems/PSschneider.pdf"
 	},
 	{
 		"name" : "Luminous",
 		"imgl" : "/static/aic2016/companies/Fluminous.jpg",
-		"info" : "The well known Luminous Power technologies is the leading home electrical specialist in India having a vast portfolio comprising of power back-up solutions like inverters, batteries, UPS and other electrical appliances. The winner of consumer Super-brand and rated as India’s most trusted brand is here in BITS to give cash prizes to the teams with the most  passionately innovative solutions."
+		"info" : "The well known Luminous Power technologies is the leading home electrical specialist in India having a vast portfolio comprising of power back-up solutions like inverters, batteries, UPS and other electrical appliances. The winner of consumer Super-brand and rated as India’s most trusted brand is here in BITS to give cash prizes to the teams with the most  passionately innovative solutions.",
+		"link" : ""
 	},
 	{
 		"name" : "Sterling Engineering",
 		"imgl" : "/static/aic2016/companies/Fsterling.jpg",
-		"info" : "With years of experience and expertise in developing the best solutions for a variety of construction challenges, Sterling has earned a reputation of being one of the most cost-efficient and reliable engineering firms in the business providing services to over 3000 projects around the world. Give life to your designs and ideas this APOGEE by giving out-of-the-box solutions to their problem statement! "
+		"info" : "With years of experience and expertise in developing the best solutions for a variety of construction challenges, Sterling has earned a reputation of being one of the most cost-efficient and reliable engineering firms in the business providing services to over 3000 projects around the world. Give life to your designs and ideas this APOGEE by giving out-of-the-box solutions to their problem statement! ",
+		"link" : "/static/aic2016/problems/PSsterling.pdf"
 	},
 	{
 		"name" : "Wooplr",
 		"imgl" : "/static/aic2016/companies/Fwooplr.jpg",
-		"info" : "Introducing this APOGEE, India’s first fashion discovery app! Connecting sellers to shoppers and giving a personalized social touch to shopping, Wooplr has come a long way in providing the fashion markets with just what they need. Watch out for their problem statement that will tickle your creative bone!"
+		"info" : "Introducing this APOGEE, India’s first fashion discovery app! Connecting sellers to shoppers and giving a personalized social touch to shopping, Wooplr has come a long way in providing the fashion markets with just what they need. Watch out for their problem statement that will tickle your creative bone!",
+		"link" : "/static/aic2016/problems/PSwooplr.pdf"
 	},
 	{
 		"name" : "HarVa",
 		"imgl" : "/static/aic2016/companies/Fharva.jpg",
-		"info" : "HarVa works as a link that fosters investments from the corporate world in the rural India. With an aim to take up the challenge of blending economic and social upliftment, HarVa takes Entrepreneurship to a new level. Discover the new avenues that this company opens up by working on their problem statements and get a chance to earn internships!"
+		"info" : "HarVa works as a link that fosters investments from the corporate world in the rural India. With an aim to take up the challenge of blending economic and social upliftment, HarVa takes Entrepreneurship to a new level. Discover the new avenues that this company opens up by working on their problem statements and get a chance to earn internships!",
+		"link" : "/static/aic2016/problems/PSharva.pdf"
 	},
 	{
 		"name" : "NextGen",
 		"imgl" : "/static/aic2016/companies/Fnextgen.jpg",
-		"info" : "NextGen, one of India’s leading Sustainability and Corporate Social Responsibility Management company, founded by BITSians, is here this APOGEE challenging you to come up with innovative solutions to manage Environmental footprint, Product life-cycles, and much more. Stay tuned for details…"
+		"info" : "NextGen, one of India’s leading Sustainability and Corporate Social Responsibility Management company, founded by BITSians, is here this APOGEE challenging you to come up with innovative solutions to manage Environmental footprint, Product life-cycles, and much more. Stay tuned for details…",
+		"link" : ""
 	},
 	{
 		"name" : "Bentley",
 		"imgl" : "/static/aic2016/companies/Fbentley.jpg",
-		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader. Look out for more details"
+		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader. Look out for more details",
+		"link" : ""
 	},
 	{
 		"name" : "Techture",
 		"imgl" : "/static/aic2016/companies/Ftechture.jpg",
-		"info" : "They aim to integrate the Architectural, Structural, Mechanical, Electrical and Plumbing disciplines by focusing on providing extensive design, analysis and visualisation services leveraging Building Information Modelling (BIM) and associated technologies. This APOGEE, 	solve their problem statements to earn internship opportunities."
+		"info" : "They aim to integrate the Architectural, Structural, Mechanical, Electrical and Plumbing disciplines by focusing on providing extensive design, analysis and visualisation services leveraging Building Information Modelling (BIM) and associated technologies. This APOGEE, 	solve their problem statements to earn internship opportunities.",
+		"link" : "/static/aic2016/problems/PStechture.pdf"
 	},
 ];
 
@@ -419,7 +427,14 @@ function initComp() {
 	for(var i=1;i<=companyData.length;i++) {
 		var dat = companyData[i-1];
 
-		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:21px'><b>"+dat.name+"</b></span><br>"+dat.info+"</div></div>";
+		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:21px'><b>"+dat.name+"</b></span><br>"+dat.info+"<br>";
+		if(dat.link != "") {
+			part += "<a href='/2016"+dat.link+"' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the problem statement</span></a></div></div>";
+		} else
+			part += "</div></div>";
+
+		
+
 		html += part;
 	}
 	$(".company-info").append(html);

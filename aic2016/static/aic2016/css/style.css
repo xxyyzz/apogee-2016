@@ -338,3 +338,12 @@ div.qbox {
     width: 600px;
 }
 
+.pslink {
+    text-transform: uppercase;
+    margin-top: 10px;
+    position: relative;
+    font-weight: bold;
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+}
