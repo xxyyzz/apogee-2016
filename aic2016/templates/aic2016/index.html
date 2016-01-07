@@ -21,6 +21,8 @@
                 <td id="tb6" class="navitem" data-page="6" onclick="getpgno(this)" href="#page6">Sponsor</td>
                 <td id="tb7" class="navitem" data-page="7" onclick="getpgno(this)" href="#page7">FAQs</td>
                 <td id="tb8" class="navitem" data-page="8" onclick="getpgno(this)" href="#page8">Contact</td>
+                <td id="tb8" class="navitem" data-page="9" onclick="getpgno(this)" href="#page9">Register</td>
+
             </tr>
         </table>
 	<div id="navarrow" class="navarrow" ></div>
@@ -65,6 +67,11 @@
 	</li>
 	<li onclick="changeClass(this)">
 	<a href="#page8" onclick="changeClass(this)">
+			<span>Contact</span>
+	</a>
+	</li>
+	<li onclick="changeClass(this)">
+	<a href="#page9" onclick="changeClass(this)">
 			<span>Contact</span>
 	</a>
 	</li>
@@ -161,6 +168,16 @@
                 </table>
  			</div>
  	</div> 
+
+ 	<div id="page9" class="page p9">
+			<i class="fa fa-user ficon"></i>
+ 			<div class="head">Register</div>
+ 			<div class="info" style="font-size:2em;text-align:center;" >
+ 				The Registrations will begin around 14 January 2016.<br>
+ 				Participants are required to submit the solution in zip format.<br>
+ 				Last Date for Round 1 submissions is 2 February 2016.
+ 			</div>
+ 	</div>
  	
 
 </div>
@@ -234,35 +251,38 @@ $(window).resize(function() {
 		// console.log(cpg);
 		switch (cpg) {
 			case 1:
-			$("#navarrow").animate({left: '5%'},500)
+			$("#navarrow").animate({left: '3.5%'},500)
 			break;
 			case 2:
-			$("#navarrow").animate({left: '17.5%'},500)
+			$("#navarrow").animate({left: '15%'},500)
 			break;
 			case 3:
-			$("#navarrow").animate({left: '30%'},500)
+			$("#navarrow").animate({left: '26%'},500)
 			break;
 			case 4:
-			$("#navarrow").animate({left: '42.5%'},500)
+			$("#navarrow").animate({left: '37.5%'},500)
 			break;
 			case 5:
-			$("#navarrow").animate({left: '55%'},500)
+			$("#navarrow").animate({left: '48.5%'},500)
 			break;
 			case 6:
-			$("#navarrow").animate({left: '67.5%'},500)
+			$("#navarrow").animate({left: '59.5%'},500)
 			break;
 			case 7:
-			$("#navarrow").animate({left: '80%'},500)
+			$("#navarrow").animate({left: '70.5%'},500)
 			break;
 			case 8:
-			$("#navarrow").animate({left: '92.5%'},500)
+			$("#navarrow").animate({left: '82%'},500)
+			break;
+			case 9:
+			$("#navarrow").animate({left: '93%'},500)
 			break;
 		};
 	};
-	// console.log(cpg);
+	console.log(cpg);
 	switch (cpg) {
 		case 1:
-		$("#navarrow").animate({left: '6%'},500)
+		$("#navarrow").animate({left: '3.5%'},500)
 		break;
 	};
 </script>
@@ -382,7 +402,7 @@ var companyData = [
 		"name" : "Luminous",
 		"imgl" : "/static/aic2016/companies/Fluminous.jpg",
 		"info" : "The well known Luminous Power technologies is the leading home electrical specialist in India having a vast portfolio comprising of power back-up solutions like inverters, batteries, UPS and other electrical appliances. The winner of consumer Super-brand and rated as India’s most trusted brand is here in BITS to give cash prizes to the teams with the most  passionately innovative solutions.",
-		"link" : ""
+		"link" : "/static/aic2016/problems/PSluminous.pdf"
 	},
 	{
 		"name" : "Sterling Engineering",
