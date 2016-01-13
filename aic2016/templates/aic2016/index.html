@@ -419,7 +419,7 @@ var companyData = [
 	{
 		"name" : "HarVa",
 		"imgl" : "/static/aic2016/companies/Fharva.jpg",
-		"info" : "HarVa works as a link that fosters investments from the corporate world in the rural India. With an aim to take up the challenge of blending economic and social upliftment, HarVa takes Entrepreneurship to a new level. Discover the new avenues that this company opens up by working on their problem statements and get a chance to earn internships!",
+		"info" : "HarVa is a for-profit rural enterprise in India started in March 2010 which aims to “Harness Value” out of places where none or little existed by setting up a network of HarVa Digital Huts in rural areas connected via Internet. The company leverages on the vast intellectual and infrastructural capital in the rural landscapes by involving local communities in business and value co-creation; attaining inclusive growth in the real sense.The company primarily focuses on Skill Development, Primary Healthcare, Digital and Financial Inclusion Practices,  Community based Farming and Rural Electrification.",
 		"link" : "/static/aic2016/problems/PSharva.pdf"
 	},
 	{
@@ -431,7 +431,7 @@ var companyData = [
 	{
 		"name" : "Bentley",
 		"imgl" : "/static/aic2016/companies/Fbentley.jpg",
-		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader.<br><a href='/2016/static/aic2016/problems/PSbentley_techmanual.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the technical manual</span></a>",
+		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader.<br><b>The problem statement is open to students of all the disciplines and years.</b><br><a href='/2016/static/aic2016/problems/PSbentley_techmanual.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the technical manual</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/2016/static/aic2016/problems/PSbentley_key.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;SOFTWARE KEY</span></a>",
 		"link" : "/static/aic2016/problems/PSbentley.pdf"
 	},
 	{
@@ -447,7 +447,7 @@ function initComp() {
 	for(var i=1;i<=companyData.length;i++) {
 		var dat = companyData[i-1];
 
-		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:21px'><b>"+dat.name+"</b></span><br>"+dat.info+"<br>";
+		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:18px'><b>"+dat.name+"</b></span><br>"+dat.info+"<br>";
 		if(dat.link != "") {
 			part += "<a href='/2016"+dat.link+"' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the problem statement</span></a></div></div>";
 		} else
