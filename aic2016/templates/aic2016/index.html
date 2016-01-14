@@ -177,7 +177,7 @@
  	<div class="head" style="top:13%;">Register</div>
  	<div class="info" style="font-size:1em; margin-top:30px;top:15%;" >
 
- 			<div class="form-style-5">
+ 			<div id="form_cont" class="form-style-5">
  				<form id="aicform">
  					<fieldset>
  						<legend><span class="number">1</span> Team Leader</legend>
@@ -572,7 +572,7 @@ initComp();
             var datasend = collect_data();
             // console.log(datasend);
             $.ajax({
-                url: 'http://bits-apogee/2016/aic/submit/',
+                url: 'http://bits-apogee.org/2016/aic/submit/',
                 type: 'POST',
                 data: datasend,
                 cache : false,
@@ -582,7 +582,12 @@ initComp();
                 success: function(data)
                 {
                 	console.log(data);
-                    // $(".body-box").html(data);
+                	if(parseInt(data))
+                	{
+                    	$("#form_cont").html("You have been successfully registered.");
+                	}
+                	else
+                		 $("#form_cont").html("You couldn't be registered. Please Try Again Later.");
                 }
             });
         }
