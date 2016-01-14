@@ -20,7 +20,7 @@ def problemstatement_add(request) :
 	gl_yos = data['gl_yos']
 
 	member = {}
-	for x in range(0,2):
+	for x in range(1,3):
 		member[x] = {}
 		try:
 			key = 'mem-%s-name' % x

@@ -22,33 +22,33 @@ def problemstatement_add(request) :
 	gl_yos = data['gl_yos']
 
 	member = {}
-	for x in range(0,2):
+	for x in range(1,3):
 		member[x] = {}
 		try:
 			key = 'mem-%s-name' % x
-			member[x]['name'] = data[key]
+			member[x-1]['name'] = data[key]
 		except MultiValueDictKeyError:
-			member[x]['name'] = None
+			member[x-1]['name'] = None
 		try:
 			key = 'mem-%s-email' % x
-			member[x]['email'] = data[key]
+			member[x-1]['email'] = data[key]
 		except MultiValueDictKeyError:
-			member[x]['phone'] = None
+			member[x-1]['phone'] = None
 		try:
 			key = 'mem-%s-phone' % x
-			member[x]['phone'] = data[key]
+			member[x-1]['phone'] = data[key]
 		except MultiValueDictKeyError:
-			member[x]['email'] = None
+			member[x-1]['email'] = None
 		try:
 			key = 'mem-%s-college' % x
-			member[x]['college'] = data[key]
+			member[x-1]['college'] = data[key]
 		except MultiValueDictKeyError:
-			member[x]['college'] = None
+			member[x-1]['college'] = None
 		try:
 			key = 'mem-%s-yos' % x
-			member[x]['yos'] = data[key]
+			member[x-1]['yos'] = data[key]
 		except MultiValueDictKeyError:
-			member[x]['yos'] = None
+			member[x-1]['yos'] = None
 
 	# return HttpResponse(member[3]['email'])
 
@@ -65,7 +65,7 @@ def problemstatement_add(request) :
 	try:
 		model_leader = Participant.objects.get(email=gl_email)
 	except:
-		model_leader = Participant.objects.create(name=gl_name, phone=gl_phone, email=gl_email, college=gl_college)
+		model_leader = Participant.objects.create(name=gl_name, phone=gl_phone, email=gl_email, college=gl_college, yos=gl_yos)
 	
 	# model_category = Category.objects.get(name=category)
 	# try:
@@ -79,7 +79,7 @@ def problemstatement_add(request) :
 			try:
 				model_member[x] = Participant.objects.get(email=member[x]['email'])
 			except:
-				model_member[x] = Participant.objects.create(name=member[x]['name'], phone=member[x]['phone'], email=member[x]['email'], college=model_college)
+				model_member[x] = Participant.objects.create(name=member[x]['name'], phone=member[x]['phone'], email=member[x]['email'], college=member[x]['college'], yos=member[x]['yos'])
 		else:
 			model_member[x] = None
 
