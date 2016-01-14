@@ -645,7 +645,7 @@ initComp();
             data.append('mem-'+z+'-phone', $("input#mem-"+z+"-phone").val());
             data.append('mem-'+z+'-email', $("input#mem-"+z+"-email").val());
             data.append('mem-'+z+'-college', $("input#mem-"+z+"-college").val());
-            data.append('mem-'+z+'-yos', $("input#mem-"+z+"-yos option:selected").val());
+            data.append('mem-'+z+'-yos', $("mem-"+z+"-yos option:selected").val());
         }
 
         data.append('problem_statement', $("#prob_stat option:selected").val());
