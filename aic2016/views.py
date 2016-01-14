@@ -6,14 +6,15 @@ import string, random, os
 from apogee16.settings import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
-
+from aic2016.models import *
+from django.template.defaultfilters import slugify
 
 
 def website(request) :
 	return render(request, "aic2016/index.html")
 
 @csrf_exempt
-def problemstatement_add(request) : 
+def problemstatement_add(request) :
 	data = request.POST
 	gl_name = data['gl_name']
 	gl_phone = data['gl_phone']
@@ -22,33 +23,33 @@ def problemstatement_add(request) :
 	gl_yos = data['gl_yos']
 
 	member = {}
-	for x in range(1,3):
+	for x in range(1,4):
 		member[x] = {}
 		try:
 			key = 'mem-%s-name' % x
-			member[x-1]['name'] = data[key]
-		except MultiValueDictKeyError:
-			member[x-1]['name'] = None
+			member[x]['name'] = data[key]
+		except KeyError:
+			member[x]['name'] = None
 		try:
 			key = 'mem-%s-email' % x
-			member[x-1]['email'] = data[key]
-		except MultiValueDictKeyError:
-			member[x-1]['phone'] = None
+			member[x]['email'] = data[key]
+		except KeyError:
+			member[x]['phone'] = None
 		try:
 			key = 'mem-%s-phone' % x
-			member[x-1]['phone'] = data[key]
-		except MultiValueDictKeyError:
-			member[x-1]['email'] = None
+			member[x]['phone'] = data[key]
+		except KeyError:
+			member[x]['email'] = None
 		try:
 			key = 'mem-%s-college' % x
-			member[x-1]['college'] = data[key]
-		except MultiValueDictKeyError:
-			member[x-1]['college'] = None
+			member[x]['college'] = data[key]
+		except KeyError:
+			member[x]['college'] = None
 		try:
 			key = 'mem-%s-yos' % x
-			member[x-1]['yos'] = data[key]
-		except MultiValueDictKeyError:
-			member[x-1]['yos'] = None
+			member[x]['yos'] = data[key]
+		except KeyError:
+			member[x]['yos'] = None
 
 	# return HttpResponse(member[3]['email'])
 
@@ -66,7 +67,7 @@ def problemstatement_add(request) :
 		model_leader = Participant.objects.get(email=gl_email)
 	except:
 		model_leader = Participant.objects.create(name=gl_name, phone=gl_phone, email=gl_email, college=gl_college, yos=gl_yos)
-	
+
 	# model_category = Category.objects.get(name=category)
 	# try:
 	# 	model_assoc = Association.objects.get(name=assoc)
@@ -74,7 +75,7 @@ def problemstatement_add(request) :
 	# 	model_assoc = None
 
 	model_member = {}
-	for x in range(0,2):
+	for x in range(1,4):
 		if member[x]['email'] != None:
 			try:
 				model_member[x] = Participant.objects.get(email=member[x]['email'])
@@ -83,22 +84,20 @@ def problemstatement_add(request) :
 		else:
 			model_member[x] = None
 
-	
-	solution.name = gl_name+gl_college+ '.zip'
-
+	solution.name = slugify(str(model_leader.id)+'-'+gl_college+'-'+gl_name)+'.zip'
 
 	# slugified_category = slugify(category)
 	# category_directory = os.path.join(MEDIA_ROOT, 'projects/', slugified_category)
 	# if not os.path.exists(category_directory):
 	# 	os.makedirs(category_directory)
 
-	model_project = Project.objects.create(leader=model_leader, solution=solution)
+	model_project = AicSubmission.objects.create(leader=model_leader, solution=solution)
 
-	for x in range(0,2):
+	for x in range(1,4):
 		if model_member[x] != None:
 			model_project.members.add(model_member[x])
 	model_project.save()
 
 	response = 1
 
-	return JsonResponse(response)
+	return JsonResponse(response, safe=False)
