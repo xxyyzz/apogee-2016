@@ -51,7 +51,7 @@
 			<span>Rules</span>
 	</a>
 	</li>
-	
+
 	<li onclick="changeClass(this)">
 	<a href="#page5" onclick="changeClass(this)">
 			<span>Companies</span>
@@ -105,7 +105,7 @@
  			<div class="info">
  				<b>APOGEE Innovation Challenge</b>, an exceptional technical symposium, aims at quenching your thirst for hands-on experience in real life problems plaguing the industrial world.<br><br>  Organized in collaboration with various multinational companies, this event presents before you existing challenges faced by these companies who seek their solutions from you. These problems, which happen to be discipline specific (one need not belong to that discipline), are to be solved by participants in teams of 2-4 in a month. After scrutiny by company officials, top 5 teams will be presenting their final solutions during APOGEE ‘16.<br><br> Exciting Internship Offers and Cash Prizes await the winners. Needless to say, you can brag about cracking a professional challenge while still being in college. Participation Certificate shall be given to all members of each team which present solutions during APOGEE ‘16.
  			</div>
- 	</div> 
+ 	</div>
 
  	<div id="page3" class="page p3">
 		<i class="fa fa-history ficon"></i>
@@ -114,7 +114,7 @@
  				Apogee Innovation Challenge 2015 which was a kernel event of APOGEE 2015 and saw huge success with problem statements from 7 companies and a participation of over 200 students. Of the 30+ interns taken, few of them were given job offers as well. <br><br>The participating companies of last year include: Schneider Electric, GoDoctr, Techture, Mindshare, Luminous, Maruti Suzuki, Larsen and Turbo
 
  			</div>
- 	</div> 
+ 	</div>
 
  	<div id="page4" class="page p4">
  		<i class="fa fa-cogs ficon"></i>
@@ -129,17 +129,17 @@
  				</ul>
 
  			</div>
- 	</div> 
+ 	</div>
 
  	<div id="page5" class="page p5">
 		<i class="fa fa-briefcase ficon"></i>
 		<div class="company-info">
-			
+
 
 		</div>
-		
- 	</div> 
-	
+
+ 	</div>
+
  	<div id="page6" class="page p6">
  			<i class="fa fa-star ficon"></i>
  			<div class="head">Sponsor</div>
@@ -149,12 +149,12 @@
 				As the global specialist in energy management and automation, Schneider Electric serves customers in over 100 countries, helping them to make their lives and ecosystems safe, reliable, efficient and sustainable. From the simplest of switches to complex operational systems, their technology, software and services improve the way their customers manage and automate their operations. At Schneider Electric, they call this Life is On.
 
  			</div>
- 	</div> 
+ 	</div>
 
 	<div id="page7" class="page p7">
 			<i class="fa fa-question-circle ficon"></i>
  			<div class="faqwrapper"></div>
- 	</div> 
+ 	</div>
 
 	<div id="page8" class="page p8">
 			<i class="fa fa-envelope ficon"></i>
@@ -169,7 +169,7 @@
                     </tr>
                 </table>
  			</div>
- 	</div> 
+ 	</div>
 
  <div id="page9" class="page p9">
  	<i class="fa fa-user ficon"></i>
@@ -244,7 +244,7 @@
  		</div>
  	</div>
  </div>
- 	
+
 
 </div>
 <!-- JAVASCRIPT -->
@@ -258,7 +258,7 @@
 // 	}
 $(document).ready(function() {
 	location.href="#page1";
-	if(window.innerWidth > 800){    
+	if(window.innerWidth > 800){
 		$("#bf").hide();
 		$("#be").hide();
    	setTimeout(function() {$("#bf").fadeIn(1000);},4500);
@@ -278,7 +278,7 @@ function showIt() {$(function() {
 // When Document is resized
 
 $(window).resize(function() {
-	if(window.innerWidth > 800){ 
+	if(window.innerWidth > 800){
 	   // location.href="#page1";
 		$("#bf").hide();
 		$("#be").hide();
@@ -290,12 +290,12 @@ $(window).resize(function() {
    	setTimeout(function() {$("#be").fadeIn(1000)},3000);
    	showIt();
 	}
-	if(window.innerWidth < 800) { 
+	if(window.innerWidth < 800) {
 	$('.app-nav').hide();
 	var visi=false;
 	$(window).scroll(function() {
 		// console.log(visi);
-		if (visi===false) { 
+		if (visi===false) {
 		$('.app-nav').fadeIn();
 		visi=true;
 		setTimeout(function() {$('.app-nav').fadeOut();
@@ -354,12 +354,12 @@ $(window).resize(function() {
 </script>
 <!-- FOR MOBILE NAV -->
 <script type="text/javascript">
-if(window.innerWidth < 800) { 
+if(window.innerWidth < 800) {
 	$('.app-nav').hide();
 	var visi=false;
 	$(window).scroll(function() {
 		// console.log(visi);
-		if (visi===false) { 
+		if (visi===false) {
 		$('.app-nav').fadeIn();
 		visi=true;
 		setTimeout(function() {$('.app-nav').fadeOut();
@@ -368,7 +368,7 @@ if(window.innerWidth < 800) {
 		}});
 	function changeClass(div) {
 		// console.log($(".active"));
-		$(".active").removeClass("active");				
+		$(".active").removeClass("active");
 		var className=div.getAttribute("class");
 		div.className="active";
 	}
@@ -399,7 +399,7 @@ if(window.innerWidth < 800) {
 });
 </script>
 
-<script> 
+<script>
 
 var faqobj = [
 	{ "ques" : "When will the internships take place ?", "ans" : "The internships are mostly going to be taking place in the summer of 2016. However, specific dates and period of the internships are subject to discussion."},
@@ -519,7 +519,7 @@ function initComp() {
 		} else
 			part += "</div></div>";
 
-		
+
 
 		html += part;
 	}
@@ -550,7 +550,7 @@ initComp();
                 if(members < 3) {
             	$(".add-member").show();
             	}
-                else 
+                else
                     alert("Delete members from the bottom of the list !");
             });
 
@@ -567,12 +567,12 @@ initComp();
         e.preventDefault();
         if(validate_project_submit() == 0) {
             $(".error-box").hide();
-            $(".submit-button").hide();
+            // $(".submit-button").hide();
 
             var datasend = collect_data();
             // console.log(datasend);
             $.ajax({
-                url: 'http://bits-apogee.org/2016/aic/submit/',
+                url: 'http://bits-apogee/aic/submit/',
                 type: 'POST',
                 data: datasend,
                 cache : false,
@@ -624,7 +624,7 @@ initComp();
     $("input#abstract-file").on('change', function(e) {
         aicsol = e.target.files;
     });
- 
+
 
     function collect_data() {
         var data = new FormData() ;
@@ -634,7 +634,7 @@ initComp();
         data.append('gl_college', $("input#gl-college").val());
         data.append('gl_yos', $("#gl-yos option:selected").val());
         console.log(data);
-        
+
         for(var z=1;z<=members;z++) {
             data.append('mem-'+z+'-name', $("input#mem-"+z+"-name").val());
             data.append('mem-'+z+'-phone', $("input#mem-"+z+"-phone").val());
@@ -642,7 +642,7 @@ initComp();
             data.append('mem-'+z+'-college', $("input#mem-"+z+"-college").val());
             data.append('mem-'+z+'-yos', $("input#mem-"+z+"-yos option:selected").val());
         }
-        
+
         data.append('problem_statement', $("#prob_stat option:selected").val());
 
         $.each(aicsol, function(key, value)
@@ -675,9 +675,9 @@ initComp();
                     errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Email is invalid."
                     count++;
                 }
-            }    
+            }
         }
-        
+
         // Check for phone...
         var re_phone = /^([0-9]{10})$/i;
         var en_phone1 = $("input#gl-phone").val();
@@ -692,13 +692,13 @@ initComp();
                     errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Phone no is invalid. Please enter a valid 10 digit mobile number."
                     count++;
                 }
-            }    
+            }
         }
 
-        //format check 
+        //format check
         var file = $("input#abstract-file").val();
         var extn = file.substring(file.lastIndexOf(".")+1);
-        if(extn != "rar" && extn != "ZIP" && extn != "zip" && extn != "RAR"  ) {
+        if( extn != "ZIP" && extn != "zip" ) {
             errorText += "<br>&bull;&nbsp;&nbsp;The abstract file can only be of ZIP/RAR Format."
             count++;
         }
