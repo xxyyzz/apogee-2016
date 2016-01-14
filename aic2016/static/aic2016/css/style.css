@@ -188,6 +188,7 @@ body
     height: 100%;
     color: transparent;
     position: relative;
+    /* overflow-y:auto;  */
 }
 .p1 {
     background-image: url('../img/bg.jpg');
@@ -257,8 +258,6 @@ a:hover {
     top: 22%;
     max-width: 80%;
     max-height: 75%;
-    overflow-y:auto;
-    overflow-x:hidden;
     margin-left: 10%;
 }
 
@@ -297,7 +296,7 @@ a:hover {
     height: 170px;
     position: relative;
     padding: 20px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .company-img-holder {
@@ -349,4 +348,14 @@ div.qbox {
     position: relative;
     font-size: 14px;
     display: inline-block;
+}
+
+.form {
+    overflow-y:auto;
+    color:#000;
+    position: relative;
+    top:13%;
+}
+.college {
+    font-family: Georgia;
 }
