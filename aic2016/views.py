@@ -86,12 +86,12 @@ def problemstatement_add(request) :
 
 	solution.name = slugify(str(model_leader.id)+'-'+gl_college+'-'+gl_name)+'.zip'
 
-	# slugified_category = slugify(category)
-	# category_directory = os.path.join(MEDIA_ROOT, 'projects/', slugified_category)
-	# if not os.path.exists(category_directory):
-	# 	os.makedirs(category_directory)
+	slugified_category = slugify(category)
+	category_directory = os.path.join(MEDIA_ROOT, 'projects/', slugified_category)
+	if not os.path.exists(category_directory):
+		os.makedirs(category_directory)
 
-	model_project = AicSubmission.objects.create(leader=model_leader, solution=solution)
+	model_project = AicSubmission.objects.create(leader=model_leader, solution=solution, problem_statement=problem_statement)
 
 	for x in range(1,4):
 		if model_member[x] != None:
