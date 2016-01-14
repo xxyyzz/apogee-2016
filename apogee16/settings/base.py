@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'cms',
     'pcradmin',
     'aarohan',
-    'aic2016'
+    'aic2016',
+    'iot',
 )
 
 MIDDLEWARE_CLASSES = (
