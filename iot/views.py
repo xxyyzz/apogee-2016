@@ -5,12 +5,10 @@ from django.http import HttpResponse, JsonResponse
 import string, random, os
 from apogee16.settings import *
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.datastructures import MultiValueDictKeyError
-
 
 
 def website(request) :
-	return render(request, "aic2016/index.html")
+	return render(request, "iot/index.html")
 
 @csrf_exempt
 def problemstatement_add(request) : 
