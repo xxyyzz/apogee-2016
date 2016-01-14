@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AicSubmission',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('problem_statement', models.CharField(choices=[('1', 'Shit1'), ('2', 'Shit2'), ('3', 'Shit3'), ('4', 'Shit4'), ('5', 'Shit5'), ('6', 'Shit6'), ('7', 'Shit7'), ('8', 'Shit8'), ('9', 'Shit9')], max_length=500)),
                 ('solution', models.FileField(upload_to=aic2016.models.upload_aic, default=None)),
             ],
@@ -22,10 +22,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Participant',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=200)),
                 ('phone', models.BigIntegerField()),
-                ('email', models.EmailField(max_length=254, unique=True)),
+                ('email', models.EmailField(unique=True, max_length=254)),
                 ('college', models.CharField(max_length=200)),
                 ('yos', models.PositiveSmallIntegerField()),
             ],
@@ -33,11 +33,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='aicsubmission',
             name='leader',
-            field=models.ForeignKey(to='aic2016.Participant', related_name='leaders'),
+            field=models.ForeignKey(related_name='leaders', to='aic2016.Participant'),
         ),
         migrations.AddField(
             model_name='aicsubmission',
             name='members',
-            field=models.ManyToManyField(blank='True', related_name='members', to='aic2016.Participant'),
+            field=models.ManyToManyField(blank='True', to='aic2016.Participant', related_name='members'),
         ),
     ]
