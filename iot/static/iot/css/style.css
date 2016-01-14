@@ -53,6 +53,7 @@ h2 {
 	font-size: 4em;
 	padding-bottom:15px; 
 	font-weight: 900;
+	color: white;
 }
 
 .header {
@@ -123,7 +124,7 @@ div.headele:hover {
 	width: calc(100% - 80px);
 	height: 100%;
 	left: 80px;
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	background-size:  100% 100% ;
 	background-image:  url(./../img/iotback.jpg);
@@ -193,6 +194,17 @@ div.headele:hover {
 	padding: 20px;
 	overflow-x: hidden;
 	top: 50px;
+	bottom: 15px;
+}
+
+.scroller2 {
+	position: relative;
+	left: 5%;
+	width: 85%;
+	overflow: auto;
+	padding: 20px;
+	overflow-x: hidden;
+	margin-top: 50px;
 	bottom: 15px;
 }
 
@@ -323,3 +335,38 @@ ul>li
 	font-size: 1.2em;
 	padding: 8px;
 }
+
+/*Registration form*/
+.info {
+    color: #000 !important;
+    font-size: 1.5em;
+    text-align: justify !important;
+    position: relative;
+    top: 22%;
+    max-width: 80%;
+    max-height: 75%;
+    margin-left: 10%;
+}
+
+.form {
+    overflow-y:auto;
+    color:#000;
+    position: relative;
+    top:13%;
+    margin-top: 10px;
+}
+
+.form-subhead{
+	font-weight: 700;
+}
+
+
+input:focus{
+	color:#444 !important;
+}
+
+input{
+	color:#444 !important;
+}
+
+

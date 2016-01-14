@@ -13,7 +13,7 @@
 <div class="header">
 	<div><a href="javascript: void(0)" onclick="home()">
 			<div id="head0" class="headele">
-				<p class="headtxt">home</p>
+				<p class="headtxt">Home</p>
 				<img class="headimg" src="/2016/static/iot/img/icons/icon1.png">
 			</div>
 	</a></div>
@@ -161,10 +161,91 @@ machines smart human extensions.</p>
 </div>
 
 <div id="content6" class="content">
-	<div id="rules5" class="rules">
-		<a id="home" href="javascript: void(0)" onclick="home()"><p class="close"> X </p></a>
-		<div class="scroller">
-		<div style="font-size: 3em;font-weight:900;margin-top: 19%;text-align: center;position: relative;">watch for it... submission starts soon !</div>		
+	<a id="home" href="javascript: void(0)" onclick="home()"><p class="close"> X </p></a>
+	<div class="scroller2">
+		<div class="form">
+			<div class="title_head">Registration</div>
+			<!--<div style="font-size: 3em;font-weight:900;margin-top: 19%;text-align: center;position: relative;">watch for it... submission starts soon !</div>-->
+			<div class="info" style="font-size:1em; margin-top:30px" >
+				<div class="form-style-5">
+					<form>
+						<fieldset>
+							<legend><span class="number">1</span>Team Leader</legend>
+							<input id="tl-name" name="field2" required="" type="text"  placeholder="Name">
+							<input id="tl-phone" required="" type="text" name="field2" placeholder="Phone">
+							<input id="tl-email" required="" type="text" name="field2" placeholder="Email">
+							<div style="line-height:1.5em; text-align:left;">
+								<input class="college" type="radio" name="college0" onclick="bits(this)" data-key="0" checked /><span>BITS Pilani</span>
+								<input class="college" type="radio" name="college0" onclick="other_college(this)" data-key="0" /><span>Other, Specify </span>
+								<input id="college0" requied="" type="text" style="display:none" value="BITS Pilani">
+							</div><br>
+							<select id="mem-1-yos" required="" class="browser-default" placeholder="Year of Study">
+								
+								<option value="1" selected>1</option>
+
+								<option value="2">2</option>
+
+								<option value="3">3</option>
+
+								<option value="4">4</option>
+
+								<option value="5">5</option>
+
+							</select>
+						</fieldset>
+						<fieldset>
+							<legend><span class="number">2</span> Members</legend>
+							
+							<div class="members-wrapper" style="line-height:1.5em; text-align:left;">
+								<div class="mem-1-wrapper"><div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member 1<div class="pull-right"></div></div><div class="input-field col-sm-6"><input id="mem-1-name" required type="text" placeholder="Name"></div><div class="input-field col-sm-6"><input id="mem-1-phone" required type="text" placeholder="Phone" ></div><div class="input-field col-sm-12"><input id="mem-1-email" required type="text" placeholder="Email" ></div><div class="input-field col-sm-12"><div style="line-height:1.5em; text-align:left;"><input class="college" type="radio" name="college1" onclick="bits(this)" data-key="1" checked><span>BITS Pilani</span><input class="college1" type="radio" name="college1" onclick="other_college(this)"  data-key="1"><span>Other, Specify</span><input id="college1" value="" requied="" type="text" style="display:none" value="BITS Pilani"></div><br></div><div class="input-field col-sm-12"><select id="mem-1-yos" required="" class="browser-default" placeholder="Year of Study">
+								
+								<option value="1" selected>1</option>
+
+								<option value="2">2</option>
+
+								<option value="3">3</option>
+
+								<option value="4">4</option>
+
+								<option value="5">5</option>
+
+							</select></div>
+							</div>
+							</div>
+							<div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</div>
+							
+						</fieldset>
+						<fieldset>
+							<legend><span class="number">3</span> Problem</legend>
+							<select id="category" required="" class="browser-default">
+								<option value="" disabled="" selected="">...</option>
+
+								<option value="Schneider Electric">Schneider Electric</option>
+
+								<option value="Luminous">Luminous</option>
+
+								<option value="Sterling Engineering">Sterling Engineering</option>
+
+								<option value="Wooplr">Wooplr</option>
+
+								<option value="HarVa">HarVa</option>
+
+								<option value="Bentley">Bentley</option>
+
+								<option value="Techture">Techture</option>
+
+							</select>
+						</fieldset>
+						<fieldset>
+							<legend><span class="number">4</span> Upload Abstract</legend>
+							<span>
+								<input id="abstract-file" required="" type="file" value="File">
+							</span>
+						</fieldset>
+						<input type="submit" value="Register"  class="waves-effect red darken-3 btn submit-button"/>
+					</form>
+				</div>
+			</div>		
 		</div>
 	</div>
 </div>
