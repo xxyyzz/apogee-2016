@@ -56,7 +56,7 @@ def problemstatement_add(request) :
 	# 	assoc = data['association']
 	# except:
 	# 	assoc = None
-	problem_statement = data['problem_statement']
+	#problem_statement = data['problem_statement']
 	solution = request.FILES['0']
 
 

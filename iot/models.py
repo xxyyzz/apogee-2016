@@ -20,7 +20,7 @@ class IotSubmission(models.Model):
     	('8', 'Shit8'),
     	('9', 'Shit9'),
     )
-    problem_statement = models.CharField(max_length=500, choices=STATEMENTS)
+    #problem_statement = models.CharField(max_length=500, choices=STATEMENTS)
     leader = models.ForeignKey('Participant', related_name='leaders')
     # college = models.ForeignKey('College')
     members = models.ManyToManyField('Participant', related_name='members', blank='True')
