@@ -74,7 +74,7 @@
 	</li>
 	<li onclick="changeClass(this)">
 	<a href="#page9" onclick="changeClass(this)">
-			<span>Contact</span>
+			<span>Register</span>
 	</a>
 	</li>
 	</ul>
@@ -189,8 +189,8 @@
  							<input class="college" type="radio" name="college0" onclick="other_college(this)" data-key="l" /><span>Other, Specify </span>
  							<input id="gl-college" required type="text" style="display:none" value="BITS Pilani">
  						</div><br>
- 						<select id="gl-yos" required="">
-
+ 						<label for="gl-yos">Year of Study</label>
+ 						<select id="gl-yos"  name="gl-yos" required="">
  							<option value="1">1</option>
 
  							<option value="2">2</option>
@@ -537,7 +537,7 @@ initComp();
         if(members < 3) {
             members++;
 
-            var context = '<div class="mem-'+members+'-wrapper"><div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member '+members+'<div class="pull-right"><i id="mem-'+members+'-delete" value="'+members+'" class="fa fa-times member-delete"></i></div></div><div class="input-field col-sm-6"><input id="mem-'+members+'-name" required type="text" placeholder="Name"></div><div class="input-field col-sm-6"><input id="mem-'+members+'-phone" required type="text" placeholder="Phone" ></div><div class="input-field col-sm-12"><input id="mem-'+members+'-email" required type="text" placeholder="Email" ></div><div class="input-field col-sm-12"><div style="line-height:1.5em; text-align:left;"><input class="college" type="radio" name="college'+members+'" onclick="bits_mem(this)" data-key="'+members+'" checked><span>BITS Pilani</span><input class="college'+members+'" type="radio" name="college'+members+'" onclick="other_college_mem(this)"  data-key="'+members+'"><span>Other, Specify</span><input id="mem-'+members+'-college" required type="text" style="display:none" value="BITS Pilani"></div><br></div><div class="input-field col-sm-12"><select id="mem-'+members+'-yos" required=""><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div>';
+            var context = '<div class="mem-'+members+'-wrapper"><div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member '+members+'<div class="pull-right"><i id="mem-'+members+'-delete" value="'+members+'" class="fa fa-times member-delete"></i></div></div><div class="input-field col-sm-6"><input id="mem-'+members+'-name" required type="text" placeholder="Name"></div><div class="input-field col-sm-6"><input id="mem-'+members+'-phone" required type="text" placeholder="Phone" ></div><div class="input-field col-sm-12"><input id="mem-'+members+'-email" required type="text" placeholder="Email" ></div><div class="input-field col-sm-12"><div style="line-height:1.5em; text-align:left;"><input class="college" type="radio" name="college'+members+'" onclick="bits_mem(this)" data-key="'+members+'" checked><span>BITS Pilani</span><input class="college'+members+'" type="radio" name="college'+members+'" onclick="other_college_mem(this)"  data-key="'+members+'"><span>Other, Specify</span><input id="mem-'+members+'-college" required type="text" style="display:none" value="BITS Pilani"></div><br></div><div class="input-field col-sm-12"><label for="mem-'+members+'-yos">Year of Study</label><select id="mem-'+members+'-yos" name="mem-'+members+'-yos" required=""><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div>';
 
             $(".members-wrapper").append(context);
 
