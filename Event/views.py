@@ -6,21 +6,21 @@ import json
 import html2text as gaussx
 # Create your views here.
 @csrf_exempt
-def geteventdata(request):
-	# try:
-	#     eventid = event_id
-	# except :
-	#     raise Http404
-	# try :
-	#     event=Event.objects.get(pk=eventid)
-	# except ObjectDoesNotExist:
-	#     raise Http404
-	if request.GET:
-		eventid = request.GET['id']
-		try :
-			event=events.objects.get(pk=eventid)
-		except ObjectDoesNotExist:
-			raise Http404       
+def geteventdata(request,event_id):
+	try:
+	    eventid = event_id
+	except :
+	    raise Http404
+	try :
+	    event=events.objects.get(pk=eventid)
+	except ObjectDoesNotExist:
+	    raise Http404
+	# if request.GET:
+	# 	eventid = request.GET['id']
+	# 	try :
+	# 		event=events.objects.get(pk=eventid)
+	# 	except ObjectDoesNotExist:
+	# 		raise Http404       
 	resp = {}
 	
 	# resp['category']=unicode(event.category.name)
