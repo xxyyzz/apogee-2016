@@ -6,7 +6,7 @@ import string, random, os
 from apogee16.settings import *
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.datastructures import MultiValueDictKeyError
-from aic2016.models import *
+from iot.models import *
 from django.template.defaultfilters import slugify
 
 
