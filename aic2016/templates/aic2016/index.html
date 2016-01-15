@@ -8,6 +8,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<link href="/2016/static/aic2016/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="/2016/static/aic2016/css/form.css">
+
 </head>
 <body>
 <!-- NAVIGATION -->
@@ -21,6 +23,8 @@
                 <td id="tb6" class="navitem" data-page="6" onclick="getpgno(this)" href="#page6">Sponsor</td>
                 <td id="tb7" class="navitem" data-page="7" onclick="getpgno(this)" href="#page7">FAQs</td>
                 <td id="tb8" class="navitem" data-page="8" onclick="getpgno(this)" href="#page8">Contact</td>
+                <td id="tb8" class="navitem" data-page="9" onclick="getpgno(this)" href="#page9">Register</td>
+
             </tr>
         </table>
 	<div id="navarrow" class="navarrow" ></div>
@@ -47,7 +51,7 @@
 			<span>Rules</span>
 	</a>
 	</li>
-	
+
 	<li onclick="changeClass(this)">
 	<a href="#page5" onclick="changeClass(this)">
 			<span>Companies</span>
@@ -66,6 +70,11 @@
 	<li onclick="changeClass(this)">
 	<a href="#page8" onclick="changeClass(this)">
 			<span>Contact</span>
+	</a>
+	</li>
+	<li onclick="changeClass(this)">
+	<a href="#page9" onclick="changeClass(this)">
+			<span>Register</span>
 	</a>
 	</li>
 	</ul>
@@ -96,7 +105,7 @@
  			<div class="info">
  				<b>APOGEE Innovation Challenge</b>, an exceptional technical symposium, aims at quenching your thirst for hands-on experience in real life problems plaguing the industrial world.<br><br>  Organized in collaboration with various multinational companies, this event presents before you existing challenges faced by these companies who seek their solutions from you. These problems, which happen to be discipline specific (one need not belong to that discipline), are to be solved by participants in teams of 2-4 in a month. After scrutiny by company officials, top 5 teams will be presenting their final solutions during APOGEE ‘16.<br><br> Exciting Internship Offers and Cash Prizes await the winners. Needless to say, you can brag about cracking a professional challenge while still being in college. Participation Certificate shall be given to all members of each team which present solutions during APOGEE ‘16.
  			</div>
- 	</div> 
+ 	</div>
 
  	<div id="page3" class="page p3">
 		<i class="fa fa-history ficon"></i>
@@ -105,7 +114,7 @@
  				Apogee Innovation Challenge 2015 which was a kernel event of APOGEE 2015 and saw huge success with problem statements from 7 companies and a participation of over 200 students. Of the 30+ interns taken, few of them were given job offers as well. <br><br>The participating companies of last year include: Schneider Electric, GoDoctr, Techture, Mindshare, Luminous, Maruti Suzuki, Larsen and Turbo
 
  			</div>
- 	</div> 
+ 	</div>
 
  	<div id="page4" class="page p4">
  		<i class="fa fa-cogs ficon"></i>
@@ -120,17 +129,17 @@
  				</ul>
 
  			</div>
- 	</div> 
+ 	</div>
 
  	<div id="page5" class="page p5">
 		<i class="fa fa-briefcase ficon"></i>
 		<div class="company-info">
-			
+
 
 		</div>
-		
- 	</div> 
-	
+
+ 	</div>
+
  	<div id="page6" class="page p6">
  			<i class="fa fa-star ficon"></i>
  			<div class="head">Sponsor</div>
@@ -140,12 +149,12 @@
 				As the global specialist in energy management and automation, Schneider Electric serves customers in over 100 countries, helping them to make their lives and ecosystems safe, reliable, efficient and sustainable. From the simplest of switches to complex operational systems, their technology, software and services improve the way their customers manage and automate their operations. At Schneider Electric, they call this Life is On.
 
  			</div>
- 	</div> 
+ 	</div>
 
 	<div id="page7" class="page p7">
 			<i class="fa fa-question-circle ficon"></i>
  			<div class="faqwrapper"></div>
- 	</div> 
+ 	</div>
 
 	<div id="page8" class="page p8">
 			<i class="fa fa-envelope ficon"></i>
@@ -160,8 +169,82 @@
                     </tr>
                 </table>
  			</div>
- 	</div> 
- 	
+ 	</div>
+
+ <div id="page9" class="page p9">
+ 	<i class="fa fa-user ficon"></i>
+ 	<div style="position:relative;top:9%;height:91%;width:100%;overflow-y:auto;">
+ 	<div class="head" style="top:13%;">Register</div>
+ 	<div class="info" style="font-size:1em; margin-top:30px;top:15%;" >
+
+ 			<div id="form_cont" class="form-style-5">
+ 				<form id="aicform">
+ 					<fieldset>
+ 						<legend><span class="number">1</span> Team Leader</legend>
+ 						<input id="gl-name" name="field2" required="" type="text"  placeholder="Name">
+ 						<input id="gl-phone" required="" type="text" name="field2" placeholder="Phone">
+ 						<input id="gl-email" required="" type="text" name="field2" placeholder="Email">
+ 						<div style="line-height:1.5em; text-align:left;">
+ 							<input class="college" type="radio" name="college0" onclick="bits(this)" data-key="l" checked /><span>BITS Pilani</span>
+ 							<input class="college" type="radio" name="college0" onclick="other_college(this)" data-key="l" /><span>Other, Specify </span>
+ 							<input id="gl-college" required type="text" style="display:none" value="BITS Pilani">
+ 						</div><br>
+ 						<label for="gl-yos">Year of Study</label>
+ 						<select id="gl-yos"  name="gl-yos" required="">
+ 							<option value="1">1</option>
+
+ 							<option value="2">2</option>
+
+ 							<option value="3">3</option>
+
+ 							<option value="4">4</option>
+
+ 							<option value="5">5</option>
+
+ 						</select>
+ 					</fieldset>
+ 					<fieldset>
+ 						<legend><span class="number">2</span> Members</legend>
+ 						<div class="members-wrapper" style="line-height:1.5em; text-align:left;">
+ 						</div>
+ 						<div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</div>
+ 					</fieldset>
+ 					<fieldset>
+ 						<legend><span class="number">3</span> Problem</legend>
+ 						<select id="prob_stat" required="" class="browser-default">
+
+ 							<option value="1">Schneider Electric</option>
+
+ 							<option value="2">Luminous</option>
+
+ 							<option value="3">Sterling Engineering</option>
+
+ 							<option value="4">Wooplr</option>
+
+ 							<option value="5">HarVa</option>
+
+ 							<option value="6">NextGen</option>
+
+ 							<option value="7">Bentley</option>
+
+ 							<option value="8">Techture</option>
+
+ 						</select>
+ 					</fieldset>
+ 					<fieldset>
+ 						<legend><span class="number">4</span> Upload Abstract</legend>
+ 						<span>
+ 							<input id="abstract-file" required="" type="file" value="File">
+ 						</span>
+ 					</fieldset>
+ 					<div class="error-box"></div>
+ 					<button type="submit" value="Register"  class="waves-effect red darken-3 btn submit-button">SUBMIT</button>
+ 				</form>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
+
 
 </div>
 <!-- JAVASCRIPT -->
@@ -175,7 +258,7 @@
 // 	}
 $(document).ready(function() {
 	location.href="#page1";
-	if(window.innerWidth > 800){    
+	if(window.innerWidth > 800){
 		$("#bf").hide();
 		$("#be").hide();
    	setTimeout(function() {$("#bf").fadeIn(1000);},4500);
@@ -195,7 +278,7 @@ function showIt() {$(function() {
 // When Document is resized
 
 $(window).resize(function() {
-	if(window.innerWidth > 800){ 
+	if(window.innerWidth > 800){
 	   // location.href="#page1";
 		$("#bf").hide();
 		$("#be").hide();
@@ -207,12 +290,12 @@ $(window).resize(function() {
    	setTimeout(function() {$("#be").fadeIn(1000)},3000);
    	showIt();
 	}
-	if(window.innerWidth < 800) { 
+	if(window.innerWidth < 800) {
 	$('.app-nav').hide();
 	var visi=false;
 	$(window).scroll(function() {
 		// console.log(visi);
-		if (visi===false) { 
+		if (visi===false) {
 		$('.app-nav').fadeIn();
 		visi=true;
 		setTimeout(function() {$('.app-nav').fadeOut();
@@ -234,46 +317,49 @@ $(window).resize(function() {
 		// console.log(cpg);
 		switch (cpg) {
 			case 1:
-			$("#navarrow").animate({left: '5%'},500)
+			$("#navarrow").animate({left: '3.5%'},500)
 			break;
 			case 2:
-			$("#navarrow").animate({left: '17.5%'},500)
+			$("#navarrow").animate({left: '15%'},500)
 			break;
 			case 3:
-			$("#navarrow").animate({left: '30%'},500)
+			$("#navarrow").animate({left: '26%'},500)
 			break;
 			case 4:
-			$("#navarrow").animate({left: '42.5%'},500)
+			$("#navarrow").animate({left: '37.5%'},500)
 			break;
 			case 5:
-			$("#navarrow").animate({left: '55%'},500)
+			$("#navarrow").animate({left: '48.5%'},500)
 			break;
 			case 6:
-			$("#navarrow").animate({left: '67.5%'},500)
+			$("#navarrow").animate({left: '59.5%'},500)
 			break;
 			case 7:
-			$("#navarrow").animate({left: '80%'},500)
+			$("#navarrow").animate({left: '70.5%'},500)
 			break;
 			case 8:
-			$("#navarrow").animate({left: '92.5%'},500)
+			$("#navarrow").animate({left: '82%'},500)
+			break;
+			case 9:
+			$("#navarrow").animate({left: '93%'},500)
 			break;
 		};
 	};
 	// console.log(cpg);
 	switch (cpg) {
 		case 1:
-		$("#navarrow").animate({left: '6%'},500)
+		$("#navarrow").animate({left: '3.5%'},500)
 		break;
 	};
 </script>
 <!-- FOR MOBILE NAV -->
 <script type="text/javascript">
-if(window.innerWidth < 800) { 
+if(window.innerWidth < 800) {
 	$('.app-nav').hide();
 	var visi=false;
 	$(window).scroll(function() {
 		// console.log(visi);
-		if (visi===false) { 
+		if (visi===false) {
 		$('.app-nav').fadeIn();
 		visi=true;
 		setTimeout(function() {$('.app-nav').fadeOut();
@@ -282,7 +368,7 @@ if(window.innerWidth < 800) {
 		}});
 	function changeClass(div) {
 		// console.log($(".active"));
-		$(".active").removeClass("active");				
+		$(".active").removeClass("active");
 		var className=div.getAttribute("class");
 		div.className="active";
 	}
@@ -313,7 +399,7 @@ if(window.innerWidth < 800) {
 });
 </script>
 
-<script> 
+<script>
 
 var faqobj = [
 	{ "ques" : "When will the internships take place ?", "ans" : "The internships are mostly going to be taking place in the summer of 2016. However, specific dates and period of the internships are subject to discussion."},
@@ -375,42 +461,50 @@ var companyData = [
 	{
 		"name" : "Schneider Electric",
 		"imgl" : "/static/aic2016/companies/Fschneider.jpg",
-		"info" : "Serving countries in over 100 countries helping them make their lives and ecosystems safe, reliable, efficient and sustainable, “The Global Specialist in Energy Management and Automation” improves the way customers manage electrical systems. Get a chance to win cash prizes up to 72k and a chance to be interviewed for the internship from this multinational company this APOGEE!"
+		"info" : "Serving countries in over 100 countries helping them make their lives and ecosystems safe, reliable, efficient and sustainable, “The Global Specialist in Energy Management and Automation” improves the way customers manage electrical systems. Get a chance to win cash prizes up to 72k and a chance to be interviewed for the internship from this multinational company this APOGEE!",
+		"link" : "/static/aic2016/problems/PSschneider.pdf"
 	},
 	{
 		"name" : "Luminous",
 		"imgl" : "/static/aic2016/companies/Fluminous.jpg",
-		"info" : "The well known Luminous Power technologies is the leading home electrical specialist in India having a vast portfolio comprising of power back-up solutions like inverters, batteries, UPS and other electrical appliances. The winner of consumer Super-brand and rated as India’s most trusted brand is here in BITS to give cash prizes to the teams with the most  passionately innovative solutions."
+		"info" : "The well known Luminous Power technologies is the leading home electrical specialist in India having a vast portfolio comprising of power back-up solutions like inverters, batteries, UPS and other electrical appliances. The winner of consumer Super-brand and rated as India’s most trusted brand is here in BITS to give cash prizes to the teams with the most  passionately innovative solutions.",
+		"link" : "/static/aic2016/problems/PSluminous.pdf"
 	},
 	{
 		"name" : "Sterling Engineering",
 		"imgl" : "/static/aic2016/companies/Fsterling.jpg",
-		"info" : "With years of experience and expertise in developing the best solutions for a variety of construction challenges, Sterling has earned a reputation of being one of the most cost-efficient and reliable engineering firms in the business providing services to over 3000 projects around the world. Give life to your designs and ideas this APOGEE by giving out-of-the-box solutions to their problem statement! "
+		"info" : "With years of experience and expertise in developing the best solutions for a variety of construction challenges, Sterling has earned a reputation of being one of the most cost-efficient and reliable engineering firms in the business providing services to over 3000 projects around the world. Give life to your designs and ideas this APOGEE by giving out-of-the-box solutions to their problem statement! ",
+		"link" : "/static/aic2016/problems/PSsterling.pdf"
 	},
 	{
 		"name" : "Wooplr",
 		"imgl" : "/static/aic2016/companies/Fwooplr.jpg",
-		"info" : "Introducing this APOGEE, India’s first fashion discovery app! Connecting sellers to shoppers and giving a personalized social touch to shopping, Wooplr has come a long way in providing the fashion markets with just what they need. Watch out for their problem statement that will tickle your creative bone!"
+		"info" : "Introducing this APOGEE, India’s first fashion discovery app! Connecting sellers to shoppers and giving a personalized social touch to shopping, Wooplr has come a long way in providing the fashion markets with just what they need. Watch out for their problem statement that will tickle your creative bone!",
+		"link" : "/static/aic2016/problems/PSwooplr.pdf"
 	},
 	{
 		"name" : "HarVa",
 		"imgl" : "/static/aic2016/companies/Fharva.jpg",
-		"info" : "HarVa works as a link that fosters investments from the corporate world in the rural India. With an aim to take up the challenge of blending economic and social upliftment, HarVa takes Entrepreneurship to a new level. Discover the new avenues that this company opens up by working on their problem statements and get a chance to earn internships!"
+		"info" : "HarVa is a for-profit rural enterprise in India started in March 2010 which aims to “Harness Value” out of places where none or little existed by setting up a network of HarVa Digital Huts in rural areas connected via Internet. The company leverages on the vast intellectual and infrastructural capital in the rural landscapes by involving local communities in business and value co-creation; attaining inclusive growth in the real sense.The company primarily focuses on Skill Development, Primary Healthcare, Digital and Financial Inclusion Practices,  Community based Farming and Rural Electrification.",
+		"link" : "/static/aic2016/problems/PSharva.pdf"
 	},
 	{
 		"name" : "NextGen",
 		"imgl" : "/static/aic2016/companies/Fnextgen.jpg",
-		"info" : "NextGen, one of India’s leading Sustainability and Corporate Social Responsibility Management company, founded by BITSians, is here this APOGEE challenging you to come up with innovative solutions to manage Environmental footprint, Product life-cycles, and much more. Stay tuned for details…"
+		"info" : "NextGen, one of India’s leading Sustainability and Corporate Social Responsibility Management company, founded by BITSians, is here this APOGEE challenging you to come up with innovative solutions to manage Environmental footprint, Product life-cycles, and much more. Stay tuned for details…",
+		"link" : "/static/aic2016/problems/PSnextgen.pdf"
 	},
 	{
 		"name" : "Bentley",
 		"imgl" : "/static/aic2016/companies/Fbentley.jpg",
-		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader. Look out for more details"
+		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader.<br><b>The problem statement is open to students of all the disciplines and years.</b><br><a href='/2016/static/aic2016/problems/PSbentley_techmanual.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the technical manual</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/2016/static/aic2016/problems/PSbentley_key.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;SOFTWARE KEY</span></a>",
+		"link" : "/static/aic2016/problems/PSbentley.pdf"
 	},
 	{
 		"name" : "Techture",
 		"imgl" : "/static/aic2016/companies/Ftechture.jpg",
-		"info" : "They aim to integrate the Architectural, Structural, Mechanical, Electrical and Plumbing disciplines by focusing on providing extensive design, analysis and visualisation services leveraging Building Information Modelling (BIM) and associated technologies. This APOGEE, 	solve their problem statements to earn internship opportunities."
+		"info" : "They aim to integrate the Architectural, Structural, Mechanical, Electrical and Plumbing disciplines by focusing on providing extensive design, analysis and visualisation services leveraging Building Information Modelling (BIM) and associated technologies. This APOGEE, 	solve their problem statements to earn internship opportunities.",
+		"link" : "/static/aic2016/problems/PStechture.pdf"
 	},
 ];
 
@@ -419,7 +513,14 @@ function initComp() {
 	for(var i=1;i<=companyData.length;i++) {
 		var dat = companyData[i-1];
 
-		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:21px'><b>"+dat.name+"</b></span><br>"+dat.info+"</div></div>";
+		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:18px'><b>"+dat.name+"</b></span><br>"+dat.info+"<br>";
+		if(dat.link != "") {
+			part += "<a href='/2016"+dat.link+"' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the problem statement</span></a></div></div>";
+		} else
+			part += "</div></div>";
+
+
+
 		html += part;
 	}
 	$(".company-info").append(html);
@@ -428,7 +529,191 @@ function initComp() {
 initComp();
 
 </script>
+<script type="text/javascript">
+// FORM VALIDATION
+    var members = 0;
 
+    $(".add-member").click(function() {
+        if(members < 3) {
+            members++;
+
+            var context = '<div class="mem-'+members+'-wrapper"><div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member '+members+'<div class="pull-right"><i id="mem-'+members+'-delete" value="'+members+'" class="fa fa-times member-delete"></i></div></div><div class="input-field col-sm-6"><input id="mem-'+members+'-name" required type="text" placeholder="Name"></div><div class="input-field col-sm-6"><input id="mem-'+members+'-phone" required type="text" placeholder="Phone" ></div><div class="input-field col-sm-12"><input id="mem-'+members+'-email" required type="text" placeholder="Email" ></div><div class="input-field col-sm-12"><div style="line-height:1.5em; text-align:left;"><input class="college" type="radio" name="college'+members+'" onclick="bits_mem(this)" data-key="'+members+'" checked><span>BITS Pilani</span><input class="college'+members+'" type="radio" name="college'+members+'" onclick="other_college_mem(this)"  data-key="'+members+'"><span>Other, Specify</span><input id="mem-'+members+'-college" required type="text" style="display:none" value="BITS Pilani"></div><br></div><div class="input-field col-sm-12"><label for="mem-'+members+'-yos">Year of Study</label><select id="mem-'+members+'-yos" name="mem-'+members+'-yos" required=""><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div>';
+
+            $(".members-wrapper").append(context);
+
+            $("#mem-"+members+"-delete").click(function() {
+                var value = $(this).attr("value");
+                if(members == value) {
+                    $(".mem-"+value+"-wrapper").remove();
+                    members--;
+                };
+                if(members < 3) {
+            	$(".add-member").show();
+            	}
+                else
+                    alert("Delete members from the bottom of the list !");
+            });
+
+            if(members == 3) {
+                $(".add-member").hide();
+            }
+        }
+
+    });
+
+
+
+    $("#aicform").submit(function(e) {
+        e.preventDefault();
+        if(validate_project_submit() == 0) {
+            $(".error-box").hide();
+            $(".submit-button").hide();
+
+            var datasend = collect_data();
+            // console.log(datasend);
+            $.ajax({
+                url: 'http://bits-apogee.org/2016/aic/submit/',
+                type: 'POST',
+                data: datasend,
+                cache : false,
+                dataType: 'html',
+                processData: false,
+                contentType: false,
+                success: function(data)
+                {
+                	console.log(data);
+                	if(parseInt(data))
+                	{
+                    	$("#form_cont").html("You have been successfully registered.");
+                	}
+                	else
+                		 $("#form_cont").html("You couldn't be registered. Please Try Again Later.");
+                }
+            });
+        }
+        else {
+        }
+    });
+
+    function other_college(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#g'+member+'-college';
+        $(id).val("");
+        $(id).show();
+    }
+
+    function bits(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#g'+member+'-college';
+        $(id).val("BITS Pilani");
+        $(id).hide();
+    }
+
+    function other_college_mem(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#mem-'+member+'-college';
+    	$(id).val("");
+        $(id).show();
+    }
+
+    function bits_mem(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#mem-'+member+'-college';
+        $(id).val("BITS Pilani");
+        $(id).hide();
+    }
+
+
+    var aicsol;
+
+    $("input#abstract-file").on('change', function(e) {
+        aicsol = e.target.files;
+    });
+
+
+    function collect_data() {
+        var data = new FormData() ;
+        data.append('gl_name', $("input#gl-name").val());
+        data.append('gl_phone', $("input#gl-phone").val());
+        data.append('gl_email', $("input#gl-email").val());
+        data.append('gl_college', $("input#gl-college").val());
+        data.append('gl_yos', $("#gl-yos option:selected").val());
+        console.log(data);
+
+        for(var z=1;z<=members;z++) {
+            data.append('mem-'+z+'-name', $("input#mem-"+z+"-name").val());
+            data.append('mem-'+z+'-phone', $("input#mem-"+z+"-phone").val());
+            data.append('mem-'+z+'-email', $("input#mem-"+z+"-email").val());
+            data.append('mem-'+z+'-college', $("input#mem-"+z+"-college").val());
+            data.append('mem-'+z+'-yos', $("#mem-"+z+"-yos option:selected").val());
+        }
+
+        data.append('problem_statement', $("#prob_stat option:selected").val());
+
+        $.each(aicsol, function(key, value)
+        {
+            data.append(key, value);
+        });
+        return data;
+    }
+
+
+
+
+    function validate_project_submit() {
+
+        var count = 0;
+        var errorText = "Following are the errors cited in the form. Please correct them before submitting... <br>";
+
+        // Check for email...
+        var re_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        var en_email1 = $("input#gl-email").val();
+
+        if(!(re_email.test(en_email1))) {
+            errorText += "<br>&bull;&nbsp;&nbsp;Team Leader's Email is invalid."
+            count++;
+        }
+        for(var i=1;i<=members;i++) {
+            if($("input#mem-"+i+"-email").val() != "") {
+                var tmp_email = $("input#mem-"+i+"-email").val();
+                if(!(re_email.test(tmp_email))) {
+                    errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Email is invalid."
+                    count++;
+                }
+            }
+        }
+
+        // Check for phone...
+        var re_phone = /^([0-9]{10})$/i;
+        var en_phone1 = $("input#gl-phone").val();
+        if(!(re_phone.test(en_phone1))) {
+            errorText += "<br>&bull;&nbsp;&nbsp;Team Leaders's Phone no is invalid. Please enter a valid 10 digit mobile number."
+            count++;
+        }
+        for(var i=1;i<=members;i++) {
+            if($("input#mem-"+i+"-phone").val() != "") {
+                var tmp_phone = $("input#mem-"+i+"-phone").val();
+                if(!(re_phone.test(tmp_phone))) {
+                    errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Phone no is invalid. Please enter a valid 10 digit mobile number."
+                    count++;
+                }
+            }
+        }
+
+        //format check
+        var file = $("input#abstract-file").val();
+        var extn = file.substring(file.lastIndexOf(".")+1);
+        if( extn != "ZIP" && extn != "zip" ) {
+            errorText += "<br>&bull;&nbsp;&nbsp;The abstract file can only be of ZIP/RAR Format."
+            count++;
+        }
+
+        $(".error-box").html(errorText).fadeIn(400);
+        console.log(count);
+        return count;
+    }
+
+</script>
 
 
 </body>

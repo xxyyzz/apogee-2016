@@ -119,7 +119,7 @@ body
     box-shadow: 0px -0px 30px #233;
 }
 .navitem{
-    width: 12.5%;
+    width: calc(100%/9);
     border:0px solid white;
 }
 .navarrow{
@@ -188,6 +188,7 @@ body
     height: 100%;
     color: transparent;
     position: relative;
+    /* overflow-y:auto;  */
 }
 .p1 {
     background-image: url('../img/bg.jpg');
@@ -213,6 +214,9 @@ body
 }
 .p8 {
     background-color: #d7d7d7;
+}
+.p9 {
+    background-color: #FF5B0D;
 }
 
 .ficon {
@@ -254,8 +258,6 @@ a:hover {
     top: 22%;
     max-width: 80%;
     max-height: 75%;
-    overflow-y:auto;
-    overflow-x:hidden;
     margin-left: 10%;
 }
 
@@ -338,3 +340,22 @@ div.qbox {
     width: 600px;
 }
 
+.pslink {
+    text-transform: uppercase;
+    margin-top: 10px;
+    position: relative;
+    font-weight: bold;
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.form {
+    overflow-y:auto;
+    color:#000;
+    position: relative;
+    top:13%;
+}
+.college {
+    font-family: Georgia;
+}

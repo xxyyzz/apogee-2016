@@ -3,27 +3,28 @@ from django.template.defaultfilters import slugify
 
 # Create your models here.
 
-def upload_aic(self, filename):
+def upload_iot(self, filename):
     slugified_category = slugify(self.get_problem_statement_display())
-    path = 'aic-submission/%s/%s' % (slugified_category, filename)
+    path = 'iot-submission/%s/%s' % (slugified_category, filename)
     return path
 
-class AicSubmission(models.Model):
+class IotSubmission(models.Model):
     STATEMENTS = (
-    	('1', 'Schneider Electric'),
-    	('2', 'Luminous'),
-    	('3', 'Sterling Engineering'),
-    	('4', 'Wooplr'),
-    	('5', 'HarVa'),
-    	('6', 'NextGen'),
-    	('7', 'Bentley'),
-    	('8', 'Techture'),
+    	('1', 'Shit1'),
+    	('2', 'Shit2'),
+    	('3', 'Shit3'),
+    	('4', 'Shit4'),
+    	('5', 'Shit5'),
+    	('6', 'Shit6'),
+    	('7', 'Shit7'),
+    	('8', 'Shit8'),
+    	('9', 'Shit9'),
     )
-    problem_statement = models.CharField(max_length=500, choices=STATEMENTS)
+    #problem_statement = models.CharField(max_length=500, choices=STATEMENTS)
     leader = models.ForeignKey('Participant', related_name='leaders')
     # college = models.ForeignKey('College')
     members = models.ManyToManyField('Participant', related_name='members', blank='True')
-    solution = models.FileField(default=None, upload_to=upload_aic)
+    solution = models.FileField(default=None, upload_to=upload_iot)
     def __str__(self):
         return str(self.id)
 

@@ -1,4 +1,4 @@
-from aic2016 import views
+from iot import views
 from django.conf.urls import url, include
 
 urlpatterns = [
