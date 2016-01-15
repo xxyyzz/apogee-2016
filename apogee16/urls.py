@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^manage/', include('cms.urls', namespace='cms')),
     url(r'^aic/', include('aic2016.urls', namespace='aic2016')),
     url(r'^aarohan/', include('aarohan.urls', namespace='aarohan')),
+    url(r'^events/', include('Event.urls', namespace='Event')),
 ]
 
