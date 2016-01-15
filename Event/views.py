@@ -32,6 +32,7 @@ def geteventdata(request,event_id):
 	resp['is_kernel']= str(unicode(event.is_kernel))
 	resp['register']=    str  (unicode(event.register) )
 	# resp['eventdescription']=unicode(event.description)
+	resp['tag'] = [k.name for k in event.tag.all()]
 	resp['img']=    str( unicode( event.img ))
 	return JsonResponse(resp)
 
