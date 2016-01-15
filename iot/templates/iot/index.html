@@ -3,7 +3,9 @@
 		<meta charset="UTF-8">
 		<title>IoT Challenge - APOGEE 2016</title>
 		<link href="/2016/static/iot/css/style.css" rel='stylesheet' type='text/css'>
+		<link href="/2016/static/iot/css/form.css" rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,300,100' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 	</head>
@@ -167,84 +169,79 @@ machines smart human extensions.</p>
 			<div class="title_head">Registration</div>
 			<!--<div style="font-size: 3em;font-weight:900;margin-top: 19%;text-align: center;position: relative;">watch for it... submission starts soon !</div>-->
 			<div class="info" style="font-size:1em; margin-top:30px" >
-				<div class="form-style-5">
-					<form>
-						<fieldset>
-							<legend><span class="number">1</span>Team Leader</legend>
-							<input id="tl-name" name="field2" required="" type="text"  placeholder="Name">
-							<input id="tl-phone" required="" type="text" name="field2" placeholder="Phone">
-							<input id="tl-email" required="" type="text" name="field2" placeholder="Email">
-							<div style="line-height:1.5em; text-align:left;">
-								<input class="college" type="radio" name="college0" onclick="bits(this)" data-key="0" checked /><span>BITS Pilani</span>
-								<input class="college" type="radio" name="college0" onclick="other_college(this)" data-key="0" /><span>Other, Specify </span>
-								<input id="college0" requied="" type="text" style="display:none" value="BITS Pilani">
-							</div><br>
-							<select id="mem-1-yos" required="" class="browser-default" placeholder="Year of Study">
-								
-								<option value="1" selected>1</option>
+				<div id="form_cont" class="form-style-5">
+ 				<form id="iotform">
+ 					<fieldset>
+ 						<legend><span class="number">1</span> Team Leader</legend>
+ 						<input id="gl-name" name="field2" required="" type="text"  placeholder="Name">
+ 						<input id="gl-phone" required="" type="text" name="field2" placeholder="Phone">
+ 						<input id="gl-email" required="" type="text" name="field2" placeholder="Email">
+ 						<div style="line-height:1.5em; text-align:left;">
+ 							<input class="college" type="radio" name="college0" onclick="bits(this)" data-key="l" checked /><span>BITS Pilani</span>
+ 							<input class="college" type="radio" name="college0" onclick="other_college(this)" data-key="l" /><span>Other, Specify </span>
+ 							<input id="gl-college" required type="text" style="display:none" value="BITS Pilani">
+ 						</div><br>
+ 						<label for="gl-yos">Year of Study</label>
+ 						<select id="gl-yos"  name="gl-yos" required="">
+ 							<option value="1">1</option>
 
-								<option value="2">2</option>
+ 							<option value="2">2</option>
 
-								<option value="3">3</option>
+ 							<option value="3">3</option>
 
-								<option value="4">4</option>
+ 							<option value="4">4</option>
 
-								<option value="5">5</option>
+ 							<option value="5">5</option>
 
-							</select>
-						</fieldset>
-						<fieldset>
-							<legend><span class="number">2</span> Members</legend>
-							
-							<div class="members-wrapper" style="line-height:1.5em; text-align:left;">
-								<div class="mem-1-wrapper"><div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member 1<div class="pull-right"></div></div><div class="input-field col-sm-6"><input id="mem-1-name" required type="text" placeholder="Name"></div><div class="input-field col-sm-6"><input id="mem-1-phone" required type="text" placeholder="Phone" ></div><div class="input-field col-sm-12"><input id="mem-1-email" required type="text" placeholder="Email" ></div><div class="input-field col-sm-12"><div style="line-height:1.5em; text-align:left;"><input class="college" type="radio" name="college1" onclick="bits(this)" data-key="1" checked><span>BITS Pilani</span><input class="college1" type="radio" name="college1" onclick="other_college(this)"  data-key="1"><span>Other, Specify</span><input id="college1" value="" requied="" type="text" style="display:none" value="BITS Pilani"></div><br></div><div class="input-field col-sm-12"><select id="mem-1-yos" required="" class="browser-default" placeholder="Year of Study">
-								
-								<option value="1" selected>1</option>
-
-								<option value="2">2</option>
-
-								<option value="3">3</option>
-
-								<option value="4">4</option>
-
-								<option value="5">5</option>
-
-							</select></div>
-							</div>
-							</div>
-							<div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</div>
-							
-						</fieldset>
-						<fieldset>
-							<legend><span class="number">3</span> Problem</legend>
-							<select id="category" required="" class="browser-default">
-								<option value="" disabled="" selected="">...</option>
-
-								<option value="Schneider Electric">Schneider Electric</option>
-
-								<option value="Luminous">Luminous</option>
-
-								<option value="Sterling Engineering">Sterling Engineering</option>
-
-								<option value="Wooplr">Wooplr</option>
-
-								<option value="HarVa">HarVa</option>
-
-								<option value="Bentley">Bentley</option>
-
-								<option value="Techture">Techture</option>
-
-							</select>
-						</fieldset>
-						<fieldset>
-							<legend><span class="number">4</span> Upload Abstract</legend>
-							<span>
-								<input id="abstract-file" required="" type="file" value="File">
-							</span>
-						</fieldset>
-						<input type="submit" value="Register"  class="waves-effect red darken-3 btn submit-button"/>
-					</form>
-				</div>
+ 						</select>
+ 					</fieldset>
+ 					<fieldset>
+ 						<legend><span class="number">2</span> Members</legend>
+ 						<div class="members-wrapper" style="line-height:1.5em; text-align:left;">
+ 							<div class="mem-1-wrapper">
+ 								<div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member 1
+ 								</div>
+ 								<div class="input-field col-sm-6">
+ 									<input id="mem-1-name" required type="text" placeholder="Name">
+ 								</div>
+ 								<div class="input-field col-sm-6">
+ 									<input id="mem-1-phone" required type="text" placeholder="Phone">
+ 								</div>
+ 								<div class="input-field col-sm-12">
+ 									<input id="mem-1-email" required type="text" placeholder="Email">
+ 								</div>
+ 								<div class="input-field col-sm-12">
+ 									<div style="line-height:1.5em; text-align:left;">
+ 										<input class="college" type="radio" name="college1" onclick="bits_mem(this)" data-key="1" checked><span>BITS Pilani</span>
+ 										<input class="college1" type="radio" name="college1" onclick="other_college_mem(this)" data-key="1"><span>Other, Specify</span>
+ 										<input id="mem-1-college" required type="text" style="display:none" value="BITS Pilani">
+ 									</div>
+ 									<br>
+ 								</div>
+ 								<div class="input-field col-sm-12">
+ 									<label for="mem-1-yos">Year of Study</label>
+ 									<select id="mem-1-yos" name="mem-1-yos" required="">
+ 										<option value="1">1</option>
+ 										<option value="2">2</option>
+ 										<option value="3">3</option>
+ 										<option value="4">4</option>
+ 										<option value="5">5</option>
+ 									</select>
+ 								</div>
+ 							</div>
+ 						</div>
+ 						<div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</div>
+ 					</fieldset>
+ 					<fieldset>
+ 						<legend><span class="number">3</span>Upload File</legend>
+ 						<span>
+ 							<input id="abstract-file" required="" type="file" value="File">
+ 						</span>
+ 					</fieldset>
+ 					<div class="error-box"></div>
+ 					<button type="submit" value="Register"  class="waves-effect red darken-3 btn submit-button">SUBMIT</button>
+ 				</form>
+ 			</div>
 			</div>		
 		</div>
 	</div>
@@ -265,5 +262,187 @@ machines smart human extensions.</p>
 
 
 <script src="/2016/static/iot/js/script.js"></script>
+<script type="text/javascript">
+	    var members = 1;
+
+    $(".add-member").click(function() {
+        if(members < 3) {
+            members++;
+
+            var context = '<div class="mem-'+members+'-wrapper"><div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member '+members+'<div class="pull-right"><i id="mem-'+members+'-delete" value="'+members+'" class="fa fa-times member-delete"></i></div></div><div class="input-field col-sm-6"><input id="mem-'+members+'-name" required type="text" placeholder="Name"></div><div class="input-field col-sm-6"><input id="mem-'+members+'-phone" required type="text" placeholder="Phone" ></div><div class="input-field col-sm-12"><input id="mem-'+members+'-email" required type="text" placeholder="Email" ></div><div class="input-field col-sm-12"><div style="line-height:1.5em; text-align:left;"><input class="college" type="radio" name="college'+members+'" onclick="bits_mem(this)" data-key="'+members+'" checked><span>BITS Pilani</span><input class="college'+members+'" type="radio" name="college'+members+'" onclick="other_college_mem(this)"  data-key="'+members+'"><span>Other, Specify</span><input id="mem-'+members+'-college" required type="text" style="display:none" value="BITS Pilani"></div><br></div><div class="input-field col-sm-12"><label for="mem-'+members+'-yos">Year of Study</label><select id="mem-'+members+'-yos" name="mem-'+members+'-yos" required=""><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div>';
+
+            $(".members-wrapper").append(context);
+
+            $("#mem-"+members+"-delete").click(function() {
+                var value = $(this).attr("value");
+                if(members == value) {
+                    $(".mem-"+value+"-wrapper").remove();
+                    members--;
+                };
+                if(members < 3) {
+            	$(".add-member").show();
+            	}
+                else
+                    alert("Delete members from the bottom of the list !");
+            });
+
+            if(members == 3) {
+                $(".add-member").hide();
+            }
+        }
+
+    });
+
+
+
+    $("#iotform").submit(function(e) {
+        e.preventDefault();
+        if(validate_project_submit() == 0) {
+            $(".error-box").hide();
+            $(".submit-button").hide();
+
+            var datasend = collect_data();
+            // console.log(datasend);
+            $.ajax({
+                url: '/submit/',
+                type: 'POST',
+                data: datasend,
+                cache : false,
+                dataType: 'html',
+                processData: false,
+                contentType: false,
+                success: function(data)
+                {
+                	console.log(data);
+                	if(parseInt(data))
+                	{
+                    	$("#form_cont").html("You have been successfully registered.");
+                	}
+                	else
+                		 $("#form_cont").html("You couldn't be registered. Please Try Again Later.");
+                }
+            });
+        }
+        else {
+        }
+    });
+
+    function other_college(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#g'+member+'-college';
+        $(id).val("");
+        $(id).show();
+    }
+
+    function bits(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#g'+member+'-college';
+        $(id).val("BITS Pilani");
+        $(id).hide();
+    }
+
+    function other_college_mem(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#mem-'+member+'-college';
+    	$(id).val("");
+        $(id).show();
+    }
+
+    function bits_mem(key) {
+    	var member= key.getAttribute("data-key");
+    	var id='#mem-'+member+'-college';
+        $(id).val("BITS Pilani");
+        $(id).hide();
+    }
+
+
+    var aicsol;
+
+    $("input#abstract-file").on('change', function(e) {
+        aicsol = e.target.files;
+    });
+
+
+    function collect_data() {
+        var data = new FormData() ;
+        data.append('gl_name', $("input#gl-name").val());
+        data.append('gl_phone', $("input#gl-phone").val());
+        data.append('gl_email', $("input#gl-email").val());
+        data.append('gl_college', $("input#gl-college").val());
+        data.append('gl_yos', $("#gl-yos option:selected").val());
+        console.log(data);
+
+        for(var z=1;z<=members;z++) {
+            data.append('mem-'+z+'-name', $("input#mem-"+z+"-name").val());
+            data.append('mem-'+z+'-phone', $("input#mem-"+z+"-phone").val());
+            data.append('mem-'+z+'-email', $("input#mem-"+z+"-email").val());
+            data.append('mem-'+z+'-college', $("input#mem-"+z+"-college").val());
+            data.append('mem-'+z+'-yos', $("#mem-"+z+"-yos option:selected").val());
+        }
+
+        $.each(aicsol, function(key, value)
+        {
+            data.append(key, value);
+        });
+        return data;
+    }
+
+
+
+
+    function validate_project_submit() {
+
+        var count = 0;
+        var errorText = "Following are the errors cited in the form. Please correct them before submitting... <br>";
+
+        // Check for email...
+        var re_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        var en_email1 = $("input#gl-email").val();
+
+        if(!(re_email.test(en_email1))) {
+            errorText += "<br>&bull;&nbsp;&nbsp;Team Leader's Email is invalid."
+            count++;
+        }
+        for(var i=1;i<=members;i++) {
+            if($("input#mem-"+i+"-email").val() != "") {
+                var tmp_email = $("input#mem-"+i+"-email").val();
+                if(!(re_email.test(tmp_email))) {
+                    errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Email is invalid."
+                    count++;
+                }
+            }
+        }
+
+        // Check for phone...
+        var re_phone = /^([0-9]{10})$/i;
+        var en_phone1 = $("input#gl-phone").val();
+        if(!(re_phone.test(en_phone1))) {
+            errorText += "<br>&bull;&nbsp;&nbsp;Team Leaders's Phone no is invalid. Please enter a valid 10 digit mobile number."
+            count++;
+        }
+        for(var i=1;i<=members;i++) {
+            if($("input#mem-"+i+"-phone").val() != "") {
+                var tmp_phone = $("input#mem-"+i+"-phone").val();
+                if(!(re_phone.test(tmp_phone))) {
+                    errorText += "<br>&bull;&nbsp;&nbsp;Member "+i+"'s Phone no is invalid. Please enter a valid 10 digit mobile number."
+                    count++;
+                }
+            }
+        }
+
+        //format check
+        var file = $("input#abstract-file").val();
+        var extn = file.substring(file.lastIndexOf(".")+1);
+        if( extn != "PDF" && extn != "pdf" ) {
+            errorText += "<br>&bull;&nbsp;&nbsp;The abstract file can only be of PDF Format."
+            count++;
+        }
+
+        $(".error-box").html(errorText).fadeIn(400);
+        console.log(count);
+        return count;
+    }
+
+</script>
 </body>
 </html>
