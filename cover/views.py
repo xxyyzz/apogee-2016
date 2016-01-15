@@ -8,3 +8,6 @@ from apogee16.settings import *
 
 def preIntro(request) :
 	return render(request, "pre/index.html")
+
+def main(request) :
+	return render(request, "main/index.html")
