@@ -27,14 +27,14 @@ class organization(models.Model):
     def __unicode__(self):
         return self.name
 
-        
+
 class events(models.Model):
     name = models.CharField(max_length = 100,verbose_name = 'Event Name' ,unique = True)
     category = models.ForeignKey(EventCategory)
-    tag = models.ManyToManyField(Tag,blank=True)
+    tags = models.ManyToManyField(Tag,blank=True)
     short_description = models.CharField(max_length = 400)
     # contact = models.TextField(blank = 'True')
-    # content = RichTextField() 
+    # content = RichTextField()
    # attachments=models.FileField(blank=True,upload_to="attachments")
     # author = models.ForeignKey(User, null = True , blank = True)
     register = models.BooleanField(verbose_name = 'Enable online registration')
@@ -80,5 +80,3 @@ class Tabs(models.Model):
     class Meta:
         verbose_name_plural = 'Tabs'
         verbose_name = 'Tab'
-
-
