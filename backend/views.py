@@ -61,29 +61,28 @@ def register(request):
 			event = Event.objects.get(pk=key)
 			member.events.add(event)
 
-		try:
-			college_rep = UserProfile.objects.get(details__college=college)
-		except:
-			member.college_rep = None
-		else:
-			member.college_rep = college_rep
+		# try:
+		# 	college_rep = UserProfile.objects.get(details__college=college)
+		# except:
+		# 	member.college_rep = None
+		# else:
+		# 	member.college_rep = college_rep
 		member.save()
 
-		if member.college_rep == None:
-			crdetails = "Your college representative has not been assigned. We will contact you to take up the post."
-		elif member.college_rep != None:
-			rep = member.college_rep.details
-			if rep.phone_two != None:
-				phone = str(rep.phone_one) + ", " + str(rep.phone_two)
-			elif rep.phone_two == None:
-				phone = str(rep.phone_one)
-			crdetails = """
-			Name: %s,
-			College: %s,
-			Email: %s,
-			Phone: %s,
-			""" % (rep.name, rep.college, rep.email_id, phone)
-
+		# if member.college_rep == None:
+		# 	crdetails = "Your college representative has not been assigned. We will contact you to take up the post."
+		# elif member.college_rep != None:
+		# 	rep = member.college_rep.details
+		# 	if rep.phone_two != None:
+		# 		phone = str(rep.phone_one) + ", " + str(rep.phone_two)
+		# 	elif rep.phone_two == None:
+		# 		phone = str(rep.phone_one)
+		# 	crdetails = """
+		# 	Name: %s,
+		# 	College: %s,
+		# 	Email: %s,
+		# 	Phone: %s,
+		# 	""" % (rep.name, rep.college, rep.email_id, phone)
 
 		body = unicode(u'''
 For centuries now, the sands of the quaint hamlet of Pilani have lured many-a-traveller into their unyielding clutches, and once you experience it, so will Oasis. ­­In its 45th edition, the cultural fest of BITS Pilani has risen from the whim of a pile of sand to one of the biggest college gatherings in the country. For the un-worshipping youth, Oasis is our religion. Come celebrate it with us.
