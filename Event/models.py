@@ -18,7 +18,7 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
-class organization(models.Model):
+class Organization(models.Model):
     user = models.OneToOneField(User)
     name = models.CharField(max_length= 200, unique=True)
     cord = models.CharField(max_length=200, blank=True)
@@ -28,7 +28,7 @@ class organization(models.Model):
         return self.name
 
 
-class events(models.Model):
+class Event(models.Model):
     name = models.CharField(max_length = 100,verbose_name = 'Event Name' ,unique = True)
     category = models.ForeignKey(EventCategory)
     tags = models.ManyToManyField(Tag,blank=True)
@@ -50,7 +50,7 @@ class events(models.Model):
     thumb=models.ImageField(blank=True, upload_to="imageuploads")
     is_kernel = models.NullBooleanField(null=True,blank=True)
     # online_reg = models.NullBooleanField(null=True,blank=True)
-    org= models.ForeignKey(organization, blank= True, null=True, default=None)
+    org= models.ForeignKey(Organization, blank= True, null=True, default=None)
 
     def __unicode__(self):
         return self.name
@@ -69,10 +69,10 @@ class Heading(models.Model):
         verbose_name = 'Tab heading'
 
 
-class Tabs(models.Model):
+class Tab(models.Model):
     heading = models.ForeignKey(Heading)
     content = RichTextField()
-    event = models.ForeignKey(events)
+    event = models.ForeignKey(Event)
 
     def __unicode__(self):
         return 'Tab for '+ self.event.name

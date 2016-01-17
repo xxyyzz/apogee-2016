@@ -12,13 +12,13 @@ def geteventdata(request,event_id):
 	except :
 	    raise Http404
 	try :
-	    event=events.objects.get(pk=eventid)
+	    event=Event.objects.get(pk=eventid)
 	except ObjectDoesNotExist:
 	    raise Http404
 	# if request.GET:
 	# 	eventid = request.GET['id']
 	# 	try :
-	# 		event=events.objects.get(pk=eventid)
+	# 		event=Event.objects.get(pk=eventid)
 	# 	except ObjectDoesNotExist:
 	# 		raise Http404
 	resp = {}
@@ -52,7 +52,7 @@ def summary(request):
 						'short_desc':event.short_description,
 						'tags':[tag.name for tag in event.tags.all()] + (['kernel'] if event.is_kernel else []),
 					}
-						for event in category.events_set.all()
+						for event in category.event_set.all()
 				]
 		container['events'] = events
 		response.append(container)
