@@ -50,7 +50,7 @@ def summary(request):
 						'id':event.id,
 						'name':event.name,
 						'short_desc':event.short_description,
-						'tags':[tag.name for tag in event.tags.all()] + [event.category.name] + (['kernel'] if event.is_kernel else []),
+						'tags':[tag.name for tag in event.tags.all()] + (['kernel'] if event.is_kernel else []),
 					}
 						for event in category.events_set.all()
 				]
