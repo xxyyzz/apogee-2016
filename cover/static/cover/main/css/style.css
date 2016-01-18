@@ -185,10 +185,6 @@ nav{
 	padding-left: 5px;
 }
 /*---------------------HOME-------------------------------------*/
-path{
-	cursor: pointer;
-}
-
 #home
 {
 	position: absolute;
@@ -397,14 +393,8 @@ input[type="range"]::-webkit-slider-thumb:active {
 	/*left:30px;*/
 }
 
-.blah
+.struct
 {
-	position: absolute;
-	display: none;
-	z-index: 2;
-	height: 100px;
-	width: 100px;
-	background-color: rgba(0,0,0,0.5);
 	cursor: pointer;
 }
 

@@ -117,7 +117,7 @@ function pan_stop()
 $(function() {
 	var moveLeft = 10;
 	var moveDown = -50;
-	$('.blah').hover(function(e) {
+	$('.struct').hover(function(e) {
 		$('#building_info>div').html($(this).data('name'));
 		$('#building_info').fadeIn(100).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
 	}, function() {
@@ -125,7 +125,7 @@ $(function() {
 		$('#building_info').fadeOut(100);
 	});
 
-	$('.blah').mousemove(function(e) {
+	$('.struct').mousemove(function(e) {
 		$("#building_info").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
 	});
 });
