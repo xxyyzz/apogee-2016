@@ -4,10 +4,12 @@ from django.template import Context
 from django.http import HttpResponse, JsonResponse
 import string, random, os
 from apogee16.settings import *
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 def preIntro(request) :
 	return render(request, "pre/index.html")
 
+@ensure_csrf_cookie
 def main(request) :
 	return render(request, "main/index.html")
