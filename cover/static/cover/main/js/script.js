@@ -229,7 +229,7 @@ $('#reg-form').submit(function(e){
 		$('#submit_l').prop('disabled', true);
 		$('#submit_r').prop('disabled', true);
 		$.ajax({
-			url:'/2016/api/register/',
+			url:'http://bits-apogee.org/2016/api/register/',
 			method:"POST",
 			crossDomain: true,
 			datatype: 'jsonp',
