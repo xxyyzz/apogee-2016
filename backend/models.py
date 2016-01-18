@@ -6,31 +6,33 @@ class Participant(models.Model):
 	GENDERS = (
 		('M', 'Male'),
 		('F', 'Female'),
-        # ('O', 'Other'),
+		# ('O', 'Other'),
 	)
-    aadhaar = models.CharField(max_length=8, null=True, blank=True, default=None, unique=True)
+	aadhaar = models.CharField(max_length=8, null=True, blank=True, default=None, unique=True)
 	name = models.CharField(max_length=200)
 	gender = models.CharField(max_length=1, choices=GENDERS)
 	college = models.ForeignKey('College')
 	city = models.CharField(max_length=20)
 	phone_one = models.BigIntegerField()
-    phone_two = models.BigIntegerField(null=True, blank=True)
+	phone_two = models.BigIntegerField(null=True, blank=True)
 	email_id = models.EmailField(unique=True)
+	email_verified = models.BooleanField(default=False)
+	email_token = models.CharField(max_length=32)
 	social_link = models.CharField(max_length=300, null=True, blank=True)
 	pcr_approval = models.BooleanField(default=False)
 	events = models.ManyToManyField('Event.events', blank=True)
 	fee_paid = models.BooleanField(default=False)
-    timestamp = models.DateTimeField(auto_now_add=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
 
-    teams = models.ManyToManyField('Team', null=True, blank=True)
+	teams = models.ManyToManyField('Team', null=True, blank=True)
 
-    bank_ifsc = models.CharField(max_length=11)
-    bank_name = models.CharField(max_length=200)
-    bank_account_no = models.CharField(max_length=20)
-    address = models.TextField(max_length=1000)
+	bank_ifsc = models.CharField(max_length=11)
+	bank_name = models.CharField(max_length=200)
+	bank_account_no = models.CharField(max_length=20)
+	address = models.TextField(max_length=1000)
 
 
-    # firewallzo = models.BooleanField('passed firewallz', default=False)
+	# firewallzo = models.BooleanField('passed firewallz', default=False)
 	# firewallzi = models.BooleanField('passed inner booth', default=False)
 	# recnacc = models.BooleanField('passed recnacc', default=False)
 	# controlz = models.BooleanField('passed controlz', default=False)
@@ -44,9 +46,9 @@ class Participant(models.Model):
 
 class Team(models.Model):
 	name = models.CharField(max_length=200)
-    members = models.ManyToManyField('Participant')
-    leader = models.ForeignKey('Participant')
-    event = models.ForeignKey('Event')
+	members = models.ManyToManyField('Participant')
+	leader = models.ForeignKey('Participant')
+	event = models.ForeignKey('Event')
 	def __unicode__(self):
 		return str(self.name)
 

@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
-from registration import views
-from registration.game import *
+from backend import views
 
 urlpatterns = [
     url(r'^register/', views.register),
+    url(r'^verify/', views.register),
 ]

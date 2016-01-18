@@ -7,23 +7,27 @@ from django.shortcuts import render, render_to_response, redirect
 
 
 def register(request):
+	status = {}
+	status['status'] = 0
+	status['message'] = "The view is working!"
+	return JsonResponse(status)
 	if request.POST:
-		name = request.POST['userName']
-		gender = request.POST['userGender']
+		name = request.POST['name']
+		gender = request.POST['gender']
 		if gender == "male":
 			gender = 'M'
 		elif gender == "female":
 			gender = 'F'
-		city = request.POST['userLocation']
-		email_id = request.POST['userEmail']
-		college = request.POST['userSchool']
-		phone_one = int(request.POST['userPhone'])
-		phone_two = request.POST['userPhoneAlt']
-		social_link = request.POST['link']
+		city = request.POST['city']
+		email_id = request.POST['email_id']
+		college = request.POST['college']
+		phone_one = int(request.POST['phone_one'])
+		phone_two = request.POST['phone_two']
+		social_link = request.POST['social_link']
 		# events = request.POST.getlist('events[]')
 		try:
-			city = request.POST['userLocation']
-			college = request.POST['userSchool']
+			city = request.POST['city']
+			college = request.POST['college']
 		except :
 			response = {}
 			response['status'] = 0
@@ -85,23 +89,8 @@ def register(request):
 		# 	""" % (rep.name, rep.college, rep.email_id, phone)
 
 		body = unicode(u'''
-For centuries now, the sands of the quaint hamlet of Pilani have lured many-a-traveller into their unyielding clutches, and once you experience it, so will Oasis. ­­In its 45th edition, the cultural fest of BITS Pilani has risen from the whim of a pile of sand to one of the biggest college gatherings in the country. For the un-worshipping youth, Oasis is our religion. Come celebrate it with us.
 
-It gives us, the students of BITS Pilani, great pleasure to welcome you to take part in our annual cultural festival Oasis ’15-Around the World in 96 Hours, which is going to be held from 28th October to 1st November 2015.
-
-To apply for participation, click http://bits-oasis.org/2015/participate/ if you haven't already. Read on to understand the application procedure.
-
-Get ready to take the journey of a lifetime, with the theme 'Around The World In 96 Hours', and who knows, you may very well reach your destination, or better still, forget about it. With a myriad of events from Rocktaves to Oasis Quiz and performances by artists of worldwide renown, the fest promises to be bigger, better and much more memorable this time around.
-
-Peruse the Oasis ’15 Rules Booklet, http://bits-oasis.org/2015/details/ for a comprehensive definition of all the events we have in store for you.
-
-Visit our engaging website http://bits-oasis.org/ and follow us on Facebook http://facebook.com/oasis.bitspilani for regular updates.
-
-Looking forward to seeing you at Oasis ’15.
-
-
-Your college representative details: %s
-		''' ) % crdetails
+		''' )
 		send_to = email_id
 		try:
 			email = EmailMessage('Application for BITS Oasis 2015', body, 'invitation@bits-oasis.org', [send_to])
@@ -131,3 +120,12 @@ Your college representative details: %s
 		return JsonResponse(status)
 	# return render(request, 'initialregistration.html')
 	return HttpResponseRedirect('/register.html')
+
+def email_verify(member):
+	import uuid
+	token = uuid.uuid4().hex
+	member.email_token = token
+	member.save()
+
+def email_confirm(request, token):
+	Participant.objects.get(email_token=token)
