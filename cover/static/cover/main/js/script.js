@@ -115,18 +115,26 @@ function pan_stop()
 
 // -------------------------BUILDING Hover-------------------------------------
 $(function() {
-	var moveLeft = 10;
-	var moveDown = -50;
+	var moveLeft = 25;
+	var moveDown = -70;
 	$('.struct').hover(function(e) {
 		$('#building_info>div').html($(this).data('name'));
-		$('#building_info').fadeIn(100).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+		$('#building_info').delay(200).fadeIn(10).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
 	}, function() {
 		$('#building_info>div').html('');
-		$('#building_info').fadeOut(100);
+		$('#building_info').fadeOut(10);
 	});
 
 	$('.struct').mousemove(function(e) {
 		$("#building_info").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+	});
+
+	$('.struct').mousedown(function(e) {
+		$("#building_info").fadeOut(10);
+	});
+
+	$('.struct').mouseup(function(e) {
+		$("#building_info").fadeIn(10);
 	});
 });
 
