@@ -66,13 +66,13 @@ def register(request):
 			BITS Pilani
 		''' ) % (name, token_url)
 		send_to = email_id
-		try:
-			email = EmailMessage('Registration for APOGEE 16', body, 'noreply@bits-apogee.org', [send_to])
-			email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-			email.send()
-		except:
-			return HttpResponse('error')
-			pass
+		# try:
+		email = EmailMessage('Registration for APOGEE 16', body, 'noreply@bits-apogee.org', [send_to])
+		email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+		email.send()
+		# except:
+		# 	return HttpResponse('error')
+		# 	pass
 		status = {}
 		status['status'] = 1
 		status['message'] = "Successfully Registered!"
