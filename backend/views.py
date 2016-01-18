@@ -2,10 +2,12 @@ from django.shortcuts import render
 from backend.models import *
 from django.http import JsonResponse
 from django.shortcuts import render, render_to_response, redirect
+from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
-
+@csrf_exempt
 def register(request):
 	status = {}
 	status['status'] = 0
@@ -121,11 +123,17 @@ def register(request):
 	# return render(request, 'initialregistration.html')
 	return HttpResponseRedirect('/register.html')
 
-def email_verify(member):
+def email_token(member):
 	import uuid
 	token = uuid.uuid4().hex
 	member.email_token = token
 	member.save()
 
 def email_confirm(request, token):
-	Participant.objects.get(email_token=token)
+	try:
+		member = Participant.objects.get(email_token=token)
+		member.email_verified = True
+		member.save()
+		return HttpResponse("Email Verified")
+	except ObjectDoesNotExist:
+		return HttpResponse("No such token")

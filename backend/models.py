@@ -20,11 +20,11 @@ class Participant(models.Model):
 	email_token = models.CharField(max_length=32)
 	social_link = models.CharField(max_length=300, null=True, blank=True)
 	pcr_approval = models.BooleanField(default=False)
-	events = models.ManyToManyField('Event.events', blank=True)
+	events = models.ManyToManyField('Event.Event', blank=True)
 	fee_paid = models.BooleanField(default=False)
 	timestamp = models.DateTimeField(auto_now_add=True)
 
-	teams = models.ManyToManyField('Team', null=True, blank=True)
+	teams = models.ManyToManyField('Team', blank=True)
 
 	bank_ifsc = models.CharField(max_length=11)
 	bank_name = models.CharField(max_length=200)
@@ -47,8 +47,8 @@ class Participant(models.Model):
 class Team(models.Model):
 	name = models.CharField(max_length=200)
 	members = models.ManyToManyField('Participant')
-	leader = models.ForeignKey('Participant')
-	event = models.ForeignKey('Event')
+	leader = models.ForeignKey('Participant', related_name='leader_team')
+	event = models.ForeignKey('Event.Event')
 	def __unicode__(self):
 		return str(self.name)
 
