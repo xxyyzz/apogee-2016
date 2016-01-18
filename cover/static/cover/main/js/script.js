@@ -75,7 +75,7 @@ function zoom_slider(v) {
 }
 var zoomtrig=null;
 function zoom_trig(t)
-{ 
+{
 	var z=$('#zoomslid').val();
 	$('#zoomslid').val(parseFloat(z) + parseFloat(t));
 	zoom_slider((parseFloat(z) + parseFloat(t)));
@@ -195,11 +195,11 @@ $('#login-form').submit(function(e){
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(response){
-			console.log(response);	
+			console.log(response);
 			if(response.status)
 			{
 
-			}	
+			}
 			else
 			{
 				$('#login-form .error_box').html(error).fadeIn();
@@ -223,7 +223,7 @@ $('#reg-form').submit(function(e){
 						'gender':$('#usergender_r > input:checked').val(),
 						'email_id':$('#useremail_r').val(),
 					};
-	console.log(reg_data);		
+	console.log(reg_data);
 	if( (test_email.test(reg_data.email_id)) && (test_phone.test(reg_data.phone_one)) )
 	{
 		$('#submit_l').prop('disabled', true);
@@ -236,7 +236,7 @@ $('#reg-form').submit(function(e){
 			data:reg_data,
 			headers : { "X-CSRFToken" : getCookie('csrftoken') },
 			success:function(response){
-				console.log(response);		
+				console.log(response);
 			}
 		});
 	}

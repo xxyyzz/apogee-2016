@@ -34,9 +34,9 @@ def register(request):
 		# 	phone_two = None
 
 		try:
-			College.objects.get(name=college)
+			model_college = College.objects.get(name=college)
 		except:
-			College.objects.create(name=college, is_displayed=False)
+			model_college = College.objects.create(name=college, is_displayed=False)
 
 		registered_members = Participant.objects.all()
 		registered_emails = [x.email_id for x in registered_members]
@@ -50,26 +50,29 @@ def register(request):
 		member.gender = gender
 		# member.city = city
 		member.email_id = email_id
-		member.college = college
+		member.college = model_college
 		member.phone_one = phone_one
 		# member.phone_two = phone_two
 		# member.social_link = social_link
 		member.save()
+		token_url = email_generate_token(member)
 
 		body = unicode(u'''
-
-		''' )
-		# send_to = email_id
-		# try:
-		# 	email = EmailMessage('Application for BITS Oasis 2015', body, 'invitation@bits-oasis.org', [send_to])
-			#poster attachment
-			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
-			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
-			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-			# email.send()
-		# except:
-		# 	return HttpResponse('error')
-			# pass
+			Hello %s !
+			You have been successfully registered for APOGEE 16.
+			To continue, please visit %s to verify your email.
+			Thanks
+			The Department of Visual Media
+			BITS Pilani
+		''' ) % (name, token_url)
+		send_to = email_id
+		try:
+			email = EmailMessage('Registration for APOGEE 16', body, 'noreply@bits-apogee.org', [send_to])
+			email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+			email.send()
+		except:
+			return HttpResponse('error')
+			pass
 		status = {}
 		status['status'] = 1
 		status['message'] = "Successfully Registered!"
@@ -78,12 +81,15 @@ def register(request):
 		status = {}
 		status['status'] = 0
 		status['message'] = "No POST Data Received."
+		return JsonResponse(status)
 
 def email_generate_token(member):
 	import uuid
 	token = uuid.uuid4().hex
 	member.email_token = token
 	member.save()
+	token_url = 'http://bits-apogee.org/2016/api/' + token + '/'
+	return token_url
 def email_confirm(request, token):
 	try:
 		member = Participant.objects.get(email_token=token)
