@@ -12,17 +12,17 @@ def geteventdata(request,event_id):
 	except :
 	    raise Http404
 	try :
-	    event=events.objects.get(pk=eventid)
+	    event=Event.objects.get(pk=eventid)
 	except ObjectDoesNotExist:
 	    raise Http404
 	# if request.GET:
 	# 	eventid = request.GET['id']
 	# 	try :
-	# 		event=events.objects.get(pk=eventid)
+	# 		event=Event.objects.get(pk=eventid)
 	# 	except ObjectDoesNotExist:
-	# 		raise Http404       
+	# 		raise Http404
 	resp = {}
-	
+
 	# resp['category']=unicode(event.category.name)
 	# resp['content']=str(unicode(event.content))
 	resp['eventname']=str(unicode(event.name))
@@ -32,6 +32,7 @@ def geteventdata(request,event_id):
 	resp['is_kernel']= str(unicode(event.is_kernel))
 	resp['register']=    str  (unicode(event.register) )
 	# resp['eventdescription']=unicode(event.description)
+	resp['tabs'] = [{k.heading.name : k.content} for k in event.tabs_set.all()]
 	resp['img']=    str( unicode( event.img ))
 	return JsonResponse(resp)
 
@@ -44,7 +45,15 @@ def summary(request):
 		container = {}
 		container['category'] = category.name
 		eventlist = {}
-		events = [{'id':event.id, 'name':event.name, 'short_desc':event.short_description} for event in category.events_set.all()]
+		events = [
+					{
+						'id':event.id,
+						'name':event.name,
+						'short_desc':event.short_description,
+						'tags':[tag.name for tag in event.tags.all()] + (['kernel'] if event.is_kernel else []),
+					}
+						for event in category.event_set.all()
+				]
 		container['events'] = events
 		response.append(container)
 	return JsonResponse(response, safe=False)
@@ -95,9 +104,8 @@ def summary(request):
 #         dic['content']=str(unicode(notification.content))
 #         dic['type']=unicode(notification.types)
 #         dic['link']=unicode(notification.link)
-		
+
 #         resp['Notifications'].append(dic)
 #         # json = simplejson.dumps(resp)
 #         # return HttpResponse(json, mimetype='application/json')
 #     return HttpResponse(json.dumps(resp), content_type="application/json")
-
