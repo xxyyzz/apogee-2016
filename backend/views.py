@@ -5,6 +5,8 @@ from django.shortcuts import render, render_to_response, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMessage
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -87,15 +89,28 @@ def register(request):
 def email_generate_token(member):
 	import uuid
 	token = uuid.uuid4().hex
+	registered_tokens = [member.email_token for member in Participant.objects.all()]
+	while token in registered_tokens:
+		token = uuid.uuid4().hex
 	member.email_token = token
 	member.save()
-	token_url = 'http://bits-apogee.org/2016/api/' + token + '/'
+	token_url = 'http://bits-apogee.org/2016/api/verify/' + token + '/'
 	return token_url
 def email_confirm(request, token):
 	try:
 		member = Participant.objects.get(email_token=token)
 		member.email_verified = True
 		member.save()
-		return HttpResponse("Email Verified")
+		email_confirmed(request)
 	except ObjectDoesNotExist:
 		return HttpResponse("No such token")
+def generate_password(member):
+
+	user = User.objects.create_user(member.email_id, member.email_id, password)
+def email_confirmed(request):
+	generate_email(member)
+	context = {
+		'email' : email,
+		'password' : password,
+	}
+	return render(request, 'main/email_verified.html', context)

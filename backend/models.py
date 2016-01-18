@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -8,6 +9,7 @@ class Participant(models.Model):
 		('F', 'Female'),
 		# ('O', 'Other'),
 	)
+	user = models.OneToOneField(User, null=True)
 	aadhaar = models.CharField(max_length=8, null=True, blank=True, default=None, unique=True)
 	name = models.CharField(max_length=200)
 	gender = models.CharField(max_length=1, choices=GENDERS)
