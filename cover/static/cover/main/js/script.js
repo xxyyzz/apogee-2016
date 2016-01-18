@@ -229,12 +229,12 @@ $('#reg-form').submit(function(e){
 		$('#submit_l').prop('disabled', true);
 		$('#submit_r').prop('disabled', true);
 		$.ajax({
-			url:'http://bits-apogee.org/2016/api/register/',
+			url:'/api/register/',
 			method:"POST",
 			crossDomain: true,
 			datatype: 'jsonp',
 			data:reg_data,
-			headers : { "X-CSRFToken" : Cookie.get('csrftoken') },
+			headers : { "X-CSRFToken" : getCookie('csrftoken') },
 			success:function(response){
 				console.log(response);		
 			}
