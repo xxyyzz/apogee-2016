@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from backend.models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, render_to_response, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
