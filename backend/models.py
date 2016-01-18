@@ -54,5 +54,6 @@ class Team(models.Model):
 
 class College(models.Model):
 	name = models.CharField(max_length=200)
+	is_displayed = models.BooleanField(default=False)
 	def __unicode__(self):
 		return str(self.name)
