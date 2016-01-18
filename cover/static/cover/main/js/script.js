@@ -231,8 +231,8 @@ $('#reg-form').submit(function(e){
 		$.ajax({
 			url:'http://bits-apogee.org/2016/api/register/',
 			method:"POST",
-			crossDomain: true,
-			datatype: 'jsonp',
+			// crossDomain: true,
+			// datatype: 'jsonp',
 			data:reg_data,
 			headers : { "X-CSRFToken" : getCookie('csrftoken') },
 			success:function(response){
