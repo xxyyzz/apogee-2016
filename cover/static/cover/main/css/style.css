@@ -62,42 +62,42 @@ nav{
 
 }
 .sidebar-icon-box {
-    width: 60px;
-    text-align: center;
-    position: relative;
-    float: left;
-    color : #555;
+	width: 60px;
+	text-align: center;
+	position: relative;
+	float: left;
+	color : #555;
 }
 .navtext {
-    padding-left: 17px;
-    position: relative;
+	padding-left: 17px;
+	position: relative;
 }
 .htile{
 	position: relative;
 	float: left;
 	width: 100%;
 	padding: 2px 0px;
-    line-height: 50px;
-    font-size: 16px;
+	line-height: 50px;
+	font-size: 16px;
 	font-weight: 400;
 	cursor: pointer;
 	padding-left: 10px;
 	color: #555;
-    border-bottom: 1px solid #fafafa;
-    border-top: 1px solid #fafafa;
+	border-bottom: 1px solid #fafafa;
+	border-top: 1px solid #fafafa;
 } 
 .htile:hover{
 	color: #222;
-    background-color: #eee;
-    border-bottom: 1px solid #eaeaea;
-    border-top: 1px solid #eee;
+	background-color: #eee;
+	border-bottom: 1px solid #eaeaea;
+	border-top: 1px solid #eee;
 } 
 .aplogo {
 	position: relative;
 	float: left;
 	width: 100%;
 	background-color: #4285F4 !important;
-	height: 170px;
+	height: 225px;
 }
 .closeside {
 	position: absolute;
@@ -112,8 +112,7 @@ nav{
 }
 .sidelogo
 {
-	width: 89%;
-	padding-top: 15px;
+	width: 78%;
 }
 #overlay{
 	height: 100%;
@@ -238,15 +237,6 @@ path{
 	user-select: none;
 }
 
-.abs_center
-{
-	position: absolute;
-	top:0;
-	bottom: 0;
-	margin: auto;
-	left:0;
-	right: 0;
-}
 .ver_center
 {
 	position: absolute;
@@ -428,6 +418,5 @@ input[type="range"]::-webkit-slider-thumb:active {
 	border-radius: 2px;
 	color: #555;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
-    /*display: none;*/
+    display: none;
 }
-

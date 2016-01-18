@@ -1,5 +1,9 @@
 // ------------------------MAP INIT + SELF FUNCTION-----------------------------
-var mapinit,win_h = $('body').height(),win_w=$('body').width();
+var mapinit;
+
+var win_h = $('body').height();
+var win_w = $('body').width();
+
 function mapstart() {
 	var beforePan,svg_w=16;svg_h=9,initzoom=1.5;
 
@@ -35,7 +39,7 @@ function mapstart() {
 			mouseWheelZoomEnabled: true,
 			preventMouseEventsDefault: true,
 			zoomScaleSensitivity: 0.2,
-			minZoom: 1.2,
+			minZoom: 1,
 			maxZoom: 6,
 			fit: false,
 			contain: true,
@@ -57,7 +61,10 @@ function mapstart() {
 	// mapinit.zoomAtPointBy(2, {x: (win_w/2), y: (win_h/2)});
 	// panZoom.setBeforePan(beforePan)
 };
+
 mapstart();
+
+
 function zoom_pan_reset()
 {
 	// mapinit.resetZoom();
@@ -73,7 +80,9 @@ function zoom_pan_reset()
 function zoom_slider(v) {
 	mapinit.zoom(v);
 }
+
 var zoomtrig=null;
+
 function zoom_trig(t)
 {
 	var z=$('#zoomslid').val();
@@ -85,17 +94,20 @@ function zoom_trig(t)
 		zoom_slider((parseFloat(z) + parseFloat(t)));
 	},200);
 }
+
 function zoom_stop()
 {
 	clearInterval(zoomtrig);
 }
 
 var pantrig=null;
+
 function pan_trig(xin,yin)
 {
 	mapinit.panBy({x: xin, y: yin});
 	pantrig = setInterval(function(){mapinit.panBy({x: xin, y: yin});},200);;
 }
+
 function pan_stop()
 {
 	clearInterval(pantrig);
@@ -146,6 +158,7 @@ $("div#login").click(function() {
 	$("#login-reg-box").delay(200).fadeIn(200);
 });
 
+
 // ------------------------OVERLAY-------------------------------------------
 function closeLightBox() {
 	$(".light-box").fadeOut(200);
@@ -159,6 +172,8 @@ function killOverlay() {
 	closeLightBox();
 	$("#overlay").fadeOut(400);
 }
+
+
 //--------------------------GET COOKIE------------------------------------
 function getCookie(name) {
     var cookieValue = null;
@@ -175,6 +190,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 
 //------------------------LOGIN/REGISTER API---------------------------------
 $('#login-form').submit(function(e){
