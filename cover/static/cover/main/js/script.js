@@ -141,12 +141,22 @@ $(".closeside").click(function() {
 	sideOpen = 0;
 });
 
+$("div#login").click(function() {
+	fireOverlay();
+	$("#login-reg-box").delay(200).fadeIn(200);
+});
+
 // ------------------------OVERLAY-------------------------------------------
+function closeLightBox() {
+	$(".light-box").fadeOut(200);
+}
+
 function fireOverlay() {
 	$("#overlay").fadeIn(400);
 }
 
 function killOverlay() {
+	closeLightBox();
 	$("#overlay").fadeOut(400);
 }
 //--------------------------GET COOKIE------------------------------------
