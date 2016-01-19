@@ -130,7 +130,7 @@ def mail_password(member, password):
 		Thanks
 		The Department of Visual Media
 		BITS Pilani
-	''' ) % (name, member.email_id, password)
+	''' ) % (member.name, member.email_id, password)
 	send_to = email_id
 	# try:
 	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
