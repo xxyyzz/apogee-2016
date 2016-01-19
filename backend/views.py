@@ -100,9 +100,8 @@ def email_authenticate_token(token):
 	try:
 		member = Participant.objects.get(email_token=token)
 		member.email_verified = True
-		member.save()
 		member.email_token = None
-		email_confirmed(member)
+		member.save()
 		return member
 	except ObjectDoesNotExist:
 		return False
@@ -123,8 +122,13 @@ def email_confirm(request, token):
 		password = generate_password(member)
 		user = create_user(member, password)
 		email = user.email
-	context = {
-		'email' : email,
-		'password' : password,
-	}
+		context = {
+			'email' : email,
+			'password' : password,
+		}
+	else:
+		context = {
+			'email' : "No Such Token",
+			'password' : "No Such Token",
+		}
 	return render(request, 'main/email_verified.html', context)
