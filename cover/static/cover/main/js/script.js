@@ -235,7 +235,7 @@ $(window).load(function(){
         success:function(response){		
 				if(response.status==1)
 				{
-					$('#user-sign-cont>div:nth-child(1)>span').html(response.firstname);
+					$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
 					$('div#login').css({'display':'none'});
 					$('#user-sign-cont').fadeIn();
 					$('#view_profile').fadeIn();
@@ -832,6 +832,52 @@ $("#help-button-2").click(function() {
 
 
 $("g.struct").click(function() {
+	var ele_id=$(this).attr("id")
 	var tab = $(this).attr("data-name");
-	console.log(tab);
+	for(var key in map_ele_info)
+	{
+		if(key==ele_id)
+			map_ele_info[key](ele_id,tab);
+	}
+	// console.log(ele_id,tab);
 });
+
+var map_ele_info = {
+	'thinkAgainConclave'	:		content_link,
+	'dhiti'					:		content_link,
+	'startupWeekend'		:		content_link,
+	'help'					:		startHelp,
+	'iot'					:		content_link,
+	'onlineEvents'			:		function(){open_category();},
+	'automation'			:		function(){open_category();},
+	'developAndDiscover'	:		function(){open_category();},
+	'login'					:		function(){if(user.loggedin==true){alert('You are already logged in!')}else{$('div#login').click();}},
+	'buildAndDesign'		:		function(){open_category();},		
+	'youthCon'				:		content_link,
+	'codeAndSimulate'		:		function(){open_category();},
+	'profShow'				:		function(){console.log('Coming Soon')},
+	'economania'			:		function(){open_category();},
+	'miscellaneous'			:		function(){open_category();},
+	'accomodation'			:		content_link,
+	'projects'				:		content_link,
+	'aic'					:		content_link,
+	'archives'				:		content_link,
+	'developers'			:		content_link,
+	'literaryFest'			:		function(){console.log('Coming Soon')},
+	'armyExhibtion'			:		function(){console.log('Coming Soon')},
+	'campusAmbassador'		:		content_link,
+	'papers'				:		content_link,
+	'sponsors'				:		content_link,
+	'ceeriExhibition'		:		content_link,
+	'contact'				:		content_link,
+	'howToReach'			:		content_link,
+	'about'					:		content_link,
+	'quiz'					:		function(){open_category();},
+}
+
+function content_link(b_id,b_name){
+	console.log(b_id,b_name);
+	$('.main_head').html(b_name);
+	// $('.lb_descr').html();
+	open_gen_lb();
+}
