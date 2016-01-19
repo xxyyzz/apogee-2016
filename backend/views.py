@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+
 
 
 # Create your views here.
@@ -193,3 +195,10 @@ def login_check(request):
 			'message' : 'Logged Out',
 		}
 		return JsonResponse(context)
+
+def email_check(request):
+	context = {
+		'email' : "No Such Token",
+		'password' : "No Such Token",
+	}
+	return render(request, 'main/email_verified.html', context)
