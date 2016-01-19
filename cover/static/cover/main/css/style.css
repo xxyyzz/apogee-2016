@@ -184,7 +184,7 @@ nav{
 	line-height: 20px;
 	color: #555;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
-	display: none;
+	/*display: none;*/
 }  
 #login:hover{
 	color: #333;
@@ -198,7 +198,7 @@ nav{
 	/*text-shadow:1px 1px #444;*/
 	font-weight: bold;
 	cursor: pointer;
-	/*display: none;*/
+	display: none;
 }
 #user-sign-cont>div:hover{color:#333;}
 #user-sign-cont>div
