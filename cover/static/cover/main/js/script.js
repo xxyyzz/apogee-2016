@@ -115,26 +115,38 @@ function pan_stop()
 
 // -------------------------BUILDING Hover-------------------------------------
 $(function() {
-	var moveLeft = 25;
-	var moveDown = -70;
 	$('.struct').hover(function(e) {
 		$('#building_info>div').html($(this).data('name'));
-		$('#building_info').delay(200).fadeIn(10).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+		$('#building_info').removeClass('left down_left down_right');
+		if(e.pageX > $(window).width()/2){
+			if(e.pageY < 150){
+				$('#building_info').addClass('down_left');
+			}
+			else{
+				$('#building_info').addClass('left');
+			}
+		}
+		else{
+			if(e.pageY < 150){
+				$('#building_info').addClass('down_right');
+			}
+		}
+		$('#building_info').css('top', e.pageY).css('left', e.pageX).css('display','block');
 	}, function() {
 		$('#building_info>div').html('');
-		$('#building_info').fadeOut(10);
+		$('#building_info').css('display','none');
 	});
 
 	$('.struct').mousemove(function(e) {
-		$("#building_info").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+		$("#building_info").css('top', e.pageY).css('left', e.pageX);
 	});
 
 	$('.struct').mousedown(function(e) {
-		$("#building_info").fadeOut(10);
+		$("#building_info").css('display','none');
 	});
 
 	$('.struct').mouseup(function(e) {
-		$("#building_info").fadeIn(10);
+		$("#building_info").css('display','block');
 	});
 });
 
