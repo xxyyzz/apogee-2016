@@ -222,7 +222,7 @@ $('#login-form').submit(function(e){
 						'username':$('#useremail_l').val(),
 						'password':$('#userpassword_l').val()
 					};
-	console.log(login_data);
+	// console.log(login_data);
 	$.ajax({
 		url:'http://bits-apogee.org/2016/api/login/',
 		method:'POST',
@@ -231,25 +231,28 @@ $('#login-form').submit(function(e){
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(response){
-			console.log(response);
-			// if(response.status)
-			// {
-
-			// }
-			// else
-			// {
-			// 	$('#login-form .error_box').html(error).fadeIn();
-			// 	$('#submit_l').prop('disabled',false);
-			// 	$('#submit_r').prop('disabled',false);
-			// }
+			// console.log(response);
+			if(response.status == 1)
+			{
+				$('#view_profile>div:nth-child(2)').html('Hi! '+response.firstname);
+				$('#login').css({'display':'none'});
+				killOverlay();
+				$('#user-sign-cont').fadeIn();
+				$('#view_profile').fadeIn();
+				setTimeout(function(){
+					$('#view_profile').fadeOut();
+				},3000);
+			}
+			else
+				$('#login-form .error_box').html(response.message).fadeIn();
 		}
 	});
 });
 
 $('#reg-form').submit(function(e){
 	e.preventDefault();
-	$('#reg-form .error_box').html('');
-	var error="Incorrect E-mail or Phone number.";
+	$('#reg-form .error_box').html('').fadeOut();
+	var error="Incorrect E-mail  or Phone number.";
 	var test_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 	var test_phone = /^([0-9]{10})$/i;
 
@@ -260,7 +263,7 @@ $('#reg-form').submit(function(e){
 						'gender':$('#usergender_r > input:checked').val(),
 						'email_id':$('#useremail_r').val(),
 					};
-	console.log(reg_data);
+	// console.log(reg_data);
 	if( (test_email.test(reg_data.email_id)) && (test_phone.test(reg_data.phone_one)) )
 	{
 		$('#submit_l').prop('disabled', true);
@@ -273,13 +276,16 @@ $('#reg-form').submit(function(e){
 			data:reg_data,
 			headers : { "X-CSRFToken" : getCookie('csrftoken') },
 			success:function(response){
-				console.log(response);
+				// console.log(response);
 				if(response.status == 1)
 				{
-					$('#view_profile>div:nth-child(2)').html('Hi! '+response.firstname);
+					$('#reg-form').html(response.message);
 				}
 				else
+				{
 					$('#reg-form .error_box').html(response.message).fadeIn();
+				}	
+				
 			}
 		});
 	}
