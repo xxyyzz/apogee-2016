@@ -827,20 +827,25 @@ $("#help-button-2").click(function() {
 	onScreen = 0;
 });
 
+// To Trigger element on click only and NOT ON DRAG
 
-
-
-
-$("g.struct").click(function() {
-	var ele_id=$(this).attr("id")
-	var tab = $(this).attr("data-name");
-	for(var key in map_ele_info)
-	{
-		if(key==ele_id)
-			map_ele_info[key](ele_id,tab);
-	}
-	// console.log(ele_id,tab);
+$("g.struct").on('mousedown', function (evt) {
+  $("g.struct").on('mouseup mousemove', function handler(evt) {
+    if (evt.type === 'mouseup') {
+      // click
+		var ele_id=$(this).attr("id")
+		var tab = $(this).attr("data-name");
+		for(var key in map_ele_info)
+		{
+			if(key==ele_id)
+				map_ele_info[key](ele_id,tab);
+		}
+    }
+    $("g.struct").off('mouseup mousemove', handler);
+  });
 });
+
+
 
 var map_ele_info = {
 	'thinkAgainConclave'	:		content_link,
@@ -848,16 +853,16 @@ var map_ele_info = {
 	'startupWeekend'		:		content_link,
 	'help'					:		startHelp,
 	'iot'					:		content_link,
-	'onlineEvents'			:		function(){open_category();},
-	'automation'			:		function(){open_category();},
-	'developAndDiscover'	:		function(){open_category();},
+	'onlineEvents'			:		function(){open_category(3);},
+	'automation'			:		function(){open_category(2);},
+	'developAndDiscover'	:		function(){open_category(5);},
 	'login'					:		function(){if(user.loggedin==true){alert('You are already logged in!')}else{$('div#login').click();}},
-	'buildAndDesign'		:		function(){open_category();},		
+	'buildAndDesign'		:		function(){open_category(0);},		
 	'youthCon'				:		content_link,
-	'codeAndSimulate'		:		function(){open_category();},
+	'codeAndSimulate'		:		function(){open_category(1);},
 	'profShow'				:		function(){console.log('Coming Soon')},
-	'economania'			:		function(){open_category();},
-	'miscellaneous'			:		function(){open_category();},
+	'economania'			:		function(){open_category(4);},
+	'miscellaneous'			:		function(){open_category(7);},
 	'accomodation'			:		content_link,
 	'projects'				:		content_link,
 	'aic'					:		content_link,
@@ -872,7 +877,7 @@ var map_ele_info = {
 	'contact'				:		content_link,
 	'howToReach'			:		content_link,
 	'about'					:		content_link,
-	'quiz'					:		function(){open_category();},
+	'quiz'					:		function(){open_category(6);},
 }
 
 function content_link(b_id,b_name){
