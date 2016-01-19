@@ -234,14 +234,14 @@ $('#login-form').submit(function(e){
 			// console.log(response);
 			if(response.status == 1)
 			{
-				$('#view_profile>div:nth-child(2)').html('Hi! '+response.firstname);
-				$('#login').css({'display':'none'});
+				$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
+				$('div#login').css({'display':'none'});
 				killOverlay();
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
 				setTimeout(function(){
 					$('#view_profile').fadeOut();
-				},3000);
+				},5000);
 			}
 			else
 				$('#login-form .error_box').html(response.message).fadeIn();
