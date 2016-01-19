@@ -115,26 +115,38 @@ function pan_stop()
 
 // -------------------------BUILDING Hover-------------------------------------
 $(function() {
-	var moveLeft = 25;
-	var moveDown = -70;
 	$('.struct').hover(function(e) {
 		$('#building_info>div').html($(this).data('name'));
-		$('#building_info').delay(200).fadeIn(10).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+		$('#building_info').removeClass('left down_left down_right');
+		if(e.pageX > $(window).width()/2){
+			if(e.pageY < 150){
+				$('#building_info').addClass('down_left');
+			}
+			else{
+				$('#building_info').addClass('left');
+			}
+		}
+		else{
+			if(e.pageY < 150){
+				$('#building_info').addClass('down_right');
+			}
+		}
+		$('#building_info').css('top', e.pageY).css('left', e.pageX).css('display','block');
 	}, function() {
 		$('#building_info>div').html('');
-		$('#building_info').fadeOut(10);
+		$('#building_info').css('display','none');
 	});
 
 	$('.struct').mousemove(function(e) {
-		$("#building_info").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+		$("#building_info").css('top', e.pageY).css('left', e.pageX);
 	});
 
 	$('.struct').mousedown(function(e) {
-		$("#building_info").fadeOut(10);
+		$("#building_info").css('display','none');
 	});
 
 	$('.struct').mouseup(function(e) {
-		$("#building_info").fadeIn(10);
+		$("#building_info").css('display','block');
 	});
 });
 
@@ -207,8 +219,8 @@ $('#login-form').submit(function(e){
 	$('#submit_l').prop('disabled', true);
 	$('#submit_r').prop('disabled', true);
 	var login_data = {
-						'useremail_l':$('#useremail_l').val(),
-						'userpassword_l':$('#userpassword_l').val()
+						'username':$('#useremail_l').val(),
+						'password':$('#userpassword_l').val()
 					};
 	console.log(login_data);
 	$.ajax({
@@ -220,16 +232,16 @@ $('#login-form').submit(function(e){
 		datatype: 'jsonp',
 		success:function(response){
 			console.log(response);
-			if(response.status)
-			{
+			// if(response.status)
+			// {
 
-			}
-			else
-			{
-				$('#login-form .error_box').html(error).fadeIn();
-				$('#submit_l').prop('disabled',false);
-				$('#submit_r').prop('disabled',false);
-			}
+			// }
+			// else
+			// {
+			// 	$('#login-form .error_box').html(error).fadeIn();
+			// 	$('#submit_l').prop('disabled',false);
+			// 	$('#submit_r').prop('disabled',false);
+			// }
 		}
 	});
 });
@@ -709,3 +721,6 @@ function go_to_location(cat,eve){
 	}, 600);
 }
 // ##################################search end
+
+// On login true
+// str.substr(0,str.indexOf(' ')); //str instead of user.name
