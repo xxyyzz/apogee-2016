@@ -118,12 +118,31 @@ def create_user(member, password):
 	member.user = user
 	member.save()
 	return user
+def mail_password(member, password):
+	body = unicode(u'''
+		Hello %s !
+
+		Thanks for verifying your email.
+		Your login details are:
+		Username: %s
+		Password: %s
+
+		Thanks
+		The Department of Visual Media
+		BITS Pilani
+	''' ) % (name, member.email_id, password)
+	send_to = email_id
+	# try:
+	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
+	email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+	email.send()
 def email_confirm(request, token):
 	member = email_authenticate_token(token)
 	if member:
 		password = generate_password(member)
 		user = create_user(member, password)
 		email = user.email
+		mail_password(member, password)
 		context = {
 			'email' : email,
 			'password' : password,
