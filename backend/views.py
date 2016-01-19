@@ -19,20 +19,29 @@ def user_login(request):
 		user = authenticate(username=username, password=password)
 		if user:
 			if user.is_active:
-				if user.is_staff:
-					login(request, user)
-					return HttpResponse('Staff Logged In')
-					# return HttpResponseRedirect('../dashboard/')
-				else:
-					login(request, user)
-					return HttpResponse('User Logged In')
-					# return HttpResponseRedirect('../dashboard/')
+				context = {
+					'status' : 1,
+					'name' : user.participant.name.split(' ', 1)[0],
+				}
+				return JsonResponse(context)
 			else:
-				return HttpResponse('User Not Active')
+				context = {
+					'status' : 0,
+					'message' : 'Your account is frozen.'
+				}
+				return JsonResponse(context)
 		else:
-			return HttpResponse('Invalid Credentials')
+			context = {
+				'status' : 0,
+				'message' : 'Invalid username or password'
+			}
+			return JsonResponse(context)
 	else:
-		return HttpResponse('Invalid Request')
+		context = {
+			'status' : 0,
+			'message' : 'Invalid request format.'
+		}
+		return JsonResponse(context)
 
 @csrf_exempt
 def user_register(request):
