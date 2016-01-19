@@ -120,7 +120,7 @@ def create_user(member, password):
 	return user
 def email_confirm(request, token):
 	member = email_authenticate_token(token)
-	if user:
+	if member:
 		password = generate_password(member)
 		user = create_user(member, password)
 		email = user.email
