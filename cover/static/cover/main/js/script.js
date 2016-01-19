@@ -709,3 +709,6 @@ function go_to_location(cat,eve){
 	}, 600);
 }
 // ##################################search end
+
+// On login true
+// str.substr(0,str.indexOf(' ')); //str instead of user.name

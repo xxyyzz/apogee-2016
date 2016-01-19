@@ -180,10 +180,54 @@ nav{
 	line-height: 20px;
 	color: #555;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
+	display: none;
 }  
 #login:hover{
 	color: #333;
 }  
+#user-sign-cont
+{	
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color:#f0f0f0;
+	text-shadow:1px 1px #444;
+	font-weight: bold;
+	cursor: pointer;
+	/*display: none;*/
+}
+#user-sign-cont>div:hover{color:#eee;}
+#user-sign-cont>div{display: inline-block;padding: 10px;position: relative;}
+#user-sign-cont span{padding: 5px;font-size: 17px;}
+
+#view_profile
+{
+	position: absolute;
+	top:100%;
+	text-align: center;
+	min-width: 100%;
+	display: none;
+	text-shadow:none;
+}
+#user-sign-cont>div:hover>#view_profile{display: block;}
+#view_profile>div:nth-child(1)
+{
+	top:-5px;
+	height: 30px;
+	width: 30px;
+	transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	background-color: #f0f0f0;
+}
+#view_profile>div:nth-child(2)
+{
+	padding: 8px 15px;
+	background-color: #f0f0f0;
+	color: #606060;
+	position: relative;
+	border-radius: 5px;
+}
 
 .sideicons{
 	font-size:22px; 
