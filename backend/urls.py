@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^verify/(?P<token>\w+)/$', views.email_confirm),
     url(r'^user/', views.login_check),
     url(r'^login/', views.user_login),
+    url(r'^logout/', views.user_logout),
     url(r'^emailverified/', views.email_check),
 ]

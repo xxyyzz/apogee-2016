@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 
@@ -216,3 +216,7 @@ def email_check(request):
 		'password' : "No Such Token",
 	}
 	return render(request, 'main/email_verified.html', context)
+
+def user_logout(request):
+	logout(request)
+	return login_check(request)
