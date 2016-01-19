@@ -247,7 +247,7 @@ $('#login-form').submit(function(e){
 					'loggedin':true,
 				}
 				setTimeout(function(){
-					$('#view_profile').css({'display',''});
+					$('#view_profile').css({'display':''});
 				},5000);
 			}
 			else
