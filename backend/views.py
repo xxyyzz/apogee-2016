@@ -131,7 +131,7 @@ def mail_password(member, password):
 		The Department of Visual Media
 		BITS Pilani
 	''' ) % (member.name, member.email_id, password)
-	send_to = email_id
+	send_to = member.email_id
 	# try:
 	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
 	email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
