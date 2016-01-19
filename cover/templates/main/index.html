@@ -41,13 +41,31 @@
 	
 	<script type="text/javascript" src="{% static 'cover/main/js/jquery.min.js' %}" ></script>
 	<script type="text/javascript" src="{% static 'cover/main/js/svg-pan-zoom.min.js' %}"></script>
+	<script src="{% static 'cover/main/js/fuse.min.js' %}"></script>
 </head>
 <body>
 
 	<!-- LOADER  -->
 	<div id="loader"></div>
 
-
+	<div class="gen_lb_cont abs_center">
+		<div class="gen_lb">
+			<div class="close_gen_lb">
+				<i class="fa fa-close"></i>
+			</div>
+			<div class="lb_head_cont">
+				<div class="lb_head">
+					<div class="lb_icon">
+						<img src="./img/icon/cb3.jpg">
+					</div>
+					<span class="main_head">heading</span>
+				</div>
+			</div>
+			<div class="lb_descr">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia hic ipsum repellat, provident sint facere sed. Nam voluptatem tempora perspiciatis eos eius, amet maxime ullam recusandae totam debitis laudantium, facere!
+			</div>
+		</div>
+	</div>
 
 	<div id="burgernav">
 		<i class="fa fa-bars" style="font-size: 25px; vertical-align:text-top"></i>&nbsp;&nbsp;&nbsp;MENU
@@ -127,45 +145,98 @@
 			<span class="login_reg">&nbsp;&nbsp;LOGIN<span style="color : #000; margin: 0px 10px">|</span>REGISTER</span>
 		</div>
 		
-		<div id="login-reg-box" class="abs_center light-box" >
-			<div class="login-reg-head">
-				Register for APOGEE 2016
+	</div>
+	<div id="login-reg-box" class="abs_center light-box" >
+		<div class="login-reg-head">
+			Register for APOGEE 2016
+		</div>
+		<div id="login-box">
+			<div class="login-head">
+				login !<br>
 			</div>
-			<div id="login-box">
-				<div class="login-head">
-					login !<br>
-				</div>
-				<div class="login-desc">Login using the user credentials sent on your registered e-mail, to register for events, pay registration fees and more. </div>
+			<div class="login-desc">Login using the user credentials sent on your registered e-mail, to register for events, pay registration fees and more. </div>
 
-				<form  id="login-form">
-					<label for="useremail_l">E-Mail</label>
-					<input type="email" id="useremail_l" required><br>
-					<label for="userpassword_l">Password</label>
-					<input type="password" id="userpassword_l" required><br>
-					<div class="error_box"></div>
-					<button type="submit_l">SUBMIT</button>
-				</form>
+			<form  id="login-form">
+				<label for="useremail_l">E-Mail</label>
+				<input type="email" id="useremail_l" required><br>
+				<label for="userpassword_l">Password</label>
+				<input type="password" id="userpassword_l" required><br>
+				<div class="error_box"></div>
+				<button type="submit_l">SUBMIT</button>
+			</form>
+		</div>
+		<div id="reg-box" >
+			<form id="reg-form">
+				<label for="username_r">Name</label>
+				<input type="text" id="username_r" required><br>
+				<label for="usercollege_r">College</label>
+				<input type="text" id="usercollege_r" required><br>
+				<label for="userphone_r">Phone Number</label>
+				<input type="number" id="userphone_r" required><br>
+				<label for="usergender_r">Gender</label>
+	        	<span id="usergender_r">
+					<input type="radio" name="usergender_r" id="reg-male" value="M" checked>
+					<label for="reg-male">Male</label>
+					<input type="radio" name="usergender_r" id="reg-female" value="F">
+					<label for="reg-female">Female</label>
+				</span><br>
+				<label for="useremail_r">E-Mail</label>
+				<input type="email" id="useremail_r" required><br>
+				<div class="error_box"></div>
+				<button type="submit_r">SUBMIT</button>
+			</form>	
+		</div>
+	</div>
+	<div id="events" class="abs_center">
+		<div id="search">
+			<div id="searchHeader">
+				<div id="iconSearchInnerWrapper">
+					<i class="fa fa-search"></i>
+				</div>
+				<input id="searchField" type="textfield" placeholder='Search here'></input>
+				<div id="iconBack">
+					<i class="fa fa-close"></i>
+				</div>
 			</div>
-			<div id="reg-box" >
-				<form id="reg-form">
-					<label for="username_r">Name</label>
-					<input type="text" id="username_r" required><br>
-					<label for="usercollege_r">College</label>
-					<input type="text" id="usercollege_r" required><br>
-					<label for="userphone_r">Phone Number</label>
-					<input type="number" id="userphone_r" required><br>
-					<label for="usergender_r">Gender</label>
-		        	<span id="usergender_r">
-						<input type="radio" name="usergender_r" id="reg-male" value="M" checked>
-						<label for="reg-male">Male</label>
-						<input type="radio" name="usergender_r" id="reg-female" value="F">
-						<label for="reg-female">Female</label>
-					</span><br>
-					<label for="useremail_r">E-Mail</label>
-					<input type="email" id="useremail_r" required><br>
-					<div class="error_box"></div>
-					<button type="submit_r">SUBMIT</button>
-				</form>	
+			<div class="innerHead">Seach Results</div>
+			<div id="searchResults"></div>
+		</div>
+		<div id="open_search">
+			<i class="fa fa-search"></i>
+		</div>
+		<div id="close_events">
+			<i class="fa fa-close"></i>
+		</div>
+		<div id="scene_cont">
+			<div id="event_prev" class="abs_center">
+				<div id="event_top">
+					<div class="e_strip">
+						<div class="event_cont"></div>
+					</div>
+				</div>
+				<div id="event_bottom">
+					<div class="e_strip">
+						<div class="event_cont"></div>
+					</div>
+				</div>
+				<div id="event_left">
+					<div class="strip"></div>
+				</div>
+				<div id="event_right">
+					<div class="strip"></div>
+				</div>
+				<img src="{% static 'cover/main/img/icon/screen.svg' %}" id="wire_cood">
+				<div class="show_event abs_center">
+					<div class="se_head">
+						<!-- added by next_event and prev_event -->
+					</div>
+					<div class="se_descr">
+						<!-- added by next_event and prev_event -->
+					</div>
+					<div class="se_ico">
+						<!-- added by show_all_det -->
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
