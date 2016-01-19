@@ -21,7 +21,7 @@ def user_login(request):
 			if user.is_active:
 				context = {
 					'status' : 1,
-					'name' : user.participant.name.split(' ', 1)[0],
+					'firstname' : user.participant.name.split(' ', 1)[0],
 				}
 				return JsonResponse(context)
 			else:
