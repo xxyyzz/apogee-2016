@@ -269,3 +269,33 @@ $('#reg-form').submit(function(e){
 		$('#reg-form .error_box').html(error).fadeIn();
 	}
 });
+
+
+window.onload = function() {
+
+	//startGuide();
+
+	$("#loader").delay(2000).fadeOut(500);
+
+	//TWITTER 
+		
+	!function(d,s,id){
+		var js,fjs=d.getElementsByTagName(s)[0];
+		if(!d.getElementById(id)){
+			js=d.createElement(s);
+			js.id=id;js.src="http://platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js,fjs);
+		}
+	}(document,"script","twitter-wjs");
+
+	//FACEBOOK 
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id))
+			return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+}

@@ -4,6 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>APOGEE 2016 | International Technical Festival | BITS Pilani</title>
+	<link rel="shortcut icon" href="{% static 'cover/main/img/style.css' %}" type="image/x-icon"/>
+
+
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="content-language" content="EN">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,6 +43,12 @@
 	<script type="text/javascript" src="{% static 'cover/main/js/svg-pan-zoom.min.js' %}"></script>
 </head>
 <body>
+
+	<!-- LOADER  -->
+	<div id="loader"></div>
+
+
+
 	<div id="burgernav">
 		<i class="fa fa-bars" style="font-size: 25px; vertical-align:text-top"></i>&nbsp;&nbsp;&nbsp;MENU
 	</div>
@@ -50,31 +59,31 @@
 		
 		<div class="htile">
 			<div class="sidebar-icon-box"><i class="fa fa-info sideicons"></i></div>
-			<span class="navtext">ABOUT</span>
+			<span class="navtext">About</span>
 		</div>
 		<div class="htile">
 		<div class="sidebar-icon-box"><i class="fa fa-puzzle-piece sideicons"></i></div>
-			<span class="navtext">EVENTS</span>
+			<span class="navtext">Events</span>
 		</div>
 		<div class="htile">
 		<div class="sidebar-icon-box"><i class="fa fa-archive sideicons"></i></div>
-			<span class="navtext">ARCHIVES</span>
+			<span class="navtext">Archives</span>
 		</div>
 		<div class="htile">
 		<div class="sidebar-icon-box"><i class="fa fa-dollar sideicons"></i></div>
-			<span class="navtext">SPONSORS</span>
+			<span class="navtext">Sponsors</span>
 		</div>
 		<div class="htile">
 		<div class="sidebar-icon-box"><i class="fa fa-star sideicons"></i></div>
-			<span class="navtext">GUEST LECTURES</span>
+			<span class="navtext">Guest Lectures</span>
 		</div>
 		<div class="htile">
 		<div class="sidebar-icon-box"><i class="fa fa-cogs sideicons"></i></div>
-			<span class="navtext">WORKSHOPS</span>
+			<span class="navtext">Workshops</span>
 		</div>   
 		<div class="htile">
 		<div class="sidebar-icon-box"><i class="fa fa-fax sideicons"></i></div>
-			<span class="navtext">CONTACTS</span>
+			<span class="navtext">Contacts</span>
 		</div>
 	</nav>
 	<div id="overlay"></div>
@@ -119,7 +128,15 @@
 		</div>
 		
 		<div id="login-reg-box" class="abs_center light-box" >
-			<div id="login-box" style="display:inline-block;width:50%;vertical-align:middle;">
+			<div class="login-reg-head">
+				Register for APOGEE 2016
+			</div>
+			<div id="login-box">
+				<div class="login-head">
+					login !<br>
+				</div>
+				<div class="login-desc">Login using the user credentials sent on your registered e-mail, to register for events, pay registration fees and more. </div>
+
 				<form  id="login-form">
 					<label for="useremail_l">E-Mail</label>
 					<input type="email" id="useremail_l" required><br>
@@ -129,7 +146,7 @@
 					<button type="submit_l">SUBMIT</button>
 				</form>
 			</div>
-			<div id="reg-box" style="display:inline-block;vertical-align:middle;">
+			<div id="reg-box" >
 				<form id="reg-form">
 					<label for="username_r">Name</label>
 					<input type="text" id="username_r" required><br>
@@ -157,29 +174,11 @@
 	<script type="text/javascript" src="{% static 'cover/main/js/script.js' %}" ></script>
 	<div id="fb-root"></div>
 	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id))
-				return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));	
+			
 	</script>
 
 	<script>
-		//TWITTER 
 		
-		!function(d,s,id){
-			var js,fjs=d.getElementsByTagName(s)[0];
-			if(!d.getElementById(id)){
-				js=d.createElement(s);
-				js.id=id;js.src="http://platform.twitter.com/widgets.js";
-				fjs.parentNode.insertBefore(js,fjs);
-			}
-		}(document,"script","twitter-wjs");
-
 	</script>
 </body>
 </html>
