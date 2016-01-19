@@ -224,7 +224,7 @@ $('#login-form').submit(function(e){
 					};
 	console.log(login_data);
 	$.ajax({
-		url:'http://bits-apogee.org/api/login/',
+		url:'http://bits-apogee.org/2016/api/login/',
 		method:'POST',
         crossDomain: true,
 		data:login_data,
