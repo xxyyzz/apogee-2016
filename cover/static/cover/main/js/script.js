@@ -1,5 +1,9 @@
 // ------------------------MAP INIT + SELF FUNCTION-----------------------------
-var mapinit,win_h = $('body').height(),win_w=$('body').width();
+var mapinit;
+
+var win_h = $('body').height();
+var win_w = $('body').width();
+
 function mapstart() {
 	var beforePan,svg_w=16;svg_h=9,initzoom=1.5;
 
@@ -35,7 +39,7 @@ function mapstart() {
 			mouseWheelZoomEnabled: true,
 			preventMouseEventsDefault: true,
 			zoomScaleSensitivity: 0.2,
-			minZoom: 1.2,
+			minZoom: 1,
 			maxZoom: 6,
 			fit: false,
 			contain: true,
@@ -57,7 +61,10 @@ function mapstart() {
 	// mapinit.zoomAtPointBy(2, {x: (win_w/2), y: (win_h/2)});
 	// panZoom.setBeforePan(beforePan)
 };
+
 mapstart();
+
+
 function zoom_pan_reset()
 {
 	// mapinit.resetZoom();
@@ -73,7 +80,9 @@ function zoom_pan_reset()
 function zoom_slider(v) {
 	mapinit.zoom(v);
 }
+
 var zoomtrig=null;
+
 function zoom_trig(t)
 {
 	var z=$('#zoomslid').val();
@@ -85,17 +94,20 @@ function zoom_trig(t)
 		zoom_slider((parseFloat(z) + parseFloat(t)));
 	},200);
 }
+
 function zoom_stop()
 {
 	clearInterval(zoomtrig);
 }
 
 var pantrig=null;
+
 function pan_trig(xin,yin)
 {
 	mapinit.panBy({x: xin, y: yin});
 	pantrig = setInterval(function(){mapinit.panBy({x: xin, y: yin});},200);;
 }
+
 function pan_stop()
 {
 	clearInterval(pantrig);
@@ -103,18 +115,26 @@ function pan_stop()
 
 // -------------------------BUILDING Hover-------------------------------------
 $(function() {
-	var moveLeft = 10;
-	var moveDown = -50;
-	$('.blah').hover(function(e) {
+	var moveLeft = 25;
+	var moveDown = -70;
+	$('.struct').hover(function(e) {
 		$('#building_info>div').html($(this).data('name'));
-		$('#building_info').fadeIn(100).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+		$('#building_info').delay(200).fadeIn(10).css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
 	}, function() {
 		$('#building_info>div').html('');
-		$('#building_info').fadeOut(100);
+		$('#building_info').fadeOut(10);
 	});
 
-	$('.blah').mousemove(function(e) {
+	$('.struct').mousemove(function(e) {
 		$("#building_info").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+	});
+
+	$('.struct').mousedown(function(e) {
+		$("#building_info").fadeOut(10);
+	});
+
+	$('.struct').mouseup(function(e) {
+		$("#building_info").fadeIn(10);
 	});
 });
 
@@ -146,6 +166,7 @@ $("div#login").click(function() {
 	$("#login-reg-box").delay(200).fadeIn(200);
 });
 
+
 // ------------------------OVERLAY-------------------------------------------
 function closeLightBox() {
 	$(".light-box").fadeOut(200);
@@ -159,6 +180,8 @@ function killOverlay() {
 	closeLightBox();
 	$("#overlay").fadeOut(400);
 }
+
+
 //--------------------------GET COOKIE------------------------------------
 function getCookie(name) {
     var cookieValue = null;
@@ -175,6 +198,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 
 //------------------------LOGIN/REGISTER API---------------------------------
 $('#login-form').submit(function(e){
@@ -245,3 +269,33 @@ $('#reg-form').submit(function(e){
 		$('#reg-form .error_box').html(error).fadeIn();
 	}
 });
+
+
+window.onload = function() {
+
+	//startGuide();
+
+	$("#loader").delay(2000).fadeOut(500);
+
+	//TWITTER 
+		
+	!function(d,s,id){
+		var js,fjs=d.getElementsByTagName(s)[0];
+		if(!d.getElementById(id)){
+			js=d.createElement(s);
+			js.id=id;js.src="http://platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js,fjs);
+		}
+	}(document,"script","twitter-wjs");
+
+	//FACEBOOK 
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id))
+			return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+}
