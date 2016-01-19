@@ -222,7 +222,7 @@ $(window).load(function(){
         success:function(response){		
 				if(response.status==1)
 				{
-					$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
+					$('#user-sign-cont>div:nth-child(1)>span').html(response.firstname);
 					$('div#login').css({'display':'none'});
 					$('#user-sign-cont').fadeIn();
 					$('#view_profile').fadeIn();
