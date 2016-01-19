@@ -248,6 +248,7 @@ $('#login-form').submit(function(e){
 
 $('#reg-form').submit(function(e){
 	e.preventDefault();
+	$('#reg-form .error_box').html('');
 	var error="Incorrect E-mail or Phone number.";
 	var test_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 	var test_phone = /^([0-9]{10})$/i;
@@ -273,6 +274,12 @@ $('#reg-form').submit(function(e){
 			headers : { "X-CSRFToken" : getCookie('csrftoken') },
 			success:function(response){
 				console.log(response);
+				if(response.status == 1)
+				{
+					$('#view_profile>div:nth-child(2)').html('Hi! '+response.firstname);
+				}
+				else
+					$('#reg-form .error_box').html(response.message).fadeIn();
 			}
 		});
 	}
