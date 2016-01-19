@@ -195,13 +195,14 @@ def login_check(request):
 		context = {
 			'status' : 1,
 			'email' : request.user.email,
-			'message' : 'Logged In',
+			'loggedin' : True,
+			'firstname' : request.user.participant.name.split(' ', 1)[0],
 		}
 		return JsonResponse(context)
 	else:
 		context = {
 			'status' : 0,
-			'message' : 'Logged Out',
+			'loggedin' : False,
 		}
 		return JsonResponse(context)
 
