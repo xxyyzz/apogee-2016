@@ -298,21 +298,6 @@ nav{
 	user-select: none;
 }
 
-.ver_center
-{
-	position: absolute;
-	top:0;
-	bottom: 0;
-	margin: auto;
-}
-.hor_center
-{
-	position: absolute;
-	margin: auto;
-	left:0;
-	right: 0; 
-
-}
 .zoompanreset-icon
 {
 	margin: 15px auto;
@@ -430,32 +415,51 @@ input[type="range"]::-webkit-slider-thumb:active {
 	position: relative;
 	float: left;
 }
+
 #building_info
 {
-	/*display: none;*/
-	/*top:20%;*/
-	/*left: 20%;*/
+	display: none;
 	position: absolute;
 	width: auto;
-	height: 60px;
+	height: 51px;
 }
 #building_info>div
 {
 	display: inline-block;
 	background:  #f0f0d7;
-	border-top-left-radius: 2px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 18px;
+	font-weight: bold;
+	position: absolute;	
+	top:0;
+	color: #555;
+	white-space: nowrap
+}
+#building_info.right>img
+{
+	height: 51px;
+}
+#building_info.right>div
+{
+	border-top-left-radius: 4px;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px; 
-	color: #555;
-	height: 40px;
-	line-height: 40px;
-	font-size: 20px;
-	padding: 0 10px;
-	top:0;
-	font-weight: bold;
-	vertical-align: top;
-	position: relative;
-	/*left:30px;*/
+	padding: 0 15px 0 10px;
+	left:25px;
+}
+#building_info.left>img
+{
+	height: 51px;
+	transform:scaleX(-1);
+}
+#building_info.left>div
+{
+	border-top-right-radius: 4px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px; 
+	padding: 0 10px 0 15px;
+	right: 25px;
 }
 
 .struct
