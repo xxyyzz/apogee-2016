@@ -196,6 +196,7 @@ def login_check(request):
 			'status' : 1,
 			'email' : request.user.email,
 			'message' : 'Logged In',
+			'firstname' : user.participant.name.split(' ', 1)[0],
 		}
 		return JsonResponse(context)
 	else:
