@@ -155,6 +155,7 @@ var sideOpen = 0;
 
 $('#overlay').click(function(){
 	killOverlay();
+	close_gen_lb();
 	if(sideOpen == 1) {
 		$('nav').animate({left:"-370px"},300,"linear");
 		sideOpen = 0;
@@ -180,17 +181,29 @@ $("div#login").click(function() {
 
 
 // ------------------------OVERLAY-------------------------------------------
+
+
+function open_gen_lb(){
+	fireOverlay();
+	$('.gen_lb_cont').fadeIn();
+}
+
+function close_gen_lb(){
+	killOverlay();
+	$('.gen_lb_cont').fadeOut();
+}
+
 function closeLightBox() {
 	$(".light-box").fadeOut(200);
 }
 
 function fireOverlay() {
-	$("#overlay").fadeIn(400);
+	$("#overlay").fadeIn(200);
 }
 
 function killOverlay() {
 	closeLightBox();
-	$("#overlay").fadeOut(400);
+	$("#overlay").fadeOut(200);
 }
 
 
@@ -352,7 +365,7 @@ $('#reg-form').submit(function(e){
 
 window.onload = function() {
 
-	//startGuide();
+	startHelp();
 
 	$("#loader").delay(2000).fadeOut(500);
 
@@ -442,12 +455,9 @@ $(window).keydown(function(e)
     			break;
     }
 });
-function open_gen_lb(){
-	$('.gen_lb_cont').fadeIn();
-}
-function close_gen_lb(){
-	$('.gen_lb_cont').fadeOut();
-}
+
+
+
 function next_strip(){
 	if(!keyallow || $("#searchField").is(":focus"))
 	{
@@ -788,3 +798,40 @@ function go_to_location(cat,eve){
 	}, 600);
 }
 // ##################################search end
+
+
+// variable to monitor help screens.
+var onScreen = 0
+
+function startHelp() {
+	fireOverlay();
+	$("#map-help-1").css("display", "block");
+	onScreen = 1;
+}
+
+$("#help-button-1").click(function() {
+	$("#map-help-1").css("display", "none");
+	$("#map-help-2").css("display", "block");
+	$("#map_control").css("z-index", 500);
+	$("#burgernav").css("z-index", 500);
+	$("div#login").css("z-index", 500);
+	onScreen = 2;
+});
+
+$("#help-button-2").click(function() {
+	$("#map-help-2").css("display", "none");
+	$("#map_control").css("z-index", 1);
+	$("#burgernav").css("z-index", 199);
+	$("div#login").css("z-index", 199);
+	killOverlay();
+	onScreen = 0;
+});
+
+
+
+
+
+$("g.struct").click(function() {
+	var tab = $(this).attr("data-name");
+	console.log(tab);
+});

@@ -2,13 +2,17 @@
 /*
 	
 	loader								1000
+	gen_lightbox						900
+	map-help							750
+	Onilne Events Page					700
+	login-reg-box 						500
+	lightbox							201
+	Overlay								200
 	Menu								199
 	Login|Register						199
 	Overlay								200
 	side-bar							201
 	login-reg-box 						500
-	Onilne Events Page					700
-	gen_lightbox						900
 	controls (all)						10
 	map 								1
 
@@ -272,14 +276,16 @@ nav{
 }
 .gen_lb{
 	position: relative;
-    margin: 10px auto;
+    margin: 2% auto;
     min-width: 70%;
     width: 450px;
     max-width: 100%;
-    min-height: 80%;
-    font-family: 'Lato',sans-serif;
-    background-color: #fff;
+    min-height: 90%;
+    background-color: #fafafa;
     z-index: 1000;
+	border-radius: 2px;
+	color: #555;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
 }
 .lb_head_cont{
 	position: relative;
@@ -615,7 +621,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 	width: 100%;
 	height: 100%;
 	z-index: 1000;
-	background-color: #f0eee7;
+	background-color: #eae7df;
 	position: absolute;
 }
 /*Online events*****************************************************************/
@@ -1042,3 +1048,13 @@ input[type="range"]::-webkit-slider-thumb:active {
 }
 /*for responsiveness of page end*/
 /*Online Events END***********************************************/
+
+
+.map-help {
+	z-index: 750;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+	color: white;
+}
