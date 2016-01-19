@@ -766,10 +766,3 @@ function go_to_location(cat,eve){
 	}, 600);
 }
 // ##################################search end
-
-var mapclick = {
-	'events' : go_to_location;
-};
-
-
-mapclick['events'](0);
