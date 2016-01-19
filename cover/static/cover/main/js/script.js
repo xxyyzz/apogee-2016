@@ -213,6 +213,8 @@ function getCookie(name) {
 
 
 //------------------------LOGIN/REGISTER API---------------------------------
+var user = {};
+
 $('#login-form').submit(function(e){
 	e.preventDefault();
 	$('#login-form .error_box').html('').fadeOut();
@@ -239,6 +241,11 @@ $('#login-form').submit(function(e){
 				killOverlay();
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
+				user ={
+					'userid':$('#useremail_l').val(),
+					'firstname':response.firstname,
+					'loggedin':true,
+				}
 				setTimeout(function(){
 					$('#view_profile').fadeOut();
 				},5000);
