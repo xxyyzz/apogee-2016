@@ -62,8 +62,10 @@ def register(request):
 
 		body = unicode(u'''
 			Hello %s !
+
 			You have been successfully registered for APOGEE 16.
 			To continue, please visit %s to verify your email.
+
 			Thanks
 			The Department of Visual Media
 			BITS Pilani
@@ -117,7 +119,7 @@ def create_user(member, password):
 	member.save()
 	return user
 def email_confirm(request, token):
-	user = email_authenticate_token(token)
+	member = email_authenticate_token(token)
 	if user:
 		password = generate_password(member)
 		user = create_user(member, password)
