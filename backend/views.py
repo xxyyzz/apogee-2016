@@ -9,9 +9,31 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
+@csrf_exempt
+def user_login(request):
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		if user:
+			if user.is_active:
+				if user.is_staff:
+					login(request, user)
+					return HttpResponse('Staff Logged In')
+					# return HttpResponseRedirect('../dashboard/')
+				else:
+					login(request, user)
+					return HttpResponse('User Logged In')
+					# return HttpResponseRedirect('../dashboard/')
+			else:
+				return HttpResponse('User Not Active')
+		else:
+			return HttpResponse('Invalid Credentials')
+	else:
+		return HttpResponse('Invalid Request')
 
 @csrf_exempt
-def register(request):
+def user_register(request):
 	if request.POST:
 		name = request.POST['name']
 		gender = request.POST['gender']
@@ -61,19 +83,19 @@ def register(request):
 		token_url = email_generate_token(member)
 
 		body = unicode(u'''
-			Hello %s !
+Hello %s !
 
-			You have been successfully registered for APOGEE 16.
-			To continue, please visit %s to verify your email.
+You have been successfully registered for APOGEE 16.
+To continue, please visit %s to verify your email.
 
-			Thanks
-			The Department of Visual Media
-			BITS Pilani
+Thanks,
+The Department of Visual Media
+BITS Pilani
 		''' ) % (name, token_url)
 		send_to = email_id
 		# try:
 		email = EmailMessage('Registration for APOGEE 16', body, 'noreply@bits-apogee.org', [send_to])
-		email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+		# email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
 		email.send()
 		# except:
 		# 	return HttpResponse('error')
@@ -120,21 +142,24 @@ def create_user(member, password):
 	return user
 def mail_password(member, password):
 	body = unicode(u'''
-		Hello %s !
+Hello %s !
 
-		Thanks for verifying your email.
-		Your login details are:
-		Username: %s
-		Password: %s
+Thanks for verifying your email.
+Your login details are:
+Username: %s
+Password: %s
+Visit http://bits-apogee.org/ to login.
 
-		Thanks
-		The Department of Visual Media
-		BITS Pilani
+Thanks,
+The Department of Visual Media
+BITS Pilani
+
+P.S. The password is auto generated. We do not intend to offend you in any manner.
 	''' ) % (member.name, member.email_id, password)
 	send_to = member.email_id
 	# try:
 	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
-	email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+	# email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
 	email.send()
 def email_confirm(request, token):
 	member = email_authenticate_token(token)
@@ -153,3 +178,18 @@ def email_confirm(request, token):
 			'password' : "No Such Token",
 		}
 	return render(request, 'main/email_verified.html', context)
+
+def login_check(request):
+	if request.user.username != '':
+		context = {
+			'status' : 1,
+			'email' : request.user.email,
+			'message' : 'Logged In',
+		}
+		return JsonResponse(context)
+	else:
+		context = {
+			'status' : 0,
+			'message' : 'Logged Out',
+		}
+		return JsonResponse(context)
