@@ -214,6 +214,31 @@ function getCookie(name) {
 
 //------------------------LOGIN/REGISTER API---------------------------------
 var user = {};
+$(window).load(function(){
+	$.ajax({
+		url:'http://bits-apogee.org/2016/api/user/',
+		method:'GET',
+        crossDomain: true,
+        success:function(response){		
+				if(response.status==1)
+				{
+					$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
+					$('div#login').css({'display':'none'});
+					$('#user-sign-cont').fadeIn();
+					$('#view_profile').fadeIn();
+					user = {
+							'userid':response.email,
+							'firstname':response.firstname,
+							'loggedin':response.loggedin,
+						   };
+					setTimeout(function(){
+					$('#view_profile').css({'display':''});
+					},3000);
+				}	
+        }
+	});
+})
+
 
 $('#login-form').submit(function(e){
 	e.preventDefault();
@@ -248,7 +273,7 @@ $('#login-form').submit(function(e){
 				}
 				setTimeout(function(){
 					$('#view_profile').css({'display':''});
-				},5000);
+				},3000);
 			}
 			else
 				$('#login-form .error_box').html(response.message).fadeIn();
@@ -742,5 +767,9 @@ function go_to_location(cat,eve){
 }
 // ##################################search end
 
-// On login true
-// str.substr(0,str.indexOf(' ')); //str instead of user.name
+var mapclick = {
+	'events' : go_to_location;
+};
+
+
+mapclick['events'](0);
