@@ -237,7 +237,29 @@ $(window).load(function(){
 				}	
         }
 	});
-})
+});
+function logout(){
+	$.ajax({
+		url:'http://bits-apogee.org/2016/api/logout/',
+		method:'GET',
+        crossDomain: true,
+        success:function(response){		
+				if(response.status==0)
+				{
+					user = {
+							'userid':undefined,
+							'firstname':undefined,
+							'loggedin':undefined,
+						   };
+					$('#user-sign-cont>div:nth-child(1)>span').html('');
+					$('div#login').fadeIn();
+					$('#user-sign-cont').css('display','');
+				}	
+				else
+					alert('Unsuccessful');
+        }
+	});
+};
 
 
 $('#login-form').submit(function(e){
