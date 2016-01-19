@@ -96,21 +96,39 @@ def email_generate_token(member):
 	member.save()
 	token_url = 'http://bits-apogee.org/2016/api/verify/' + token + '/'
 	return token_url
-def email_confirm(request, token):
+def email_authenticate_token(token):
 	try:
 		member = Participant.objects.get(email_token=token)
 		member.email_verified = True
+		member.email_token = None
 		member.save()
-		email_confirmed(request)
+		return member
 	except ObjectDoesNotExist:
-		return HttpResponse("No such token")
+		return False
 def generate_password(member):
-
+    from xkcdpass import xkcd_password as xp
+    wordfile = xp.locate_wordfile()
+    mywords = xp.generate_wordlist(wordfile=wordfile, min_length=8, max_length=10)
+    password = xp.generate_xkcdpassword(mywords, numwords=2, delimiter='').lower().translate(None, ' -_')
+    return(password)
+def create_user(member, password):
 	user = User.objects.create_user(member.email_id, member.email_id, password)
-def email_confirmed(request):
-	generate_email(member)
-	context = {
-		'email' : email,
-		'password' : password,
-	}
+	member.user = user
+	member.save()
+	return user
+def email_confirm(request, token):
+	user = email_authenticate_token(token)
+	if user:
+		password = generate_password(member)
+		user = create_user(member, password)
+		email = user.email
+		context = {
+			'email' : email,
+			'password' : password,
+		}
+	else:
+		context = {
+			'email' : "No Such Token",
+			'password' : "No Such Token",
+		}
 	return render(request, 'main/email_verified.html', context)

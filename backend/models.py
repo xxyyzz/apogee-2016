@@ -19,7 +19,7 @@ class Participant(models.Model):
 	phone_two = models.BigIntegerField(null=True, blank=True)
 	email_id = models.EmailField(unique=True)
 	email_verified = models.BooleanField(default=False)
-	email_token = models.CharField(max_length=32)
+	email_token = models.CharField(max_length=32, null=True, blank=True)
 	social_link = models.CharField(max_length=300, null=True, blank=True)
 	pcr_approval = models.BooleanField(default=False)
 	events = models.ManyToManyField('Event.Event', blank=True)
