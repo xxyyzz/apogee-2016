@@ -192,11 +192,15 @@ def email_confirm(request, token):
 
 def login_check(request):
 	if request.user.username != '':
+		try:
+			firstname = request.user.participant.name.split(' ', 1)[0],
+		except ObjectDoesNotExist:
+			firstname = None,
 		context = {
 			'status' : 1,
 			'email' : request.user.email,
 			'loggedin' : True,
-			'firstname' : request.user.participant.name.split(' ', 1)[0],
+			'firstname' : firstname,
 		}
 		return JsonResponse(context)
 	else:
