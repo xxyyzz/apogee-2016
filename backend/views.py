@@ -153,7 +153,7 @@ def create_user(member, password):
 	member.user = user
 	member.save()
 	return user
-def mail_password(member, password):
+def mail_password(member, user, password):
 	body = unicode(u'''
 Hello %s !
 
@@ -168,7 +168,7 @@ The Department of Visual Media
 BITS Pilani
 
 P.S. The password is auto generated. We do not intend to offend you in any manner.
-	''' ) % (member.name, member.email_id, password)
+	''' ) % (member.name, user.username, password)
 	send_to = member.email_id
 	# try:
 	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
@@ -179,10 +179,10 @@ def email_confirm(request, token):
 	if member:
 		password = generate_password(member)
 		user = create_user(member, password)
-		email = user.email
-		mail_password(member, password)
+		username = user.username
+		mail_password(member, user, password)
 		context = {
-			'email' : email,
+			'username' : username,
 			'password' : password,
 		}
 	else:

@@ -49,7 +49,30 @@
 <body>
 
 	<!-- LOADER  -->
-	<div id="loader"></div>
+	<div id="loader">
+		<div class="abs_center">
+		<svg id="loadersvg" width="140" height="40">
+		  <rect width="40" height="40" x="0" y="0" rx="6" ry="6">
+		    <animate attributeName="width" values="0;40;40;40;0" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="height" values="0;40;40;40;0" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="x" values="20;0;0;0;20" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="y" values="20;0;0;0;20" dur="1000ms" repeatCount="indefinite"/>
+		  </rect>
+		  <rect width="40" height="40" x="50" y="0" rx="6" ry="6">
+		    <animate attributeName="width" values="0;40;40;40;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="height" values="0;40;40;40;0" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="x" values="70;50;50;50;70" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="y" values="20;0;0;0;20" begin="200ms" dur="1000ms" repeatCount="indefinite"/>
+		  </rect>
+		  <rect width="40" height="40" x="100" y="0" rx="3" ry="3">
+		    <animate attributeName="width" values="0;40;40;40;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="height" values="0;40;40;40;0" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="x" values="120;100;100;100;120" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+		    <animate attributeName="y" values="20;0;0;0;20" begin="400ms" dur="1000ms" repeatCount="indefinite"/>
+		  </rect>
+		</svg>
+		</div>
+	</div>
 
 	<div class="gen_lb">
 		<div class="close_gen_lb">
@@ -199,8 +222,8 @@
 			<div class="login-desc">Login using the user credentials sent on your registered e-mail, to register for events, pay registration fees and more. </div>
 
 			<form  id="login-form">
-				<label for="useremail_l">E-Mail</label>
-				<input type="email" id="useremail_l" required>
+				<label for="useremail_l">Username</label>
+				<input type="text" id="useremail_l" required>
 				<label for="userpassword_l">Password</label>
 				<input type="password" id="userpassword_l" required>
 				<div class="error_box"></div>
