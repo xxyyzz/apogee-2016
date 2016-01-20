@@ -182,7 +182,7 @@ def email_confirm(request, token):
 		username = user.username
 		mail_password(member, password)
 		context = {
-			'email' : username,
+			'username' : username,
 			'password' : password,
 		}
 	else:
