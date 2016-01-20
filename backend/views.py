@@ -245,8 +245,7 @@ def events_check(request):
 					registered = False
 				eventdata = {
 						'id':event.id,
-						'name':event.name,
-						'regsitration_enabled' : event.register,
+						'reg_enabled' : event.register,
 						'registered' : registered,
 					}
 				container['events'].append(eventdata)
