@@ -17,6 +17,7 @@ def user_login(request):
 		user = authenticate(username=username, password=password)
 		if user:
 			if user.is_active:
+				login(request, user)
 				context = {
 					'status' : 1,
 					'firstname' : user.participant.name.split(' ', 1)[0],
@@ -189,7 +190,6 @@ def email_confirm(request, token):
 	return render(request, 'main/email_verified.html', context)
 
 def login_check(request):
-	z = request.user.username
 	if request.user.is_authenticated():
 		try:
 			firstname = request.user.participant.name.split(' ', 1)[0],
@@ -203,12 +203,9 @@ def login_check(request):
 		}
 		return JsonResponse(context)
 	else:
-		k = request.user.username
 		context = {
 			'status' : 0,
 			'loggedin' : False,
-			'k' : k,
-			'z' : z,
 		}
 		return JsonResponse(context)
 
