@@ -189,7 +189,7 @@ def email_confirm(request, token):
 	return render(request, 'main/email_verified.html', context)
 
 def login_check(request):
-	if request.user.username:
+	if request.user.is_authenticated:
 		try:
 			firstname = request.user.participant.name.split(' ', 1)[0],
 		except ObjectDoesNotExist:
