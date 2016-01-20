@@ -238,17 +238,22 @@ $(window).load(function(){
 					$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
 					$('div#login').css({'display':'none'});
 					$('#user-sign-cont').fadeIn();
-					$('#view_profile').fadeIn();
+					// $('#view_profile').fadeIn();
 					user = {
 							'userid':response.email,
 							'firstname':response.firstname,
 							'loggedin':response.loggedin,
 						   };
-					setTimeout(function(){
-					$('#view_profile').css({'display':''});
-					},3000);
+					// setTimeout(function(){
+					// $('#view_profile').css({'display':''});
+					// },3000);
 				}	
-        }
+				else
+					startHelp();
+				},
+		error:function(){
+					startHelp();
+				},		
 	});
 });
 function logout(){
@@ -364,8 +369,6 @@ $('#reg-form').submit(function(e){
 
 
 window.onload = function() {
-
-	startHelp();
 
 	$("#loader").delay(2000).fadeOut(500);
 
