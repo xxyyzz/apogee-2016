@@ -243,14 +243,12 @@ def events_check(request):
 					registered = True if event in request.user.participant.events else False
 				except:
 					registered = False
-				eventdata = [
-					{
+				eventdata = {
 						'id':event.id,
 						'name':event.name,
 						'regsitration_enabled' : event.register,
 						'registered' : registered,
 					}
-				]
 				container['events'].append(eventdata)
 			response['data'].append(container)
 		return JsonResponse(response)
