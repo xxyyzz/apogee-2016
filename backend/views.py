@@ -148,7 +148,7 @@ def generate_password(member):
     return(password)
 def create_user(member, password):
 	name = str(member.name).lower()
-	username = name.translate(None, ' ?.!/;:-_') + member.id
+	username = name.translate(None, ' ?.!/;:-_') + str(member.id)
 	user = User.objects.create_user(username=username, email=member.email_id, password=password)
 	member.user = user
 	member.save()
@@ -179,10 +179,10 @@ def email_confirm(request, token):
 	if member:
 		password = generate_password(member)
 		user = create_user(member, password)
-		email = user.email
+		username = user.username
 		mail_password(member, password)
 		context = {
-			'email' : email,
+			'username' : username,
 			'password' : password,
 		}
 	else:
