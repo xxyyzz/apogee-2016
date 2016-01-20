@@ -7,14 +7,15 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from Event.models import Event, EventCategory
 
 # Create your views here.
 @csrf_exempt
 def user_login(request):
 	if request.method == 'POST':
-		username = request.POST['username']
+		email = request.POST['username']
 		password = request.POST['password']
-		user = authenticate(username=username, password=password)
+		user = authenticate(email=email, password=password)
 		if user:
 			if user.is_active:
 				login(request, user)
@@ -146,7 +147,7 @@ def generate_password(member):
     password = xp.generate_xkcdpassword(mywords, numwords=2, delimiter='').lower().translate(None, ' -_')
     return(password)
 def create_user(member, password):
-	user = User.objects.create_user(member.email_id, member.email_id, password)
+	user = User.objects.create_user(username=member.email_id, email=member.email_id, password=password)
 	member.user = user
 	member.save()
 	return user
@@ -219,3 +220,35 @@ def email_check(request):
 def user_logout(request):
 	logout(request)
 	return login_check(request)
+
+def events_check(request):
+	loggedin = request.user.is_authenticated()
+	response = {
+		'loggedin' : loggedin,
+		'data' : [],
+	}
+	categories = EventCategory.objects.all()
+	events = Event.objects.all()
+	try:
+		registered = True if event in request.user.participant.events else False
+	except:
+		registered = False
+	for category in categories:
+		container = {}
+		container['category'] = category.name
+		container['events'] = []
+		eventlist = {}
+		for event in category.event_set.all():
+			try:
+				registered = True if event in request.user.participant.events else False
+			except:
+				registered = False
+			eventdata = {
+					'id':event.id,
+					'reg_enabled' : event.register,
+					'registered' : registered,
+					'team_event' : event.is_team
+				}
+			container['events'].append(eventdata)
+		response['data'].append(container)
+	return JsonResponse(response)

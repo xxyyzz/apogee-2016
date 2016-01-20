@@ -238,17 +238,22 @@ $(window).load(function(){
 					$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
 					$('div#login').css({'display':'none'});
 					$('#user-sign-cont').fadeIn();
-					$('#view_profile').fadeIn();
+					// $('#view_profile').fadeIn();
 					user = {
 							'userid':response.email,
 							'firstname':response.firstname,
 							'loggedin':response.loggedin,
 						   };
-					setTimeout(function(){
-					$('#view_profile').css({'display':''});
-					},3000);
+					// setTimeout(function(){
+					// $('#view_profile').css({'display':''});
+					// },3000);
 				}	
-        }
+				else
+					startHelp();
+				},
+		error:function(){
+					startHelp();
+				},		
 	});
 });
 function logout(){
@@ -365,8 +370,6 @@ $('#reg-form').submit(function(e){
 
 window.onload = function() {
 
-	startHelp();
-
 	$("#loader").delay(2000).fadeOut(500);
 
 	//TWITTER 
@@ -396,7 +399,7 @@ window.onload = function() {
 // -----------------------------------Online Events---------------------------------------
 var events_list,event_data=[];
 var cur_cat = 0,cur_event=0;
-var keyallow = false;
+var keyallow = false,eventpageopen=false;
 var disp,lh;
 
 $(window).load(function(){
@@ -407,6 +410,7 @@ $(window).load(function(){
 		close_gen_lb();
 	});
 	$('#close_events').click(function(){
+		eventpageopen=false;
 		$('#events').fadeOut();
 	});
 	$('#event_top').click(function(){
@@ -424,11 +428,28 @@ $(window).load(function(){
 	$('.se_descr').on('click','#show_more',function(){
 		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);
 	});
+	$('.se_descr').on('click','#register_me',function(){
+		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);
+		$('.eve_det_ico_register').click();
+	});
 	$('.se_ico').on('click','.eve_det_ico',function(){
 		var x = $(this).data('eve_id'),
 		y = $(this).data('eve_pos'),
 		z = $(this).data('eve_type');
 		$('.se_descr').html(event_data[x].tabs[y][z]);
+	});
+	$('.se_ico').on('click','.eve_det_ico_register',function(){
+		var obj = events_list[cur_cat].events[cur_event];
+		var put_it = $('.se_descr');
+		if(!obj.reg_enabled)
+			put_it.html('Online registrations for this event are not active.');
+		else
+			put_it.html('kar le bhai register aachi event hai');
+	});
+	$('.close_more_det').click(function(){
+		$(this).fadeOut();
+		$('.se_ico').html('');
+		$('.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
 	});
 	$('#searchResults').on('click','.searchResult',function(){
 		go_to_location($(this).data('cat'),$(this).data('eve'));
@@ -436,26 +457,65 @@ $(window).load(function(){
 	});
 
 });
+var mapkeydown=false;
 $(window).keydown(function(e)
 {
     var keycode = e.keyCode || e.which;
-    switch(keycode)
+    // console.log(keycode);
+    if(eventpageopen)
     {
-    	case 37: 
-				prev_strip();
-				break;
-    	case 38: 
-				prev_eve();
-    			break;
-    	case 39:
-				next_strip();
-    			break;
-    	case 40:
-				next_eve();
-    			break;
+    	switch(keycode)
+        {
+        	case 37: 
+    				prev_strip();
+    				break;
+        	case 38: 
+    				prev_eve();
+        			break;
+        	case 39:
+    				next_strip();
+        			break;
+        	case 40:
+    				next_eve();
+        			break;				
+        }
+    }
+    else
+    {	
+    	if(!mapkeydown)
+    	{
+        	mapkeydown=true;
+	    	switch(keycode)
+	        {
+	        	case 37: 
+	    				pan_trig(50,0);
+	    				break;
+	        	case 38: 
+	    				pan_trig(0,50);
+	        			break;
+	        	case 39:
+	    				pan_trig(-50,0);
+	        			break;
+	        	case 40:
+	    				pan_trig(0,-50);
+	        			break;
+	        	case 219 : zoom_trig(-0.2);
+	        				break;
+	        	case 221 : zoom_trig(0.2);
+	        				break;		        			
+	        }
+	    }    
     }
 });
-
+$(window).keyup(function(e)
+{
+	if(!eventpageopen)
+	{
+		mapkeydown=false;
+		pan_stop();
+		zoom_stop();
+	}	
+});
 
 
 function next_strip(){
@@ -464,6 +524,7 @@ function next_strip(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0)');
 	var c = $('#event_right>.strip').css('background-position');
 	$('#event_right>.strip').css('background-position',((parseInt(c)-140) + 'px 0'));
@@ -473,9 +534,12 @@ function next_strip(){
 	if(cur_cat == events_list.length)
 		cur_cat = 0;
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	open_category(cur_cat);
 	setTimeout(function() {
 		keyallow = true;
+		$('.cat_name').html(events_list[cur_cat].category);
+		$('.cat_name').css('bottom','0px');
 	}, 600);
 }
 function prev_strip(){
@@ -484,6 +548,7 @@ function prev_strip(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0)');
 	var c = $('#event_left>.strip').css('background-position');
 	$('#event_left>.strip').css('background-position',((parseInt(c)+140) + 'px 0'));
@@ -493,10 +558,13 @@ function prev_strip(){
 	if(cur_cat<0)
 		cur_cat = events_list.length - 1;
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	open_category(cur_cat);
 	setTimeout(function() {
 		keyallow = true;
-	}, 550);
+		$('.cat_name').html(events_list[cur_cat].category);
+		$('.cat_name').css('bottom','0px');
+	}, 600);
 }
 function next_eve(){
 	if(!keyallow || $("#searchField").is(":focus"))
@@ -504,6 +572,7 @@ function next_eve(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0.5)');
 	$('#event_top>.e_strip').animate({top:(parseInt($('#event_top>.e_strip').css('top')) - lh) + 'px'},500);
 	$('#event_bottom>.e_strip').animate({top:(parseInt($('#event_bottom>.e_strip').css('top')) - lh) + 'px'},500);
@@ -511,13 +580,14 @@ function next_eve(){
 	$('.show_event>.se_head').css('font-size','1em');
 	$('.show_event>.se_descr').animate({'top':'-100px','opacity':0},200);
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	setTimeout(function() {
 		cur_event++;
 		if(cur_event == events_list[cur_cat].events.length){
 			cur_event = 0;
 		}
 		$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
-		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div id="show_more">Show More</div>');
+		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
 		$('.show_event>.se_head').css({'top':'100px'});
 		$('.show_event>.se_head').css('opacity','1');
 		$('.show_event>.se_head').animate({'top':'0px'},250);
@@ -545,6 +615,7 @@ function prev_eve(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0.5)');
 	$('#event_top>.e_strip').animate({top:(parseInt($('#event_top>.e_strip').css('top')) + lh) + 'px'},500);
 	$('#event_bottom>.e_strip').animate({top:(parseInt($('#event_bottom>.e_strip').css('top')) + lh) + 'px'},500);
@@ -552,13 +623,14 @@ function prev_eve(){
 	$('.show_event>.se_head').css('font-size','1em');
 	$('.show_event>.se_descr').animate({'top':'200px','opacity':0},200);
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	setTimeout(function() {
 		cur_event--;
 		if(cur_event < 0){
 			cur_event = events_list[cur_cat].events.length - 1;
 		}
 		$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
-		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc +'</div><div id="show_more">Show More</div>');
+		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
 		$('.show_event>.se_head').css({'top':'-50px'});
 		$('.show_event>.se_head').css('opacity','1');
 		$('.show_event>.se_head').animate({'top':'0px'},250);
@@ -586,9 +658,25 @@ function summaryGet(){
 		method: "GET",
 		success: function(data){
 			events_list = data;
+			eve_reg_info();
 			open_category(cur_cat);
 			keyallow = true;
 			setUpSearchRandom();
+		}
+	});
+}
+function eve_reg_info(){
+	$.ajax({
+		url: "http://bits-apogee.org/2016/api/registrationstatus/",
+		method: "GET",
+		success: function(data){
+			for(var i=0;i<data.length;i++){
+				for(var j=0;j<data[i].events.length;j++){
+					events_list[i].events[j].reg_enabled = data[i].events[j].reg_enabled;
+					events_list[i].events[j].registered = data[i].events[j].registered;
+					events_list[i].events[j].team_event = data[i].events[j].team_event;
+				}
+			}
 		}
 	});
 }
@@ -627,6 +715,7 @@ var icon_map = {
 	'Judging Criteria': 'gavel',
 	'Eligibility': 'check				',
 	'Overview ': 'circle-o',
+	'Register':'pencil',
 }
 function show_all_det(id){
 	var tabs = event_data[id].tabs,ele="";
@@ -636,8 +725,10 @@ function show_all_det(id){
 			ele +='<div class="eve_det_ico" data-eve_id="'+id+'" data-eve_pos="'+x+'" data-eve_type="'+y+'"><div class="ico_name">'+y+'<div></div></div><i class="fa fa-'+icon_map[y]+'"></i></div>';
 		}
 	}
+	ele +='<div class="eve_det_ico_register"><div class="ico_name">Register<div></div></div><i class="fa fa-pencil"></i></div>';
 	$('.se_ico').html(ele);
 	$('.se_ico').fadeIn();
+	$('.close_more_det').fadeIn();
 	$('.se_descr').html(event_data[id].tabs[0][$('.se_ico>div').data('eve_type')]);
 }
 function get_event_detail(id,call_back){
@@ -745,8 +836,8 @@ function go_to_location(cat,eve){
 		t = 8-t;
 	}
 	t = t - cat;
+	$('.cat_name').css('bottom','');
 	$('#event_prev').css('background-position',((parseInt($('#event_prev').css('background-position')) + (t*disp))+'px 0'));
-	
 	var c = parseInt($('#event_right>.strip').css('background-position'));
 	$('#event_right>.strip').css('background-position',((c+(140*t)) + 'px 0'));
 	$('#event_left>.strip').css('background-position',((c+(140*(t+1))) + 'px 0'));
@@ -758,6 +849,7 @@ function go_to_location(cat,eve){
 		{
 			cur_event = eve;
 			var pos_top,pos_bot;
+			$('.cat_name').css('bottom','');
 			if(eve==0){
 				pos_top = -1*lh*events_list[cur_cat].events.length;
 			}
@@ -778,9 +870,10 @@ function go_to_location(cat,eve){
 			$('.show_event>.se_head').css('font-size','1em');
 			$('.show_event>.se_descr').animate({'top':'200px','opacity':0},200);
 			$('.se_ico').html('');
+			$('.close_more_det').css('display','none');
 			setTimeout(function() {
 				$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
-				$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div id="show_more">Show More</div>');
+				$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
 				$('.show_event>.se_head').css({'top':'100px'});
 				$('.show_event>.se_head').css('opacity','1');
 				$('.show_event>.se_head').animate({'top':'0px'},250);
@@ -793,6 +886,8 @@ function go_to_location(cat,eve){
 			}, 250);
 		}
 		else{
+			$('.cat_name').html(events_list[cur_cat].category);
+			$('.cat_name').css('bottom','0px');
 			keyallow = true;
 		}		
 	}, 600);
@@ -886,21 +981,21 @@ var map_ele_info = {
 										ename:'Online Events',
 										content:'Online Events',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(3),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(3),350});},
 									},
 
 	'automation'			:		{
 										ename:'Automation',
 										content:'Automation',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(2),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(2),350});},
 									},
 
 	'developAndDiscover'	:		{
 										ename:'Develop and Discover',
 										content:'Develop and Discover',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
 									},
 
 	'login'					:		{
@@ -914,7 +1009,7 @@ var map_ele_info = {
 										ename:'Build and Design',
 										content:'Build and Design',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(0),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(0),350});},
 									},
 		
 	'youthCon'				:		{
@@ -928,7 +1023,7 @@ var map_ele_info = {
 										ename:'Code and Simulate',
 										content:'Code and Simulate',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(1),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(1),350});},
 									},
 
 	'profShow'				:		{
@@ -942,14 +1037,14 @@ var map_ele_info = {
 										ename:'Economania',
 										content:'Economania',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(4),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(4),350});},
 									},
 
 	'miscellaneous'			:		{
 										ename:'Miscellaneous',
 										content:'Miscellaneous',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(7),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(7),350});},
 									},
 
 	'accomodation'			:		{
@@ -1054,7 +1149,7 @@ var map_ele_info = {
 										ename:'Quiz',
 										content:'Quiz',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
 									},
 
 	'workshops'			:		{
@@ -1067,6 +1162,10 @@ var map_ele_info = {
 }
 
 function content_link(b_icon,b_name,b_content){
+<<<<<<< HEAD
+=======
+	// console.log(b_name,b_content);
+>>>>>>> 8c371ebadff79bc27738ca500e212e0d3e7b61f7
 	$('.main_head').html(b_name);
 	$("div.lb_icon>img").attr("src", b_icon);
 	$('.lb_descr').html(b_content);

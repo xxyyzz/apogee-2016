@@ -1,6 +1,7 @@
 from django.http import HttpResponse, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from Event.models import *
+from backend.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import html2text as gaussx
@@ -58,54 +59,43 @@ def summary(request):
 		response.append(container)
 	return JsonResponse(response, safe=False)
 
-# @csrf_exempt
-# def getcategoryevents(request):
-# 	if request.GET:
-# 		data=request.GET
-# 		name=data['category']
-# 		try:
-# 			c=Category.objects.get(name=name)
-# 		except :
-# 			raise Http404
-# 		eset= Event.objects.filter(category = c)
-# 		resp={}
-# 		resp['Events']=[]
-# 		for e in eset :
-# 			dic={}
-# 			dic['eventid']=int(e.id)
-# 			dic['eventname']=str(unicode(e.name))
-# 			dic['eventcategory']=str(unicode(e.category.name))
-# 			dic['date']=    str( unicode( e.date ))
-# 			dic['time']=   str(  unicode(e.time ) )
-# 			dic['eventcontent']= str(unicode(e.content))
-# 			dic['venue']=    str  (unicode(e.venue) )
-# 			if e.icon:
-# 				dic['eventicon']=str(e.icon.url)
-# 			else :
-# 				dic['eventicon']=''
-# 			dic['eventdescription']=unicode(e.description)
-# 			dic['eventshortdescription']=unicode(e.short_description)
-# 			resp['Events'].append(dic)
-# 		# json = simplejson.dumps(resp)
-# 		# return HttpResponse(json, mimetype='application/json')
-# 		return HttpResponse(json.dumps(resp), content_type="application/json")
-# 	else:
-# 		raise Http404
-# @csrf_exempt
-# def getnotificationdata(request):
-#     try:
-#         n =Notification.objects.all()
-#     except :
-#         raise Http404
-#     resp={}
-#     resp['Notifications']=[]
-#     for notification in n :
-#         dic={}
-#         dic['content']=str(unicode(notification.content))
-#         dic['type']=unicode(notification.types)
-#         dic['link']=unicode(notification.link)
+def register_single(request, eventid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	try:
+		participant.events.add(event)
+		participant.save()
+		response = {
+			'registered' : True,
+		}
+	except:
+		response = {
+			'registered' : False,
+		}
+	return JsonResponse(response)
+def register_team(request, eventid, teamid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	team = Team.objects.get(id=teamid)
+	try:
+		participant.events.add(event)
+		participant.teams.add(team)
+		participant.save()
 
-#         resp['Notifications'].append(dic)
-#         # json = simplejson.dumps(resp)
-#         # return HttpResponse(json, mimetype='application/json')
-#     return HttpResponse(json.dumps(resp), content_type="application/json")
+		response = {
+			'registered' : True,
+		}
+	except:
+		response = {
+			'registered' : False,
+		}
+	return JsonResponse(response)
+# def register_new_team(request):
+# 	if request.POST:
+# 		memberids = request.POST.getlist('id')
+# 		name
+# 		member
+# 		leader
+# 		event
+# 		team = Team.objects.create()
+# 		for memberid in memberids:
