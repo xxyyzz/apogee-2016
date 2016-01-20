@@ -1,2 +1,84 @@
-{{ email }}
-{{ password }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apogee 16</title>
+<style>
+body, html{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height:100%;
+	background-color: #2D1818;
+}
+.det_wrapper{
+	position: relative;
+	min-width: 80%;
+	width: 900px;
+	max-width: 100%;
+	margin: auto;
+	color: white;
+}
+.det_head{
+	position: relative;
+	width: 100%;
+	padding: 50px 0;
+	text-align: center;
+	font-size: 3em;
+}
+.det_descr_cont{
+	position: relative;
+	border-top: 2px solid white;
+	border-bottom: 2px solid white;
+	margin-bottom: 50px;
+	padding: 20px 50px;
+	text-align: center;
+}
+.det_descr{
+	font-size: 2em;
+    margin: 25px 0;
+    font-weight: 300;
+}
+.credentials{
+	position: relative;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid #eee;
+    font-size: 1.5em;
+    text-align: left;
+    display: inline-block;
+    padding: 10px 40px;
+}
+.box_align{
+	float: left;
+	margin:  5px;
+}
+</style>
+</head>
+<body>
+<div class="det_wrapper">
+	<div class="det_head">
+		<img src="./img/logo.png" style="width:80%">
+	</div>
+	<div class="det_descr_cont">
+		<div class="det_descr">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam commodi consequuntur, nihil consectetur quis, aliquam natus possimus cumque eos doloribus ducimus impedit? Asperiores quis ipsum, iusto tempora consectetur eius eveniet!
+		</div>
+		<div class="credentials">
+			<div>
+				<div class="box_align" style="text-align:right">
+					dekho ye email:
+					<br>
+					aur ye pass:
+				</div>
+				<div class="box_align">
+					{{ email }}<br>{{ password }}
+				</div>
+			</div>
+		</div>
+		<div style="font-size: 1.2em;margin:5px 0;">
+			Lorem ipsum dolor sit amet, 
+		</div>
+	</div>
+</div>
+</body>
+</html>
