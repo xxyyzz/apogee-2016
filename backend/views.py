@@ -222,37 +222,33 @@ def user_logout(request):
 	return login_check(request)
 
 def events_check(request):
-	if request.user.is_authenticated():
-		response = {
-			'loggedin' : True,
-			'data' : [],
-		}
-		categories = EventCategory.objects.all()
-		events = Event.objects.all()
-		try:
-			registered = True if event in request.user.participant.events else False
-		except:
-			registered = False
-		for category in categories:
-			container = {}
-			container['category'] = category.name
-			container['events'] = []
-			eventlist = {}
-			for event in category.event_set.all():
-				try:
-					registered = True if event in request.user.participant.events else False
-				except:
-					registered = False
-				eventdata = {
-						'id':event.id,
-						'reg_enabled' : event.register,
-						'registered' : registered,
-					}
-				container['events'].append(eventdata)
-			response['data'].append(container)
-		return JsonResponse(response)
-	else:
-		response = {
-			'loggedin' : False,
-		}
-		return JsonResponse(response)
+	loggedin = request.user.is_authenticated()
+	response = {
+		'loggedin' : Loggedin,
+		'data' : [],
+	}
+	categories = EventCategory.objects.all()
+	events = Event.objects.all()
+	try:
+		registered = True if event in request.user.participant.events else False
+	except:
+		registered = False
+	for category in categories:
+		container = {}
+		container['category'] = category.name
+		container['events'] = []
+		eventlist = {}
+		for event in category.event_set.all():
+			try:
+				registered = True if event in request.user.participant.events else False
+			except:
+				registered = False
+			eventdata = {
+					'id':event.id,
+					'reg_enabled' : event.register,
+					'registered' : registered,
+					'team_event' : event.is_team
+				}
+			container['events'].append(eventdata)
+		response['data'].append(container)
+	return JsonResponse(response)
