@@ -275,6 +275,7 @@ function logout(){
 					$('#user-sign-cont>div:nth-child(1)>span').html('');
 					$('div#login').fadeIn();
 					$('#user-sign-cont').css('display','');
+					eve_reg_info();
 				}	
 				else
 					alert('Unsuccessful');
@@ -314,6 +315,7 @@ $('#login-form').submit(function(e){
 					'firstname':response.firstname,
 					'loggedin':true,
 				}
+				eve_reg_info();
 				setTimeout(function(){
 					$('#view_profile').css({'display':''});
 				},3000);
@@ -435,6 +437,9 @@ $(window).load(function(){
 		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);
 		$('.eve_det_ico_register').click();
 	});
+	$('.se_descr').on('click','.register_event',function(){
+		register_for_event(events_list[cur_cat].events[cur_event].id);
+	});
 	$('.se_ico').on('click','.eve_det_ico',function(){
 		var x = $(this).data('eve_id'),
 		y = $(this).data('eve_pos'),
@@ -446,8 +451,16 @@ $(window).load(function(){
 		var put_it = $('.se_descr');
 		if(!obj.reg_enabled)
 			put_it.html('Online registrations for this event are not active.');
+		else if(user.loggedin){
+			if(obj.registered){
+				put_it.html('You are already registered for this event');
+			}
+			else{
+				put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
+			}
+		}
 		else
-			put_it.html('kar le bhai register aachi event hai');
+			put_it.html('Please login to register in this event');
 	});
 	$('.close_more_det').click(function(){
 		$(this).fadeOut();
@@ -673,13 +686,22 @@ function eve_reg_info(){
 		url: "http://bits-apogee.org/2016/api/registrationstatus/",
 		method: "GET",
 		success: function(data){
-			for(var i=0;i<data.length;i++){
-				for(var j=0;j<data[i].events.length;j++){
-					events_list[i].events[j].reg_enabled = data[i].events[j].reg_enabled;
-					events_list[i].events[j].registered = data[i].events[j].registered;
-					events_list[i].events[j].team_event = data[i].events[j].team_event;
+			for(var i=0;i<data.data.length;i++){
+				for(var j=0;j<data.data[i].events.length;j++){
+					events_list[i].events[j].reg_enabled = data.data[i].events[j].reg_enabled;
+					events_list[i].events[j].registered = data.data[i].events[j].registered;
+					events_list[i].events[j].team_event = data.data[i].events[j].team_event;
 				}
 			}
+		}
+	});
+}
+function register_for_event(id){
+	$.ajax({
+		url: "http://bits-apogee.org/2016/event/register/"+id+"/",
+		method: "GET",
+		success: function(data){
+			console.log(data);
 		}
 	});
 }
@@ -954,8 +976,8 @@ var map_ele_info = {
 									},
 	'dhiti'					:		{
 										ename:'Dhiti',
-										content:'<p>We have a population of around 1.2 billion and it is just a matter of time, that we will be the nation with the most number of young and technically sound work forces. Technology has grown in many forms and can be made accessible almost to all. It is just a luxury for some but can ease the life of many and can be the key to solving some of the most pressing issues faced by the country today. We just need some ideas and tinkering to apply it on the field.</p><p>It is only by solving such basic problems that development will occur collectively in every community and not selectively. Dhiti(sanskrit for “An idea”) is a platform for passionate individuals who ideate and aspire for technology to reach the grassroots. Here we will provide you with problems and mentors to form feasible solutions to various issues and provide recognition to your solution. So, let’s put our ideas and knowledge bases to some real use.</p><br><a class="lb_a" href="http://bits-apogee.org/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
-										icon:'',
+										content:'<p>We have a population of around 1.2 billion and it is just a matter of time, that we will be the nation with the most number of young and technically sound work forces. Technology has grown in many forms and can be made accessible almost to all. It is just a luxury for some but can ease the life of many and can be the key to solving some of the most pressing issues faced by the country today. We just need some ideas and tinkering to apply it on the field.</p><p>It is only by solving such basic problems that development will occur collectively in every community and not selectively. Dhiti(sanskrit for “An idea”) is a platform for passionate individuals who ideate and aspire for technology to reach the grassroots. Here we will provide you with problems and mentors to form feasible solutions to various issues and provide recognition to your solution. So, let’s put our ideas and knowledge bases to some real use.</p><p><b>For more details,contact</b><br>Sameer<br>+91 7728086695</p><br><a class="lb_a" href="http://bits-apogee.org/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										icon:'/2016/static/cover/main/img/lb-icons/dhiti.svg',
 										func:content_link,
 									},
 
@@ -976,7 +998,7 @@ var map_ele_info = {
 	'iot'					:		{
 										ename:'IoT Challenge',
 										content:'<p><b>IoT Challenge 2016</b> is a one-of-a-kind platform where participants will get all the required tools from Texas Instruments to give a real form to their creative IoT solutions.</p><p>The uniqueness and beauty of this challenge is that there will not be a particular problem statement. The teams can ideate an IoT solution in any of the facets of human life to make it simpler, easier, more convenient, or more systematic. The teams can explore their minds in a wide range of fields.</p><p>In the preliminary round, teams will have to submit their solution in a detailed written form on the online portal. The teams whose solutions are innovative and feasible will be selected for the final round. They will be provided a toolkit with all the necessary equipments to build a working prototype of their idea over a period of 25 days. The selected teams will present their prototypes at APOGEE-2016 before a panel of expert judges.</p><p>Each member of the winning team will be given TI’s smartwatch. So along with creating your own IoT prototype you can get one created by the maestros! All the teams presenting their solutions in the final round will get certificates from TI and their own to-be IoT device.</p><br><a class="lb_a" href="http://bits-apogee.org/iot/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
-										icon:'/2016/static/cover/main/img/lb-icons/iot.svg',
+										icon:'/2016/static/cover/main/img/lb-icons/iotc.svg',
 										func:content_link,
 									},
 
@@ -1017,8 +1039,8 @@ var map_ele_info = {
 		
 	'youthCon'				:		{
 										ename:'Youth Conference',
-										content:'',
-										icon:'/2016/static/cover/main/img/lb-icons/youthCon.svg',
+										content:'<p><b>Leading Endeavour to Achieve Progress (LEAP) </b>is an initiative for all the student run social volunteer organisations across the country. It is an effort of people who feel that the pace of development has become stagnant with the passage of time. In spite of having all the sources and means, most of the organizations stand at the same place where they were ten years ago. LEAP is not just an initiative to improve the efficiency of organizations but also a way through which creative and good ideas can be shared and used for the betterment of the society.</p><p>Numerous student led societies have enough volunteer strength, funds and team dedication, but they fail to create a significant impact. It is thus the need of the hour to have a society joining hands and working together to convert all the whispers into roars. A common platform for like minded volunteer society, connecting them through the will to bring about a change, is what we are working for. It aims to create a larger impact on the society, that are ultimate beneficiaries of actions, they perform.</p><br><a class="lb_a" href="http://bits-apogee.org/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										icon:'/2016/static/cover/main/img/lb-icons/youthcon.svg',
 										func:content_link,
 									},
 
@@ -1032,7 +1054,7 @@ var map_ele_info = {
 	'profShow'				:		{
 										ename:'ProfShows',
 										content:'<div class="c_soon">Coming soon...</div>',
-										icon:'',
+										icon:'/2016/static/cover/main/img/lb-icons/profshows.svg',
 										func:content_link,
 									},
 
@@ -1051,7 +1073,7 @@ var map_ele_info = {
 									},
 
 	'accomodation'			:		{
-										ename:'',
+										ename:'Accommodation',
 										content:'<p>All registered participants that come to Pilani will be provided accommodation on the campus.Colleges will share a dormitory style room with a capacity of 25-30 people.Bedding, buckets and extension cords will be provided.The accommodation is free of cost, but a caution deposit of Rs. 200 per participant will be collected which will be refunded at the time of checkout, provided there is no damage to the room, bedding and so on.No issues regarding change of accommodation will be entertained since all the accommodation centers are pre-checked by us.</p><h3>Hospitality :</h3><p>There will be a Hospitality counter open 24 hours at the "Reception & Accommodation" hut, to help you with further queries once you have arrived on campus.A hospitality number will also be provided for all the queries pertaining to the same.</p>',
 										icon:'/2016/static/cover/main/img/lb-icons/accomodation.svg',
 										func:content_link,
@@ -1067,7 +1089,7 @@ var map_ele_info = {
 	'aic'					:		{
 										ename:'APOGEE Innovation Challenge',
 										content:'<p><b>APOGEE Innovation Challenge</b>, an exceptional technical symposium, aims at quenching your thirst for hands-on experience in real life problems plaguing the industrial world.</p><p>Organized in collaboration with various multinational companies, this event presents before you existing challenges faced by these companies who seek their solutions from you. These problems, which happen to be discipline specific (one need not belong to that discipline), are to be solved by participants in teams of 2-4 in a month. After scrutiny by company officials, top 5 teams will be presenting their final solutions during APOGEE ‘16.</p><p>Exciting Internship Offers and Cash Prizes await the winners. Needless to say, you can brag about cracking a professional challenge while still being in college. Participation Certificate shall be given to all members of each team which present solutions during APOGEE ‘16.</p><br><a class="lb_a" href="http://bits-apogee.org/aic/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
-										icon:'',
+										icon:'/2016/static/cover/main/img/lb-icons/aic.svg',
 										func:content_link,
 									},
 
@@ -1116,7 +1138,7 @@ var map_ele_info = {
 	'sponsors'				:		{
 										ename:'Sponsors',
 										content:'',
-										icon:'/2016/static/cover/main/img/lb-icons/startupWeekend.svg',
+										icon:'/2016/static/cover/main/img/lb-icons/sponsor.svg',
 										func:content_link,
 									},
 
@@ -1156,16 +1178,15 @@ var map_ele_info = {
 									},
 
 	'workshops'			:		{
-										ename:'Literary Fest',
+										ename:'Workshops',
 										content:'<div class="c_soon">Coming soon...</div>',
-										icon:'',
+										icon:'/2016/static/cover/main/img/lb-icons/workshops.svg',
 										func:content_link,
 									},
 
 }
 
 function content_link(b_icon,b_name,b_content){
-	// console.log(b_name,b_content);
 	$('.main_head').html(b_name);
 	$("div.lb_icon>img").attr("src", b_icon);
 	$('.lb_descr').html(b_content);
