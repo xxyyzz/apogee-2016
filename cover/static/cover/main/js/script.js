@@ -433,6 +433,14 @@ $(window).load(function(){
 		z = $(this).data('eve_type');
 		$('.se_descr').html(event_data[x].tabs[y][z]);
 	});
+	$('.se_ico').on('click','.eve_det_ico_register',function(){
+		$('.se_descr').html('Kar le bhai register aacha event hai');
+	});
+	$('.close_more_det').click(function(){
+		$(this).fadeOut();
+		$('.se_ico').html('');
+		$('.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div id="show_more">Show More</div>');
+	});
 	$('#searchResults').on('click','.searchResult',function(){
 		go_to_location($(this).data('cat'),$(this).data('eve'));
 		closeSearch();
@@ -467,6 +475,7 @@ function next_strip(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0)');
 	var c = $('#event_right>.strip').css('background-position');
 	$('#event_right>.strip').css('background-position',((parseInt(c)-140) + 'px 0'));
@@ -476,9 +485,12 @@ function next_strip(){
 	if(cur_cat == events_list.length)
 		cur_cat = 0;
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	open_category(cur_cat);
 	setTimeout(function() {
 		keyallow = true;
+		$('.cat_name').html(events_list[cur_cat].category);
+		$('.cat_name').css('bottom','0px');
 	}, 600);
 }
 function prev_strip(){
@@ -487,6 +499,7 @@ function prev_strip(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0)');
 	var c = $('#event_left>.strip').css('background-position');
 	$('#event_left>.strip').css('background-position',((parseInt(c)+140) + 'px 0'));
@@ -496,10 +509,13 @@ function prev_strip(){
 	if(cur_cat<0)
 		cur_cat = events_list.length - 1;
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	open_category(cur_cat);
 	setTimeout(function() {
 		keyallow = true;
-	}, 550);
+		$('.cat_name').html(events_list[cur_cat].category);
+		$('.cat_name').css('bottom','0px');
+	}, 600);
 }
 function next_eve(){
 	if(!keyallow || $("#searchField").is(":focus"))
@@ -507,6 +523,7 @@ function next_eve(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0.5)');
 	$('#event_top>.e_strip').animate({top:(parseInt($('#event_top>.e_strip').css('top')) - lh) + 'px'},500);
 	$('#event_bottom>.e_strip').animate({top:(parseInt($('#event_bottom>.e_strip').css('top')) - lh) + 'px'},500);
@@ -514,6 +531,7 @@ function next_eve(){
 	$('.show_event>.se_head').css('font-size','1em');
 	$('.show_event>.se_descr').animate({'top':'-100px','opacity':0},200);
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	setTimeout(function() {
 		cur_event++;
 		if(cur_event == events_list[cur_cat].events.length){
@@ -548,6 +566,7 @@ function prev_eve(){
 		return;
 	}
 	keyallow = false;
+	$('.cat_name').css('bottom','');
 	$('.show_event').css('background-color','rgba(0,0,0,0.5)');
 	$('#event_top>.e_strip').animate({top:(parseInt($('#event_top>.e_strip').css('top')) + lh) + 'px'},500);
 	$('#event_bottom>.e_strip').animate({top:(parseInt($('#event_bottom>.e_strip').css('top')) + lh) + 'px'},500);
@@ -555,6 +574,7 @@ function prev_eve(){
 	$('.show_event>.se_head').css('font-size','1em');
 	$('.show_event>.se_descr').animate({'top':'200px','opacity':0},200);
 	$('.se_ico').html('');
+	$('.close_more_det').css('display','none');
 	setTimeout(function() {
 		cur_event--;
 		if(cur_event < 0){
@@ -595,6 +615,15 @@ function summaryGet(){
 		}
 	});
 }
+function eve_reg_info(){
+	$.ajax({
+		url: "http://bits-apogee.org/2016/api/registrationstatus/",
+		method: "GET",
+		success: function(data){
+			console.log(data);
+		}
+	});
+}
 function open_category(x){
 	var data = events_list[x].events,ele="";
 	$('#event_top > .e_strip').fadeOut(250);
@@ -630,6 +659,7 @@ var icon_map = {
 	'Judging Criteria': 'gavel',
 	'Eligibility': 'check				',
 	'Overview ': 'circle-o',
+	'Register':'pencil',
 }
 function show_all_det(id){
 	var tabs = event_data[id].tabs,ele="";
@@ -639,8 +669,10 @@ function show_all_det(id){
 			ele +='<div class="eve_det_ico" data-eve_id="'+id+'" data-eve_pos="'+x+'" data-eve_type="'+y+'"><div class="ico_name">'+y+'<div></div></div><i class="fa fa-'+icon_map[y]+'"></i></div>';
 		}
 	}
+	ele +='<div class="eve_det_ico_register"><div class="ico_name">Register<div></div></div><i class="fa fa-pencil"></i></div>';
 	$('.se_ico').html(ele);
 	$('.se_ico').fadeIn();
+	$('.close_more_det').fadeIn();
 	$('.se_descr').html(event_data[id].tabs[0][$('.se_ico>div').data('eve_type')]);
 }
 function get_event_detail(id,call_back){
@@ -748,8 +780,8 @@ function go_to_location(cat,eve){
 		t = 8-t;
 	}
 	t = t - cat;
+	$('.cat_name').css('bottom','');
 	$('#event_prev').css('background-position',((parseInt($('#event_prev').css('background-position')) + (t*disp))+'px 0'));
-	
 	var c = parseInt($('#event_right>.strip').css('background-position'));
 	$('#event_right>.strip').css('background-position',((c+(140*t)) + 'px 0'));
 	$('#event_left>.strip').css('background-position',((c+(140*(t+1))) + 'px 0'));
@@ -761,6 +793,7 @@ function go_to_location(cat,eve){
 		{
 			cur_event = eve;
 			var pos_top,pos_bot;
+			$('.cat_name').css('bottom','');
 			if(eve==0){
 				pos_top = -1*lh*events_list[cur_cat].events.length;
 			}
@@ -781,6 +814,7 @@ function go_to_location(cat,eve){
 			$('.show_event>.se_head').css('font-size','1em');
 			$('.show_event>.se_descr').animate({'top':'200px','opacity':0},200);
 			$('.se_ico').html('');
+			$('.close_more_det').css('display','none');
 			setTimeout(function() {
 				$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
 				$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div id="show_more">Show More</div>');
@@ -796,6 +830,8 @@ function go_to_location(cat,eve){
 			}, 250);
 		}
 		else{
+			$('.cat_name').html(events_list[cur_cat].category);
+			$('.cat_name').css('bottom','0px');
 			keyallow = true;
 		}		
 	}, 600);
