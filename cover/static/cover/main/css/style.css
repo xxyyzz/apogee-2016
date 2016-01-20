@@ -593,7 +593,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 }
 
 #login-reg-box{
-    height:60%;
+    height:90%;
     width:80%;
     background:white;
     color:black;  
@@ -603,24 +603,101 @@ input[type="range"]::-webkit-slider-thumb:active {
 	color: #333;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
     display: none;
+    overflow-y:auto;
+}
+form label{
+    /*color: #4d4d4d;*/
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.1875em;
+    font-weight: bold;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+form input[type="text"], form input[type="password"], form input[type="email"], form input[type="number"]{
+    background-color: #fafafa;
+    font-family: inherit;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.75);
+    display: block;
+    font-size: 0.875em;
+    margin: 0 0 1em 0;
+    padding: 0.5em;
+    height: 2.3125em;
+    width: 100%;
+    max-width: 320px;
+    outline: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
+    transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
+}
+form input[type="text"]:focus, form input[type="password"]:focus, form input[type="email"]:focus, form input[type="number"]:focus{
+    -webkit-box-shadow: 0 0 5px #999999;
+    -moz-box-shadow: 0 0 5px #999999;
+    box-shadow: 0 0 5px #999999;
+    border-color: #999999;
+}
+form button[type="submit"]
+{
+	border: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: normal;
+    line-height: 1;
+    outline: none;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 0.75em;
+    padding-right: 1.5em;
+    padding-bottom: 0.8125em;
+    padding-left: 1.5em;
+    font-size: 1em;
+    background-color: #6B6B6B;
+    border-color: #627f9a;
+    color: white;
+}
+form button[type="submit"]:hover,form button[type="submit"]:focus,form button[type="submit"]:active{
+	background-color: #565656;
+}
+.error_box
+{
+	border: 1px solid #d03232;
+    background-color: #f4e1e1;
+    display: none; 
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 1em;
 }
 
 #login-box {
 	position: relative;
-	float: left;
+	display: inline-block;
+    vertical-align: top;
 	box-sizing: border-box;
-	padding: 20px 30px;
-	width:calc(50% - 5px);
+	padding: 10px 30px;
+	width:50%;
 	border-right : 1px solid #ddd;
 	height: auto
 }
 
-.login-head {
+.login-head,.reg-head {
 	font-weight: 900;
 	font-size: 50px;
 }
 
-.login-desc {
+.login-desc,.reg-desc {
     margin-top: 5px;
     text-align: justify;
     text-shadow: 1px 1px #fff;
@@ -629,9 +706,9 @@ input[type="range"]::-webkit-slider-thumb:active {
 
 #reg-box {
 	position: relative;
-	float: right;
 	width:calc(50% - 5px);
-
+	display: inline-block;
+	padding: 10px 30px;
 }
 
 .login-reg-head {
