@@ -762,8 +762,8 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	height: 100px;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	border-left: 20px solid #02567e;
-	border-right: 20px solid #02567e;
+	border-left: 20px solid #118382;
+	border-right: 20px solid #118382;
 	background-color: #f9fbd6;
 	overflow: hidden;
 }
@@ -785,8 +785,8 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	height: 140px;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	border-top: 20px solid #02567e;
-	border-bottom: 20px solid #02567e;
+	border-top: 20px solid #118382;
+	border-bottom: 20px solid #118382;
 	background-color: #001328;
 }
 #event_left{right:100%;}
@@ -833,13 +833,15 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: #02567E;
+	font-weight: 900;
 }
 .show_event{
 	overflow: hidden;
 	color: white;
-	border: 15px solid #f9fbd6;
+	border: 15px solid #D2effc;
 	border-radius: 20px;
-	box-shadow: inset 0 0 20px #000;
+	box-shadow: inset 0 0 10px #000;
 }
 .se_head{
 	position: relative;
@@ -868,6 +870,10 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	font-size: 1.3em;
     font-weight: 300;
     text-shadow: 1px 1px 2px #000;
+}
+.se_descr p,.se_descr span{
+	font-size: 1em !important;
+	color: #fff !important;
 }
 .light_large_font{
 	font-size: 1.6em;
@@ -899,12 +905,38 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	background-color: #fff;
 	text-shadow:none;
 }
+.cat_name{
+	position: absolute;
+	width:100%;
+    text-align: center;
+    font-size: 3em;
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px 30px;
+    height: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    bottom:-100px;
+    font-weight:900;
+    -webkit-transition: bottom 0.2s ease;
+    -moz-transition: bottom 0.2s ease;
+    transition: bottom 0.2s ease;
+}
 .se_ico{
 	position: absolute;
     right: 20px;
-    top: 110px;
+    top: 103px;
 }
-.eve_det_ico{
+.close_more_det{
+	display: none;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	font-size: 1.2em;
+	cursor: pointer;
+}
+.eve_det_ico,.eve_det_ico_register{
     position: relative;
     width: 40px;
     height: 40px;
@@ -913,17 +945,17 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     border: 1px solid #fff;
     border-radius: 50%;
     font-size: 1.5em;
-    line-height: 40px;
+    line-height: 35px;
     cursor: pointer;
     -moz-transition: all 350ms ease;
 	-webkit-transition: all 350ms ease;
     transition: all 350ms ease;
 }
-.eve_det_ico:hover{
+.eve_det_ico:hover,.eve_det_ico_register:hover{
 	color: #000;
 	background-color: #fff;
 }
-.eve_det_ico:hover > .ico_name{
+.eve_det_ico:hover > .ico_name,.eve_det_ico:hover > .ico_name{
 	display: block;
 }
 .ico_name{
