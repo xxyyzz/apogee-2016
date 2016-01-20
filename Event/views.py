@@ -32,7 +32,7 @@ def geteventdata(request,event_id):
 	resp['is_kernel']= str(unicode(event.is_kernel))
 	resp['register']=    str  (unicode(event.register) )
 	# resp['eventdescription']=unicode(event.description)
-	resp['tabs'] = [{k.heading.name : k.content} for k in event.tabs_set.all()]
+	resp['tabs'] = [{k.heading.name : k.content} for k in event.tab_set.all()]
 	resp['img']=    str( unicode( event.img ))
 	return JsonResponse(resp)
 
@@ -58,6 +58,11 @@ def summary(request):
 		response.append(container)
 	return JsonResponse(response, safe=False)
 
+def register_single(request, eventid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	participant.events.add(event)
+	participant.save()
 # @csrf_exempt
 # def getcategoryevents(request):
 # 	if request.GET:
