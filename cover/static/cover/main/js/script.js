@@ -1162,10 +1162,6 @@ var map_ele_info = {
 }
 
 function content_link(b_icon,b_name,b_content){
-<<<<<<< HEAD
-=======
-	// console.log(b_name,b_content);
->>>>>>> 8c371ebadff79bc27738ca500e212e0d3e7b61f7
 	$('.main_head').html(b_name);
 	$("div.lb_icon>img").attr("src", b_icon);
 	$('.lb_descr').html(b_content);
