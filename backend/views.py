@@ -179,10 +179,10 @@ def email_confirm(request, token):
 	if member:
 		password = generate_password(member)
 		user = create_user(member, password)
-		email = user.email
+		username = user.username
 		mail_password(member, password)
 		context = {
-			'email' : email,
+			'email' : username,
 			'password' : password,
 		}
 	else:
