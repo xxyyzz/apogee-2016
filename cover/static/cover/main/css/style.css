@@ -909,6 +909,24 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	background-color: #fff;
 	text-shadow:none;
 }
+.register_event{
+	text-align: center;
+    margin: 10px;
+    width: 150px;
+    color: white;
+    border: 1px solid #fff;
+    line-height: 35px;
+    padding: 0 10px;
+    cursor: pointer;
+    -moz-transition: all 350ms ease;
+    -webkit-transition: all 350ms ease;
+    transition: all 350ms ease;
+}
+.register_event:hover{
+	color: #000;
+	background-color: #fff;
+	text-shadow:none;
+}
 .cat_name{
 	position: absolute;
 	width:100%;
