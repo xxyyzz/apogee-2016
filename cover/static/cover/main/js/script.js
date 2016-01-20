@@ -185,12 +185,12 @@ $("div#login").click(function() {
 
 function open_gen_lb(){
 	fireOverlay();
-	$('.gen_lb_cont').fadeIn();
+	$('.gen_lb').fadeIn();
 }
 
 function close_gen_lb(){
 	killOverlay();
-	$('.gen_lb_cont').fadeOut();
+	$('.gen_lb').fadeOut();
 }
 
 function closeLightBox() {

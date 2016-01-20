@@ -277,23 +277,44 @@ nav{
 .gen_lb{
 	position: relative;
     margin: 2% auto;
-    min-width: 70%;
+    min-width: 75%;
     width: 450px;
     max-width: 100%;
     min-height: 90%;
+    height: 90%;
     background-color: #fafafa;
     z-index: 1000;
 	border-radius: 2px;
-	color: #555;
+	color: #444;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
+	display: none;
 }
+
+.lb_a {
+	text-decoration: none;
+    color: #555;
+    border: 1px solid #555;
+    padding: 5px 20px;
+    border-radius: 3px;
+}
+
+.c_soon {
+	text-align: center;
+    margin-top: 150px;
+    font-size: 25px;
+}
+
 .lb_head_cont{
 	position: relative;
-	text-align: center;
-	font-size: 2.5em;
-	font-weight: 900;
-	padding: 25px 0;
-	border-bottom: 1px solid #000;
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 900;
+    padding: 25px 0 20px 0px;
+    border-bottom: 1px solid #bbb;
+    box-sizing: border-box;
+    /* padding: 10px; */
+    margin: 0px 20px;
+    box-shadow: 0px 1px 0px #fff;
 }
 .lb_icon{
 	width: 50px;
@@ -309,10 +330,14 @@ nav{
 }
 .lb_descr{
 	position: relative;
-	padding: 25px 10% 20px 10%;
-	overflow:auto;
-	font-size: 1.3em;
-    font-weight: 300;
+    padding: 20px 5% 20px 5%;
+    overflow-y: auto;
+    font-size: 1.1em;
+    font-weight: 400;
+    height: calc(100% - 120px);
+    text-align: justify;
+    box-sizing: border-box;
+    margin: 10px;
 }
 /*Common Lightbox END###########*/
 /*---------------------HOME-------------------------------------*/
@@ -572,7 +597,7 @@ input[type="range"]::-webkit-slider-thumb:active {
     background: #fafafa;
 	z-index: 500;
 	border-radius: 2px;
-	color: #555;
+	color: #333;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
     display: none;
 }
@@ -1057,4 +1082,149 @@ input[type="range"]::-webkit-slider-thumb:active {
 	height: 100%;
 	display: none;
 	color: white;
+}
+
+
+/*-----------------------------CONTACTS----------------------------------*/
+#contacts
+{
+	background-color: #2a373e;
+	color: white;
+	letter-spacing: 1px;
+}
+
+.confb
+{
+	fill:#fff;
+}
+.confb:hover
+{
+	fill:#3b5998;
+}
+
+.contactinfo
+{
+	
+	width: 282px;
+	margin: 0px 49px 80px 49px;
+	position: relative;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+}
+
+@media screen and (max-width: 600px) {
+
+	.contactinfo
+	{
+		margin: 19px;
+	}	
+}
+
+.contactinfo>div:nth-child(1)
+{
+	padding: 5px;
+	text-align: center;
+	font-size: 1.3em;
+	font-weight: bold;
+	word-wrap: break-word;
+}
+
+.contactinfo>div:nth-child(2)>img {
+    width: 210px;
+    height: 210px;
+    margin: 2% 5% 2% 5%;
+    border-radius: 50%;
+    border: 5px solid #ccc;
+}
+
+.contactinfo>div:nth-child(3)
+{
+	text-align: center;
+	font-size: 0.9em;
+	line-height: 1.4em;
+}
+
+.fb_link
+{
+	position: absolute;
+	bottom: 5%;
+	height: 45px;
+	width: 45px;
+	right: 18%;
+	background-color: #3b5998;
+	-moz-transition: .3s ease-in-out;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+	border-radius: 50%;
+	padding: 5px;
+	border: 3px solid #fff;
+}
+.fb_link:hover
+{
+	background-color: #fff;
+}
+
+/* Gray Scale */
+
+/*.contactinfo div img {
+	-moz-filter: grayscale(100%);
+	-webkit-filter: grayscale(100%) ;
+	filter: grayscale(100%) ;
+	-moz-transition: .3s ease-in-out;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.contactinfo  div img:hover{
+	-moz-filter: grayscale(0);
+	-webkit-filter: grayscale(0);
+	filter: grayscale(0);
+}
+*/
+.contact_data
+{
+	text-align: center;
+	max-width: 1260px;
+	left:0;
+	right: 0;
+	margin: auto;
+}
+
+/*-----------------------------CONTACTS END----------------------------------*/
+
+/*------------------- ARCHIVES ------------------------*/
+
+.archive-holder {
+	width: 320px;
+    margin: 0px 20px 40px 60px;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+
+}
+
+.arch-img {
+	width: 100%;
+	 padding: 3px;
+    border: 1px solid #888;
+    border-radius: 3px;
+}
+
+a.arch-lnk {
+    text-decoration: none;
+    font-size: 15px;
+    color: #333;
+}
+
+/*------------------------------- REACH PILANI -----------------------*/
+
+#google-map {
+	width: 100%;
+	height: 300px;
+	box-sizing : border-box;
+	border: 1px solid #888;
+	padding: 3px;
+	border-radius: 3px;
 }
