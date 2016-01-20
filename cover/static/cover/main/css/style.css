@@ -1193,16 +1193,14 @@ input[type="range"]::-webkit-slider-thumb:active {
 /*-----------------------------CONTACTS END----------------------------------*/
 
 /*------------------- ARCHIVES ------------------------*/
-
+.archive_data{text-align: center; } 
 .archive-holder {
-	width: 320px;
-    margin: 0px 20px 40px 60px;
+	width: 360px;
+    padding: 25px;
     position: relative;
     text-align: center;
     display: inline-block;
     vertical-align: top;
-    float: left;
-
 }
 
 .arch-img {

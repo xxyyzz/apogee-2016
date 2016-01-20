@@ -994,7 +994,7 @@ var map_ele_info = {
 										func:content_link,
 									},
 
-	'armyExhibtion'			:		{
+	'armyExhibition'			:	{
 										ename:'Army Exhibtion',
 										content:'<div class="c_soon">Coming soon...</div>',
 										icon:'',
@@ -1057,6 +1057,13 @@ var map_ele_info = {
 										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
 									},
 
+	'workshops'			:		{
+										ename:'Literary Fest',
+										content:'<div class="c_soon">Coming soon...</div>',
+										icon:'',
+										func:content_link,
+									},
+
 }
 
 function content_link(b_icon,b_name,b_content){
@@ -1065,3 +1072,13 @@ function content_link(b_icon,b_name,b_content){
 	$('.lb_descr').html(b_content);
 	open_gen_lb();
 }
+
+$('.htile').click(function(){
+	$('.closeside').click();
+	var t= $(this);
+	setTimeout(function(){
+		var key = t.data('name');
+		// console.log(t,key);
+		map_ele_info[key]['func'](map_ele_info[key]['icon'],map_ele_info[key]['ename'],map_ele_info[key]['content']);
+	},350);
+});
