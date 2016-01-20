@@ -191,6 +191,9 @@ function open_gen_lb(){
 function close_gen_lb(){
 	killOverlay();
 	$('.gen_lb').fadeOut();
+	$('.main_head').html('');
+	$("div.lb_icon>img").attr("src", '');
+	$('.lb_descr').html('');
 }
 
 function closeLightBox() {
