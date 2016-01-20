@@ -8,8 +8,6 @@ from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
-
-
 # Create your views here.
 @csrf_exempt
 def user_login(request):
@@ -118,7 +116,7 @@ BITS Pilani
 	else:
 		status = {}
 		status['status'] = 0
-		status['message'] = "No POST Data Received."
+		status['message'] = "No POST Data 	Received."
 		return JsonResponse(status)
 
 def email_generate_token(member):
@@ -191,7 +189,7 @@ def email_confirm(request, token):
 	return render(request, 'main/email_verified.html', context)
 
 def login_check(request):
-	if request.user.username != '':
+	if request.user.username:
 		try:
 			firstname = request.user.participant.name.split(' ', 1)[0],
 		except ObjectDoesNotExist:
