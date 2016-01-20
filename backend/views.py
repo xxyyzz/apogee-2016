@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from Event.models import Event, EventCategory
 
 # Create your views here.
 @csrf_exempt
@@ -190,7 +191,7 @@ def email_confirm(request, token):
 	return render(request, 'main/email_verified.html', context)
 
 def login_check(request):
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		try:
 			firstname = request.user.participant.name.split(' ', 1)[0],
 		except ObjectDoesNotExist:
@@ -219,3 +220,41 @@ def email_check(request):
 def user_logout(request):
 	logout(request)
 	return login_check(request)
+
+def events_check(request):
+	if request.user.is_authenticated:
+		response = {
+			'loggedin' : True,
+			'data' : [],
+		}
+		categories = EventCategory.objects.all()
+		events = Event.objects.all()
+		try:
+			registered = True if event in request.user.participant.events else False
+		except:
+			registered = False
+		for category in categories:
+			container = {}
+			container['category'] = category.name
+			eventlist = {}
+			for event in category.event_set.all():
+				try:
+					registered = True if event in request.user.participant.events else False
+				except:
+					registered = False
+				events = [
+					{
+						'id':event.id,
+						'name':event.name,
+						'regsitration_enabled' : event.register,
+						'registered' : registered,
+					}
+				]
+				container['events'] = events
+				response['data'].append(container)
+		return JsonResponse(response)
+	else:
+		response = {
+			'loggedin' : False,
+		}
+		return JsonResponse(response)
