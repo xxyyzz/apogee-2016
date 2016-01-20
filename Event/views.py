@@ -58,6 +58,11 @@ def summary(request):
 		response.append(container)
 	return JsonResponse(response, safe=False)
 
+def register_single(request, eventid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	participant.events.add(event)
+	participant.save()
 # @csrf_exempt
 # def getcategoryevents(request):
 # 	if request.GET:

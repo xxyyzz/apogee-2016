@@ -222,7 +222,7 @@ def user_logout(request):
 	return login_check(request)
 
 def events_check(request):
-	if request.user.is_authenticated:
+	if request.user.is_authenticated():
 		response = {
 			'loggedin' : True,
 			'data' : [],
