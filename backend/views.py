@@ -236,13 +236,14 @@ def events_check(request):
 		for category in categories:
 			container = {}
 			container['category'] = category.name
+			container['events'] = []
 			eventlist = {}
 			for event in category.event_set.all():
 				try:
 					registered = True if event in request.user.participant.events else False
 				except:
 					registered = False
-				events = [
+				eventdata = [
 					{
 						'id':event.id,
 						'name':event.name,
@@ -250,8 +251,8 @@ def events_check(request):
 						'registered' : registered,
 					}
 				]
-				container['events'] = events
-				response['data'].append(container)
+				container['events'].append(eventdata)
+			response['data'].append(container)
 		return JsonResponse(response)
 	else:
 		response = {
