@@ -224,7 +224,7 @@ def user_logout(request):
 def events_check(request):
 	loggedin = request.user.is_authenticated()
 	response = {
-		'loggedin' : Loggedin,
+		'loggedin' : loggedin,
 		'data' : [],
 	}
 	categories = EventCategory.objects.all()
