@@ -399,7 +399,7 @@ window.onload = function() {
 // -----------------------------------Online Events---------------------------------------
 var events_list,event_data=[];
 var cur_cat = 0,cur_event=0;
-var keyallow = false;
+var keyallow = false,eventpageopen=false;
 var disp,lh;
 
 $(window).load(function(){
@@ -410,6 +410,7 @@ $(window).load(function(){
 		close_gen_lb();
 	});
 	$('#close_events').click(function(){
+		eventpageopen=false;
 		$('#events').fadeOut();
 	});
 	$('#event_top').click(function(){
@@ -439,26 +440,65 @@ $(window).load(function(){
 	});
 
 });
+var mapkeydown=false;
 $(window).keydown(function(e)
 {
     var keycode = e.keyCode || e.which;
-    switch(keycode)
+    // console.log(keycode);
+    if(eventpageopen)
     {
-    	case 37: 
-				prev_strip();
-				break;
-    	case 38: 
-				prev_eve();
-    			break;
-    	case 39:
-				next_strip();
-    			break;
-    	case 40:
-				next_eve();
-    			break;
+    	switch(keycode)
+        {
+        	case 37: 
+    				prev_strip();
+    				break;
+        	case 38: 
+    				prev_eve();
+        			break;
+        	case 39:
+    				next_strip();
+        			break;
+        	case 40:
+    				next_eve();
+        			break;				
+        }
+    }
+    else
+    {	
+    	if(!mapkeydown)
+    	{
+        	mapkeydown=true;
+	    	switch(keycode)
+	        {
+	        	case 37: 
+	    				pan_trig(50,0);
+	    				break;
+	        	case 38: 
+	    				pan_trig(0,50);
+	        			break;
+	        	case 39:
+	    				pan_trig(-50,0);
+	        			break;
+	        	case 40:
+	    				pan_trig(0,-50);
+	        			break;
+	        	case 219 : zoom_trig(-0.2);
+	        				break;
+	        	case 221 : zoom_trig(0.2);
+	        				break;		        			
+	        }
+	    }    
     }
 });
-
+$(window).keyup(function(e)
+{
+	if(!eventpageopen)
+	{
+		mapkeydown=false;
+		pan_stop();
+		zoom_stop();
+	}	
+});
 
 
 function next_strip(){
@@ -889,21 +929,21 @@ var map_ele_info = {
 										ename:'Online Events',
 										content:'Online Events',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(3),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(3),350});},
 									},
 
 	'automation'			:		{
 										ename:'Automation',
 										content:'Automation',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(2),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(2),350});},
 									},
 
 	'developAndDiscover'	:		{
 										ename:'Develop and Discover',
 										content:'Develop and Discover',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
 									},
 
 	'login'					:		{
@@ -917,7 +957,7 @@ var map_ele_info = {
 										ename:'Build and Design',
 										content:'Build and Design',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(0),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(0),350});},
 									},
 		
 	'youthCon'				:		{
@@ -931,7 +971,7 @@ var map_ele_info = {
 										ename:'Code and Simulate',
 										content:'Code and Simulate',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(1),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(1),350});},
 									},
 
 	'profShow'				:		{
@@ -945,14 +985,14 @@ var map_ele_info = {
 										ename:'Economania',
 										content:'Economania',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(4),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(4),350});},
 									},
 
 	'miscellaneous'			:		{
 										ename:'Miscellaneous',
 										content:'Miscellaneous',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(7),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(7),350});},
 									},
 
 	'accomodation'			:		{
@@ -1057,7 +1097,7 @@ var map_ele_info = {
 										ename:'Quiz',
 										content:'Quiz',
 										icon:'',
-										func:function(){$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
 									},
 
 	'workshops'			:		{
@@ -1070,7 +1110,7 @@ var map_ele_info = {
 }
 
 function content_link(b_icon,b_name,b_content){
-	console.log(b_name,b_content);
+	// console.log(b_name,b_content);
 	$('.main_head').html(b_name);
 	$("div.lb_icon>img").attr("src", b_icon);
 	$('.lb_descr').html(b_content);
