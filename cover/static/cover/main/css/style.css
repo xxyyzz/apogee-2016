@@ -744,6 +744,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
     z-index: 10;
+    cursor: pointer;
 }
 #events{
 	background: url('../img/icon/back.svg');
@@ -882,15 +883,18 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	text-align: center;
 	text-shadow: 1px 1px 2px #000;
 }
-#show_more{
+.buttons_center{
 	position: absolute;
 	bottom: 30px;
 	right: 0;
 	left: 0;
     margin: auto;
-    width: 150px;
     text-align: center;
     font-weight: 900;
+}
+.buttons_center>div{
+	display:inline-block;
+	width: 150px;
 	color: white;
 	border: 1px solid #fff;	
 	line-height: 35px;
@@ -900,7 +904,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	-webkit-transition: all 350ms ease;
     transition: all 350ms ease;
 }
-#show_more:hover{
+.buttons_center>div:hover{
 	color: #000;
 	background-color: #fff;
 	text-shadow:none;
@@ -955,7 +959,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	color: #000;
 	background-color: #fff;
 }
-.eve_det_ico:hover > .ico_name,.eve_det_ico:hover > .ico_name{
+.eve_det_ico:hover > .ico_name,.eve_det_ico_register:hover > .ico_name{
 	display: block;
 }
 .ico_name{
@@ -997,6 +1001,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
     z-index: 10;
+    cursor: pointer;
 }
 #searchIcon
 {
