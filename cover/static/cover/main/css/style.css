@@ -1231,3 +1231,41 @@ a.arch-lnk {
 	padding: 3px;
 	border-radius: 3px;
 }
+
+.txt {
+    margin-left: 50px;
+    margin-top: 150px;
+    margin-right: 15%;
+    font-size: 20px;
+    height: 60%;
+    /* position: absolute; */
+    text-align: justify;
+}
+
+.rules {
+	padding: 3px 10px;
+    font-size: 17px;
+}
+
+.txt>.welcome {
+	font-weight: 900;
+    font-size: 60px;
+}
+
+.help-button {
+	background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    outline: none;
+    border-radius: 2px;
+    font-weight: 900;
+    font-size: 30px;
+    padding: 5px 20px;
+    margin: 20px;
+    cursor: pointer
+}
+
+.help-button:hover {
+	background-color: white;
+    color: black;
+}
