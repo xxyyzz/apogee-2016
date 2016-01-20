@@ -191,7 +191,7 @@ def email_confirm(request, token):
 	return render(request, 'main/email_verified.html', context)
 
 def login_check(request):
-	if request.user.is_authenticated:
+	if request.user.is_authenticated():
 		try:
 			firstname = request.user.participant.name.split(' ', 1)[0],
 		except ObjectDoesNotExist:
@@ -224,7 +224,7 @@ def user_logout(request):
 def events_check(request):
 	loggedin = request.user.is_authenticated()
 	response = {
-		'loggedin' : Loggedin,
+		'loggedin' : loggedin,
 		'data' : [],
 	}
 	categories = EventCategory.objects.all()

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from Event.models import *
+from backend.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import html2text as gaussx
@@ -61,8 +62,31 @@ def summary(request):
 def register_single(request, eventid):
 	event = Event.objects.get(id=eventid)
 	participant = request.user.participant
-	participant.events.add(event)
-	participant.save()
+	try:
+		participant.events.add(event)
+		participant.save()
+		response = {
+			'registered' : True,
+		}
+	except:
+		response = {
+			'registered' : False,
+		}
+	return JsonResponse(response)
+def register_team(request, eventid, teamid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	try:
+		participant.events.add(event)
+		participant.save()
+		response = {
+			'registered' : True,
+		}
+	except:
+		response = {
+			'registered' : False,
+		}
+	return JsonResponse(response)
 # @csrf_exempt
 # def getcategoryevents(request):
 # 	if request.GET:
