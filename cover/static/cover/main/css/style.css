@@ -1401,3 +1401,52 @@ a.arch-lnk {
 	background-color: white;
     color: black;
 }
+
+.main-nav {
+	width: 50%;
+    max-width: 500px;
+    top: 50px;
+    margin: auto;
+    position: absolute;
+    left: calc(50% - 250px);
+}
+
+.pann-nav {
+    width: 150px;
+    max-width: 500px;
+    margin-top: 50px;
+    margin: auto;
+    position: absolute;
+    bottom: 40px;
+    right: 120px;
+}
+
+
+.zoom-nav {
+    width: 110px;
+    max-width: 500px;
+    margin-top: 50px;
+    margin: auto;
+    position: absolute;
+    bottom: 250px;
+    right: 120px;
+}
+
+
+.quik-nav {
+	width: 75px;
+    max-width: 500px;
+    margin-top: 50px;
+    margin: auto;
+    position: absolute;
+    top: 80px;
+    left: 50px;
+}
+
+#help-button-2 {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform:translateX(-50%);
+
+}

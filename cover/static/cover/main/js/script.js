@@ -926,7 +926,7 @@ function startHelp() {
 	onScreen = 1;
 }
 
-$("#help-button-1").click(function() {
+$("#help-button-1,#map-help-1").click(function() {
 	$("#map-help-1").css("display", "none");
 	$("#map-help-2").css("display", "block");
 	$("#map_control").css("z-index", 500);
@@ -935,7 +935,7 @@ $("#help-button-1").click(function() {
 	onScreen = 2;
 });
 
-$("#help-button-2").click(function() {
+$("#help-button-2,#map-help-2").click(function() {
 	$("#map-help-2").css("display", "none");
 	$("#map_control").css("z-index", 1);
 	$("#burgernav").css("z-index", 199);
