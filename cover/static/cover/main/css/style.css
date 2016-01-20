@@ -56,6 +56,18 @@ html,body{
 	left:0;
 	right: 0; 
 }
+/*--------------------------LOADER---------------------------*/
+svg#loadersvg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+svg#loadersvg rect {
+  fill: #DE5B51;
+}
 
 /*-----------------------NAV + PROFILE-ICONS-----------------------------*/
 nav{
