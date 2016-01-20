@@ -272,6 +272,7 @@ function logout(){
 					$('#user-sign-cont>div:nth-child(1)>span').html('');
 					$('div#login').fadeIn();
 					$('#user-sign-cont').css('display','');
+					eve_reg_info();
 				}	
 				else
 					alert('Unsuccessful');
@@ -311,6 +312,7 @@ $('#login-form').submit(function(e){
 					'firstname':response.firstname,
 					'loggedin':true,
 				}
+				eve_reg_info();
 				setTimeout(function(){
 					$('#view_profile').css({'display':''});
 				},3000);
@@ -432,6 +434,9 @@ $(window).load(function(){
 		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);
 		$('.eve_det_ico_register').click();
 	});
+	$('.se_descr').on('click','.register_event',function(){
+		register_for_event(events_list[cur_cat].events[cur_event].id);
+	});
 	$('.se_ico').on('click','.eve_det_ico',function(){
 		var x = $(this).data('eve_id'),
 		y = $(this).data('eve_pos'),
@@ -443,8 +448,16 @@ $(window).load(function(){
 		var put_it = $('.se_descr');
 		if(!obj.reg_enabled)
 			put_it.html('Online registrations for this event are not active.');
+		else if(user.loggedin){
+			if(obj.registered){
+				put_it.html('You are already registered for this event');
+			}
+			else{
+				put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
+			}
+		}
 		else
-			put_it.html('kar le bhai register aachi event hai');
+			put_it.html('Please login to register in this event');
 	});
 	$('.close_more_det').click(function(){
 		$(this).fadeOut();
@@ -670,13 +683,22 @@ function eve_reg_info(){
 		url: "http://bits-apogee.org/2016/api/registrationstatus/",
 		method: "GET",
 		success: function(data){
-			for(var i=0;i<data.length;i++){
-				for(var j=0;j<data[i].events.length;j++){
-					events_list[i].events[j].reg_enabled = data[i].events[j].reg_enabled;
-					events_list[i].events[j].registered = data[i].events[j].registered;
-					events_list[i].events[j].team_event = data[i].events[j].team_event;
+			for(var i=0;i<data.data.length;i++){
+				for(var j=0;j<data.data[i].events.length;j++){
+					events_list[i].events[j].reg_enabled = data.data[i].events[j].reg_enabled;
+					events_list[i].events[j].registered = data.data[i].events[j].registered;
+					events_list[i].events[j].team_event = data.data[i].events[j].team_event;
 				}
 			}
+		}
+	});
+}
+function register_for_event(id){
+	$.ajax({
+		url: "http://bits-apogee.org/2016/event/register/"+id+"/",
+		method: "GET",
+		success: function(data){
+			console.log(data);
 		}
 	});
 }
