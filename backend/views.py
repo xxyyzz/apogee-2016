@@ -147,9 +147,8 @@ def generate_password(member):
     password = xp.generate_xkcdpassword(mywords, numwords=2, delimiter='').lower().translate(None, ' -_')
     return(password)
 def create_user(member, password):
-	name1 = member.name.lower()
-	name2 = member.name.lower().translate(' ?.!/;:-_')
-	username = member.name.lower().translate(' ?.!/;:-_') + member.id
+	name = str(member.name).lower()
+	username = name.translate(None, ' ?.!/;:-_') + member.id
 	user = User.objects.create_user(username=username, email=member.email_id, password=password)
 	member.user = user
 	member.save()
