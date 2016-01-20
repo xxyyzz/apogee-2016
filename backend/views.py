@@ -13,9 +13,9 @@ from Event.models import Event, EventCategory
 @csrf_exempt
 def user_login(request):
 	if request.method == 'POST':
-		username = request.POST['username']
+		email = request.POST['username']
 		password = request.POST['password']
-		user = authenticate(username=username, password=password)
+		user = authenticate(email=email, password=password)
 		if user:
 			if user.is_active:
 				login(request, user)
@@ -147,7 +147,7 @@ def generate_password(member):
     password = xp.generate_xkcdpassword(mywords, numwords=2, delimiter='').lower().translate(None, ' -_')
     return(password)
 def create_user(member, password):
-	user = User.objects.create_user(member.email_id, member.email_id, password)
+	user = User.objects.create_user(username=member.email_id, email=member.email_id, password=password)
 	member.user = user
 	member.save()
 	return user
