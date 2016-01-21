@@ -761,6 +761,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 /*for developers page*/
 .devinfo
 {
+	
 	width: 270px;
 	margin: 15px;
 	position: relative;
@@ -921,7 +922,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	position: absolute;
 	bottom: 0px;
 	width:100%;
-	padding: 25px 10% 20px 10%;
+	padding: 25px 10% 20px 7%;
 	margin-top:108px;
 	overflow:auto;
 	opacity: 0;
