@@ -232,7 +232,7 @@ def events_check(request):
 	categories = EventCategory.objects.all()
 	events = Event.objects.all()
 	try:
-		registered = True if event in request.user.participant.events else False
+		registered = True if event in request.user.participant.events.all() else False
 	except:
 		registered = False
 	for category in categories:
@@ -242,7 +242,7 @@ def events_check(request):
 		eventlist = {}
 		for event in category.event_set.all():
 			try:
-				registered = True if event in request.user.participant.events else False
+				registered = True if event in request.user.participant.events.all() else False
 			except:
 				registered = False
 			eventdata = {
