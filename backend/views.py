@@ -304,9 +304,12 @@ def register_team(request, eventid):
 	team.leader = leader
 	team.save()
 	for memberid in memberids:
-		member = Participant.objects.get(id=memberid)
-		team.members.add(member)
-		team.save()
+		try:
+			member = Participant.objects.get(id=memberid)
+			team.members.add(member)
+			team.save()
+		except:
+			pass
 	response = {
 		'status' : 1,
 		'message' : 'Team ' + name + ' successfully registered'
