@@ -733,7 +733,8 @@ function register_for_event(id){
 		url: "http://bits-apogee.org/2016/api/events/register/"+id+"/",
 		method: "GET",
 		success: function(data){
-			console.log(data);
+			$('.se_descr').html(data.message);
+			eve_reg_info();
 		}
 	});
 }
