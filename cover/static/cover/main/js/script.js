@@ -285,18 +285,20 @@ function logout(){
 	});
 };
 
-$('#create_my_team').submit(function(id){
-	var url = 'bits-apogee.org'+imgpre+'/api/events/team/register/'+id+'/';
+$('#create_my_team').submit(function(e){
+	e.preventDefault();
+	var url = 'bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/';
     var formData = $(this).serializeArray();
+    $('.create_team').val('Creating ...');
+    $('.create_team').prop('disabled', true);
     $.post(url, formData).done(function (data) {
         if(data.status == 1){
-        	$('.se_descr').html('Team successfully created.');
-        	eve_reg_info();
+        	$('.lb_descr').html('Team successfully created.');
         }
         else{
-        	$('.se_descr').html('Some error occured.');
-        	eve_reg_info();
+        	$('.lb_descr').html('Some error occured. Plaese Try Again.');
         }
+        eve_reg_info();
     });
 });
 $('#login-form').submit(function(e){
@@ -485,15 +487,29 @@ $(window).load(function(){
 		register_for_event(events_list[cur_cat].events[cur_event].id);
 	});
 	var wait =0;
-	$('.se_descr').on('keyup','input[name="memberid"]',function(){
+	$('.lb_descr').on('keyup','input[name="memberid"]',function(){
 		wait++;
 		var t =$(this);
 		if(wait==1){
 			setTimeout(function() {
-				create_my_team(t.val(),t.parent().find('span'));
+				create_my_team(t.val(),t.parent().find('.name_mem'));
 				wait = 0;
 			}, 500);
 		}
+	});
+	$('.se_descr').on('click','.open_create',function(){
+		var obj = events_list[cur_cat].events[cur_event];
+		var put_it = $('.lb_descr');
+		var eve = "";
+		$('.main_head').html(obj.name);
+		eve += ' <form id="create_my_team"><div>Team Name <input type="text" name="name" required/></div>';
+		for(var i=0;i<obj.max_members;i++){
+			eve += '<div><div class="mem_id_label">Member'+(i+1)+' ID</div> <input type="text" name="memberid" /><span class="name_mem"></span> </div>';
+		}
+		eve += '<input type="submit" value="Create" class="create_team" /></form>';
+		put_it.html(eve);
+		$('.lb_icon>img').attr('src',imgpre+'/static/cover/main/img/lb-icons/about.svg');
+		open_gen_lb();
 	});
 	$('.se_ico').on('click','.eve_det_ico',function(){
 		var x = $(this).data('eve_id'),
@@ -512,13 +528,7 @@ $(window).load(function(){
 				}
 			else{
 				if(obj.team_event){
-					var eve = "";
-					eve += 'This is a team event, you can either create a new team or to join an existing team contact its team leader. <form id="create_my_team"><div>Team Name <input type="text" name="name" required/></div>';
-					for(var i=0;i<obj.max_members;i++){
-						eve += '<div>Member'+(i+1)+' ID <input type="text" name="memberid" /><span style="color:rgb(116, 255, 116) !important;"></span> </div>';
-					}
-					eve += '</form> <div class="create_team">Create Team</div>';
-					put_it.html(eve); 
+					put_it.html('This is a team event, you can either create a new team or to join an existing team contact its team leader.<div class="open_create">Create Team</div>'); 
 				}
 				else{
 					put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
@@ -778,9 +788,15 @@ function create_my_team(id,put){
 			method: "GET",
 			success: function(data){
 				if(data.status==1)
+				{
+					put.css('color','rgb(25, 188, 25)');
 					put.html(data.name);
+				}
 				else
+				{
+					put.css('color','rgb(242, 80, 80)');
 					put.html(data.message);
+				}
 			}
 		});
 	}
