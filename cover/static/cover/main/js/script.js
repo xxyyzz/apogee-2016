@@ -292,7 +292,7 @@ $(document).on('submit','#create_a_team',function(e){
     $('.create_team').text('Creating ...');
     $('.create_team').prop('disabled', true);
     $.ajax({
-		url:'bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/',
+		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/',
 		method:'POST',
         crossDomain: true,
 		data:formData,
