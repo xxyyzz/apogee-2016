@@ -283,7 +283,7 @@ function logout(){
 	});
 };
 
-$('#create_my_team').sumbit(function(id){
+$('#create_my_team').submit(function(id){
 	var url = 'bits-apogee.org/2016/api/events/team/register/'+id+'/';
     var formData = $(this).serializeArray();
     $.post(url, formData).done(function (data) {
