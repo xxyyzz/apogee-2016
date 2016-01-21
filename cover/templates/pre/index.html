@@ -1,3 +1,5 @@
+{% load staticfiles %}
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>APOGEE 2016 | International Technical Festival | BITS Pilani</title>
@@ -16,13 +18,13 @@
 	    <meta name="revisit-after" content="1 days">
     
 	    <link type="image/x-icon" rel="shortcut icon" href="" />
-		<link rel="stylesheet" type="text/css" href="/2016/static/cover/pre/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="{% static 'cover/pre/assets/css/style.css' %}">
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-		<link href="/2016/static/cover/pre/assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+		<link href="{% static 'cover/pre/assets/fonts/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
 	
 	</head>
 
@@ -39,18 +41,18 @@
 
 		</script>
 
-		<script type="text/javascript" src="/2016/static/cover/pre/assets/js/grad.js"></script>
+		<script type="text/javascript" src="{% static 'cover/pre/assets/js/grad.js'%}"></script>
 		<div id="gradient" ></div>
 
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 logo-wrapper">
 				<a href="http://bits-apogee.org" target="_blank">
-					<img src="/2016/static/cover/pre/assets/img/logo.png">
+					<img src="{% static 'cover/pre/assets/img/logo.png' %}">
 				</a>	
 			</div>
 			<div class="col-md-10 col-md-offset-1 only-logo-wrapper">
 				<a href="http://bits-apogee.org" target="_blank">
-					<img src="/2016/static/cover/pre/assets/img/only-logo.png">
+					<img src="{% static 'cover/pre/assets/img/only-logo.png' %}">
 				</a>	
 			</div>
 			<div class="col-md-8 col-md-offset-2 text-wrapper">
@@ -63,7 +65,7 @@
 
 			<div class="col-md-10 col-md-offset-1 footer-wrapper">
 				<div class="fb-like" data-href="https://www.facebook.com/bitsapogee?fref=ts" data-width="400px" colorscheme="dark" data-layout="standard" data-action="like" data-show-faces="false" data-share="true" style="color: white"></div>
-				<a href="mailto:webmaster@bits-apogee.org"><div class="last-year">Write to us&nbsp;&nbsp;<i class="fa fa-envelope "></i></div></a><a href="/u/2015/"><div class="last-year">Visit last year's website&nbsp;&nbsp;<i class="fa fa-external-link "></i>&nbsp;&nbsp;|&nbsp;&nbsp;</div></a>
+				<a href="mailto:webmaster@bits-apogee.org"><div class="last-year">Write to us&nbsp;&nbsp;<i class="fa fa-envelope "></i></div></a><a href="http://bits-apogee.org/2015/"><div class="last-year">Visit last year's website&nbsp;&nbsp;<i class="fa fa-external-link "></i>&nbsp;&nbsp;|&nbsp;&nbsp;</div></a>
 			</div>
 			
 
