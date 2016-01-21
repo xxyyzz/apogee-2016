@@ -278,7 +278,7 @@ function logout(){
 					eve_reg_info();
 				}	
 				else
-					alert('Unsuccessful');
+					alert('Unsuccessful. Please Try Again!');
         }
 	});
 };
@@ -289,6 +289,7 @@ $('#login-form').submit(function(e){
 	$('#login-form .error_box').html('').fadeOut();
 	$('#submit_l').prop('disabled', true);
 	$('#submit_r').prop('disabled', true);
+	$('#submit_l').html('logging in...');
 	var login_data = {
 						'username':$('#useremail_l').val(),
 						'password':$('#userpassword_l').val()
@@ -314,16 +315,31 @@ $('#login-form').submit(function(e){
 					'userid':$('#useremail_l').val(),
 					'firstname':response.firstname,
 					'loggedin':true,
-				}
+				};
+				$('#submit_l').prop('disabled', false);
+				$('#submit_r').prop('disabled', false);
+				$('#submit_l').html('login');
 				eve_reg_info();
 				setTimeout(function(){
 					$('#view_profile').css({'display':''});
 				},3000);
 			}
 			else
-				$('#login-form .error_box').html(response.message).fadeIn();
-		}
+				{
+					$('#login-form .error_box').html(response.message).fadeIn();
+					$('#submit_l').prop('disabled', false);
+					$('#submit_r').prop('disabled', false);
+					$('#submit_l').html('login');
+				}			
+		},
+		error: function(){
+							$('#login-form .error_box').html('Try Again!').fadeIn();
+							$('#submit_l').prop('disabled', false);
+							$('#submit_r').prop('disabled', false);
+							$('#submit_l').html('login');
+			},
 	});
+
 });
 
 $('#reg-form').submit(function(e){
@@ -345,6 +361,7 @@ $('#reg-form').submit(function(e){
 	{
 		$('#submit_l').prop('disabled', true);
 		$('#submit_r').prop('disabled', true);
+		$('#submit_r').html('Registering...');
 		$.ajax({
 			url:'http://bits-apogee.org/2016/api/register/',
 			method:"POST",
@@ -356,14 +373,25 @@ $('#reg-form').submit(function(e){
 				// console.log(response);
 				if(response.status == 1)
 				{
+					$('#submit_l').prop('disabled', false);
+					$('#submit_r').prop('disabled', false);
+					$('#submit_r').html('Register');
 					$('#reg-form').html(response.message);
 				}
 				else
 				{
+					$('#submit_l').prop('disabled', false);
+					$('#submit_r').prop('disabled', false);
+					$('#submit_r').html('Register');
 					$('#reg-form .error_box').html(response.message).fadeIn();
 				}	
-				
-			}
+			},
+			error: function(){
+				$('#submit_l').prop('disabled', false);
+				$('#submit_r').prop('disabled', false);
+				$('#submit_r').html('Register');
+				$('#reg-form .error_box').html('Try Again!').fadeIn();
+			},
 		});
 	}
 	else
@@ -702,7 +730,7 @@ function eve_reg_info(){
 }
 function register_for_event(id){
 	$.ajax({
-		url: "http://bits-apogee.org/2016/event/register/"+id+"/",
+		url: "http://bits-apogee.org/2016/events/register/"+id+"/",
 		method: "GET",
 		success: function(data){
 			console.log(data);
@@ -1024,7 +1052,7 @@ var map_ele_info = {
 										ename:'Develop and Discover',
 										content:'Develop and Discover',
 										icon:'',
-										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(6),350});},
+										func:function(){eventpageopen=true;$('#events').fadeIn();setTimeout(function(){go_to_location(5),350});},
 									},
 
 	'login'					:		{
@@ -1043,7 +1071,7 @@ var map_ele_info = {
 		
 	'youthCon'				:		{
 										ename:'Youth Conference',
-										content:'<p><b>Leading Endeavour to Achieve Progress (LEAP) </b>is an initiative for all the student run social volunteer organisations across the country. It is an effort of people who feel that the pace of development has become stagnant with the passage of time. In spite of having all the sources and means, most of the organizations stand at the same place where they were ten years ago. LEAP is not just an initiative to improve the efficiency of organizations but also a way through which creative and good ideas can be shared and used for the betterment of the society.</p><p>Numerous student led societies have enough volunteer strength, funds and team dedication, but they fail to create a significant impact. It is thus the need of the hour to have a society joining hands and working together to convert all the whispers into roars. A common platform for like minded volunteer society, connecting them through the will to bring about a change, is what we are working for. It aims to create a larger impact on the society, that are ultimate beneficiaries of actions, they perform.</p><br><a class="lb_a" href="http://bits-apogee.org/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										content:'<p><b>Leading Endeavour to Achieve Progress (LEAP) </b>is an initiative for all the student run social volunteer organisations across the country. It is an effort of people who feel that the pace of development has become stagnant with the passage of time. In spite of having all the sources and means, most of the organizations stand at the same place where they were ten years ago. LEAP is not just an initiative to improve the efficiency of organizations but also a way through which creative and good ideas can be shared and used for the betterment of the society.</p><p>Numerous student led societies have enough volunteer strength, funds and team dedication, but they fail to create a significant impact. It is thus the need of the hour to have a society joining hands and working together to convert all the whispers into roars. A common platform for like minded volunteer society, connecting them through the will to bring about a change, is what we are working for. It aims to create a larger impact on the society, that are ultimate beneficiaries of actions, they perform.</p><br><a class="lb_a" href="http://bits-apogee.org/youthcon/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon:'/2016/static/cover/main/img/lb-icons/youthcon.svg',
 										func:content_link,
 									},
@@ -1169,7 +1197,7 @@ var map_ele_info = {
 
 	'about'					:		{
 										ename:'About',
-										content:'',
+										content:'<p>In the heart of Pilani lies a fest that pushes the boundaries of student performance and creativity every year. From presenting papers and projects, to bringing into reality imaginative designs that the student mind conjures up, to the events that enthrall everyone who attends, APOGEE, BITS Pilani\'s technical fest, has always brought together the brightest minds in technology and engineering over the years, and this year, it promises to be bigger than ever.</p><p>Ever dreamed about establishing civilization in Mars? Ever imagined building exciting vehicles and robots with your own hands? Ever wanted to challenge your mind with mind-bending quizzes, word games, and programming challenges? In the final days of February, APOGEE 2016 returns, with a plethora of classics, and many innovative new events.</p><p>From the town of Pilani, BITS Pilani welcomes you to <b>APOGEE 2016</b>. <br><br><span style="font-weight:900;font-size: 30px">The Future is Now !</span></p>',
 										icon:'/2016/static/cover/main/img/lb-icons/about.svg',
 										func:content_link,
 									},
