@@ -289,8 +289,21 @@ def register_team(request, eventid, teamid):
 			'registered' : False,
 		}
 	return JsonResponse(response)
-def register_new_team(request):
-	pass
+def participant_summary(request, participantid):
+	try:
+		participant = Participant.objects.get(id=participantid)
+		response = {
+			'name' : participant.name,
+			'id' : participant.id,
+			'college': participant.college,
+			'status' : 1,
+		}
+	except:
+		response = {
+			'status' : 0,
+			'message' : 'No such participant',
+		}
+	return JsonResponse(status)
 # 	if request.POST:
 # 		memberids = request.POST.getlist('id')
 # 		name
