@@ -490,11 +490,7 @@ $(window).load(function(){
 				}
 			else{
 				if(obj.team_event){
-					put_it.html('This is a team event, you can either create a new team or to join an existing team contact its team leader.
-						<form id="create_my_team">
-						
-						</form>
-						<div class="create_team">Create Team</div>');
+					put_it.html('This is a team event, you can either create a new team or to join an existing team contact its team leader.<form id="create_my_team"></form><div class="create_team">Create Team</div>');
 				}
 				else{
 					put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
