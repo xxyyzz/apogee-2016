@@ -26,7 +26,7 @@ def geteventdata(request,event_id):
 
 	# resp['category']=unicode(event.category.name)
 	# resp['content']=str(unicode(event.content))
-	resp['eventname']=str(unicode(event.name))
+	resp['eventname']=str(unicode(event.name.decode('utf-8')))
 	resp['eventcategory']=str(unicode(event.category.name))
 	resp['eventshortdescription']=unicode(event.short_description)
 	resp['contact']=   str(  unicode(event.org.phone ) )
