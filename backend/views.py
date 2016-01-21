@@ -303,7 +303,7 @@ def participant_summary(request, participantid):
 			'status' : 0,
 			'message' : 'No such participant',
 		}
-	return JsonResponse(status)
+	return JsonResponse(response)
 # 	if request.POST:
 # 		memberids = request.POST.getlist('id')
 # 		name
