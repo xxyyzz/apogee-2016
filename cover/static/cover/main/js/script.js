@@ -287,19 +287,26 @@ function logout(){
 
 $('#create_my_team').submit(function(e){
 	e.preventDefault();
-	var url = 'bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/';
     var formData = $(this).serializeArray();
     $('.create_team').val('Creating ...');
     $('.create_team').prop('disabled', true);
-    $.post(url, formData).done(function (data) {
-        if(data.status == 1){
-        	$('.lb_descr').html('Team successfully created.');
-        }
-        else{
-        	$('.lb_descr').html('Some error occured. Plaese Try Again.');
-        }
-        eve_reg_info();
-    });
+    $.ajax({
+		url:'bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/';
+		method:'POST',
+        crossDomain: true,
+		data:formData,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(response){
+			if(data.status == 1){
+	        	$('.lb_descr').html('Team successfully created.');
+	        }
+	        else{
+	        	$('.lb_descr').html('Some error occured. Plaese Try Again.');
+	        }
+	        eve_reg_info();
+		}
+	});
 });
 $('#login-form').submit(function(e){
 	e.preventDefault();
