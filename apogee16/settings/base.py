@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'aic2016',
     'iot',
     'dhiti',
+    'youthcon',
 )
 
 MIDDLEWARE_CLASSES = (

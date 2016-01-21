@@ -1064,20 +1064,34 @@ $("#help-button-2,#map-help-2").click(function() {
 // To Trigger element on click only and NOT ON DRAG
 
 $("g.struct").on('mousedown', function (evt) {
+	// var init_x=evt.pageX,init_y=evt.pageY;
+	// console.log(init_x,init_y,evt);
   $("g.struct").on('mouseup mousemove', function handler(evt) {
-    if (evt.type === 'mouseup') {
+ 	// var fin_x=evt.pageX,fin_y=evt.pageY;
+ 	// console.log(init_x,fin_x,init_y,fin_y,evt);
+    if ((evt.type === 'mouseup')) {
       // click
-		var ele_id=$(this).attr("id")
-		// var tab = $(this).attr("data-name");
+		var ele_id=$(this).attr("id");
 		for(var key in map_ele_info)
 		{
 			if(key==ele_id)
+			{
 				map_ele_info[key]['func'](map_ele_info[key]['icon'],map_ele_info[key]['ename'],map_ele_info[key]['content']);
+			}
 		}
     }
+    else
+    {
+    	// $("g.struct").on('mouseup', function handler(evt) {
+    	// 	// console.log(evt);
+    	// 	// if((evt.pag))
+    	// });
+	}
     $("g.struct").off('mouseup mousemove', handler);
   });
 });
+
+
 
 
 var map_ele_info = {
@@ -1089,7 +1103,7 @@ var map_ele_info = {
 									},
 	'dhiti'					:		{
 										ename:'Dhiti',
-										content:'<p>We have a population of around 1.2 billion and it is just a matter of time, that we will be the nation with the most number of young and technically sound work forces. Technology has grown in many forms and can be made accessible almost to all. It is just a luxury for some but can ease the life of many and can be the key to solving some of the most pressing issues faced by the country today. We just need some ideas and tinkering to apply it on the field.</p><p>It is only by solving such basic problems that development will occur collectively in every community and not selectively. Dhiti(sanskrit for “An idea”) is a platform for passionate individuals who ideate and aspire for technology to reach the grassroots. Here we will provide you with problems and mentors to form feasible solutions to various issues and provide recognition to your solution. So, let’s put our ideas and knowledge bases to some real use.</p><p><b>For more details,contact</b><br>Sameer<br>+91 7728086695</p><br><a class="lb_a" href="http://bits-apogee.org/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										content:'<p>We have a population of around 1.2 billion and it is just a matter of time, that we will be the nation with the most number of young and technically sound work forces. Technology has grown in many forms and can be made accessible almost to all. It is just a luxury for some but can ease the life of many and can be the key to solving some of the most pressing issues faced by the country today. We just need some ideas and tinkering to apply it on the field.</p><p>It is only by solving such basic problems that development will occur collectively in every community and not selectively. Dhiti(sanskrit for “An idea”) is a platform for passionate individuals who ideate and aspire for technology to reach the grassroots. Here we will provide you with problems and mentors to form feasible solutions to various issues and provide recognition to your solution. So, let’s put our ideas and knowledge bases to some real use.</p><p><b>For more details,contact</b><br>Sameer<br>+91 7728086695</p><br><a class="lb_a" href="/dhiti" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/dhiti.svg',
 										func:content_link,
 									},
@@ -1250,7 +1264,7 @@ var map_ele_info = {
 
 	'sponsors'				:		{
 										ename:'Sponsors',
-										content:'',
+										content:'<div style="text-align:center;"> <div class="spons_row"> <div class="spons_cont"> <a href="#"> <div class="spons_title">Associate Title</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/Sap.jpg"/> </a> </div> <div class="spons_cont"> <a href="#"> <div class="spons_title">Outreach Workshops Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/Jarvis.jpg"/> </a> </div> </div> <div class="spons_row"> <div class="spons_cont"> <a href="#"> <div class="spons_title">Workshops Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/Twenty19.jpg"/> </a> </div> <div class="spons_cont"> <a href="#"> <div class="spons_title">Workshops Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/AuthenticTechs.jpg"/> </a> </div> </div> <div class="spons_row"> <div class="spons_cont"> <a href="#"> <div class="spons_title">Campus Ambassador Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/Youth4work.jpg"/> </a> </div> <div class="spons_cont"> <a href="#"> <div class="spons_title">Media and Youth Outreach Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/CampusGuide.jpg"/> </a> </div> </div> <div class="spons_row"> <div class="spons_cont"> <a href="#"> <div class="spons_title">Payment Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/instamojo.jpg"/> </a> </div> <div class="spons_cont" style="display:none;"> <a href="#"> <div class="spons_title">Partner</div> <img class="spons_img" src="'+imgpre+'/static/cover/main/img/spons/Techdefence.jpg"/> </a> </div> </div> </div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/spons.svg',
 										func:content_link,
 									},
