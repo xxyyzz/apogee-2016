@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'aarohan',
     'aic2016',
     'iot',
+    'dhiti',
 )
 
 MIDDLEWARE_CLASSES = (
