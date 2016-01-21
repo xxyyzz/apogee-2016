@@ -405,7 +405,7 @@ window.onload = function() {
 var events_list,event_data=[];
 var cur_cat = 0,cur_event=0;
 var keyallow = false,eventpageopen=false;
-var disp,lh;
+var disp,lh,show_eve_instr=true;
 
 $(window).load(function(){
 	disp = $('#event_prev').width();
@@ -429,6 +429,10 @@ $(window).load(function(){
 	});
 	$('#event_right').click(function(){
 		next_strip();
+	});
+	$('.eve_instrs_close').click(function(){
+		$(this).parent().fadeOut();
+		show_eve_instr=false;
 	});
 	$('.se_descr').on('click','#show_more',function(){
 		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);

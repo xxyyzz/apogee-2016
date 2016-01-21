@@ -758,13 +758,59 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     z-index: 10;
     cursor: pointer;
 }
+/*for developers page*/
+.devinfo
+{
+	
+	width: 282px;
+	margin: 0px 15px;
+	position: relative;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+}
+.dep_name{
+	font-size:2.5em;
+	margin-top:30px;
+}
+.dev_data
+{
+	text-align: center;
+	max-width: 1260px;
+	left:0;
+	right: 0;
+	margin: auto;
+}
+.sep_dep_name{
+	width:60%;
+	color: #444;
+}
+.devinfo img{
+	width:80%;
+}
+/*for developers page END*/
 #events{
 	background: url('../img/icon/back.svg');
 	background-size: 100% auto;
 	font-family: 'Lato', sans-serif;
 	z-index: 700;
 }
-
+.eve_instrs{
+	background: rgba(0,0,0,0.5);
+	text-align: center;
+	z-index:10;
+}
+.eve_instrs>img{
+	height: 60%;
+}
+.eve_instrs_close{
+	position: absolute;
+	top:30px;
+	right: 30px;
+	font-size: 2em;
+	color: white;
+	cursor:pointer;
+}
 #event_top,#event_bottom
 {
 	position: absolute;
