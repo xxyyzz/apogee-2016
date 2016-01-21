@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^aic/', include('aic2016.urls', namespace='aic2016')),
     url(r'^iot/', include('iot.urls', namespace='iot')),
     url(r'^aarohan/', include('aarohan.urls', namespace='aarohan')),
+    url(r'^dhiti/', include('dhiti.urls', namespace='dhiti')),
     url(r'^events/', include('Event.urls', namespace='Event')),
     url(r'^api/', include('backend.urls', namespace='api')),
 ]
