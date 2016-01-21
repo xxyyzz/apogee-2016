@@ -341,7 +341,6 @@ $('#login-form').submit(function(e){
 	});
 
 });
-
 $('#reg-form').submit(function(e){
 	e.preventDefault();
 	$('#reg-form .error_box').html('').fadeOut();
@@ -487,14 +486,23 @@ $(window).load(function(){
 			put_it.html('Online registration for this event is not active.');
 		else if(user.loggedin){
 			if(obj.registered){
-				put_it.html('You are already registered for this event');
-			}
+					put_it.html('You are already registered for this event. To know more visit your profile.');
+				}
 			else{
-				put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
+				if(obj.team_event){
+					put_it.html('This is a team event, you can either create a new team or to join an existing team contact its team leader.
+						<form id="create_my_team">
+						
+						</form>
+						<div class="create_team">Create Team</div>');
+				}
+				else{
+					put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
+				}	
 			}
 		}
 		else
-			put_it.html('Please login to register in this event');
+			put_it.html('Registrations for this event is open. Please login to register in this event');
 	});
 	$('.close_more_det').click(function(){
 		$(this).fadeOut();
