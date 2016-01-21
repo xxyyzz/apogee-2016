@@ -445,6 +445,8 @@ $(window).load(function(){
 	$('#close_events').click(function(){
 		eventpageopen=false;
 		$('#events').fadeOut();
+		$('.show_event').css('background','');
+		$('.close_more_det').click();
 	});
 	$('#event_top').click(function(){
 		prev_eve();

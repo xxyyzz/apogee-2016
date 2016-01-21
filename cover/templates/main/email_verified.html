@@ -61,14 +61,18 @@ body, html{
 	</div>
 	<div class="det_descr_cont">
 		<div class="det_descr">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam commodi consequuntur, nihil consectetur quis, aliquam natus possimus cumque eos doloribus ducimus impedit? Asperiores quis ipsum, iusto tempora consectetur eius eveniet!
+		{% if status == 0 %}
+			Invalid Token
+		</div>
+		{% elif == 1 %}
+			Thank you for verifying your email. Here are your login credentials.
 		</div>
 		<div class="credentials">
 			<div>
 				<div class="box_align" style="text-align:right">
-					dekho ye username:
+					Email:
 					<br>
-					aur ye pass:
+					Password:
 				</div>
 				<div class="box_align">
 					{{ username }}<br>{{ password }}
@@ -76,8 +80,9 @@ body, html{
 			</div>
 		</div>
 		<div style="font-size: 1.2em;margin:5px 0;">
-			Lorem ipsum dolor sit amet,
+			These credentials have also been emailed to you.
 		</div>
+		{% endif %}
 	</div>
 </div>
 </body>
