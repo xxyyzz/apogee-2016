@@ -16,7 +16,7 @@ class EventAdmin(admin.ModelAdmin):
 	    # Now we just add an extra filter on the queryset and
 	    # we're done. Assumption: Page.owner is a foreignkey
 	    # to a User.
-	    given_org = organization.objects.get(user= request.user)
+	    given_org = Organization.objects.get(user= request.user)
 	    return qs.filter(org=given_org)
 
 
@@ -34,8 +34,8 @@ class TabAdmin(admin.ModelAdmin):
 	    # Now we just add an extra filter on the queryset and
 	    # we're done. Assumption: Page.owner is a foreignkey
 	    # to a User.
-	    given_org = organization.objects.get(user= request.user)
-	    events_list = events.objects.filter(org=given_org)
+	    given_org = Organization.objects.get(user= request.user)
+	    events_list = Event.objects.filter(org=given_org)
 	    return qs.filter(event__in=events_list)
 	    # tabs_list=qs.filter(event__in=events_list)
 	    # c=0
