@@ -445,6 +445,8 @@ $(window).load(function(){
 	$('#close_events').click(function(){
 		eventpageopen=false;
 		$('#events').fadeOut();
+		$('.show_event').css('background','');
+		$('.close_more_det').click();
 	});
 	$('#event_top').click(function(){
 		prev_eve();
@@ -482,7 +484,7 @@ $(window).load(function(){
 		var obj = events_list[cur_cat].events[cur_event];
 		var put_it = $('.se_descr');
 		if(!obj.reg_enabled)
-			put_it.html('Online registrations for this event are not active.');
+			put_it.html('Online registration for this event is not active.');
 		else if(user.loggedin){
 			if(obj.registered){
 				put_it.html('You are already registered for this event');
@@ -733,7 +735,8 @@ function register_for_event(id){
 		url: "http://bits-apogee.org/2016/api/events/register/"+id+"/",
 		method: "GET",
 		success: function(data){
-			console.log(data);
+			$('.se_descr').html(data.message);
+			eve_reg_info();
 		}
 	});
 }
