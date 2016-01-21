@@ -252,7 +252,7 @@ def events_check(request):
 					'reg_enabled' : event.register,
 					'registered' : registered,
 					'team_event' : event.is_team,
-					'max_members' : events.max_participants,
+					'max_members' : event.max_participants,
 				}
 			container['events'].append(eventdata)
 		response['data'].append(container)
