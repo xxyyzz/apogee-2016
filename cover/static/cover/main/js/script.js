@@ -482,7 +482,7 @@ $(window).load(function(){
 		var obj = events_list[cur_cat].events[cur_event];
 		var put_it = $('.se_descr');
 		if(!obj.reg_enabled)
-			put_it.html('Online registrations for this event are not active.');
+			put_it.html('Online registration for this event is not active.');
 		else if(user.loggedin){
 			if(obj.registered){
 				put_it.html('You are already registered for this event');

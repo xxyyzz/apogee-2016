@@ -761,9 +761,8 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 /*for developers page*/
 .devinfo
 {
-	
-	width: 282px;
-	margin: 0px 15px;
+	width: 270px;
+	margin: 15px;
 	position: relative;
 	text-align: center;
 	display: inline-block;
