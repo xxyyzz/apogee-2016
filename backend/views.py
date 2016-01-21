@@ -293,29 +293,29 @@ def register_single(request, eventid):
 # 		}
 # 	return JsonResponse(response)
 def register_team(request, eventid):
-	try:
-		data = request.POST
-		memberids = data.getlist('memberid')
-		name = data['name']
-		event = Event.objects.get(id=eventid)
-		team = Team.objects.create(name=name, event=event)
-		team.name = name
-		leader = request.user.participant
-		team.leader = leader
+	# try:
+	data = request.POST
+	memberids = data.getlist('memberid')
+	name = data['name']
+	event = Event.objects.get(id=eventid)
+	team = Team.objects.create(name=name, event=event)
+	team.name = name
+	leader = request.user.participant
+	team.leader = leader
+	team.save()
+	for memberid in memberids:
+		member = Participant.objects.get(id=memberid)
+		team.members.add(member)
 		team.save()
-		for memberid in memberids:
-			member = Participant.objects.get(id=memberid)
-			team.members.add(member)
-			team.save()
-		response = {
-			'status' : 1,
-			'message' : 'Team ' + name + ' successfully registered'
-		}
-	except:
-		response = {
-			'status' : 0,
-			'message' : 'Registration unsuccessful. Please try again.'
-		}
+	response = {
+		'status' : 1,
+		'message' : 'Team ' + name + ' successfully registered'
+	}
+	# except:
+	# 	response = {
+	# 		'status' : 0,
+	# 		'message' : 'Registration unsuccessful. Please try again.'
+	# 	}
 	return JsonResponse(response)
 
 def participant_summary(request, participantid):
