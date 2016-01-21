@@ -16,7 +16,7 @@ class EventAdmin(admin.ModelAdmin):
 	    # Now we just add an extra filter on the queryset and
 	    # we're done. Assumption: Page.owner is a foreignkey
 	    # to a User.
-	    given_org = organization.objects.get(user= request.user)
+	    given_org = Organization.objects.get(user= request.user)
 	    return qs.filter(org=given_org)
 
 
