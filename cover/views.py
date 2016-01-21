@@ -10,6 +10,9 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def preIntro(request) :
 	return render(request, "pre/index.html")
 
+def intro(request) :
+	return render(request, "intro/index.html")	
+
 @ensure_csrf_cookie
 def main(request) :
 	return render(request, "main/index.html")
