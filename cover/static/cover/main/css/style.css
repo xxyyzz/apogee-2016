@@ -1521,5 +1521,37 @@ a.arch-lnk {
 	bottom: 50px;
 	left: 50%;
 	transform:translateX(-50%);
+}
+
+/*Sponsors*/
+.spons_cont{
+	width:300px;
+	padding:10px; 
+	cursor: pointer;
+	margin: 20px 30px;
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
 
 }
+.spons_cont a
+{
+	display: inline-block;
+	text-decoration: none;
+	color:inherit;
+	width: 100%;
+}
+.spons_title{
+	border-top-left-radius:5px; 
+	border-top-right-radius:5px; 
+	background: #444;
+	color: #f0f0f0;
+	font-size: 20px;
+	line-height: 30px;
+}
+.spons_img{
+	width: 100%;
+	padding:2px; 
+	border:1px solid #888;
+}
+
