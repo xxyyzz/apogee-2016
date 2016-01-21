@@ -298,9 +298,9 @@ def register_team(request, eventid):
 	memberids = data.getlist('memberid')
 	name = data['name']
 	event = Event.objects.get(id=eventid)
-	team = Team.objects.create(name=name, event=event)
-	team.name = name
 	leader = request.user.participant
+	team = Team.objects.create(name=name, event=event, leader=leader)
+	team.name = name
 	team.leader = leader
 	team.save()
 	for memberid in memberids:
