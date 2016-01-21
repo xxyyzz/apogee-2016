@@ -295,7 +295,7 @@ def participant_summary(request, participantid):
 		response = {
 			'name' : participant.name,
 			'id' : participant.id,
-			'college': participant.college,
+			'college': participant.college.name,
 			'status' : 1,
 		}
 	except:
