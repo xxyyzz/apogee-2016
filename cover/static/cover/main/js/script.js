@@ -484,6 +484,17 @@ $(window).load(function(){
 	$('.se_descr').on('click','.register_event',function(){
 		register_for_event(events_list[cur_cat].events[cur_event].id);
 	});
+	var wait =0;
+	$('.se_descr').on('keyup','input[name="memberid"]',function(){
+		wait++;
+		var t =$(this);
+		if(wait==1){
+			setTimeout(function() {
+				create_my_team(t.val(),t.parent().find('span'));
+				wait = 0;
+			}, 500);
+		}
+	});
 	$('.se_ico').on('click','.eve_det_ico',function(){
 		var x = $(this).data('eve_id'),
 		y = $(this).data('eve_pos'),
@@ -502,9 +513,9 @@ $(window).load(function(){
 			else{
 				if(obj.team_event){
 					var eve = "";
-					eve += 'This is a team event, you can either create a new team or to join an existing team contact its team leader. <form id="create_my_team"><div>Team Name <input type="text" name="name" /></div>';
+					eve += 'This is a team event, you can either create a new team or to join an existing team contact its team leader. <form id="create_my_team"><div>Team Name <input type="text" name="name" required/></div>';
 					for(var i=0;i<obj.max_members;i++){
-						eve += '<div>Member'+(i+1)+' Id <input type="text" name="memberid" /><span style="color:rgb(116, 255, 116) !important;"></span> </div>';
+						eve += '<div>Member'+(i+1)+' ID <input type="text" name="memberid" /><span style="color:rgb(116, 255, 116) !important;"></span> </div>';
 					}
 					eve += '</form> <div class="create_team">Create Team</div>';
 					put_it.html(eve); 
@@ -757,10 +768,22 @@ function eve_reg_info(){
 	});
 }
 
-function create_my_team(){
-	$.ajax({
-		url: ''
-	});
+function create_my_team(id,put){
+	if(id==""){
+		put.html('');
+	}
+	else{
+		$.ajax({
+			url: 'http://bits-apogee.org'+imgpre+'/api/participant/'+id+'/',
+			method: "GET",
+			success: function(data){
+				if(data.status==1)
+					put.html(data.name);
+				else
+					put.html(data.message);
+			}
+		});
+	}
 }
 function register_for_event(id){
 	$.ajax({
