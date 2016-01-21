@@ -966,7 +966,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	background-color: #fff;
 	text-shadow:none;
 }
-.register_event{
+.register_event,.create_team{
 	text-align: center;
     margin: 10px;
     width: 150px;
