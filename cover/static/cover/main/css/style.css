@@ -980,6 +980,21 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
 }
+#create_my_team{
+	margin: 15px 0;
+}
+#create_my_team input{
+	background: none;
+	border: 1px solid white;
+	border-radius: 3px;
+	padding: 5px 10px;
+	color: white;
+	display: inline;
+	margin: 10px;
+}
+#create_my_team input[name="memberid"]{
+	width: 150px;
+}
 .register_event:hover,.create_team:hover{
 	color: #000;
 	background-color: #fff;

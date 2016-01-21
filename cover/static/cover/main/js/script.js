@@ -499,7 +499,13 @@ $(window).load(function(){
 				}
 			else{
 				if(obj.team_event){
-					put_it.html('This is a team event, you can either create a new team or to join an existing team contact its team leader. <form id="create_my_team"> <input type="text" name="name" /> <input type="text" name="leaderid" /> <input type="text" name="memberid" /> </form> <div class="create_team">Create Team</div>'); 
+					var eve = "";
+					eve += 'This is a team event, you can either create a new team or to join an existing team contact its team leader. <form id="create_my_team"><div>Team Name <input type="text" name="name" /></div>';
+					for(var i=0;i<obj.max_members;i++){
+						eve += '<div>Member'+(i+1)+' Id <input type="text" name="memberid" /><span style="color:rgb(116, 255, 116) !important;"></span> </div>';
+					}
+					eve += '</form> <div class="create_team">Create Team</div>';
+					put_it.html(eve); 
 				}
 				else{
 					put_it.html('Registrations for this event are open.<div class="register_event">Register</div>');
@@ -742,9 +748,16 @@ function eve_reg_info(){
 					events_list[i].events[j].reg_enabled = data.data[i].events[j].reg_enabled;
 					events_list[i].events[j].registered = data.data[i].events[j].registered;
 					events_list[i].events[j].team_event = data.data[i].events[j].team_event;
+					events_list[i].events[j].max_members = data.data[i].events[j].max_members;
 				}
 			}
 		}
+	});
+}
+
+function create_my_team(){
+	$.ajax({
+		url: ''
 	});
 }
 function register_for_event(id){
