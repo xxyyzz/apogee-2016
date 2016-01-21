@@ -293,34 +293,34 @@ def register_single(request, eventid):
 # 		}
 # 	return JsonResponse(response)
 def register_team(request, eventid):
-	# try:
-	data = request.POST
-	memberids = data.getlist('memberid')
-	name = data['name']
-	event = Event.objects.get(id=eventid)
-	leader = request.user.participant
-	team = Team.objects.create(name=name, event=event, leader=leader)
-	team.name = name
-	team.leader = leader
-	team.save()
-	for memberid in memberids:
-		try:
-			member = Participant.objects.get(id=memberid)
-			member.events.add(event)
-			member.save()
-			team.members.add(member)
-			team.save()
-		except:
-			pass
-	response = {
-		'status' : 1,
-		'message' : 'Team ' + name + ' successfully registered'
-	}
-	# except:
-	# 	response = {
-	# 		'status' : 0,
-	# 		'message' : 'Registration unsuccessful. Please try again.'
-	# 	}
+	try:
+		data = request.POST
+		memberids = data.getlist('memberid')
+		name = data['name']
+		event = Event.objects.get(id=eventid)
+		leader = request.user.participant
+		team = Team.objects.create(name=name, event=event, leader=leader)
+		team.name = name
+		team.leader = leader
+		team.save()
+		for memberid in memberids:
+			try:
+				member = Participant.objects.get(id=memberid)
+				member.events.add(event)
+				member.save()
+				team.members.add(member)
+				team.save()
+			except:
+				pass
+		response = {
+			'status' : 1,
+			'message' : 'Team ' + name + ' successfully registered'
+		}
+	except:
+		response = {
+			'status' : 0,
+			'message' : 'Whoopsie! Looks like an error occured. Please try again later.'
+		}
 	return JsonResponse(response)
 
 def participant_summary(request, participantid):
@@ -360,9 +360,9 @@ def profile_summary(request):
 			'fee_paid' : member.fee_paid,
 			'teams' : [team.name for team in member.teams.all()],
 			'address' : member.address,
-			'bank_ifsc' : bank_ifsc,
-			'bank_account_no' : bank_account_no,
-			'bank_name' : bank_name,
+			'bank_ifsc' : member.bank_ifsc,
+			'bank_account_no' : member.bank_account_no,
+			'bank_name' : member.bank_name,
 		}
 	else:
 		response = {
