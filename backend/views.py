@@ -251,7 +251,8 @@ def events_check(request):
 					'id':event.id,
 					'reg_enabled' : event.register,
 					'registered' : registered,
-					'team_event' : event.is_team
+					'team_event' : event.is_team,
+					'max_members' : event.max_participants,
 				}
 			container['events'].append(eventdata)
 		response['data'].append(container)
@@ -274,38 +275,47 @@ def register_single(request, eventid):
 			'message' : 'Registration Failed!'
 		}
 	return JsonResponse(response)
-def register_team(request, eventid, teamid):
-	event = Event.objects.get(id=eventid)
-	participant = request.user.participant
-	team = Team.objects.get(id=teamid)
+# def register_team(request, eventid, teamid):
+# 	event = Event.objects.get(id=eventid)
+# 	participant = request.user.participant
+# 	team = Team.objects.get(id=teamid)
+# 	try:
+# 		participant.events.add(event)
+# 		participant.teams.add(team)
+# 		participant.save()
+#
+# 		response = {
+# 			'registered' : True,
+# 		}
+# 	except:
+# 		response = {
+# 			'registered' : False,
+# 		}
+# 	return JsonResponse(response)
+def register_team(request, eventid):
 	try:
-		participant.events.add(event)
-		participant.teams.add(team)
-		participant.save()
-
+		data = request.POST
+		memberids = data.getlist('memberid')
+		name = data['name']
+		event = Event.objects.get(id=eventid)
+		team = Team.objects.create(name=name, event=event)
+		team.name = name
+		leader = request.user.participant
+		team.leader = leader
+		team.save()
+		for memberid in memberids:
+			member = Participant.objects.get(id=memberid)
+			team.members.add(member)
+			team.save()
 		response = {
-			'registered' : True,
+			'status' : 1,
+			'message' : 'Team ' + name + ' successfully registered'
 		}
 	except:
 		response = {
-			'registered' : False,
+			'status' : 0,
+			'message' : 'Registration unsuccessful. Please try again.'
 		}
-	return JsonResponse(response)
-# def create_team(request, eventid):
-# 	data = request.POST
-# 	memberids = data.getlist('memberid')
-# 	leaderid = data['leaderid']
-# 	name = data['name']
-# 	event = Event.objects.get(id=eventid)
-# 	team = Team.objects.create(name=name, event=event)
-# 	leader = Participant.objects.get(id=leaderid)
-# 	team.leader = leader
-# 	team.save()
-# 	for memberid in memberids:
-# 		member = Participant.objects.get(id=memberid)
-# 		team.members.add(member)
-# 		team.save()
-#
 
 def participant_summary(request, participantid):
 	try:
