@@ -182,13 +182,15 @@ def email_confirm(request, token):
 		username = user.username
 		mail_password(member, user, password)
 		context = {
+			'status' : 1,
 			'username' : username,
 			'password' : password,
 		}
 	else:
 		context = {
-			'email' : "No Such Token",
-			'password' : "No Such Token",
+			'status' : 0,
+			'email' : "Invalid Token",
+			'password' : "Invalid Token",
 		}
 	return render(request, 'main/email_verified.html', context)
 
@@ -289,6 +291,22 @@ def register_team(request, eventid, teamid):
 			'registered' : False,
 		}
 	return JsonResponse(response)
+# def create_team(request, eventid):
+# 	data = request.POST
+# 	memberids = data.getlist('memberid')
+# 	leaderid = data['leaderid']
+# 	name = data['name']
+# 	event = Event.objects.get(id=eventid)
+# 	team = Team.objects.create(name=name, event=event)
+# 	leader = Participant.objects.get(id=leaderid)
+# 	team.leader = leader
+# 	team.save()
+# 	for memberid in memberids:
+# 		member = Participant.objects.get(id=memberid)
+# 		team.members.add(member)
+# 		team.save()
+#
+
 def participant_summary(request, participantid):
 	try:
 		participant = Participant.objects.get(id=participantid)
