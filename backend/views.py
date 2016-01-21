@@ -289,7 +289,8 @@ def register_team(request, eventid, teamid):
 			'registered' : False,
 		}
 	return JsonResponse(response)
-# def register_new_team(request):
+def register_new_team(request):
+	pass
 # 	if request.POST:
 # 		memberids = request.POST.getlist('id')
 # 		name
