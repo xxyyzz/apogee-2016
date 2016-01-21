@@ -191,6 +191,9 @@ function open_gen_lb(){
 function close_gen_lb(){
 	killOverlay();
 	$('.gen_lb').fadeOut();
+	$('.main_head').html('');
+	$("div.lb_icon>img").attr("src", '');
+	$('.lb_descr').html('');
 }
 
 function closeLightBox() {
@@ -926,7 +929,7 @@ function startHelp() {
 	onScreen = 1;
 }
 
-$("#help-button-1").click(function() {
+$("#help-button-1,#map-help-1").click(function() {
 	$("#map-help-1").css("display", "none");
 	$("#map-help-2").css("display", "block");
 	$("#map_control").css("z-index", 500);
@@ -935,7 +938,7 @@ $("#help-button-1").click(function() {
 	onScreen = 2;
 });
 
-$("#help-button-2").click(function() {
+$("#help-button-2,#map-help-2").click(function() {
 	$("#map-help-2").css("display", "none");
 	$("#map_control").css("z-index", 1);
 	$("#burgernav").css("z-index", 199);
@@ -1121,7 +1124,7 @@ var map_ele_info = {
 	'campusAmbassador'		:		{
 										ename:'Campus Ambassador',
 										content:'<span style="font-size:25px"><b>What is a Campus Ambassador ?</b></span><p>A Campus Ambassador is responsible for publicity for APOGEE, the annual technical extravaganza of BITS Pilani, Pilani Campus, and is responsible for introducing and encouraging student participation in the fest, in his/her area or college.</p><p>To APOGEE he/she is the chief student representative of the college and is the coordinator for any relevant activity conducted in his/her college for publicity through social media, College notice boards, Root-mails etc.</p><span style="font-size:25px"><b>Why be a Campus Ambassador ?</b></span><p>Campus Ambassador Program, this time is powered by YOUTH4WORK, an established talent assessment company. A Campus Ambassador will get an official certificate through BITS-Pilani for pursuing a Marketing Internship Programme for 2 months recognized by YOUTH4WORK.</p><p>Moreover, he/she will be entitled to awards and special incentives like exemptions from registration fees, exclusive merchandise, recommendations etc. based on their performance in the programme.</p><br><a class="lb_a" href="http://bits-apogee.org/campusambassador/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
-										icon:'/2016/static/cover/main/img/lb-icons/ca.svg',
+										icon:'/2016/static/cover/main/img/lb-icons/campus.svg',
 										func:content_link,
 									},
 
@@ -1135,7 +1138,7 @@ var map_ele_info = {
 	'sponsors'				:		{
 										ename:'Sponsors',
 										content:'',
-										icon:'/2016/static/cover/main/img/lb-icons/sponsor.svg',
+										icon:'/2016/static/cover/main/img/lb-icons/spons.svg',
 										func:content_link,
 									},
 

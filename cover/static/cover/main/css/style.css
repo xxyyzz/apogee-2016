@@ -56,6 +56,18 @@ html,body{
 	left:0;
 	right: 0; 
 }
+/*--------------------------LOADER---------------------------*/
+svg#loadersvg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+svg#loadersvg rect {
+  fill: #DE5B51;
+}
 
 /*-----------------------NAV + PROFILE-ICONS-----------------------------*/
 nav{
@@ -1400,4 +1412,53 @@ a.arch-lnk {
 .help-button:hover {
 	background-color: white;
     color: black;
+}
+
+.main-nav {
+	width: 50%;
+    max-width: 500px;
+    top: 50px;
+    margin: auto;
+    position: absolute;
+    left: calc(50% - 250px);
+}
+
+.pann-nav {
+    width: 150px;
+    max-width: 500px;
+    margin-top: 50px;
+    margin: auto;
+    position: absolute;
+    bottom: 40px;
+    right: 120px;
+}
+
+
+.zoom-nav {
+    width: 110px;
+    max-width: 500px;
+    margin-top: 50px;
+    margin: auto;
+    position: absolute;
+    bottom: 250px;
+    right: 120px;
+}
+
+
+.quik-nav {
+	width: 75px;
+    max-width: 500px;
+    margin-top: 50px;
+    margin: auto;
+    position: absolute;
+    top: 80px;
+    left: 50px;
+}
+
+#help-button-2 {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform:translateX(-50%);
+
 }
