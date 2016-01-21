@@ -967,7 +967,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	background-color: #fff;
 	text-shadow:none;
 }
-.register_event,.create_team{
+.register_event,.open_create{
 	text-align: center;
     margin: 10px;
     width: 150px;
@@ -980,7 +980,34 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
 }
-.register_event:hover,.create_team:hover{
+#create_a_team>div{
+	text-align: left;
+}
+#create_a_team input[name="memberid"]{
+	width:150px;
+	margin-right: 10px;
+	display:inline-block;
+}
+#create_a_team input[type="submit"]{
+	padding: 5px 10px;
+	background: none;
+	outline: none;
+	border: 1px solid #000;
+	color: #000;
+}
+#create_a_team input[type="submit"]:hover{
+	background-color: #000;
+	color: white;
+}
+#create_a_team .mem_id_label{
+	display:inline-block;
+	margin-right:10px;
+}
+#create_a_team .name_mem{
+	display:inline-block;
+	margin: 10px 0;
+}
+.register_event:hover,.open_create:hover{
 	color: #000;
 	background-color: #fff;
 	text-shadow:none;
