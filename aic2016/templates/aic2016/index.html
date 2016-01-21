@@ -1,14 +1,30 @@
-<html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="EN">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content = "AAPOGEE Innovation Challenge, an exceptional technical symposium, aims at quenching your thirst for hands-on experience in real life problems plaguing the industrial world.Organized in collaboration with various multinational companies, this event presents before you existing challenges faced by these companies who seek their solutions from you. These problems, which happen to be discipline specific (one need not belong to that discipline), are to be solved by participants in teams of 2-4 in a month."/>
+	<meta name = "keywords" content = "apogee, technical Festival, techfest, tech fest, bits pilani, apogee 2016, bits tech fest, bits fest, birla institute of technology and science,apogee innovation challenge,aic,aic2016"/>
+	<meta name="robots" content="index, follow">
+	<meta name="googlebot" content="index, follow">
+	<meta name="copyright" content="Copyright © 2016 Department Of Visual Media, BITS Pilani">
+	<meta name="author" content="Department Of Visual Media, BITS Pilani">
+	<meta name="email" content="webmaster@bits-apogee.org">
+	<meta name="rating" content="general">
+	<meta name="distribution" content="Global">
+	<meta name="revisit-after" content="1 days">
+
 	<title>Apogee Innovation Challenge 2016</title>
- 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="/2016/static/aic2016/css/style.css">
-    <link rel="icon" href="/2016/static/aic2016/img/favicon.ico" type="image/ico">
-    <meta name="viewport" content="width=device-width" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<link href="/2016/static/aic2016/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link rel="stylesheet" type="text/css" href="/2016/static/aic2016/css/form.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'aic2016/css/style.css' %}">
+    <link rel="icon" href="{% static 'aic2016/img/favicon.ico' %}" type="image/ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href="{% static 'aic2016/css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'aic2016/css/form.css' %}">
 
 </head>
 <body>
@@ -82,14 +98,14 @@
 <!-- LANDING -->
 <div id="page1" class="page p1">
 	<div class="bulb" id="bulb">
-		<img id="b1" class="b1" src="/2016/static/aic2016/img/bulb1.png">
-		<img id="b2" class="b2" src="/2016/static/aic2016/img/bulb1.png">
-		<img id="b3" class="b3a" src="/2016/static/aic2016/img/bulb2.png">
-		<img id="be" class="b3" src="/2016/static/aic2016/img/bulb4.png" >
-		<img id="bf" class="b3" src="/2016/static/aic2016/img/bulb3.png">
-		<img id="b4" class="b4" src="/2016/static/aic2016/img/bulb1.png">
+		<img id="b1" class="b1" src="{% static 'aic2016/img/bulb1.png' %}">
+		<img id="b2" class="b2" src="{% static 'aic2016/img/bulb1.png' %}">
+		<img id="b3" class="b3a" src="{% static 'aic2016/img/bulb2.png' %}">
+		<img id="be" class="b3" src="{% static 'aic2016/img/bulb4.png' %}" >
+		<img id="bf" class="b3" src="{% static 'aic2016/img/bulb3.png' %}">
+		<img id="b4" class="b4" src="{% static 'aic2016/img/bulb1.png' %}">
 	</div>
-	<a href="http://bits-apogee.org"><img class="bl" src="/2016/static/aic2016/img/logo.png"></a>
+	<a href="http://bits-apogee.org"><img class="bl" src="{% static 'aic2016/img/logo.png' %}"></a>
 </div>
 
 
@@ -144,7 +160,7 @@
  			<i class="fa fa-star ficon"></i>
  			<div class="head">Sponsor</div>
  			<div class="info" >
- 				We are proud to have Schneider Electric as the event sponsor for Apogee Innovation Challenge 2016. Schneider Electric is a European multinational corporation that specializes in electricity distribution, automation management and produces installation components for energy management. It is headquartered in Rueil-Malmaison, France.<img src="/2016/static/aic2016/img/sponslogo.jpg" id="spon">
+ 				We are proud to have Schneider Electric as the event sponsor for Apogee Innovation Challenge 2016. Schneider Electric is a European multinational corporation that specializes in electricity distribution, automation management and produces installation components for energy management. It is headquartered in Rueil-Malmaison, France.<img src="{% static 'aic2016/img/sponslogo.jpg' %}" id="spon">
  				<br><br>
 				As the global specialist in energy management and automation, Schneider Electric serves customers in over 100 countries, helping them to make their lives and ecosystems safe, reliable, efficient and sustainable. From the simplest of switches to complex operational systems, their technology, software and services improve the way their customers manage and automate their operations. At Schneider Electric, they call this Life is On.
 
@@ -455,56 +471,56 @@ function initFaq() {
 
 
 initFaq();
-
+var imgpre="/2016";
 
 var companyData = [
 	{
 		"name" : "Schneider Electric",
-		"imgl" : "/static/aic2016/companies/Fschneider.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Fschneider.jpg",
 		"info" : "Serving countries in over 100 countries helping them make their lives and ecosystems safe, reliable, efficient and sustainable, “The Global Specialist in Energy Management and Automation” improves the way customers manage electrical systems. Get a chance to win cash prizes up to 72k and a chance to be interviewed for the internship from this multinational company this APOGEE!",
-		"link" : "/static/aic2016/problems/PSschneider.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PSschneider.pdf"
 	},
 	{
 		"name" : "Luminous",
-		"imgl" : "/static/aic2016/companies/Fluminous.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Fluminous.jpg",
 		"info" : "The well known Luminous Power technologies is the leading home electrical specialist in India having a vast portfolio comprising of power back-up solutions like inverters, batteries, UPS and other electrical appliances. The winner of consumer Super-brand and rated as India’s most trusted brand is here in BITS to give cash prizes to the teams with the most  passionately innovative solutions.",
-		"link" : "/static/aic2016/problems/PSluminous.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PSluminous.pdf"
 	},
 	{
 		"name" : "Sterling Engineering",
-		"imgl" : "/static/aic2016/companies/Fsterling.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Fsterling.jpg",
 		"info" : "With years of experience and expertise in developing the best solutions for a variety of construction challenges, Sterling has earned a reputation of being one of the most cost-efficient and reliable engineering firms in the business providing services to over 3000 projects around the world. Give life to your designs and ideas this APOGEE by giving out-of-the-box solutions to their problem statement! ",
-		"link" : "/static/aic2016/problems/PSsterling.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PSsterling.pdf"
 	},
 	{
 		"name" : "Wooplr",
-		"imgl" : "/static/aic2016/companies/Fwooplr.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Fwooplr.jpg",
 		"info" : "Introducing this APOGEE, India’s first fashion discovery app! Connecting sellers to shoppers and giving a personalized social touch to shopping, Wooplr has come a long way in providing the fashion markets with just what they need. Watch out for their problem statement that will tickle your creative bone!",
-		"link" : "/static/aic2016/problems/PSwooplr.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PSwooplr.pdf"
 	},
 	{
 		"name" : "HarVa",
-		"imgl" : "/static/aic2016/companies/Fharva.jpg",
-		"info" : "HarVa is a for-profit rural enterprise in India started in March 2010 which aims to “Harness Value” out of places where none or little existed by setting up a network of HarVa Digital Huts in rural areas connected via Internet. The company leverages on the vast intellectual and infrastructural capital in the rural landscapes by involving local communities in business and value co-creation; attaining inclusive growth in the real sense.The company primarily focuses on Skill Development, Primary Healthcare, Digital and Financial Inclusion Practices,  Community based Farming and Rural Electrification.",
-		"link" : "/static/aic2016/problems/PSharva.pdf"
+		"imgl" : imgpre+"/static/aic2016/companies/Fharva.jpg",
+		"info" : "HarVa is a for-profit rural enterprise in India started in March 2010 which aims to “Harness Value” out of places where none or little existed by setting up a network of HarVa Digital Huts in rural areas connected via Internet. The company leverages on the vast intellectual and infrastructural capital in the rural landscapes by involving local communities in business and value co-creation; attaining inclusive growth in the real sense.The company primarily focuses on Skill Development, Primary Healthcare, Digital and Financial Inclusion Practices, Community based Farming and Rural Electrification.",
+		"link" : imgpre+"/static/aic2016/problems/PSharva.pdf"
 	},
 	{
 		"name" : "NextGen",
-		"imgl" : "/static/aic2016/companies/Fnextgen.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Fnextgen.jpg",
 		"info" : "NextGen, one of India’s leading Sustainability and Corporate Social Responsibility Management company, founded by BITSians, is here this APOGEE challenging you to come up with innovative solutions to manage Environmental footprint, Product life-cycles, and much more. Stay tuned for details…",
-		"link" : "/static/aic2016/problems/PSnextgen.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PSnextgen.pdf"
 	},
 	{
 		"name" : "Bentley",
-		"imgl" : "/static/aic2016/companies/Fbentley.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Fbentley.jpg",
 		"info" : "With more than 3000 colleagues in over 50 countries, Bentley provides the most comprehensive solutions for advancing infrastructure including roadways, bridges, airports and skyscrapers.  AIC  2016 presents to you the problem statement of this  global leader.<br><b>The problem statement is open to students of all the disciplines and years.</b><br><a href='/2016/static/aic2016/problems/PSbentley_techmanual.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the technical manual</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/2016/static/aic2016/problems/PSbentley_key.pdf' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;SOFTWARE KEY</span></a>",
-		"link" : "/static/aic2016/problems/PSbentley.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PSbentley.pdf"
 	},
 	{
 		"name" : "Techture",
-		"imgl" : "/static/aic2016/companies/Ftechture.jpg",
+		"imgl" : imgpre+"/static/aic2016/companies/Ftechture.jpg",
 		"info" : "They aim to integrate the Architectural, Structural, Mechanical, Electrical and Plumbing disciplines by focusing on providing extensive design, analysis and visualisation services leveraging Building Information Modelling (BIM) and associated technologies. This APOGEE, 	solve their problem statements to earn internship opportunities.",
-		"link" : "/static/aic2016/problems/PStechture.pdf"
+		"link" : imgpre+"/static/aic2016/problems/PStechture.pdf"
 	},
 ];
 
@@ -513,9 +529,9 @@ function initComp() {
 	for(var i=1;i<=companyData.length;i++) {
 		var dat = companyData[i-1];
 
-		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='/2016"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:18px'><b>"+dat.name+"</b></span><br>"+dat.info+"<br>";
+		var part = "<div class='company-block'><div class='company-img-block'><img class='company-img-holder' src='"+dat.imgl+"'></div><div class='company-txt-block'><span style='font-size:18px'><b>"+dat.name+"</b></span><br>"+dat.info+"<br>";
 		if(dat.link != "") {
-			part += "<a href='/2016"+dat.link+"' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the problem statement</span></a></div></div>";
+			part += "<a href='"+dat.link+"' target='_blank'><span class='pslink'><i class='fa fa-download'></i>&nbsp;&nbsp;&nbsp;download the problem statement</span></a></div></div>";
 		} else
 			part += "</div></div>";
 
@@ -572,7 +588,7 @@ initComp();
             var datasend = collect_data();
             // console.log(datasend);
             $.ajax({
-                url: 'http://bits-apogee.org/2016/aic/submit/',
+                url: 'http://bits-apogee.org'+imgpre+'/aic/submit/',
                 type: 'POST',
                 data: datasend,
                 cache : false,

@@ -263,7 +263,7 @@ function thinkagain_reset(spk)
 	$('#thinkagain').css({'overflow':'auto'});
 }
 
-var imgpre = "/2016"
+var imgpre = "/2016";
 
 var speaker_data = 
 [
