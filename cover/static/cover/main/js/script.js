@@ -1165,7 +1165,7 @@ var map_ele_info = {
 
 	'about'					:		{
 										ename:'About',
-										content:'',
+										content:'<p>In the heart of Pilani lies a fest that pushes the boundaries of student performance and creativity every year. From presenting papers and projects, to bringing into reality imaginative designs that the student mind conjures up, to the events that enthrall everyone who attends, APOGEE, BITS Pilani\'s technical fest, has always brought together the brightest minds in technology and engineering over the years, and this year, it promises to be bigger than ever.</p><p>Ever dreamed about establishing civilization in Mars? Ever imagined building exciting vehicles and robots with your own hands? Ever wanted to challenge your mind with mind-bending quizzes, word games, and programming challenges? In the final days of February, APOGEE 2016 returns, with a plethora of classics, and many innovative new events.</p><p>From the town of Pilani, BITS Pilani welcomes you to <b>APOGEE 2016</b>. <br><br><span style="font-weight:900;font-size: 30px">The Future is Now !</span></p>',
 										icon:'/2016/static/cover/main/img/lb-icons/about.svg',
 										func:content_link,
 									},
