@@ -35,7 +35,7 @@ class TabAdmin(admin.ModelAdmin):
 	    # we're done. Assumption: Page.owner is a foreignkey
 	    # to a User.
 	    given_org = Organization.objects.get(user= request.user)
-	    events_list = events.objects.filter(org=given_org)
+	    events_list = Event.objects.filter(org=given_org)
 	    return qs.filter(event__in=events_list)
 	    # tabs_list=qs.filter(event__in=events_list)
 	    # c=0
