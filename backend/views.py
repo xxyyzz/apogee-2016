@@ -306,6 +306,8 @@ def register_team(request, eventid):
 	for memberid in memberids:
 		try:
 			member = Participant.objects.get(id=memberid)
+			member.events.add(event)
+			member.save()
 			team.members.add(member)
 			team.save()
 		except:
