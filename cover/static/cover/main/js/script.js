@@ -479,10 +479,6 @@ $(window).load(function(){
 	$('.se_descr').on('click','#show_more',function(){
 		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);
 	});
-	$('.se_descr').on('click','#register_me',function(){
-		get_event_detail(events_list[cur_cat].events[cur_event].id,show_all_det);
-		$('.eve_det_ico_register').click();
-	});
 	$('.se_descr').on('click','.register_event',function(){
 		register_for_event(events_list[cur_cat].events[cur_event].id);
 	});
@@ -516,7 +512,7 @@ $(window).load(function(){
 	$('.close_more_det').click(function(){
 		$(this).fadeOut();
 		$('.se_ico').html('');
-		$('.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
+		$('.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="show_more">More</div></div>');
 	});
 	$('#searchResults').on('click','.searchResult',function(){
 		go_to_location($(this).data('cat'),$(this).data('eve'));
@@ -657,7 +653,7 @@ function next_eve(){
 			cur_event = 0;
 		}
 		$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
-		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
+		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="show_more">More</div></div>');
 		$('.show_event>.se_head').css({'top':'100px'});
 		$('.show_event>.se_head').css('opacity','1');
 		$('.show_event>.se_head').animate({'top':'0px'},250);
@@ -701,7 +697,7 @@ function prev_eve(){
 			cur_event = events_list[cur_cat].events.length - 1;
 		}
 		$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
-		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
+		$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="show_more">More</div></div>');
 		$('.show_event>.se_head').css({'top':'-50px'});
 		$('.show_event>.se_head').css('opacity','1');
 		$('.show_event>.se_head').animate({'top':'0px'},250);
@@ -954,7 +950,7 @@ function go_to_location(cat,eve){
 			$('.close_more_det').css('display','none');
 			setTimeout(function() {
 				$('.show_event>.se_head').html(events_list[cur_cat].events[cur_event].name);
-				$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="register_me">Register</div><div id="show_more">More</div></div>');
+				$('.show_event>.se_descr').html('<div class="light_large_font">'+events_list[cur_cat].events[cur_event].short_desc + '</div><div class="buttons_center"><div id="show_more">More</div></div>');
 				$('.show_event>.se_head').css({'top':'100px'});
 				$('.show_event>.se_head').css('opacity','1');
 				$('.show_event>.se_head').animate({'top':'0px'},250);
@@ -1159,7 +1155,7 @@ var map_ele_info = {
 
 	'developers'			:		{
 										ename:'Developers',
-										content:'',
+										content:'<div class="dev_data" id="c_data"> <div class="dev_cont"> <div class="dep_name">Frontend Developers</div> <hr class="sep_dep_name"> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/pranjal.jpg" class="contact_img"> </div> <div class="contact_det"><b>Pranjal Gupta</b> <br></div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/smit.jpg" class="contact_img"> </div> <div class="contact_det"><b>Smit Patwa</b> <br>smit.patwa@gmail.com</div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/prateek.jpg" class="contact_img"> </div> <div class="contact_det"><b>Prateek Gupta</b> <br>prateek.g1509@gmail.com</div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/piyush.jpg" class="contact_img"> </div> <div class="contact_det"><b>Piyush Ranjan</b> <br></div> </div> </div> <div class="dev_cont"> <div class="dep_name">Graphic Designers</div> <hr class="sep_dep_name"> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/amey.jpg" class="contact_img"> </div> <div class="contact_det"><b>Amey Agrawal</b> <br></div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/abhinav.jpg" class="contact_img"> </div> <div class="contact_det"><b>Abhinav Sharma</b> <br></div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/rishabh.jpg" class="contact_img"> </div> <div class="contact_det"><b>Rishabh Garg</b> <br></div> </div> </div> <div class="dev_cont"> <div class="dep_name">Backend Developers</div> <hr class="sep_dep_name"> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/nikhil.jpg" class="contact_img"> </div> <div class="contact_det"><b>Nikhil Verma</b> <br>nikhilweee@gmail.com</div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/satwik.jpg" class="contact_img"> </div> <div class="contact_det"><b>Satwik Bhattamishra</b> <br></div> </div> <div class="devinfo"> <div style="position:relative"><img src="'+imgpre+'"static/cover/main/img/dev/kunal.jpg" class="contact_img"> </div> <div class="contact_det"><b>Kunal Sharma</b> <br>ks05111996@gmail.com</div> </div> </div> </div>',
 										icon: imgpre+'cover/main/img/lb-icons/developers.svg',
 										func:content_link,
 									},
