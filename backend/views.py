@@ -254,3 +254,47 @@ def events_check(request):
 			container['events'].append(eventdata)
 		response['data'].append(container)
 	return JsonResponse(response)
+
+
+def register_single(request, eventid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	try:
+		participant.events.add(event)
+		participant.save()
+		response = {
+			'status' : 1,
+			'message' : 'Successfully Registered!'
+		}
+	except:
+		response = {
+			'status' : 0,
+			'message' : 'Registration Failed!'
+		}
+	return JsonResponse(response)
+def register_team(request, eventid, teamid):
+	event = Event.objects.get(id=eventid)
+	participant = request.user.participant
+	team = Team.objects.get(id=teamid)
+	try:
+		participant.events.add(event)
+		participant.teams.add(team)
+		participant.save()
+
+		response = {
+			'registered' : True,
+		}
+	except:
+		response = {
+			'registered' : False,
+		}
+	return JsonResponse(response)
+# def register_new_team(request):
+# 	if request.POST:
+# 		memberids = request.POST.getlist('id')
+# 		name
+# 		member
+# 		leader
+# 		event
+# 		team = Team.objects.create()
+# 		for memberid in memberids:
