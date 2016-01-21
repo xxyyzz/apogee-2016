@@ -980,30 +980,30 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
 }
-#create_my_team>div{
+#create_a_team>div{
 	text-align: left;
 }
-#create_my_team input[name="memberid"]{
+#create_a_team input[name="memberid"]{
 	width:150px;
 	margin-right: 10px;
 	display:inline-block;
 }
-#create_my_team input[type="submit"]{
+#create_a_team input[type="submit"]{
 	padding: 5px 10px;
 	background: none;
 	outline: none;
 	border: 1px solid #000;
 	color: #000;
 }
-#create_my_team input[type="submit"]:hover{
+#create_a_team input[type="submit"]:hover{
 	background-color: #000;
 	color: white;
 }
-#create_my_team .mem_id_label{
+#create_a_team .mem_id_label{
 	display:inline-block;
 	margin-right:10px;
 }
-#create_my_team .name_mem{
+#create_a_team .name_mem{
 	display:inline-block;
 	margin: 10px 0;
 }

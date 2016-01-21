@@ -285,10 +285,11 @@ function logout(){
 	});
 };
 
-$('#create_my_team').submit(function(e){
+$(document).on('submit','#create_a_team',function(e){
 	e.preventDefault();
+	console.log('hey');
     var formData = $(this).serializeArray();
-    $('.create_team').val('Creating ...');
+    $('.create_team').text('Creating ...');
     $('.create_team').prop('disabled', true);
     $.ajax({
 		url:'bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/',
@@ -297,7 +298,7 @@ $('#create_my_team').submit(function(e){
 		data:formData,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
-		success:function(response){
+		success:function(data){
 			if(data.status == 1){
 	        	$('.lb_descr').html('Team successfully created.');
 	        }
@@ -509,11 +510,11 @@ $(window).load(function(){
 		var put_it = $('.lb_descr');
 		var eve = "";
 		$('.main_head').html(obj.name);
-		eve += ' <form id="create_my_team"><div>Team Name <input type="text" name="name" required/></div>';
+		eve += ' <form id="create_a_team"><div>Team Name <input type="text" name="name" required/></div>';
 		for(var i=0;i<obj.max_members;i++){
 			eve += '<div><div class="mem_id_label">Member'+(i+1)+' ID</div> <input type="text" name="memberid" /><span class="name_mem"></span> </div>';
 		}
-		eve += '<input type="submit" value="Create" class="create_team" /></form>';
+		eve += '<button type="submit" class="create_team" >Create</button></form>';
 		put_it.html(eve);
 		$('.lb_icon>img').attr('src',imgpre+'/static/cover/main/img/lb-icons/about.svg');
 		open_gen_lb();
