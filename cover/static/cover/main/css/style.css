@@ -1456,17 +1456,23 @@ a.arch-lnk {
     font-size: 20px;
     height: 60%;
     /* position: absolute; */
+    font-weight: bold;
     text-align: justify;
 }
 
 .rules {
-	padding: 3px 10px;
-    font-size: 17px;
+    padding: 5px 10px;
+    font-size: 20px;
+    /*font-family: 'Open Sans';*/
+    line-height: 28px;
+    font-family: 'Lato';
+    font-weight: normal;
+    letter-spacing: 0.3px;
 }
 
 .txt>.welcome {
 	font-weight: 900;
-    font-size: 60px;
+    font-size: 65px;
 }
 
 .help-button {
