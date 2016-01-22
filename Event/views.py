@@ -29,9 +29,11 @@ def geteventdata(request,event_id):
 	resp['eventname']=event.name
 	resp['eventcategory']=str(unicode(event.category.name))
 	resp['eventshortdescription']=unicode(event.short_description)
-	resp['contact']=str(unicode(event.org.phone))
-	resp['is_kernel']=str(unicode(event.is_kernel))
-	resp['register']=str(unicode(event.register))
+
+	resp['contact']=   str(  unicode(event.org.phone ) )
+	resp['is_kernel']= str(unicode(event.is_kernel))
+	resp['register']=    str(unicode(event.register) )
+
 	# resp['eventdescription']=unicode(event.description)
 	resp['tabs'] = [{k.heading.name : k.content} for k in event.tab_set.all()]
 	resp['img']= str(unicode( event.img ))
