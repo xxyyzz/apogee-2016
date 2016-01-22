@@ -100,7 +100,7 @@ You have been successfully registered for APOGEE 16.
 To continue, please visit %s to verify your email.
 
 Thanks,
-The Department of Visual Media
+Department of Visual Media
 BITS Pilani
 		''' ) % (name, token_url)
 		send_to = email_id
@@ -113,7 +113,7 @@ BITS Pilani
 		# 	pass
 		status = {}
 		status['status'] = 1
-		status['message'] = "Successfully Registered!"
+		status['message'] = "Successfully Registered! An automated mail has been sent to your registered E-mail address... <br> Please confirm the activation link in the mail to continue."
 		return JsonResponse(status)
 	else:
 		status = {}
@@ -164,7 +164,7 @@ Password: %s
 Visit http://bits-apogee.org/ to login.
 
 Thanks,
-The Department of Visual Media
+Department of Visual Media
 BITS Pilani
 
 P.S. The password is auto generated. We do not intend to offend you in any manner.
