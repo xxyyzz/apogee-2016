@@ -3,6 +3,8 @@ from registrations.views import *
 from cms import utilities
 from django.conf.urls import url, include
 urlpatterns = [
+    url(r'', views.dashboard),
+
     url(r'^ambassadors/$', views.ambassadors_list),
     url(r'^app_amb/$', views.app_amb),
     url(r'^amb_act/$', views.amb_act),
