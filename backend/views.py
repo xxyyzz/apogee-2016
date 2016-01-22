@@ -118,7 +118,7 @@ BITS Pilani
 	else:
 		status = {}
 		status['status'] = 0
-		status['message'] = "No POST Data 	Received."
+		status['message'] = "No POST Data Received."
 		return JsonResponse(status)
 
 def email_generate_token(member):
@@ -159,6 +159,7 @@ Hello %s !
 
 Thanks for verifying your email.
 Your login details are:
+User ID: %s
 Username: %s
 Password: %s
 Visit http://bits-apogee.org/ to login.
@@ -168,7 +169,7 @@ The Department of Visual Media
 BITS Pilani
 
 P.S. The password is auto generated. We do not intend to offend you in any manner.
-	''' ) % (member.name, user.username, password)
+	''' ) % (member.name, member.id, user.username, password)
 	send_to = member.email_id
 	# try:
 	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
@@ -202,6 +203,7 @@ def login_check(request):
 			firstname = None,
 		context = {
 			'status' : 1,
+			'id' : request.user.participant.id if hasattr(request.user, 'participant') else None,
 			'email' : request.user.email,
 			'loggedin' : True,
 			'firstname' : firstname,
