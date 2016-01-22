@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'backend',
     'registrations',
     'Event',
     'ckeditor',
@@ -43,6 +44,8 @@ INSTALLED_APPS = (
     'aarohan',
     'aic2016',
     'iot',
+    'dhiti',
+    'youthcon',
 )
 
 MIDDLEWARE_CLASSES = (
