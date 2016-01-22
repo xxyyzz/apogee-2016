@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^amb_act/$', views.amb_act),
     url(r'^amb_xlsx/$', views.ambassador_approved_xlsx),
     url(r'^mail_approved/$', views.mail_approved),
+    url(r'^initreg/$', views.initial_registration),
 
     url(r'^mail_selected/$', views.mail_selected_amb),
 

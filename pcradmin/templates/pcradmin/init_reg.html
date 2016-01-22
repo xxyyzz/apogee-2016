@@ -19,19 +19,13 @@ function checkall(gauss){
     <div class="container">
     <div class="row">
         <div class="twelve columns textcenter">
-            <h1>Campus Ambassadors Applicants</h1>
+            <h1>Initial Registration</h1>
             <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
 
-        <form action='../amb_act/' method= 'POST'>
-        {% csrf_token %}            
-            <button name="mail" value="True" class="button button-primary">Mail</button>
-
-            <button name="approval" value="2" class="button" style="background-color : #00CC00; color : white;">Approve</button>            
-            <button name="approval" value="1" class="button" style="background-color : #FF0000; color : white;">Deny</button>            
+            
 <br>
-{% if no_select %}
- <p style= 'color:red'> Please select someone </p>
- {% endif %}
+
+
             <table class= "u-full-width">
             <tbody>
                 <tr>
@@ -50,9 +44,9 @@ function checkall(gauss){
                 <!-- <td> -->
                     <!-- <input type = 'checkbox' name='amb_list' value = {{amb.id}}> -->
                 <!-- </td> -->
-                <td> {{amb.name}} </td>
-                <td> {{amb.email}} </td>
-                <td> {{amb.phone}} </td>
+                <td> {{init_ob.name}} </td>
+                <td> {{init_ob.email}} </td>
+                <td> {{init_ob.phone}} </td>
                 
             </tr>
 

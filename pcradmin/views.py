@@ -24,7 +24,7 @@ import difflib
 
 def initial_registration(request):
 	init_reg = InitialRegistration.objects.all()
-	return render(request,'init_reg.html', {'init_reg' : init_reg })
+	return render(request,'pcradmin/init_reg.html', {'init_reg' : init_reg })
 
 
 
