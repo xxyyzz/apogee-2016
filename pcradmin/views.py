@@ -22,12 +22,21 @@ import difflib
 
 
 
+def initial_registration(request):
+	init_reg = InitialRegistration.objects.all()
+	return render(request,'init_reg.html', {'init_reg' : init_reg })
 
 
 
 
 
+@staff_member_required
+def dashboard(request):
+	return render(request, 'pcradmin/dashboard.html')
 
+def pcr_logout(request):
+	logout(request)
+	return redirect('http://bits-apogee.org/2016/pcradmin/dashboard/')
 
 
 
@@ -339,13 +348,6 @@ def oasis_stats_pcr(request):
 # def pathfinder(request, pagename):
 # 	users = User.objects.all()
 # 	return render(request, 'pcradmin/'+pagename+'.html', {'users' : users})
-@staff_member_required
-def dashboard(request):
-	return render(request, 'pcradmin/dashboard.html')
-
-def pcr_logout(request):
-	logout(request)
-	return redirect('http://bits-apogee.org/2016/pcradmin/dashboard/')
 
 
 # # @staff_member_required
