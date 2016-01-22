@@ -1,0 +1,63 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+
+
+<script type= 'text/javascript'>
+function checkall(gauss){
+  var cbx = document.getElementsByTagName('input');
+  for(var i=0; i< cbx.length ; ++i)
+  {
+    if(cbx[i].type == 'checkbox')
+      cbx[i].checked = gauss.checked;
+
+  }
+}
+</script>
+
+
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Initial Registration</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+            
+<br>
+
+
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <!-- <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th> -->
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <!-- <th>Root Mail</th> -->
+                    <!-- <th>Approved</th> -->
+                </tr>
+            </tbody>
+            <tbody>
+            {% for init_ob in init_reg reversed %}
+            <tr>
+
+                <!-- <td> -->
+                    <!-- <input type = 'checkbox' name='amb_list' value = {{amb.id}}> -->
+                <!-- </td> -->
+                <td> {{init_ob.name}} </td>
+                <td> {{init_ob.email}} </td>
+                <td> {{init_ob.phone}} </td>
+                
+            </tr>
+
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+        </form>
+
+    </div>
+    </div>
+</div>
+{% endblock body %}
