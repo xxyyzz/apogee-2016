@@ -1567,3 +1567,65 @@ a.arch-lnk {
 	border:1px solid #888;
 }
 
+/*WORKSHOPS*/
+.workshop-title{
+	border-bottom:1px solid #444;
+	font-weight: bold;
+	color:#444; 
+	text-align: left;
+	font-size:1.4em;
+	margin:0 20px;
+	font-family: 'Lato';
+}
+.workshop-title>div
+{
+	display: inline-block;
+    margin-bottom: -3px;
+    padding: 0 10px;
+    border-bottom: 3px solid #444;
+}
+.workshop-cont{
+	position: relative;
+	min-height: 250px;
+	height: auto;
+	color: #444;
+	background-color: #444;	
+	border: 1px solid #444;
+	margin: 20px;
+	text-align: left;
+}	
+.workshop-img{
+	display: inline-block;
+	background-color: #fff;
+	width: 250px;
+	height: 100%;
+	top:0;
+	left: 0;
+
+	position: absolute;
+
+}
+.workshop-img>img
+{
+	width: 95%;
+}
+.workshop-desc{
+	display: inline-block;
+	position: relative;
+	top:0;
+	left:250px;
+	width: calc(100% - 250px);
+	padding: 15px 25px;
+	height: 100%;
+	color: #f0f0f0;
+	font-size: 16px;
+	font-family: 'Lato';
+	background-color: #444;
+}
+.workshop-desc>div:nth-child(1)
+{
+	font-size: 1.3em;
+	font-weight: bold;
+}
+.workshop-desc>div{padding: 7px 0;}
+.workshop-desc>div>a{color:#f0f0f0;margin: 10px 0;}
