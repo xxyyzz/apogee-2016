@@ -29,6 +29,9 @@ def initial_registration(request):
 
 
 
+@staff_member_required
+def dashboard2(request):
+	return HttpResponseRedirect('./dashboard/')
 
 @staff_member_required
 def dashboard(request):
