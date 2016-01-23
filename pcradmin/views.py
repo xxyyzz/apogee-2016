@@ -8,7 +8,7 @@ from backend.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import Context
-from django.core.mail import send_mail, EmailMessage, backends
+from django.core.mail import send_mail, EmailMessage
 from django.contrib.auth import login, logout
 from django.contrib import auth
 from django.db.models import F
@@ -17,7 +17,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 import difflib
 
-cabackend = backends.smtp.EmailBackend(
+from django.core.mail.backends.smtp import EmailBackend
+cabackend = EmailBackend(
     host='smtp.gmail.com',
     port=587,
     username='campusambassador@bits-apogee.org',
@@ -49,7 +50,7 @@ def pcr_logout(request):
 
 
 def part_list(request):
-	part_obs = Participant.objects.all()	
+	part_obs = Participant.objects.all()
 	# amb_list=[]
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
 	return render(request, 'pcradmin/part_list.html', {'part_list' : part_obs})
