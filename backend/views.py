@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from Event.models import Event, EventCategory
 
-from backend.utilities import staff_check
+# from backend.utilities import staff_check
 
 # Create your views here.
 @csrf_exempt
@@ -321,7 +321,7 @@ def register_team(request, eventid):
 				member.save()
 				team.members.add(member)
 				team.save()
-				response['members'].append(member.name)
+				response['added'].append(member.name)
 			except:
 				response['not_added'].append(memberid)
 	except:
