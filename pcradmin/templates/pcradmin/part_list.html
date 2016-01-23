@@ -1,0 +1,103 @@
+{% extends "pcradmin/base.html" %}
+{% block body %} 
+
+
+<script type= 'text/javascript'>
+function checkall(gauss){
+  var cbx = document.getElementsByTagName('input');
+  for(var i=0; i< cbx.length ; ++i)
+  {
+    if(cbx[i].type == 'checkbox')
+      cbx[i].checked = gauss.checked;
+
+  }
+}
+</script>
+
+
+<div>
+    <div class="container">
+    <div class="row">
+        <div class="twelve columns textcenter">
+            <h1>Apogee Participants</h1>
+            <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+        <form action='../part_act/' method= 'POST'>
+        {% csrf_token %}            
+<!--             <button name="mail" value="True" class="button button-primary">Mail</button>
+
+            <button name="approval" value="2" class="button" style="background-color : #00CC00; color : white;">Approve</button>            
+            <button name="approval" value="1" class="button" style="background-color : #FF0000; color : white;">Deny</button> -->            
+<br>
+{% if no_select %}
+ <p style= 'color:red'> Please select someone </p>
+ {% endif %}
+            <table class= "u-full-width">
+            <tbody>
+                <tr>
+                    <!-- <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th> -->
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <!-- <th>College</th>
+                    <th>City</th> -->
+                    <th>Online Paid</th>
+                    <th>Verified Mail</th>
+                    <th>Pcr Approved</th>
+                </tr>
+            </tbody>
+            <tbody>
+            {% for Part in part_list reversed %}
+            <tr>
+
+                <!-- <td>
+                    <input type = 'checkbox' name='Part_list' value = {{Part.id}}>
+                </td> -->
+                <td> {{Part.name}} </td>
+                <td> {{Part.email_id}} </td>
+                <td> {{Part.phone_one}} </td>
+                {% if Part.fee_paid %}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+                {% if Part.email_verified %}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+                {% if Part.pcr_approval%}
+                <td style='color:green'>
+                    Yes
+                </td>
+                {% else %}
+                <td style='color:red'>
+                    No
+                </td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td><strong>College:</strong></td>
+                <td colspan="2"> {{ Part.college.name }}</td>
+                <td><strong>Address:</strong></td>
+                <td colspan="2"> {{ Part.address }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+        </form>
+
+    </div>
+    </div>
+</div>
+{% endblock body %}
