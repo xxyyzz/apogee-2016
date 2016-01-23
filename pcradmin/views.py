@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.shortcuts import render
 from registrations.models import *
+from backend.models import *
 # from events.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -42,6 +43,12 @@ def pcr_logout(request):
 	return redirect('http://bits-apogee.org/2016/pcradmin/dashboard/')
 
 
+
+def part_list(request):
+	part_obs = Participant.objects.all()	
+	# amb_list=[]
+	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
+	return render(request, 'pcradmin/part_list.html', {'part_list' : part_obs})
 
 def ambassadors_list(request):
 	amb_obs = CampusAmbassador.objects.all()	
