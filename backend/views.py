@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from Event.models import Event, EventCategory
 
+from backend.utilities import staff_check
+
 # Create your views here.
 @csrf_exempt
 def user_login(request):
@@ -207,6 +209,7 @@ def login_check(request):
 			'email' : request.user.email,
 			'loggedin' : True,
 			'firstname' : firstname,
+			'name' : request.user.participant.name if hasattr(request.user, 'participant') else None,
 		}
 		return JsonResponse(context)
 	else:
@@ -305,6 +308,12 @@ def register_team(request, eventid):
 		team.name = name
 		team.leader = leader
 		team.save()
+		response = {
+			'status' : 1,
+			'message' : 'Team ' + name + ' successfully registered.',
+			'added' : [],
+			'not_added' : [],
+		}
 		for memberid in memberids:
 			try:
 				member = Participant.objects.get(id=memberid)
@@ -312,12 +321,9 @@ def register_team(request, eventid):
 				member.save()
 				team.members.add(member)
 				team.save()
+				response['members'].append(member.name)
 			except:
-				pass
-		response = {
-			'status' : 1,
-			'message' : 'Team ' + name + ' successfully registered'
-		}
+				response['not_added'].append(memberid)
 	except:
 		response = {
 			'status' : 0,
@@ -342,6 +348,7 @@ def participant_summary(request, participantid):
 	return JsonResponse(response)
 
 def profile_summary(request):
+	staff_check(request)
 	user = request.user
 	member = request.user.participant
 	if member.email_verified:
