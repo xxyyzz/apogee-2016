@@ -134,7 +134,7 @@ Good Luck! ''')
 				send_to.append( str( amb.email) )
 
 			try:
-				email = EmailMessage("Campus Ambassador Approval", body, 'no-reply@bits-apogee.org', send_to)
+				email = EmailMessage("Campus Ambassador Approval", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
 			#poster attachment
 			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
@@ -204,7 +204,7 @@ def mail_approved(request):
 			send_to=[]
 			send_to.append( str(amb.email) )
 			try:
-				email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to)
+				email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
 				email.send()
 			#poster attachment
 			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
