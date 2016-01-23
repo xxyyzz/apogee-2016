@@ -24,6 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 ALLOWED_HOSTS = []
 
+ADMINS = [
+    ('Nikhil Verma', 'nikhilweee@gmail.com'),
+    ('Satwik Bhattamishra', 'satwik55@gmail.com')
+]
 
 # Application definition
 
