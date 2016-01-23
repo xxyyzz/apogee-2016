@@ -247,6 +247,7 @@ $(window).load(function(){
 					user = {
 							'userid':response.email,
 							'firstname':response.firstname,
+							'name':response.name;
 							'loggedin':response.loggedin,
 							'id':response.id,
 						   };
@@ -511,7 +512,7 @@ $(window).load(function(){
 		var put_it = $('.lb_descr');
 		var eve = "";
 		$('.main_head').html(obj.name);
-		eve += ' <form id="create_a_team"><div>Team Name <input type="text" name="name" required/></div><div><div class="mem_id_label">Leader ID</div> <input type="text" readonly="readonly" name="memberid" value="'+user.id+'" /><span class="name_mem" style="color:rgb(25, 188, 25)">'+user.firstname+'</span> </div>';
+		eve += ' <form id="create_a_team"><div>Team Name <input type="text" name="name" required/></div><div><div class="mem_id_label">Leader ID</div> <input type="text" readonly="readonly" name="memberid" value="'+user.id+'" /><span class="name_mem" style="color:rgb(25, 188, 25)">'+user.name+'</span> </div>';
 		for(var i=1;i<obj.max_members;i++){
 			eve += '<div><div class="mem_id_label">Member'+i+' ID</div> <input type="text" name="memberid" /><span class="name_mem"></span> </div>';
 		}
