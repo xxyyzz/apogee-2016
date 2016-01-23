@@ -3,7 +3,7 @@ from registrations.views import *
 from cms import utilities
 from django.conf.urls import url, include
 urlpatterns = [
-    url(r'', views.dashboard),
+    url(r'^$', views.dashboard2),
 
     url(r'^ambassadors/$', views.ambassadors_list),
     url(r'^app_amb/$', views.app_amb),
@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^amb_xlsx/$', views.ambassador_approved_xlsx),
     url(r'^mail_approved/$', views.mail_approved),
     url(r'^initreg/$', views.initial_registration),
+    url(r'^part_list/$', views.part_list),
 
     url(r'^mail_selected/$', views.mail_selected_amb),
 
