@@ -247,7 +247,7 @@ $(window).load(function(){
 					user = {
 							'userid':response.email,
 							'firstname':response.firstname,
-							'name':response.name;
+							'name':response.name,
 							'loggedin':response.loggedin,
 							'id':response.id,
 						   };
