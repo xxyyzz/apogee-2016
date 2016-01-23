@@ -980,13 +980,10 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
 }
-#create_a_team{
-	text-align: center;
-}
 #create_a_team>div{
-	text-align: center;
+	text-align: left;
 }
-#create_a_team input[name="memberid"],#create_a_team input[name="name"]{
+#create_a_team input[name="memberid"]{
 	width:150px;
 	margin-right: 10px;
 	display:inline-block;
@@ -1009,9 +1006,6 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 #create_a_team .name_mem{
 	display:inline-block;
 	margin: 10px 0;
-}
-.create_team{
-	display:inline-block;
 }
 .register_event:hover,.open_create:hover{
 	color: #000;
