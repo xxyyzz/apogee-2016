@@ -9,8 +9,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from Event.models import Event, EventCategory
 
-# from backend.utilities import staff_check
-
 # Create your views here.
 @csrf_exempt
 def user_login(request):
@@ -50,72 +48,55 @@ def user_register(request):
 	if request.POST:
 		name = request.POST['name']
 		gender = request.POST['gender']
-		# city = request.POST['city']
 		email_id = request.POST['email_id']
 		college = request.POST['college']
 		phone_one = int(request.POST['phone_one'])
-		# phone_two = request.POST['phone_two']
-		# social_link = request.POST['social_link']
-		# events = request.POST.getlist('events[]')
-		try:
-			# city = request.POST['city']
-			college = request.POST['college']
-		except :
-			response = {}
-			response['status'] = 0
-			response['message'] = "Enter a valid college. Please Refresh the page to enter valid details"
-			return JsonResponse(response)
-
-		# try :
-		# 	phone_two = int(phone_two)
-		# except :
-		# 	phone_two = None
+		college = request.POST['college']
 
 		try:
 			model_college = College.objects.get(name=college)
 		except:
 			model_college = College.objects.create(name=college, is_displayed=False)
 
+		response = {}
 		registered_members = Participant.objects.all()
 		registered_emails = [x.email_id for x in registered_members]
 		if email_id in registered_emails: #check for already registered emails....no need to check if valid as we are using email field on fronted side
-			response = {}
-			response['status'] = 0
-			response['message'] = "This email is already registered! Please Refresh the page to register with another email."
-			return JsonResponse(response)
-		member = Participant()
-		member.name = name
-		member.gender = gender
-		# member.city = city
-		member.email_id = email_id
-		member.college = model_college
-		member.phone_one = phone_one
-		# member.phone_two = phone_two
-		# member.social_link = social_link
-		member.save()
+			member = Participant.objects.get(email_id=email_id)
+			response['message'] = "This email has already been registered."
+		else:
+			member = Participant()
+			member.name = name
+			member.gender = gender
+			member.email_id = email_id
+			member.college = model_college
+			member.phone_one = phone_one
+			member.save()
+			response['message'] = "Registration Successful!"
 		token_url = email_generate_token(member)
 
 		body = unicode(u'''
 Hello %s !
 
-You have been successfully registered for APOGEE 16.
-To continue, please visit %s to verify your email.
+You have successfully registered for APOGEE 16.
+
+Just need to verify that this is your email address.
+Gotta keep the internet safe from spambots and all that.
+Is this you?
+
+Please visit %s to verify your email.
+We'll give you your login credentials there.
+See ya!
 
 Thanks,
 Department of Visual Media
 BITS Pilani
-		''' ) % (name, token_url)
-		send_to = email_id
-		# try:
+		''' ) % (member.name, token_url)
+		send_to = member.email_id
 		email = EmailMessage('Registration for APOGEE 16', body, 'noreply@bits-apogee.org', [send_to])
-		# email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
 		email.send()
-		# except:
-		# 	return HttpResponse('error')
-		# 	pass
-		status = {}
-		status['status'] = 1
-		status['message'] = "Successfully Registered! An automated mail has been sent to your registered E-mail address... <br> Please confirm the activation link in the mail to continue."
+		response['status'] = 1
+		response['message'] += "<br>An automated email has been sent to your registered email address.<br>Please confirm the activation link in the mail to continue."
 		return JsonResponse(status)
 	else:
 		status = {}
@@ -123,6 +104,7 @@ BITS Pilani
 		status['message'] = "No POST Data Received."
 		return JsonResponse(status)
 
+### Helper Functions
 def email_generate_token(member):
 	import uuid
 	token = uuid.uuid4().hex
@@ -177,6 +159,8 @@ P.S. The password is auto generated. We do not intend to offend you in any manne
 	email = EmailMessage('Registration for APOGEE 16', body, 'APOGEE, BITS Pilani', [send_to])
 	# email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
 	email.send()
+### End helper functions
+
 def email_confirm(request, token):
 	member = email_authenticate_token(token)
 	if member:
@@ -280,23 +264,7 @@ def register_single(request, eventid):
 			'message' : 'Registration Failed!'
 		}
 	return JsonResponse(response)
-# def register_team(request, eventid, teamid):
-# 	event = Event.objects.get(id=eventid)
-# 	participant = request.user.participant
-# 	team = Team.objects.get(id=teamid)
-# 	try:
-# 		participant.events.add(event)
-# 		participant.teams.add(team)
-# 		participant.save()
-#
-# 		response = {
-# 			'registered' : True,
-# 		}
-# 	except:
-# 		response = {
-# 			'registered' : False,
-# 		}
-# 	return JsonResponse(response)
+
 def register_team(request, eventid):
 	try:
 		data = request.POST
@@ -346,49 +314,3 @@ def participant_summary(request, participantid):
 			'message' : 'No such participant',
 		}
 	return JsonResponse(response)
-
-def profile_summary(request):
-	staff_check(request)
-	user = request.user
-	member = request.user.participant
-	if member.email_verified:
-		response = {
-			'status' : 1,
-			'id' : member.id,
-			'aadhaar' : member.aadhaar,
-			'name' : member.name,
-			'gender' : member.gender,
-			'college' : member.college.name,
-			'city' : member.city,
-			'phone' : member.phone_one,
-			'alt_phone' : member.phone_two,
-			'email' : member.email_id,
-			'email_verified' : member.email_verified,
-			'social_link' : member.social_link,
-			'events' : [event.name for event in member.events.all()],
-			'fee_paid' : member.fee_paid,
-			'teams' : [team.name for team in member.teams.all()],
-			'address' : member.address,
-			'bank_ifsc' : member.bank_ifsc,
-			'bank_account_no' : member.bank_account_no,
-			'bank_name' : member.bank_name,
-		}
-	else:
-		response = {
-			'status' : 0,
-			'message' : 'Please verify your email to access this section'
-		}
-	# except:
-	# 	response = {
-	# 		'status' : 0,
-	# 		'message' : 'Associated Participant not found.'
-	# 	}
-	return JsonResponse(response)
-# 	if request.POST:
-# 		memberids = request.POST.getlist('id')
-# 		name
-# 		member
-# 		leader
-# 		event
-# 		team = Team.objects.create()
-# 		for memberid in memberids:

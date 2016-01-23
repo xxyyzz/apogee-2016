@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from backend import views
+from backend import views_profile
 
 urlpatterns = [
     url(r'^register/', views.user_register),
@@ -11,6 +12,6 @@ urlpatterns = [
     url(r'^events/status/', views.events_check),
     url(r'^events/register/(?P<eventid>[0-9]+)/$', views.register_single),
     url(r'^events/team/register/(?P<eventid>[0-9]+)/$', views.register_team),
-    url(r'^profile/$', views.profile_summary),
+    url(r'^profile/$', views_profile.summary),
     url(r'^participant/(?P<participantid>[0-9]+)/$', views.participant_summary),
 ]
