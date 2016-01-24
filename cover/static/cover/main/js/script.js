@@ -1353,6 +1353,10 @@ function get_pro_info(){
 			$('input[name="accno"]').val(data.bank_account_no);
 			$('input[name="ifsc_code"]').val(data.bank_ifsc);
 			$('input[name="address"]').val(data.address);
+			if(!data.pcr_approval){
+				$('.approved').addClass('unapproved');
+				$('.unapproved').text('Unapproved');
+			}
 		}
 	});
 }

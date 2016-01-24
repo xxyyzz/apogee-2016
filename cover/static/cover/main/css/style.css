@@ -3,6 +3,7 @@
 	
 	loader								1000
 	gen_lightbox						900
+	profile	lightbox					800
 	map-help							750
 	Onilne Events Page					700
 	login-reg-box 						500
@@ -1653,6 +1654,7 @@ a.arch-lnk {
 	position: absolute;
 	overflow-y:auto;
 	display:none;
+	z-index: 800;
 }
 .lb_profile{
 	position: relative;
