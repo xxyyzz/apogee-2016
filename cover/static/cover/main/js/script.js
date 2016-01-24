@@ -1356,21 +1356,21 @@ function get_pro_info(){
 		}
 	});
 }
-$('#pro_detail_form').submit(function(e){
-	e.preventDefault();
-	var formData = $(this).serializeArray();
-	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/',
-		method:'POST',
-        crossDomain: true,
-		data:formData,
-		headers : { "X-CSRFToken" : getCookie('csrftoken') },
-		datatype: 'jsonp',
-		success:function(data){
+// $('#pro_detail_form').submit(function(e){
+// 	e.preventDefault();
+// 	var formData = $(this).serializeArray();
+// 	$.ajax({
+// 		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/',
+// 		method:'POST',
+//         crossDomain: true,
+// 		data:formData,
+// 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+// 		datatype: 'jsonp',
+// 		success:function(data){
 
-		},
-	});
-})
+// 		},
+// 	});
+// });
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
 });
