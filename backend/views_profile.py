@@ -166,7 +166,7 @@ def update_profile(request):
 	data = request.POST
 	# city = data['city'] if 'city' in data else None
 	member = request.user.participant
-	member.bank_ifsc = data['bank']
+	member.bank_ifsc = data['bank_ifsc']
 	member.address = data['address']
 	member.bank_account_no = data['bank_account_no']
 	member.bank_name = data['bank_name']
