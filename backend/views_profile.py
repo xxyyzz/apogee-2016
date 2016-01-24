@@ -21,7 +21,31 @@ def summary(request):
 			'email_verified' : member.email_verified,
 			'social_link' : member.social_link,
 			'single_events' : [event.name for event in member.events.filter(is_team=False)],
-			'team_events' : {event.name : [team for team in member.teams.filter(event=event)] for event in member.events.filter(is_team=True)},
+			'team_events' : [
+			{
+				'id' : event.id,
+				'name' : event.name,
+				'details' : [
+					{
+						'id' : team.id,
+						'name' : team.name,
+						'leader' : {
+							'id' : team.leader.id,
+							'name' : team.leader.name,
+						},
+						'members' : [
+							{
+								'id' : member.id,
+								'name' : member.name,
+							}
+								for member in team.members.all()
+						],
+					}
+						for team in member.teams.filter(event=event)
+				]
+			}
+				for event in member.events.filter(is_team=True)
+			],
 			'fee_paid' : member.fee_paid,
 			'teams' : [team.name for team in member.teams.all()],
 			'address' : member.address,
