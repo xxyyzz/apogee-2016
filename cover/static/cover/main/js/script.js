@@ -1333,3 +1333,26 @@ $('.htile').click(function(){
 		map_ele_info[key]['func'](map_ele_info[key]['icon'],map_ele_info[key]['ename'],map_ele_info[key]['content']);
 	},350);
 });
+
+
+// profile
+
+var profile_info;
+function get_pro_info(){
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
+		method: "GET",
+		success: function(data){
+			console.log(data);
+		}
+	});
+}
+$('.close_lb_profile').click(function(){
+	$('.lb_pro_cont').fadeOut();
+});
+$('.pro_tab_name').click(function(){
+	$('.pro_tab').css('display','none');
+	$('#'+$(this).data('tab')).css('display','block');
+	$('.pro_tab_name').removeClass('tab_active');
+	$(this).addClass('tab_active');
+});

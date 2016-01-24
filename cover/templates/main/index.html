@@ -108,6 +108,87 @@
 
 	</div>
 
+
+
+<!-- Profile -->
+
+<div class="lb_pro_cont abs_center">
+	<div class="close_lb_profile abs_center" style="top:0;right:0"></div>
+	<div class="lb_profile">
+		<div class="close_lb_profile hover_dark">
+			<i class="fa fa-close"></i>
+		</div>
+		<div class="lb_pro_head">Profile</div>
+		<div class="lb_pro_descr">
+			<div class="pro_tab_name_cont">
+				<div class="pro_tab_name tab_active hover_dark" data-tab="pro_detail">Details</div>
+				<div class="pro_tab_name hover_dark" data-tab="pro_event">Events</div>
+				<div class="pro_tab_name hover_dark" data-tab="pro_payment">Payments</div>
+			</div>
+			<div class="pro_tab" id="pro_detail">
+				<div class="const_det_cont">
+					<div class="const_det" style="border-bottom:1px solid #333">Your Details:</div>
+					<div class="const_det">Smit Patwa</div>
+					<div class="det_label">Email:</div>
+					<div class="const_det">sp7648@gmail.com</div>
+					<div class="det_label">College:</div>
+					<div class="const_det">BITS Pilani</div>
+					<div class="det_label">Phone:</div>
+					<div class="const_det">7737770516</div>
+					<div class="const_det approved">Approved</div>
+				</div>
+				<div class="other_det_cont">
+					<form id="pro_detail_form">
+						<div class="const_det" style="border-bottom:1px solid #333">Bank Details:</div>
+						<label for="bank_name">Bank Name</label>
+						<input type="text" name="bank_name" />
+						<label for="accno">Account Number</label>
+						<input type="number" name="accno" />
+						<label for="ifsc_code">IFSC code</label>
+						<input type="text" name="ifsc_code" />
+						<label for="address1">Address Line 1</label>
+						<input type="text" name="address1" />
+						<label for="address2">Address Line 2</label>
+						<input type="text" name="address1" />
+						<label for="address3">Address Line 3</label>
+						<input type="text" name="address1" />
+						<button class="update_bank hover_dark">Update</button>
+					</form>
+				</div>
+				
+			</div>
+			<div class="pro_tab" id="pro_event">
+				<div class="user_reg_eve">
+					Ye lo bhai event
+					<button class="unreg_eve hover_dark">Unregister</button>
+				</div>
+				<div class="user_team_eve">
+					<div class="team_eve_head">Ye lo bhai event</div>
+					<div class="team_eve_descr">
+						<div class="ted_name">
+							Team name:&nbsp; 
+							<span class="ted_name_spn">Getters</span>
+						</div>
+						<div class="ted_members">
+							Members:&nbsp; 
+							<span class="ted_name_spn">me, you</span>
+						</div>
+						<div class="ted_options">
+							<button class="edit_team hover_dark">Edit</button>
+							<button class="delete_team hover_dark">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pro_tab" id="pro_payment">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Profile END -->
+
 	<div id="map-help-2" class="map-help">
 		<img class="main-nav" src="{% static 'cover/main/img/instr/nav.svg' %}" />
 		<img class="pann-nav" src="{% static 'cover/main/img/instr/pan-nav.svg' %}" />
