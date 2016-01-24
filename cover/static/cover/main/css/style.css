@@ -1772,7 +1772,7 @@ a.arch-lnk {
 #pro_detail_form{
 
 }
-#pro_detail_form>input{
+#pro_detail_form>input,#pro_detail_form>textarea{
 	position: relative;
 	display: block;
 	width: 340px;
@@ -1783,7 +1783,7 @@ a.arch-lnk {
 	outline: none;
 	background:none;
 }
-#pro_detail_form>input:focus{
+#pro_detail_form>input:focus,#pro_detail_form>textarea:focus{
 	box-shadow: rgb(153, 153, 153) 0px 0px 5px;
     border-color: rgb(153, 153, 153);
 }
@@ -1792,6 +1792,9 @@ a.arch-lnk {
     margin-bottom: 0.1875em;
     font-weight: bold;
     font-size: 0.8em;
+}
+#pro_detail_form>textarea{
+	resize:none;
 }
 .update_bank{
 	display: inline-block;
