@@ -1652,6 +1652,7 @@ a.arch-lnk {
 .lb_pro_cont{
 	position: absolute;
 	overflow-y:auto;
+	display:none;
 }
 .lb_profile{
 	position: relative;
