@@ -1333,3 +1333,50 @@ $('.htile').click(function(){
 		map_ele_info[key]['func'](map_ele_info[key]['icon'],map_ele_info[key]['ename'],map_ele_info[key]['content']);
 	},350);
 });
+
+
+// profile
+
+var profile_info;
+function get_pro_info(){
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
+		method: "GET",
+		success: function(data){
+			profile_info =data;
+			console.log(data);
+			$('.pd_name').text(data.name);
+			$('.pd_email').text(data.email);
+			$('.pd_college').text(data.college);
+			$('.pd_phone').text(data.phone);
+			$('input[name="bank_name"]').val(data.bank_name);
+			$('input[name="accno"]').val(data.bank_account_no);
+			$('input[name="ifsc_code"]').val(data.bank_ifsc);
+			$('input[name="address"]').val(data.address);
+		}
+	});
+}
+// $('#pro_detail_form').submit(function(e){
+// 	e.preventDefault();
+// 	var formData = $(this).serializeArray();
+// 	$.ajax({
+// 		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/',
+// 		method:'POST',
+//         crossDomain: true,
+// 		data:formData,
+// 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+// 		datatype: 'jsonp',
+// 		success:function(data){
+
+// 		},
+// 	});
+// });
+$('.close_lb_profile').click(function(){
+	$('.lb_pro_cont').fadeOut();
+});
+$('.pro_tab_name').click(function(){
+	$('.pro_tab').css('display','none');
+	$('#'+$(this).data('tab')).css('display','block');
+	$('.pro_tab_name').removeClass('tab_active');
+	$(this).addClass('tab_active');
+});
