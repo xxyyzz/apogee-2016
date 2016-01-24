@@ -1338,7 +1338,7 @@ $('.htile').click(function(){
 // profile
 
 var profile_info;
-function get_pro_info(){
+function openProfile(){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
 		method: "GET",
@@ -1387,6 +1387,10 @@ function get_pro_info(){
 			}
 			else{
 				$('#pro_event').html(eve);
+			}
+			if($('.lb_pro_cont').css('display')=="none"){
+				$('#overlay').fadeIn();
+				$('.lb_pro_cont').fadeIn();
 			}
 		}
 	});
@@ -1461,6 +1465,7 @@ $('#pro_event').on('click','.delete_team',function(){
 });
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
+	$('#overlay').fadeOut();
 });
 $('.pro_tab_name').click(function(){
 	$('.pro_tab').css('display','none');
