@@ -181,6 +181,8 @@ $("div#login").click(function() {
 	$("#login-reg-box").delay(200).fadeIn(200);
 });
 
+$("#update_wrapper"),click()
+
 
 // ------------------------OVERLAY-------------------------------------------
 
@@ -1344,7 +1346,7 @@ function openProfile(){
 		method: "GET",
 		success: function(data){
 			profile_info =data;
-			console.log(data);
+			//console.log(data);
 			$('.pd_name').text(data.name);
 			$('.pd_email').text(data.email);
 			$('.pd_college').text(data.college);
@@ -1395,6 +1397,7 @@ function openProfile(){
 		}
 	});
 }
+
 function unreg_eve(id){
 	$('.unreg_eve').prop('disabled',true);
 	$.ajax({
@@ -1403,11 +1406,12 @@ function unreg_eve(id){
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
-			get_pro_info();
+			openProfile();
 			eve_reg_info();
 		}
 	});
 }
+
 function leave_team(id){
 	$('.leave_team').prop('disabled',true);
 	$.ajax({
@@ -1416,7 +1420,7 @@ function leave_team(id){
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
-			get_pro_info();
+			openProfile();
 			eve_reg_info();
 		}
 	});
@@ -1429,7 +1433,7 @@ function delete_team(id){
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
-			get_pro_info();
+			openProfile();
 			eve_reg_info();
 		}
 	});
@@ -1447,7 +1451,7 @@ $('#pro_detail_form').submit(function(e){
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(data){
-			get_pro_info();
+			openProfile();
 		},
 	});
 });
