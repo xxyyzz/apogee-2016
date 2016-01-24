@@ -181,6 +181,27 @@ nav{
 }
 @-webkit-keyframes navanim2{0%{left: 300px;}
 100%{left: 25px;}}
+
+@media screen and (max-width: 480px) {
+	.bt-text {
+		display: none;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.zoom-panel {
+		display: none;
+	}
+
+	.zoom-nav {
+		display: none;
+	}
+
+	.zoompanreset-icon {
+		display: none;
+	}
+}
+
 #login{
 	right: 20px;
 	position: absolute;
