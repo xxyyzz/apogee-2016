@@ -29,28 +29,23 @@ def summary(request):
 			],
 			'team_events' : [
 			{
-				'id' : event.id,
-				'name' : event.name,
-				'details' : [
+				'event_id' : team.event.id,
+				'event_name' : team.event.name,
+				'team_id' : team.id,
+				'team_name' : team.name,
+				'team_leader' : {
+					'id' : team.leader.id,
+					'name' : team.leader.name,
+				},
+				'team_members' : [
 					{
-						'id' : team.id,
-						'name' : team.name,
-						'leader' : {
-							'id' : team.leader.id,
-							'name' : team.leader.name,
-						},
-						'members' : [
-							{
-								'id' : member.id,
-								'name' : member.name,
-							}
-								for member in team.members.all()
-						]
+						'id' : member.id,
+						'name' : member.name,
 					}
-						for team in member.team_set.filter(event=event)
+						for member in team.members.all()
 				]
 			}
-				for event in member.events.filter(is_team=True)
+				for team in member.team_set.all()
 			],
 			'fee_paid' : member.fee_paid,
 			'teams' : [team.name for team in member.teams.all()],
@@ -67,7 +62,53 @@ def summary(request):
 		}
 	return JsonResponse(response)
 
-# @staff_check
-# def delete_event(request):
-# 	member = request.user.participant
-# 	member.events.
+@staff_check
+def unregister_single(request, eventid):
+	try:
+		event = Event.objects.get(id=eventid)
+		member = request.user.participant
+		member.events.remove(event)
+		member.save()
+		response = {
+			'status' : 1,
+		}
+		return JsonResponse(response)
+	except:
+		response = {
+			'status' : 0,
+		}
+		return JsonResponse(response)
+
+def register_team(request, eventid):
+	# try:
+	data = request.POST
+	memberids = data.getlist('memberid')
+	name = data['name']
+	event = Event.objects.get(id=eventid)
+	leader = request.user.participant
+	team = Team.objects.create(name=name, event=event, leader=leader)
+	team.name = name
+	team.leader = leader
+	team.save()
+	response = {
+		'status' : 1,
+		'message' : 'Team ' + name + ' successfully registered.',
+		'added' : [],
+		'not_added' : [],
+	}
+	for memberid in memberids:
+		try:
+			member = Participant.objects.get(id=memberid)
+			member.events.add(event)
+			member.save()
+			team.members.add(member)
+			team.save()
+			response['added'].append(member.name)
+		except:
+			response['not_added'].append(memberid)
+	# except:
+	# 	response = {
+	# 		'status' : 0,
+	# 		'message' : 'Whoopsie! Looks like an error occured. Please try again later.'
+	# 	}
+	return JsonResponse(response)
