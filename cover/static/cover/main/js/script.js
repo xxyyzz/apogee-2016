@@ -181,7 +181,7 @@ $("div#login").click(function() {
 	$("#login-reg-box").delay(200).fadeIn(200);
 });
 
-$("#update_wrapper"),click()
+//$("#update_wrapper"),click()
 
 
 // ------------------------OVERLAY-------------------------------------------
