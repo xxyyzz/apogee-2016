@@ -1817,8 +1817,7 @@ a.arch-lnk {
     line-height: 24px;
     position: relative;
 	padding: 15px 150px 15px 15px;
-    background-color: #333;
-    color: #fff;
+    border: 1px solid #333;
 }
 .unreg_eve{
 	display: inline-block;
@@ -1843,12 +1842,11 @@ a.arch-lnk {
 	position: relative;
 	padding: 0 15px;
 	line-height: 50px;
-    background-color: #333;
-    color: #fff;
+    border: 1px solid #333;
 }
 .team_eve_descr{
 	position: relative;
-	background-color: #ddd;
+	border: 1px solid #333;
 	padding: 15px;
 }
 .ted_options{
