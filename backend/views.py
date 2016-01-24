@@ -99,10 +99,10 @@ BITS Pilani
 		response['message'] += "<br>An automated email has been sent to your registered email address.<br>Please confirm the activation link in the mail to continue."
 		return JsonResponse(status)
 	else:
-		status = {}
-		status['status'] = 0
-		status['message'] = "No POST Data Received."
-		return JsonResponse(status)
+		response = {}
+		response['status'] = 0
+		response['message'] = "No POST Data Received."
+		return JsonResponse(response)
 
 ### Helper Functions
 def email_generate_token(member):
