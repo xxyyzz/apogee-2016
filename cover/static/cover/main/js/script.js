@@ -1353,7 +1353,7 @@ function get_pro_info(){
 			$('input[name="bank_acc_no"]').val(data.bank_account_no);
 			$('input[name="bank_ifsc"]').val(data.bank_ifsc);
 			$('textarea[name="address"]').val(data.address);
-			$('.update_bank').prop('disabled','false');
+			$('.update_bank').prop('disabled',false);
 			$('.update_bank').text('Update');
 			if(!data.pcr_approval){
 				$('.approved').addClass('unapproved');
@@ -1392,7 +1392,7 @@ function get_pro_info(){
 	});
 }
 function unreg_eve(id){
-	$('.unreg_eve').prop('disabled','true');
+	$('.unreg_eve').prop('disabled',true);
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
 		method: "POST",
@@ -1405,7 +1405,7 @@ function unreg_eve(id){
 	});
 }
 function leave_team(id){
-	$('.leave_team').prop('disabled','true');
+	$('.leave_team').prop('disabled',true);
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
 		method: "POST",
@@ -1418,7 +1418,7 @@ function leave_team(id){
 	});
 }
 function delete_team(id){
-	$('.delete_team').prop('disabled','true');
+	$('.delete_team').prop('disabled',true);
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
 		method: "POST",
@@ -1432,7 +1432,7 @@ function delete_team(id){
 }
 $('#pro_detail_form').submit(function(e){
 	e.preventDefault();
-	$('.update_bank').prop('disabled','true');
+	$('.update_bank').prop('disabled',true);
 	$('.update_bank').text('Updating..');
 	var formData = $(this).serializeArray();
 	$.ajax({
