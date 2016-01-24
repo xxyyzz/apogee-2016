@@ -97,7 +97,7 @@ BITS Pilani
 		email.send()
 		response['status'] = 1
 		response['message'] += "<br>An automated email has been sent to your registered email address.<br>Please confirm the activation link in the mail to continue."
-		return JsonResponse(status)
+		return JsonResponse(response)
 	else:
 		response = {}
 		response['status'] = 0
