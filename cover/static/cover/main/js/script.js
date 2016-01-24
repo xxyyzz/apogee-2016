@@ -1388,6 +1388,8 @@ function unreg_eve(id){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
 		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
 			get_pro_info();
 		}
@@ -1398,6 +1400,8 @@ function leave_team(id){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
 		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
 			get_pro_info();
 		}
@@ -1408,6 +1412,8 @@ function delete_team(id){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
 		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
 			get_pro_info();
 		}
@@ -1430,9 +1436,15 @@ function delete_team(id){
 // });
 $('#pro_event').on('click','.unreg_eve',function(){
 	unreg_eve($(this).data('id'));
+	$(this).text('Wait a sec..');
 });
 $('#pro_event').on('click','.leave_team',function(){
 	leave_team($(this).data('id'));
+	$(this).text('Wait a sec..');
+});
+$('#pro_event').on('click','.delete_team',function(){
+	delete_team($(this).data('id'));
+	$(this).text('Wait a sec..');
 });
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
