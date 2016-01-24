@@ -1,5 +1,5 @@
 from backend.utilities import staff_check
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 @staff_check
 def summary(request):
