@@ -1406,7 +1406,7 @@ function leave_team(id){
 function delete_team(id){
 	$('.delete_team').prop('disabled','true');
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
 		method: "POST",
 		success: function(data){
 			get_pro_info();
