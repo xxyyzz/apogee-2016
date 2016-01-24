@@ -133,7 +133,11 @@ def generate_password(member):
 def create_user(member, password):
 	name = str(member.name).lower()
 	username = name.translate(None, ' ?.!/;:-_') + str(member.id)
-	user = User.objects.create_user(username=username, email=member.email_id, password=password)
+	try:
+		user = User.objects.get(email=member.email_id)
+		user.set_password(password)
+	except:
+		user = User.objects.create_user(username=username, email=member.email_id, password=password)
 	member.user = user
 	member.save()
 	return user
