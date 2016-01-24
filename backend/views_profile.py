@@ -28,7 +28,7 @@ def summary(request):
 			'bank_ifsc' : member.bank_ifsc,
 			'bank_account_no' : member.bank_account_no,
 			'bank_name' : member.bank_name,
-			'pcr_approved' : member.pcr_approved,
+			'pcr_approval' : member.pcr_approval,
 		}
 	else:
 		response = {
