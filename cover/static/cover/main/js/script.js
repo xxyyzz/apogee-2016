@@ -1343,10 +1343,34 @@ function get_pro_info(){
 		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
 		method: "GET",
 		success: function(data){
+			profile_info =data;
 			console.log(data);
+			$('.pd_name').text(data.name);
+			$('.pd_email').text(data.email);
+			$('.pd_college').text(data.college);
+			$('.pd_phone').text(data.phone);
+			$('input[name="bank_name"]').val(data.bank_name);
+			$('input[name="accno"]').val(data.bank_account_no);
+			$('input[name="ifsc_code"]').val(data.bank_ifsc);
+			$('input[name="address"]').val(data.address);
 		}
 	});
 }
+// $('#pro_detail_form').submit(function(e){
+// 	e.preventDefault();
+// 	var formData = $(this).serializeArray();
+// 	$.ajax({
+// 		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/',
+// 		method:'POST',
+//         crossDomain: true,
+// 		data:formData,
+// 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+// 		datatype: 'jsonp',
+// 		success:function(data){
+
+// 		},
+// 	});
+// });
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
 });
