@@ -1379,7 +1379,13 @@ function get_pro_info(){
 				}
 				
 			}
-			$('#pro_event').html(eve);
+			if(eve=="")
+			{
+				$('#pro_event').html('You are not registered for any events yet.');
+			}
+			else{
+				$('#pro_event').html(eve);
+			}
 		}
 	});
 }
@@ -1388,8 +1394,11 @@ function unreg_eve(id){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
 		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
 			get_pro_info();
+			eve_reg_info();
 		}
 	});
 }
@@ -1398,8 +1407,11 @@ function leave_team(id){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
 		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
 			get_pro_info();
+			eve_reg_info();
 		}
 	});
 }
@@ -1408,31 +1420,42 @@ function delete_team(id){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
 		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
 			get_pro_info();
+			eve_reg_info();
 		}
 	});
 }
-// $('#pro_detail_form').submit(function(e){
-// 	e.preventDefault();
-// 	var formData = $(this).serializeArray();
-// 	$.ajax({
-// 		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/',
-// 		method:'POST',
-//         crossDomain: true,
-// 		data:formData,
-// 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
-// 		datatype: 'jsonp',
-// 		success:function(data){
+$('#pro_detail_form').submit(function(e){
+	e.preventDefault();
+	$('.update_bank').prop('disabled','true');
+	$('.update_bank').text('Updating..');
+	var formData = $(this).serializeArray();
+	$.ajax({
+		url:'http://bits-apogee.org'+imgpre+'/api/profile/update/',
+		method:'POST',
+        crossDomain: true,
+		data:formData,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(data){
 
-// 		},
-// 	});
-// });
+		},
+	});
+});
 $('#pro_event').on('click','.unreg_eve',function(){
 	unreg_eve($(this).data('id'));
+	$(this).text('Wait a sec..');
 });
 $('#pro_event').on('click','.leave_team',function(){
 	leave_team($(this).data('id'));
+	$(this).text('Wait a sec..');
+});
+$('#pro_event').on('click','.delete_team',function(){
+	delete_team($(this).data('id'));
+	$(this).text('Wait a sec..');
 });
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
