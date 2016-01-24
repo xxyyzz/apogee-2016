@@ -20,31 +20,32 @@ def summary(request):
 			'email' : member.email_id,
 			'email_verified' : member.email_verified,
 			'social_link' : member.social_link,
-			'single_events' : [event.name for event in member.events.filter(is_team=False)],
+			'single_events' : [
+				{
+					'name' : event.name,
+					'id' : event.id,
+				}
+				for event in member.events.filter(is_team=False)
+			],
 			'team_events' : [
 			{
-				'id' : event.id,
-				'name' : event.name,
-				'details' : [
+				'event_id' : team.event.id,
+				'event_name' : team.event.name,
+				'team_id' : team.id,
+				'team_name' : team.name,
+				'team_leader' : {
+					'id' : team.leader.id,
+					'name' : team.leader.name,
+				},
+				'team_members' : [
 					{
-						'id' : team.id,
-						'name' : team.name,
-						'leader' : {
-							'id' : team.leader.id,
-							'name' : team.leader.name,
-						},
-						'members' : [
-							{
-								'id' : member.id,
-								'name' : member.name,
-							}
-								for member in team.members.all()
-						],
+						'id' : member.id,
+						'name' : member.name,
 					}
-						for team in member.teams.filter(event=event)
+						for member in team.members.all()
 				]
 			}
-				for event in member.events.filter(is_team=True)
+				for team in member.team_set.all()
 			],
 			'fee_paid' : member.fee_paid,
 			'teams' : [team.name for team in member.teams.all()],
@@ -61,5 +62,37 @@ def summary(request):
 		}
 	return JsonResponse(response)
 
-def delete_event(request):
-	pass
+@staff_check
+def unregister_single(request, eventid):
+	try:
+		event = Event.objects.get(id=eventid)
+		member = request.user.participant
+		member.events.remove(event)
+		member.save()
+		response = {
+			'status' : 1,
+		}
+		return JsonResponse(response)
+	except:
+		response = {
+			'status' : 0,
+		}
+		return JsonResponse(response)
+@staff_check
+def unregister_team(request, eventid):
+	try:
+		team = Team.objects.get(id=teamid)
+		member = request.user.participant
+		team.members.remove(member)
+		team.save()
+		member.events.remove(team.event)
+		member.save()
+		response = {
+			'status' : 1,
+		}
+		return JsonResponse(response)
+	except:
+		response = {
+			'status' : 0,
+		}
+		return JsonResponse(response)
