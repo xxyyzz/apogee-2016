@@ -136,6 +136,7 @@ def create_user(member, password):
 	try:
 		user = User.objects.get(email=member.email_id)
 		user.set_password(password)
+		user.save()
 	except:
 		user = User.objects.create_user(username=username, email=member.email_id, password=password)
 	member.user = user
