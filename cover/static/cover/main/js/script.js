@@ -1350,7 +1350,7 @@ function get_pro_info(){
 			$('.pd_college').text(data.college);
 			$('.pd_phone').text(data.phone);
 			$('input[name="bank_name"]').val(data.bank_name);
-			$('input[name="bank_acc_no"]').val(data.bank_account_no);
+			$('input[name="bank_account_no"]').val(data.bank_account_no);
 			$('input[name="bank_ifsc"]').val(data.bank_ifsc);
 			$('textarea[name="address"]').val(data.address);
 			$('.update_bank').prop('disabled',false);
