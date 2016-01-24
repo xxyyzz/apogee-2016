@@ -1357,6 +1357,59 @@ function get_pro_info(){
 				$('.approved').addClass('unapproved');
 				$('.unapproved').text('Unapproved');
 			}
+			var eve="";
+			for(var i=0;i<data.single_events.length;i++){
+				eve += '<div class="user_reg_eve">'+data.single_events[i].name+'<button class="unreg_eve hover_dark" data-id="'+data.single_events[i].id+'">Unregister</button> </div>';
+			}
+			var te = data.team_events;
+			for(var i=0;i<te.length;i++){
+				eve += '<div class="user_team_eve"> <div class="team_eve_head">'+te[i].event_name+'</div> <div class="team_eve_descr"> <div class="ted_name"> Team name:&nbsp; <span class="ted_name_spn">'+te[i].team_name+'</span> </div> <div class="ted_members"> Members:&nbsp; <span class="ted_name_spn">';
+				var j;
+				for(j=0;j<te[i].team_members.length-1;j++){
+					eve+=te[i].team_members[j].name+', ';
+				}
+				eve+=te[i].team_members[j].name +'</span> </div><div class="ted_options">';
+
+				if(user.id==te[i].team_leader.id)
+				{
+					eve += '<button class="delete_team hover_dark" data-id="'+te[i].team_id+'">Delete</button> </div></div></div>';
+				}
+				else{
+					eve+='<button class="leave_team hover_dark" data-id="'+te[i].team_id+'">Leave</button></div></div></div>';
+				}
+				
+			}
+			$('#pro_event').html(eve);
+		}
+	});
+}
+function unreg_eve(id){
+	$('.unreg_eve').prop('disabled','true');
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
+		method: "POST",
+		success: function(data){
+			get_pro_info();
+		}
+	});
+}
+function leave_team(id){
+	$('.leave_team').prop('disabled','true');
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
+		method: "POST",
+		success: function(data){
+			get_pro_info();
+		}
+	});
+}
+function delete_team(id){
+	$('.delete_team').prop('disabled','true');
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
+		method: "POST",
+		success: function(data){
+			get_pro_info();
 		}
 	});
 }
@@ -1375,6 +1428,12 @@ function get_pro_info(){
 // 		},
 // 	});
 // });
+$('#pro_event').on('click','.unreg_eve',function(){
+	unreg_eve($(this).data('id'));
+});
+$('#pro_event').on('click','.leave_team',function(){
+	leave_team($(this).data('id'));
+});
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
 });
