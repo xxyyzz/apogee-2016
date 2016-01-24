@@ -1338,7 +1338,7 @@ $('.htile').click(function(){
 // profile
 
 var profile_info;
-function get_pro_info(){
+function openProfile(){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
 		method: "GET",
@@ -1350,29 +1350,122 @@ function get_pro_info(){
 			$('.pd_college').text(data.college);
 			$('.pd_phone').text(data.phone);
 			$('input[name="bank_name"]').val(data.bank_name);
-			$('input[name="accno"]').val(data.bank_account_no);
-			$('input[name="ifsc_code"]').val(data.bank_ifsc);
-			$('input[name="address"]').val(data.address);
+			$('input[name="bank_account_no"]').val(data.bank_account_no);
+			$('input[name="bank_ifsc"]').val(data.bank_ifsc);
+			$('textarea[name="address"]').val(data.address);
+			$('.update_bank').prop('disabled',false);
+			$('.update_bank').text('Update');
+			if(!data.pcr_approval){
+				$('.approved').addClass('unapproved');
+				$('.unapproved').text('Unapproved');
+			}
+			var eve="";
+			for(var i=0;i<data.single_events.length;i++){
+				eve += '<div class="user_reg_eve">'+data.single_events[i].name+'<button class="unreg_eve hover_dark" data-id="'+data.single_events[i].id+'">Unregister</button> </div>';
+			}
+			var te = data.team_events;
+			for(var i=0;i<te.length;i++){
+				eve += '<div class="user_team_eve"> <div class="team_eve_head">'+te[i].event_name+'</div> <div class="team_eve_descr"> <div class="ted_name"> Team name:&nbsp; <span class="ted_name_spn">'+te[i].team_name+'</span> </div> <div class="ted_members"> Members:&nbsp; <span class="ted_name_spn">';
+				var j;
+				for(j=0;j<te[i].team_members.length-1;j++){
+					eve+=te[i].team_members[j].name+', ';
+				}
+				eve+=te[i].team_members[j].name +'</span> </div><div class="ted_options">';
+
+				if(user.id==te[i].team_leader.id)
+				{
+					eve += '<button class="delete_team hover_dark" data-id="'+te[i].team_id+'">Delete</button> </div></div></div>';
+				}
+				else{
+					eve+='<button class="leave_team hover_dark" data-id="'+te[i].team_id+'">Leave</button></div></div></div>';
+				}
+				
+			}
+			if(eve=="")
+			{
+				$('#pro_event').html('<div style="padding-top:25px;text-align:center">You are not registered for any events yet.</div>');
+			}
+			else{
+				$('#pro_event').html(eve);
+			}
+			if($('.lb_pro_cont').css('display')=="none"){
+				$('#overlay').fadeIn();
+				$('.lb_pro_cont').fadeIn();
+			}
 		}
 	});
 }
-// $('#pro_detail_form').submit(function(e){
-// 	e.preventDefault();
-// 	var formData = $(this).serializeArray();
-// 	$.ajax({
-// 		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/',
-// 		method:'POST',
-//         crossDomain: true,
-// 		data:formData,
-// 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
-// 		datatype: 'jsonp',
-// 		success:function(data){
-
-// 		},
-// 	});
-// });
+function unreg_eve(id){
+	$('.unreg_eve').prop('disabled',true);
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
+		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		success: function(data){
+			get_pro_info();
+			eve_reg_info();
+		}
+	});
+}
+function leave_team(id){
+	$('.leave_team').prop('disabled',true);
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
+		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		success: function(data){
+			get_pro_info();
+			eve_reg_info();
+		}
+	});
+}
+function delete_team(id){
+	$('.delete_team').prop('disabled',true);
+	$.ajax({
+		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
+		method: "POST",
+		crossDomain: true,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		success: function(data){
+			get_pro_info();
+			eve_reg_info();
+		}
+	});
+}
+$('#pro_detail_form').submit(function(e){
+	e.preventDefault();
+	$('.update_bank').prop('disabled',true);
+	$('.update_bank').text('Updating..');
+	var formData = $(this).serializeArray();
+	$.ajax({
+		url:'http://bits-apogee.org'+imgpre+'/api/profile/update/',
+		method:'POST',
+        crossDomain: true,
+		data:formData,
+		headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(data){
+			get_pro_info();
+		},
+	});
+});
+$('#pro_event').on('click','.unreg_eve',function(){
+	unreg_eve($(this).data('id'));
+	$(this).text('Wait a sec..');
+});
+$('#pro_event').on('click','.leave_team',function(){
+	leave_team($(this).data('id'));
+	$(this).text('Wait a sec..');
+});
+$('#pro_event').on('click','.delete_team',function(){
+	delete_team($(this).data('id'));
+	$(this).text('Wait a sec..');
+});
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
+	$('#overlay').fadeOut();
 });
 $('.pro_tab_name').click(function(){
 	$('.pro_tab').css('display','none');
