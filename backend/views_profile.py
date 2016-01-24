@@ -86,7 +86,7 @@ def unregister_single(request, eventid):
 
 @staff_check
 @require_POST
-def unregister_team(request, eventid):
+def unregister_team(request, teamid):
 	try:
 		team = Team.objects.get(id=teamid)
 		member = request.user.participant
@@ -157,5 +157,27 @@ def delete_team(request, teamid):
 	except:
 		response = {
 			'status' : 1,
+		}
+		return JsonResponse(response)
+
+@staff_check
+@require_POST
+def update_profile(request):
+	try:
+		data = request.POST
+		# city = data['city'] if 'city' in data else None
+		member = request.user.participant
+		member.bank_ifsc = data['bank']
+		member.address = data['address']
+		member.bank_account_no = data['bank_account_no']
+		member.bank_name = data['bank_name']
+		member.save()
+		response = {
+			'status' : 1,
+		}
+		return JsonResponse(response)
+	except:
+		response = {
+			'status' : 0,
 		}
 		return JsonResponse(response)
