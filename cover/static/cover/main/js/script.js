@@ -1381,7 +1381,7 @@ function get_pro_info(){
 			}
 			if(eve=="")
 			{
-				$('#pro_event').html('You are not registered for any events yet.');
+				$('#pro_event').html('<div style="padding-top:25px;text-align:center">You are not registered for any events yet.</div>');
 			}
 			else{
 				$('#pro_event').html(eve);
@@ -1441,7 +1441,7 @@ $('#pro_detail_form').submit(function(e){
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(data){
-
+			get_pro_info();
 		},
 	});
 });
