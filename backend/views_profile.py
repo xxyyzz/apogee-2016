@@ -39,9 +39,9 @@ def summary(request):
 								'name' : member.name,
 							}
 								for member in team.members.all()
-						],
+						]
 					}
-					for team in member.teams.filter(event=event)
+						for team in member.team_set.filter(event=event)
 				]
 			}
 				for event in member.events.filter(is_team=True)
