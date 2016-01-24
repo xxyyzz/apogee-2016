@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^events/register/(?P<eventid>[0-9]+)/$', views.register_single),
     url(r'^events/unregister/(?P<eventid>[0-9]+)/$', views_profile.unregister_single),
     url(r'^events/team/register/(?P<eventid>[0-9]+)/$', views.register_team),
+    url(r'^events/team/unregister/(?P<teamid>[0-9]+)/$', views_profile.unregister_team),
     url(r'^profile/$', views_profile.summary),
     url(r'^participant/(?P<participantid>[0-9]+)/$', views.participant_summary),
 ]

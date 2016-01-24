@@ -78,37 +78,21 @@ def unregister_single(request, eventid):
 			'status' : 0,
 		}
 		return JsonResponse(response)
-
-def register_team(request, eventid):
-	# try:
-	data = request.POST
-	memberids = data.getlist('memberid')
-	name = data['name']
-	event = Event.objects.get(id=eventid)
-	leader = request.user.participant
-	team = Team.objects.create(name=name, event=event, leader=leader)
-	team.name = name
-	team.leader = leader
-	team.save()
-	response = {
-		'status' : 1,
-		'message' : 'Team ' + name + ' successfully registered.',
-		'added' : [],
-		'not_added' : [],
-	}
-	for memberid in memberids:
-		try:
-			member = Participant.objects.get(id=memberid)
-			member.events.add(event)
-			member.save()
-			team.members.add(member)
-			team.save()
-			response['added'].append(member.name)
-		except:
-			response['not_added'].append(memberid)
-	# except:
-	# 	response = {
-	# 		'status' : 0,
-	# 		'message' : 'Whoopsie! Looks like an error occured. Please try again later.'
-	# 	}
-	return JsonResponse(response)
+@staff_check
+def unregister_team(request, eventid):
+	try:
+		team = Team.objects.get(id=teamid)
+		member = request.user.participant
+		team.members.remove(member)
+		team.save()
+		member.events.remove(team.event)
+		member.save()
+		response = {
+			'status' : 1,
+		}
+		return JsonResponse(response)
+	except:
+		response = {
+			'status' : 0,
+		}
+		return JsonResponse(response)
