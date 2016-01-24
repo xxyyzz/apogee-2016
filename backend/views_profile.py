@@ -148,6 +148,7 @@ def delete_team(request, teamid):
 		team = Team.objects.get(id=teamid)
 		for member in team.members.all():
 			member.events.remove(team.event)
+		team.leader.events.remove(team.event)
 		team.delete()
 		response = {
 			'status' : 1,
