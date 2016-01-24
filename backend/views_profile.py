@@ -20,13 +20,14 @@ def summary(request):
 			'email' : member.email_id,
 			'email_verified' : member.email_verified,
 			'social_link' : member.social_link,
-			'events' : [event.name for event in member.events.all()],
+			'events' : [event.name for event in member.events.filter(is_team=False)],
 			'fee_paid' : member.fee_paid,
 			'teams' : [team.name for team in member.teams.all()],
 			'address' : member.address,
 			'bank_ifsc' : member.bank_ifsc,
 			'bank_account_no' : member.bank_account_no,
 			'bank_name' : member.bank_name,
+			'pcr_approved' :
 		}
 	else:
 		response = {
