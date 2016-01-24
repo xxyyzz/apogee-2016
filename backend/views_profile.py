@@ -20,7 +20,13 @@ def summary(request):
 			'email' : member.email_id,
 			'email_verified' : member.email_verified,
 			'social_link' : member.social_link,
-			'single_events' : [event.name for event in member.events.filter(is_team=False)],
+			'single_events' : [
+				{
+					'name' : event.name,
+					'id' : event.id,
+				}
+				for event in member.events.filter(is_team=False)
+			],
 			'team_events' : [
 			{
 				'id' : event.id,
@@ -61,5 +67,7 @@ def summary(request):
 		}
 	return JsonResponse(response)
 
-def delete_event(request):
-	pass
+# @staff_check
+# def delete_event(request):
+# 	member = request.user.participant
+# 	member.events.
