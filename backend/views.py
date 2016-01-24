@@ -108,7 +108,7 @@ BITS Pilani
 def email_generate_token(member):
 	import uuid
 	token = uuid.uuid4().hex
-	registered_tokens = [member.email_token for member in Participant.objects.all()]
+	registered_tokens = [participant.email_token for participant in Participant.objects.all()]
 	while token in registered_tokens:
 		token = uuid.uuid4().hex
 	member.email_token = token
