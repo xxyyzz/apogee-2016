@@ -56,6 +56,88 @@ def part_list(request):
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
 	return render(request, 'pcradmin/part_list.html', {'part_list' : part_obs})
 
+
+
+def part_act(request):
+	part_obs = Participant.objects.all()
+
+
+	body = unicode(u''' ''')
+
+
+	part_ids = request.POST.getlist('part_list')
+	if part_ids:
+		no_select=0
+	else:
+		return render(request,'pcradmin/part_list.html',{'part_list' : part_obs, 'no_select' : 1})
+
+	if request.POST.get('approval', False):
+		val = request.POST['approval']
+		val =int(val)
+		if val == 2:
+			send_to= []
+			for i in part_ids:
+				aid = int(i)
+				try:
+					part= Participant.objects.get(id=aid)
+				except:
+					return HttpResponse('Error : Call Satwik 9928823099')
+				if part.pcr_approval == True:
+					continue
+				part.pcr_approval= True
+				part.save()
+				send_to.append( str( part.email_id) )
+
+			# try:
+			# 	email = EmailMessage("PCR Approval", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
+			# #poster attachment
+			# # email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+			# #email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+			# #email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+			# 	email.send()
+			# 	return render(request, 'pcradmin/showmailsent.html')
+			# except:
+			# 	return HttpResponse(' Email Error: Call Satwik 9928823099 ')
+
+		elif val == 1:
+			for i in part_ids:
+				aid = int(i)
+				try:
+					part= Participant.objects.get(id=aid)
+				except:
+					return HttpResponse('Error : Call Satwik 9928823099')
+				part.pcr_approval= False
+				part.save()
+		else:
+			return HttpResponse('Error: Decision Value didnt match;   Call Satwik 9928823099  :    ' + str(part_ids) + ' | ' + str(val))
+
+
+		return HttpResponseRedirect('../part_list/')
+
+	# elif request.POST['mail']:
+	# 	id_str = ','.join(part_ids)
+	# 	mailbody = 'Default mail body'
+	# 	gauss_check= 0
+	# 	context = {
+	# 	'mailbody' :mailbody,
+	# 	'id_str' : id_str,
+	# 	}
+	# 	return render(request, 'pcradmin/mail_selected_amb.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def ambassadors_list(request):
 	amb_obs = CampusAmbassador.objects.all()
 	# amb_list=[]

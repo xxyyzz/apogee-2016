@@ -24,10 +24,10 @@ function checkall(gauss){
 
         <form action='../part_act/' method= 'POST'>
         {% csrf_token %}            
-<!--             <button name="mail" value="True" class="button button-primary">Mail</button>
+            <!-- <button name="mail" value="True" class="button button-primary">Mail</button> -->
 
             <button name="approval" value="2" class="button" style="background-color : #00CC00; color : white;">Approve</button>            
-            <button name="approval" value="1" class="button" style="background-color : #FF0000; color : white;">Deny</button> -->            
+            <button name="approval" value="1" class="button" style="background-color : #FF0000; color : white;">Deny</button>            
 <br>
 {% if no_select %}
  <p style= 'color:red'> Please select someone </p>
@@ -35,7 +35,7 @@ function checkall(gauss){
             <table class= "u-full-width">
             <tbody>
                 <tr>
-                    <!-- <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th> -->
+                    <th>Select All <input type= 'checkbox' name= 'selectall' onclick= "checkall(this)"> </th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -50,9 +50,9 @@ function checkall(gauss){
             {% for Part in part_list reversed %}
             <tr>
 
-                <!-- <td>
-                    <input type = 'checkbox' name='Part_list' value = {{Part.id}}>
-                </td> -->
+                <td>
+                    <input type = 'checkbox' name='part_list' value = {{Part.id}}>
+                </td>
                 <td> {{Part.name}} </td>
                 <td> {{Part.email_id}} </td>
                 <td> {{Part.phone_one}} </td>
