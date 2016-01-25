@@ -56,7 +56,9 @@ def part_list(request):
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
 	return render(request, 'pcradmin/part_list.html', {'part_list' : part_obs})
 
-
+def part_details(request,part_id):
+	part_ob = Participant.objects.get(id=part_id)
+	return render(request,'pcradmin/part_details.html', {'part':part_ob})
 
 def part_act(request):
 	part_obs = Participant.objects.all()

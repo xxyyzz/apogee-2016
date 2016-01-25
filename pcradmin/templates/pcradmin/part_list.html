@@ -39,8 +39,8 @@ function checkall(gauss){
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <!-- <th>College</th>
-                    <th>City</th> -->
+                    <th>College</th>
+                    <!-- <th>City</th> -->
                     <th>Online Paid</th>
                     <th>Verified Mail</th>
                     <th>Pcr Approved</th>
@@ -53,9 +53,10 @@ function checkall(gauss){
                 <td>
                     <input type = 'checkbox' name='part_list' value = {{Part.id}}>
                 </td>
-                <td> {{Part.name}} </td>
+                <td> <a href='./{{Part.id}}/'>{{Part.name}}</a> </td>
                 <td> {{Part.email_id}} </td>
                 <td> {{Part.phone_one}} </td>
+                <td>{{ Part.college.name }}</td>
                 {% if Part.fee_paid %}
                 <td style='color:green'>
                     Yes
@@ -84,12 +85,7 @@ function checkall(gauss){
                 </td>
                 {% endif %}
             </tr>
-            <tr>
-                <td><strong>College:</strong></td>
-                <td colspan="2"> {{ Part.college.name }}</td>
-                <td><strong>Address:</strong></td>
-                <td colspan="2"> {{ Part.address }}</td>
-            </tr>
+
             {% endfor %}
             </tbody>
             </table>
