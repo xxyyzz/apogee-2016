@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals 
+from __future__ import unicode_literals
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.shortcuts import render
 from registrations.models import *
@@ -17,11 +17,16 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, HttpResponseRedirect
 
 import difflib
-  
 
-
-
-
+from django.core.mail.backends.smtp import EmailBackend
+cabackend = EmailBackend(
+    host='smtp.gmail.com',
+    port=587,
+    username='campusambassador@bits-apogee.org',
+    password='campusambassador',
+    use_tls=True,
+    fail_silently=False,
+)
 
 
 def initial_registration(request):
@@ -46,25 +51,25 @@ def pcr_logout(request):
 
 
 def part_list(request):
-	part_obs = Participant.objects.all()	
+	part_obs = Participant.objects.all()
 	# amb_list=[]
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
 	return render(request, 'pcradmin/part_list.html', {'part_list' : part_obs})
 
 def ambassadors_list(request):
-	amb_obs = CampusAmbassador.objects.all()	
+	amb_obs = CampusAmbassador.objects.all()
 	# amb_list=[]
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
-	return render(request, 'pcradmin/list_ambassadors.html', {'amb_list' : amb_obs})	
+	return render(request, 'pcradmin/list_ambassadors.html', {'amb_list' : amb_obs})
 
 def app_amb(request):
-	amb_obs = CampusAmbassador.objects.filter(pcr_approved=True)	
+	amb_obs = CampusAmbassador.objects.filter(pcr_approved=True)
 	# amb_list=[]
 	# collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
-	return render(request, 'pcradmin/approved_amb.html', {'amb_list' : amb_obs})	
+	return render(request, 'pcradmin/approved_amb.html', {'amb_list' : amb_obs})
 
 def amb_act(request):
-	amb_obs = CampusAmbassador.objects.all()	
+	amb_obs = CampusAmbassador.objects.all()
 
 
 	body = unicode(u'''Hello,
@@ -89,9 +94,9 @@ The following are expected from you promptly:
 
 1. Please Pre-register and help your friends pre-register on https://www.bits-apogee.org/ .
 
-2. Please reply to pcr@bits-apogee.org with the e-mail address and contact numbers of the NSS head in your college along with the Mechanical, Computer Science and Electrical departments’ (if any) student representatives. 
+2. Please reply to pcr@bits-apogee.org with the e-mail address and contact numbers of the NSS head in your college along with the Mechanical, Computer Science and Electrical departments’ (if any) student representatives.
 
-3. You are expected to share the posts uploaded on the APOGEE Facebook page https://www.facebook.com/bitsapogee ; it will be monitored by one of our members. 
+3. You are expected to share the posts uploaded on the APOGEE Facebook page https://www.facebook.com/bitsapogee ; it will be monitored by one of our members.
 
 4. Please subscribe on Youth4Work (website) if you haven’t till now (otherwise you will be not be a recognized Intern).
 
@@ -130,15 +135,15 @@ Good Luck! ''')
 				send_to.append( str( amb.email) )
 
 			try:
-				email = EmailMessage("Campus Ambassador Approval", body, 'no-reply@bits-apogee.org', send_to)
+				email = EmailMessage("Campus Ambassador Approval", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
 			#poster attachment
 			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
 				email.send()
-				return render(request, 'pcradmin/showmailsent.html')	
+				return render(request, 'pcradmin/showmailsent.html')
 			except:
-				return HttpResponse(' Email Error: Call Satwik 9928823099 ')		
+				return HttpResponse(' Email Error: Call Satwik 9928823099 ')
 
 		elif val == 1:
 			for i in amb_ids:
@@ -148,10 +153,10 @@ Good Luck! ''')
 				except:
 					return HttpResponse('Error : Call Satwik 9928823099')
 				amb.pcr_approved= False
-				amb.save()	
+				amb.save()
 		else:
-			return HttpResponse('Error: Decision Value didnt match;   Call Satwik 9928823099  :    ' + str(amb_ids) + ' | ' + str(val))			
-		
+			return HttpResponse('Error: Decision Value didnt match;   Call Satwik 9928823099  :    ' + str(amb_ids) + ' | ' + str(val))
+
 
 		return HttpResponseRedirect('../ambassadors/')
 
@@ -162,8 +167,8 @@ Good Luck! ''')
 		context = {
 		'mailbody' :mailbody,
 		'id_str' : id_str,
-		}	
-		return render(request, 'pcradmin/mail_selected_amb.html', context)		
+		}
+		return render(request, 'pcradmin/mail_selected_amb.html', context)
 
 
 
@@ -180,7 +185,7 @@ def mail_selected_amb(request):
 		send_to.append( str( amb.email) )
 
 	# try:
-	email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to)
+	email = EmailMessage(subject="Campus Ambassador", body=body, from_email='no-reply@bits-apogee.org', to=send_to, connection=cabackend)
 	#poster attachment
 	# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 	#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
@@ -188,7 +193,7 @@ def mail_selected_amb(request):
 	email.send()
 	return render(request, 'pcradmin/showmailsent.html')
 	# except:
-	# 	return HttpResponse('Mail to selected Ambassadors Error : Contact Satwik 9928823099')		
+	# 	return HttpResponse('Mail to selected Ambassadors Error : Contact Satwik 9928823099')
 
 
 def mail_approved(request):
@@ -200,14 +205,14 @@ def mail_approved(request):
 			send_to=[]
 			send_to.append( str(amb.email) )
 			try:
-				email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to)
+				email = EmailMessage("Campus Ambassador", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
 				email.send()
 			#poster attachment
 			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
 			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
 			except:
-				return HttpResponse('Mail Error : Contact Satwik 9928823099')		
+				return HttpResponse('Mail Error : Contact Satwik 9928823099')
 		return render(request, 'pcradmin/showmailsent.html')
 
 	else:
@@ -218,7 +223,7 @@ def mail_approved(request):
 		context = {
 		'mailbody' :mailbody,
 		'gauss_check' : gauss_check
-		}	
+		}
 		return render(request, 'pcradmin/mail_amb.html', context)
 
 
@@ -261,13 +266,13 @@ def deepgetattr(obj, attr, default = None):
 
 
 def ambassador_approved_xlsx(request):
-	from django.http import HttpResponse, HttpResponseRedirect  
+	from django.http import HttpResponse, HttpResponseRedirect
 	import xlsxwriter
 	from registrations.models import CampusAmbassador
 	# if request.POST:
-	try:  
+	try:
 	    import cStringIO as StringIO
-	except ImportError:  
+	except ImportError:
 	    import StringIO
 	a_list = []
 
@@ -296,7 +301,7 @@ def ambassador_approved_xlsx(request):
 	worksheet.write(1, 7, "Description")
 	worksheet.write(1, 8, "Root Mail")
 	worksheet.write(1, 9, "PCR Approved")
-	    
+
 	for i, row in enumerate(data):
 	    """for each object in the date list, attribute1 & attribute2
 	    are written to the first & second column respectively,
@@ -317,11 +322,11 @@ def ambassador_approved_xlsx(request):
 	workbook.close()
 	filename = 'ExcelReport.xlsx'
 	output.seek(0)
-	response = HttpResponse(output.read(), content_type="application/ms-excel")  
+	response = HttpResponse(output.read(), content_type="application/ms-excel")
 	response['Content-Disposition'] = 'attachment; filename=%s' % filename
 	return response
 	# amb_obs = CampusAmbassador.objects.all()
-	# return render(request, 'pcradmin/xlsx_ambassadors.html', {'amb_list' : amb_obs})		
+	# return render(request, 'pcradmin/xlsx_ambassadors.html', {'amb_list' : amb_obs})
 
 
 
@@ -386,7 +391,7 @@ def stats_event(request):
 
 
 
-# ### old code below  
+# ### old code below
 
 # # Create your views here.
 # def home(request):
@@ -409,11 +414,11 @@ def stats_event(request):
 # def init_list(request):
 # 	if request.method == 'POST':
 # 		clg = str(request.POST['college'])
-		
+
 # 		users = InitialRegistration.objects.filter(college=clg)
 # 		context = {
 # 			'users' : users
-			
+
 # 		}
 # 		return render(request, 'pcradmin/init_select.html', context)
 
@@ -426,7 +431,7 @@ def stats_event(request):
 # 	for t in clist:
 # 		if InitialRegistration.objects.filter(college = t):
 # 			k = InitialRegistration.objects.filter(college = t)[0]
-	
+
 # 			if k.college_rep:
 # 				clg_list.append((k.college, 'Selected' ))
 # 			else:
@@ -460,11 +465,11 @@ def stats_event(request):
 
 # 			if crep.college_rep:
 # 				user_ob = crep.college_rep.user
-				
 
-				
 
-				
+
+
+
 # 			# if crep.college_rep == None:
 # 			if (User.objects.filter(email = crep.email_id) ):
 # 				newuser = User.objects.get(email = crep.email_id)
@@ -474,7 +479,7 @@ def stats_event(request):
 # 				crep_id = crep.id
 # 				new_userp = UserProfile.objects.create(user= newuser, details_id = crep_id)
 
-			
+
 # 			newuser.save()
 # 			new_userp.save()
 # 			crep.college_rep = new_userp
@@ -485,7 +490,7 @@ def stats_event(request):
 # 			for k in members:
 # 				k.college_rep = crep.college_rep
 # 				k.save()
-			
+
 
 # 			username =crep.email_id
 # 			password= crep.phone_one
@@ -493,7 +498,7 @@ def stats_event(request):
 # You have been selected as the college representative for your college.
 # Your username is : %s
 # Your password is : %s
-# To view the information brochure of Oasis '15 click here: http://bits-oasis.org/2015/details/ 
+# To view the information brochure of Oasis '15 click here: http://bits-oasis.org/2015/details/
 # 		''' ) % (username, password)
 
 
@@ -519,11 +524,11 @@ def stats_event(request):
 # 	You have been selected as the college representative for your college.
 # 	Your username is : %s
 # 	Your password is : %s
-# 	To view the information brochure of Oasis '15 click here: http://bits-oasis.org/2015/details/ 
+# 	To view the information brochure of Oasis '15 click here: http://bits-oasis.org/2015/details/
 # 			''' ) % (username, password)
 
 
-# 		send_to = username 
+# 		send_to = username
 # 		try:
 # 			email = EmailMessage("College representative confirmation, Oasis'15", body, 'invitation@bits-oasis.org', [send_to])
 # 			#poster attachment
@@ -546,7 +551,7 @@ def stats_event(request):
 # You have been selected as the college representative for your college.
 # Your username is : %s
 # Your password is : %s
-# To view the information brochure of Oasis '15 click here: http://bits-oasis.org/2015/details/ 
+# To view the information brochure of Oasis '15 click here: http://bits-oasis.org/2015/details/
 # 		''' ) % (username, password)
 
 # 		context = {
@@ -566,7 +571,7 @@ def stats_event(request):
 # @staff_member_required
 # def std_list_college(request):
 # 	dispcollege_ob = College.objects.filter(is_displayed = True)
-	
+
 # 	tocollege_ob = College.objects.filter(is_displayed = False)
 
 # 	clg_list = []
@@ -668,7 +673,7 @@ def stats_event(request):
 # 		entry = {}
 # 		entry['id'] = event.id
 # 		entry['name'] = event.name
-# 		entry['category'] = str(event.category.name) 
+# 		entry['category'] = str(event.category.name)
 # 		entry['males'] = str(event.initialregistration_set.filter(gender='M').count())+' | '+str(event.initialregistration_set.filter(gender='M', gl_approval=True).count())+' | '+str(event.initialregistration_set.filter(gender='M', pcr_approval=True).count())
 # 		entry['females'] = str(event.initialregistration_set.filter(gender='F').count())+' | '+str(event.initialregistration_set.filter(gender='F', gl_approval=True).count())+' | '+str(event.initialregistration_set.filter(gender='F', pcr_approval=True).count())
 # 		entry['total'] = str(event.initialregistration_set.all().count())+' | '+str(event.initialregistration_set.filter(gl_approval=True).count())+' | '+str(event.initialregistration_set.filter(pcr_approval=True).count())+' | '+str(event.initialregistration_set.filter(pcr_approval=True, confirmed_events__gte=1).distinct().count())
@@ -730,7 +735,7 @@ def stats_event(request):
 # 		# 'collegewise' : collegewise,
 # 		'total' : total,
 # 		'un_stdf' : un_stdF,
-# 		'un_stdm' : un_stdM,	
+# 		'un_stdm' : un_stdM,
 # 		'un_std': un_std,
 # 		'paid' : paidlist,
 # 		'paidm' : paidlistm,
@@ -751,8 +756,8 @@ def stats_event(request):
 # 	# 	entry = {}
 # 	# 	entry['id'] = event.id
 # 	# 	entry['name'] = event.name
-# 	# 	entry['category'] = str(event.category.name) 
-# 	# 	entry['males'] = str(event.initialregistration_set.filter(gender='M').count()) 
+# 	# 	entry['category'] = str(event.category.name)
+# 	# 	entry['males'] = str(event.initialregistration_set.filter(gender='M').count())
 # 	# 	entry['females'] = str(event.initialregistration_set.filter(gender='F').count())
 # 	# 	entry['total'] = str(event.initialregistration_set.all().count())
 # 	# 	for key, value in entry.iteritems():
@@ -761,9 +766,9 @@ def stats_event(request):
 # 	# 				entry[key] = value.replace('0 | 0 | 0', '---')
 # 	# 	eventwise.append(entry)
 # 	# total = {}
-# 	# total['males'] = str(InitialRegistration.objects.filter(gender='M').count()) 
+# 	# total['males'] = str(InitialRegistration.objects.filter(gender='M').count())
 # 	# total['females'] = str(InitialRegistration.objects.filter(gender='F').count())
-# 	# total['total'] = str(InitialRegistration.objects.all().count()) 
+# 	# total['total'] = str(InitialRegistration.objects.all().count())
 
 # 	for gauss in colleges_init:
 # 		if InitialRegistration.objects.filter(college = gauss).count() != 0:
@@ -806,7 +811,7 @@ def stats_event(request):
 # 		entry = {}
 # 		entry['id'] = event.id
 # 		entry['name'] = event.name
-# 		entry['category'] = str(event.category.name) 
+# 		entry['category'] = str(event.category.name)
 # 		entry['males'] = str(event.initialregistration_set.filter(gender='M', college=college).count())+' | '+str(event.initialregistration_set.filter(gender='M', gl_approval=True, college=college).count())+' | '+str(event.initialregistration_set.filter(gender='M', pcr_approval=True, college=college).count())
 # 		entry['females'] = str(event.initialregistration_set.filter(gender='F', college=college).count())+' | '+str(event.initialregistration_set.filter(gender='F', gl_approval=True, college=college).count())+' | '+str(event.initialregistration_set.filter(gender='F', pcr_approval=True, college=college).count())
 # 		entry['total'] = str(event.initialregistration_set.filter(college=college).count())+' | '+str(event.initialregistration_set.filter(gl_approval=True, college=college).count())+' | '+str(event.initialregistration_set.filter(pcr_approval=True, college=college).count())
@@ -842,7 +847,7 @@ def stats_event(request):
 # 		entry['males'] = str(InitialRegistration.objects.filter(gender= 'M', college=college, events=eventid).count() )
 # 		entry['females'] = str(InitialRegistration.objects.filter(gender= 'F', college=college, events=eventid).count() )
 # 		entry['total'] = str(InitialRegistration.objects.filter(college=college, events= eventid).count() )
-		
+
 # 		entry['males'] = str(InitialRegistration.objects.filter(gender='M', college=college, events=event).count())+' | '+str(InitialRegistration.objects.filter(gender='M', gl_approval=True, college=college, events=event).count())+' | '+str(InitialRegistration.objects.filter(gender='M', pcr_approval=True, college=college, events=event).count())
 # 		entry['females'] = str(InitialRegistration.objects.filter(gender='F', college=college, events=event).count())+' | '+str(InitialRegistration.objects.filter(gender='F', gl_approval=True, college=college, events=event).count())+' | '+str(InitialRegistration.objects.filter(gender='F', pcr_approval=True, college=college, events=event).count())
 # 		entry['total'] = str(InitialRegistration.objects.filter(college=college, events=event).count())+' | '+str(InitialRegistration.objects.filter(gl_approval=True, college=college, events=event).count())+' | '+str(InitialRegistration.objects.filter(pcr_approval=True, college=college, events=event).count())
@@ -1042,7 +1047,7 @@ def stats_event(request):
 
 # @staff_member_required
 # def change_team_limit_list(request):
-# 	u_list = UserProfile.objects.order_by('college')[0:]	
+# 	u_list = UserProfile.objects.order_by('college')[0:]
 # 	return render(request, 'pcradmin/change_team_limit_list.html', {'u_list':u_list})
 
 # @staff_member_required
@@ -1064,7 +1069,7 @@ def stats_event(request):
 # 		p = EventLimits()
 # 		p.event = EventNew.objects.get(id=int(eventid))
 # 		p.leader = UserProfile.objects.get(id=int(userid))
-		
+
 # 		p.limit = climit
 # 		p.save()
 # 		return render(request, 'pcradmin/limit_changed.html')
@@ -1139,7 +1144,7 @@ def stats_event(request):
 # 		user = User.objects.get(username=username)
 # 		email = user.email
 # 		status = user.is_active
-# 		return render(request, 'pcradmin/status_set.html',{'uname': username, 'email' : email, 'stat' : status})		
+# 		return render(request, 'pcradmin/status_set.html',{'uname': username, 'email' : email, 'stat' : status})
 
 # @staff_member_required
 # def save_sports_limits(request):
@@ -1157,7 +1162,7 @@ def stats_event(request):
 # 	if request.method == 'POST':
 # 		stat = request.POST['status']
 # 		user_name = request.POST['uname']
-		
+
 # 		gauss= User.objects.all()
 # 		tstat=2
 # 		if stat == '0':
@@ -1170,17 +1175,17 @@ def stats_event(request):
 # 		if stat == '1':
 # 			for obj in gauss:
 # 				if obj.username == user_name:
-# 					obj.is_active =  True	
-# 					email_add = obj.email				
+# 					obj.is_active =  True
+# 					email_add = obj.email
 # 					obj.save()
 # 					return render(request, 'pcradmin/status_show.html', {'status' : 'active', 'status_bin': 1,'username' : user_name, 'email' : email_add})
 # 		return render(request, 'pcradmin/showstatus.html')
 
 
 
-	
 
-		
+
+
 # # def pcr_login(request):
 
 # 	# context = RequestContext(request)
@@ -1201,7 +1206,7 @@ def stats_event(request):
 # 			# else:
 # 				# context = {'error_heading' : "Account Frozen", 'error_message' :  'No changes can be made now <br> Return back <a href="/">home</a>'}
 # 				# return render(request, 'pcradmin/error.html', context)
-		
+
 # 		# else:
 # 			# context = {'error_heading' : "Invalid Login Credentials", 'error_message' :  'Please <a href=".">try again</a>'}
 # 			# return render(request, 'pcradmin/error.html', context)
@@ -1230,14 +1235,14 @@ def stats_event(request):
 
 # # 		p_objlist = Participant.objects.filter(coach = False)
 # # 		for k in p_objlist:
-# # 			if k.gleader.id == uid.id:		
+# # 			if k.gleader.id == uid.id:
 # # 				plist.append(k)
 
 # # 		return render(request, 'pcradmin/participantlist.html', {'plist': plist, 'uname' : user_name})
 
 # @staff_member_required
 # def participant_list(request):
-# 	if request.method == 'POST':	
+# 	if request.method == 'POST':
 # 		if 'save' in request.POST:
 # 				try:
 # 					key = request.POST['id']
@@ -1254,7 +1259,7 @@ def stats_event(request):
 # 				name = request.POST['name']
 # 				phone = request.POST['phone']
 # 				sex = request.POST['sex']
-				
+
 # 				check=1
 # 				if coach == True:
 # 					check = 1
@@ -1277,13 +1282,13 @@ def stats_event(request):
 
 # 					p_objlist = Participant.objects.filter(coach = False)
 # 					for k in p_objlist:
-# 						if k.gleader.id == uid.id:		
+# 						if k.gleader.id == uid.id:
 # 							plist.append(k)
 
 # 					clist=[]
 # 					c_objlist = Participant.objects.filter(coach = True)
 # 					for k in c_objlist:
-# 						if k.gleader.id == uid.id:		
+# 						if k.gleader.id == uid.id:
 # 							clist.append(k)
 # 					return render(request,'pcradmin/participantlist.html', {'plist': plist, 'uname' : uname, 'clist' : clist})
 # 					#return redirect('registration:edit')
@@ -1306,13 +1311,13 @@ def stats_event(request):
 
 # 					p_objlist = Participant.objects.filter(coach = False)
 # 					for k in p_objlist:
-# 						if k.gleader.id == uid.id:		
+# 						if k.gleader.id == uid.id:
 # 							plist.append(k)
 
 # 					clist=[]
 # 					c_objlist = Participant.objects.filter(coach = True)
 # 					for k in c_objlist:
-# 						if k.gleader.id == uid.id:		
+# 						if k.gleader.id == uid.id:
 # 							clist.append(k)
 # 					return render(request,'pcradmin/participantlist.html', {'plist': plist, 'uname' : uname, 'clist' : clist})
 
@@ -1323,15 +1328,15 @@ def stats_event(request):
 
 # 		p_objlist = Participant.objects.filter(coach = False)
 # 		for k in p_objlist:
-# 			if k.gleader.id == uid.id:		
+# 			if k.gleader.id == uid.id:
 # 				plist.append(k)
 
 # 		eventobjects = EventNew.objects.all()
-# 		eventlist = [x.name for x in eventobjects]		
+# 		eventlist = [x.name for x in eventobjects]
 # 		clist=[]
 # 		c_objlist = Participant.objects.filter(coach = True)
 # 		for k in c_objlist:
-# 			if k.gleader.id == uid.id:		
+# 			if k.gleader.id == uid.id:
 # 				clist.append(k)
 # 		return render(request, 'pcradmin/participantlist.html', {'plist': plist, 'uname' : user_name, 'eventlist': eventlist, 'clist' : clist})
 # 	else:
@@ -1341,7 +1346,7 @@ def stats_event(request):
 # def search_user(request):
 # 	if request.method == 'POST':
 # 		query = request.POST['query']
-		
+
 # 		uprofile = UserProfile.objects.all()
 # 		result= []
 # 		flag=0
@@ -1408,10 +1413,10 @@ def stats_event(request):
 # 				elif k.gender in gender:
 # 					if event_q in x.name:
 # 						plist.append(k)
-				
+
 
 # 		return render(request, 'pcradmin/participants.html', {'plist' : plist, 'uname' : uname})
-				
+
 
 
 
@@ -1424,19 +1429,19 @@ def stats_event(request):
 # 		test = request.POST['key']
 # 		uname = request.POST['uname']
 
-# 		if test == 'confirm':	
+# 		if test == 'confirm':
 # 			for k in Participant.objects.all():
 # 				for z in request.POST:
-# 					if z != 'key' and z != 'uname' :				
+# 					if z != 'key' and z != 'uname' :
 # 						if str(k.id) == str(z):
 # 							k.confirmation = True
 # 							k.save()
 # 							plist.append(k)
 
-# 		if test == 'unconfirm':	
+# 		if test == 'unconfirm':
 # 			for k in Participant.objects.all():
 # 				for z in request.POST:
-# 					if z != 'key'and z != 'uname':				
+# 					if z != 'key'and z != 'uname':
 # 						if str(k.id) == str(z):
 # 							k.confirmation = False
 # 							k.save()
@@ -1626,7 +1631,7 @@ def stats_event(request):
 # 				participant.save()
 # 				eventobjects= EventNew.objects.all()
 # 				eventlist = [ x.name for x in eventobjects]
-				
+
 # 				return render(request,'pcradmin/participantlist.html', {'uname' : uname, 'eventlist' : eventlist})
 # 				#return redirect('registration:edit')
 # 			else:
@@ -1670,12 +1675,12 @@ def stats_event(request):
 
 
 # def gauss_xlsx(request):
-# 	from django.http import HttpResponse, HttpResponseRedirect  
+# 	from django.http import HttpResponse, HttpResponseRedirect
 # 	import xlsxwriter
 
-# 	try:  
+# 	try:
 # 		import cStringIO as StringIO
-# 	except ImportError:  
+# 	except ImportError:
 # 		import StringIO
 # 	a_list = []
 
@@ -1715,9 +1720,9 @@ def stats_event(request):
 # 		# plist = InitialRegistration.objects.filter(college = clg)
 # 		if  InitialRegistration.objects.filter(college=clg):
 # 			worksheet.write(rowno, 0 , clg)
-			
+
 # 			for event in eventlist:
-# 				fermat = str(event.initialregistration_set.filter(college = clg, gender= 'M').count()) + '|' +  str(event.initialregistration_set.filter(college = clg, gender='F').count() ) #+ '|' + str(event.initialregistration_set.filter(college = clg, pcr_approval= True).count() ) 
+# 				fermat = str(event.initialregistration_set.filter(college = clg, gender= 'M').count()) + '|' +  str(event.initialregistration_set.filter(college = clg, gender='F').count() ) #+ '|' + str(event.initialregistration_set.filter(college = clg, pcr_approval= True).count() )
 # 				worksheet.set_column (rowno, colno, 16)
 # 				worksheet.write(rowno, colno, fermat)
 # 				colno+=1
@@ -1741,7 +1746,7 @@ def stats_event(request):
 # 	workbook.close()
 # 	filename = 'ExcelReport.xlsx'
 # 	output.seek(0)
-# 	response = HttpResponse(output.read(), content_type="application/ms-excel")  
+# 	response = HttpResponse(output.read(), content_type="application/ms-excel")
 # 	response['Content-Disposition'] = 'attachment; filename=%s' % filename
 # 	return response
 
@@ -1790,10 +1795,10 @@ def stats_event(request):
 # 		# 	members = key.initialregistration_set.filter(college_rep=collegerep, pcr_approval=True)
 # 		# elif edited.count() > 0:
 # 		# 	members = key.initialregistration_confirmed_set.filter(college_rep=collegerep, pcr_approval=True)
-		
+
 # 		all_members = key.initialregistration_set.filter(college_rep=collegerep, pcr_approval=True)
 # 		confirmed_members = key.initialregistration_confirmed_set.filter(college_rep=collegerep, pcr_approval=True)
-		
+
 # 		members = []
 # 		# if firsttime:
 # 		# 	for member in all_members:
