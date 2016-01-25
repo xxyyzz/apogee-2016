@@ -15,7 +15,6 @@ urlpatterns = [
 
     url(r'^mail_selected/$', views.mail_selected_amb),
 
-    url(r'^oasis_stats/$', views.oasis_stats_pcr),
 
     # url(r'^username/save/(?P<user_id>\d+)/$', views.username_save),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
@@ -61,7 +60,7 @@ urlpatterns = [
 
     # url(r'^stats/paid_list$', views.paid_list, name='paid'),
     # url(r'^stats/paid_list/paid_act$', views.paid_act, name='paid_act'),
-    url(r'^stats/$', views.stats_ambassadors, name='stats'),
+    url(r'^stats/$', views.stats_event, name='stats'),
     url(r'^ambassadorxlsx/$', utilities.ambassador_stats_xlsx),
 
     # url(r'^stats/$', views.stats_eventwise, name='stats'),

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.shortcuts import render
 from registrations.models import *
+from Event.models import *
 from backend.models import *
 # from events.models import *
 from django.contrib.auth.models import User
@@ -324,10 +325,46 @@ def ambassador_approved_xlsx(request):
 
 
 
-################################################################
+@staff_member_required
+def stats_event(request):
+	events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+	college = College.objects.all()
+	eventwise = []
+	for event in events:
+		entry = {}
+		entry['id'] = event.id
+		entry['name'] = event.name
+		entry['category'] = str(event.category.name) 
+		entry['males'] = str(event.participant_set.filter(gender='M', college=college).count())+' | '+str(event.participant_set.filter(gender='M', pcr_approval=True).count())
+		entry['females'] = str(event.participant_set.filter(gender='F').count())+' | '+str(event.participant_set.filter(gender='F', pcr_approval=True).count())
+		entry['total'] = str(event.participant_set.filter(college=college).count())+' | '+str(event.participant_set.filter(pcr_approval=True).count())
+		for key, value in entry.iteritems():
+			if type(value) is str:
+				if value == '0 | 0 | 0':
+					entry[key] = value.replace('0 | 0 | 0', '---')
+		eventwise.append(entry)
+	total = {}
+	total['males'] = str(Participant.objects.filter(gender='M').count())+' | '+str(Participant.objects.filter(gender='M', pcr_approval=True).count())
+	total['females'] = str(Participant.objects.filter(gender='F').count())+' | '+str(Participant.objects.filter(gender='F', pcr_approval=True).count())
+	total['total'] = str(Participant.objects.all().count())+' | '+str(Participant.objects.filter(pcr_approval=True).count())
 
-def oasis_stats_pcr(request):
-	return HttpResponseRedirect('http://bits-oasis.org/2015/pcradmin/stats/')
+	total_amb = CampusAmbassador.objects.all().count()
+	app_amb = CampusAmbassador.objects.filter(pcr_approved=True).count()
+	amb_stats = str(total_amb)+ " | " +str(app_amb)
+	# context= {
+	# 'amb_stats' : amb_stats,
+	# }
+
+
+	context = {
+		# 'college' : college,
+		'eventwise' : eventwise,
+		'total' : total,
+		'amb_stats' : amb_stats,
+
+	}
+	return render(request, 'pcradmin/apogee_stats.html', context)
+################################################################
 
 
 
@@ -362,7 +399,7 @@ def oasis_stats_pcr(request):
 
 # # @staff_member_required
 # # def username_select(request):
-# # 	users = InitialRegistration.objects.all()
+# # 	users = initialregistration.objects.all()
 # # 	context = {
 # # 		'users' : users
 # # 	}
