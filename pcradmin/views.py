@@ -19,10 +19,10 @@ import difflib
 
 from django.core.mail.backends.smtp import EmailBackend
 cabackend = EmailBackend(
-    host='smtp.gmail.com',
+    host='smtp.mailgun.org',
     port=587,
-    username='campusambassador@bits-apogee.org',
-    password='campusambassador',
+    username='noreply@mg.bits-apogee.org',
+    password='donotreplybc',
     use_tls=True,
     fail_silently=False,
 )
