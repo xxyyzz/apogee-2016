@@ -181,6 +181,8 @@ $("div#login").click(function() {
 	$("#login-reg-box").delay(200).fadeIn(200);
 });
 
+//$("#update_wrapper"),click()
+
 
 // ------------------------OVERLAY-------------------------------------------
 
@@ -1212,7 +1214,7 @@ var map_ele_info = {
 
 	'projects'				:		{
 										ename:'Projects',
-										content:'',
+										content:'<p>The <b>Project presentation competition</b> at BITS Pilani features projects from a variety of scientific research areas. With categories dedicated to both evergreen fields like infrastructure and new frontiers of technology such as simulations or mathematical modeling, we assure you a platform beyond compare. </p>A project is defined as an activity with an aim to formulating a problem and presenting a solution to it using existing/emerging/novel concepts and/or technologies.</p> <p><b>The following are descriptions of the 15 categories under which projects can be presented in Prototype 2016: </b><br><br>Automation, Communication and Network Systems, Design Appliances, Economic Modelling and Finance, Health and Nutrition, Energy, Environment, Infrastructure, Industrial Processes and Applications, Materials Science, Pure Sciences, Software Design (Application Development), Software Design (Adaptive Technology), Signal Processing, Simulation and Mathematical Modelling (Chemical), Simulation and Mathematical Modelling (Non-chemical), Transportation.</p><p><b>For any queries, contact :</b> <br><br>Shreya Tripathi<br>+91 77371 38540<br>Pavan Savanur<br>+91 99822 27826<br>Adit Agarwal<br>+91 99100 93042</p>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/project.svg',
 										func:content_link,
 									},
@@ -1261,7 +1263,7 @@ var map_ele_info = {
 
 	'papers'				:		{
 										ename:'Papers',
-										content:'',
+										content:'<p><b>Paper presentation</b> is a competition where the participants exhibit the results of their scientific investigations or researches. It is a platform for all the ingenious minds out there to showcase their intense knowledge and communicative skills to the audience in an intriguing manner through an oral presentation using means such as slides, graphs etc. The dates of the announcement of the result will be released soon. </p><a class="lb_a" href="http://bits-apogee.org/papers/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Submit the Abstract </b></a><br><br><p>The papers can be of two types:<ul><li><b>Technical papers</b> which describe the experiments performed by you and further scope of research. </li><li><b>Review papers</b> which study a particular topic followed by a detailed hypothesis and a plan of action</li></ul>The various categories of paper presentation include:<ul><li><b>Basic Sciences</b> (Biological Sciences, Physics, Chemistry, Mathematics)</li><li><b>Engineering</b> (Chemical, Civil, Computer Science, Electrical &amp; Electronics, Electronics &amp; Communication, Electronics &amp; Instrumentation, Material Science , Mechanical)</li>	<li><b>Humanities</b> (Philosophy, Psychology)</li> <li><b>Miscellaneous</b> (Economics and Finance, Pharmacy, Management, Environmental Science)</li></ul></p>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/paper.svg',
 										func:content_link,
 									},
@@ -1289,7 +1291,7 @@ var map_ele_info = {
 
 	'howToReach'			:		{
 										ename:'Reach 333031',
-										content:'<div id="google-map"></div> <h3>Travelling by car/taxi from Delhi</h3> <p>There are four routes to get here, distance is 200 or 220 km depending on route taken and time taken is about 4.5 hours. In preferential order the routes are: Delhi-Jhajjar- Charkhi Dadri-Loharu-Pilani,Delhi-Gurgaon-Dharuheda-Rewari-MahendraGarh- Loharu-Pilani, Delhi-Gurgaon-Dharuheda-Rewari-Narnaul-Singhana-Chirawa- Pilani,Delhi-Rohtak-Bhiwani-Loharu-Pilani.</p> <h3>Travelling by bus from Delhi</h3> <p>In case you prefer to travel by public transport, you need to catch a bus at the Inter State Bus Terminal (ISBT), Kashmiri Gate, Delhi. There are frequent buses to Pilani from Delhi from around 4:55 AM to 10:00 PM by Haryana Roadways and Rajasthan Roadways. Contacts: Haryana Roadways (ISBT, Delhi) – 011 23861262 (Loharu) – 01252 258207, Rajasthan Roadways (ISBT, Delhi) – 011 23864470, 011 23864417 (Pilani) – 01596 242263.</p> <h3>Travelling by train from Delhi</h3> <p>There are three trains which run daily from Sarai Rohilla Railway Station (Delhi) to Loharu, which is only 24 km from Pilani. All of them are express trains and take 3 hours to reach Loharu, from where a bus/taxi can be taken for a 40 min journey to Pilani. <img src="'+imgpre+'/static/cover/main/img/howToReach.jpg" style="width: 90%"> </p> <h3>Travelling by car/taxi from Jaipur</h3> <p>There are three routes to get here, distance is 209 or 214 km depending on the route taken and time taken is about 4 hours. In preferential order, the routes are: Jaipur-Reengus-Khandela-Jhunjhunu-Pilani,Jaipur-Reengus-Sikar-Nawalgarh-Jhunjhunu-Pilani,Jaipur-Reengus-Chala-Khetri-Chirawa-Pilani.</p> <h3>Travelling by bus from Jaipur</h3> <p>In case you prefer to travel by public transport, you need to catch a bus from the State Bus Terminal (Sindhi Camp), Jaipur. There are frequent buses to Pilani starting from Jaipur from around 4:00 AM till mid-night. Contacts: Rajasthan Roadways (Sindhi Camp, Jaipur) – 0141 2207914, (Pilani) – 01596 242263. Private buses also ply on this route: Vijay Travels – 01596 220321.</p> <h3>Travelling by train from Jaipur</h3> <p>Jaipur – Loharu section is undergoing gauge conversion and no direct trains are currently available from Jaipur to Loharu or Chirawa.</p> <script type="text/javascript">function initMap() {var myLatLng = {lat: 28.364, lng: 75.587};var map = new google.maps.Map(document.getElementById("google-map"), {center: myLatLng,scrollwheel: true,zoom: 15});var image ="'+imgpre+'/static/cover/main/img/marker.png";marker = new google.maps.Marker({ position: new google.maps.LatLng(28.364, 75.5871271),map: map ,icon: image });}setTimeout(function() {initMap()	}, 1000);</script>', 
+										content:'<div id="google-map"></div> <h3>Travelling by car/taxi from Delhi</h3> <p>There are four routes to get here, distance is 200 or 220 km depending on route taken and time taken is about 4.5 hours. In preferential order the routes are: Delhi-Jhajjar- Charkhi Dadri-Loharu-Pilani,Delhi-Gurgaon-Dharuheda-Rewari-MahendraGarh- Loharu-Pilani, Delhi-Gurgaon-Dharuheda-Rewari-Narnaul-Singhana-Chirawa- Pilani,Delhi-Rohtak-Bhiwani-Loharu-Pilani.</p> <h3>Travelling by bus from Delhi</h3> <p>In case you prefer to travel by public transport, you need to catch a bus at the Inter State Bus Terminal (ISBT), Kashmiri Gate, Delhi. There are frequent buses to Pilani from Delhi from around 4:55 AM to 10:00 PM by Haryana Roadways and Rajasthan Roadways. Contacts: Haryana Roadways (ISBT, Delhi) – 011 23861262 (Loharu) – 01252 258207, Rajasthan Roadways (ISBT, Delhi) – 011 23864470, 011 23864417 (Pilani) – 01596 242263.</p> <h3>Travelling by train from Delhi</h3> <p>There are three trains which run daily from Sarai Rohilla Railway Station (Delhi) to Loharu, which is only 24 km from Pilani. All of them are express trains and take 3 hours to reach Loharu, from where a bus/taxi can be taken for a 40 min journey to Pilani. <br><img src="'+imgpre+'/static/cover/main/img/howToReach.jpg" style="width: 80%;margin:10px 10%"> </p> <h3>Travelling by car/taxi from Jaipur</h3> <p>There are three routes to get here, distance is 209 or 214 km depending on the route taken and time taken is about 4 hours. In preferential order, the routes are: Jaipur-Reengus-Khandela-Jhunjhunu-Pilani,Jaipur-Reengus-Sikar-Nawalgarh-Jhunjhunu-Pilani,Jaipur-Reengus-Chala-Khetri-Chirawa-Pilani.</p> <h3>Travelling by bus from Jaipur</h3> <p>In case you prefer to travel by public transport, you need to catch a bus from the State Bus Terminal (Sindhi Camp), Jaipur. There are frequent buses to Pilani starting from Jaipur from around 4:00 AM till mid-night. Contacts: Rajasthan Roadways (Sindhi Camp, Jaipur) – 0141 2207914, (Pilani) – 01596 242263. Private buses also ply on this route: Vijay Travels – 01596 220321.</p> <h3>Travelling by train from Jaipur</h3> <p>Jaipur – Loharu section is undergoing gauge conversion and no direct trains are currently available from Jaipur to Loharu or Chirawa.</p> <script type="text/javascript">function initMap() {var myLatLng = {lat: 28.364, lng: 75.587};var map = new google.maps.Map(document.getElementById("google-map"), {center: myLatLng,scrollwheel: true,zoom: 15});var image ="'+imgpre+'/static/cover/main/img/marker.png";marker = new google.maps.Marker({ position: new google.maps.LatLng(28.364, 75.5871271),map: map ,icon: image });}setTimeout(function() {initMap()	}, 1000);</script>', 
 										icon: imgpre+'/static/cover/main/img/lb-icons/map.svg',
 										func:content_link,
 									},
@@ -1338,22 +1340,22 @@ $('.htile').click(function(){
 // profile
 
 var profile_info;
-function get_pro_info(){
+function openProfile(){
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
 		method: "GET",
 		success: function(data){
 			profile_info =data;
-			console.log(data);
+			//console.log(data);
 			$('.pd_name').text(data.name);
 			$('.pd_email').text(data.email);
 			$('.pd_college').text(data.college);
 			$('.pd_phone').text(data.phone);
 			$('input[name="bank_name"]').val(data.bank_name);
-			$('input[name="bank_acc_no"]').val(data.bank_account_no);
+			$('input[name="bank_account_no"]').val(data.bank_account_no);
 			$('input[name="bank_ifsc"]').val(data.bank_ifsc);
 			$('textarea[name="address"]').val(data.address);
-			$('.update_bank').prop('disabled','false');
+			$('.update_bank').prop('disabled',false);
 			$('.update_bank').text('Update');
 			if(!data.pcr_approval){
 				$('.approved').addClass('unapproved');
@@ -1388,51 +1390,57 @@ function get_pro_info(){
 			else{
 				$('#pro_event').html(eve);
 			}
+			if($('.lb_pro_cont').css('display')=="none"){
+				$('#overlay').fadeIn();
+				$('.lb_pro_cont').fadeIn();
+			}
 		}
 	});
 }
+
 function unreg_eve(id){
-	$('.unreg_eve').prop('disabled','true');
+	$('.unreg_eve').prop('disabled',true);
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
 		method: "POST",
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
-			get_pro_info();
+			openProfile();
 			eve_reg_info();
 		}
 	});
 }
+
 function leave_team(id){
-	$('.leave_team').prop('disabled','true');
+	$('.leave_team').prop('disabled',true);
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
 		method: "POST",
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
-			get_pro_info();
+			openProfile();
 			eve_reg_info();
 		}
 	});
 }
 function delete_team(id){
-	$('.delete_team').prop('disabled','true');
+	$('.delete_team').prop('disabled',true);
 	$.ajax({
 		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
 		method: "POST",
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		success: function(data){
-			get_pro_info();
+			openProfile();
 			eve_reg_info();
 		}
 	});
 }
 $('#pro_detail_form').submit(function(e){
 	e.preventDefault();
-	$('.update_bank').prop('disabled','true');
+	$('.update_bank').prop('disabled',true);
 	$('.update_bank').text('Updating..');
 	var formData = $(this).serializeArray();
 	$.ajax({
@@ -1443,7 +1451,7 @@ $('#pro_detail_form').submit(function(e){
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(data){
-			get_pro_info();
+			openProfile();
 		},
 	});
 });
@@ -1461,6 +1469,7 @@ $('#pro_event').on('click','.delete_team',function(){
 });
 $('.close_lb_profile').click(function(){
 	$('.lb_pro_cont').fadeOut();
+	$('#overlay').fadeOut();
 });
 $('.pro_tab_name').click(function(){
 	$('.pro_tab').css('display','none');

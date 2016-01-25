@@ -168,6 +168,26 @@ nav{
 	color: #333;
 }
 
+#updates-wrapper{
+	background: #fafafa;
+	top: 20px;
+	left: 170px;
+	padding: 10px 20px;
+	position: absolute;
+	z-index: 199;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 2px;
+	font-size: 19px;
+	font-weight: 300;
+	line-height: 20px;
+	color: #555;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
+}
+#updates-wrapper:hover{
+	color: #333;
+}
+
 .burgeranim{  
 	-webkit-animation: navanim 0.27s 1 linear;
 	-webkit-animation-delay: 0.03s;
@@ -182,6 +202,27 @@ nav{
 }
 @-webkit-keyframes navanim2{0%{left: 300px;}
 100%{left: 25px;}}
+
+@media screen and (max-width: 480px) {
+	.bt-text {
+		display: none;
+	}
+}
+
+@media screen and (max-height: 600px) {
+	.zoom-panel {
+		display: none;
+	}
+
+	.zoom-nav {
+		display: none;
+	}
+
+	.zoompanreset-icon {
+		display: none;
+	}
+}
+
 #login{
 	right: 20px;
 	position: absolute;
@@ -1817,8 +1858,7 @@ a.arch-lnk {
     line-height: 24px;
     position: relative;
 	padding: 15px 150px 15px 15px;
-    background-color: #333;
-    color: #fff;
+    border: 1px solid #333;
 }
 .unreg_eve{
 	display: inline-block;
@@ -1843,12 +1883,11 @@ a.arch-lnk {
 	position: relative;
 	padding: 0 15px;
 	line-height: 50px;
-    background-color: #333;
-    color: #fff;
+    border: 1px solid #333;
 }
 .team_eve_descr{
 	position: relative;
-	background-color: #ddd;
+	border: 1px solid #333;
 	padding: 15px;
 }
 .ted_options{
