@@ -214,9 +214,9 @@ def apirequest_fee(request):
 	# part.save()
 
 	#name= payments['buyer_name'  ]
-	#kunal='kunal sharma'
+	kunal='kunal sharma'
 	response={
-	'name':name,
+	# 'name':name,
 	'kunal':kunal,
 	# 'paymentid' :paymentid,
 	# 'linktitle' : linktitle,
