@@ -1,6 +1,6 @@
 /*---------------------Z-index----------------------------------*/
 /*
-	
+
 	loader								1000
 	gen_lightbox						900
 	profile	lightbox					800
@@ -55,7 +55,7 @@ html,body{
 	position: absolute;
 	margin: 0 auto;
 	left:0;
-	right: 0; 
+	right: 0;
 }
 /*--------------------------LOADER---------------------------*/
 svg#loadersvg {
@@ -108,13 +108,13 @@ nav{
 	color: #555;
 	border-bottom: 1px solid #fafafa;
 	border-top: 1px solid #fafafa;
-} 
+}
 .htile:hover{
 	color: #222;
 	background-color: #eee;
 	border-bottom: 1px solid #eaeaea;
 	border-top: 1px solid #eee;
-} 
+}
 .aplogo {
 	position: relative;
 	float: left;
@@ -188,7 +188,7 @@ nav{
 	color: #333;
 }
 
-.burgeranim{  
+.burgeranim{
 	-webkit-animation: navanim 0.27s 1 linear;
 	-webkit-animation-delay: 0.03s;
 	-webkit-animation-fill-mode: forwards;
@@ -196,7 +196,7 @@ nav{
 @-webkit-keyframes navanim{0%{left: 25px;background: #4099ff;color: #404040;}
 100%{left: 300px;background: #4099ff;color: #404040;}}
 
-.burgeranim2{ 
+.burgeranim2{
 	-webkit-animation: navanim2 0.27s 1 linear;
 	-webkit-animation-fill-mode: forwards;
 }
@@ -239,12 +239,12 @@ nav{
 	color: #555;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
 	/*display: none;*/
-}  
+}
 #login:hover{
 	color: #333;
-}  
+}
 #user-sign-cont
-{	
+{
 	position: absolute;
 	top: 20px;
 	right: 20px;
@@ -305,13 +305,13 @@ nav{
 }
 
 .sideicons{
-	font-size:22px; 
+	font-size:22px;
 	line-height:50px;
 	padding-left: 5px;
 }
 /*Common Lightbox*/
 .gen_lb_cont{
-	overflow-y: auto; 
+	overflow-y: auto;
 	z-index: 900;
 }
 .close_gen_lb{
@@ -340,7 +340,7 @@ nav{
     z-index: 1000;
 	border-radius: 2px;
 	color: #444;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
 	display: none;
 }
 
@@ -469,7 +469,7 @@ nav{
 	/*bottom: 20px;*/
 	/*padding-top: 130px;*/
 	transform: rotate(-90deg);
-	height: 50px;	
+	height: 50px;
 	padding-top: 14px;
 	/*width: 180px;*/
 }
@@ -521,7 +521,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 	width: 70px;
 	background-color: #fafafa;
 	border-radius: 50%;
-	margin:0px 5px; 
+	margin:0px 5px;
 	box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
 
 	-webkit-user-select: none;
@@ -574,7 +574,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 #building_info>div
 {
 	display: inline-block;
-	position: absolute;	
+	position: absolute;
 	left:35px;
 	top:-61px;
 	height: 34px;
@@ -587,7 +587,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 	white-space: nowrap;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px; 
+	border-bottom-right-radius: 3px;
 }
 #building_info>img{
 	position:absolute;
@@ -650,12 +650,12 @@ input[type="range"]::-webkit-slider-thumb:active {
     height:90%;
     width:80%;
     background:white;
-    color:black;  
+    color:black;
     background: #fafafa;
 	z-index: 500;
 	border-radius: 2px;
 	color: #333;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
     display: none;
     overflow-y:auto;
 }
@@ -729,7 +729,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 {
 	border: 1px solid #d03232;
     background-color: #f4e1e1;
-    display: none; 
+    display: none;
     padding: 10px;
     font-size: 12px;
     margin-bottom: 1em;
@@ -803,7 +803,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 /*for developers page*/
 .devinfo
 {
-	
+
 	width: 270px;
 	margin: 15px;
 	position: relative;
@@ -829,6 +829,11 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 }
 .devinfo img{
 	width:80%;
+}
+.dev-icons{
+	margin: 7px;
+    color: #444444;
+    font-size: 22px;
 }
 /*for developers page END*/
 #events{
@@ -901,7 +906,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	background: url("../img/icon/bgs.svg");
 	/*background-repeat: repeat-x;*/
     background-size: 7672px 540px;
-    background-position: 0 0; 
+    background-position: 0 0;
     border-radius: 20px;
     -webkit-transition: background-position 500ms ease;
     transition: background-position 500ms ease;
@@ -996,7 +1001,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	display:inline-block;
 	width: 150px;
 	color: white;
-	border: 1px solid #fff;	
+	border: 1px solid #fff;
 	line-height: 35px;
 	padding: 0 10px;
 	cursor: pointer;
@@ -1217,12 +1222,12 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
    color: rgba(255,255,255,0.6);
 }
 :-moz-placeholder { /* Firefox 18- */
-   color: rgba(255,255,255,0.6); 
+   color: rgba(255,255,255,0.6);
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-   color:rgba(255,255,255,0.6); 
+   color:rgba(255,255,255,0.6);
 }
-:-ms-input-placeholder {  
+:-ms-input-placeholder {
    color:rgba(255,255,255,0.6);
 }
 #searchField
@@ -1238,7 +1243,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	color:#555;
 }
 #iconBack
-{	
+{
 	height: 35px;
     float: right;
     position: absolute;
@@ -1368,7 +1373,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 
 .contactinfo
 {
-	
+
 	width: 282px;
 	margin: 0px 49px 80px 49px;
 	position: relative;
@@ -1382,7 +1387,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 	.contactinfo
 	{
 		margin: 19px;
-	}	
+	}
 }
 
 .contactinfo>div:nth-child(1)
@@ -1457,7 +1462,7 @@ form button[type="submit"]:hover,form button[type="submit"]:focus,form button[ty
 /*-----------------------------CONTACTS END----------------------------------*/
 
 /*------------------- ARCHIVES ------------------------*/
-.archive_data{text-align: center; } 
+.archive_data{text-align: center; }
 .archive-holder {
 	width: 360px;
     padding: 25px;
@@ -1586,7 +1591,7 @@ a.arch-lnk {
 /*Sponsors*/
 .spons_cont{
 	width:300px;
-	padding:10px; 
+	padding:10px;
 	cursor: pointer;
 	margin: 20px 30px;
 	position: relative;
@@ -1602,8 +1607,8 @@ a.arch-lnk {
 	width: 100%;
 }
 .spons_title{
-	border-top-left-radius:5px; 
-	border-top-right-radius:5px; 
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
 	background: #444;
 	color: #f0f0f0;
 	font-size: 20px;
@@ -1611,7 +1616,7 @@ a.arch-lnk {
 }
 .spons_img{
 	width: 100%;
-	padding:2px; 
+	padding:2px;
 	border:1px solid #888;
 }
 
@@ -1619,7 +1624,7 @@ a.arch-lnk {
 .workshop-title{
 	border-bottom:1px solid #444;
 	font-weight: bold;
-	color:#444; 
+	color:#444;
 	text-align: left;
 	font-size:1.4em;
 	margin:0 20px;
@@ -1637,11 +1642,11 @@ a.arch-lnk {
 	min-height: 250px;
 	height: auto;
 	color: #444;
-	background-color: #444;	
+	background-color: #444;
 	border: 1px solid #444;
 	margin: 20px;
 	text-align: left;
-}	
+}
 .workshop-img{
 	display: inline-block;
 	background-color: #fff;
