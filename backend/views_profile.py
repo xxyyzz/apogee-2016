@@ -176,25 +176,24 @@ def update_profile(request):
 	}
 	return JsonResponse(response)
 
-@login_required
+@staff_check
+@require_POST
 def instamojo_payment(request):
-	if request.method == 'POST':
-		user = request.user
-		part_ob = Participant.objects.get(user=user)
-		pid = part_ob.id
-		salt='3688fa4859dd4812882c001d951fcae6'
-		message = str(pid)
-		mac_calculated = hmac.new(
-	     	str(salt),
-        	message,
-        	hashlib.sha1,
-        	).hexdigest()
-		#b = 'https://www.instamojo.com/bitsoasis/registration-ticket/'+'?intent=buy&data_Field_88249='+names+'&data_amount='+str(a*250)+'&data_readonly=data_amount&data_readonly=data_Field_88249&data_sign='+mac_calculated
-		instalink = 'https://www.instamojo.com/bitsapogee/apogee-registration-fee/'+'?data_Field_94287='+message+'&data_readonly=data_Field_94287&data_sign='+mac_calculated
-		return HttpResponseRedirect(instalink)
+	part_ob = request.user.participant
+	pid = part_ob.id
+	salt='3688fa4859dd4812882c001d951fcae6'
+	message = str(pid)
+	mac_calculated = hmac.new(
+     	str(salt),
+    	message,
+    	hashlib.sha1,
+    	).hexdigest()
+	#b = 'https://www.instamojo.com/bitsoasis/registration-ticket/'+'?intent=buy&data_Field_88249='+names+'&data_amount='+str(a*250)+'&data_readonly=data_amount&data_readonly=data_Field_88249&data_sign='+mac_calculated
+	instalink = 'https://www.instamojo.com/bitsapogee/apogee-registration-fee/'+'?data_Field_94287='+message+'&data_readonly=data_Field_94287&data_sign='+mac_calculated
+	return HttpResponseRedirect(instalink)
 
 
-
+@staff_check
 def apirequest_fee(request):
 	import requests
 	payid=str(request.GET['payment_id'] )
