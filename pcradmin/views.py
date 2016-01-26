@@ -415,7 +415,7 @@ def ambassador_approved_xlsx(request):
 
 
 @staff_member_required
-def stats_event(request):
+def eventwise_stats(request):
 	events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
 	college = College.objects.all()
 	eventwise = []
@@ -452,10 +452,36 @@ def stats_event(request):
 		'amb_stats' : amb_stats,
 
 	}
-	return render(request, 'pcradmin/apogee_stats.html', context)
+	return render(request, 'pcradmin/eventwise_stats.html', context)
+
 ################################################################
 
+@staff_member_required
+def total_stats(request):
+	total_part = Participant.objects.all().count()
+	app_part = Participant.objects.filter(pcr_approval=True).count()
+	part_stats = str(total_part)+ " | " +str(app_part)
+	total_amb = CampusAmbassador.objects.all().count()
+	app_amb = CampusAmbassador.objects.filter(pcr_approved=True).count()
+	amb_stats = str(total_amb)+ " | " +str(app_amb)
+	# context= {
+	# 'amb_stats' : amb_stats,
+	# }
 
+
+	context = {
+		# 'college' : college,
+		# 'eventwise' : eventwise,
+		# 'total' : total,
+		'amb_stats' : amb_stats,
+		'part_stats' : part_stats,
+
+	}
+	return render(request, 'pcradmin/total_stats.html', context)
+
+
+
+################################################################
 
 
 

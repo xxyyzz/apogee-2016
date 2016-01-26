@@ -63,7 +63,8 @@ urlpatterns = [
 
     # url(r'^stats/paid_list$', views.paid_list, name='paid'),
     # url(r'^stats/paid_list/paid_act$', views.paid_act, name='paid_act'),
-    url(r'^stats/$', views.stats_event, name='stats'),
+    url(r'^stats/$', views.eventwise_stats, name='stats'),
+    url(r'^total_stats/$', views.total_stats, name='stats'),
     url(r'^ambassadorxlsx/$', utilities.ambassador_stats_xlsx),
 
     # url(r'^stats/$', views.stats_eventwise, name='stats'),
