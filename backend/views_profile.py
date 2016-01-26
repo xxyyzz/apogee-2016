@@ -175,3 +175,50 @@ def update_profile(request):
 		'status' : 1,
 	}
 	return JsonResponse(response)
+
+@login_required
+def instamojo_payment(request):
+	if request.method == 'POST':
+		user = request.user
+		part_ob = Participant.objects.get(user=user)
+		pid = part_ob.id
+		salt='3688fa4859dd4812882c001d951fcae6'
+		message = str(pid)
+		mac_calculated = hmac.new(
+	     	str(salt),
+        	message,
+        	hashlib.sha1,
+        	).hexdigest()
+		#b = 'https://www.instamojo.com/bitsoasis/registration-ticket/'+'?intent=buy&data_Field_88249='+names+'&data_amount='+str(a*250)+'&data_readonly=data_amount&data_readonly=data_Field_88249&data_sign='+mac_calculated
+		instalink = 'https://www.instamojo.com/bitsapogee/apogee-registration-fee/'+'?data_Field_94287='+message+'&data_readonly=data_Field_94287&data_sign='+mac_calculated
+		return HttpResponseRedirect(instalink)
+
+
+
+def apirequest_fee(request):
+	import requests
+	payid=str(request.GET['payment_id'] )
+	headers = {'X-Api-Key': '58430d59e907bd9061be3f38597757d6',
+    	       'X-Auth-Token': '1fed57f6ea0de2abac9b85508fcdc4c1'}
+	r = requests.get('https://www.instamojo.com/api/1.1/payments/',
+                	 headers=headers)
+	json_ob = r.json()
+	# dec_json = json.loads(json_ob)
+	payments = json_ob['payments'][0]
+	custom_fields_ = payments['custom_fields']
+	linktitle = payments['link_title']
+	field2 = custom_fields_['Field_94287']
+	pid = field2['value']
+	part = Participant.objects.get(id = int(pid))
+	part.fee_paid=True
+	part.save()
+
+	#name= payments['buyer_name'  ]
+	#kunal='kunal sharma'
+	response={
+	#'name':name,
+	#'kunal':kunal,
+	'linktitle' : linktitle,
+	'status':1,
+	}
+	return JsonResponse(response)

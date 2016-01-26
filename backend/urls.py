@@ -18,4 +18,6 @@ urlpatterns = [
     url(r'^profile/update/$', views_profile.update_profile),
     url(r'^profile/$', views_profile.summary),
     url(r'^participant/(?P<participantid>[0-9]+)/$', views.participant_summary),
+    url(r'^pay/$', views_profile.ininstamojo_payment),
+    url(r'^thank_you/$', views_profile.apirequest_fee),
 ]
