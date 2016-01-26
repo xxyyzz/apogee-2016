@@ -195,31 +195,31 @@ def instamojo_payment(request):
 
 @staff_check
 def apirequest_fee(request):
-	# import requests
-	# #payid=str(request.GET['payment_id'] )
-	# headers = {'X-Api-Key': '58430d59e907bd9061be3f38597757d6',
- #    	       'X-Auth-Token': '1fed57f6ea0de2abac9b85508fcdc4c1'}
-	# r = requests.get('https://www.instamojo.com/api/1.1/payments/',
- #                	 headers=headers)
-	# json_ob = r.json()
-	# # dec_json = json.loads(json_ob)
-	# payments = json_ob['payments'][0]
-	# custom_fields_ = payments['custom_fields']
-	# linktitle = payments['link_title']
-	# paymentid = payments['payment_id']
-	# field2 = custom_fields_['Field_94287']
-	# pid = field2['value']
-	# part = Participant.objects.get(id = int(pid))
-	# part.fee_paid=True
-	# part.save()
+	import requests
+	#payid=str(request.GET['payment_id'] )
+	headers = {'X-Api-Key': '58430d59e907bd9061be3f38597757d6',
+    	       'X-Auth-Token': '1fed57f6ea0de2abac9b85508fcdc4c1'}
+	r = requests.get('https://www.instamojo.com/api/1.1/payments/',
+                	 headers=headers)
+	json_ob = r.json()
+	# dec_json = json.loads(json_ob)
+	payments = json_ob['payments'][0]
+	custom_fields_ = payments['custom_fields']
+	linktitle = payments['link_title']
+	paymentid = payments['payment_id']
+	field2 = custom_fields_['Field_94287']
+	pid = field2['value']
+	part = Participant.objects.get(id = int(pid))
+	part.fee_paid=True
+	part.save()
 
 	#name= payments['buyer_name'  ]
-	kunal='kunal sharma'
+	#kunal='kunal sharma'
 	response={
-	# 'name':name,
-	'kunal':kunal,
-	# 'paymentid' :paymentid,
-	# 'linktitle' : linktitle,
-	# 'status':1,
+	#'name':name,
+	#'kunal':kunal,
+	'paymentid' :paymentid,
+	'linktitle' : linktitle,
+	'status':1,
 	}
 	return JsonResponse(response)
