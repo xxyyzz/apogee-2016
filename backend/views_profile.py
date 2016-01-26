@@ -196,7 +196,7 @@ def instamojo_payment(request):
 @staff_check
 def apirequest_fee(request):
 	import requests
-	payid=str(request.GET['payment_id'] )
+	#payid=str(request.GET['payment_id'] )
 	headers = {'X-Api-Key': '58430d59e907bd9061be3f38597757d6',
     	       'X-Auth-Token': '1fed57f6ea0de2abac9b85508fcdc4c1'}
 	r = requests.get('https://www.instamojo.com/api/1.1/payments/',
