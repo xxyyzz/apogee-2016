@@ -4,6 +4,7 @@ from backend.models import *
 from Event.models import *
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 import hmac
 import hashlib
 
