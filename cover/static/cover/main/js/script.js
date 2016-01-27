@@ -337,7 +337,7 @@ $('#login-form').submit(function(e){
 			{
 				$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
 				$('div#login').css({'display':'none'});
-				fireOverlay();
+				$(".light-box").fadeOut(200);
 				$('#login_instrs').fadeIn();
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
