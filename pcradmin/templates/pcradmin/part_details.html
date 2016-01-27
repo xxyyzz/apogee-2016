@@ -1,0 +1,72 @@
+{% extends "pcradmin/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+
+        <div class="twelve columns textcenter">
+        <a href="{% url 'pcradmin:dashboard' %}" class="button button-primary">Dashboard</a>
+
+            <h1><strong>Participant Details </strong></h1>
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+<!--                         <th><h5>Action</h5></th>
+                        <th><h5>Click! </h5></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td> {{part.name}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td>{{part.email_id}} </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Phone</strong></td>
+                        <td> {{part.phone_one}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>College</strong></td>
+                        <td>{{part.college.name}} </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gender</strong></td>
+                        <td>{{part.gender}} </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address</strong></td>
+                        <td> {{part.address}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Events</strong></td>
+                        <td> {% for k in part.events.all %}{{k.name}},{% endfor %}</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Team Names</strong></td>
+                        <td>{% for k in part.teams.all %}k.name,{% endfor %} </td>
+                    </tr>                                                                                                            
+                    <tr>
+                        <td><strong>Online Paid</strong></td>
+                        <td> {% if part.fee_paid %}Yes {% else %}No {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bank name | ifsc code</strong></td>
+                        <td> {{part.bank_name}} | {{part.bank_ifsc}}</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Bank Account N.</strong></td>
+                        <td>{{part.bank_account_no}} </td>
+                    </tr>                                 
+
+                </tbody>
+            </table>
+            <br><a class="button" href="../logout/">Logout</a>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock body %}

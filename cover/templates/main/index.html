@@ -39,6 +39,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'cover/main/css/style.css' %}">
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+	<script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
 	
 	<script type="text/javascript" src="{% static 'cover/main/js/jquery.min.js' %}" ></script>
 	<script type="text/javascript" src="{% static 'cover/main/js/svg-pan-zoom.min.js' %}"></script>
@@ -83,11 +84,11 @@
 				<div class="lb_icon">
 					<img src="">
 				</div>
-				<span class="main_head">Youth Conference 2016</span>
+				<span class="main_head"><!-- light-box heading --></span>
 			</div>
 		</div>
 		<div class="lb_descr">
-			<p><b>Leading Endeavour to Achieve Progress (LEAP) </b>is an initiative for all the student run social volunteer organisations across the country. It is an effort of people who feel that the pace of development has become stagnant with the passage of time. In spite of having all the sources and means, most of the organizations stand at the same place where they were ten years ago. LEAP is not just an initiative to improve the efficiency of organizations but also a way through which creative and good ideas can be shared and used for the betterment of the society.</p><p>Numerous student led societies have enough volunteer strength, funds and team dedication, but they fail to create a significant impact. It is thus the need of the hour to have a society joining hands and working together to convert all the whispers into roars. A common platform for like minded volunteer society, connecting them through the will to bring about a change, is what we are working for. It aims to create a larger impact on the society, that are ultimate beneficiaries of actions, they perform.</p><br><a class="lb_a" href="http://bits-apogee.org/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>
+
 		</div>
 	</div>
 
@@ -107,7 +108,6 @@
 
 
 	</div>
-
 
 
 <!-- Profile -->
@@ -135,11 +135,13 @@
 					<div class="const_det pd_college"></div>
 					<div class="det_label">Phone:</div>
 					<div class="const_det pd_phone"></div>
-					<div class="const_det approved">Approved</div>
+					<div class="const_det approved">Account Approved</div><br>
+					<div class="const_det pay_rec">Payment Received</div>
 				</div>
 				<div class="other_det_cont">
 					<form id="pro_detail_form">
 						<div class="const_det" style="border-bottom:1px solid #333">Bank Details:</div>
+						<span>Your<span>
 						<label for="bank_name">Bank Name</label>
 						<input type="text" placeholder="eg. ICICI Bank" name="bank_name" required/>
 						<label for="bank_account_no">Account Number</label>
@@ -177,7 +179,12 @@
 				</div> -->
 			</div>
 			<div class="pro_tab" id="pro_payment">
-				<div style="Width:100%;font-size:3em;margin-top:10%;text-align:center">Coming soon...</div>
+				<div style="Width:100%;font-size:1em;margin-top:5%;text-align:center">
+				<div style="font-size:1.5em;padding:30px 10px;">To REGISTER for APOGEE'16. Click the button below to make payment with our 256-bit encrypted secure gateway.</div>
+				<div style="display:inline-block;">
+				<a href="./api/pay/" rel="im-checkout" data-behaviour="link" data-style="flat" data-text="PAY With Instamojo" data-token="c4735e17ef61ada6a51e5d3596627276"></a>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -197,8 +204,14 @@
 
 
 	<div id="burgernav">
-		<i class="fa fa-bars" style="font-size: 25px; vertical-align:text-top"></i>&nbsp;&nbsp;&nbsp;MENU
+		<i class="fa fa-bars" style="font-size: 25px; vertical-align:text-top"></i><span class="bt-text">&nbsp;&nbsp;&nbsp;MENU</span>
 	</div>
+
+	<div id="updates-wrapper">
+		<i class="fa fa-bell" style="font-size: 25px; vertical-align:text-top"></i><span class="bt-text">&nbsp;&nbsp;&nbsp;UPDATES</span>
+	</div>
+
+
 	<nav>
 		<div class="aplogo"><i class="fa fa-close closeside"></i>
 			<img src="{% static 'cover/main/img/apogee_logo.svg' %}" class="sidelogo abs_center"/>
@@ -270,7 +283,7 @@
 		
 		<div id="login">
 			<i class="fa fa-user" style="font-size:25px; vertical-align: text-top"></i>
-			<span class="login_reg">&nbsp;&nbsp;LOGIN<span style="color : #000; margin: 0px 10px">|</span>REGISTER</span>
+			<span class="login_reg bt-text">&nbsp;&nbsp;LOGIN<span style="color : #000; margin: 0px 10px">|</span>REGISTER</span>
 		</div>
 		<div id="user-sign-cont">
 			<div onclick="openProfile()">
