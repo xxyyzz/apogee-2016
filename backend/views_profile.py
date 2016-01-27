@@ -3,6 +3,8 @@ from django.views.decorators.http import require_POST
 from backend.models import *
 from Event.models import *
 from django.http import JsonResponse
+import hmac
+import hashlib
 
 @staff_check
 def summary(request):
@@ -183,13 +185,13 @@ def instamojo_payment(request):
 		pid = part_ob.id
 		salt='3688fa4859dd4812882c001d951fcae6'
 		message = str(pid)
-	# 	mac_calculated = hmac.new(
- #     		str(salt),
- #    		message,
- #    		hashlib.sha1,
- #    		).hexdigest()
-	# #b = 'https://www.instamojo.com/bitsoasis/registration-ticket/'+'?intent=buy&data_Field_88249='+names+'&data_amount='+str(a*250)+'&data_readonly=data_amount&data_readonly=data_Field_88249&data_sign='+mac_calculated
-	# 	instalink = 'https://www.instamojo.com/bitsapogee/apogee-registration-fee/'+'?data_Field_94287='+message+'&data_readonly=data_Field_94287&data_sign='+mac_calculated
+		mac_calculated = hmac.new(
+     		str(salt),
+    		message,
+    		hashlib.sha1,
+    		).hexdigest()
+	#b = 'https://www.instamojo.com/bitsoasis/registration-ticket/'+'?intent=buy&data_Field_88249='+names+'&data_amount='+str(a*250)+'&data_readonly=data_amount&data_readonly=data_Field_88249&data_sign='+mac_calculated
+		instalink = 'https://www.instamojo.com/bitsapogee/apogee-registration-fee/'+'?data_Field_94287='+message+'&data_readonly=data_Field_94287&data_sign='+mac_calculated
 		json_ob = {
 		'test':pid,
 		}
