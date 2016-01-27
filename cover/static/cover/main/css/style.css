@@ -672,7 +672,7 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-form input[type="text"], form input[type="password"], form input[type="email"], form input[type="number"]{
+form input[type="text"], form input[type="password"],form textarea, form input[type="email"], form input[type="number"]{
     background-color: #fafafa;
     font-family: inherit;
     border: 1px solid #cccccc;
@@ -694,7 +694,7 @@ form input[type="text"], form input[type="password"], form input[type="email"], 
     -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
-form input[type="text"]:focus, form input[type="password"]:focus, form input[type="email"]:focus, form input[type="number"]:focus{
+form input[type="text"]:focus,form textarea:focus, form input[type="password"]:focus, form input[type="email"]:focus, form input[type="number"]:focus{
     -webkit-box-shadow: 0 0 5px #999999;
     -moz-box-shadow: 0 0 5px #999999;
     box-shadow: 0 0 5px #999999;
