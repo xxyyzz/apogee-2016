@@ -337,7 +337,8 @@ $('#login-form').submit(function(e){
 			{
 				$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
 				$('div#login').css({'display':'none'});
-				killOverlay();
+				fireOverlay();
+				$('#login_instrs').fadeIn();
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
 				user ={
@@ -1338,7 +1339,10 @@ $('.htile').click(function(){
 
 
 // profile
-
+$('#login_instrs').click(function(){
+	$(this).fadeOut();
+	killOverlay();
+});
 var profile_info;
 function openProfile(){
 	$.ajax({
