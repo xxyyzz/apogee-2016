@@ -1795,7 +1795,7 @@ a.arch-lnk {
 	font-size: 0.9em;
 	font-weight:400;
 }
-.approved,.unapproved{
+.pay_rec,.pay_nrec,.approved,.unapproved{
 	border: 1px solid black;
     color: black;
     padding: 5px 10px;
@@ -1803,11 +1803,11 @@ a.arch-lnk {
     border-radius: 2px;
     display: inline-block;
 }
-.approved{
+.approved,.pay_rec{
 	border-color: green;
 	color: green;
 }
-.unapproved{
+.unapproved,.pay_nrec{
 	border-color: red;
 	color: red;
 }

@@ -1361,6 +1361,10 @@ function openProfile(){
 				$('.approved').addClass('unapproved');
 				$('.unapproved').text('Unapproved');
 			}
+			if(!data.fee_paid){
+				$('.pay_rec').addClass('pay_nrec');
+				$('.pay_nrec').text('Payment Not Received');
+			}
 			var eve="";
 			for(var i=0;i<data.single_events.length;i++){
 				eve += '<div class="user_reg_eve">'+data.single_events[i].name+'<button class="unreg_eve hover_dark" data-id="'+data.single_events[i].id+'">Unregister</button> </div>';
