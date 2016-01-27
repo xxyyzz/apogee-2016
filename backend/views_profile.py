@@ -191,7 +191,11 @@ def instamojo_payment(request):
     		).hexdigest()
 	#b = 'https://www.instamojo.com/bitsoasis/registration-ticket/'+'?intent=buy&data_Field_88249='+names+'&data_amount='+str(a*250)+'&data_readonly=data_amount&data_readonly=data_Field_88249&data_sign='+mac_calculated
 		instalink = 'https://www.instamojo.com/bitsapogee/apogee-registration-fee/'+'?data_Field_94287='+message+'&data_readonly=data_Field_94287&data_sign='+mac_calculated
-		return HttpResponseRedirect(instalink)
+		json_ob = {
+		'test':pid,
+		}
+		return JsonResponse(json_ob)
+		# return HttpResponseRedirect(instalink)
 
 
 @staff_check
