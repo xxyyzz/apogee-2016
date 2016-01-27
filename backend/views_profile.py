@@ -218,11 +218,11 @@ def apirequest_fee(request):
 
 	#name= payments['buyer_name'  ]
 	#kunal='kunal sharma'
-	response={
+	context={
 	#'name':name,
 	#'kunal':kunal,
 	'paymentid' :paymentid,
 	'linktitle' : linktitle,
 	'status':1,
 	}
-	return JsonResponse(response)
+	return render(request, 'main/thank_you.html', context)

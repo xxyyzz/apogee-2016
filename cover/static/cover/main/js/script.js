@@ -1359,7 +1359,7 @@ function openProfile(){
 			$('.update_bank').text('Update');
 			if(!data.pcr_approval){
 				$('.approved').addClass('unapproved');
-				$('.unapproved').text('Unapproved');
+				$('.unapproved').text('Account Unapproved');
 			}
 			if(!data.fee_paid){
 				$('.pay_rec').addClass('pay_nrec');
