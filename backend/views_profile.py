@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from backend.models import *
 from Event.models import *
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse
 import hmac
 import hashlib
 
