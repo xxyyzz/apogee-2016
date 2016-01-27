@@ -342,9 +342,11 @@ $('#login-form').submit(function(e){
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
 				user ={
-					'userid':$('#useremail_l').val(),
+					'userid':response.email,
 					'firstname':response.firstname,
+					'name':response.name,
 					'loggedin':true,
+					'id':response.id,
 				};
 				$('#submit_l').prop('disabled', false);
 				$('#submit_r').prop('disabled', false);
