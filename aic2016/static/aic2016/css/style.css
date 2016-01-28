@@ -275,32 +275,38 @@ a:hover {
 }
 
 .company-block {
-    height: 210px;
+    /*height: 210px;*/
     width: calc(100% - 10px);
     border: 1px solid white;
     border-radius: 4px;
     margin: 10px 0px;
+    position: relative;
 }
 
 .company-img-block {
     width: 210px;
-    height: 210px;
-    position: relative;
+    height: 100%;
+    position: absolute;
     background-color: white;
-    float: left;
+    /*float: left;*/
 }
 
 .company-txt-block{
     width: calc(100% - 260px);
-    float: left;
-    height: 170px;
+    height: auto;
+    min-height: 190px;
     position: relative;
+    left: 215px;
     padding: 10px 20px;
     font-size: 18px;
 }
 
 .company-img-holder {
     width: 100%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
 }
 
 .faqwrapper {
