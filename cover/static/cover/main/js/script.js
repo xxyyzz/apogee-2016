@@ -337,13 +337,16 @@ $('#login-form').submit(function(e){
 			{
 				$('#user-sign-cont>div:nth-child(1)>span').html('Hi, '+response.firstname);
 				$('div#login').css({'display':'none'});
-				killOverlay();
+				$(".light-box").fadeOut(200);
+				$('#login_instrs').fadeIn();
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
 				user ={
-					'userid':$('#useremail_l').val(),
+					'userid':response.email,
 					'firstname':response.firstname,
+					'name':response.name,
 					'loggedin':true,
+					'id':response.id,
 				};
 				$('#submit_l').prop('disabled', false);
 				$('#submit_r').prop('disabled', false);
@@ -1338,7 +1341,10 @@ $('.htile').click(function(){
 
 
 // profile
-
+$('#login_instrs').click(function(){
+	$(this).fadeOut();
+	killOverlay();
+});
 var profile_info;
 function openProfile(){
 	$.ajax({
