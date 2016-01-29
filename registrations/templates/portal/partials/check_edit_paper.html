@@ -81,7 +81,7 @@
                     contentType: false,
                     success: function(data)
                     {
-                        if(data["status"]==1)
+                        if( data.status == 1)
                             $(".body-box").html(data.message);
                         else
                             $(".body-box").html("Unsuccessful! Please try again later.");
