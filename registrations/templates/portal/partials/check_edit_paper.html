@@ -35,3 +35,21 @@
     Invalid Reference number. 
     {% endif %}         
 </div>
+
+<script>
+
+    $("input#abstract-file").on('change', function(e) {
+        finalabstract = e.target.files;
+    });
+
+    function collect_data() {
+        var data = new FormData() ;
+
+        $.each(finalabstract, function(key, value)
+        {
+            data.append(key, value);
+        });
+
+        return data;
+    }
+</script>
