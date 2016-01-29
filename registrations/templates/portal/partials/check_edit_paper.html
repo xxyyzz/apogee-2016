@@ -35,14 +35,13 @@
 </div>
 
 <script>
-    var  stub = "{{project.stub}}" ;
     $("input#abstract-file").on('change', function(e) {
         finalabstract = e.target.files;
     });
 
     function collect_data() {
         var data = new FormData() ;
-        data.append('ref', stub );
+        data.append('ref', '{{stub}}' );
 
         $.each(finalabstract, function(key, value)
         {
