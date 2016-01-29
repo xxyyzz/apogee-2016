@@ -147,7 +147,7 @@
 
                 success: function(data)
                 {
-                    if(data["status"])
+                    if(data["status"]==1)
                         $("#project-edit-form").html(data.message);
                 }
             });
