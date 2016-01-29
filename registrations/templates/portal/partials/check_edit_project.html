@@ -82,7 +82,9 @@
 
     function collect_data() {
         var data = new FormData() ;
-  
+        
+        data.append('ref', {{project.stub}});
+        
         for(var z=1;z<=members;z++) {
             data.append('mem-'+z+'-name', $("input#mem-"+z+"-name").val());
             data.append('mem-'+z+'-phone', $("input#mem-"+z+"-phone").val());
