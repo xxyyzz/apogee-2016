@@ -71,7 +71,9 @@
         	-->
 
             {% if round == '2' %}
+            <div>
             <button class=" blue darken-2 waves-light btn btn-edit-project">Edit Members</button>
+            </div>
             {% endif %}
     	</div>     
     </form> 
@@ -82,7 +84,7 @@
 <script type="text/javascript">
     $('.btn-edit-project').click(function(){
         $.ajax({
-            url : 'project/edit/',
+            url : 'projects/edit/',
             method : 'POST',
             data : status_query,
             success : function(data) {
