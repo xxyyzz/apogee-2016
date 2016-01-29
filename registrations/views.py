@@ -404,42 +404,52 @@ def edit_paper(request):
 
 
 def edit_project(request):
-	data = request.POST
-	stub = data['ref']
-	member = {}
-	for x in range(1,6):
-		member[x] = {}
-		try:
-			key = 'mem-%s-name' % x
-			member[x]['name'] = data[key]
-		except MultiValueDictKeyError:
-			member[x]['name'] = None
-		try:
-			key = 'mem-%s-phone' % x
-			member[x]['phone'] = data[key]
-		except MultiValueDictKeyError:
-			member[x]['phone'] = None
-		try:
-			key = 'mem-%s-email' % x
-			member[x]['email'] = data[key]
-		except MultiValueDictKeyError:
-			member[x]['email'] = None
-	entry = Project.objects.get(stub=stub)
-	entry.members.clear()
-	model_member = {}
-	for x in range(1,6):
-		if member[x]['email'] != None:
+	if request.method == 'GET':
+		stub = data['ref']
+		entry = Project.objects.get(stub=stub)
+		response = {
+			"status" : 1,
+			"project" : entry,
+		}
+		return render(request, "portal/partials/check_edit_paper.html", response)
+	if request.method == 'POST':
+		data = request.POST
+		stub = data['ref']
+		member = {}
+		for x in range(1,6):
+			member[x] = {}
 			try:
-				model_member[x] = Participant.objects.get(email=member[x]['email'])
-			except:
-				model_member[x] = Participant.objects.create(name=member[x]['name'], phone=member[x]['phone'], email=member[x]['email'], college=model_college)
-		else:
-			model_member[x] = None
-	for x in range(1,6):
-		if model_member[x] != None:
-			entry.members.add(model_member[x])
-	entry.save()
-	response = {
-		"project" : entry,
-	}
-	return render(request, "portal/partials/check_edit_project.html", response)
+				key = 'mem-%s-name' % x
+				member[x]['name'] = data[key]
+			except MultiValueDictKeyError:
+				member[x]['name'] = None
+			try:
+				key = 'mem-%s-phone' % x
+				member[x]['phone'] = data[key]
+			except MultiValueDictKeyError:
+				member[x]['phone'] = None
+			try:
+				key = 'mem-%s-email' % x
+				member[x]['email'] = data[key]
+			except MultiValueDictKeyError:
+				member[x]['email'] = None
+		entry = Project.objects.get(stub=stub)
+		# entry.members.clear()
+		model_member = {}
+		for x in range(1,6):
+			if member[x]['email'] != None:
+				try:
+					model_member[x] = Participant.objects.get(email=member[x]['email'])
+				except:
+					model_member[x] = Participant.objects.create(name=member[x]['name'], phone=member[x]['phone'], email=member[x]['email'], college=model_college)
+			else:
+				model_member[x] = None
+		for x in range(1,6):
+			if model_member[x] != None:
+				entry.members.add(model_member[x])
+		entry.save()
+		response = {
+			"status" : 1,
+			"message" : "Your changes have been saved."
+		}
+		return JsonResponse(response)
