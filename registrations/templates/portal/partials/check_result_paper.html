@@ -67,8 +67,9 @@
             </div> -->
             
             {% if round == '2' %}
+            <div class=" no-label col-sm-6">
             <button class=" blue darken-2 waves-light btn btn-final-paper" style="margin-top:15px;">SUBMIT FINAL PAPER</button>
-            
+            </div>
             {% endif %}
         </div>     
     </form> 
@@ -81,12 +82,11 @@
     $('.btn-final-paper').click(function(){
         $.ajax({
             url : 'papers/edit/',
-            method : 'POST',
+            method : 'GET',
             data : status_query,
             headers : {
                 "X-CSRFToken" : getCookie('csrftoken')
             },
-            dataType: 'html',
             success : function(data) {
                 $(".body-box").html(data);
                 open_body_box();

@@ -1,13 +1,32 @@
 <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 form-wrapper">
 	<div class="review-project-header">
-		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
+		<div class="ref-num-holder">REFERENCE : #{{project.stub}}</div>
 		<!-- <div class="status-holder">Abstract Submitted</div> -->
 	</div>
-    <form id="project-abstract-form">
+    <form id="project-edit-form">
     	<div class="row">
     		<div class="col-xs-6 form-subhead">
                 EDIT MEMBERS
             </div>
+            
+            {% for member in project.members.all %}
+            <div class="mem-{{ forloop.counter }}-wrapper">
+                <div class="col-xs-12 form-subhead">MEMBER {{ forloop.counter }}
+                    <div class="pull-right">
+                        <i id="mem-{{ forloop.counter }}-delete" value="{{ forloop.counter }}" class="fa fa-times member-delete"></i>
+                    </div>
+                </div>
+                <div class="input-field col-sm-6">
+                    <input id="mem-{{ forloop.counter }}-name" required type="text" >\n<label for="mem-{{ forloop.counter }}-name">Name</label>
+                </div>
+                <div class="input-field col-sm-6">
+                    <input id="mem-{{ forloop.counter }}-phone" required type="text" >\n<label for="mem-{{ forloop.counter }}-phone">Phone</label>
+                </div>
+                <div class="input-field col-sm-12">
+                    <input id="mem-{{ forloop.counter }}-email" required type="text" >\n<label for="mem-{{ forloop.counter }}-email">Email Address</label>
+                </div>
+            </div>
+            {% endfor %}
 
             <div class="col-xs-12 form-subhead add-member-wraprer">
                 <div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD MEMBER</div> 
