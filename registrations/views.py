@@ -376,12 +376,15 @@ def add_initial_registration(request):
 @csrf_exempt
 def edit_paper(request):
 	if request.method == 'GET':
+		stub = data['ref']
+		entry = Paper.objects.get(stub=stub)
 		response = {
-			"status" : 1
+			"status" : 1,
+			"stub" : entry.stub,
 		}
 		return render(request, "portal/partials/check_edit_paper.html", response)
 
-	if request.method == 'POST'
+	if request.method == 'POST':
 		data = request.POST
 		stub = data['ref']
 		paper = request.FILES['0']
