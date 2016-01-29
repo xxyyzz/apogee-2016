@@ -147,7 +147,8 @@
 
                 success: function(data)
                 {
-                    $(".body-box").html(data)
+                    if(data["status"])
+                        $("#project-edit-form").html(data.message);
                 }
             });
         }

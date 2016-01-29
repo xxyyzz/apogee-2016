@@ -39,6 +39,7 @@
 
     function collect_data() {
         var data = new FormData() ;
+        data.append('ref', '{{project.stub}}' );
 
         $.each(finalabstract, function(key, value)
         {
