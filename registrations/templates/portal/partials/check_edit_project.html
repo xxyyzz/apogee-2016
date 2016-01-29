@@ -58,7 +58,7 @@
     var members = {{project.members.all.count}};
 
     for(i=1;i<=members;++i){
-        $("#mem-"+members+"-delete").on("click",function() {
+        $("#mem-"+i+"-delete").on("click",function() {
                 var value = $(this).attr("value");
                 console.log(this,value);
                 if(members == value) {
@@ -78,14 +78,16 @@
 
             $(".members-wrapper").append(context);
 
-            $("#mem-"+members+"-delete").on("click",function() {
+            $("#mem-"+members+"-delete").click(function() {
                 var value = $(this).attr("value");
-                console.log(this,value);
                 if(members == value) {
                     $(".mem-"+value+"-wrapper").remove();
                     members--;
+                };
+                if(members < 3) {
+                $(".add-member").show();
                 }
-                else 
+                else
                     alert("Delete members from the bottom of the list !");
             });
 
