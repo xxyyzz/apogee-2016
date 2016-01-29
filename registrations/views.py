@@ -436,7 +436,7 @@ def edit_project(request):
 			except MultiValueDictKeyError:
 				member[x]['email'] = None
 		entry = Project.objects.get(stub=stub)
-		# entry.members.clear()
+		entry.members.clear()
 		model_member = {}
 		for x in range(1,6):
 			if member[x]['email'] != None:
