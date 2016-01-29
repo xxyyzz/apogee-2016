@@ -376,6 +376,7 @@ def add_initial_registration(request):
 @csrf_exempt
 def edit_paper(request):
 	if request.method == 'GET':
+		data = request.GET
 		stub = data['ref']
 		entry = Paper.objects.get(stub=stub)
 		response = {
@@ -405,6 +406,7 @@ def edit_paper(request):
 
 def edit_project(request):
 	if request.method == 'GET':
+		data = request.GET
 		stub = data['ref']
 		entry = Project.objects.get(stub=stub)
 		response = {
