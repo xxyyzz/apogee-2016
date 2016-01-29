@@ -1,0 +1,93 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href='https://fonts.googleapis.com/css?family=Lato:400' rel='stylesheet' type='text/css'>
+<title>Apogee 16</title>
+<style>
+body, html{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height:100%;
+	font-family: 'Lato','sans-serif';
+	background-color: #2D1818;
+}
+.det_wrapper{
+	position: relative;
+	min-width: 80%;
+	width: 900px;
+	max-width: 100%;
+	margin: auto;
+	color: white;
+}
+.det_head{
+	position: relative;
+	width: 100%;
+	padding: 50px 0;
+	text-align: center;
+	font-size: 3em;
+}
+.det_descr_cont{
+	position: relative;
+	border-top: 2px solid white;
+	border-bottom: 2px solid white;
+	margin-bottom: 50px;
+	padding: 20px 50px;
+	text-align: center;
+}
+.det_descr{
+	font-size: 2em;
+    margin: 25px 0;
+    font-weight: 300;
+}
+.credentials{
+	position: relative;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid #eee;
+    font-size: 1.5em;
+    text-align: left;
+    display: inline-block;
+    padding: 10px 40px;
+}
+.box_align{
+	float: left;
+	margin:  5px;
+}
+</style>
+</head>
+<body>
+<div class="det_wrapper">
+	<div class="det_head">
+		<img src="{% static 'cover/main/img/logo.png' %}" style="width:80%">
+	</div>
+	<div class="det_descr_cont">
+		<div class="det_descr">
+		{% if status == 0 %}
+			Invalid Token
+		</div>
+		{% elif status == 1 %}
+			Thank you for registering with us. Your payment has been received. Your Tansaction details have been mentioned below:
+		</div>
+		<div class="credentials">
+			<div>
+				<div class="box_align" style="text-align:right">
+					Transaction Id:
+					<br>
+					You have paid for:
+				</div>
+				<div class="box_align">
+					{{ paymentid }}<br>{{ linktitle }}
+				</div>
+			</div>
+		</div>
+		<!-- 
+		<div style="font-size: 1.2em;margin:5px 0;">
+			These credentials have also been emailed to you.
+		</div> -->
+		{% endif %}
+	</div>
+</div>
+</body>
+</html>

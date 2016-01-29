@@ -4,6 +4,7 @@
 	loader								1000
 	gen_lightbox						900
 	profile	lightbox					800
+	login_instrs						750
 	map-help							750
 	Onilne Events Page					700
 	login-reg-box 						500
@@ -672,7 +673,7 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-form input[type="text"], form input[type="password"], form input[type="email"], form input[type="number"]{
+form input[type="text"], form input[type="password"],form textarea, form input[type="email"], form input[type="number"]{
     background-color: #fafafa;
     font-family: inherit;
     border: 1px solid #cccccc;
@@ -694,7 +695,7 @@ form input[type="text"], form input[type="password"], form input[type="email"], 
     -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;
     transition: box-shadow 0.45s, border-color 0.45s ease-in-out;
 }
-form input[type="text"]:focus, form input[type="password"]:focus, form input[type="email"]:focus, form input[type="number"]:focus{
+form input[type="text"]:focus,form textarea:focus, form input[type="password"]:focus, form input[type="email"]:focus, form input[type="number"]:focus{
     -webkit-box-shadow: 0 0 5px #999999;
     -moz-box-shadow: 0 0 5px #999999;
     box-shadow: 0 0 5px #999999;
@@ -1686,8 +1687,9 @@ a.arch-lnk {
 /*Profile*/
 
 .hover_dark{
-	opacity: 0.7;
+	opacity: 0.8;
 	cursor:pointer;
+	outline: none;
 	-moz-transition: opacity 300ms ease;
     -webkit-transition: opacity 300ms ease;
     transition: opacity 300ms ease;
@@ -1794,7 +1796,7 @@ a.arch-lnk {
 	font-size: 0.9em;
 	font-weight:400;
 }
-.approved,.unapproved{
+.pay_rec,.pay_nrec,.approved,.unapproved{
 	border: 1px solid black;
     color: black;
     padding: 5px 10px;
@@ -1802,11 +1804,11 @@ a.arch-lnk {
     border-radius: 2px;
     display: inline-block;
 }
-.approved{
+.approved,.pay_rec{
 	border-color: green;
 	color: green;
 }
-.unapproved{
+.unapproved,.pay_nrec{
 	border-color: red;
 	color: red;
 }
@@ -1864,12 +1866,17 @@ a.arch-lnk {
     position: relative;
 	padding: 15px 150px 15px 15px;
     border: 1px solid #333;
+    background-color: #333;
+    color:#f0f0f0;
+    font-weight: bolder; 
 }
 .unreg_eve{
 	display: inline-block;
     padding: 10px 15px;
     position: absolute;
-    background: rgb(228,50,50);
+    /*background: rgb(228,50,50);*/
+	background-color: #F34235;
+    opacity: 1  !important;
     border-radius: 5px;
     top: 7px;
     right: 10px;
@@ -1889,11 +1896,15 @@ a.arch-lnk {
 	padding: 0 15px;
 	line-height: 50px;
     border: 1px solid #333;
+    background-color: #333;
+    color:#f0f0f0;
+    font-weight: bolder; 
 }
 .team_eve_descr{
 	position: relative;
 	border: 1px solid #333;
 	padding: 15px;
+	background-color: #eee;
 }
 .ted_options{
 	position: relative;
@@ -1903,7 +1914,9 @@ a.arch-lnk {
     padding: 5px 15px;
     margin-right: 15px;
     margin-top: 15px;
-    background: rgb(228,50,50);
+	background-color: #F34235;
+    /*background: rgb(228,50,50);*/
+    opacity: 1  !important;
     border-radius: 5px;
     width: 125px;
     line-height: 20px;
@@ -1912,5 +1925,7 @@ a.arch-lnk {
     border:0;
     font-size: 1em;
 }
-
+.unreg_eve:hover,.ted_options>button:hover{
+	background-color: #E4271A;
+}
 /*Profile*/
