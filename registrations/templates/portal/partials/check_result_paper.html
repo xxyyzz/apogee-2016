@@ -1,75 +1,77 @@
 <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 form-wrapper">
-	{% if status == 1 %}
-	<div class="review-project-header">
-		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
-		{% if round == 1 %}
+    {% if status == 1 %}
+    <div class="review-project-header">
+        <div class="ref-num-holder">REFERENCE : #{{stub}} {{round}}</div>
+        {% if round == '1' %}
         <div class="status-holder" style="color:#B51B21;">Abstract Not selected</div>
-        {% elif round == 2 %}
+        {% elif round == '2' %}
         <div class="status-holder">Abstract Selected</div>
         {% endif %}
-	</div>
+    </div>
     <form id="project-abstract-form">
-    	<div class="row">
-    		<div class="col-xs-12 form-subhead">
-				NAME OF THE PROJECT
-			</div>		
-			<div class="input-field  no-label col-sm-12">
-         		{{title}}
-        	</div>
-		
-    		<div class="col-xs-12 form-subhead">
-    			AUTHOR 
-    		</div>
-    		<div class="input-field no-label col-sm-6">
-         		<b>{{author.name}}</b>
-        	</div>
-        	<div class="input-field no-label col-sm-12">
-         		{{author.email}}, +91 {{author.phone}}
-        	</div>
-
-        	<div class="col-xs-12 form-subhead">
-    			CO-AUTHOR 
-    		</div>
-    		<div class="input-field no-label col-sm-6">
-         		<b>{{coauthor.name}}</b>
-        	</div>
-        	<div class="input-field no-label col-sm-12">
-         		{{coauthor.email}}, +91 {{coauthor.phone}}
-        	</div>
-
-        	<div class="col-xs-12 form-subhead">
-    			ADDRESS FOR CORRESPONDENCE 
-    		</div>
-    		<div class="input-field no-label col-sm-12">
-         		{{address}}
-        	</div>
+        <div class="row">
+            <div class="col-xs-12 form-subhead">
+                NAME OF THE PROJECT
+            </div>      
+            <div class="input-field  no-label col-sm-12">
+                {{title}}
+            </div>
+        
+            <div class="col-xs-12 form-subhead">
+                AUTHOR 
+            </div>
+            <div class="input-field no-label col-sm-6">
+                <b>{{author.name}}</b>
+            </div>
+            <div class="input-field no-label col-sm-12">
+                {{author.email}}, +91 {{author.phone}}
+            </div>
 
             <div class="col-xs-12 form-subhead">
-    			COLLEGE 
-			</div>
-    		<div class="input-field no-label col-sm-12">
-         		{{author.college}}
-        	</div>
+                CO-AUTHOR 
+            </div>
+            <div class="input-field no-label col-sm-6">
+                <b>{{coauthor.name}}</b>
+            </div>
+            <div class="input-field no-label col-sm-12">
+                {{coauthor.email}}, +91 {{coauthor.phone}}
+            </div>
 
             <div class="col-xs-12 form-subhead">
-    			CATEGORY 
-    		</div>
-    		
+                ADDRESS FOR CORRESPONDENCE 
+            </div>
+            <div class="input-field no-label col-sm-12">
+                {{address}}
+            </div>
+
+            <div class="col-xs-12 form-subhead">
+                COLLEGE 
+            </div>
+            <div class="input-field no-label col-sm-12">
+                {{author.college}}
+            </div>
+
+            <div class="col-xs-12 form-subhead">
+                CATEGORY 
+            </div>
+            
             <div class=" no-label col-sm-12">
-         		{{category}}
-        	</div>
-        	<!--
-        	<div class="col-xs-6 form-subhead">
-    			ABSTRACT 
-    		</div>
-        	<div class=" input-field no-label col-sm-12">
-        		{{abstract}}
-        	</div>
-        	-->
-            {% if round == 2 %}
-            <button class=" blue darken-2 waves-light btn pull-right btn-status">SUBMIT FINAL PAPER</button>
+                {{category}}
+            </div>
+            
+            <!-- <div class="col-xs-6 form-subhead">
+                ABSTRACT 
+            </div>
+            <div class=" input-field no-label col-sm-12">
+                {{abstract}}
+            </div> -->
+            
+            {% if round == '2' %}
+            <div style="padding-top:15px;">
+            <button class=" blue darken-2 waves-light btn btn-final-paper">SUBMIT FINAL PAPER</button>
+            </div>
             {% endif %}
-    	</div>     
+        </div>     
     </form> 
     {% else %}
     Invalid Reference number. 
@@ -77,8 +79,19 @@
 </div>
 
 <script type="text/javascript">
-    $('.btn-status').click(){
-        wrapLink("/check/edit/");
-    }
+    $('.btn-final-paper').click(function(){
+        $.ajax({
+            url : 'papers/edit/',
+            method : 'POST',
+            data : status_query,
+            headers : {
+                "X-CSRFToken" : getCookie('csrftoken')
+            },
+            dataType: 'html',
+            success : function(data) {
+                $(".body-box").html(data);
+                open_body_box();
+            }
+        });
+    });
 </script>
-

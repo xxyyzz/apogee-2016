@@ -2,9 +2,9 @@
 	{% if status == 1 %}
 	<div class="review-project-header">
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
-        {% if round == 1 %}
+        {% if round == '1' %}
 		<div class="status-holder" style="color:#B51B21;">Abstract Not selected</div>
-        {% elif round == 2 %}
+        {% elif round == '2' %}
         <div class="status-holder">Abstract Selected</div>
         {% endif %}
 	</div>
@@ -70,8 +70,10 @@
         	</div>
         	-->
 
-            {% if round == 2 %}
-            <button class=" blue darken-2 waves-light btn pull-right btn-status">Edit Members</button>
+            {% if round == '2' %}
+            <div style="padding-top:15px;">
+            <button class=" blue darken-2 waves-light btn btn-edit-project">Edit Members</button>
+            </div>
             {% endif %}
     	</div>     
     </form> 
@@ -80,8 +82,20 @@
     {% endif %}         
 </div>
 <script type="text/javascript">
-    $('.btn-status').click(){
-        wrapLink("/check/edit/");
-    }
+    $('.btn-edit-project').click(function(){
+        $.ajax({
+            url : 'projects/edit/',
+            method : 'POST',
+            data : status_query,
+            headers : {
+                "X-CSRFToken" : getCookie('csrftoken')
+            },
+            dataType: 'html',
+            success : function(data) {
+                $(".body-box").html(data);
+                open_body_box();
+            }
+        }); 
+    });
 </script>
 
