@@ -52,7 +52,6 @@
 
         return data;
     }
-var blah,tp;
     $("form#project-final-abstract").submit(function(e) {
         e.preventDefault();
     
@@ -83,9 +82,7 @@ var blah,tp;
                     contentType: false,
                     success: function(data)
                     {
-                        blah=data;
                         jdata = JSON.parse(data);
-                        tp=jdata;
                         // console.log(data.status,(data.status==1));
                         if( jdata.status == 1)
                             $("#project-final-abstract").html(jdata.message);
