@@ -2,7 +2,11 @@
 	{% if status == 1%}
 	<div class="review-project-header">
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
-		<div class="status-holder">Abstract Submitted</div>
+        {% if round == 1%}
+		<div class="status-holder" style="color:#B51B21;">Abstract Not selected</div>
+        {% elif round == 2%}
+        <div class="status-holder">Abstract Selected</div>
+        {% endif %}
 	</div>
     <form id="project-abstract-form">
     	<div class="row">
@@ -65,10 +69,19 @@
         		{{abstract}}
         	</div>
         	-->
+
+            {% if round == 2%}
+            <button class=" blue darken-2 waves-light btn pull-right btn-status">Edit Members</button>
+            {% endif %}
     	</div>     
     </form> 
     {% else %}
     Invalid Reference number. 
     {% endif %}         
 </div>
+<script type="text/javascript">
+    $('.btn-status').click(){
+        wrapLink("/check/edit/");
+    }
+</script>
 

@@ -40,6 +40,9 @@ routes = {
 			},
 			'status' : {
 				'func' : init_check_status
+			},
+			'edit' : {
+				'func' : init_check_edit
 			}
 		},
 		'prep' : prep_check,
@@ -212,7 +215,32 @@ function init_check_status(obj) {
 	});
 }
 
-
+function init_check_edit(obj) {
+	if(status_query.cat=='paper')
+	{
+		$.ajax({
+			url : 'paper/edit/',
+			method : 'POST',
+			data : status_query,
+			success : function(data) {
+				$(".body-box").html(data);
+				open_body_box();
+			}
+		});
+	}
+	else if(status_query.cat=='project')
+	{
+		$.ajax({
+			url : 'project/edit/',
+			method : 'POST',
+			data : status_query,
+			success : function(data) {
+				$(".body-box").html(data);
+				open_body_box();
+			}
+		});	
+	}
+}
 
 
 function init_CampusAmbassadorForm(obj) {
