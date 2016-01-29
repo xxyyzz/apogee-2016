@@ -67,7 +67,7 @@
             </div> -->
             
             {% if round == '2' %}
-            <div>
+            <div style="padding-top:15px;">
             <button class=" blue darken-2 waves-light btn btn-final-paper">SUBMIT FINAL PAPER</button>
             </div>
             {% endif %}
@@ -84,6 +84,10 @@
             url : 'papers/edit/',
             method : 'POST',
             data : status_query,
+            headers : {
+                "X-CSRFToken" : getCookie('csrftoken')
+            },
+            dataType: 'html',
             success : function(data) {
                 $(".body-box").html(data);
                 open_body_box();
