@@ -2,9 +2,9 @@
 	{% if status == 1 %}
 	<div class="review-project-header">
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
-        {% if round == 1 %}
+        {% if round == '1' %}
 		<div class="status-holder" style="color:#B51B21;">Abstract Not selected</div>
-        {% elif round == 2 %}
+        {% elif round == '2' %}
         <div class="status-holder">Abstract Selected</div>
         {% endif %}
 	</div>
@@ -70,7 +70,7 @@
         	</div>
         	-->
 
-            {% if round == 2 %}
+            {% if round == '2' %}
             <button class=" blue darken-2 waves-light btn pull-right btn-edit-project">Edit Members</button>
             {% endif %}
     	</div>     
