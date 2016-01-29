@@ -81,6 +81,7 @@
                     contentType: false,
                     success: function(data)
                     {
+                        console.log(data.status,(data.status==1));
                         if( data.status == 1)
                             $(".body-box").html(data.message);
                         else
