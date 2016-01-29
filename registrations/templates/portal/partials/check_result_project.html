@@ -83,12 +83,11 @@
     $('.btn-edit-project').click(function(){
         $.ajax({
             url : 'projects/edit/',
-            method : 'POST',
+            method : 'GET',
             data : status_query,
             headers : {
                 "X-CSRFToken" : getCookie('csrftoken')
             },
-            dataType: 'html',
             success : function(data) {
                 $(".body-box").html(data);
                 open_body_box();

@@ -3,7 +3,7 @@
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
 		<!-- <div class="status-holder">Abstract Submitted</div> -->
 	</div>
-    <form id="project-abstract-form">
+    <form id="project-final-abstract">
     	<div class="row">
     		<div class="col-xs-6 form-subhead">
                 UPLOAD FINAL PAPER
@@ -46,4 +46,33 @@
 
         return data;
     }
+
+    $("form#project-final-abstract").submit(function(e) {
+        e.preventDefault();
+    
+        $(".submit-button").hide();
+
+        var dat = collect_data();
+
+        $.ajax({
+                url: 'papers/edit/',
+                type: 'POST',
+                data: dat,
+                cache: false,
+                headers : {
+                    "X-CSRFToken" : getCookie('csrftoken')
+                },
+                dataType: 'html',
+                processData: false,
+                contentType: false,
+                success: function(data)
+                {
+                    if(data["status"]==1)
+                        $(".body-box").html(data.message);
+                    else
+                        $(".body-box").html("Unsuccessful! Please try again later. ");
+                }
+        });
+
+    });
 </script>

@@ -81,12 +81,11 @@
     $('.btn-final-paper').click(function(){
         $.ajax({
             url : 'papers/edit/',
-            method : 'POST',
+            method : 'GET',
             data : status_query,
             headers : {
                 "X-CSRFToken" : getCookie('csrftoken')
             },
-            dataType: 'html',
             success : function(data) {
                 $(".body-box").html(data);
                 open_body_box();
