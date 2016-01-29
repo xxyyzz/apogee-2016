@@ -3,6 +3,7 @@
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
 		<!-- <div class="status-holder">Abstract Submitted</div> -->
 	</div>
+    <div id="form-cont" style="padding:15px 0;">
     <form id="project-final-abstract">
     	<div class="row">
     		<div class="col-xs-6 form-subhead">
@@ -31,7 +32,8 @@
         	</div>
         	-->
     	</div>     
-    </form>         
+    </form>  
+    </div>       
 </div>
 
 <script>
@@ -86,7 +88,7 @@ var blah,tp;
                         tp=jdata;
                         // console.log(data.status,(data.status==1));
                         if( jdata.status == 1)
-                            $("#project-final-abstract").html(data.message);
+                            $("#project-final-abstract").html(jdata.message);
                         else
                             {
                                 $("#project-final-abstract").html("Unsuccessful! Please try again later.");

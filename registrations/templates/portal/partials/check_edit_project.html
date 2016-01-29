@@ -3,6 +3,7 @@
 		<div class="ref-num-holder">REFERENCE : #{{project.stub}}</div>
 		<!-- <div class="status-holder">Abstract Submitted</div> -->
 	</div>
+    <div id="form-cont" style="padding:15px 0;">
     <form id="project-edit-form">
     	<div class="row">
     		<div class="col-xs-6 form-subhead">
@@ -49,7 +50,8 @@
         	</div>
         	-->
     	</div>     
-    </form>       
+    </form>   
+    </div>    
 </div>
 <script>
     $("input").focus();
@@ -147,8 +149,9 @@
 
                 success: function(data)
                 {
-                    if(data["status"]==1)
-                        $("#project-edit-form").html(data.message);
+                    var jdata = JSON.parse(data);
+                    if(jdata["status"]==1)
+                        $("#form-cont").html(jdata.message);
                 }
             });
         }
