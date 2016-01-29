@@ -67,6 +67,7 @@
 
             $("#mem-"+members+"-delete").click(function() {
                 var value = $(this).attr("value");
+                console.log(this,value);
                 if(members == value) {
                     $(".mem-"+value+"-wrapper").remove();
                     members--;
