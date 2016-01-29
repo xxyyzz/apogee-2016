@@ -376,7 +376,7 @@ def add_initial_registration(request):
 @csrf_exempt
 def edit_paper(request):
 	data = request.POST
-	stub = data['stub']
+	stub = data['ref']
 	paper = request.FILES['0']
 	paper.name = model_stub + '.pdf'
 	entry = Paper.objects.get(stub=stub)
@@ -394,6 +394,7 @@ def edit_paper(request):
 
 def edit_project(request):
 	data = request.POST
+	stub = data['ref']
 	member = {}
 	for x in range(1,6):
 		member[x] = {}
