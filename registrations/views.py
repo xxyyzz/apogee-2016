@@ -413,7 +413,7 @@ def edit_project(request):
 			"status" : 1,
 			"project" : entry,
 		}
-		return render(request, "portal/partials/check_edit_paper.html", response)
+		return render(request, "portal/partials/check_edit_project.html", response)
 	if request.method == 'POST':
 		data = request.POST
 		stub = data['ref']
