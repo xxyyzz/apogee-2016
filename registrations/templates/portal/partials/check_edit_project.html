@@ -1,5 +1,5 @@
 <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 form-wrapper">
-	{% if status == 1 and round == 2 %}
+	{% if status == 1 %}
 	<div class="review-project-header">
 		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
 		<!-- <div class="status-holder">Abstract Submitted</div> -->
@@ -9,7 +9,7 @@
     		<div class="col-xs-6 form-subhead">
                 EDIT MEMBERS
             </div>
-            
+
             <div class="col-xs-12 form-subhead add-member-wraprer">
                 <div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD MEMBER</div> 
             </div>
@@ -24,8 +24,6 @@
         	-->
     	</div>     
     </form> 
-    {% elif status == 1 and  round ==1 %}
-    Sorry. Your paper wasn't selected for next round, hence you cannot edit the info.
     {% else %}
     Invalid Reference number. 
     {% endif %}         
