@@ -53,7 +53,7 @@
 </div>
 <script>
     $("input").focus();
-    var member = {{project.members.all.count}};
+    var members = {{project.members.all.count}};
 
     $(".add-member").click(function() {
         if(members < 5) {
@@ -147,7 +147,8 @@
 
                 success: function(data)
                 {
-                    $(".body-box").html(data)
+                    if(data["status"])
+                        $("#project-edit-form").html(data.message);
                 }
             });
         }

@@ -17,8 +17,11 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-            <div class="input-field col-sm-6">
-            <button class=" blue darken-2 waves-light btn btn-status" style="margin-top:15px;">SUBMIT</button>
+            <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 error-box"></div>
+            <div class="col-xs-12" style="text-align: center">
+                <input class="waves-effect red darken-3 btn submit-button" type="submit">
+            </div>
             </div>        	<!--
         	<div class="col-xs-6 form-subhead">
     			ABSTRACT 
@@ -39,6 +42,7 @@
 
     function collect_data() {
         var data = new FormData() ;
+        data.append('ref', '{{project.stub}}' );
 
         $.each(finalabstract, function(key, value)
         {
@@ -51,29 +55,45 @@
     $("form#project-final-abstract").submit(function(e) {
         e.preventDefault();
     
-        $(".submit-button").hide();
+        errorText='';
+        count = 0;
 
         var dat = collect_data();
+        var file = $("input#abstract-file").val();
+        var extn = file.substring(file.lastIndexOf(".")+1);
+        if(extn != "pdf" && extn != "PDF" ) {
+            errorText += "<br>&bull;&nbsp;&nbsp;The abstract file can only be of PDF Format."
+            count++;
+        }
 
-        $.ajax({
-                url: 'papers/edit/',
-                type: 'POST',
-                data: dat,
-                cache: false,
-                headers : {
-                    "X-CSRFToken" : getCookie('csrftoken')
-                },
-                dataType: 'html',
-                processData: false,
-                contentType: false,
-                success: function(data)
-                {
-                    if(data["status"]==1)
-                        $(".body-box").html(data.message);
-                    else
-                        $(".body-box").html("Unsuccessful! Please try again later. ");
-                }
-        });
+        if(count==0)
+        {    
+            $(".submit-button").hide();
+            $.ajax({
+                    url: 'papers/edit/',
+                    type: 'POST',
+                    data: dat,
+                    cache: false,
+                    headers : {
+                        "X-CSRFToken" : getCookie('csrftoken')
+                    },
+                    dataType: 'html',
+                    processData: false,
+                    contentType: false,
+                    success: function(data)
+                    {
+                        if(data["status"]==1)
+                            $(".body-box").html(data.message);
+                        else
+                            $(".body-box").html("Unsuccessful! Please try again later.");
+                    }
+            });
+        }
+        else
+        {
+            $(".error-box").html(errorText).fadeIn(400);
+
+        }    
 
     });
 </script>
