@@ -375,21 +375,29 @@ def add_initial_registration(request):
 
 @csrf_exempt
 def edit_paper(request):
-	data = request.POST
-	stub = data['ref']
-	paper = request.FILES['0']
-	paper.name = model_stub + '.pdf'
-	entry = Paper.objects.get(stub=stub)
-	entry.paper = paper
-	entry.save()
-	slugified_category = slugify(entry.category)
-	category_directory = os.path.join(MEDIA_ROOT, 'papers-final/', slugified_category)
-	if not os.path.exists(category_directory):
-		os.makedirs(category_directory)
-	response = {
-		"paper" : entry,
-	}
-	return render(request, "portal/partials/check_edit_paper.html", response)
+	if request.method == 'GET':
+		response = {
+			"status" : 1
+		}
+		return render(request, "portal/partials/check_edit_paper.html", response)
+
+	if request.method == 'POST'
+		data = request.POST
+		stub = data['ref']
+		paper = request.FILES['0']
+		paper.name = model_stub + '.pdf'
+		entry = Paper.objects.get(stub=stub)
+		entry.paper = paper
+		entry.save()
+		slugified_category = slugify(entry.category)
+		category_directory = os.path.join(MEDIA_ROOT, 'papers-final/', slugified_category)
+		if not os.path.exists(category_directory):
+			os.makedirs(category_directory)
+		response = {
+			"status" : 1,
+			"message" : "Your final paper has been successfully submitted."
+		}
+		return JsonResponse(response)
 
 
 def edit_project(request):
