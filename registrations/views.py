@@ -389,7 +389,7 @@ def edit_paper(request):
 		data = request.POST
 		stub = data['ref']
 		paper = request.FILES['0']
-		paper.name = model_stub + '.pdf'
+		paper.name = stub + '.pdf'
 		entry = Paper.objects.get(stub=stub)
 		entry.paper = paper
 		entry.save()
