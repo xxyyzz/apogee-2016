@@ -71,7 +71,7 @@
         	-->
 
             {% if round == '2' %}
-            <button class=" blue darken-2 waves-light btn pull-right btn-edit-project">Edit Members</button>
+            <button class=" blue darken-2 waves-light btn btn-edit-project">Edit Members</button>
             {% endif %}
     	</div>     
     </form> 
@@ -81,7 +81,15 @@
 </div>
 <script type="text/javascript">
     $('.btn-edit-project').click(function(){
-        wrapLink("/check/edit/") ;
+        $.ajax({
+            url : 'project/edit/',
+            method : 'POST',
+            data : status_query,
+            success : function(data) {
+                $(".body-box").html(data);
+                open_body_box();
+            }
+        }); 
     });
 </script>
 
