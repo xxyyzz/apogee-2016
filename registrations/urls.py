@@ -6,9 +6,11 @@ urlpatterns = [
     url(r'^papers/instructions/$', views.papersInstructions),
     url(r'^papers/form/$', views.papersForm),
     url(r'^papers/status/$', views.papersStatus),
+    url(r'^papers/edit/$', views.edit_paper),
     url(r'^projects/instructions/$', views.projectsInstructions),
     url(r'^projects/status/$', views.projectsStatus),
     url(r'^projects/form/$', views.projectsForm),
+    url(r'^projects/edit/$', views.edit_project),
     url(r'^check/form/$', views.checkForm),
     url(r'^check/status/$', views.checkStatus),
     url(r'^updates/$', views.renderUpdates),
@@ -16,7 +18,7 @@ urlpatterns = [
     url(r'^ca/main/$', views.campusAmbassadorMain),
     url(r'^ca/status/$', views.campusAmbassadorStatus),
     #url(r'^ca/confirm/$', views.campusAmbassadorConfirm),
-        
+
 
 
     #url(r'^username/set/(?P<user_id>\d+)/$', views.username_set),
@@ -46,7 +48,7 @@ urlpatterns = [
     #url(r'^users/$', views.search_user),
     #url(r'^participants/$', views.search_plist),
     #url(r'^pconfirm/$', views.pconfirm),
-    #url(r'^pedit$', views.pedit), 
+    #url(r'^pedit$', views.pedit),
     #url(r'^stats/$', views.stats_view, name='stats'),
     #url(r'^stats/college/(?P<userid>\d+)/$', views.stats_college, name='stats_college'),
     #url(r'^stats/event/(?P<eventid>\d+)/$', views.stats_event, name='stats_event'),

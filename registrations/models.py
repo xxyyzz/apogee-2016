@@ -7,9 +7,14 @@ def upload_project(self, filename):
     path = 'projects/%s/%s' % (slugified_category, filename)
     return path
 
-def upload_paper(self, filename):
+def upload_paper_abstract(self, filename):
     slugified_category = slugify(self.category)
     path = 'papers/%s/%s' % (slugified_category, filename)
+    return path
+
+def upload_paper(self, filename):
+    slugified_category = slugify(self.category)
+    path = 'papers-final/%s/%s' % (slugified_category, filename)
     return path
 
 #this function is of no use, however removing it hampers migrations somehow
@@ -44,13 +49,14 @@ class Paper(models.Model):
     address = models.TextField()
     author = models.ForeignKey('Participant', related_name='authors')
     co_author = models.ForeignKey('Participant', related_name='co_authors', blank=True, null=True)
-    abstract = models.FileField(default=None, upload_to=upload_paper)
+    abstract = models.FileField(default=None, upload_to=upload_paper_abstract)
     STATUSES = (
         ('1', 'Round 1'),
         ('2', 'Round 2'),
         ('3', 'Round 3'),
     )
     status = models.CharField(max_length=2, choices=STATUSES, default="1")
+    paper = models.FileField(default=None, null=True, upload_to=upload_paper)
     def __unicode__(self):
         return self.name
 
@@ -96,7 +102,7 @@ class CampusAmbassador(models.Model):
     ambassador_quality = models.TextField()
     root_mail = models.BooleanField(default=False)
     pcr_approved= models.NullBooleanField(default=False)
-    
+
     class Meta:
         verbose_name_plural = 'Campus Ambassadors'
     def __unicode__(self):
