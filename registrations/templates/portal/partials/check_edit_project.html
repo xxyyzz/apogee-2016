@@ -29,11 +29,9 @@
             </div>
             {% endfor %}
             
-            {% if project.members.all.count  < 5 %}
             <div class="col-xs-12 form-subhead add-member-wraprer">
                 <div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD MEMBER</div> 
             </div>
-            {% endif %}
 
             <div class="row">
             <div class="col-xs-10 col-xs-offset-1 error-box"></div>
@@ -56,6 +54,9 @@
 <script>
     $("input").focus();
     var members = {{project.members.all.count}};
+    if(members == 5 ) {
+                $(".add-member-wraprer").hide();
+    };
 
     for(i=1;i<=members;++i){
         $("#mem-"+i+"-delete").on("click",function() {
