@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^initreg/$', views.initial_registration),
     url(r'^part_list/$', views.part_list),
     url(r'^part_list/(?P<part_id>\d+)/$', views.part_details),
-
+    url(r'^participantxlsx/$', utilities.participant_stats_xlsx),
     url(r'^part_act/$', views.part_act),
 
     url(r'^mail_selected/$', views.mail_selected_amb),
@@ -58,7 +58,7 @@ urlpatterns = [
     # url(r'^users/$', views.search_user),
     # url(r'^participants/$', views.search_plist),
     # url(r'^pconfirm/$', views.pconfirm),
-    # url(r'^pedit$', views.pedit), 
+    # url(r'^pedit$', views.pedit),
 
 
     # url(r'^stats/paid_list$', views.paid_list, name='paid'),
