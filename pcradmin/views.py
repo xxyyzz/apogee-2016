@@ -20,10 +20,10 @@ import difflib
 
 from django.core.mail.backends.smtp import EmailBackend
 cabackend = EmailBackend(
-    host='smtp.mailgun.org',
+    host='smtp.gmail.com',
     port=587,
-    username='noreply@mg.bits-apogee.org',
-    password='donotreplybc',
+    username='campusambassador@bits-apogee.org',
+    password='campusambassador',
     use_tls=True,
     fail_silently=False,
 )
@@ -218,16 +218,16 @@ Good Luck! ''')
 				amb.save()
 				send_to.append( str( amb.email) )
 
-			try:
-				email = EmailMessage("Campus Ambassador Approval", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
-			#poster attachment
-			# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
-			#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
-			#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-				email.send()
-				return render(request, 'pcradmin/showmailsent.html')
-			except:
-				return HttpResponse(' Email Error: Call Satwik 9928823099 ')
+			# try:
+			email = EmailMessage("Campus Ambassador Approval", body, 'no-reply@bits-apogee.org', send_to, connection=cabackend)
+		#poster attachment
+		# email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+		#email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+		#email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+			email.send()
+			return render(request, 'pcradmin/showmailsent.html')
+			# except:
+				# return HttpResponse(' Email Error: Call Satwik 9928823099 ')
 
 		elif val == 1:
 			for i in amb_ids:
@@ -423,7 +423,7 @@ def eventwise_stats(request):
 		entry = {}
 		entry['id'] = event.id
 		entry['name'] = event.name
-		entry['category'] = str(event.category.name) 
+		entry['category'] = str(event.category.name)
 		entry['males'] = str(event.participant_set.filter(gender='M', college=college).count())+' | '+str(event.participant_set.filter(gender='M', pcr_approval=True).count())
 		entry['females'] = str(event.participant_set.filter(gender='F').count())+' | '+str(event.participant_set.filter(gender='F', pcr_approval=True).count())
 		entry['total'] = str(event.participant_set.filter(college=college).count())+' | '+str(event.participant_set.filter(pcr_approval=True).count())
