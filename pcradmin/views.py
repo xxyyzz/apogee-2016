@@ -171,7 +171,7 @@ controls@bits-apogee.org
             #email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
             #email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
                 email.send()
-                return render(request, 'pcradmin/showmailsent.html')
+            return render(request, 'pcradmin/showmailsent.html')
                 # except:
                 #     return HttpResponse(' Email Error: Call Satwik 9928823099 ')
 
