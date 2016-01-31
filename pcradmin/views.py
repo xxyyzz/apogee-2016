@@ -91,7 +91,7 @@ def part_act(request):
                     continue
                 part.pcr_approval= True
                 part.save()
-                send_to = part.email_id
+                send_to = [part.email_id]
                 # send_to.append( str( part.email_id) )
                 # try:
                 body = unicode(u'''
