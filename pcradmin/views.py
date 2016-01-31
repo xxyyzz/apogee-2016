@@ -94,8 +94,7 @@ def part_act(request):
                 send_to = [part.email_id]
                 # send_to.append( str( part.email_id) )
                 # try:
-                body = unicode(u'''
-Dear %s,
+                body = unicode(u'''Dear %s,
 CONGRATULATIONS!
 
 You are now CONFIRMED as a participant for APOGEE 2016. You are welcome to BITS-Pilani to participate in APOGEE 2016, to be held from 25th-28th February,2016.
@@ -155,8 +154,7 @@ Aditya Chauhan +918239822574
 pcr@bits-apogee.org
 
 Falguni Agrawal: +91 9928089204
-controls@bits-apogee.org
-                ''') % part.name
+controls@bits-apogee.org''') % (part.name)
                 email = EmailMessage("APOGEE 16 Confirmation", body, 'noreply@bits-apogee.org', send_to, connection=postmarkbackend)
             #poster attachment
             # email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
