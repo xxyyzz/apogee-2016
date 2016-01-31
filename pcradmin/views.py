@@ -35,6 +35,14 @@ postmarkbackend = EmailBackend(
     use_tls=True,
     fail_silently=False,
 )
+awsbackend = EmailBackend(
+    host='email-smtp.us-east-1.amazonaws.com',
+    port=587,
+    username='AKIAITSG5NOGTWUOKGKA',
+    password='AgMT6v+BaxhlW+3AyNxGiJ1m1F9RRxfGtRhLfk3kwoIi',
+    use_tls=True,
+    fail_silently=False,
+)
 
 
 def initial_registration(request):
@@ -156,7 +164,7 @@ pcr@bits-apogee.org
 
 Falguni Agrawal: +91 9928089204
 controls@bits-apogee.org''') % part.name
-                email = EmailMessage("APOGEE 16 Confirmation", body, 'noreply@bits-apogee.org', send_to, connection=cabackend)
+                email = EmailMessage("APOGEE 16 Confirmation", body, 'noreply@bits-apogee.org', send_to, connection=awsbackend)
             #poster attachment
             # email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
             #email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
