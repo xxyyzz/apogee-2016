@@ -93,8 +93,8 @@ def part_act(request):
                 part.save()
                 send_to = part.email_id
                 # send_to.append( str( part.email_id) )
-                try:
-                    body = unicode(u'''
+                # try:
+                body = unicode(u'''
 Dear %s,
 CONGRATULATIONS!
 
@@ -107,25 +107,25 @@ Please note:
 - The registration fees will be Rs 900 per person. The workshop fees will be separate.The registration fees can be paid in cash or via demand draft (in favour of BITS PILANI, payable at Pilani), but only on arrival at the campus. However, if you pay the registration fee online you will be paying only Rs.800 i.e. a discount of Rs.100. Please note that multiple participants can make the payment via a single demand draft.
 
 - The registration fees includes
-    1. Accommodation in the hostels for the duration of the fest
-    2. Free entry for all guest lectures and exhibitions
-    3. Participation in all the events and a chance to win prize money worth a total of Rs. 12 lakhs.
+1. Accommodation in the hostels for the duration of the fest
+2. Free entry for all guest lectures and exhibitions
+3. Participation in all the events and a chance to win prize money worth a total of Rs. 12 lakhs.
 
 - The registration fees does not include food. Mess coupons will be available at reasonable rates for those who wish to eat in the mess. There are a lot of eating outlets, cafeterias and restaurants inside campus as well.
 
 - You will have to pay an additional, refundable (will be given back to you) safety deposit of Rs. 200 at the Reception and Accommodation hut.
 
 - You need to produce the following documents on arrival at the campus:
-    1. Two passport size photographs
-    2. A valid college ID card / bonafide certificate
-    3. A print-out of the confirmation page from the website.
-    4. PLEASE ENSURE TO GET YOUR BANK DETAILS ALONG WITH YOU (if you have not filled that in registration form) BECAUSE IF YOU/YOUR TEAM WINS, THERE WOULD NOT BE A PROBLEM IN TRANSFERRING THE PRIZE MONEY.THIS IS COMPULSORY.
+1. Two passport size photographs
+2. A valid college ID card / bonafide certificate
+3. A print-out of the confirmation page from the website.
+4. PLEASE ENSURE TO GET YOUR BANK DETAILS ALONG WITH YOU (if you have not filled that in registration form) BECAUSE IF YOU/YOUR TEAM WINS, THERE WOULD NOT BE A PROBLEM IN TRANSFERRING THE PRIZE MONEY.THIS IS COMPULSORY.
 
 - On Campus Registration Procedure:
-    1. Once on campus, report to the Firewallz (Security) booth at the main gate.
-    2. Then, proceed to the Controls (Registrations) booth to register.
-    3. Obtain your ID card from the adjacent Firewallz (Security) booth.
-    4. Go to the Reception and Accommodation hut to obtain your accommodation details.
+1. Once on campus, report to the Firewallz (Security) booth at the main gate.
+2. Then, proceed to the Controls (Registrations) booth to register.
+3. Obtain your ID card from the adjacent Firewallz (Security) booth.
+4. Go to the Reception and Accommodation hut to obtain your accommodation details.
 
 If You have been confirmed for any Workshops then please read the following:
 Payment for workshops has to be done through Online Payment.
@@ -156,16 +156,16 @@ pcr@bits-apogee.org
 
 Falguni Agrawal: +91 9928089204
 controls@bits-apogee.org
-                    ''') % part.name
-                    email = EmailMessage("APOGEE 16 Confirmation", body, 'noreply@bits-apogee.org', send_to, connection=postmarkbackend)
-                #poster attachment
-                # email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
-                #email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
-                #email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
-                    email.send()
-                    return render(request, 'pcradmin/showmailsent.html')
-                except:
-                    return HttpResponse(' Email Error: Call Satwik 9928823099 ')
+                ''') % part.name
+                email = EmailMessage("APOGEE 16 Confirmation", body, 'noreply@bits-apogee.org', send_to, connection=postmarkbackend)
+            #poster attachment
+            # email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
+            #email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
+            #email.attach_file('/home/dvm/taruntest/oasisattach/Rules Booklet Oasis 2014.pdf')
+                email.send()
+                return render(request, 'pcradmin/showmailsent.html')
+                # except:
+                #     return HttpResponse(' Email Error: Call Satwik 9928823099 ')
 
         elif val == 1:
             for i in part_ids:
