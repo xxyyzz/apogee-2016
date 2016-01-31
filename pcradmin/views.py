@@ -163,8 +163,9 @@ Aditya Chauhan +918239822574
 pcr@bits-apogee.org
 
 Falguni Agrawal: +91 9928089204
-controls@bits-apogee.org''') % part.name
-                email = EmailMessage("APOGEE 16 Confirmation", body, 'noreply@bits-apogee.org', send_to, connection=awsbackend)
+controls@bits-apogee.org
+''') % part.name
+                email = EmailMessage("APOGEE 16 Confirmation", body, 'APOGEE, BITS Pilani <noreply@bits-apogee.org>', send_to, connection=awsbackend)
             #poster attachment
             # email.attach_file('/home/dvm/oasis/oasis2015/attachments/Oasis 2015 Communique.docx')
             #email.attach_file('/home/dvm/taruntest/oasisattach/Oasis 2014 Posters.pdf')
