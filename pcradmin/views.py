@@ -135,9 +135,7 @@ Please note:
 3. Obtain your ID card from the adjacent Firewallz (Security) booth.
 4. Go to the Reception and Accommodation hut to obtain your accommodation details.
 
-If You have been confirmed for any Workshops then please read the following:
-Payment for workshops has to be done through Online Payment.
-In the Workshop tab on the website, go to the workshop you have registered for and click on 'Read More'. It will redirect you to a page that has details regarding the workshop, including the online payment option.
+Registration for various Workshops will happen on campus itself. Registration fees for these workshops will be separate from APOGEE registration fees and have to be paid on campus while enrolling.
 
 You can also check registration status in your APOGEE profile to see your shortlisted workshops, projects, papers and events.
 
