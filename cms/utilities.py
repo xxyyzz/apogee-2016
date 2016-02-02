@@ -54,6 +54,7 @@ def paper_stats_xlsx(request):
     worksheet.write(0, 10, "Co-Author Phone")
     worksheet.write(0, 11, "Co-Author Email")
     worksheet.write(0, 12, "Co-Author College")
+    worksheet.write(0, 13, "Paper Submitted?")
 
     for i, row in enumerate(data):
         """for each object in the date list, attribute1 & attribute2
@@ -74,6 +75,7 @@ def paper_stats_xlsx(request):
         worksheet.write(i+1, 10, deepgetattr(row['obj'] , 'co_author.phone', 'NA'))
         worksheet.write(i+1, 11, deepgetattr(row['obj'] , 'co_author.email', 'NA'))
         worksheet.write(i+1, 12, deepgetattr(row['obj'] , 'co_author.college.name', 'NA'))
+        worksheet.write(i+1, 13, deepgetattr(row['obj'] , 'paper.url', 'NA'))
 
     workbook.close()
     filename = 'ExcelReport.xlsx'
