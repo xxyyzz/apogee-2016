@@ -74,7 +74,7 @@ def paper_stats_xlsx(request):
         worksheet.write(i+1, 9, deepgetattr(row['obj'] , 'co_author.name', 'NA'))
         worksheet.write(i+1, 10, deepgetattr(row['obj'] , 'co_author.phone', 'NA'))
         worksheet.write(i+1, 11, deepgetattr(row['obj'] , 'co_author.email', 'NA'))
-        worksheet.write(i+1, 12, deepgetattr(row['obj'] , 'co_author.college.name', 'NA'))
+        worksheet.write(i+1, 12, deepgetattr(row['obj'] , 'co_author.college.name', 'NA') if row['obj'].paper else "No")
         worksheet.write(i+1, 13, deepgetattr(row['obj'] , 'paper.url', 'NA'))
 
     workbook.close()
