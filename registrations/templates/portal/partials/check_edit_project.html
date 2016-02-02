@@ -71,6 +71,9 @@
                 }
                 else 
                     alert("Delete members from the bottom of the list !");
+                if(members < 5) {
+                $(".add-member").show();
+                }
         });
     }
 
@@ -88,11 +91,11 @@
                     $(".mem-"+value+"-wrapper").remove();
                     members--;
                 };
-                if(members < 3) {
-                $(".add-member").show();
-                }
                 else
                     alert("Delete members from the bottom of the list !");
+                if(members < 5) {
+                $(".add-member").show();
+                }
             });
 
             if(members == 5 ) {
