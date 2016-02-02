@@ -18,7 +18,8 @@ urlpatterns = [
 
     url(r'^mail_selected/$', views.mail_selected_amb),
 
-
+    url(r'^dhiti_xlsx/$', views.dhiti_xlsx),
+    url(r'^reng_xlsx/$', views.RENG_xlsx),
     # url(r'^username/save/(?P<user_id>\d+)/$', views.username_save),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     # url(r'^$', views.home),
