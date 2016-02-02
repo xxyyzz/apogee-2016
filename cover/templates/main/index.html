@@ -39,6 +39,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'cover/main/css/style.css' %}">
 
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+	<script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
 	
 	<script type="text/javascript" src="{% static 'cover/main/js/jquery.min.js' %}" ></script>
 	<script type="text/javascript" src="{% static 'cover/main/js/svg-pan-zoom.min.js' %}"></script>
@@ -110,6 +111,15 @@
 
 
 <!-- Profile -->
+<div id="login_instrs" class="map-help">
+		<div class="txt" style="text-align:left;">
+			<span class="welcome">You are successfully logged in!</span><br>
+			Click on the view profile button on the top right corner to open profile page. Update the neccesary details.<br><br> You can also view your registered events and pay the APOGEE 2016 registration fee online to avail a discount of Rs. 100/-
+			<br>
+
+			<button class="help-button">Ok</button>
+		</div>
+</div>
 
 <div class="lb_pro_cont abs_center">
 	<div class="close_lb_profile abs_center" style="top:0;right:0"></div>
@@ -134,14 +144,16 @@
 					<div class="const_det pd_college"></div>
 					<div class="det_label">Phone:</div>
 					<div class="const_det pd_phone"></div>
-					<div class="const_det approved">Approved</div>
+					<div class="const_det approved">Account Approved</div><br>
+					<div class="const_det pay_rec">Payment Received</div>
 				</div>
 				<div class="other_det_cont">
 					<form id="pro_detail_form">
 						<div class="const_det" style="border-bottom:1px solid #333">Bank Details:</div>
+						<span>Your<span>
 						<label for="bank_name">Bank Name</label>
 						<input type="text" placeholder="eg. ICICI Bank" name="bank_name" required/>
-						<label for="bank_acc_no">Account Number</label>
+						<label for="bank_account_no">Account Number</label>
 						<input type="number" placeholder="eg. 083301505263" name="bank_account_no" required/>
 						<label for="bank_ifsc">IFSC code</label>
 						<input type="text" placeholder="eg. ICIC0000833" name="bank_ifsc" required/>
@@ -176,7 +188,12 @@
 				</div> -->
 			</div>
 			<div class="pro_tab" id="pro_payment">
-				<div style="Width:100%;font-size:3em;margin-top:10%;text-align:center">Coming soon...</div>
+				<div style="Width:100%;font-size:1em;margin-top:5%;text-align:center">
+				<div style="font-size:1.5em;padding:30px 10px;">To REGISTER for APOGEE'16. Click the button below to make payment with our 256-bit encrypted secure gateway.</div>
+				<div style="display:inline-block;">
+				<a href="./api/pay/" rel="im-checkout" data-behaviour="link" data-style="flat" data-text="PAY With Instamojo" data-token="c4735e17ef61ada6a51e5d3596627276"></a>
+				</div>
+				</div>
 			</div>
 		</div>
 	</div>

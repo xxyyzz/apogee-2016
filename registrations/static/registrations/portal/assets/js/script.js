@@ -212,9 +212,6 @@ function init_check_status(obj) {
 	});
 }
 
-
-
-
 function init_CampusAmbassadorForm(obj) {
 	console.log("init campus-ambassador");
 	createRipple('#1565C0');

@@ -319,3 +319,4 @@ def participant_summary(request, participantid):
 			'message' : 'No such participant',
 		}
 	return JsonResponse(response)
+

@@ -236,3 +236,5 @@ select {
 	font-weight: 400;
 	font-size: 17px;
 }
+
+.member-delete {cursor:pointer; }

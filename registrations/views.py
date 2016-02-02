@@ -30,7 +30,7 @@ def papersForm(request) :
 	return render(request, "portal/partials/papers_form.html",context)
 
 @csrf_exempt
-def papersStatus(request) : 
+def papersStatus(request) :
 	data = request.POST
 	paper_name = data['paper-name']
 	category = data['category']
@@ -53,7 +53,7 @@ def papersStatus(request) :
 		model_author = Participant.objects.get(email=author_email)
 	except:
 		model_author = Participant.objects.create(name=author_name, phone=author_phone, email=author_email, college=model_college)
-	
+
 	model_category = Category.objects.get(name=category)
 
 	if co_author_name != "":
@@ -107,7 +107,7 @@ def projectsForm(request) :
 
 
 @csrf_exempt
-def projectsStatus(request) : 
+def projectsStatus(request) :
 	data = request.POST
 	project_name = data['project-name']
 	tl_name = data['tl-name']
@@ -153,7 +153,7 @@ def projectsStatus(request) :
 		model_leader = Participant.objects.get(email=tl_email)
 	except:
 		model_leader = Participant.objects.create(name=tl_name, phone=tl_phone, email=tl_email, college=model_college)
-	
+
 	model_category = Category.objects.get(name=category)
 	try:
 		model_assoc = Association.objects.get(name=assoc)
@@ -202,12 +202,12 @@ def checkForm(request) :
 def checkStatus(request) :
 	data = request.POST
 	response = {}
-	try : 
+	try :
 		ref = data['ref']
 		cat = data['cat']
 		if cat == 'paper' :
 			entry = Paper.objects.get(stub=ref)
-			try : 
+			try :
 				response['status'] = 1
 				response['title'] = entry.name
 				response['category'] = entry.category.name
@@ -219,13 +219,14 @@ def checkStatus(request) :
 				response['author']['email'] = entry.author.email
 				response['author']['college'] = entry.author.college.name
 				response['coauthor'] = {}
+				response['round'] = entry.status
 				#response['abstract'] = entry.abstract.file
 				if entry.co_author != None :
 					response['coauthor']['name'] = entry.co_author.name
 					response['coauthor']['phone'] = entry.co_author.phone
 					response['coauthor']['email'] = entry.co_author.email
 					response['coauthor']['college'] = entry.co_author.college
-				
+
 				return render(request, "portal/partials/check_result_paper.html", response)
 
 			except :
@@ -234,7 +235,7 @@ def checkStatus(request) :
 
 		elif cat == 'project' :
 			entry = Project.objects.get(stub=ref)
-			try : 
+			try :
 				response['status'] = 1
 				response['title'] = entry.name
 				response['category'] = entry.category.name
@@ -247,6 +248,7 @@ def checkStatus(request) :
 				response['tl']['email'] = entry.leader.email
 				response['tl']['college'] = entry.leader.college.name
 				response['members'] = []
+				response['round'] = entry.status
 
 				cursor = entry.members.all()
 
@@ -265,7 +267,7 @@ def checkStatus(request) :
 				return render(request, "portal/partials/check_result_project.html", response)
 
 
-	except : 
+	except :
 		print ('quit')
 		response["status"] = 0
 		response["text"] = "Invalid Input"
@@ -277,7 +279,7 @@ def checkStatus(request) :
 # CAMPUS AMBASSADOR VIEWS
 
 
-def campusAmbassadorMain(request) : 
+def campusAmbassadorMain(request) :
 	return render(request, "portal/campusAmbassadorMain.html")
 
 @csrf_exempt
@@ -296,14 +298,14 @@ def campusAmbassadorStatus(request):
 		root_mail = False
 	elif root_mail == 1:
 		root_mail = True
-	
+
 	try:
 		model_college = College.objects.get(name=college)
 	except:
 		model_college = College.objects.create(name=college)
 
 	response = {}
-	
+
 	try:
 		CampusAmbassador.objects.create(name=name, address=address, college=model_college, year=year, degree=degree, email=email, phone=phone, ambassador_quality=ambassador_quality, root_mail=root_mail)
 		response['status'] = 1
@@ -311,7 +313,7 @@ def campusAmbassadorStatus(request):
 
 		body = """Dear Applicant,
 Greetings from the Department for Publications and Correspondence -APOGEE, BITS Pilani. We are pleased to inform you that your registration for the Campus Ambassador Programme for APOGEE 2016 has been confirmed.
- 
+
 Please make sure you go through the following guidelines for better understanding of the programme:
 
 i) Registration Guideline (Make sure you have completed these steps)
@@ -326,7 +328,7 @@ ii) Selection Procedure
 
 iii) Post Selection Tasks
     a) If you are selected, you automatically get registered as a marketing intern with youth4work, working for APOGEE 2016.
-    b) You will be working with a member from the organizing team who will assign you tasks and keep helping you out with various issues you may face during marketing and publicity of APOGEE in your institute. 
+    b) You will be working with a member from the organizing team who will assign you tasks and keep helping you out with various issues you may face during marketing and publicity of APOGEE in your institute.
     c) The final performance of the intern will be judged by how many people he/she can get for APOGEE-2016 from 25th Feb-28th          Feb,2016.
 
 Please note that failing to meet the dedication required for a successful internship without righteous reasons can lead to cancellation of your internship anytime till APOGEE 2016.
@@ -345,7 +347,7 @@ Thank you."""
 		# except:
 		# response['status'] = 0
 		# response['message'] = "Error"
-	
+
 	except IntegrityError:
 		response['status'] = 0
 		response['message'] = "Email already exists!"
@@ -364,9 +366,92 @@ def add_initial_registration(request):
 	try:
 		InitialRegistration.objects.create(name=name, email=email, phone=phone)
 		response['status']=1
-	
+
 	except IntegrityError:
 		response['status'] = 0
 		response['message'] = "Email already exists!"
-	
+
 	return JsonResponse(response)
+
+@csrf_exempt
+def edit_paper(request):
+	if request.method == 'GET':
+		data = request.GET
+		stub = data['ref']
+		entry = Paper.objects.get(stub=stub)
+		response = {
+			"status" : 1,
+			"stub" : entry.stub,
+		}
+		return render(request, "portal/partials/check_edit_paper.html", response)
+
+	if request.method == 'POST':
+		data = request.POST
+		stub = data['ref']
+		paper = request.FILES['0']
+		paper.name = stub + '.pdf'
+		entry = Paper.objects.get(stub=stub)
+		entry.paper = paper
+		entry.save()
+		slugified_category = slugify(entry.category)
+		category_directory = os.path.join(MEDIA_ROOT, 'papers-final/', slugified_category)
+		if not os.path.exists(category_directory):
+			os.makedirs(category_directory)
+		response = {
+			"status" : 1,
+			"message" : "Your final paper has been successfully submitted."
+		}
+		return JsonResponse(response)
+
+
+def edit_project(request):
+	if request.method == 'GET':
+		data = request.GET
+		stub = data['ref']
+		entry = Project.objects.get(stub=stub)
+		response = {
+			"status" : 1,
+			"project" : entry,
+		}
+		return render(request, "portal/partials/check_edit_project.html", response)
+	if request.method == 'POST':
+		data = request.POST
+		stub = data['ref']
+		member = {}
+		for x in range(1,6):
+			member[x] = {}
+			try:
+				key = 'mem-%s-name' % x
+				member[x]['name'] = data[key]
+			except MultiValueDictKeyError:
+				member[x]['name'] = None
+			try:
+				key = 'mem-%s-phone' % x
+				member[x]['phone'] = data[key]
+			except MultiValueDictKeyError:
+				member[x]['phone'] = None
+			try:
+				key = 'mem-%s-email' % x
+				member[x]['email'] = data[key]
+			except MultiValueDictKeyError:
+				member[x]['email'] = None
+		entry = Project.objects.get(stub=stub)
+		entry.members.clear()
+		model_member = {}
+		for x in range(1,6):
+			if member[x]['email'] != None:
+				try:
+					model_member[x] = Participant.objects.get(email=member[x]['email'])
+				except:
+					model_member[x] = Participant.objects.create(name=member[x]['name'], phone=member[x]['phone'], email=member[x]['email'], college=model_college)
+			else:
+				model_member[x] = None
+		for x in range(1,6):
+			if model_member[x] != None:
+				entry.members.add(model_member[x])
+		entry.save()
+		response = {
+			"status" : 1,
+			"message" : "Your changes have been saved."
+		}
+		return JsonResponse(response)

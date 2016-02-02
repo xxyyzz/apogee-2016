@@ -1,0 +1,105 @@
+<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 form-wrapper">
+	<div class="review-project-header">
+		<div class="ref-num-holder">REFERENCE : #{{stub}}</div>
+		<!-- <div class="status-holder">Abstract Submitted</div> -->
+	</div>
+    <div id="form-cont" style="padding:15px 0;">
+    <form id="project-final-abstract">
+    	<div class="row">
+    		<div class="col-xs-6 form-subhead">
+                UPLOAD FINAL PAPER
+            </div>
+            <div class="file-field input-field col-sm-12">
+                <div class="waves-effect red darken-3 btn">
+                    <span>File</span>
+                    <input id="abstract-file" required type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 error-box"></div>
+            <div class="col-xs-12" style="text-align: center">
+                <input class="waves-effect red darken-3 btn submit-button" type="submit">
+            </div>
+            </div>        	<!--
+        	<div class="col-xs-6 form-subhead">
+    			ABSTRACT 
+    		</div>
+        	<div class=" input-field no-label col-sm-12">
+        		{{abstract}}
+        	</div>
+        	-->
+    	</div>     
+    </form>  
+    </div>       
+</div>
+
+<script>
+    $("input#abstract-file").on('change', function(e) {
+        finalabstract = e.target.files;
+    });
+
+    function collect_data() {
+        var data = new FormData() ;
+        data.append('ref', '{{stub}}' );
+
+        $.each(finalabstract, function(key, value)
+        {
+            data.append(key, value);
+        });
+
+        return data;
+    }
+    $("form#project-final-abstract").submit(function(e) {
+        e.preventDefault();
+    
+        errorText='';
+        count = 0;
+
+        var dat = collect_data();
+        var file = $("input#abstract-file").val();
+        var extn = file.substring(file.lastIndexOf(".")+1);
+        if(extn != "pdf" && extn != "PDF" ) {
+            errorText += "<br>&bull;&nbsp;&nbsp;The abstract file can only be of PDF Format."
+            count++;
+        }
+
+        if(count==0)
+        {    
+            $(".submit-button").hide();
+            $.ajax({
+                    url: 'papers/edit/',
+                    type: 'POST',
+                    data: dat,
+                    cache: false,
+                    headers : {
+                        "X-CSRFToken" : getCookie('csrftoken')
+                    },
+                    dataType: 'html',
+                    processData: false,
+                    contentType: false,
+                    success: function(data)
+                    {
+                        jdata = JSON.parse(data);
+                        // console.log(data.status,(data.status==1));
+                        if( jdata.status == 1)
+                            $("#project-final-abstract").html(jdata.message);
+                        else
+                            {
+                                $("#project-final-abstract").html("Unsuccessful! Please try again later.");
+                                $(".submit-button").show();
+
+                            }    
+                    }
+            });
+        }
+        else
+        {
+            $(".error-box").html(errorText).fadeIn(400);
+
+        }    
+
+    });
+</script>
