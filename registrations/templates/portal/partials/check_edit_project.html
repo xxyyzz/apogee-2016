@@ -9,6 +9,7 @@
     		<div class="col-xs-6 form-subhead">
                 EDIT MEMBERS
             </div>
+            <div class="members-wrapper">
 
             {% for member in project.members.all %}
             <div class="mem-{{ forloop.counter }}-wrapper">
@@ -28,6 +29,8 @@
                 </div>
             </div>
             {% endfor %}
+                
+            </div>
             
             <div class="col-xs-12 form-subhead add-member-wraprer">
                 <div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;ADD MEMBER</div> 
