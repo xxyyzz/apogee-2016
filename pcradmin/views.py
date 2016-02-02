@@ -553,6 +553,28 @@ def total_stats(request):
 
 
 
+
+
+def event_part(request, event_id=None):
+    event = Event.objects.get(id=int(event_id))
+    participants = Participant.objects.filter(events=event)
+    context = {
+        'event' : event,
+        'participants' : participants,
+        # 'total' : total,
+    }
+    return render(request, 'pcradmin/stats_participants.html', context)
+
+
+
+
+
+
+
+
+
+
+
 ################################################################
 
 
