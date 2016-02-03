@@ -1319,8 +1319,7 @@ var map_ele_info = {
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
 										func:content_link,
 									},
-
-}
+};
 
 function content_link(b_icon,b_name,b_content){
 	$('.main_head').html(b_name);
@@ -1328,6 +1327,28 @@ function content_link(b_icon,b_name,b_content){
 	$('.lb_descr').html(b_content);
 	open_gen_lb();
 }
+
+$('#updates-wrapper').click(function(){
+	$.ajax({
+		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
+		method:'GET',
+        crossDomain: true,
+		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(data){
+			// console.log(data);
+			var icon = imgpre+'/static/cover/main/img/lb-icons/updates.svg'
+			var content='';
+			for(i=0;i<data['upd'].length;++i)
+			{
+				// console.log(data['upd'][i]);
+				content+='<div class="upd_cont"> <div class="upd_header"> <div class="upd_name" >'+data["upd"][i]["name"]+'</div> <div class="upd_ts">'+data["upd"][i]["date_posted"]+'</div></div><div class="upd_desc">'+data["upd"][i]["content"]+'</div></div>';
+				// content
+			}
+			content_link(icon,'Updates',content);
+		},
+	});
+});
 
 $('.htile').click(function(){
 	$('.closeside').click();
@@ -1487,3 +1508,7 @@ $('.pro_tab_name').click(function(){
 	$('.pro_tab_name').removeClass('tab_active');
 	$(this).addClass('tab_active');
 });
+
+
+//-----------------------UPDATES-------------------------
+
