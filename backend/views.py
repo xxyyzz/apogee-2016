@@ -339,6 +339,6 @@ def getupdates(request):
         	'message' : 'No Notifications',
         }
 
-	return HttpResponse(json.dumps(resp), content_type="application/json")
+	return JsonResponse(resp)
 
 
