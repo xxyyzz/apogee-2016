@@ -331,8 +331,7 @@ def getupdates(request):
 			dic['name']=unicode(x.name)
 			dic['date_posted']=unicode(x.date_posted)      
 			resp.append(dic)
-		return JsonResponse(resp)
-	except :
+	except:
 		resp = {
 			'status': 0,
 			'message' : 'No Notifications',
