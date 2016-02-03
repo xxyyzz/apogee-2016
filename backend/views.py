@@ -320,25 +320,25 @@ def participant_summary(request, participantid):
 		}
 	return JsonResponse(response)
 
-@csrf_exempt
+
 def getupdates(request):
     try:
         u = Updates.objects.all()
     	resp={}
        	resp['Notifications']=[]
        	dic={}
-    	for notification in n :
+    	for notification in u :
         	dic['content']=str(unicode(notification.content))
 	        dic['type']=unicode(notification.types)
 	        dic['link']=unicode(notification.link)      
         	resp['Notifications'].append(dic)
-
+    	return JsonResponse(resp)
     except :
         resp = {
         	'status': 0,
         	'message' : 'No Notifications',
         }
+    	return JsonResponse(resp)
 
-	return JsonResponse(resp)
 
 
