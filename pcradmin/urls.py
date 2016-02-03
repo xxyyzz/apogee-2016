@@ -20,6 +20,7 @@ urlpatterns = [
 
     url(r'^dhiti_xlsx/$', views.dhiti_xlsx),
     url(r'^reng_xlsx/$', views.RENG_xlsx),
+    url(r'^innover_xlsx/$', views.innover_xlsx),
     # url(r'^username/save/(?P<user_id>\d+)/$', views.username_save),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     # url(r'^$', views.home),
