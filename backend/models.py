@@ -63,7 +63,7 @@ class College(models.Model):
 
 class Updates(models.Model):
     name = models.CharField(max_length=200)
-    content = RIchTextField()
+    content = RichTextField()
     date_posted = models.DateField(auto_now_add=True)
     def __unicode__(self):
         return self.name
