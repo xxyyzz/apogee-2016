@@ -322,23 +322,22 @@ def participant_summary(request, participantid):
 
 
 def getupdates(request):
-    try:
-        u = Updates.objects.all()
-    	resp={}
-       	resp['Notifications']=[]
-       	dic={}
-    	for notification in u :
-        	dic['content']=str(unicode(notification.content))
-	        dic['type']=unicode(notification.types)
-	        dic['link']=unicode(notification.link)      
-        	resp['Notifications'].append(dic)
-    	return JsonResponse(resp)
-    except :
-        resp = {
-        	'status': 0,
-        	'message' : 'No Notifications',
-        }
-    	return JsonResponse(resp)
+	resp = {}
+	try:
+		u = Updates.objects.all()
+		dic = {}
+		for x in u:
+			dic['content']=str(unicode(x.content))
+			dic['name']=unicode(x.name)
+			dic['date_posted']=unicode(x.date_posted)      
+			resp.append(dic)
+		return JsonResponse(resp)
+	except :
+		resp = {
+			'status': 0,
+			'message' : 'No Notifications',
+		}
+	return JsonResponse(resp)
 
 
 
