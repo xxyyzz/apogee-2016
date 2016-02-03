@@ -1189,7 +1189,7 @@ var map_ele_info = {
 
 	'profShow'				:		{
 										ename:'ProfShows',
-										content:'<div class="c_soon">Coming soon...</div>',
+										content:'<div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/aflatunes.jpg"><h2>Aflatunes</h2><div> Stay Aflatuned! for beat-boxing and a capella with the eight-member band, Aflatunes.</div></div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/profshows.svg',
 										func:content_link,
 									},

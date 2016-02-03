@@ -358,7 +358,13 @@ nav{
     margin-top: 150px;
     font-size: 25px;
 }
-
+.prof_sh_cont{
+	text-align: center;
+}
+.prof_sh_cont>img{
+	width: 350px;
+	max-width: 100%;
+}
 .lb_head_cont{
 	position: relative;
     text-align: center;
