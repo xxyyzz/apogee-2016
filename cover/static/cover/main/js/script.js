@@ -1189,7 +1189,7 @@ var map_ele_info = {
 
 	'profShow'				:		{
 										ename:'ProfShows',
-										content:'<div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/aflatunes.jpg"><h2>Aflatunes</h2><div> Stay Aflatuned! for beat-boxing and a capella with the eight-member band, Aflatunes.</div></div>',
+										content:'<div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/aflatunes.jpg"><h2>Aflatunes</h2><div> Stay Aflatuned! for beat-boxing and a capella with the eight-member band, Aflatunes.</div></div><hr><div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/abish.jpg"><h2>Abish Mathew</h2><div>Abish Mathew is an Indian Stand Up comedian, actor and musician. Known for his work with All India Bakchod and Son Of Abish!</div></div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/profshows.svg',
 										func:content_link,
 									},

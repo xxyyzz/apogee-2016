@@ -9,7 +9,17 @@
 		<link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,300,100' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
+		<style>
+		.info>table{
+			border-spacing: 0;
+		}
+		.info td,.info th{
+			vertical-align: top;
+			border: 1px solid #eee;
+			padding: 15px;
+			text-align: center;
+		}
+		</style>
 	</head>
 
 <body>
@@ -53,7 +63,7 @@
 	</a></div>
 	<div><a  href="javascript: void(0)" onclick="curr=6; headexp()">
 		<div id="head5" class="headele">
-			<p class="headtxt" style="font-size:20px;">Registration</p>
+			<p class="headtxt" style="font-size:20px;">Results</p>
 			<img class="headimg" src="{% static 'iot/img/icons/reg.png' %}">
 		</div>
 	</a></div>
@@ -168,82 +178,89 @@ machines smart human extensions.</p>
 	<a id="home" href="javascript: void(0)" onclick="home()"><p class="close"> X </p></a>
 	<div class="scroller2">
 		<div class="form">
-			<div class="title_head">Registration</div>
-			<!--<div style="font-size: 3em;font-weight:900;margin-top: 19%;text-align: center;position: relative;">watch for it... submission starts soon !</div>-->
-			<div class="info" style="font-size:1em; margin-top:30px" >
-				<div id="form_cont" class="form-style-5">
- 				<form id="iotform">
- 					<fieldset>
- 						<legend><span class="number">1</span> Team Leader</legend>
- 						<input id="gl-name" name="field2" required="" type="text"  placeholder="Name">
- 						<input id="gl-phone" required="" type="text" name="field2" placeholder="Phone">
- 						<input id="gl-email" required="" type="text" name="field2" placeholder="Email">
- 						<div style="line-height:1.5em; text-align:left;">
- 							<input class="college" type="radio" name="college0" onclick="bits(this)" data-key="l" checked /><span>BITS Pilani</span>
- 							<input class="college" type="radio" name="college0" onclick="other_college(this)" data-key="l" /><span>Other, Specify </span>
- 							<input id="gl-college" required type="text" style="display:none" value="BITS Pilani">
- 						</div><br>
- 						<label for="gl-yos">Year of Study</label>
- 						<select id="gl-yos"  name="gl-yos" required="">
- 							<option value="1">1</option>
-
- 							<option value="2">2</option>
-
- 							<option value="3">3</option>
-
- 							<option value="4">4</option>
-
- 							<option value="5">5</option>
-
- 						</select>
- 					</fieldset>
- 					<fieldset>
- 						<legend><span class="number">2</span> Members</legend>
- 						<div class="members-wrapper" style="line-height:1.5em; text-align:left;">
- 							<div class="mem-1-wrapper">
- 								<div class="col-xs-12 form-subhead" style="padding-bottom:8px">Member 1
- 								</div>
- 								<div class="input-field col-sm-6">
- 									<input id="mem-1-name" required type="text" placeholder="Name">
- 								</div>
- 								<div class="input-field col-sm-6">
- 									<input id="mem-1-phone" required type="text" placeholder="Phone">
- 								</div>
- 								<div class="input-field col-sm-12">
- 									<input id="mem-1-email" required type="text" placeholder="Email">
- 								</div>
- 								<div class="input-field col-sm-12">
- 									<div style="line-height:1.5em; text-align:left;">
- 										<input class="college" type="radio" name="college1" onclick="bits_mem(this)" data-key="1" checked><span>BITS Pilani</span>
- 										<input class="college1" type="radio" name="college1" onclick="other_college_mem(this)" data-key="1"><span>Other, Specify</span>
- 										<input id="mem-1-college" required type="text" style="display:none" value="BITS Pilani">
- 									</div>
- 									<br>
- 								</div>
- 								<div class="input-field col-sm-12">
- 									<label for="mem-1-yos">Year of Study</label>
- 									<select id="mem-1-yos" name="mem-1-yos" required="">
- 										<option value="1">1</option>
- 										<option value="2">2</option>
- 										<option value="3">3</option>
- 										<option value="4">4</option>
- 										<option value="5">5</option>
- 									</select>
- 								</div>
- 							</div>
- 						</div>
- 						<div class="pull-right add-member"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Member</div>
- 					</fieldset>
- 					<fieldset>
- 						<legend><span class="number">3</span>Upload File</legend>
- 						<span>
- 							<input id="abstract-file" required="" type="file" value="File">
- 						</span>
- 					</fieldset>
- 					<div class="error-box"></div>
- 					<button type="submit" value="Register"  class="waves-effect red darken-3 btn submit-button">SUBMIT</button>
- 				</form>
- 			</div>
+			<div class="title_head" style="text-align:center;">Selected Teams</div>
+			
+			<div class="info" style="font-size:1em; margin-top:30px;padding: 10px 20px; border-radius: 5px; background: rgba(255,255,255,0.6);" >
+				<table>
+					<tr>
+						<th>Team No.</th>
+						<th>Leader Name</th>
+						<th>Team Members</th>
+						<th>College</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Shivam Khandelwal</td>
+						<td>Rahul Surana, Parakh Sarda, Prajyot Gupta</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Vinayak Vakare</td>
+						<td>Sayali Wadekar, Shivam Yadav, Ramratan Prajapati</td>
+						<td>Terna College of Engineering, Nerul, Navi Mumbai</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Vinith Kannan A</td>
+						<td>Gokulnath B, Saran S, Vishal L</td>
+						<td>RMK Engineering College, Tamil Nadu</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Gaurav Mittal</td>
+						<td>Antil Singhal, Archit Saxena, Rahul Kumar Budhwani</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>Akash Sheshrao Sargar</td>
+						<td>Avinash Gajanan Nagare</td>
+						<td>Shri Sant Gajanan maharaj College of Engineering, Shegaon</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td>Shivesh Ganju</td>
+						<td>Mohit Yadav, Mihir Saxena, Abhishek Teotia</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td>Gokula Krishnan</td>
+						<td>Sadhana Shrinivasan, Vidhi Jain</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td>Vijay Singh</td>
+						<td>Pushpendra Singh</td>
+						<td>BKBIET Pilani</td>
+					</tr>
+					<tr>
+						<td>9</td>
+						<td>Antarang Jain</td>
+						<td>Neel Choski, Rahul Sharma, Shrenik Borad</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td>Nitesh Vijay</td>
+						<td>Abhishek Kumar, Ankit Raj, Nilay Jain</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>Arjun Tyagi</td>
+						<td>Akshay Goelcha, Nitin Mankani</td>
+						<td>BITS Pilani</td>
+					</tr>
+					<tr>
+						<td>12</td>
+						<td>Kalpit Munot</td>
+						<td>Shashwat Shivam Jha, Nishant Poonia</td>
+						<td>BITS Pilani</td>
+					</tr>
+				</table>
 			</div>		
 		</div>
 	</div>
