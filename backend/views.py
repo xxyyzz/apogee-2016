@@ -323,6 +323,7 @@ def participant_summary(request, participantid):
 
 def getupdates(request):
 	resp = {}
+	resp['upd'] = []
 	try:
 		u = Updates.objects.all()
 		dic = {}
@@ -330,7 +331,7 @@ def getupdates(request):
 			dic['content']=str(unicode(x.content))
 			dic['name']=unicode(x.name)
 			dic['date_posted']=unicode(x.date_posted)      
-			resp.append(dic)
+			resp['upd'].append(dic)
 	except:
 		resp = {
 			'status': 0,
