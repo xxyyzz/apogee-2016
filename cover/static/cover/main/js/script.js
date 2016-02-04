@@ -1329,6 +1329,7 @@ function content_link(b_icon,b_name,b_content){
 }
 
 $('#updates-wrapper').click(function(){
+	console.log('yo');
 	$.ajax({
 		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
 		method:'GET',
@@ -1336,7 +1337,7 @@ $('#updates-wrapper').click(function(){
 		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(data){
-			// console.log(data);
+			console.log(data);
 			var icon = imgpre+'/static/cover/main/img/lb-icons/updates.svg'
 			var content='';
 			for(i=0;i<data['upd'].length;++i)
