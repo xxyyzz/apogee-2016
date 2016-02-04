@@ -1106,7 +1106,7 @@ $("g.struct").on('mousedown', function (evt) {
 var map_ele_info = {
 	'thinkAgainConclave'	:		{
 										ename:'Think Again Conclave',
-										content:'<p>The <b>Think Again conclave</b>, the out of the box guest lecture series of APOGEE, has been an integral component of the fest ever since its inception in 2012. Featuring talks by some of the brightest and most creative minds on the planet, the conclave has always inspired the students and attendees to rediscover and refurbish their minds and ambitions, and quite aptly, to “Think Again”. </p><p>The series, over the years, has showcased a vast number of orators who have left the audience in raptures with their sheer brilliance on stage. Walter Lewin, Ryan Woodward, Jeff Lieberman, Mansoor Khan, David J. Peterson and Walter Bender are just some of the many names, who have instilled a sense of novelty in the minds of the audience and added a different dimension to their thinking. The Think Again Conclave was also the proud host of the first ever Ig Nobel Laureates’ Conference.</p><p style="font-size:25px;font-weight:900">Stay tuned while we reveal present year\'s speakers...</p>',
+										content:'<p>The <b>Think Again conclave</b>, the out of the box guest lecture series of APOGEE, has been an integral component of the fest ever since its inception in 2012. Featuring talks by some of the brightest and most creative minds on the planet, the conclave has always inspired the students and attendees to rediscover and refurbish their minds and ambitions, and quite aptly, to “Think Again”. </p><p>The series, over the years, has showcased a vast number of orators who have left the audience in raptures with their sheer brilliance on stage. Walter Lewin, Ryan Woodward, Jeff Lieberman, Mansoor Khan, David J. Peterson and Walter Bender are just some of the many names, who have instilled a sense of novelty in the minds of the audience and added a different dimension to their thinking. The Think Again Conclave was also the proud host of the first ever Ig Nobel Laureates’ Conference.</p><p style="font-size:25px;font-weight:900">Present Speakers...</p><p><div style="display:inline-block;width:320px;padding:5px 25px;text-align:center;"> <b>Dr. Richard Stallman</b><br> Father of the Free Software Movement, Founder GNU will be speaking on  Net Neutrality on 26th February 2016. </div> <div style="display:inline-block;width:300px;padding:5px 25px;text-align:center;"> <b>Mobasshar Javed Akbar</b><br> A Columnist, Editor, Author will be speaking on the relationship between India and Pakistan on 27th February 2016. </div></p><br><a class="lb_a" href="http://bits-apogee.org/thinkagain/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/thinkAgain.svg',
 										func:content_link,
 									},
@@ -1189,7 +1189,7 @@ var map_ele_info = {
 
 	'profShow'				:		{
 										ename:'ProfShows',
-										content:'<div class="c_soon">Coming soon...</div>',
+										content:'<div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/aflatunes.jpg"><h2>Aflatunes</h2><div> Stay Aflatuned! for beat-boxing and a capella with the eight-member band, Aflatunes.</div></div><hr><div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/abish.jpg"><h2>Abish Mathew</h2><div>Abish Mathew is an Indian Stand Up comedian, actor and musician. Known for his work with All India Bakchod and Son Of Abish!</div></div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/profshows.svg',
 										func:content_link,
 									},
@@ -1319,8 +1319,7 @@ var map_ele_info = {
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
 										func:content_link,
 									},
-
-}
+};
 
 function content_link(b_icon,b_name,b_content){
 	$('.main_head').html(b_name);
@@ -1328,6 +1327,29 @@ function content_link(b_icon,b_name,b_content){
 	$('.lb_descr').html(b_content);
 	open_gen_lb();
 }
+
+$('#updates-wrapper').click(function(){
+	console.log('yo');
+	$.ajax({
+		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
+		method:'GET',
+        crossDomain: true,
+		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(data){
+			console.log(data);
+			var icon = imgpre+'/static/cover/main/img/lb-icons/updates.svg'
+			var content='';
+			for(i=0;i<data['upd'].length;++i)
+			{
+				// console.log(data['upd'][i]);
+				content+='<div class="upd_cont"> <div class="upd_header"> <div class="upd_name" >'+data["upd"][i]["name"]+'</div> <div class="upd_ts">'+data["upd"][i]["date_posted"]+'</div></div><div class="upd_desc">'+data["upd"][i]["content"]+'</div></div>';
+				// content
+			}
+			content_link(icon,'Updates',content);
+		},
+	});
+});
 
 $('.htile').click(function(){
 	$('.closeside').click();
@@ -1487,3 +1509,7 @@ $('.pro_tab_name').click(function(){
 	$('.pro_tab_name').removeClass('tab_active');
 	$(this).addClass('tab_active');
 });
+
+
+//-----------------------UPDATES-------------------------
+

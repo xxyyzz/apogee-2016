@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -59,3 +60,10 @@ class College(models.Model):
 	is_displayed = models.BooleanField(default=False)
 	def __unicode__(self):
 		return str(self.name)
+
+class Updates(models.Model):
+    name = models.CharField(max_length=200)
+    content = RichTextField()
+    date_posted = models.DateField(auto_now_add=True)
+    def __unicode__(self):
+        return self.name
