@@ -191,7 +191,7 @@ def aic_stats_xlsx(request):
         there is no data available"""
 
         worksheet.write(i+1, 0, deepgetattr(row['obj'], 'id', 'NA'))
-        worksheet.write(i+1, 1, deepgetattr(row['obj'], 'get_problem_statement_display()', 'NA'))
+        worksheet.write(i+1, 1, row['obj'].get_problem_statement_display())
         worksheet.write(i+1, 2, deepgetattr(row['obj'], 'solution.url', 'NA'))
         worksheet.write(i+1, 3, deepgetattr(row['obj'], 'leader.name', 'NA'))
         worksheet.write(i+1, 4, deepgetattr(row['obj'], 'leader.phone', 'NA'))
