@@ -1072,7 +1072,7 @@ $("#help-button-2,#map-help-2").click(function() {
 
 $("g.struct").on('mousedown', function (evt) {
 	var init_x=evt.pageX,init_y=evt.pageY;
-	// console.log(init_x,init_y,evt);
+	console.log(init_x,init_y,evt);
   $("g.struct").on('mouseup', function handler(evt) {
  	var fin_x=evt.pageX,fin_y=evt.pageY;
  	// console.log(init_x,fin_x,init_y,fin_y,evt);
@@ -1316,6 +1316,24 @@ var map_ele_info = {
 	'workshops'			:		{
 										ename:'Workshops',
 										content:'<div style="text-align:center;width:100%;"><div class="workshop-title"><div>ONCAMPUS Workshop</div></div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/AuthenticTechs.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Authentic Techs</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Authentic Techs. They will be conducting Ethical Hacking/Cyber Forensic, Surface Computing, Android Development. workshops in BITS PILANI as well.</div> <div><b>TOPIC: </b> Ethical Hacking/Cyber Forensic, Surface Computing, Android Development.</div><div><b>COST: </b> Rs. 1100/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div><div> <a class="lb_a" href="http://authentictechs.com/bitsapogee/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a></div> </div> </div> <div class="workshop-cont"> <div class="workshop-img"> <img src="" class="abs_center"> </div> <div class="workshop-desc"> <div>Workshop on Financial Engineering</div> <div><b>COST: </b> Rs. 900/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div></div></div><div class="workshop-cont"> <div class="workshop-img"> <img src="" class="abs_center"> </div> <div class="workshop-desc"> <div>Workshop on MATLAB</div> <div><b>COST: </b> Rs. 900/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div></div></div><div class="workshop-title">	<div>OUTREACH Workshop</div></div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/AuthenticTechs.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Authentic Techs</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Authentic Techs. They will be conducting Ethical Hacking workshops all over India, and the winners get to witness APOGEE \'16 in BITS the 25th to 28th February, 2016. To register as a participant or conduct this workshop in your college, follow the link below.</div> <div><b>TOPIC: </b> Ethical Hacking/Cyber Forensic, Surface Computing, Android Development.</div><div> <a class="lb_a" href="http://authentictechs.com/bitsapogee/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register</b></a></div> </div> </div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/Jarvis.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Jarvis India</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Jarvis India. They will be conducting Internet of Things and Mobile Controlled Robotics workshops all over India, and the winners get to witness APOGEE \'16 in BITS the 25th to 28th February, 2016.</div> <div><b>TOPIC: </b>Internet of Things, Mobile Controlled Robotics.</div><div> <a class="lb_a" href="http://www.jarvisindia.net/outReach.php#68" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register</b></a></div> </div> </div> </div>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										func:content_link,
+									},
+	'armageddon'			:		{
+										ename:'Armageddon',
+										content:'<div class="c_soon">Coming soon...</div>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										func:content_link,
+									},									
+	'blog'			:		{
+										ename:'Blog',
+										content:'<div class="c_soon">Coming soon...</div>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										func:content_link,
+									},
+	'kernel'			:		{
+										ename:'Kernel Events',
+										content:'<div class="c_soon">Coming soon...</div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
 										func:content_link,
 									},
