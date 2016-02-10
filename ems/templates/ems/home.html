@@ -1,0 +1,40 @@
+{% extends "ems/base.html" %}
+{% block title %}
+    Login
+{% endblock title %}
+{% block sidebar_content %}
+    <li>
+        <a href="{% url 'ems:event_home' %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Manage Events</p>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'ems:team_home' %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Manage Teams</p>
+        </a>
+    </li>
+{% endblock sidebar_content %}
+{% block main_content %}
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">{{ user.get_full_name }}</h4>
+                            <p class="category">Logged In</p>
+                            <p class="category">Select an option from the sidebar</p>
+                            {% if errors %}
+                                <p class="category" style="color:red">Please mind your own business</p>
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock main_content %}
