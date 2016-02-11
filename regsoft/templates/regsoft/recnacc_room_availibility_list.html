@@ -1,0 +1,273 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+     <!--           <br>
+    <a href="http://www.bits-bosm.org/2015/regsoft/recnacc/dashboard/{{ gl_id }}/">Summary</a>
+    <a href="http://www.bits-bosm.org/2015/regsoft/recnacc/"> Go to Home </a>
+        <br>
+    <a href="/2015/regsoft/recnacc/bhavanwise/" target="_blank">Bhavan College List </a>
+    <br>
+    <a href="/2015/regsoft/recnacc/all_bhavans/" target="_blank">Overall Room Availibilty</a> -->
+<div class="wrapper">
+    <div class="sidebar" data-color="azure" >  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Recnacc </strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="../home/">
+                        <i class="pe-7s-home"></i> 
+                        <p>HOME</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="../bhavan_gleader_list/">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>Bhavan-Leader List</p>
+                    </a>
+                </li>  
+                <li>
+                    <a href="../../groupcodes">
+                        <i class="pe-7s-note2"></i> 
+                        <p>GroupCode list</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="../checkedout_select_gl/">
+                        <i class="pe-7s-credit"></i> 
+                        <p>Checkedout List</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="../bhavan_inventory_list/">
+                        <i class="pe-7s-safe"></i> 
+                        <p>Inventory Availabilty</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="../room_availibility_list/">
+                        <i class="pe-7s-culture"></i> 
+                        <p>Room Vacancy</p>
+                    </a>            
+                </li>
+
+            </ul> 
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> BITS Oasis 2015 </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    <!-- 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul> -->
+                </div>
+            </div>
+        </nav>
+                     
+                     
+        <script type= 'text/javascript'>
+function checkall(gauss){
+  var cbx = document.getElementsByTagName('input');
+  for(var i=0; i< cbx.length ; ++i)
+  {
+    if(cbx[i].type == 'checkbox')
+      cbx[i].checked = gauss.checked;
+
+  }
+}
+
+</script>
+                     
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                              <!--   <h4 class="title">Participants for {{gl.details.college}}</h4> <h5> Males : {{no_males}} Females : {{no_females}} </h5>
+                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>College Representative: {{gl.details.college_rep.details.name}} <br>The following have not been alloted rooms.</p> -->
+                            <h4> Roomwise Vacancy</h4>         </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Bhawan</th>
+                                        <th>Room</th>
+                                        <th>Vacancy</th>
+                                        <!-- <th>Allot Seats</th> -->
+                                        <!-- <th>a</th>
+                                        <th>b</th>
+                                        <th>c</th>
+                                        <th>d</th>
+                                        <th>e</th>
+                                        <th>f</th> -->
+                                        
+                                       <!--  <th width="8%">Select </th> -->
+                                    </thead>
+                                    <tbody><!-- 
+                                        <form method= "POST" action = "../allot/{{gl.id}}" id ="form2"> -->
+                                          {% for x in all_rooms %}
+                                            {% if x.id > 0 %}
+                                            <tr class="trprop">
+                                                <td>{{x.bhavan.name}}</td>
+                                                <td>{{x.room}}</td>
+                                                <td id="{{x.id}}" >{{x.vacancy}}</td>
+                                                <!-- <td><input type ="number" name="{{x.id}}alloted" id="{{x.id}}alloted"/></td> -->
+                                                <!-- <td>{{x.a_capacity}}</td>
+                                                <td>{{x.b_capacity}}</td>
+                                                <td>{{x.c_capacity}}</td>
+                                                <td>{{x.d_capacity}}</td>
+                                                <td>{{x.e_capacity}}</td>
+                                                <td>{{x.f_capacity}}</td> -->
+                                               <!--  <td><label class="checkbox"><input type ="checkbox" name="roomid"  value = "{{x.id}}" data-toggle= "checkbox"></label></td> -->
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                      
+                                   <!--     </form> -->
+                                    </tbody>
+                                </table>
+
+                                   
+                            </div>
+                        </div>
+                            <!-- <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" value="Confirm"/ onclick="return checkvalue();" form= "form2"><strong>Allot</strong></button> -->
+                    </div>  
+                    
+                    <style type="text/css">
+                        .itemcnt
+                        {
+                            font-size: 14px;
+                            line-height: 18px;
+                            text-align: center;
+                            position: absolute;
+                            width: 70px;
+                            color: #333;
+                        }
+                        .trprop
+                        {
+                            border-bottom: 20px solid transparent;
+                            border-top: 1px solid #111;
+                        }
+                    </style>
+                    
+                    
+                                 
+                </div>                    
+            </div>
+        </div>
+
+<!--     <form>
+    <select name = "bhavan">
+        {% for x in blist %}
+        <option value="{{x.id}}">{{x.name}}</option>
+        {% endfor %}
+    </select>
+    <input type ="number" name="a" />
+    <input type ="number" name="b" />
+    <input type ="number" name="c" />
+    <input type ="number" name="d" />
+    <input type ="number" name="e" />
+    <input type ="number" name="f" />
+    <input type = "hidden" name = "gl_id"  -->
+
+      
+
+
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : <strong>9928823099 / 8058868682</strong> / 9928834365  
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+
+{% endblock body %}
+
+
+
+<!-- <form method="POST" action="http://www.bits-oasis.org/2015/recnacc/allot/{{gl_id}}/">
+<input type="hidden" name="formtype" id="code" value="finalform"/>
+ <div class="content table-responsive table-full-width">
+        <table class="table table-hover table-striped">
+        <tr>
+            <th>Bhawan</th>
+            <th>Room</th>
+            <th>Availibilty</th>
+            <th>Allot Seats</th>
+            <th>Select</th>
+            
+        </tr>
+        {% for x in all_rooms %}
+            {% if x.id > 0 %}
+            <tr>
+                <td>{{x.bhavan.name}}</a></td>
+                <td>{{x.room}}</td>
+                <td id="{{x.id}}">{{x.vacancy}}</td>
+                <td><input type ="number" name="{{x.id}}alloted" id="{{x.id}}alloted"/></td>
+                <td><input type ="checkbox" name="roomid" class="blahblah" value = "{{x.id}}"/></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    
+    <input type="submit" value="Confirm"/ onclick="return checkvalue();">
+    </form>
+     <table>
+        <tr>
+            <th>Name</th>
+            <th>Room</th>
+            <th>Bhawan</th>
+
+            
+        </tr>
+        {% for x in done_participants %}
+            <tr><td>{{x.name}}</td>
+                <td>{{x.room.room}}</td>
+                <td>{{x.room.bhavan.name}}</td>
+             </tr>
+        {% endfor %}
+    </table> -->
+ 

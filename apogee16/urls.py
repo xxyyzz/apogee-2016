@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^youthcon/', include('youthcon.urls', namespace='youthcon')),
     url(r'^events/', include('Event.urls', namespace='Event')),
     url(r'^api/', include('backend.urls', namespace='api')),
+    url(r'^', include('regsoft.urls', namespace='regsoft')),
+    
 ]

@@ -1,0 +1,196 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+    
+
+ 
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/static/regsoft/img/sidebar-4.jpg">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Controls </strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="{% url 'regsoft:main' %}">
+                        <i class="pe-7s-home"></i> 
+                        <p>Home</p>
+                    </a>            
+                </li>
+            </ul> 
+        </div>
+
+    </div>
+
+    
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> Controls Booth </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+<script type= 'text/javascript'>
+function checkall(gauss){
+  var cbx = document.getElementsByTagName('input');
+  for(var i=0; i< cbx.length ; ++i)
+  {
+    if(cbx[i].type == 'checkbox')
+      cbx[i].checked = gauss.checked;
+
+  }
+}
+
+</script>
+                     
+        <!--<div class="content">
+            <div class="container-fluid">
+            <div class="row">                   
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Details</h4>
+                                
+                            </div>
+                            <div class="content">
+                                <p><strong>Name</strong> {{ participant.name }} <br></p>
+                                <p><strong>Gender</strong> {{ participant.gender }} <br></p>
+                                <p><strong>College</strong> {{ participant.college }} <br></p>
+                                <p><strong>Phone One</strong> {{ participant.phone_one }} <br></p>
+                                <p><strong>Phone Two</strong> {{ participant.phone_two }} <br></p>
+                                <p><strong>Events</strong> {% for event in participant.confirmed_events.all %} {{ event.name }}, {% endfor %} <br></p>
+                            </div>
+                        </div>
+                    </div>           
+                </div>                     
+            </div>
+        </div>-->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="card">
+                        <form action="." method="POST">
+                        {% csrf_token %}
+                            <div class="header">
+                                <h4 class="title">Add a BITSian</h4>
+                            </div>
+                            <div class="content">
+                            {% if status == 1 %}
+                            <div class="alert alert-success">
+                                    <span><b>{{ bitsian.long_id }} - {{ bitsian.name }}</b> added successfully!</span>
+                            </div>
+                            {% endif %}
+                            {% if status == 0 %}
+                            <div class="alert alert-danger">
+                                {% if bitsian %}
+                                    <span><b>{{ bitsian.long_id }} - {{ bitsian.name }}</b> already exists in the database!</span>
+                                {% elif wrongid %}
+                                    <span><b>{{ wrongid }}</b> is not a valid ID!</span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>Full ID</label>
+                                                <input type="text" class="form-control" required placeholder="2014A3PS200P" name="long_id" size="12">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Short ID</label>
+                                                <input type="number" class="form-control" required placeholder="14200" name="short_id">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <input type="text" list="genders" class="form-control" required placeholder="M" name="gender">
+                                                <datalist id="genders">
+                                                    <option value="M">Male</option>
+                                                    <option value="F">Female</option>
+                                                </datalist>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" required placeholder="Nikhil Verma" name="name">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>College</label>
+                                                <input type="text" class="form-control" readonly placeholder="Blank" value="BITS Pilani" name="college">
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-fill" name="update">Save</button>
+                                    <div class="clearfix"></div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>               
+                </div>                    
+            </div>
+        </div>
+        
+
+
+
+
+        <!-- FOOTER FOR THE PAGE -->
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : 9928823099 / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+{% endblock body %}
+
+

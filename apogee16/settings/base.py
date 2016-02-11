@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'iot',
     'dhiti',
     'youthcon',
+    'regsoft',
 )
 
 MIDDLEWARE_CLASSES = (

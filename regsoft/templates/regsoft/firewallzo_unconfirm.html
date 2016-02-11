@@ -1,0 +1,202 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+    
+
+ 
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color="blue" data-image="/static/regsoft/img/sidebar-4.jpg">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Firewallz </strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="../scan">
+                        <i class="pe-7s-home"></i> 
+                        <p>Home</p>
+                    </a>            
+                </li>
+
+                <li>
+
+                    <a href="../scan/{{crep.id}}">
+                        <i class="pe-7s-menu"></i> 
+                        <p>Dashboard</p>
+                    </a>
+   
+                </li>
+                <li>
+                    <a href="../../groupcodes">
+                        <i class="pe-7s-note2"></i> 
+                        <p>Passed Groups</p>
+                    </a>            
+                </li>
+
+
+
+                <li>
+                    <a href="../barcodelist">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>BARCODELIST</p>
+                    </a>        
+                </li>
+                <li>
+                    <a href="../add/{{crep.id}}">
+                        <i class="pe-7s-user"></i> 
+                        <p>Add Participant </p>
+                    </a>
+                </li>
+           
+            </ul> 
+        </div>
+
+    </div>
+
+    
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> Firewallz Outer Booth </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+<script type= 'text/javascript'>
+function checkall(gauss){
+  var cbx = document.getElementsByTagName('input');
+  for(var i=0; i< cbx.length ; ++i)
+  {
+    if(cbx[i].type == 'checkbox')
+      cbx[i].checked = gauss.checked;
+
+  }
+}
+
+</script>
+                     
+       <div class="content">
+            <div class="container-fluid">
+                <div class="row">                                        
+
+                    
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">Passed Firewallz</h4>
+                                <p class="category">Males : {{maleno}} Females : {{femaleno}}</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th>S.no</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Events </th>
+                                        <th>Group Leader</th>
+                                        <th>Phone</th>
+                                        <th>Select All
+                                            <input type= 'checkbox'  name= 'selectall' onclick= "checkall(this)">
+                                        </th>
+                                        
+                                    </thead>
+                                    <tbody>
+                                        <form method= "POST" action = '../unconfirmed/{{crep.id}}' id ="form1">
+                                            {% csrf_token %}                        
+                                            <input type = 'hidden' name='crepid' value = {{crep.id}}>                
+                                        {% for prt in plist %}
+
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td>{% if prt.grpleader.details == prt %}
+                                                <strong>{{prt.name}}(gl) </strong>
+                                                {% else %}
+                                                {{prt.name}}
+                                                {% endif %}
+                                            </td>
+                                            <td> {{prt.gender}} </td>
+                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td> {{prt.grpleader.details.name}}
+                                            <td>{{prt.phone_one}}</td>
+
+                                            <td>
+                                                <!-- <label class="checkbox"> -->
+                                                    <input type='checkbox'   name='part' value = '{{prt.id}}'  >
+                                                <!-- </label> -->
+                                            </td>                                            
+
+
+                                        </tr>
+                                        {% endfor  %}
+                                       </form>
+                                    </tbody>
+
+                                </table>
+                               <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1"><strong>UnConfirm </strong></button>     
+                            </div>
+                        </div>
+                    </div> 
+                    
+
+
+
+
+                                 
+                </div>                    
+            </div>
+        </div>
+
+
+
+
+        <!-- FOOTER FOR THE PAGE -->
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : 9928823099 / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+{% endblock body %}
+
+
