@@ -132,44 +132,34 @@ function checkall(gauss){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participants for {{crep.details.college}}</h4> <h5> Males : {{maleno}} Females : {{femaleno}} <br> Faculty : Males : {{fmale}} Females: {{ffemale}} </h5>
-                                <p class="category">College Representative: {{crep.details.name}} <br>The following have not passed firewallz outerbooth</p>
+                                <h4 class="title">Participant of {{part.college.name}}</h4> 
+
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>S.no</th>
-                                        <th>Name</th>
+                                        <th>Name | (Pcr approval)</th>
                                         <th>Gender</th>
                                         <th> Events </th>
                                         <th>Phone</th>
                                         <th>EDIT </th>
+                                        <th>Fee Paid</th>
                                         
-                                         <th>Select All <!-- <label class= "checkbox" > --> 
-                                            <input type= 'checkbox'  name= 'selectall' onclick= "checkall(this)">
-                                        <!-- </label> -->
-                                        </th>
                                     </thead>
                                     <tbody>
                                         <form method= "POST" action = '../confirm/' id ="form1">
                                             {% csrf_token %}
-                                        {% for prt in part %}
                                         <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{prt.name}}{% if prt.is_faculty %}(Faculty){% endif %}</td>
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <td>{{prt.phone_one}}</td>
-                                            <td> <a href="../edit/{{prt.id}}"><i class= 'fa fa-edit'></i> Edit </a>
-                                            <td>
-                                                <!-- <label class="checkbox"> -->
-
-                                                    <input type='checkbox'   name='part' value = '{{prt.id}}' />
-
-                                                <!-- </label> -->
+                                            <td>1</td>
+                                            <td>{{part.name}}{% if part.pcr_approval %}(Pcr approved){% else %}(Not approved){% endif %}</td>
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td> <a href="../edit/{{part.id}}"><i class= 'fa fa-edit'></i> Edit </a>
+                                            <td>{% if part.fee_paid %}Yes{% else %}No{% endif %}
                                             </td>
                                         </tr>
-                                        {% endfor  %}
                                        </form>
                                     </tbody>
                                 </table>
@@ -180,48 +170,7 @@ function checkall(gauss){
                             <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1"><strong>Confirm </strong></button>
                     </div>  
                     
-                    
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">Already passed Firewallz</h4>
-                                <p class="category"><strong>Males : {{maleno_two}} Females : {{femaleno_two}}
-                                    <br>  Faculty : Males : {{fmale_two}} Females: {{ffemale_two}} <br></strong></p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Events</th>
-                                        <!-- <th>Phone</th> -->
-                                        <th>Group Code</th>
-                                        <th>Group Leader</th>
-                                        <th>Unique Id </th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        {% for prt in part_two %}
-                                        <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{prt.name}}{% if prt.is_faculty %}(Faculty){% endif %}</td>
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
-                                            <td>{{prt.grpleader.groupcode}}</td>
-                                            <td>{{prt.grpleader.details.name}} </td>
-                                            <td>{{prt.aadhaar}}</td>
 
-                                        </tr>
-                                        {% endfor  %}
-                                       
-                                    </tbody>
-                                </table>
-                                   
-                            </div>
-                        </div>
-                    </div> 
                     
                                  
                 </div>                    
