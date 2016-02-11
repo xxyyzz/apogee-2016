@@ -1,5 +1,4 @@
 from django.db import models
-from backend.models import Team
 # Create your models here.
 
 # The Team model is reflected here, to be ported next time.
@@ -15,9 +14,9 @@ from backend.models import Team
 # 		return str(self.name)
 
 class Score(models.Model):
-    level = models.ForeignKey(Level)
-    team = models.ForeignKey(Team)
-    judge = models.ForeignKey(Judge)
+    level = models.ForeignKey('Level')
+    team = models.ForeignKey('backend.Team')
+    judge = models.ForeignKey('Judge')
     var1 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var2 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var3 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
@@ -31,12 +30,12 @@ class Score(models.Model):
 
 class Level(models.Model):
     # score_set
-    event = models.ForeignKey(Event)
-    label = models.ForeignKey(Label)
-    judges = models.ManyToManyField(Judge)
+    event = models.ForeignKey('Event.Event')
+    label = models.ForeignKey('Label')
+    judges = models.ManyToManyField('Judge')
     name = models.CharField(max_length=100)
     position = models.PositiveSmallIntegerField()
-    teams = models.ManyToManyField(Team, related_name='levels')
+    teams = models.ManyToManyField('backend.Team', related_name='levels')
 
 class Judge(models.Model):
     name = models.CharField(max_length=200)
