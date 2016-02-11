@@ -729,19 +729,19 @@ def firewallzo_dashboard_two(request,part_id):
 
 # ##### Recnacc ###################
 
-# @csrf_exempt
-# def recnacc_home(request):
-# 	if request.POST:
-# 		try:
-# 			encoded = str( request.POST['code'] )
-# 			decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+@csrf_exempt
+def recnacc_home(request):
+	if request.POST:
+		try:
+			encoded = str( request.POST['code'] )
+			decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
 
-# 		except:
-# 			return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
-# 		return HttpResponseRedirect("../home/" + str(decoded) )
+		except:
+			return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
+		return HttpResponseRedirect("../home/" + str(decoded) )
 
 
-# 	return render(request, "regsoft/recnacc_home.html")
+	return render(request, "regsoft/recnacc_home.html")
 
 
 # def recnacc_notify(request):
