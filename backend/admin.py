@@ -11,4 +11,4 @@ class ParticipantAdmin(admin.ModelAdmin):
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(College)
-admin.site.register(Updates)
+admin.site.register(Update)
