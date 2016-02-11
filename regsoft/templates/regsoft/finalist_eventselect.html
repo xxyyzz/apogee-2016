@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<title>Controls | Oasis 2015 </title>
+	</head>
+
+	<body>
+		<div class="row">
+			<center>		
+			<h2> Controls | oasis 2015</h2>
+			<hr>
+			<br>
+			</center>
+		</div>
+		<div class="row">
+			<center>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-3"></div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<form action="/teams/finalist_showTeams/" method="POST">
+				Select Event for Finalist selection
+				<select name="event_name" class="form-control">
+					{% for e in event_names %}
+					<option value="{{ e }}"> {{ e }} </option>
+					{% endfor %}
+				</select>
+				<br>
+				<button type="submit" class="btn btn-danger" id="submitButton">Get Teams List</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+

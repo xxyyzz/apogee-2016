@@ -77,17 +77,13 @@ def user_register(request):
 
 		body = unicode(u'''
 Hello %s !
-
 You have successfully registered for APOGEE 16.
-
 Just need to verify that this is your email address.
 Gotta keep the internet safe from spambots and all that.
 Is this you?
-
 Please visit %s to verify your email.
 We'll give you your login credentials there.
 See ya!
-
 Thanks,
 Department of Visual Media
 BITS Pilani
@@ -145,18 +141,15 @@ def create_user(member, password):
 def mail_password(member, user, password):
 	body = unicode(u'''
 Hello %s !
-
 Thanks for verifying your email.
 Your login details are:
 User ID: %s
 Username: %s
 Password: %s
 Visit http://bits-apogee.org/ to login.
-
 Thanks,
 Department of Visual Media
 BITS Pilani
-
 P.S. The password is auto generated. We do not intend to offend you in any manner.
 	''' ) % (member.name, member.id, user.username, password)
 	send_to = member.email_id
@@ -337,4 +330,8 @@ def getupdates(request):
 			'status': 0,
 			'message' : 'No Notifications',
 		}
+<<<<<<< HEAD
 	return JsonResponse(resp)
+=======
+	return JsonResponse(resp)
+>>>>>>> 9af21fe08e5c0db7a2cce43bca8acf74b0af46fe

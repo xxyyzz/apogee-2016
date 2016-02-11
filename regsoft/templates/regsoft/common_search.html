@@ -1,0 +1,217 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+    
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/static/regsoft/img/sidebar-4.jpg">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Controlz </strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="../home/">
+                        <i class="pe-7s-home"></i> 
+                        <p>HOME</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="../bill_delete">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>bill LIST</p>
+                    </a>
+                </li> 
+                <li>
+                    <a href="../../groupcodes">
+                        <i class="pe-7s-note2"></i> 
+                        <p>GroupCode list</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="../recnacc_bill_list/">
+                        <i class="pe-7s-note2"></i> 
+                        <p>Recnacc Bill Print</p>
+                    </a>            
+                </li>
+                <li>
+                    <a href="{% url 'regsoft:controlz_stats' %}">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>STATS</p>
+                    </a>
+                </li>
+            </ul> 
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> BITS Oasis 2015 </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+                     
+                     
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    <div class="col-md-8 col-md-offset-2 ">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Controlz</h4>
+                                {% if status == 0 %} <p class="category" style = "color:red"> Invalid Code Entered</p>
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <form method="POST" action=".">
+                                {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label>Enter Search Term</label>
+                                                <input name="keyword" type="text" class="form-control" placeholder="Name, ID, or College">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Search</label>
+                                                <button type="submit" class="btn btn-info btn-fill">Search</button>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                    
+                                 
+                </div>  
+
+
+        {% if results %}
+        <div class="row">                                        
+            <div class="col-md-10 col-md-offset-1">
+                <div class="card card-plain">
+                    <div class="header">
+                        <h4 class="title">Search Results</h4>
+                        <p class="category">{{ results|length }} matches found</p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <th>Name</th>
+                                <th>College </th>
+                                <th>Phone</th>
+                                <th>Sex</th>
+                                <th>Aadhaar</th>
+                            </thead>
+                            <tbody>
+                            {% for member in results %}
+                                <tr>
+                                    <td>{{ member.name }}</td>
+                                    <td>{{ member.college }}</td>
+                                    <td>{{ member.phone_one }} <br> {{ member.phone_two }}</td>
+                                    <td>{{ member.gender }}</td>
+                                    <td>{{ member.aadhaar }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> 
+        </div>   
+        {% endif %}
+
+
+                                 
+            </div>
+        </div>
+        
+
+
+
+        <script>
+        setInterval(function(){
+            var rec_not = new XMLHttpRequest();
+            var url = "http://www.bits-oasis.org/2015/group_notify/";
+            var out="" ;
+            rec_not.onreadystatechange = function() {
+                if (rec_not.readyState == 4 && rec_not.status == 200) {
+                    var myArr = JSON.parse(rec_not.responseText);
+                    // console.log(myArr);
+                    myFunction(myArr["gauss"]);
+                }
+            }
+            rec_not.open("GET", url, true);
+            rec_not.send();
+
+            function myFunction(arr) {
+                for(i = 0; i < arr.length; i++) 
+                {
+                   out += '<tr><td>'+ (i+1) + '</td><td>' + arr[i].glname + '</td><td>' + arr[i].college + '</td><td>' + arr[i].groupcode + '</td><td>' + arr[i].partno  + '</td><td>' + arr[i].facno + '</td><td>' +  arr[i].phone  + '</td></tr>' ; 
+                }
+                document.getElementById("rec_notif").innerHTML = out;
+            }
+        },3000);
+        
+
+        </script>
+
+
+
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : <strong>9928823099 </strong> / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+
+{% endblock body %}
+
