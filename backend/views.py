@@ -326,11 +326,11 @@ def getupdates(request):
 	resp['upd'] = []
 	try:
 		u = Updates.objects.all()
-		dic = {}
 		for x in u:
+			dic = {}
 			dic['content']=str(unicode(x.content))
 			dic['name']=unicode(x.name)
-			dic['date_posted']=unicode(x.date_posted)      
+			dic['date_posted']=unicode(x.date_posted)
 			resp['upd'].append(dic)
 	except:
 		resp = {
@@ -338,6 +338,3 @@ def getupdates(request):
 			'message' : 'No Notifications',
 		}
 	return JsonResponse(resp)
-
-
-
