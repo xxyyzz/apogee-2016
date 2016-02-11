@@ -82,7 +82,8 @@
     {% endif %}         
 </div>
 <script type="text/javascript">
-    $('.btn-edit-project').click(function(){
+    $('.btn-edit-project').click(function(e){
+        e.preventDefault();
         $.ajax({
             url : 'projects/edit/',
             method : 'GET',

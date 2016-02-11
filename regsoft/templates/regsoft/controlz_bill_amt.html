@@ -1,0 +1,244 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+    
+
+
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Controls</strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="../home/">
+                        <i class="pe-7s-home"></i> 
+                        <p>Home</p>
+                    </a>            
+                </li>
+
+                <li>
+
+                    <a href="../home/{{gl.id}}">
+                        <i class="pe-7s-menu"></i> 
+                        <p>Dashboard</p>
+                    </a>
+   
+                </li>
+                <li>
+                    <a href="../../groupcodes">
+                        <i class="pe-7s-note2"></i> 
+                        <p>Passed Groups</p>
+                    </a>            
+                </li>
+<!-- 
+                <li>
+                    <a href="../unconfirm/{{gl.id}}">
+                        <i class="pe-7s-delete-user"></i> 
+                        <p>Unconfirm </p>
+                    </a>
+                </li> 
+ -->
+                <li>
+                    <a href="../bill_delete">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>Bill list</p>
+                    </a>        
+                </li>
+
+
+
+            </ul> 
+        </div>
+
+    </div>
+
+    
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> Controls Booth </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+                     
+                     
+
+
+
+       <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">Following Participants are to be billed</h4>
+
+
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th>S.no</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th> Events </th>
+                                        <th>Phone</th>
+                                        
+                                    </thead>
+                                    <tbody>
+
+
+                                        {% for prt in plist %}
+                                            <input type= "hidden" name='{{prt.id}}' value="{{prt.id}}" >
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td>{{prt.name}} {% if prt.reg_paid %}(onlinepaid) {% elif prt.is_faculty %}(faculty) {% endif %}</td>
+                                            <td> {{prt.gender}} </td>
+                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{prt.phone_one}}</td>
+
+                                        </tr>
+                                        {% endfor  %}
+                                       
+                            
+
+                                    </tbody>
+                                </table>
+                                   
+<br> <br>
+<div align= "center">
+                                <p >
+                                    <strong> Bill Details </strong><br>
+                                    College : {{gl.details.college}}<br>
+                                    Amount per person: 750 <br>
+                                    Amount per Onlinepaid: 500 <br>
+                                    Amount per Faculty: 0 <br>
+                                    <br>
+                                    No. of Faculty : {{facultyno}} <br>
+                                    Online Paid : {{onlinepaid}} <br>
+                                    Participants : {{pcount}}<br>   
+                                    Total Individuals : {{total}}<br>
+                                    Total Amount : {{totalamt}}
+                                </p>
+</div>
+<div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                
+
+
+<form method= "POST" action="../bill_details/{{gl.id}}" >
+{% csrf_token %}
+
+    <input type = 'hidden' name='pidlist' value="{% for k in plist %}{{k.id}},{% endfor %}" >  
+
+<label><strong>Demand Draft No.</label>
+
+                                                <input type="text" name='ddno' class="form-control" placeholder="Enter DD No." value="">
+                                            </div>        
+
+<!--         <tr><td>Demand Draft Number<input type = "text" name="dd" id = "dd" placeholder="Enter DD No." value=""/></td> -->
+<br>
+
+<label ><strong>Denominations</label>
+<!-- <p align ="center">Denominations</p> -->
+<table align="center">
+<tr><td> 1000 x</td><td><input onblur="findTotal()" class="form-control" type ="text" name="n_1000" id="n_1000" value=0 /></td></tr>
+<tr><td>500 x</td><td><input onblur="findTotal()" class="form-control" type ="text" name="n_500" id="n_500" value=0 /></td></tr>
+<tr><td>100 X</td><td><input onblur="findTotal()" class="form-control" type ="text" name="n_100" id="n_100" value=0 /></td></tr>
+<tr><td>50 X</td><td><input onblur="findTotal()" class="form-control" type ="text" name="n_50" id="n_50" value=0 /></td></tr>
+<tr><td>20 X</td><td><input onblur="findTotal()" class="form-control" type ="text" name="n_20" id="n_20" value=0 /></td></tr>
+<tr><td>10 X</td><td><input onblur="findTotal()" class="form-control" type ="text" name="n_10" id="n_10" value=0 /></td></tr>
+
+<tr><td><strong>Total Amount:</strong></td><td><input type="text" class="form-control" name="total" id="total" value="0" /></td></tr>
+</table>
+
+ <button type="submit" class="btn btn-info btn-fill pull-right">Generate Receipt</button>
+
+
+</form>
+
+<script type="text/javascript">
+function findTotal(){
+    var v1000 = document.getElementsByName('n_1000')[0].value;
+    var v500 = document.getElementsByName('n_500')[0].value;
+    var v100 = document.getElementsByName('n_100')[0].value;
+    var v50 = document.getElementsByName('n_50')[0].value;
+    var v20 = document.getElementsByName('n_20')[0].value;
+    var v10 = document.getElementsByName('n_10')[0].value;
+    var tot = ((parseInt(v1000))*1000) + ((parseInt(v500))*500) + ((parseInt(v100))*100) + ((parseInt(v50))*50) + ((parseInt(v20))*20) + ((parseInt(v10))*10);
+    
+    document.getElementsByName('total')[0].value = tot;
+}
+
+</script>     
+
+
+        </div>
+</div>
+
+
+                            </div>
+                        </div>
+                    </div> 
+                    
+                                 
+                </div>                    
+            </div>
+        </div>
+
+
+
+
+        <!-- FOOTER FOR THE PAGE -->
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : 9928823099 / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+{% endblock body %}
+
+

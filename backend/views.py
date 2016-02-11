@@ -330,4 +330,8 @@ def getupdates(request):
 			'status': 0,
 			'message' : 'No Notifications',
 		}
+<<<<<<< HEAD
 	return JsonResponse(resp)
+=======
+	return JsonResponse(resp)
+>>>>>>> 9af21fe08e5c0db7a2cce43bca8acf74b0af46fe

@@ -1,0 +1,219 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+    
+
+
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color="blue" data-image="/static/regsoft/img/sidebar-4.jpg">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Firewallz </strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="../scan">
+                        <i class="pe-7s-home"></i> 
+                        <p>Home</p>
+                    </a>            
+                </li>
+
+                <li>
+
+                    <a href="../scan/{{crep.id}}">
+                        <i class="pe-7s-menu"></i> 
+                        <p>Dashboard</p>
+                    </a>
+   
+                </li>
+                <li>
+                    <a href="../groupcodes">
+                        <i class="pe-7s-note2"></i> 
+                        <p>Passed Groups</p>
+                    </a>            
+                </li>
+
+                <li>
+                    <a href="../unconfirm/{{crep.id}}">
+                        <i class="pe-7s-delete-user"></i> 
+                        <p>Unconfirm </p>
+                    </a>
+                </li> 
+
+                <li>
+                    <a href="typography.html">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>Barcodelist</p>
+                    </a>        
+                </li>
+
+                <li>
+                    <a href="../add/{{crep.id}}">
+                        <i class="pe-7s-user"></i> 
+                        <p>Add Participant </p>
+                    </a>
+                </li> 
+
+            </ul> 
+        </div>
+
+    </div>
+
+    
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> Firewallz Outer Booth </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="../logout">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+                     
+                     
+<div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Edit Participant</h4>
+                            </div>
+                            <div class="content">
+                                <form method= 'POST' action= '../edit/{{part.id}}'>
+                                    {% csrf_token %}
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>College (disabled)</label>
+                                                <input type="text" class="form-control" disabled placeholder="Company" value="{{part.college}}">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" name='name' placeholder="Gauss" value="{{part.name}}">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input type="text" name='email' value="{{part.email_id}}" class="form-control" placeholder="Email">
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Phone No.</label>
+                                                <input type="text" name='phone' class="form-control" placeholder="Phone no." value="{{part.phone_one}}">
+                                            </div>        
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Gender</label><br> &nbsp;
+
+                                                
+                                                <select name="gender" >
+                                                   
+                                                  <option value="M" >Male</option>
+                                                  <option value="F" {% if part.gender == 'F'%} selected = "selected" {% endif %} >Female</option>
+                                                </select>
+
+                     
+                        
+
+
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    
+
+                                     <label>Events</label>
+                                    <div class="row">
+                                    	<form method='POST' action='.'>
+                                    	<p>Denominations</p>
+<table align="center">
+<tr><td> 1000 x</td><td><input onblur="findTotal()" type ="text" name="n_1000" id="n_1000" value=0 /></td></tr>
+<tr><td>500 x</td><td><input onblur="findTotal()" type ="text" name="n_500" id="n_500" value=0 /></td></tr>
+<tr><td>100 X</td><td><input onblur="findTotal()" type ="text" name="n_100" id="n_100" value=0 /></td></tr>
+<tr><td>50 X</td><td><input onblur="findTotal()" type ="text" name="n_50" id="n_50" value=0 /></td></tr>
+<tr><td>20 X</td><td><input onblur="findTotal()" type ="text" name="n_20" id="n_20" value=0 /></td></tr>
+<tr><td>10 X</td><td><input onblur="findTotal()" type ="text" name="n_10" id="n_10" value=0 /></td></tr>
+<tr><td>Total:</td><td><input type="text" name="total" id="total"/></td></tr>
+</table>
+
+<input type="submit" value="Generate Receipt"/>
+
+<script type="text/javascript">
+function findTotal(){
+    var v1000 = document.getElementsByName('n_1000')[0].value;
+	var v500 = document.getElementsByName('n_500')[0].value;
+	var v100 = document.getElementsByName('n_100')[0].value;
+	var v50 = document.getElementsByName('n_50')[0].value;
+	var v20 = document.getElementsByName('n_20')[0].value;
+	var v10 = document.getElementsByName('n_10')[0].value;
+    var tot = ((parseInt(v1000))*1000) + ((parseInt(v500))*500) + ((parseInt(v100))*100) + ((parseInt(v50))*50) + ((parseInt(v20))*20) + ((parseInt(v10))*10);
+    
+    document.getElementsByName('total')[0].value = tot;
+}
+
+</script>
+                       	
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+        <!-- FOOTER FOR THE PAGE -->
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : 9928823099 / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+{% endblock body %}
+
+
+
