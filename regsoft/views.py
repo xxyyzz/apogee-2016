@@ -1,115 +1,73 @@
-# # from registration.models import *
-# # from events.models import *
-# from models import *
-# # from django.views.decorators.csrf import csrf_protect
-# from django.http import HttpResponse
-# from django.http import HttpResponseRedirect
-# import string
-# from random import randint
-# from django.template import RequestContext
-# from django.shortcuts import render_to_response, redirect, render
-# from django.views.decorators.csrf import csrf_exempt
-# import datetime
-# from django.contrib.auth.models import User
-# from django.contrib.admin.views.decorators import staff_member_required
-# from registration.models import *
-# from events.models import *
-# from django.db import IntegrityError
-# import json
-# from django.http import JsonResponse
-# from django.core.exceptions import ObjectDoesNotExist
-
-# @csrf_exempt
-# def firewallzo_home(request, page):
-# 	return render(request, 'regsoft/' + page + '.html')
-
-# @csrf_exempt
-# def firewallzo_dashboard(request):
-# 	if request.POST:
-# 		try:
-# 			encoded = request.POST['code']
-# 			decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
-
-# 		except:
-# 			if request.POST.get('crepid', False):
-# 				decoded = int( request.POST['crepid'] )
-# 			else:
-# 				return render(request, 'regsoft/scan.html', {'status' : 0})
-# 		return HttpResponseRedirect("../scan/" + str(decoded) )
+from backend.models import *
+from models import *
+# from django.views.decorators.csrf import csrf_protect
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+import string
+from random import randint
+from django.template import RequestContext
+from django.shortcuts import render_to_response, redirect, render
+from django.views.decorators.csrf import csrf_exempt
+import datetime
+from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import staff_member_required
+from Event.models import *
+from django.db import IntegrityError
+import json
+from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 
-# 		decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
+@csrf_exempt
+def firewallzo_dashboard(request):
+	if request.POST:
+		try:
+			encoded = request.POST['code']
+			decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
+
+		except:
+			if request.POST.get('crepid', False):
+				decoded = int( request.POST['crepid'] )
+			else:
+				return render(request, 'regsoft/scan.html', {'status' : 0})
+		return HttpResponseRedirect("../scan/" + str(decoded) )
+
+
+		decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
 		
-# 		crep = UserProfile.objects.filter(id = decoded)
-# 		if crep:
-# 			crep=  UserProfile.objects.filter(id = decoded)[0]
-# 			participants = InitialRegistration.objects.filter(college_rep = crep, firewallzo = False)
-# 			participants_two = InitialRegistration.objects.filter(college_rep = crep, firewallzo = True)
-# 			maleno = InitialRegistration.objects.filter(college_rep = crep, firewallzo = False, gender= 'M').count()
-# 			femaleno = InitialRegistration.objects.filter(college_rep = crep, firewallzo = False, gender= 'F').count()
-# 			maleno_two = InitialRegistration.objects.filter(college_rep = crep, firewallzo = True, gender= 'M').count()
-# 			femaleno_two = InitialRegistration.objects.filter(college_rep = crep, firewallzo = True, gender= 'F').count()
+		part = Participant.objects.filter(id = decoded)
+		if part:
+			part=  part[0]
+			context = {
+			'part' :part,
+			}
+			return render(request, 'regsoft/table.html', context)
+		else:
+			return render(request, 'regsoft/scan.html', {'status' : 0})
 
 
-# 			context = {
-# 			'part' : participants,
-# 			'part_two' : participants_two,
-# 			'maleno' : maleno,
-# 			'femaleno' :femaleno,
-# 			'maleno_two' : maleno_two,
-# 			'femaleno_two' : femaleno_two,
-# 			'crep' :crep,
-# 			}
-# 			return render(request, 'regsoft/table.html', context)
-# 		else:
-# 			return render(request, 'regsoft/scan.html', {'status' : 0})
-
-
-# 	return render(request, 'regsoft/scan.html')
+	return render(request, 'regsoft/scan.html')
 
 
 
 
-# def firewallzo_dashboard_two(request,crep_id):
+def firewallzo_dashboard_two(request,part_id):
 
-# 	decoded = crep_id
-# 	# decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning    
-# 	crep = UserProfile.objects.filter(id = decoded)
-# 	if crep:
-# 		crep=  UserProfile.objects.filter(id = decoded)[0]
-# 		participants = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = False)
-# 		participants_two = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = True)
-# 		maleno = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = False, gender= 'M', is_faculty=False ).count()
-# 		femaleno = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = False, gender= 'F', is_faculty=False ).count()
-# 		maleno_two = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = True, gender= 'M', is_faculty=False ).count()
-# 		femaleno_two = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = True, gender= 'F', is_faculty= False ).count()
-# 		fmaleno = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = False, gender= 'M', is_faculty= True ).count()
-# 		ffemaleno = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = False, gender= 'F', is_faculty= True ).count()
-# 		fmale_two = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = True, gender= 'M', is_faculty= True ).count()
-# 		ffemale_two = InitialRegistration.objects.filter( pcr_approval=True, college_rep = crep, firewallzo = True, gender= 'F', is_faculty= True ).count()
+	decoded = part_id
+	# decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning    
+	part = Participant.objects.filter(id = decoded)
+	if part:
+		part=  part[0]
+		context = {
+		'part' : part,
 
-# 		# ffemale = InitialRegistration.objects.filter(is_faculty= True, col)
+		}
+		return render(request, 'regsoft/table.html', context)
+	else:
+		return render(request, 'regsoft/scan.html', {'status' : 0})
 
 
-# 		context = {
-# 		'part' : participants,
-# 		'part_two' : participants_two,
-# 		'maleno' : maleno,
-# 		'femaleno' :femaleno,
-# 		'maleno_two' : maleno_two,
-# 		'femaleno_two' : femaleno_two,
-# 		'crep' :crep,
-# 		'fmale' :fmaleno,
-# 		'ffemale' : ffemaleno,
-# 		'fmale_two' : fmale_two,
-# 		'ffemale_two' : ffemale_two,
-# 		}
-# 		return render(request, 'regsoft/table.html', context)
-# 	else:
-# 		return render(request, 'regsoft/scan.html', {'status' : 0})
-
-
-# 	return render(request, 'regsoft/scan.html')
+	return render(request, 'regsoft/scan.html')
 
 # def firewallzo_confirm(request):
 # 	if request.POST:
