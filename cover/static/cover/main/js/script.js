@@ -1072,7 +1072,7 @@ $("#help-button-2,#map-help-2").click(function() {
 
 $("g.struct").on('mousedown', function (evt) {
 	var init_x=evt.pageX,init_y=evt.pageY;
-	// console.log(init_x,init_y,evt);
+	console.log(init_x,init_y,evt);
   $("g.struct").on('mouseup', function handler(evt) {
  	var fin_x=evt.pageX,fin_y=evt.pageY;
  	// console.log(init_x,fin_x,init_y,fin_y,evt);
@@ -1189,7 +1189,7 @@ var map_ele_info = {
 
 	'profShow'				:		{
 										ename:'ProfShows',
-										content:'<div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/aflatunes.jpg"><h2>Aflatunes</h2><div> Stay Aflatuned! for beat-boxing and a capella with the eight-member band, Aflatunes.</div></div><hr><div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/abish.jpg"><h2>Abish Mathew</h2><div>Abish Mathew is an Indian Stand Up comedian, actor and musician. Known for his work with All India Bakchod and Son Of Abish!</div></div>',
+										content:'<div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/abish.jpg"><h2>Abish Mathew</h2><div>Abish Mathew is an Indian Stand Up comedian, actor and musician. Known for his work with All India Bakchod and Son Of Abish!</div></div><hr><div class="prof_sh_cont"><img src="'+imgpre+'/static/cover/main/img/profshow/aflatunes.jpg"><h2>Aflatunes</h2><div> Stay Aflatuned! for beat-boxing and a capella with the eight-member band, Aflatunes.</div></div><hr><br><br><div style="font-size: 25px">Abish Mathew and Aflatunes will be performing on <b>27th February, 2016</b></div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/profshows.svg',
 										func:content_link,
 									},
@@ -1217,14 +1217,14 @@ var map_ele_info = {
 
 	'projects'				:		{
 										ename:'Projects',
-										content:'<p>The <b>Project presentation competition</b> at BITS Pilani features projects from a variety of scientific research areas. With categories dedicated to both evergreen fields like infrastructure and new frontiers of technology such as simulations or mathematical modeling, we assure you a platform beyond compare. </p>A project is defined as an activity with an aim to formulating a problem and presenting a solution to it using existing/emerging/novel concepts and/or technologies.</p> <p><b>The following are descriptions of the 15 categories under which projects can be presented in Prototype 2016: </b><br><br>Automation, Communication and Network Systems, Design Appliances, Economics and Finance, Health and Nutrition, Energy, Environment, Infrastructure, Industrial Processes and Applications, Materials Science, Software Design (Application Development), Software Design (Adaptive Technology), Signal Processing, Simulation and Mathematical Modelling (Chemical), Simulation and Mathematical Modelling (Non-chemical), Transportation.</p><p><b>For any queries, contact :</b> <br><br>Shreya Tripathi<br>+91 77371 38540<br>Pavan Savanur<br>+91 99822 27826<br>Adit Agarwal<br>+91 99100 93042</p>',
+										content:'<p>The <b>Project presentation competition</b> at BITS Pilani features projects from a variety of scientific research areas. With categories dedicated to both evergreen fields like infrastructure and new frontiers of technology such as simulations or mathematical modeling, we assure you a platform beyond compare. </p>A project is defined as an activity with an aim to formulating a problem and presenting a solution to it using existing/emerging/novel concepts and/or technologies.</p> <p><b>The following are descriptions of the 15 categories under which projects can be presented in Prototype 2016: </b><br><br>Automation, Communication and Network Systems, Design Appliances, Economics and Finance, Health and Nutrition, Energy, Environment, Infrastructure, Industrial Processes and Applications, Materials Science, Software Design (Application Development), Software Design (Adaptive Technology), Signal Processing, Simulation and Mathematical Modelling (Chemical), Simulation and Mathematical Modelling (Non-chemical), Transportation.<br><br>The prize money of <b>Rs.10,000</b> for categories <b>Design Appliances, Health and Nutrition and Energy</b> is sponsored by the 1966-71 batch of BITSAA.</p><p><b>For any queries, contact :</b> <br><br>Shreya Tripathi<br>+91 77371 38540<br>Pavan Savanur<br>+91 99822 27826<br>Adit Agarwal<br>+91 99100 93042</p>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/project.svg',
 										func:content_link,
 									},
 
 	'aic'					:		{
 										ename:'APOGEE Innovation Challenge',
-										content:'<p><b>APOGEE Innovation Challenge</b>, an exceptional technical symposium, aims at quenching your thirst for hands-on experience in real life problems plaguing the industrial world.</p><p>Organized in collaboration with various multinational companies, this event presents before you existing challenges faced by these companies who seek their solutions from you. These problems, which happen to be discipline specific (one need not belong to that discipline), are to be solved by participants in teams of 2-4 in a month. After scrutiny by company officials, top 5 teams will be presenting their final solutions during APOGEE ‘16.</p><p>Exciting Internship Offers and Cash Prizes await the winners. Needless to say, you can brag about cracking a professional challenge while still being in college. Participation Certificate shall be given to all members of each team which present solutions during APOGEE ‘16.</p><br><a class="lb_a" href="/aic/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										content:'<p><b>APOGEE Innovation Challenge</b>, an exceptional technical symposium, aims at quenching your thirst for hands-on experience in real life problems plaguing the industrial world.</p><p>Organized in collaboration with various multinational companies, this event presents before you existing challenges faced by these companies who seek their solutions from you. These problems, which happen to be discipline specific (one need not belong to that discipline), are to be solved by participants in teams of 2-4 in a month. After scrutiny by company officials, top 5 teams will be presenting their final solutions during APOGEE ‘16.</p><p>Exciting Internship Offers and Cash Prizes await the winners. Needless to say, you can brag about cracking a professional challenge while still being in college. Participation Certificate shall be given to all members of each team which present solutions during APOGEE ‘16.</p><p>The deadline for certian problem statements has been extended till <b>22nd February 2016</b></p><br><a class="lb_a" href="/aic/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/aic.svg',
 										func:content_link,
 									},
@@ -1266,7 +1266,7 @@ var map_ele_info = {
 
 	'papers'				:		{
 										ename:'Papers',
-										content:'<p><b>Paper presentation</b> is a competition where the participants exhibit the results of their scientific investigations or researches. It is a platform for all the ingenious minds out there to showcase their intense knowledge and communicative skills to the audience in an intriguing manner through an oral presentation using means such as slides, graphs etc. The dates of the announcement of the result will be released soon. </p><a class="lb_a" href="http://bits-apogee.org/papers/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Submit the Abstract </b></a><br><br><p>The papers can be of two types:<ul><li><b>Technical papers</b> which describe the experiments performed by you and further scope of research. </li><li><b>Review papers</b> which study a particular topic followed by a detailed hypothesis and a plan of action</li></ul>The various categories of paper presentation include:<ul><li><b>Basic Sciences</b> (Biological Sciences, Physics, Chemistry, Mathematics)</li><li><b>Engineering</b> (Chemical, Civil, Computer Science, Electrical &amp; Electronics, Electronics &amp; Communication, Electronics &amp; Instrumentation, Material Science , Mechanical)</li>	<li><b>Humanities</b> (Philosophy, Psychology)</li> <li><b>Miscellaneous</b> (Economics and Finance, Pharmacy, Management, Environmental Science)</li></ul></p>',
+										content:'<p><b>Paper presentation</b> is a competition where the participants exhibit the results of their scientific investigations or researches. It is a platform for all the ingenious minds out there to showcase their intense knowledge and communicative skills to the audience in an intriguing manner through an oral presentation using means such as slides, graphs etc. The dates of the announcement of the result will be released soon. </p><p>The papers can be of two types:<ul><li><b>Technical papers</b> which describe the experiments performed by you and further scope of research. </li><li><b>Review papers</b> which study a particular topic followed by a detailed hypothesis and a plan of action</li></ul>The various categories of paper presentation include:<ul><li><b>Basic Sciences</b> (Biological Sciences, Physics, Chemistry, Mathematics)</li><li><b>Engineering</b> (Chemical, Civil, Computer Science, Electrical &amp; Electronics, Electronics &amp; Communication, Electronics &amp; Instrumentation, Material Science , Mechanical)</li>	<li><b>Humanities</b> (Philosophy, Psychology)</li> <li><b>Miscellaneous</b> (Economics and Finance, Pharmacy, Management, Environmental Science)</li></ul></p>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/paper.svg',
 										func:content_link,
 									},
@@ -1315,12 +1315,29 @@ var map_ele_info = {
 
 	'workshops'			:		{
 										ename:'Workshops',
-										content:'<div style="text-align:center;width:100%;"><div class="workshop-title"><div>ONCAMPUS Workshop</div></div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/AuthenticTechs.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Authentic Techs</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Authentic Techs. They will be conducting Ethical Hacking/Cyber Forensic, Surface Computing, Android Development. workshops in BITS PILANI as well.</div> <div><b>TOPIC: </b> Ethical Hacking/Cyber Forensic, Surface Computing, Android Development.</div><div><b>COST: </b> Rs. 1100/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div><div> <a class="lb_a" href="http://authentictechs.com/bitsapogee/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a></div> </div> </div> <div class="workshop-cont"> <div class="workshop-img"> <img src="" class="abs_center"> </div> <div class="workshop-desc"> <div>Workshop on Financial Engineering</div> <div><b>COST: </b> Rs. 900/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div></div></div><div class="workshop-cont"> <div class="workshop-img"> <img src="" class="abs_center"> </div> <div class="workshop-desc"> <div>Workshop on MATLAB</div> <div><b>COST: </b> Rs. 900/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div></div></div><div class="workshop-title">	<div>OUTREACH Workshop</div></div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/AuthenticTechs.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Authentic Techs</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Authentic Techs. They will be conducting Ethical Hacking workshops all over India, and the winners get to witness APOGEE \'16 in BITS the 25th to 28th February, 2016. To register as a participant or conduct this workshop in your college, follow the link below.</div> <div><b>TOPIC: </b> Ethical Hacking/Cyber Forensic, Surface Computing, Android Development.</div><div> <a class="lb_a" href="http://authentictechs.com/bitsapogee/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register</b></a></div> </div> </div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/Jarvis.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Jarvis India</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Jarvis India. They will be conducting Internet of Things and Mobile Controlled Robotics workshops all over India, and the winners get to witness APOGEE \'16 in BITS the 25th to 28th February, 2016.</div> <div><b>TOPIC: </b>Internet of Things, Mobile Controlled Robotics.</div><div> <a class="lb_a" href="http://www.jarvisindia.net/outReach.php#68" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register</b></a></div> </div> </div> </div>',
+										content:'<div style="text-align:center;width:100%;"><div class="workshop-title"><div>ONCAMPUS Workshop</div></div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/AuthenticTechs.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Authentic Techs</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Authentic Techs. They will be conducting Ethical Hacking/Cyber Forensic, Surface Computing, Android Development. workshops in BITS PILANI as well.</div> <div><b>TOPIC: </b> Ethical Hacking/Cyber Forensic, Surface Computing, Android Development.</div><div><b>COST: </b> Rs. 1100/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div><div> <a class="lb_a" href="http://authentictechs.com/bitsapogee/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a></div> </div> </div> <div class="workshop-cont"> <div class="workshop-img"> <img src="" class="abs_center"> </div> <div class="workshop-desc"> <div>Workshop on Financial Markets</div> <div><b>COST: </b> Rs. 900/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div></div></div><div class="workshop-cont"> <div class="workshop-img"> <img src="" class="abs_center"> </div> <div class="workshop-desc"> <div>Workshop on MATLAB</div> <div><b>COST: </b> Rs. 900/- for each worshop. <b>On-spot registration</b></div><div><b>Certificates will be given to all the participants</b></div></div></div><div class="workshop-title">	<div>OUTREACH Workshop</div></div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/AuthenticTechs.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Authentic Techs</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Authentic Techs. They will be conducting Ethical Hacking workshops all over India, and the winners get to witness APOGEE \'16 in BITS the 25th to 28th February, 2016. To register as a participant or conduct this workshop in your college, follow the link below.</div> <div><b>TOPIC: </b> Ethical Hacking/Cyber Forensic, Surface Computing, Android Development.</div><div> <a class="lb_a" href="http://authentictechs.com/bitsapogee/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register</b></a></div> </div> </div> <div class="workshop-cont"> <div class="workshop-img"> <img src="'+imgpre+'/static/cover/main/img/workshops/Jarvis.jpg" class="abs_center"> </div> <div class="workshop-desc"> <div>Jarvis India</div> <div>Presenting the official Outreach Workshop Partner for APOGEE \'16, Jarvis India. They will be conducting Internet of Things and Mobile Controlled Robotics workshops all over India, and the winners get to witness APOGEE \'16 in BITS the 25th to 28th February, 2016.</div> <div><b>TOPIC: </b>Internet of Things, Mobile Controlled Robotics.</div><div> <a class="lb_a" href="http://www.jarvisindia.net/outReach.php#68" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register</b></a></div> </div> </div> </div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
 										func:content_link,
 									},
-
-}
+	'armageddon'			:		{
+										ename:'Armageddon',
+										content:'<div class="c_soon">Coming soon...</div>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										func:content_link,
+									},									
+	'blog'			:		{
+										ename:'Blog',
+										content:'<div class="c_soon">Coming soon...</div>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										func:content_link,
+									},
+	'kernel'			:		{
+										ename:'Kernel Events',
+										content:'<div class="c_soon">Coming soon...</div>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										func:content_link,
+									},
+};
 
 function content_link(b_icon,b_name,b_content){
 	$('.main_head').html(b_name);
@@ -1328,6 +1345,29 @@ function content_link(b_icon,b_name,b_content){
 	$('.lb_descr').html(b_content);
 	open_gen_lb();
 }
+
+$('#updates-wrapper').click(function(){
+	console.log('yo');
+	$.ajax({
+		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
+		method:'GET',
+        crossDomain: true,
+		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(data){
+			console.log(data);
+			var icon = imgpre+'/static/cover/main/img/lb-icons/updates.svg'
+			var content='';
+			for(i=0;i<data['upd'].length;++i)
+			{
+				// console.log(data['upd'][i]);
+				content+='<div class="upd_cont"> <div class="upd_header"> <div class="upd_name" >'+data["upd"][i]["name"]+'</div> <div class="upd_ts">'+data["upd"][i]["date_posted"]+'</div></div><div class="upd_desc">'+data["upd"][i]["content"]+'</div></div>';
+				// content
+			}
+			content_link(icon,'Updates',content);
+		},
+	});
+});
 
 $('.htile').click(function(){
 	$('.closeside').click();
@@ -1487,3 +1527,7 @@ $('.pro_tab_name').click(function(){
 	$('.pro_tab_name').removeClass('tab_active');
 	$(this).addClass('tab_active');
 });
+
+
+//-----------------------UPDATES-------------------------
+

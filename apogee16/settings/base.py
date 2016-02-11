@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'dhiti',
     'youthcon',
     'regsoft',
+    'ems',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<title>Controls | Oasis 2015 </title>
+	</head>
+
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+		</script>
+		<script>
+		$(document).ready(function() {
+				str = '<div style="background:orange;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-2">' +
+					'Id' +'</div>'+
+						'<div style="background:red;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-3">' +
+					'Name' +
+					'</div>' +
+					'<div style="background:blue;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">'+
+					"College" +
+					'</div>' +
+					'<div style="background:green;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-3">' +
+					'Phone' +
+					'</div>';
+					$("#cur_list").html(str);
+				});
+
+		function updateList() {
+
+				$.ajax({
+					url:"{% url 'ems:getParticipantList' %}",
+					data: ({ id_list: document.getElementById("id_list").value }),
+					method:'POST',
+					dataType:'json',
+					success: function(data)
+					{
+						//alert(data.names);
+						part_list = data;
+						len = part_list.names.length;
+						str = '<div style="background:orange;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-2">' +
+					'Id' +'</div>'+
+						'<div style="background:red;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-3">' +
+					'Name' +
+					'</div>' +
+					'<div style="background:blue;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">'+
+					"College" +
+					'</div>' +
+					'<div style="background:green;color:white" class="col-xs-12 col-sm-12 col-md-4 col-lg-3">' +
+					'Phone' +
+					'</div>';
+						//alert(len);
+						for (i=0; i<len; i++) {
+							str += '<div class="row">' +
+									'<div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">'
+									+ part_list.ids[i] +
+									'</div>' +
+									'<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">'
+									+ part_list.names[i] +
+									'</div>' +
+									'<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">'
+									+ part_list.colleges[i] +
+									'</div>' +
+									'<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">'
+									+ part_list.phones[i] +
+									'</div>'+
+									'</div>';
+						}
+						//alert(str);
+						$("#cur_list").html(str);
+
+					}
+				});
+		}
+		</script>
+		<div class="row">
+			<center>
+			<h2> Controls | oasis 2015</h2>
+			<hr>
+			<br>
+			</center>
+		</div>
+		<div class="row">
+			<center>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				Select Event
+				<form action="{% url 'ems:choose_leader' %}" method="POST">
+				<select name="event_name" class="form-control">
+				{% for event in events %}
+					<option>{{ event.name }}</option>
+				{% endfor %}
+				</select>
+				<br>
+
+				<input class="form-control" type="text" name="id_list" id="id_list" placeholder="Enter space separated IDs">
+				<br>
+				<a onclick="updateList()" class="btn btn-danger" id="upload_list">Update List</a>
+				<button type="submit" class="btn btn-danger" id="select_leader">Select Leader</button>
+			</form>
+			</div>
+			<div id="cur_list" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			kahsdkasjdh
+			</div>
+			</center>
+		</div>
+	</body>
+</html>
