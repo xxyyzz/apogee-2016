@@ -527,7 +527,7 @@ function submit_ans(ans,x){
 	$.ajax({
 		url: './dvm/'+level_url[x-1],
 		method: 'POST',
-		data: {fbid:'12344567891',level: x,answer: ans},
+		data: {fbid:'12344567891',sol: ans},
 		success: function(data){
 			console.log(data);
 		},
