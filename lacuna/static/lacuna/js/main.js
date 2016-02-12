@@ -490,26 +490,48 @@ function send_login(){
 	$.ajax({
 		url: './login/',
 		method: 'POST',
-		data: {id:'12344567891',name:'Smit Patwa'},
+		data: {fbid:'12344567891',name:'Smit Patwa'},
 		success: function(data){
 			console.log(data);
 		},
 	});
 }
+function get_level_status(){
+	$.ajax({
+		url: './status/',
+		method: 'POST',
+		data: {fbid:'12344567891'},
+		success: function(data){
+			console.log(data);
+			// {score: 0, informals_level: 1, name: "Smit Patwa", dvm_level: 1}
+		},
+	});
+}
 // login=====================END==============================
 // dashboard=================================================
-function call_level(){
+function call_level(x){
 	$.ajax({
-		url: '',
+		url: './dvm/getlevel/',
 		method: 'POST',
-		data: {id:'1234',},
+		data: {fbid:'12344567891',level: x},
 		success: function(data){
 			console.log(data);
 		},
 	});
 }
 // dashboard========================END=========================
-
+// level ========================================================
+function submit_ans(ans,x){
+	$.ajax({
+		url: './dvm/getlevel/',
+		method: 'POST',
+		data: {fbid:'12344567891',level: x,answer: ans},
+		success: function(data){
+			console.log(data);
+		},
+	});
+}
+// level ============================END============================
 // Login lacuna===================================================
 function statusChangeCallback(response) {
 	console.log('statusChangeCallback');
@@ -543,8 +565,7 @@ function checkLoginState() {
 window.fbAsyncInit = function() {
 	FB.init({
 	appId      : '920596834728554',
-	cookie     : true,  // enable cookies to allow the server to access 
-	                    // the session
+	cookie     : true,  // enable cookies to allow the server to access the session
 	xfbml      : true,  // parse social plugins on this page
 	version    : 'v2.2' // use version 2.2
 });
