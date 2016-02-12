@@ -1,16 +1,36 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Lacuna</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'lacuna/css/main.css' %}">
+	<script type="text/javascript" src="{% static 'lacuna/js/jquery.min.js' %}"></script>
 </head>
 <body>
-	<div id="game_loader">
-		<img src="{% static 'img/preloader.gif' %}" class="abs_center">
+	<div class="login_lacuna abs_center" style="display:none">
+		<div class="fb_login_cont">
+			<img src="{% static 'lacuna/img/fb_login.png' %}" alt="">
+		</div>
 	</div>
-	<div class="story_container" style="background-image:url({% static 'img/qwerty.jpg' %});">
+	<div class="dashboard abs_center">
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+		<div class="levels"></div>
+	</div>
+	<div id="game_loader">
+		<img src="{% static 'lacuna/img/preloader.gif' %}" class="abs_center">
+	</div>
+	<div class="story_container" style="background-image:url({% static 'lacuna/img/qwerty.jpg' %});">
 		<div class="storydet_container">
 			<div class="story_next story_but" style="right:0;">Next ></div>
 			<div class="story_prev story_but" style="left:0;">< Previous</div>
@@ -32,6 +52,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'lacuna/js/main.js' %}"></script>
 </body>
 </html>

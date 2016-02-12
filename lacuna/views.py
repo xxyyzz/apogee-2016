@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def home(request):
-    return render(request, 'lacuna/lacuna.html')
+    return render(request, 'lacuna/index.html')
 
 @csrf_exempt
 def user_login(request):
