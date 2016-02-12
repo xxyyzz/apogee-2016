@@ -485,7 +485,30 @@ function puzzle5init()
 }
 puzzle5init();
 
-
+// login===================================================
+function send_login(){
+	$.ajax({
+		url: './login/',
+		method: 'POST',
+		data: {id:'12344567891',name:'Smit Patwa'},
+		success: function(data){
+			console.log(data);
+		},
+	});
+}
+// login=====================END==============================
+// dashboard=================================================
+function call_level(){
+	$.ajax({
+		url: '',
+		method: 'POST',
+		data: {id:'1234',},
+		success: function(data){
+			console.log(data);
+		},
+	});
+}
+// dashboard========================END=========================
 
 // Login lacuna===================================================
 function statusChangeCallback(response) {
