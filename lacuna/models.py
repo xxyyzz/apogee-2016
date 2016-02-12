@@ -21,5 +21,26 @@ class Lacuna(models.Model):
     dvm_10_time = models.DurationField(null=True)
     dvm_11_time = models.DurationField(null=True)
     dvm_12_time = models.DurationField(null=True)
+    informals_1 = models.PositiveSmallIntegerField(default=0)
+    informals_2 = models.PositiveSmallIntegerField(default=0)
+    informals_3 = models.PositiveSmallIntegerField(default=0)
+    informals_4 = models.PositiveSmallIntegerField(default=0)
+    informals_5 = models.PositiveSmallIntegerField(default=0)
+    informals_6 = models.PositiveSmallIntegerField(default=0)
+    informals_7 = models.PositiveSmallIntegerField(default=0)
+    informals_8 = models.PositiveSmallIntegerField(default=0)
+    informals_9 = models.PositiveSmallIntegerField(default=0)
+    informals_10 = models.PositiveSmallIntegerField(default=0)
+    informals_11 = models.PositiveSmallIntegerField(default=0)
+    informals_12 = models.PositiveSmallIntegerField(default=0)
     def __str__(self):
         return self.name
+
+class Level(models.Model):
+    DEPARTMENTS = (
+    ('DVM', 'DVM'),
+    ('INFORMALS', 'INFORMALS'),
+    )
+    dept = models.CharField(max_length=10, choices=DEPARTMENTS)
+    level = models.PositiveSmallIntegerField()
+    content = models.TextField()

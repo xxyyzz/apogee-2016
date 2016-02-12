@@ -36,6 +36,25 @@ def status(request):
     return JsonResponse(response)
 
 @csrf_exempt
+def dvm_level_get(request):
+    fbid = request.POST['fbid']
+    level = request.POST['level']
+    lacuna = Lacuna.objects.get(fbid=fbid)
+    if lacuna.current_dvm_level <= level:
+        leveldata = Level.objects.get(level=level, dept='DVM')
+        response = {
+            'status' : 1,
+            'content' : leveldata.content
+        }
+    else:
+        response = {
+            'status' : 0,
+            'message' : 'Bad Request',
+        }
+    return JsonResponse(response)
+
+
+@csrf_exempt
 def dvm1verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
