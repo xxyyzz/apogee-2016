@@ -521,9 +521,11 @@ function call_level(x){
 }
 // dashboard========================END=========================
 // level ========================================================
+var sendt = [0,0,0,0,0,0,0,0,0];
+var level_url = ['filterpuzzle/']
 function submit_ans(ans,x){
 	$.ajax({
-		url: './dvm/getlevel/',
+		url: './dvm/'+level_url[x-1],
 		method: 'POST',
 		data: {fbid:'12344567891',level: x,answer: ans},
 		success: function(data){
