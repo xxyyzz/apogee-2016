@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block sidebar_content %}
     <li>
-        <a href="{% url 'ems:event_home' %}">
+        <a href="{% url 'ems:events_home' %}">
             <i class="pe-7s-news-paper"></i>
             <p>Manage Events</p>
         </a>
@@ -26,7 +26,7 @@
                                 <h4 class="title">Controlz</h4>
                             </div>
                             <div class="content">
-                                <form method="POST" action="{% url 'ems:event_home' %}">
+                                <form method="POST" action="{% url 'ems:events_home' %}">
                                 {% csrf_token %}
                                     <div class="row">
                                         <div class="col-md-12">

@@ -318,7 +318,7 @@ def getupdates(request):
     resp = {}
     resp['upd'] = []
     try:
-        u = Updates.objects.all()
+        u = Updates.objects.order_by('-date_posted')
         for x in u:
             dic = {}
             dic['content']=str(unicode(x.content))

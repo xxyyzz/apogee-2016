@@ -235,6 +235,9 @@ function getCookie(name) {
 //------------------------LOGIN/REGISTER API---------------------------------
 var user = {};
 $(window).load(function(){
+	getUserInfo();
+});
+function getUserInfo(){
 	$.ajax({
 		url:'http://bits-apogee.org'+imgpre+'/api/user/',
 		method:'GET',
@@ -264,7 +267,7 @@ $(window).load(function(){
 					startHelp();
 				},
 	});
-});
+}
 function logout(){
 	$.ajax({
 		url:'http://bits-apogee.org'+imgpre+'/api/logout/',
@@ -341,13 +344,7 @@ $('#login-form').submit(function(e){
 				$('#login_instrs').fadeIn();
 				$('#user-sign-cont').fadeIn();
 				$('#view_profile').fadeIn();
-				user ={
-					'userid':response.email,
-					'firstname':response.firstname,
-					'name':response.name,
-					'loggedin':true,
-					'id':response.id,
-				};
+				getUserInfo();
 				$('#submit_l').prop('disabled', false);
 				$('#submit_r').prop('disabled', false);
 				$('#submit_l').html('login');
