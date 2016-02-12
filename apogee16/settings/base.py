@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'youthcon',
     'regsoft',
     'ems',
+    'lacuna',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,12 +1,13 @@
 from django.db import models
 from backend.models import *
 # Create your models here.
-class Stats(models.Model):
-    participant = models.OneToOneField(Participant)
-    score = models.IntegerField()
-    current_dvm_level = models.PositiveSmallIntegerField()
-    current_informals_level = models.PositiveSmallIntegerField()
-    level_start_time = models.DateTimeField()
+class Lacuna(models.Model):
+    fbid = models.BigIntegerField()
+    name = models.CharField(max_length=200)
+    score = models.IntegerField(default=0)
+    current_dvm_level = models.PositiveSmallIntegerField(default=1)
+    current_informals_level = models.PositiveSmallIntegerField(default=1)
+    start_time = models.DateTimeField()
     dvm_1_time = models.IntegerField()
     dvm_2_time = models.IntegerField()
     dvm_3_time = models.IntegerField()
