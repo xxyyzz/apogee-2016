@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Lacuna</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'">
-	<script type="text/javascript" src="{% static 'js/jquery.min.js'}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 </head>
 <body>
 	<div id="game_loader">
-		<img src="img/preloader.gif" class="abs_center">
+		<img src="{% static 'img/preloader.gif' %}" class="abs_center">
 	</div>
-	<div class="story_container" style="background-image:url({% static 'img/qwerty.jpg');">
+	<div class="story_container" style="background-image:url({% static 'img/qwerty.jpg' %});">
 		<div class="storydet_container">
 			<div class="story_next story_but" style="right:0;">Next ></div>
 			<div class="story_prev story_but" style="left:0;">< Previous</div>
@@ -32,6 +32,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
