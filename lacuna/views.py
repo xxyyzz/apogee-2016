@@ -5,7 +5,7 @@ import datetime
 
 # Create your views here.
 def home(request):
-    return render(request, 'lacuna/lacuna.html')
+    return render(request, 'lacuna/index.html')
 
 def user_login(request):
     fbid = request.POST['id']
