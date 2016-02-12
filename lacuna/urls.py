@@ -5,5 +5,5 @@ urlpatterns = [
     url(r'^status/$', status),
     url(r'^login/$', user_login),
     url(r'^dvm/getlevel/$', dvm_level_get),
-    url(r'^filterpuzzle/$', dvm1verify),
+    url(r'^dvm/filterpuzzle/$', dvm1verify),
 ]

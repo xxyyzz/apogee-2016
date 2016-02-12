@@ -61,11 +61,20 @@ def dvm1verify(request):
     sol = request.POST['sol']
     sol = json.loads(sol)
     error = False
-    for row in sol:
-        for value in row:
-            if value != 0:
-                error = True
+    for value in sol:
+        if value != 0:
+            error = True
     if error == False:
         part = Lacuna.objects.get(fbid=fbid)
         part.current_dvm_level = 2
         part.dvm_1_time = part.start_time - datetime.now()
+        # score change
+        part.save()
+        response = {
+            'status' : 1,
+        }
+    else:
+        response = {
+            'status' : 0,
+        }
+    return JsonResponse(response)
