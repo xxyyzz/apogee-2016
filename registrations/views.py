@@ -438,6 +438,10 @@ def edit_project(request):
 		entry = Project.objects.get(stub=stub)
 		entry.members.clear()
 		model_member = {}
+		try:
+			model_college = College.objects.get(name=entry.leader.college)
+		except:
+			model_college = College.objects.create(name=entry.leader.college)
 		for x in range(1,6):
 			if member[x]['email'] != None:
 				try:

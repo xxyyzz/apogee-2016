@@ -148,6 +148,70 @@ def project_stats_xlsx(request):
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response
 
+def aic_stats_xlsx(request):
+    from django.http import HttpResponse, HttpResponseRedirect
+    import xlsxwriter
+
+    try:
+        import cStringIO as StringIO
+    except ImportError:
+        import StringIO
+    a_list = []
+
+    from aic2016.models import AicSubmission
+    entries = AicSubmission.objects.all()
+
+    for p in entries:
+        a_list.append({'obj': p})
+    data = sorted(a_list, key=lambda k: k['obj'].id)
+    output = StringIO.StringIO()
+    workbook = xlsxwriter.Workbook(output)
+    worksheet = workbook.add_worksheet('new-spreadsheet')
+    date_format = workbook.add_format({'num_format': 'mmmm d yyyy'})
+
+    worksheet.write(0, 0, "Solution ID")
+    worksheet.write(0, 1, "Problem Statement")
+    worksheet.write(0, 2, "Solution URL")
+    worksheet.write(0, 3, "Leader Name")
+    worksheet.write(0, 4, "Leader Phone")
+    worksheet.write(0, 5, "Leader Email")
+    worksheet.write(0, 6, "Leader YOS")
+    worksheet.write(0, 7, "Leader College")
+    for i in range(3):
+        worksheet.write(0, 8+5*i, "Member "+str(i+1)+" Names")
+        worksheet.write(0, 9+5*i, "Member "+str(i+1)+" Phone")
+        worksheet.write(0, 10+5*i, "Member "+str(i+1)+" Email")
+        worksheet.write(0, 11+5*i, "Member "+str(i+1)+" YOS")
+        worksheet.write(0, 12+5*i, "Member "+str(i+1)+" College")
+
+    for i, row in enumerate(data):
+        """for each object in the date list, attribute1 & attribute2
+        are written to the first & second column respectively,
+        for the relevant row. The 3rd arg is a failure message if
+        there is no data available"""
+
+        worksheet.write(i+1, 0, deepgetattr(row['obj'], 'id', 'NA'))
+        worksheet.write(i+1, 1, row['obj'].get_problem_statement_display())
+        worksheet.write(i+1, 2, deepgetattr(row['obj'], 'solution.url', 'NA'))
+        worksheet.write(i+1, 3, deepgetattr(row['obj'], 'leader.name', 'NA'))
+        worksheet.write(i+1, 4, deepgetattr(row['obj'], 'leader.phone', 'NA'))
+        worksheet.write(i+1, 5, deepgetattr(row['obj'], 'leader.email', 'NA'))
+        worksheet.write(i+1, 6, deepgetattr(row['obj'], 'leader.yos', 'NA'))
+        worksheet.write(i+1, 7, deepgetattr(row['obj'], 'leader.college.name', 'NA'))
+        for n, member in enumerate(row['obj'].members.all()):
+            worksheet.write(i+1, 8+5*n, deepgetattr(member, 'name', 'NA'))
+            worksheet.write(i+1, 9+5*n, deepgetattr(member, 'phone', 'NA'))
+            worksheet.write(i+1, 10+5*n, deepgetattr(member, 'email', 'NA'))
+            worksheet.write(i+1, 11+5*n, deepgetattr(member, 'yos', 'NA'))
+            worksheet.write(i+1, 12+5*n, deepgetattr(member, 'college.name', 'NA'))
+
+    workbook.close()
+    filename = 'ExcelReport.xlsx'
+    output.seek(0)
+    response = HttpResponse(output.read(), content_type="application/ms-excel")
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
+
 def ambassador_stats_xlsx(request):
     from django.http import HttpResponse, HttpResponseRedirect
     import xlsxwriter

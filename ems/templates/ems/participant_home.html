@@ -1,0 +1,126 @@
+{% extends "ems/base.html" %}
+{% block body %}
+    
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/static/ems/img/sidebar-4.jpg">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Controlz </strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="{% url 'ems:main' %}">
+                        <i class="pe-7s-home"></i> 
+                        <p>HOME</p>
+                    </a>            
+                </li>
+            </ul> 
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> BITS Oasis 2015 </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+                     
+                     
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Controlz</h4>
+                                {% if status == 0 %} <p class="category" style = "color:red"> Invalid Code Entered</p>
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <form method="POST" action="{% url 'ems:participant_home' %}">
+                                {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Enter Participant Code</label>
+                                                <input name="code" type="text" class="form-control" placeholder="CODE">
+                                            </div>        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-4">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-info btn-fill">Scan Code</button>
+                                            </div>        
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                    
+                                 
+                </div>                 
+            </div>
+        </div>
+        
+
+
+
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : <strong>9928823099 </strong> / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+
+{% endblock body %}
+

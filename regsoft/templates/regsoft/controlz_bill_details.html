@@ -1,0 +1,191 @@
+{% extends "regsoft/base.html" %}
+{% block body %}
+    
+
+
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color="purple">  
+    
+    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+    
+    
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <strong>Controls</strong>
+                </a>
+            </div>
+                       
+            <ul class="nav">
+                <li>
+                    <a href="../home/">
+                        <i class="pe-7s-home"></i> 
+                        <p>Home</p>
+                    </a>            
+                </li>
+
+                <li>
+
+                    <a href="../home/{{gl.id}}">
+                        <i class="pe-7s-menu"></i> 
+                        <p>Dashboard</p>
+                    </a>
+   
+                </li>
+                <li>
+                    <a href="../../groupcodes">
+                        <i class="pe-7s-note2"></i> 
+                        <p>Passed Groups</p>
+                    </a>            
+                </li>
+
+                <li>
+                    <a href="../bill_delete">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>Delete Bill</p>
+                    </a>
+                </li> 
+
+
+
+
+            </ul> 
+        </div>
+
+    </div>
+
+    
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><strong> Controls Booth </strong></a>
+                </div>
+                <div class="collapse navbar-collapse">       
+                    <ul class="nav navbar-nav navbar-left">
+                    </ul>
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                Log out
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+                     
+                     
+
+
+
+       <div class="content">
+            <div class="container-fluid">
+                <div class="row">                   
+                    
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">Regsoft</h4>
+
+
+                            </div>
+                            <div class="content table-responsive table-full-width">
+
+                                   
+<br> <br>
+<div align= "center">
+                                <p >
+                                    <h4><strong> Bill Details </strong></h4><br>
+                                    <strong>Receipt No. : {{bill_id}} </strong><br>
+                                    <strong>College : {{gl.details.college}} </strong><br>
+                                    <strong>Cash Given : {{given}} </strong><br>
+                                    <strong>Balance: {{balance}} </strong><br>
+                                    <strong>DD nummber: {{ddno}} </strong><br>
+
+                                    <strong>Amount per participant: 750 </strong> <br>
+                                    <strong>Amount per onlinepaid: 500 </strong> <br>
+                                    <strong>Amount per faculty: 0 </strong> <br>
+                                    <strong>Total Amount Paid : {{total}} </strong>
+                                    <br>
+                                    <br>
+                                    <strong>Online Paid: {{onlinepaid}} </strong> <br>
+                                    <strong>No. of faculty: {{is_faculty}} </strong> <br>
+                                    <strong>No. of Males : {{maleno}} </strong><br>
+                                    <strong>No. of Females : {{femaleno}} </strong><br>
+                                    <strong>Total Individuals : {{totalpart}} </strong><br>
+
+                                </p>
+</div>
+<div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                
+
+
+<form method= "POST" action="../bill_print/" >
+    {% csrf_token %}
+    <input type = "hidden" name = 'gl_id' value="{{gl.id}}" >
+    <input type = 'hidden' name='bill_id' value= "{{bill_id}}" >
+    <!-- <input type = 'hidden' name='pidlist' value="{% for k in plist %}{{k.id}},{% endfor %}" >   -->
+
+
+<!--         <tr><td>Demand Draft Number<input type = "text" name="dd" id = "dd" placeholder="Enter DD No." value=""/></td> -->
+<br>
+
+
+ <button type="submit" class="btn btn-info btn-fill col-md-3 col-md-offset-11" >Print Receipt</button>
+
+
+</form>
+
+  
+
+
+        </div>
+</div>
+
+
+                            </div>
+                        </div>
+                    </div> 
+                    
+                                 
+                </div>                    
+            </div>
+        </div>
+
+
+
+
+        <!-- FOOTER FOR THE PAGE -->
+        
+        <footer class="footer">
+            <div class="copyright container-fluid">
+
+                    <p class="pull-left">
+                &copy; 2015 <a >Department of Visual Media</a>   
+                </p>
+
+
+                <p class="pull-right">
+                    For any queries contact : 9928823099 / 9928834365 / 8058868682
+                </p>
+            </div>
+        </footer>
+        
+        
+    </div>   
+</div>
+{% endblock body %}
+
+

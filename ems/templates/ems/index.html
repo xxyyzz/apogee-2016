@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<title>Controls | Oasis 2015 </title>
+	</head>
+
+	<body>
+		<div class="row">
+			<center>
+			<h2> Controls | Oasis 2015</h2>
+			<h3> Event Management System </h3>
+			<hr>
+			</center>
+		</div>
+		<div class="row">
+			<b style="color:red">{{ error_message }}</b>
+		</div>
+		<div class="row">
+			<center>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<a class="btn btn-danger" href="{% url 'ems:upload_list' %}">Add New Team</a>
+				<br><br>
+				<a class="btn btn-danger" href="{% url 'ems:event_home' %}" id="select_finalist">Eventwise Teams</a>
+				<br><br>
+				<a class="btn btn-danger" href="{% url 'ems:participant_home' %}" id="select_finalist">Participant Details</a>
+				<br><br>
+				<a class="btn btn-danger" href="{% url 'ems:add_bitsian' %}">Add BITSian to the Database</a>
+				<br><br>
+			</div>
+			</center>
+		</div>
+		<center>
+			&copy; Department of Visual Media <br>
+			Queries? Call Nikhil - 9928834365
+		</center>
+	</body>
+</html>
