@@ -1112,14 +1112,14 @@ var map_ele_info = {
 									},
 	'dhiti'					:		{
 										ename:'Dhiti',
-										content:'<p>We have a population of around 1.2 billion and it is just a matter of time, that we will be the nation with the most number of young and technically sound work forces. Technology has grown in many forms and can be made accessible almost to all. It is just a luxury for some but can ease the life of many and can be the key to solving some of the most pressing issues faced by the country today. We just need some ideas and tinkering to apply it on the field.</p><p>It is only by solving such basic problems that development will occur collectively in every community and not selectively. Dhiti(sanskrit for “An idea”) is a platform for passionate individuals who ideate and aspire for technology to reach the grassroots. Here we will provide you with problems and mentors to form feasible solutions to various issues and provide recognition to your solution. So, let’s put our ideas and knowledge bases to some real use.</p><p><b>For more details,contact</b><br><div style="display:inline-block;padding-right:80px">Sameer<br>+91 7728086695</div><div style="display:inline-block;">Vidyasagar Singh<br>+91 8504066462</div></p><br><a class="lb_a" href="/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										content:'<p>We have a population of around 1.2 billion and it is just a matter of time, that we will be the nation with the most number of young and technically sound work forces. Technology has grown in many forms and can be made accessible almost to all. It is just a luxury for some but can ease the life of many and can be the key to solving some of the most pressing issues faced by the country today. We just need some ideas and tinkering to apply it on the field.</p><p>It is only by solving such basic problems that development will occur collectively in every community and not selectively. Dhiti(sanskrit for “An idea”) is a platform for passionate individuals who ideate and aspire for technology to reach the grassroots. Here we will provide you with problems and mentors to form feasible solutions to various issues and provide recognition to your solution. So, let’s put our ideas and knowledge bases to some real use.</p><p>The prize money of Rs.10,000 for Winner of DHITI is sponsored by the 1966-71 batch of BITSAA.</p><br><a class="lb_a" href="/dhiti/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/dhiti.svg',
 										func:content_link,
 									},
 
 	'startupWeekend'		:		{
 										ename:'Startup Weekend',
-										content:'<p><b>Startup Weekend</b> is a global grassroots movement of active and empowered entrepreneurs driven by the idea of starting up, that connects them to the right people and resources over the  weekend.  It is the largest community of passionate entrepreneurs with over 3000 past events in 150 countries around the world. </p><p>The goal of Startup Weekend is to provide the time, space, knowledge, and resources to help potential entrepreneurs gain the experience they need to start successful ventures. At a Startup Weekend, one gets a 54 hour frenzy of business model creation, coding, designing, and market validation. Coming in alone with an idea on Friday night and leaving on Sunday evening with a startup company, and a bag full of new network contacts is a unique experience only found at a Startup Weekend.</p><p>Startup Weekend  follows a basic model: anyone is welcome to pitch their startup idea and receive feedback from their peers and then exchange of ideas takes place over 54 hours. The weekends culminate with presentations in front of local entrepreneurial leaders who then provide critical appraisal and feedback. </p><br><a class="lb_a" href="http://in.explara.com/e/swpilani" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;REGISTER HERE</b></a>',
+										content:'<p><b>Startup Weekend</b> is a global grassroots movement of active and empowered entrepreneurs driven by the idea of starting up, that connects them to the right people and resources over the  weekend.  It is the largest community of passionate entrepreneurs with over 3000 past events in 150 countries around the world. </p><p>The goal of Startup Weekend is to provide the time, space, knowledge, and resources to help potential entrepreneurs gain the experience they need to start successful ventures. At a Startup Weekend, one gets a 54 hour frenzy of business model creation, coding, designing, and market validation. Coming in alone with an idea on Friday night and leaving on Sunday evening with a startup company, and a bag full of new network contacts is a unique experience only found at a Startup Weekend.</p><p>Startup Weekend  follows a basic model: anyone is welcome to pitch their startup idea and receive feedback from their peers and then exchange of ideas takes place over 54 hours. The weekends culminate with presentations in front of local entrepreneurial leaders who then provide critical appraisal and feedback. </p><br><a class="lb_a" href="http://up.co/communities/india/pilani-rajasthan-india/startup-weekend/6179" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;REGISTER HERE</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/startupWeekend.svg',
 										func:content_link,
 									},
@@ -1321,15 +1321,15 @@ var map_ele_info = {
 									},
 	'armageddon'			:		{
 										ename:'Armageddon',
-										content:'<div class="c_soon">Coming soon...</div>',
-										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
+										content:'<p><b>Armageddon</b> is the traditional online gaming competition, being one of the primary attraction of APOGEE 2016. The event sees the participation of the best gaming societies from all over the country, that compete neck and neck in a spectrum of games that include FIFA, BLUR, Age of Empires etc. </p><p>This year, we present the version 2.0 of this grand event. An overnight competition for the first time, it promises to be bigger and better in present instance !</p><p><b>The games happening this year are : </b><br><ul><li>AOE II : Conquerers\' Expansion</li><li>COD 4 : Modern Warfare</li><li>Counter Strike 1.6</li><li>DOTA 2</li><li>FIFA 14</li><li>Need for Speed Most Wanted</li><li>BLUR</li></ul></p><br><a class="lb_a" href="http://bits-apogee.org/armageddon/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register !</b></a>',
+										icon: imgpre+'/static/cover/main/img/lb-icons/arma.png',
 										func:content_link,
 									},									
 	'blog'			:		{
 										ename:'Blog',
 										content:'<div class="c_soon">Coming soon...</div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
-										func:content_link,
+										func:function() { window.open('http://bits-apogee.org/blog', '_blank');  },
 									},
 	'kernel'			:		{
 										ename:'Kernel Events',
