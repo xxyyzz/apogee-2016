@@ -4,6 +4,9 @@ import json
 import datetime
 
 # Create your views here.
+def home(request):
+    return render(request, 'lacuna/lacuna.html')
+
 def user_login(request):
     fbid = request.POST['id']
     try:
@@ -37,4 +40,5 @@ def dvm1verify(request):
         for value in row:
             if value != 0:
                 error = True
-    if error = False:
+    if error == False:
+        pass
