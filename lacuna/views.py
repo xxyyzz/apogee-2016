@@ -39,6 +39,7 @@ def status(request):
 def dvm_level_get(request):
     fbid = request.POST['fbid']
     level = request.POST['level']
+    level = int(level)
     lacuna = Lacuna.objects.get(fbid=fbid)
     if lacuna.current_dvm_level <= level:
         leveldata = Level.objects.get(level=level, dept='DVM')
