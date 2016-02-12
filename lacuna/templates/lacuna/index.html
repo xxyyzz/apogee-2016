@@ -8,6 +8,15 @@
 	<script type="text/javascript" src="{% static 'lacuna/js/jquery.min.js' %}"></script>
 </head>
 <body>
+	<div class="login_lacuna">
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+		</fb:login-button>
+		<div id="status">
+		</div>
+	</div>
+	<div class="dashboard">
+		
+	</div>
 	<div id="game_loader">
 		<img src="{% static 'lacuna/img/preloader.gif' %}" class="abs_center">
 	</div>
