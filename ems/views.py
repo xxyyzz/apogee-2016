@@ -312,21 +312,21 @@ def genTeam(request):
 @csrf_exempt
 @staff_member_required
 def getParticipantList(request):
-    print request.POST.get('id_list')
-    id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
+    pass
+#     id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
 
-    outside_list = [x for x in id_list if len(x) < 5]
-    bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-    bitsian_long_list = [x for x in id_list if len(x) >= 11]
-    outsiders = InitialRegistration.objects.filter(id__in = outside_list)
-    bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-    bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-    bitsians = bitsian_long_objs | bitsian_short_objs
+#     outside_list = [x for x in id_list if len(x) < 5]
+#     bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
+#     bitsian_long_list = [x for x in id_list if len(x) >= 11]
+#     outsiders = InitialRegistration.objects.filter(id__in = outside_list)
+#     bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
+#     bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
+#     bitsians = bitsian_long_objs | bitsian_short_objs
 
-    context = {}
-    context['ids'] = [r.id for r in outsiders] + [r.long_id for r in bitsians]
-    context['names'] = [r.name for r in outsiders] + [r.name for r in bitsians]
-    context['colleges'] = [r.college for r in outsiders] + [r.college for r in bitsians]
-    context['phones'] = [r.phone_one for r in outsiders] + [None for r in bitsians]
-    print context
-    return JsonResponse(context, safe=False)
+#     context = {}
+#     context['ids'] = [r.id for r in outsiders] + [r.long_id for r in bitsians]
+#     context['names'] = [r.name for r in outsiders] + [r.name for r in bitsians]
+#     context['colleges'] = [r.college for r in outsiders] + [r.college for r in bitsians]
+#     context['phones'] = [r.phone_one for r in outsiders] + [None for r in bitsians]
+#     print context
+#     return JsonResponse(context, safe=False)
