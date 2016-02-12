@@ -1,36 +1,41 @@
 from django.shortcuts import render
 from lacuna.models import *
 import json
-import datetime
+from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def home(request):
     return render(request, 'lacuna/lacuna.html')
 
+@csrf_exempt
 def user_login(request):
-    fbid = request.POST['id']
+    fbid = request.POST['fbid']
+    name = request.POST['name']
     try:
-        lacuna = Lacuna.models.get(fbid=fbid)
+        lacuna = Lacuna.objects.get(fbid=fbid)
     except:
-        lacuna = Lacuna.models.create(fbid=fbid, name=name, start_time=timezone.now)
+        lacuna = Lacuna.objects.create(fbid=fbid, name=name, start_time=datetime.now())
     response = {
         'status' : 1,
     }
     return JsonResponse(response)
 
+@csrf_exempt
 def status(request):
-    fbid = request.POST['id']
-    lacuna = Lacuna.models.get(fbid=fbid)
+    fbid = request.POST['fbid']
+    lacuna = Lacuna.objects.get(fbid=fbid)
     score = lacuna.score
     response = {
         'fbid' : lacuna.fbid,
         'name' : lacuna.name,
         'score' : lacuna.score,
         'dvm_level' : lacuna.current_dvm_level,
-        'informals_level' : lacuna.current_lacuna_level,
+        'informals_level' : lacuna.current_informals_level,
     }
     return JsonResponse(response)
 
+@csrf_exempt
 def dvm1verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
@@ -41,4 +46,6 @@ def dvm1verify(request):
             if value != 0:
                 error = True
     if error == False:
-        pass
+        part = Lacuna.objects.get(fbid=fbid)
+        part.current_dvm_level = 2
+        part.dvm_1_time = part.start_time - datetime.now()
