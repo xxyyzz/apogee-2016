@@ -1,0 +1,176 @@
+/*--------------------------------GENERAL-------------------------------------*/
+*{
+	box-sizing:border-box;
+}
+
+body,html{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: auto; 
+	position: absolute;
+	top:0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.abs_center{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.hor_center{
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-left: auto;	
+	margin-right: auto;	
+}
+
+.ver_center{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-top: auto;	
+	margin-bottom: auto;	
+}
+/*-------------------Game Loader--------------*/
+#game_loader{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 5000;
+	display: none;
+}
+#game_loader>img{
+	height: 60px;
+	width: 60px;
+}
+
+/*-------------------STORY--------------*/
+
+.story_container{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	background-position: center; 
+}
+.story_next,.story_prev{
+	position: absolute;
+	width: 200px;
+	bottom: calc(100% + 25px);
+	background-color: rgba(0,0,0,0.5);
+	z-index: 1;
+	border-radius: 5px; 
+	border: 1px solid #eee;	
+	text-align: center;
+	cursor: pointer;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+.story_next:hover,.story_prev:hover{
+	background-color: rgba(0,0,0,0.95);	
+	color: #fff;
+}
+.storydet_container{
+	position: absolute;
+	margin:2.5%;
+	max-height: 50vh;
+	width: 95%;
+	bottom: 0;
+	border: 1px solid #eee;
+	color:#f0f0f0;
+	font-size: 1em;
+	border-radius: 5px;
+}
+.text_container{
+	background-color: rgba(0,0,0,0.6);
+	border-radius: 5px;
+	padding: 2%;
+	max-height: 50vh;
+	overflow-y:auto; 
+	font-size: 1.2em;
+	transition: background-color 0.15s ease;
+	-moz-transition: background-color 0.15s ease;
+	-webkit-transition: background-color 0.15s ease;
+}
+.text_container:hover{
+	background-color: rgba(0,0,0,0.9);	
+}
+
+/*----------------------PUZZLE 5-------------------*/
+.puzzle5grid
+{
+	height: 100%;
+    width: 100%;
+	background-color: transparent;
+}
+#puzzle5{
+	background-size: 100% 100%;
+	background-image: url(./../img/puzzle/puzzle5.jpg);
+	/*display: block;*/
+}
+.puzzle_cont{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+#puzzle5 .puzzle_deto{
+    box-shadow: 0 0 60px 10px #222;
+    display: inline-block;
+    height: auto;
+    height: 550px;
+    width:550px;
+    background: #FEFEFE;
+    left: 5%;
+	border-radius: 5px;
+}
+#puzzle5 .puzzle_deti{
+    border: 8px solid #EBECEC;
+    margin:12px;
+    padding: 7px;
+    /*box-shadow: inset 0 0 0 16px #fff, inset 0 0 0 17px #e6b741, inset 0 0 0 18px #fff, inset 0 0 0 19px #e6b741, inset 0 0 0 20px #fff, inset 0 0 0 21px #e6b741;*/
+   }
+#puzzle5 .puzzle5box
+{
+	position: relative;
+	width: 45px;
+	height: 45px;
+	margin: 5px ;
+	background-color: #808080;
+	display: inline-block;
+	color:#EBECEC;
+	text-align: center;
+	line-height: 45px;
+	border-radius:2px;
+	cursor: pointer; 
+	font-weight: bolder;
+	vertical-align: top;
+	transition: all 0.15s ease;
+	-moz-transition: all 0.15s ease;
+	-webkit-transition: all 0.15s ease;
+}
+#puzzle5 .puzzle5box.nocolor
+{
+	background-color: transparent;
+	visibility: hidden;
+}
+#puzzle5 .puzzle5box.visited,#puzzle5 .puzzle5box.sel
+{
+	background-color: #EBECEC;
+	color: #808080;
+}
