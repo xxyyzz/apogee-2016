@@ -884,7 +884,18 @@ def recnacc_checkout(request,pid):
 		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
 
 
-
+def get_barcode_recnacc(request):
+	list_of_people_selected = Participant.objects.filter(pcr_approval=True)
+	final_display = []
+	for x in list_of_people_selected:
+		name = x.name
+		college = x.college.name
+		pid= x.id
+		encoded = encode_glid(pid)
+		final_display.append((name,college,encoded, pid))
+	context = RequestContext(request)
+	context_dict = {'final_display':final_display}
+	return render_to_response('regsoft/get_barcode_recnacc.html', context_dict, context)
 # # Create your views here.
 # @csrf_exempt
 # @staff_member_required
@@ -1369,7 +1380,8 @@ def recnacc_room_list(request):
 	plist = []
 	for x in rooms:
 		prtno = Participant.objects.filter(room = x).count()
-		plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
+		if x.id != 1:
+			plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
 
 	context = RequestContext(request)
 	context_dict = {'plist':plist}

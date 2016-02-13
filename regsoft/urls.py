@@ -40,6 +40,7 @@ urlpatterns = [
 # 	url(r'^recnacc/faculty_allot/(?P<gl_id>\d+)$', recnacc_faculty_allot),
 	url(r'^recnacc/deallocate/(?P<pid>\d+)$', recnacc_deallocate),
 	url(r'^recnacc/checkout/(?P<pid>\d+)$', recnacc_checkout),
+	url(r'^recnacc/barcodelist/$', get_barcode_recnacc),
 # 	#url(r'^recnacc/return_inventory/(?P<gl_id>\d+)$', recnacc_return_inventory),
 # 	url(r'^recnacc/checkedout_select_gl/$', recnacc_checkedout_select_gl),
 # 	url(r'^recnacc/checked_out_participants/(?P<gl_id>\d+)$', recnacc_checked_out_participants),
