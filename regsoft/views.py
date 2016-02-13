@@ -1,5 +1,5 @@
 from backend.models import *
-from models import *
+from regsoft.models import *
 # from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
