@@ -562,6 +562,7 @@ function get_level_status(){
 			$('.dash_score').html(data.score);
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
+			$('.dashboard').fadeIn();
 		},
 	});
 }

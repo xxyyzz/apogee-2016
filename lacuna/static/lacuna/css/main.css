@@ -39,6 +39,9 @@ body,html{
 #_x30_{
 	cursor: pointer;
 }
+.dashboard{
+	display:none;
+}
 .main_svg_cont{
 	position: absolute;
 	width: 100%;
