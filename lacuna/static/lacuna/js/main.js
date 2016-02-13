@@ -559,6 +559,8 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
+			$('.dash_score').html(data.score);
+			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 		},
 	});
@@ -574,6 +576,11 @@ function getStory(x){
 	});
 }
 // login=====================END==============================
+$(window).load(function(){
+	$('#_x30_').click(function(){
+		call_level(1);
+	});
+});
 // dashboard=================================================
 function call_level(x){
 	$.ajax({
