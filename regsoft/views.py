@@ -827,27 +827,27 @@ def recnacc_dashboard(request,pid):
 	else:
 		return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
 
-# @csrf_exempt
-# def recnacc_allot(request,gl_id):
+@csrf_exempt
+def recnacc_allot(request,pid):
 
 #   #list acco with availibilty
 #   #ability to select
-# 	try:
-# 		gleader.objects.get(id = gl_id)
-# 	except:
-# 		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
-# 	bhavan_list= Bhavan.objects.all()
-# 	initial_vacancy_display= []
-# 	vacancy_display = []
-# 	all_rooms = []
-# 	for bhavan in bhavan_list:
-# 		if bhavan.id != 1:
-# 			bhavan_name = bhavan.name
-# 			rooms = [x for x in bhavan.room_set.all()]
-# 			all_rooms += rooms
-# 			if len(rooms):
-# 				vacancy_display.append((bhavan_name,rooms))
-# 		gl = gleader.objects.filter(id = gl_id)[0]
+	try:
+		Participant.objects.get(id = pid)
+	except:
+		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
+	bhavan_list= Bhavan.objects.all()
+	initial_vacancy_display= []
+	vacancy_display = []
+	all_rooms = []
+	for bhavan in bhavan_list:
+		if bhavan.id != 1:
+			bhavan_name = bhavan.name
+			rooms = [x for x in bhavan.room_set.all()]
+			all_rooms += rooms
+			if len(rooms):
+				vacancy_display.append((bhavan_name,rooms))
+		part_ob = Participant.objects.filter(id = pid)[0]
 # 	participant_list = gl.initialregistration_set.all() 
 # 	no_males=0
 # 	no_females=0
