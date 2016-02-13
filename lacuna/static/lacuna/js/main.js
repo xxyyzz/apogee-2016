@@ -613,6 +613,7 @@ function call_level(x){
 function load_level(d,x){
 	$('.dashboard').fadeOut();
 	$('#puzzle').fadeIn();
+	$('#puzzle_cont').fadeIn();
 	$('#puzzle').html(d.html_file);
 	console.log('../static/lacuna/js/game/'+d.js_file);
 	$.loadScript('../static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
@@ -631,6 +632,7 @@ function submit_ans(ans,x){
 			console.log(data);
 			if(data.status==1){
 				$('#puzzle').fadeOut();
+				$('#puzzle_cont').fadeOut();
 				$('.dashboard').fadeIn();
 				get_level_status();
 			}
