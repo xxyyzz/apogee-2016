@@ -278,3 +278,7 @@ body,html{
 	padding: 20px;
 	overflow-y: auto;
 }
+
+.story{
+	cursor: pointer;
+}
