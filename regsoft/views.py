@@ -768,7 +768,7 @@ def recnacc_allot(request,pid):
 			part_ob = Participant.objects.get(id = pid)
 			if part_ob.gender == 'F':
 				part_ob.room = selectedroom
-				part_ob.save
+				part_ob.save()
 				selectedroom.vacancy -= 1
 				selectedroom.save()
 			
@@ -776,7 +776,7 @@ def recnacc_allot(request,pid):
 			part_ob = Participant.objects.get(id = pid)
 			if part_ob.gender == 'M':
 				part_ob.room = selectedroom
-				part_ob.save
+				part_ob.save()
 				selectedroom.vacancy -= 1
 				selectedroom.save()
 
@@ -790,7 +790,7 @@ def recnacc_allot(request,pid):
 		context = RequestContext(request)       
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-				part_ob.save()
+				
 		
 
 @csrf_exempt
