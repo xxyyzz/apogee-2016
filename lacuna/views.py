@@ -129,7 +129,7 @@ def dvm1verify(request):
     return verify_final(request, error)
 
 @csrf_exempt
-def dvm1verify(request):
+def dvm2verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
     sol = json.loads(sol)
