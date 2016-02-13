@@ -78,10 +78,22 @@ def informals_level_verify(request):
     if sol == levelobj.answer:
         part = Participant.objects.get(fbid=fbid)
         stats = list(part.informals_stats)
+        count = stats.count('0')
+        count = 12 - count
+        for val in stats:
+            if val != '0':
+                count += 1
         stats[level-1] = '2'
         stats = ''.join(stats)
         part.informals_stats = stats
         part.save()
+        stats = list(part.informals_stats)
+        count = stats.count('0')
+        count = 12 - count
+        part.score = part.score + count*50
+        part.save()
+
+
         response = {
             'status' : 1,
         }
