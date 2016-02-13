@@ -4,9 +4,18 @@
 	position: absolute;
 	top:0;
 	left:0;
+	overflow: hidden;
 }
 #chess > #chess-board{
 	position: relative;
+}
+#chess > #backround-boxs{
+	position: absolute;
+	overflow: hidden;
+	left:-5%;
+	width: 110%;
+}
+.grid{
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
@@ -17,7 +26,6 @@
 	    -ms-flex-wrap:wrap;
 	        flex-wrap:wrap;
 }
-
 .bishop{
 	position: absolute;
 	background-repeat: no-repeat;
