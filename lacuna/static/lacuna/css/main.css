@@ -21,7 +21,43 @@ body,html{
 	width: 100%;
 	font-family: 'Cabin', sans-serif;
 }
-
+.btn_sty{
+    position: absolute;
+    top: 20px;
+	background: #fafafa;
+    top: 20px;
+    left: 25px;
+    padding: 10px 20px;
+    z-index: 199;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #555;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
+}
+.main_svg_cont{
+	position: absolute;
+	width: 100%;
+	top:0;
+	left:0;
+	background: url(../img/backme.jpg);
+	background-size: 100% auto;
+}
+.btn1{
+    left: 25px;
+}
+.btn2{
+    left: 170px;
+}
+.btn3{
+	right:25px;
+}
+.btn4{
+	right: 170px;
+}
 .abs_center{
 	position: absolute;
 	top: 0;

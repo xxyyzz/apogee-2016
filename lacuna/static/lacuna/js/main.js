@@ -638,6 +638,7 @@ function statusChangeCallback(response) {
 	// for FB.getLoginStatus().
 	if (response.status === 'connected') {
 	  // Logged into your app and Facebook.
+
 		testAPI();
 	} else if (response.status === 'not_authorized') {
 	  // The person is logged into Facebook, but not your app.
@@ -700,7 +701,8 @@ function testAPI() {
 	FB.api('/me', function(response) {
 		user.id = response.id;
 		user.name = response.name;
-	  send_login(response.id,response.name);
+		$('.fb_login_cont').fadeOut();
+	  	send_login(response.id,response.name);
 	});
 }
 // Login lacuna===================END=============================
