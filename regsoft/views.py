@@ -818,6 +818,7 @@ def recnacc_deallocate(request,pid):
 #       if x.room.id != 1:
 #           alist.append(x)
     if request.POST:
+        part_ob = Participant.objects.get(id=pid)    
         selected_room = part_ob.room
         selected_room.vacancy += 1
         selected_room.save()
