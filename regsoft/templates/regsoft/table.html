@@ -27,24 +27,17 @@
                 </li>
 
                 <li>                  
-                    <a href="./{{crep.id}}">
+                    <a href="./{{part.id}}">
                         <i class="pe-7s-menu"></i> 
                         <p>Dashboard</p>
                     </a>
                     <!-- </form>         -->
                 </li>
                 <li>
-                    <a href="../../groupcodes">
+                    <a href="../pcodes/">
                         <i class="pe-7s-note2"></i> 
-                        <p>Passed Groups</p>
+                        <p>Passed Members</p>
                     </a>            
-                </li>
-
-                <li>
-                    <a href="../unconfirm/{{crep.id}}">
-                        <i class="pe-7s-delete-user"></i> 
-                        <p>Unconfirm </p>
-                    </a>
                 </li> 
 
                 <li>
@@ -55,7 +48,7 @@
                 </li>
 
                 <li>
-                    <a href="../add/{{crep.id}}">
+                    <a href="../add/">
                         <i class="pe-7s-user"></i> 
                         <p>Add Participant </p>
                     </a>
@@ -129,6 +122,45 @@ function checkall(gauss){
         <div class="content">
             <div class="container-fluid">
                 <div class="row">                   
+ 
+                    
+        {% if part.firewallzo %} 
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">Already passed Firewallz</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Name | (Pcr Approval)</th>
+                                        <th>Gender</th>
+                                        <th>Events</th>
+                                        <th>Phone</th>
+                                        <th>Unique Id </th>
+                                        
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>{{part.id}}</td>
+                                            <td>{{part.name}}{% if part.pcr_approval %}(Approved) {% else %}(Not Approved){% endif %}</td>
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td>{{part.aadhaar}}</td>
+
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                   
+                            </div>
+                        </div>
+                        <a href="../unconfirm/{{part.id}}" class="btn btn-info btn-fill col-md-2 col-md-offset-5" ><strong>Unconfirm </strong></a>
+                    </div> 
+                    {% else %}
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
@@ -138,7 +170,7 @@ function checkall(gauss){
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>S.no</th>
+                                        <th>ID</th>
                                         <th>Name | (Pcr approval)</th>
                                         <th>Gender</th>
                                         <th> Events </th>
@@ -151,7 +183,7 @@ function checkall(gauss){
                                         <form method= "POST" action = '../confirm/' id ="form1">
                                             {% csrf_token %}
                                         <tr>
-                                            <td>1</td>
+                                            <td>{{part.id}}</td>
                                             <td>{{part.name}}{% if part.pcr_approval %}(Pcr approved){% else %}(Not approved){% endif %}</td>
                                             <td> {{part.gender}} </td>
                                             <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
@@ -167,12 +199,9 @@ function checkall(gauss){
                                    
                             </div>
                         </div>
-                            <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1"><strong>Confirm </strong></button>
-                    </div>  
-                    
-
-                    
-                                 
+                            <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1" name='confirm' value="{{part.id}}"><strong>Confirm </strong></button>
+                    </div>                     
+            {% endif %}                                 
                 </div>                    
             </div>
         </div>

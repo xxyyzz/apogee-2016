@@ -27,15 +27,7 @@
                 </li>
  
                 <li>
-
-                    <a href="../scan/{{crep.id}}">
-                        <i class="pe-7s-menu"></i> 
-                        <p>Dashboard</p>
-                    </a>
-   
-                </li>
-                <li>
-                    <a href="../../groupcodes">
+                    <a href="../pcodes/">
                         <i class="pe-7s-note2"></i> 
                         <p>Passed Groups</p>
                     </a>            
@@ -47,12 +39,6 @@
                     </a>        
                 </li>
 
-                <li>
-                    <a href="../unconfirm/{{crep.id}}">
-                        <i class="pe-7s-delete-user"></i> 
-                        <p>Unconfirm </p>
-                    </a>
-                </li> 
 
 <!--                 <li>
                     <a href="icons.html">
@@ -118,14 +104,18 @@
                                 {% endif %}
                             </div>
                             <div class="content">
-                                <form method= 'POST' action= '../add/{{crep.id}}'>
+                                <form method= 'POST' action= '../add/'>
                                     {% csrf_token %}
 
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <label>College (disabled)</label>
-                                                <input type="text" class="form-control" name ="college" disabled placeholder="Company" value="{{college}}">
+                                                <label>College</label>
+                                         <select name="college" class="form-control" >
+                                         {% for c in clg_list %}
+                                        <option value="{{c.id}}" >{{c.name}}</option>
+                                         {% endfor %}
+                                      </select>  
                                             </div>        
                                         </div>
                                         <div class="col-md-3">
@@ -154,7 +144,7 @@
                                                 <label>Gender</label><br> &nbsp;
 
                                                 
-                                                <select name="gender" >
+                                                <select name="gender" class="form-control">
                                                    
                                                   <option value="M" >Male</option>
                                                   <option value="F" >Female</option>
@@ -167,16 +157,6 @@
                                             </div>        
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                           <label class="checkbox"> Faculty                 
-                                            <input type="checkbox" name="is_faculty" value="True" data-toggle= "checkbox"></label>
-                         
-                        
-
-
-                                            </div>        
-                                        </div>
                                     </div>
                                     
 
