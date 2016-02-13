@@ -665,7 +665,7 @@ FB.getLoginStatus(function(response) {
 // successful.  See statusChangeCallback() for when this call is made.
 function testAPI() {
 	FB.api('/me', function(response) {
-	  (response.name,response.id);
+	  send_login(response.id,response.name);
 	});
 }
 // Login lacuna===================END=============================
