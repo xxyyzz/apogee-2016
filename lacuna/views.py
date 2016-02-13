@@ -114,9 +114,7 @@ def verify_final(request, error):
                 attr = 'dvm_%s_time' % str(i)
                 addition = getattr(part, attr)
                 if addition is not None:
-                    print total_time, addition
                     total_time = total_time + addition
-            print total_time
             part.total_time = total_time
             part.save()
         response = {
@@ -145,8 +143,9 @@ def dvm2verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    if sol.replace(" ", "")upper() == 'SAMYEMONASTERY':
+        error = False
     return verify_final(request, error)
 
 @csrf_exempt
