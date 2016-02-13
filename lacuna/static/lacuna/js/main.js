@@ -497,14 +497,14 @@ $(window).load(function(){
 // async script=================================
 var initList = [
 	{func: function(){chessinit();}},
-	{func: function(){crypt();}},
+	{func: function(){qrcodeinit();}},
 	{func: function(){lvl1init();}},
 	{func: function(){crypt();}},
 	{func: function(){level4init();}},
 	{func: function(){crypt();}},
 	{func: function(){magicinit();}},
 	{func: function(){crypt();}},
-	{func: function(){onetwothreeinit();}},
+	{func: function(){level5init();}},
 	{func: function(){crypt();}},
 	{func: function(){colorinit();}},
 	{func: function(){crypt();}},

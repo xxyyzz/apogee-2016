@@ -104,8 +104,8 @@ function level5init()
 	function win()
 	{
 		if(count==row*col)
+			submit_ans('win',9);
 			alert('win');
 	}
 
 }
-level5init();

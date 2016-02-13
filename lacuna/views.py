@@ -144,7 +144,7 @@ def dvm2verify(request):
     level = request.POST['level']
     level = int(level)
     error = True
-    if sol.replace(" ", "")upper() == 'SAMYEMONASTERY':
+    if sol.replace(" ", "").upper() == 'SAMYEMONASTERY':
         error = False
     return verify_final(request, error)
 
