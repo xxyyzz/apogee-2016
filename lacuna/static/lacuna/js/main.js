@@ -563,11 +563,11 @@ function get_level_status(){
 		},
 	});
 }
-function getStory(){
+function getStory(x){
 	$.ajax({
 		url: './storyline/',
 		method: 'POST',
-		data: {fbid:user.id,level:user.level},
+		data: {fbid:user.id,level:x},
 		success: function(data){
 			console.log(data);
 		},
