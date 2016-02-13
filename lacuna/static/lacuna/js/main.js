@@ -559,7 +559,10 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
+			$('.dash_score').html(data.score);
+			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
+			$('.dashboard').fadeIn();
 		},
 	});
 }
@@ -574,6 +577,11 @@ function getStory(x){
 	});
 }
 // login=====================END==============================
+$(window).load(function(){
+	$('#_x30_').click(function(){
+		call_level(1);
+	});
+});
 // dashboard=================================================
 var instruct_arr = [
 						"There are two black and two white bishops on the grid. Your goal is to interchange their positions, adhering to the rules of chess. The bishops can only move diagonally, and if it is possible for a bishop to kill a bishop of the opposite colour, you lose the game.",
