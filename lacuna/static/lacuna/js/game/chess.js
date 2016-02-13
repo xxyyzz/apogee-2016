@@ -117,7 +117,7 @@ var chess={
 		 	}
 		}
 		submit_ans('win',1);
-		window.alert("You won!");
+		
 		return 1;
 	},
 	setStyle : function(){

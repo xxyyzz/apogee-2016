@@ -614,10 +614,10 @@ function load_level(d,x){
 	$('.dashboard').fadeOut();
 	$('#puzzle').fadeIn();
 	$('#puzzle').html(d.html_file);
-	console.log('../2016/static/lacuna/js/game/'+d.js_file);
-	$.loadScript('../2016/static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
+	console.log('../static/lacuna/js/game/'+d.js_file);
+	$.loadScript('../static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
 	open_instr(instruct_arr[x]);
-	loadCss('../2016/static/lacuna/css/game/'+d.css_file,x);
+	loadCss('../static/lacuna/css/game/'+d.css_file,x);
 }
 // dashboard========================END=========================
 // level ========================================================
@@ -629,6 +629,11 @@ function submit_ans(ans,x){
 		data: {fbid:user.id,sol: JSON.stringify(ans),level:x},
 		success: function(data){
 			console.log(data);
+			if(data.status==1){
+				$('#puzzle').fadeOut();
+				$('.dashboard').fadeIn();
+				get_level_status();
+			}
 		},
 	});
 }
