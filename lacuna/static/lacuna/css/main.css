@@ -157,8 +157,9 @@ body,html{
 }
 /*puzzle div===========================================*/
 #puzzle_cont{
+	display: none;
 	z-index: 1000;
-	/*background-color: red;*/
+	background-color: #fff;
 	position: absolute;
 	top: 0;
 	left: 0;
