@@ -38,6 +38,15 @@ def status(request):
     return JsonResponse(response)
 
 @csrf_exempt
+def storyline(request):
+    level = request.POST['level']
+    level = int(level)
+    story = Story.objects.get(level=level)
+    content = story.content
+    response = json.loads(content)
+    return JsonResponse(response)
+
+@csrf_exempt
 def dvm_level_get(request):
     fbid = request.POST['fbid']
     level = request.POST['level']

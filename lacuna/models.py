@@ -38,3 +38,9 @@ class Level(models.Model):
     answer = models.CharField(max_length=500, null=True, blank=True)
     def __str__(self):
         return str(self.level)
+
+class Story(models.Model):
+    level = models.PositiveSmallIntegerField()
+    content = models.TextField(default='NA')
+    def __str__(self):
+        return str(self.level)
