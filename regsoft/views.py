@@ -837,7 +837,7 @@ def recnacc_allot(request,pid):
 	except:
 		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
 	room_list= Room.objects.all()
-	part_ob = Participant.objects.filter(id = pid)[0]
+	part_ob = Participant.objects.get(id = pid)
 	if request.method == 'POST':
 		try:
 			roomid = request.POST['roomid']
@@ -899,9 +899,9 @@ def recnacc_deallocate(request,pid):
 			selected_room.save()
 			part_ob.room = None
 			part_ob.save()
-		context = RequestContext(request)
-		context_dict = {'part_ob':part_ob}
-		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
 
 	else:
 		context = RequestContext(request)

@@ -190,47 +190,6 @@ function checkall(gauss){
                     </div>  
                     
                     
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">The following participants have been <strong>deallocated</strong>.</h4>
-                                
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Status</th>
-                                        
-                                        <th>Phone</th>
-                                        <th>Group Code</th>
-                                        <th>Group Leader</th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        {% for x in done_people %}
-                                        <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{x.name}}</td>
-                                            <td> {{x.gender}} </td>
-                                           
-                                            <td>{% if x.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
-                                            <td>{{x.phone_one}}</td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
-                                            <td>{{x.grpleader.groupcode}}</td>
-                                            <td>{{x.grpleader.details.name}} </td>
-
-                                        </tr>
-                                        {% endfor  %}
-                                       
-                                    </tbody>
-                                </table>
-                                   
-                            </div>
-                        </div>
-                    </div> 
                     
                                  
                 </div>                    
