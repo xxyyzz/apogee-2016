@@ -498,8 +498,9 @@ $(window).load(function(){
 var initList = [
 	{func: function(){lvl1init();}},
 	{func: function(){level4init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
+	{func: function(){chessinit();}},
+	{func: function(){colorinit();}},
+	{func: function(){magicinit();}},
 	];
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({
