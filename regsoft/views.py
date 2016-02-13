@@ -836,409 +836,90 @@ def recnacc_allot(request,pid):
 		Participant.objects.get(id = pid)
 	except:
 		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
-	bhavan_list= Bhavan.objects.all()
-	initial_vacancy_display= []
-	vacancy_display = []
-	all_rooms = []
-	for bhavan in bhavan_list:
-		if bhavan.id != 1:
-			bhavan_name = bhavan.name
-			rooms = [x for x in bhavan.room_set.all()]
-			all_rooms += rooms
-			if len(rooms):
-				vacancy_display.append((bhavan_name,rooms))
-		part_ob = Participant.objects.filter(id = pid)[0]
-# 	participant_list = gl.initialregistration_set.all() 
-# 	no_males=0
-# 	no_females=0
-# 	for p in participant_list:
-# 		if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty!=True:
-# 			no_males+=1
-# 		elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty!=True:
-# 			no_females+=1
-# 	if request.POST:
-# 		try:
-# 			request.POST.getlist('roomid')
-# 		except:
-# 			error="Invalid Room Selected"
-# 			context = RequestContext(request)
-# 			context_dict = {'error':error}
-# 			return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-# 		for roomid in request.POST.getlist('roomid'):
-# 		  # roomid=request.POST.getlist('roomid')
+	room_list= Room.objects.exclude(id = 1)
+	part_ob = Participant.objects.filter(id = pid)[0]
+	if request.method == 'POST':
+		try:
+			request.POST['roomid']
+		except:
+			error="Invalid Room Selected"
+			context = RequestContext(request)
+			context_dict = {'error':error}
+			return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
 			
-# 			x = roomid + 'alloted'
-# 			noalloted=int(request.POST.get(x, False)) 
-# 			# noa = 'a'+roomid
-# 			# nob = 'b'+roomid
-# 			# noc = 'c'+roomid
-# 			# nod = 'd'+roomid
-# 			# noe = 'e'+roomid
-# 			# nof = 'f'+roomid
+		selectedroom = Room.objects.get(id=roomid) 
+		selectedroom_availibilty = selectedroom.vacancy
 
-# 			roomid = int(roomid)
-# 			no_males=0
-# 			no_females=0
-			
-# 			# selectedroom = Room.objects.get(id=roomid)         
-# 			# a_no=int(request.POST.get(noa, False))
-# 			# if a_no == '':
-# 			#     a_no =0 
-# 			# b_no=int(request.POST.get(nob, False))
-# 			# if b_no == '':
-# 			#     b_no =0
-# 			# c_no=int(request.POST.get(noc, False))
-# 			# if c_no == '':
-# 			#     c_no =0
-# 			# d_no=int(request.POST.get(nod, False))
-# 			# if d_no == '':
-# 			#     d_no =0
-# 			# e_no=int(request.POST.get(noe, False))
-# 			# if e_no == '':
-# 			#     e_no =0
-# 			# f_no=int(request.POST.get(nof, False))
-# 			# if f_no == '':
-# 			#     f_no =0
-			
-# 			# selectedbhavan = Bhavan.objects.get(id = selectedroom.bhavan.id)
-# 			# selectedbhavan.a_capacity -= a_no
-# 			# selectedbhavan.b_capacity -= b_no
-# 			# selectedbhavan.c_capacity -= c_no
-# 			# selectedbhavan.d_capacity -= d_no
-# 			# selectedbhavan.e_capacity -= e_no
-# 			# selectedbhavan.f_capacity -= f_no
-# 			# selectedbhavan.save()
-# 			# # selectedroom.bhavan.a_capacity -= a_no
-# 			# # selectedroom.bhavan.b_capacity -= b_no
-# 			# # selectedroom.bhavan.c_capacity -= c_no
-# 			# # selectedroom.bhavan.d_capacity -= d_no
-# 			# # selectedroom.bhavan.e_capacity -= e_no
-# 			# # selectedroom.bhavan.f_capacity -= f_no
 
-# 			# # selectedroom.save()
-# 			# if Inventory.objects.filter(room = selectedroom, gl_id = gl_id):
-# 			#     inob = Inventory.objects.filter(room = selectedroom, gl_id = gl_id)[0]
-# 			#     inob.a += a_no
-# 			#     inob.b += b_no
-# 			#     inob.c += c_no
-# 			#     inob.d += d_no
-# 			#     inob.e += e_no
-# 			#     inob.f += f_no
-# 			#     inob.save()
-
-# 			# else:
-# 			#     ilist = Inventory()
-# 			#     ilist.a = a_no
-# 			#     ilist.b = b_no
-# 			#     ilist.c = c_no
-# 			#     ilist.d = d_no
-# 			#     ilist.e = e_no
-# 			#     ilist.f = f_no
-# 			#     ilist.room = selectedroom
-# 			#     ilist.gl_id = gl_id
-# 			#     ilist.save()        
-
+		if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'F':
+				part_ob.room = selectedroom
+				part_ob.save
+				selectedroom.vacancy -= 1
+				selectedroom.save()
 			
-			
-# 			for p in participant_list:
-# 				if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty!=True:
-# 					no_males+=1
-# 				elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty!=True:
-# 					no_females+=1
-# 			selectedroom = Room.objects.get(id=roomid) 
-# 			selectedroom_availibilty = selectedroom.vacancy
-# 			unalloted_males = [x for x in participant_list if x.firewallzo == True and x.is_faculty!=True and x.gender[0].upper() == 'M' and x.recnacc != True]
-# 			unalloted_females = [x for x in participant_list if x.firewallzo == True and x.is_faculty!=True and x.gender[0].upper() == 'F' and x.recnacc != True]
-# 			if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
-# 				if no_females<noalloted:
-# 					return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
-# 				for y in range(noalloted):
-# 					unalloted_females[y].recnacc=True
-# 					unalloted_females[y].room = selectedroom
-# 					selectedroom.vacancy -= 1
-# 					selectedroom.save()
-# 					unalloted_females[y].save()
-			
-# 			else:
-# 				if no_males<noalloted:
-# 					return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
-# 				for y in range(noalloted):
-# 					unalloted_males[y].recnacc=True
-# 					unalloted_males[y].room = selectedroom
-# 					selectedroom.vacancy -= 1
-# 					selectedroom.save()
-# 					unalloted_males[y].save()
-# 		#return HttpResponse(selectedroom.vacancy)
-# 			bal = noalloted*300
-# 			gl.amount_taken += bal
-# 			gl.save()
-# 		no_males=0
-# 		no_females=0
-# 		participant_list = gl.initialregistration_set.all()
-# 		for p in participant_list:
-# 			if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty!=True:
-# 				no_males+=1
-# 			elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty!=True:
-# 				no_females+=1
-# 			bhavan_list= Bhavan.objects.all()
-# 			all_rooms =[]
-# 			blist = [ x for x in bhavan_list if x.id != 1]
-# 			for bhavan in bhavan_list:
-# 				if bhavan.id != 1:  
-# 					bhavan_name = bhavan.name
-# 					rooms = [x for x in bhavan.room_set.all() if x.vacancy != 0]
-# 					all_rooms += rooms
-# 					if len(rooms):
-# 						vacancy_display.append((bhavan_name,rooms))
-# 		done_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.is_faculty!=True]
-# 		context = RequestContext(request)
-# 		context_dict = {'done_participants':done_participants, 'blist':blist,'all_rooms':all_rooms,'no_males':no_males, 'no_females':no_females,"gl":gl, 'vacancy_display':vacancy_display}
-# 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		else:
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'M':
+				part_ob.room = selectedroom
+				part_ob.save
+				selectedroom.vacancy -= 1
+				selectedroom.save()
 
-# 	else:
+		context = RequestContext(request)
+ 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+ 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+
+	else:
 # 		bhavan_list = Bhavan.objects.all()
 # 		blist = [x for x in bhavan_list if x.id != 1]
 # 		done_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.is_faculty!=True]
 # 		context = RequestContext(request)
-# 		context_dict = {'done_participants':done_participants, 'blist':blist, 'all_rooms':all_rooms,'vacancy_display':vacancy_display, 'no_males':no_males, 'no_females':no_females, "gl":gl}
-# 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		context = RequestContext(request)		
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
 
-# @csrf_exempt
-# def recnacc_faculty_allot(request,gl_id):
 
-#   #list acco with availibilty
-#   #ability to select
-# 	bhavan_list= Bhavan.objects.all()
-# 	initial_vacancy_display= []
-# 	vacancy_display = []
-# 	all_rooms = []
-# 	for bhavan in bhavan_list:
-# 		if bhavan.id != 1:
-# 			bhavan_name = bhavan.name
-# 			rooms = [x for x in bhavan.room_set.all()]
-# 			all_rooms += rooms
-# 			if len(rooms):
-# 				vacancy_display.append((bhavan_name,rooms))
-# 		gl = gleader.objects.filter(id = gl_id)[0]
-# 	participant_list = gl.initialregistration_set.all() 
-# 	no_males=0
-# 	no_females=0
-# 	for p in participant_list:
-# 		if p.gender[0].upper()=="M" and p.firewallzo ==True and p.is_faculty == True and p.recnacc!=True:
-# 			no_males+=1
-# 		elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.is_faculty == True and p.recnacc!=True:
-# 			no_females+=1
-# 	if request.POST:
-# 		try:
-# 			request.POST.getlist('roomid')
-# 		except:
-# 			error="Invalid Room Selected"
-# 			context = RequestContext(request)
-# 			context_dict = {'error':error}
-# 			return render_to_response('regsoft/recnacc_acco_faculty.html', context_dict, context)
-# 		for roomid in request.POST.getlist('roomid'):
-# 		  # roomid=request.POST.getlist('roomid')
-			
-# 			x = roomid + 'alloted'
-# 			noalloted=int(request.POST.get(x, False)) 
-# 			# noa = 'a'+roomid
-# 			# nob = 'b'+roomid
-# 			# noc = 'c'+roomid
-# 			# nod = 'd'+roomid
-# 			# noe = 'e'+roomid
-# 			# nof = 'f'+roomid
-
-# 			roomid = int(roomid)
-# 			no_males=0
-# 			no_females=0
-			
-# 			# selectedroom = Room.objects.get(id=roomid)         
-# 			# a_no=int(request.POST.get(noa, False))
-# 			# if a_no == '':
-# 			#     a_no =0 
-# 			# b_no=int(request.POST.get(nob, False))
-# 			# if b_no == '':
-# 			#     b_no =0
-# 			# c_no=int(request.POST.get(noc, False))
-# 			# if c_no == '':
-# 			#     c_no =0
-# 			# d_no=int(request.POST.get(nod, False))
-# 			# if d_no == '':
-# 			#     d_no =0
-# 			# e_no=int(request.POST.get(noe, False))
-# 			# if e_no == '':
-# 			#     e_no =0
-# 			# f_no=int(request.POST.get(nof, False))
-# 			# if f_no == '':
-# 			#     f_no =0
-			
-# 			# selectedbhavan = Bhavan.objects.get(id = selectedroom.bhavan.id)
-# 			# selectedbhavan.a_capacity -= a_no
-# 			# selectedbhavan.b_capacity -= b_no
-# 			# selectedbhavan.c_capacity -= c_no
-# 			# selectedbhavan.d_capacity -= d_no
-# 			# selectedbhavan.e_capacity -= e_no
-# 			# selectedbhavan.f_capacity -= f_no
-# 			# selectedbhavan.save()
-# 			# # selectedroom.bhavan.a_capacity -= a_no
-# 			# # selectedroom.bhavan.b_capacity -= b_no
-# 			# # selectedroom.bhavan.c_capacity -= c_no
-# 			# # selectedroom.bhavan.d_capacity -= d_no
-# 			# # selectedroom.bhavan.e_capacity -= e_no
-# 			# # selectedroom.bhavan.f_capacity -= f_no
-
-# 			# # selectedroom.save()
-# 			# if Inventory.objects.filter(room = selectedroom, gl_id = gl_id):
-# 			#     inob = Inventory.objects.filter(room = selectedroom, gl_id = gl_id)[0]
-# 			#     inob.a += a_no
-# 			#     inob.b += b_no
-# 			#     inob.c += c_no
-# 			#     inob.d += d_no
-# 			#     inob.e += e_no
-# 			#     inob.f += f_no
-# 			#     inob.save()
-
-# 			# else:
-# 			#     ilist = Inventory()
-# 			#     ilist.a = a_no
-# 			#     ilist.b = b_no
-# 			#     ilist.c = c_no
-# 			#     ilist.d = d_no
-# 			#     ilist.e = e_no
-# 			#     ilist.f = f_no
-# 			#     ilist.room = selectedroom
-# 			#     ilist.gl_id = gl_id
-# 			#     ilist.save()        
-
-			
-			
-# 			for p in participant_list:
-# 				if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty == True:
-# 					no_males+=1
-# 				elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty == True:
-# 					no_females+=1
-# 			selectedroom = Room.objects.get(id=roomid) 
-# 			selectedroom_availibilty = selectedroom.vacancy
-# 			unalloted_males = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'M' and x.recnacc != True and x.is_faculty==True]
-# 			unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True and x.is_faculty==True]
-# 			if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
-# 				if no_females<noalloted:
-# 					return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
-# 				for y in range(noalloted):
-# 					unalloted_females[y].recnacc=True
-# 					unalloted_females[y].room = selectedroom
-# 					selectedroom.vacancy -= 1
-# 					selectedroom.save()
-# 					unalloted_females[y].save()
-			
-# 			else:
-# 				if no_males<noalloted:
-# 					return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
-# 				for y in range(noalloted):
-# 					unalloted_males[y].recnacc=True
-# 					unalloted_males[y].room = selectedroom
-# 					selectedroom.vacancy -= 1
-# 					selectedroom.save()
-# 					unalloted_males[y].save()
-# 			# bal = noalloted*300
-# 			# gl.amount_taken += bal
-# 			# gl.save()
-# 		#return HttpResponse(selectedroom.vacancy)
-# 		no_males=0
-# 		no_females=0
-# 		participant_list = gl.initialregistration_set.all()
-# 		for p in participant_list:
-# 			if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty == True:
-# 				no_males+=1
-# 			elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.recnacc!=True and p.is_faculty == True:
-# 				no_females+=1
-# 			bhavan_list= Bhavan.objects.all()
-# 			all_rooms =[]
-# 			blist = [ x for x in bhavan_list if x.id != 1]
-# 			for bhavan in bhavan_list:
-# 				if bhavan.id != 1:  
-# 					bhavan_name = bhavan.name
-# 					rooms = [x for x in bhavan.room_set.all() if x.vacancy != 0]
-# 					all_rooms += rooms
-# 					if len(rooms):
-# 						vacancy_display.append((bhavan_name,rooms))
-# 		done_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.is_faculty==True]
-# 		context = RequestContext(request)
-# 		context_dict = {'done_participants':done_participants, 'blist':blist,'all_rooms':all_rooms,'no_males':no_males, 'no_females':no_females,"gl":gl, 'vacancy_display':vacancy_display}
-# 		return render_to_response('regsoft/recnacc_acco_faculty.html', context_dict, context)
-
-# 	else:
-# 		bhavan_list = Bhavan.objects.all()
-# 		blist = [x for x in bhavan_list if x.id != 1]
-# 		done_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.is_faculty==True]
-# 		context = RequestContext(request)
-# 		context_dict = {'done_participants':done_participants, 'blist':blist, 'all_rooms':all_rooms,'vacancy_display':vacancy_display, 'no_males':no_males, 'no_females':no_females, "gl":gl}
-# 		return render_to_response('regsoft/recnacc_acco_faculty.html', context_dict, context)
-
-# @csrf_exempt
-# def recnacc_deallocate(request,gl_id):
-# 	gl = gleader.objects.get(id=gl_id)
-# 	alloted_people = InitialRegistration.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
+@csrf_exempt
+def recnacc_deallocate(request,pid):
+	part_ob = Participant.objects.get(id=pid)
+	# alloted_people = InitialRegistration.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
 # 	alist=[]
 # 	for x in alloted_people:
 # 		if x.room.id != 1:
 # 			alist.append(x)
-# 	if request.POST:
-# 		try:
-# 			list_of_people_selected = request.POST.getlist('deallocate')
-# 		except:
-# 			return HttpResponse('No one was selected')
-# 		selected_people_list = [int(x) for x in list_of_people_selected]
-# 		done_people = []
-# 		for x in selected_people_list:
-# 			p= InitialRegistration.objects.get(id=x)
-# 			p.recnacc = False
-# 			if p.room:
-# 				selected_room = p.room
-# 				selected_room.vacancy += 1
-# 				selected_room.save()
-# 				p.room = None
-# 				p.save()
-# 				done_people.append(p)
-# 			if p.is_faculty!=True:
-# 				gl.amount_taken -= 300
-# 				gl.save()
-# 		alloted_people = InitialRegistration.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
-# 		alist=[]
-# 		for x in alloted_people:
-# 			if x.room.id != 1:
-# 				alist.append(x)
-# 		context = RequestContext(request)
-# 		context_dict = {'done_people':done_people, 'alloted_people':alist,"gl":gl}
-# 		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-# 	else:
-# 		done_people = []
-# 		context = RequestContext(request)
-# 		context_dict = {'done_people':done_people, 'alloted_people':alist,"gl":gl}
-# 		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+	if request.POST:
+			if part_ob.room:
+				selected_room = part_ob.room
+				selected_room.vacancy += 1
+				selected_room.save()
+				part_ob.room = None
+				part_ob.save()
 
-# @csrf_exempt
-# def recnacc_checkout(request,gl_id):
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob}
+		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+	else:
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob}
+		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+
+@csrf_exempt
+def recnacc_checkout(request,pid):
 #   #simple template to enter id
 # 	postcheck = False
-# 	if request.POST:
-# 		postcheck = True
-# 		try:
-# 			list_of_people_selected = request.POST.getlist('checkout')
-# 		except:
-# 			return HttpResponse('error')
-# 		selectedpeople_list = [int(x) for x in list_of_people_selected]
-# 		display_table = []
-# 		for x in selectedpeople_list:
-# 			participant = InitialRegistration.objects.get(id=x)
-# 			participant_room = participant.room
-# 			participant_room.vacancy += 1
-# 			participant_room.save()
-# 			participant.room = Room.objects.get(id=1)
-# 			croom = Room.objects.get(id=1)
-# 			croom.vacancy -= 1
-# 			croom.save()
-# 			participant.save()
+	if request.method == 'POST':
+		part_ob = Participant.objects.get(id=pid) 		
+		proom = part_ob.room
+		proom.vacancy += 1
+		proom.save()
+		part_ob.room = Room.objects.get(id=1)
+		croom = Room.objects.get(id=1)
+		croom.vacancy -= 1
+		croom.save()
+		part_ob.save()
+		check = 1
 # 		  # participant_name = str(participant.name) 
 # 		  # participant_gender = str(participant.gender)[0].upper()
 # 		  # if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
@@ -1253,20 +934,21 @@ def recnacc_allot(request,pid):
 # 		gl.save()
 # 		participant_list = gl.initialregistration_set.all() 
 # 		final_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.room.bhavan.id != 1]
-# 		context = RequestContext(request)
-# 		context_dict = {'gl':gl,'display_table':display_table, 'postcheck':postcheck, 'final_participants':final_participants}
-# 		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob, 'check':check}
+		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
 
 
-# 	else:
-# 		gl = gleader.objects.get(id=gl_id)
-# 		participant_list = gl.initialregistration_set.all() 
-# 	  #college = str(gl.college)
-# 	  #gl_name = str(gl.firstname + ' ' + gl.lastname)
-# 		final_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.room.bhavan.id != 1]
-# 		context = RequestContext(request)
-# 		context_dict = {'final_participants':final_participants, 'gl':gl}
-# 		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
+	else:
+		part_ob = Participant.objects.get(id=pid)
+		proom = part_ob.room
+		if proom.id == 1:
+			check = 1
+		else:
+			check = 2
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob,'check':check}
+		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
 
 
 
