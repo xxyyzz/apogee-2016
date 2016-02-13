@@ -556,7 +556,20 @@ function get_level_status(){
 		data: {fbid:user.id},
 		success: function(data){
 			console.log(data);
+			user.informals_stats = data.informals_stats;
+			user.dvm_level = data.dvm_level;
+			user.score = data.score;
 			$('.login_lacuna').fadeOut();
+		},
+	});
+}
+function getStory(){
+	$.ajax({
+		url: './storyline/',
+		method: 'POST',
+		data: {fbid:user.id,level:user.level},
+		success: function(data){
+			console.log(data);
 		},
 	});
 }
