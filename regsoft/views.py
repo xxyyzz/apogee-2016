@@ -829,24 +829,20 @@ def recnacc_dashboard(request,pid):
 
 @csrf_exempt
 def recnacc_allot(request,pid):
-
-#   #list acco with availibilty
-#   #ability to select
 	try:
 		Participant.objects.get(id = pid)
 	except:
 		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
-	room_list= Room.objects.all()
-	part_ob = Participant.objects.get(id = pid)
 	if request.method == 'POST':
-		try:
-			roomid = request.POST['roomid']
-		except:
-			error="Invalid Room Selected"
-			context = RequestContext(request)
-			context_dict = {'error':error}
-			return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-			
+		roomid = int(request.POST['roomid'])
+		# except:
+		# 	error="Invalid Room Selected"
+		# 	context = RequestContext(request)
+		# 	context_dict = {'error':error}
+		# 	return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+	
 		selectedroom = Room.objects.get(id=roomid) 
 		selectedroom_availibilty = selectedroom.vacancy
 
@@ -872,13 +868,8 @@ def recnacc_allot(request,pid):
  		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
 
 	else:
-# 		bhavan_list = Bhavan.objects.all()
-# 		blist = [x for x in bhavan_list if x.id != 1]
-# 		done_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.is_faculty!=True]
-# 		context = RequestContext(request)
 		room_list= Room.objects.all()
 		part_ob = Participant.objects.get(id = pid)
-
 		context = RequestContext(request)		
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
