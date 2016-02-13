@@ -18,10 +18,7 @@ function lvl1init()
 					[7,8,5],
 				 ];
 	var win = null;	
-	lvl=$('#lvl1');
-
-	lvl.height(($(document).height())-($(document).height()%3));
-	lvl.width(($(document).width())-($(document).width()%3));
+	lvl=$('#level1');
 	function randomizeinit()
 	{
 		t=Math.floor(Math.random()*3);
@@ -115,3 +112,4 @@ function lvl1init()
 	$('.box').on('click',function(){update(this)}); 
 
 };
+lvl1init();
