@@ -730,7 +730,7 @@ def recnacc_home(request):
 #       return HttpResponseRedirect("../home/" + str(decoded) )
 
 #   return render(request, "regsoft/recnacc_home.html")
-
+@csrf_exempt
 def recnacc_dashboard(request,pid):
     part_ob = Participant.objects.filter(id = pid)
     
