@@ -157,8 +157,8 @@ function checkall(gauss){
                                         </th>
                                     </thead>
                                     <tbody>
-                                       <form method='POST' action='../deallocate/{{part_ob.id}}'>
-                                       
+                                       <form method='POST' action='../deallocate/{{part_ob.id}}' id = "form2">
+                                       </form>
                                         <tr>
                                             <td>{{part_ob.id}}</td>
                                             <td>{{part_ob.name}}</td>
@@ -174,8 +174,6 @@ function checkall(gauss){
                                             <td>{{part_ob.controlz}}</td>
                                             <td>{{part_ob.room}}</td>
 
-                                            <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
-                                            <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
                                             
                                         </tr>
                                     </tbody>
@@ -185,7 +183,7 @@ function checkall(gauss){
                             </div>
                     
                         </div>
-                            <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5"><strong>Deallocate</strong></button></form>
+                            <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" value="Confirm"/  form= "form2"><strong>Deallocate</strong></button>
                     
                     </div>  
                     
