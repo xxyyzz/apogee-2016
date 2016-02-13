@@ -821,7 +821,7 @@ def recnacc_deallocate(request,pid):
         selected_room = part_ob.room
         selected_room.vacancy += 1
         selected_room.save()
-         part_ob.room = ''
+        part_ob.room = ''
         part_ob.save()
         context = RequestContext(request)
         context_dict = {'part_ob':part_ob}
