@@ -6,7 +6,7 @@ $(window).load(function(){
 // Array for game
 var cur_pos = 0;
 // var game_seq = ["dashboard","story01","story02","story03","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",]
-var imgpre = '../2016/static/lacuna/'
+var imgpre = '2016/static/lacuna/'
 
 var story_seq=[
 		{
