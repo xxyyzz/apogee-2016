@@ -583,6 +583,21 @@ $(window).load(function(){
 	});
 });
 // dashboard=================================================
+var instruct_arr = [
+						"There are two black and two white bishops on the grid. Your goal is to interchange their positions, adhering to the rules of chess. The bishops can only move diagonally, and if it is possible for a bishop to kill a bishop of the opposite colour, you lose the game.",
+						"Well all you gotta do is make a continuous sequence of  dark block in specific row and columns associating to their number.<br><br>for Eg. 7 2 3 means 7darkbox...random number of lightbox...2darkbox...random number of lightbox...3darkbox<br><br>Simple enough right?",
+						"The image you see seems a bit off. The colours make no sense. Filters, obviously. Clicking each tile changes the filters in a different manner. You must change the filters so as to obtain the original image.",
+						"BrainF**k is all  you get.",
+						"Each face of a dice has a specific number of dots. However, you can add a specific direction to each face too. A direction once assigned to a face cannot be taken by another face, and a face can have only one direction. Your goal is to get from the die at the bottom left to the die at the top right.",
+						"",
+						"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
+						"",
+						"The entirety of the grid needs to be covered, one at a time, moving only vertically or horizontally without going to the same tile twice. There is a catch, however. You can only follow a particular pattern: 1-2-3-1-2-3....",
+						"",
+						"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
+						"",
+	];
+
 function call_level(x){
 	$.ajax({
 		url: './dvm/getlevel/',
@@ -601,6 +616,7 @@ function load_level(d,x){
 	$('#puzzle').html(d.html_file);
 	console.log('../2016/static/lacuna/js/game/'+d.js_file);
 	$.loadScript('../2016/static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
+	open_instr(instruct_arr[x]);
 	loadCss('../2016/static/lacuna/css/game/'+d.css_file,x);
 }
 // dashboard========================END=========================
@@ -698,3 +714,14 @@ function testAPI() {
 	});
 }
 // Login lacuna===================END=============================
+
+// instruction---------------------------
+function open_instr(cont)
+{
+	$('#instr_det>.content').html(cont);
+	$('#instr_cont').fadeIn(250);
+}
+$('#instr_det>.cross,#instr_cont>.overlay').click(function(){
+	$('#instr_cont .content').html('');
+	$('#instr_cont').fadeOut(250);
+});
