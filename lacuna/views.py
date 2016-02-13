@@ -3,9 +3,11 @@ from lacuna.models import *
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.admin.views.decorators import staff_member_required
 import json
 
 # Create your views here.
+@staff_member_required
 def home(request):
     return render(request, 'lacuna/index.html')
 
@@ -127,28 +129,17 @@ def dvm1verify(request):
     return verify_final(request, error)
 
 @csrf_exempt
-def dvm2verify(request):
+def dvm1verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
     sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
     error = False
-    # Error Check
-    # for value in sol:
-    #     if value != 0:
-    #         error = True
-    if error == False:
-        part = Participant.objects.get(fbid=fbid)
-        if part.current_dvm_level == 2:
-            part.current_dvm_level = 3
-            part.dvm_2_time = time_taken(part.start_time)
-            part.start_time = timezone.now()
-            part.progress = 6
-            part.save()
-        response = {
-            'status' : 1,
-        }
-    else:
-        response = {
-            'status' : 0,
-        }
-    return JsonResponse(response)
+    for i in range(0, len(sol)/2):
+        for j in range(0, len(sol[i])/2):
+            a = 2*i
+            b = 2*j
+            if sol[a][b]!=0 and ((a!=0 and sol[a-1][b]!=0 and (sol[a][b] != sol[a-1][b] or sol[a][b+1] != sol[a-1][b+1])) or (b!=0 and sol[a][b-1]!=0 and (sol[a][b] != sol[a][b-1] or sol[a+1][b] != sol[a+1][b-1]))):
+                error = True;
+    return verify_final(request, error)
