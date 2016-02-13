@@ -2,7 +2,7 @@
 	loader				2000
 	login lacuna		1500
 	dashboard			1200
-	puzzle_cont			1000
+	puzzle_cont			1300
 z-index map*/
 
 /*--------------------------------GENERAL-------------------------------------*/
@@ -114,6 +114,7 @@ body,html{
 	position: absolute;
 	top: 0;
 	left: 0;
+	z-index: 1400;
 	height: 100%;
 	width: 100%;
 	background-size: cover;
@@ -164,7 +165,7 @@ body,html{
 /*puzzle div===========================================*/
 #puzzle_cont{
 	display: none;
-	z-index: 1000;
+	z-index: 1300;
 	background-color: #fff;
 	position: absolute;
 	top: 0;
