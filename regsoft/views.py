@@ -834,7 +834,7 @@ def recnacc_allot(request,pid):
 	except:
 		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
 	if request.method == 'POST':
-		roomid = int(request.POST['roomid'][0])
+		roomid = request.POST['roomid'][0]
 		# except:
 		# 	error="Invalid Room Selected"
 		# 	context = RequestContext(request)
