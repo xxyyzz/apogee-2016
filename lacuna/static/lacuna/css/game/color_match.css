@@ -1,0 +1,88 @@
+.game_wrapper{
+	text-align: center;
+	min-height: 100vh;
+	padding: 50px 0;
+	background:url('./../../img/puzzle/magic/color_back.jpg');
+	background-size: 100% 100%;
+}
+#place_dice{
+	display: inline-block;
+	vertical-align: top;
+	width: 520px;
+	text-align: center;
+}
+#place_dice td{
+	width: 105px;
+	height: 105px;
+	text-align: center;
+}
+#place_dice .drop_dice{
+	border-radius: 5px;
+	border: 1px solid #000;
+	box-shadow: 1px 1px 2px 0 #000;
+	padding: 0;
+	background: url('./../../img/puzzle/magic/color_holder.png');
+	background-size: 100% 100%;
+}
+#place_dice .ui-draggable-dragging{
+	z-index:10;
+}
+#place_dice table{
+	width:100%;
+	border-spacing: 20px;
+}
+
+#dice_wrapper{
+	display: inline-block;
+	vertical-align: top;
+	width: 480px;
+	height: 480px;
+	text-align: left;
+}
+#dice_wrapper .color_cont{
+	display: inline-block;
+	margin: 10px;
+}
+#dice_wrapper .color_cont>div{
+	line-height: 45px;
+}
+.color_cont{
+	position: relative;
+	width: 100px;
+	height: 100px;
+	line-height: 45px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 10px;
+	background-color: #eee;
+	color: #eee;
+	cursor: pointer;
+}
+.color_cont>div{
+	position: absolute;
+	width:45%;
+	height:45%;
+	text-align: center;
+	background-size: 100% 100%;
+}
+.color_cont>.top_left_val{
+	top: 3%;
+	left:3%;
+	border-top-left-radius: 10px;
+
+}
+.color_cont>.top_right_val{
+	top:3%;
+	right:3%;
+	border-top-right-radius: 10px;
+}
+.color_cont>.bottom_left_val{
+	bottom:3%;
+	left:3%;
+	border-bottom-left-radius: 10px;
+}
+.color_cont>.bottom_right_val{
+	bottom:3%;
+	right:3%;
+	border-bottom-right-radius: 10px;
+}

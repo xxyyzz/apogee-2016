@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 410 907"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:black}
+    .fil1 {fill:url(#id2);fill-rule:nonzero}
+   ]]>
+  </style>
+    <mask id="id0">
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="169.618" y1="28.7992" x2="240.374" y2="877.862">
+   <stop offset="0" style="stop-opacity:1; stop-color:white"/>
+   <stop offset="0.768627" style="stop-opacity:-128; stop-color:white"/>
+   <stop offset="0.501961" style="stop-opacity:0; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+     <rect style="fill:url(#id1)" x="2" y="2" width="407" height="903"/>
+    </mask>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="-17.4606" y1="571.823" x2="427.445" y2="334.839">
+   <stop offset="0" style="stop-opacity:1; stop-color:#1F1B20"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FEFEFE"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2237381476928">
+   <path class="fil0" style="mask:url(#id0)" d="M72 5l266 0c37,0 67,30 67,67l0 763c0,36 -30,66 -67,66l-266 0c-37,0 -67,-30 -67,-66l0 -763c0,-37 30,-67 67,-67z"/>
+   <path class="fil1" d="M72 0l266 0c20,0 38,8 51,21 13,13 21,31 21,51l0 763c0,19 -8,37 -21,50 -13,13 -31,21 -51,21l-266 0c-20,0 -38,-8 -51,-21 -13,-13 -21,-31 -21,-50l0 -763c0,-20 8,-38 21,-51 13,-13 31,-21 51,-21zm266 10l-266 0c-17,0 -33,7 -44,18 -11,12 -18,27 -18,44l0 763c0,17 7,32 18,43 11,11 27,18 44,18l266 0c17,0 33,-7 44,-18 11,-11 18,-26 18,-43l0 -763c0,-17 -7,-32 -18,-44 -11,-11 -27,-18 -44,-18z"/>
+  </g>
+ </g>
+</svg>
