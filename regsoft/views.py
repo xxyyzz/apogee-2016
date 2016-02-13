@@ -758,7 +758,7 @@ def recnacc_allot(request,pid):
 		#   context_dict = {'error':error}
 		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
 		room_list_a= Room.objects.all()
-		room_list = {}
+		room_list = []
 		for x in room_list_a:
 			if x.id != 1:
 				room_list.append[x]
@@ -791,7 +791,7 @@ def recnacc_allot(request,pid):
 
 	else:
 		room_list_a= Room.objects.all()
-		room_list = {}
+		room_list = []
 		for x in room_list_a:
 			if x.id != 1:
 				room_list.append[x]
