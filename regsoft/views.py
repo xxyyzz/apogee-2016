@@ -803,7 +803,7 @@ def recnacc_deallocate(request,pid):
 #           alist.append(x)
 
 	if request.method == 'POST':
-		if part_ob.room:
+		if part_ob.room != None:
 			selected_room = part_ob.room
 			selected_room.vacancy += 1
 			selected_room.save()
@@ -828,7 +828,7 @@ def recnacc_checkout(request,pid):
 #   postcheck = False
 	if request.method == 'POST':
 		part_ob = Participant.objects.get(id=pid)       
-		if part_ob.room:
+		if part_ob.room != None:
 			part_ob = Participant.objects.get(id=pid)       
 			proom = part_ob.room
 			proom.vacancy += 1
