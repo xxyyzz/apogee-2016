@@ -484,8 +484,20 @@ function puzzle5init()
 
 }
 puzzle5init();
+// window load=======================================================
+$(window).load(function(){
+	send_login();
+	get_level_status()
+	$('.levels').click(function(){
+		var x= $(this).index()+1;
+		call_level(x);
+	});
+});
+// window load====================END===================================
 // async script=================================
-var initList = [lacunainit]
+var initList = [
+	{func: function(){filterinit();}},
+	];
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({
         url: url,
@@ -497,6 +509,7 @@ jQuery.loadScript = function (url, callback) {
 // $.loadScript('url_to_someScript.js', function(){
 //     //Stuff to do after someScript has loaded
 // });
+
 // async script===============END==================
 // login===================================================
 function send_login(){
@@ -529,9 +542,18 @@ function call_level(x){
 		data: {fbid:12344567891,level: parseInt(x)},
 		success: function(data){
 			console.log(data);
+			load_level(data.content,x-1);
 			// content: {page:,files:[{name:,callback:}],}
 		},
 	});
+}
+function load_level(d,x){
+	$('.dashboard').fadeOut();
+	$('#puzzle').fadeIn();
+	$('#puzzle').html(d.page);
+	d = JSON.parse(d);
+	console.log(d);
+	// $.loadScript('../2016/static/lacuna/js/game/'+d.js_file+'/', initList[x].func());
 }
 // dashboard========================END=========================
 // level ========================================================
