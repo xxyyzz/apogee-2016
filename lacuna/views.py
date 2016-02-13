@@ -56,6 +56,7 @@ def dvm_level_get(request):
         }
     return JsonResponse(response)
 
+
 @csrf_exempt
 def informals_level_verify(request):
     fbid = request.POST['fbid']
