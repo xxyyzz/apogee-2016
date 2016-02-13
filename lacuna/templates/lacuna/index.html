@@ -12,8 +12,8 @@
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
-	<div class="login_lacuna abs_center" style="display:none">
-		<div class="fb_login_cont">
+	<div class="login_lacuna abs_center">
+		<div class="fb_login_cont" onclick="call_fb_login();">
 			<img src="{% static 'lacuna/img/fb_login.png' %}" alt="">
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 		<div class="levels"></div>
 	</div>
 	<div id="game_loader">
-		<img src="{% static 'lacuna/img/preloader.gif' %}" class="abs_center">
+		<img src="{% static 'lacuna/img/preloader.gif' %}" class="abs_center" >
 	</div>
 	<div class="story_container" style="background-image:url({% static 'lacuna/img/qwerty.jpg' %});">
 		<div class="storydet_container">
