@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 import json
+import yaml
 
 # Create your views here.
 # @staff_member_required
@@ -44,8 +45,7 @@ def storyline(request):
     # story = Story.objects.all()
     story = Story.objects.get(level=level)
     content = story.content
-    response = json.loads(content)
-    return JsonResponse(response)
+    return JsonResponse(content, safe=False)
 
 @csrf_exempt
 def dvm_level_get(request):
