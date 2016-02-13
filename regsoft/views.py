@@ -321,13 +321,13 @@ def gcodelist(request):
 @csrf_exempt
 def controlz_home(request):
   if request.POST:
-      try:
-          encoded = str( request.POST['code'] )
-          decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+	  try:
+		  encoded = str( request.POST['code'] )
+		  decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
 
-      except:
-          return render(request, 'regsoft/controlz_home.html', {'status' : 0})
-      return HttpResponseRedirect("../home/" + str(decoded) )
+	  except:
+		  return render(request, 'regsoft/controlz_home.html', {'status' : 0})
+	  return HttpResponseRedirect("../home/" + str(decoded) )
 
   return render(request, "regsoft/controlz_home.html")
 
@@ -713,7 +713,7 @@ def recnacc_home(request):
 #       return HttpResponseRedirect("../home/" + str(decoded) )
 
 #   return render(request, "regsoft/recnacc_home.html")
-
+@csrf_exempt
 def recnacc_dashboard(request,pid):
 	part_ob = Participant.objects.filter(id = pid)
 	
@@ -790,6 +790,51 @@ def recnacc_allot(request,pid):
 		context = RequestContext(request)       
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+	try:
+		Participant.objects.get(id = pid)
+	except:
+		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
+	if request.method == 'POST':
+		roomid = request.POST['roomid']
+		# except:
+		#   error="Invalid Room Selected"
+		#   context = RequestContext(request)
+		#   context_dict = {'error':error}
+		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+	
+		selectedroom = Room.objects.get(id=roomid) 
+		selectedroom_availibilty = selectedroom.vacancy
+
+
+		if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'F':
+				part_ob.room = selectedroom
+				part_ob.save()
+				selectedroom.vacancy -= 1
+				selectedroom.save()
+			
+		else:
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'M':
+				part_ob.room = selectedroom
+				part_ob.save()
+				selectedroom.vacancy -= 1
+				selectedroom.save()
+
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+
+	else:
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+		context = RequestContext(request)       
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+
 
 
 @csrf_exempt
@@ -812,6 +857,24 @@ def recnacc_deallocate(request,pid):
 			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
 		else:
 			return HttpResponse('This person has to be alloted a room first.')
+	else:
+		if part_ob.room:
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
+	if request.POST:
+		selected_room = part_ob.room
+		selected_room.vacancy += 1
+		selected_room.save()
+		part_ob.room = ''
+		part_ob.save()
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob}
+		return HttpResponseRedirect('../home/'+part_ob.id)
+		# return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+	
 	else:
 		if part_ob.room:
 			context = RequestContext(request)
