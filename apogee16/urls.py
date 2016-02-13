@@ -36,4 +36,5 @@ urlpatterns = [
     url(r'^', include('regsoft.urls', namespace='regsoft')),
     url(r'^ems/', include('ems.urls', namespace='ems')),
     url(r'^lacunabeta/', include('lacuna.urls', namespace='lacuna')),
+    url(r'^revengg/', include('revengg.urls', namespace='revengg')),
 ]

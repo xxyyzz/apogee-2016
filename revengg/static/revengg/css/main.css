@@ -1,0 +1,611 @@
+ if u change the css, which u will, dont do anything to the `NEEDED` css - that will remain as-it-is */
+
+/* universal */
+*
+{
+	cursor: default;
+	font-family: "ASans";
+	margin: 0;
+	overflow: hidden;
+}
+
+
+body,html {
+	height: 100%;
+	background-color: #f1f1f1; 
+	margin:0;
+	padding:0;
+	overflow: hidden;
+	cursor: default;
+	font-family: "ASans";
+	margin: 0;
+	overflow: hidden;
+}
+
+/* Blackout */
+
+.blackout {
+	display:none;
+	position:fixed;
+	background-color: rgba(0,0,0,0.90);
+	width:100%;
+	height:100%;
+	z-index:2;
+}
+
+#quesanspanel {
+	display: none;
+}
+
+#warnquitpanel {
+	display: none;
+	position: absolute;
+	top:0;
+	left:0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.9);
+	z-index: 5;
+}
+#warnquitpanel button,#testendpanel button
+{
+	border:0px solid black;
+    margin: 15px;
+    font-size: 20px;
+    border-radius: 3px;
+    height: auto;
+    width: auto;
+    padding: 10px 20px;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:all 0.15s ease-in;
+    -webkit-transition:all 0.15s ease-in;
+    -moz-transition:all 0.15s ease-in;
+    box-sizing:border-box;
+    outline: none;
+}
+#testendpanel button{background: #238dd0;}
+#testendpanel button:hover{background: #1A5A84;border: 1px solid #145279;}
+
+#warnquitreturn{background: #6EB729;}
+#warnquitreturn:hover{background: #94C535;border: 1px solid #5CAE0E;}
+
+#warnquitconfirm{background: #EF2748 ;}
+#warnquitconfirm:hover{background: #FF2A4D;border: 1px solid #D62340;}
+
+
+#warnquitpanel > div
+{
+	text-align: center;
+	height: auto;
+}
+.abs_center{
+	position: absolute;
+	top:0;
+	right: 0;
+	left:0;
+	bottom: 0;
+	margin: auto;
+}
+
+#testendpanel {
+	display: none;
+	background-color: #333;
+}
+
+#feedbackpanel {
+	display: none;
+	background-color: #333;
+	color: #eee;
+}
+
+.closeBox {
+	position:fixed;
+	color:white;
+	right:0px;
+	padding:20px;
+	font-size:15px;
+	cursor: pointer;
+	z-index:5;
+}
+
+.blackoutContent {
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:4;
+	display:none;
+}
+
+.blackoutContentWrapper {
+	background-color: #f1f1f1;
+	border-radius: 5px;
+	overflow-y:hidden;
+	overflow-x: hidden;
+	margin-top:5%;
+	z-index:4;
+	width:500px;
+	margin-left: calc(50% - 250px);
+	height:550px;
+	margin-top:5%;
+	box-shadow: 0px 0px 0px 5px #cf4635;
+}
+
+/* Blackout Styling Ends */
+/*Initial page*/
+#start_panel{
+	width: 100%;
+	height: 100%;
+	background: #123456;
+	font-family: Asans;
+	padding: 15px 0;
+}
+#instrs{
+	width: 90%;
+	height: 80%;
+	min-height: 630px;
+	margin: auto;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 25px 50px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#instrs ol,#instrs ul{
+	padding-left: 25px;
+}
+#instrs ol>li{
+	margin: 15px 0;
+}
+#instrs ul>li{
+	margin: 5px 0;
+}
+#aarohan_logo{
+	width: 350px;
+	display: block;
+	margin: auto;
+}
+#start_test,#next_instr{
+    display: block;
+	margin: auto;
+    font-size: 1.2em;
+    font-weight: 900;
+    padding: 10px 50px;
+    border: 1px solid #5cae0e;
+    border-radius: 5px;
+    background-color: #69AB2A;
+	outline: none;
+    color: white;
+    cursor:pointer;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+}
+#start_test:hover,#next_instr:hover{
+	background-color: #26A523;
+}
+.disable_start{
+	background-color: #666 !important;
+}
+#stu_det{
+	display:none;
+	text-align: center;
+}
+#stu_det label,#stu_det input{
+	color: black;
+}
+#stu_det>form{
+	width:320px;
+}
+/*Initial page END*/
+
+/* topbar */
+.topBar {
+	top: 0px;
+	left:0;
+	position: fixed;
+	width:100%;
+	z-index: 1;
+	height: 60px;
+	background: #333;
+	box-shadow:  0px -1px 20px 0px #000;
+}
+.head {
+	font-size:40px;
+	font-weight: 900;
+	text-align: justify;
+	height:60px;
+	line-height: 60px;
+	padding-left:10px;
+	padding-right: 30px;
+	float:left;
+	color:white;
+	border-left: 5px solid #70067b;
+	border-right: 20px solid #70067b;
+	background: #92069d;
+	text-shadow: 1px 1px 1px black;
+}
+.topContainer1 {
+	height:100%;
+	border-left: 25px solid #e00c2f;
+	border-right: 10px solid #e00c2f;
+	background: #ff2a4d;
+	vertical-align: middle;
+	padding: 0% 20px 0% 10px;
+	width:110px;
+	float:right;
+	color:white;
+	line-height: 60px;
+	font-weight: 900;
+	font-size: 50px;
+	text-align: center;
+}
+
+.topContainer2 {
+	height:100%;
+	border-left: 25px solid #444;
+	border-right: 10px solid #444;
+	background: #333;
+	vertical-align: middle;
+	padding: 0% 20px 0% 10px;
+	width:110px;
+	float:right;
+	color:white;
+	line-height: 60px;
+	font-weight: 900;
+	font-size: 50px;
+	text-align: center;
+	cursor: pointer;
+}
+
+
+/* topbar styling ends */
+
+/* right elements*/
+
+.rightBox {
+	position: fixed;
+	right: 20px;
+	width: 320px;
+	border-radius: 5px;
+	background-color: #e3e3e3;
+	overflow: hidden;
+}
+
+
+.questions {
+	top: 80px;
+	height: calc(100% - 90px);
+}
+
+.header {
+	font-weight: 700;
+	width: calc(100%);
+	line-height: 40px;
+	height: 40px;
+}
+
+.shopHeader {
+	background-color: #a9e339;
+	border-bottom: 5px solid #8bcc0e;
+}
+
+.questionsHeader {
+	background-color: #fbab20;
+	border-bottom: 5px solid #db9419;
+}
+
+.rightIcon {
+	height: 20px;
+	margin-bottom: 	-5px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.powerWrapper {
+	width: 138px;
+	margin: 10px 10px;
+	float: left;
+	border: 1px solid #bbb;
+	height: 100px;
+	border-radius: 10px;
+}
+
+.questionsList {
+	width: 320px;
+	height: 110px;
+	/*border: 1px solid black;*/
+	margin: 2px;
+	height: calc(100% - 60px);
+	overflow-y: auto;
+}
+
+.quesbutton {
+	width: 50px;
+	margin: 5px;
+	height: 40px;
+	border: 1px solid #aaa;
+	background-color: #eee;
+	cursor: pointer;
+}
+
+/* right elements styling end */
+
+/* IOWrwpper */
+
+.IOWrapper {
+	top: 80px;
+	left: 10px;
+	position: fixed;
+	width: calc(100% - 370px);
+	height: calc(100% - 90px);
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
+
+.IOHeader{
+	margin: 10px 0%;
+	height: 40px;
+	padding-left: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.levelBox {
+	float: left;
+	font-weight: 900;
+	width: auto;
+	padding: 0px 10px;
+	border-radius: 5px;
+	font-size: 24px;
+	text-align: center;
+	margin: 2px;
+	background-color: #e54444;
+	color: white;
+}
+
+.numQuestion {
+	float: left;
+	width: 300px;
+	border-radius: 5px;
+	font-size: 24px;
+	margin: 2px;
+	margin-left: 10px;
+}
+
+.mark_scheme {
+	float: right;
+	width: auto;
+	border-radius: 5px;
+	font-size: 14px;
+	margin-right: 10px;
+	margin-top: 7px;
+}
+
+
+.IOContent {
+	font-weight: 300;
+	padding: 20px;
+	font-size: 1.3em;
+	text-align: justify;
+	overflow-y: auto;
+    max-height: 70%;
+}
+.IOContent > img{
+	max-width: 100%;
+}
+.IOContent input[type=radio]{
+	margin-right: 10px;
+}
+.IOContent input[type=radio] + img{
+	vertical-align: middle;
+}
+.IOAnswerWrapper {
+    position:absolute;
+    bottom:0px;
+    height:60px;
+    width: 100%;
+    background: #ddd;
+    border-top:1px solid #ccc;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 60px;
+}
+.ques_cat_head{
+	margin-top: 5px;
+    background: rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
+.answerSubmit {
+    border:0px solid black;
+    margin: 3px;
+    font-size: 18px;
+    border-radius: 3px;
+    height: auto;
+    width: auto;
+    padding: 5px 15px;
+    background: #238dd0;
+    color:white;
+    cursor: pointer;
+}
+
+#queslistref
+{
+	display: inline;	
+	margin: 0px 15px;
+	float:right;
+}
+.box
+{
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	vertical-align: middle;
+	margin: 4px;
+}
+.boxtext
+{
+	font-size: 13px;
+	display: inline;
+	margin: 0px 5px;
+	vertical-align: middle;	
+}
+/* IOWrapper Styling end */
+
+
+/*FEEDBACK AND SCORE--------------- START*/
+.scoreHolder
+{
+	line-height: 60px;
+	font-size: 35px;
+	height: 50px;
+	padding: 25px;
+	width: 70%;
+	left:0;
+	right: 0;
+	margin: auto;
+	border-bottom: 1px dashed white;
+}
+.scoreIs
+{
+	font-size: 45px;
+	display: inline;
+	margin:0px 10px;
+}
+.feedback_form{
+	padding: 15px;
+	font-size: 30px;
+	/*background-color: white;*/
+	min-width:450px;
+	width: 50%;
+	left:0;
+	right:0;
+	margin: 30px auto; 
+}
+.feedback_form>form
+{
+	text-align: center;
+	width:450px;
+	left:0;
+	right:0;
+	padding-top:20px; 
+	margin: auto;
+}
+
+.feedback_form button
+{
+	border:0px solid black;
+    margin: 15px;
+    font-size: 20px;
+    border-radius: 3px;
+    height: auto;
+    width: auto;
+    padding: 10px 20px;
+    background: #238dd0;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:all 0.15s ease-in;
+    -webkit-transition:all 0.15s ease-in;
+    -moz-transition:all 0.15s ease-in;
+    box-sizing:border-box;
+}
+.feedback_form button:hover
+{
+	background: #1A5A84;
+	border: 1px solid #145279;
+}
+
+/* form starting stylings ------------------------------- */
+.feedback_form .group        { 
+  position:relative; 
+  margin-bottom:30px; 
+}
+.feedback_form input,.feedback_form textarea     {
+  font-size:18px;
+  padding:10px 0px;
+  display:block;
+  width:100%;
+  color: #eee;
+  border:none;
+  border-bottom:1px solid #ccc;
+  background-color: transparent;
+}
+.feedback_form textarea  
+{
+	overflow: hidden;
+}
+.feedback_form input:focus,.feedback_form textarea:focus     { outline:none; }
+
+/* LABEL ======================================= */
+.feedback_form label          {
+  color:#eee; 
+  font-size:15px;
+  text-transform: uppercase;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  font-weight: bold;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+}
+
+/* active state */
+.feedback_form input:focus ~ label, .feedback_form input:valid ~ label,.feedback_form textarea:focus ~ label, .feedback_form textarea:valid ~ label      {
+  top:-20px;
+  font-size:14px;
+  color:#238dd0;
+}
+/* BOTTOM BARS ================================= */
+.feedback_form .bar  { position:relative; display:block; width:100%;  margin-top: 1px; }
+.feedback_form .bar:before, .feedback_form .bar:after   {
+  content:'';
+  height:1px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#238dd0; 
+  transition:0.2s ease all; 
+
+}
+.feedback_form .bar:before {
+  left:50%;
+}
+.feedback_form .bar:after {
+  right:50%; 
+}
+
+/* active state */
+.feedback_form input:focus ~ .bar:before, .feedback_form input:focus ~ .bar:after,.feedback_form textarea:focus ~ .bar:before, .feedback_form textarea:focus ~ .bar:after {
+  width:50%;
+}
+.feedback_form input[type=number]::-webkit-inner-spin-button, 
+.feedback_form input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+/* HIGHLIGHTER ================================== */
+.feedback_form .highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+
+/* ANIMATIONS ================ */
+@keyframes inputHighlighter {
+  from  { background:#238dd0; }
+  to    { width:0; background:transparent; }
+}
+
+/*FEEDBACK AND SCORE--------------- END
