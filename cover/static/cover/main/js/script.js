@@ -1247,9 +1247,9 @@ var map_ele_info = {
 										func:content_link,
 									},
 
-	'armyExhibition'			:	{
-										ename:'Army Exhibtion',
-										content:'<div class="c_soon">Coming soon...</div>',
+	'ndrfExhibition'			:	{
+										ename:'NDRF Exhibtion',
+										content:'<p><b>National Disaster Response Force (NDRF)</b> is a 8 battalions of special police force constituted for the purpose of specialized response to natural and man-made disasters.NDRF has proved its important by highly skilled rescue and relief operations, regular and intensive training and re-training, capacity building & familiarization excercises within the area of responsibility of respective battalions, carrying out mock drills and joint exercises with the various stakeholders. Since its constitution in 2009, the group has worked to save over 4,20,000 lives by prompt response in different rescue operations. <b>NDRF was the leading force that worked for relief during the 2015 Chennai Floods.</b></p><p>An important aspect of the NDRF is increasing the general public awareness towards disaster management by organizing exhibitions, performing mock drill, carrying out demonstrations etc. This APOGEE, NDRF is coming to BITS Pilani to showcase their preparedness by displaying their skillset as well as their armory in a first of its kind exhibition spanning for all 3 days. They would be performing demonstrations and steps to take in response to any unforeseen disasters.  </p>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/army.svg',
 										func:content_link,
 									},
@@ -1277,7 +1277,7 @@ var map_ele_info = {
 
 	'ceeriExhibition'		:		{
 										ename:'CEERI Exhibition',
-										content:'<div class="c_soon">Coming soon...</div>',
+										content:'<p><b>CSIR-Central Electronics Engineering Research Institute (CSIR-CEERI), Pilani</b> is a premier research Institute in the field of Electronics, established in 1953 under the aegis of Council of Scientific & Industrial Research (CSIR). It is devoted to reasearch & development activities in three areas, namely: <ul><li>Advanced Electronic Systems: Electronic Instrumentation, Industrial Control & Automation, Power Electronics, Robotics, Image Processing & DSP, Embedded System Design etc. </li><li>Advanced Semiconductor Electronics : MEMS, Microsensors, VLSI Design (Digital, Analog, Mixed Signal), Opto-electronic Technologies, Photonic Devices and Sub-systems, Nano-electronics etc.</li><li>Microwave Tubes: Klystron, Magnetron, Travelling Wave Tubes, Gyrotron, Plasma Tubes, Tera Hertz devices etc.</li></ul></p><p>CEERI is the hub for cut edge research in the field of advanced electronics in the country. It houses a large number of projects and researches that is an awesome treat to a geek\'s eye. APOGEE, BITS Pilani is preveledged to have the best of these projects on display and demonstrations for the entire duration of the fest. The exhibition is aimed at creating a conducive level of interaction between interested students and emeritus professors of CEERI in order to benefit from their unparalleled knowledge and experience. </p>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/ceeri.svg',
 										func:content_link,
 									},

@@ -38,6 +38,15 @@ def status(request):
     return JsonResponse(response)
 
 @csrf_exempt
+def storyline(request):
+    level = request.POST['level']
+    level = int(level)
+    story = Story.objects.get(level=level)
+    content = story.content
+    response = json.loads(content)
+    return JsonResponse(response)
+
+@csrf_exempt
 def dvm_level_get(request):
     fbid = request.POST['fbid']
     level = request.POST['level']
@@ -82,11 +91,6 @@ def informals_level_verify(request):
         }
     return JsonResponse(response)
 
-def time_taken(ref_time):
-    delta = timezone.now() - ref_time
-    td = delta - timedelta(microseconds=delta.microseconds)
-    return td
-
 def verify_final(request, error):
     PROGRESS = [3,6,11,16,23,31,40,50,61,73,86,100]
     fbid = request.POST['fbid']
@@ -102,13 +106,16 @@ def verify_final(request, error):
             part.start_time = timezone.now()
             part.progress = PROGRESS[level-1]
             # part.save()
-            total_time = 0
-            for i in range(1, 13):
-                attr = 'dvm_%s_time' % str(i)
-                total_time = total_time + getattr(part, attr)
-            part.total_time = total_time
             attr = 'dvm_%s_time' % str(level)
             setattr(part, attr, td)
+            part.save()
+            total_time = timedelta(seconds=0)
+            for i in range(1, 13):
+                attr = 'dvm_%s_time' % str(i)
+                addition = getattr(part, attr)
+                if addition is not None:
+                    total_time = total_time + addition
+            part.total_time = total_time
             part.save()
         response = {
             'status' : 1,
@@ -119,9 +126,30 @@ def verify_final(request, error):
         }
     return JsonResponse(response)
 
-
 @csrf_exempt
 def dvm1verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm2verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = True
+    if sol.replace(" ", "")upper() == 'SAMYEMONASTERY':
+        error = False
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm3verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
     sol = json.loads(sol)
@@ -133,20 +161,118 @@ def dvm1verify(request):
             error = True
     return verify_final(request, error)
 
+
 @csrf_exempt
-def dvm2verify(request):
+def dvm4verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
     error = False
-    for i in range(0, len(sol)/2):
-        for j in range(0, len(sol[i])/2):
+    # if sol.upper() == ''
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm5verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    # if sol.upper() == ''
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm6verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    # if sol.upper() == ''
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm7verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    temp = [0,0,0,0,0,0,0,0,0,0]
+    for i in sol:
+        for j in col:
+            temp[i+6] += sol[i][j]
+            temp[j+1] += sol[i][j]
+        temp[0] += sol[i][i]
+        temp[5] += sol[i][3-1]
+    for i in temp:
+        if i != 6:
+            error = True
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm8verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    # if sol.upper() == ''
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm9verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    # if sol.upper() == ''
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm10verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    # if sol.upper() == ''
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm11verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    for i in range(0, int(len(sol)/2)):
+        for j in range(0, int(len(sol[i])/2)):
             a = 2*i
             b = 2*j
             if sol[a][b]!=0 and ((a!=0 and sol[a-1][b]!=0 and (sol[a][b] != sol[a-1][b] or sol[a][b+1] != sol[a-1][b+1])) or (b!=0 and sol[a][b-1]!=0 and (sol[a][b] != sol[a][b-1] or sol[a+1][b] != sol[a+1][b-1]))):
                 error = True;
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm12verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
+    error = False
+    # if sol.upper() == ''
     return verify_final(request, error)
 
 def leaderboard(request):
