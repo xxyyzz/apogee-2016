@@ -12,7 +12,11 @@
 	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
+	<div id="loader abs_center">
+		<img src="{% static 'lacuna/img/preloader.png' %}" class="abs_center" style="height:60px;">
+	</div>
 	<div class="login_lacuna abs_center">
+		<img src="{% static 'lacuna/img/lacuna_logo.png' %}">
 		<div class="fb_login_cont" style="cursor:pointer" onclick="call_fb_login();">
 			<img src="{% static 'lacuna/img/fb_login.png' %}" alt="">
 		</div>

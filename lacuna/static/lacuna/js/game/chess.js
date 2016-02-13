@@ -147,29 +147,6 @@ var chess={
 			}
 		}
 	},
-	setBackBoxs: function(){
-		var board= document.getElementById("backround-boxs");
-		var h= (0.5*window.innerWidth);
-		var height = window.innerHeight;
-		var k=0;
-		board.style.top =((height-(h*0.8))/2)-(h*0.2);
-		for (i = 0; i <11; i++) {
-			for (j = 0; j <6; j++) {
-				var html= document.createElement("div");
-				html.setAttribute("class","chess-box-div");
-				if((k%2)==0){
-					html.style.backgroundImage="url('/2016/static/lacuna/img/puzzle/back_black.jpg')";
-				}else{
-					html.style.backgroundImage="url('/2016/static/lacuna/img/puzzle/back_white.jpg')";
-				}
-				board.appendChild(html);
-				k++;
-			};
-		};
-		$('#backround-boxs').css('top',((height-(h*0.8))/2)-(h*0.2));
-		$('.chess-box-div').css('height',h*0.20 + 'px');
-		$('.chess-box-div').css('width',h*0.20 + 'px');
-	},
 	initArrays: function(){
 		this.boxs= new Array(5);
 		for(var i=0; i<5;i++){
@@ -183,7 +160,6 @@ var chess={
 	init: function(){
 		this.initArrays();
 		this.createBoxs();
-		this.setBackBoxs();
 		this.createBishops();
 		this.setStyle();
 	}

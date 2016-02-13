@@ -1,3 +1,8 @@
+// loader
+$(window).load(function(){
+	$('#loader').remove();
+})
+
 // Array for game
 var cur_pos = 0;
 // var game_seq = ["dashboard","story01","story02","story03","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",]
