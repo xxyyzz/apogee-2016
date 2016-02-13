@@ -802,9 +802,9 @@ def recnacc_dashboard(request,pid):
 	
 	if part_ob:
 		part_ob = part_ob[0]
-		if part_ob.recnacc == 'True':
+		if part_ob.recnacc == True:
 			check = 1
-		elif part_ob.recnacc == 'False':
+		elif part_ob.recnacc == False:
 			check = 2
 			
 		
