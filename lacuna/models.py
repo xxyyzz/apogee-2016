@@ -44,3 +44,4 @@ class Level(models.Model):
     dept = models.CharField(max_length=10, choices=DEPARTMENTS)
     level = models.PositiveSmallIntegerField()
     content = models.TextField()
+    answer = models.CharField(max_length=500, null=True, blank=True)
