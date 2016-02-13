@@ -4,16 +4,16 @@ from regsoft.views import *
 urlpatterns = [
 	url(r'^firewallzouter/scan/$', firewallzo_dashboard),
 	url(r'^firewallzouter/scan/(?P<part_id>\d+)$', firewallzo_dashboard_two),
-# 	url(r'^firewallzouter/confirm/$', firewallzo_confirm),
+	url(r'^firewallzouter/confirm/$', firewallzo_confirm),
 # 	url(r'^firewallzouter/confirm/(?P<crep_id>\d+)$', firewallzo_setgleader),
+	url(r'^firewallzouter/edit/(?P<part_id>\d+)$', firewallzo_edit_part),
 # 	url(r'^firewallzouter/groupcodes/$', gcodelist),
 # 	url(r'^firewallzouter/testx/$', testx),
-# 	url(r'^firewallzouter/unconfirm/(?P<crep_id>\d+)$', firewallzo_unconfirm),
+	url(r'^firewallzouter/unconfirm/(?P<part_id>\d+)$', firewallzo_unconfirm),
 # 	url(r'^firewallzouter/unconfirmed/(?P<crep_id>\d+)$', firewallzo_unconfirm),
-# 	url(r'^firewallzouter/edit/(?P<part_id>\d+)$', firewallzo_edit_part),
-# 	url(r'^firewallzouter/add/(?P<crep_id>\d+)$', firewallzo_add),
+	url(r'^firewallzouter/add/$', firewallzo_add),
 # 	url(r'^firewallzouter/add_guest/$', firewallzo_add_guest),
-# 	url(r'^firewallzouter/barcodelist/$', get_barcode),
+	url(r'^firewallzouter/barcodelist/$', get_barcode),
 
 # 	url(r'^common/search/$', common_search,  name="common_search"),
 

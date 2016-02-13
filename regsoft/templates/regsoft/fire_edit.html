@@ -28,7 +28,7 @@
 
                 <li>
 
-                    <a href="../scan/{{crep.id}}">
+                    <a href="../scan/{{part.id}}">
                         <i class="pe-7s-menu"></i> 
                         <p>Dashboard</p>
                     </a>
@@ -37,12 +37,12 @@
                 <li>
                     <a href="../../groupcodes">
                         <i class="pe-7s-note2"></i> 
-                        <p>Passed Groups</p>
+                        <p>Passed Members</p>
                     </a>            
                 </li>
 
                 <li>
-                    <a href="../unconfirm/{{crep.id}}">
+                    <a href="../unconfirm/">
                         <i class="pe-7s-delete-user"></i> 
                         <p>Unconfirm </p>
                     </a>
@@ -56,7 +56,7 @@
                 </li>
 
                 <li>
-                    <a href="../add/{{crep.id}}">
+                    <a href="../add/">
                         <i class="pe-7s-user"></i> 
                         <p>Add Participant </p>
                     </a>
@@ -154,8 +154,8 @@
 
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                           <label class="checkbox"> Faculty                 
-                                            <input type="checkbox" name="is_faculty" value="True" {% if part.is_faculty %} checked {% endif %}  data-toggle= "checkbox"></label>
+                                           <label class="checkbox"> PCR Approval                 
+                                            <input type="checkbox" name="pcr_approval" value="True" {% if part.pcr_approval %} checked {% endif %}  data-toggle= "checkbox"></label>
                          
                         
 
