@@ -40,6 +40,7 @@ urlpatterns = [
 # 	url(r'^recnacc/faculty_allot/(?P<gl_id>\d+)$', recnacc_faculty_allot),
 	url(r'^recnacc/deallocate/(?P<pid>\d+)$', recnacc_deallocate),
 	url(r'^recnacc/checkout/(?P<pid>\d+)$', recnacc_checkout),
+	url(r'^recnacc/barcodelist/$', get_barcode_recnacc),
 # 	#url(r'^recnacc/return_inventory/(?P<gl_id>\d+)$', recnacc_return_inventory),
 # 	url(r'^recnacc/checkedout_select_gl/$', recnacc_checkedout_select_gl),
 # 	url(r'^recnacc/checked_out_participants/(?P<gl_id>\d+)$', recnacc_checked_out_participants),
@@ -47,8 +48,8 @@ urlpatterns = [
 # 	url(r'^recnacc/bhavan_inventory_list/$', recnacc_bhavan_inventory_list),
 # 	url(r'^recnacc/room_availibility_list/$', recnacc_room_availibility_list),
 # 	url(r'^recnacc/bhavan_gleader_list/$', recnacc_bhavan_gleader_list),
-# 	url(r'^recnacc/room_list/$', recnacc_room_list),
-# 	url(r'^recnacc/room_details/(?P<room_id>\d+)$', recnacc_room_details),
+	url(r'^recnacc/room_list/$', recnacc_room_list),
+	url(r'^recnacc/room_details/(?P<room_id>\d+)$', recnacc_room_details),
 	
 
 # 	url(r'^teams/$', mainScreen, name='main'),
