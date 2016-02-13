@@ -496,7 +496,10 @@ $(window).load(function(){
 // window load====================END===================================
 // async script=================================
 var initList = [
-	{func: function(){filterinit();}},
+	{func: function(){lvl1init();}},
+	{func: function(){level4init();}},
+	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
 	];
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({
@@ -505,6 +508,19 @@ jQuery.loadScript = function (url, callback) {
         success: callback,
         async: true
     });
+}
+function loadCss(url,x){
+	if (!document.getElementById('css_level'+x))
+	{
+	    var head  = document.getElementsByTagName('head')[0];
+	    var link  = document.createElement('link');
+	    link.id   = 'css_level'+x;
+	    link.rel  = 'stylesheet';
+	    link.type = 'text/css';
+	    link.href = url;
+	    link.media = 'all';
+	    head.appendChild(link);
+	}
 }
 // $.loadScript('url_to_someScript.js', function(){
 //     //Stuff to do after someScript has loaded
@@ -542,7 +558,7 @@ function call_level(x){
 		data: {fbid:12344567891,level: parseInt(x)},
 		success: function(data){
 			console.log(data);
-			load_level(data.content,x-1);
+			load_level(data,x-1);
 			// content: {page:,files:[{name:,callback:}],}
 		},
 	});
@@ -550,10 +566,10 @@ function call_level(x){
 function load_level(d,x){
 	$('.dashboard').fadeOut();
 	$('#puzzle').fadeIn();
-	$('#puzzle').html(d.page);
-	d = JSON.parse(d);
-	console.log(d);
-	// $.loadScript('../2016/static/lacuna/js/game/'+d.js_file+'/', initList[x].func());
+	$('#puzzle').html(d.html_file);
+	console.log('../2016/static/lacuna/js/game/'+d.js_file);
+	$.loadScript('../2016/static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
+	loadCss('../2016/static/lacuna/css/game/'+d.css_file,x);
 }
 // dashboard========================END=========================
 // level ========================================================

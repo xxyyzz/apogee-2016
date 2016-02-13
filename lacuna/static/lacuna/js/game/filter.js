@@ -1,1 +1,117 @@
-function filterinit(){eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('d F(){d l(){t=f.s(3*f.D());j(b l=0;l<=t;++l){k=f.s(9*f.D());j(b i=0;i<a[k].u;++i)X(o[a[k][i]]){y 0:o[a[k][i]]=1;v;y 1:o[a[k][i]]=2;v;y 2:o[a[k][i]]=0}}e()}d e(){U=f.s(c.p()/3.G),W=f.s(c.q()/3.G);j(b t="g",l=0;9>l;++l){1==o[l]?t="g A":2==o[l]&&(t="g w");b e=$("<11>",{"E":t});$,c.S(e),t="g"}}d r(t){b l=$(t).R();j(i=0;i<a[l].u;++i)0==o[a[l][i]]?(o[a[l][i]]=1,$(c.z()[a[l][i]]).K("A")):1==o[a[l][i]]?(o[a[l][i]]=2,$(c.z()[a[l][i]]).P("E","g w")):2==o[a[l][i]]&&(o[a[l][i]]=0,$(c.z()[a[l][i]]).J("w"));n()}d n(){h=1;j(b t=0;t<o.u;++t)Q(0!=o[t]){h=0;v}B h&&N("M L"),!1}b o=[2,1,0,1,1,1,1,2,2],a=[[0,1,3],[0,1,2],[1,2,5],[0,3,6],[1,3,4,5,7],[2,5,8],[3,6,7],[6,7,8],[7,8,5]],h=I;c=$("#O"),c.p($(m).p()-$(m).p()%3),c.q($(m).q()-$(m).q()%3),l(),$(".g").15("T",d(){r(1a)})}d H(){"14 13";b t={};C.16(t,"x",{19:18,12:!1}),t.x=9;b l={V x(){B 17}};l.x=5;b e={};C.Y(e),e.10="Z"}F(),H();',62,73,'|||||||||||var|lvl|function||Math|box|||for|||document|||height|width||floor||length|break|blue||case|children|red|return|Object|random|class|lvl1init|04|blah|null|removeClass|addClass|WIN|YOU|alert|lvl1|attr|if|index|append|click|ht|get|wt|switch|preventExtensions|ohai|newProp|div|writable|strict|use|on|defineProperty||42|value|this'.split('|'),0,{}))}
+function lvl1init()
+{
+	var saogridinit = 	[2,1,0,1,1,1,1,2,2];
+				    //0-blank 1-red 2-blue [index - color]
+				    // [0 - 2] [1 - 1] [2 - 2]
+				    // [3 - 2] [4 - 0] [5 - 1]
+				    // [6 - 2] [7 - 1] [8 - 1]
+
+	var change = [
+					[0,1,3],
+					[0,1,2,],
+					[1,2,5],
+					[0,3,6],
+					[1,3,4,5,7],
+					[2,5,8],
+					[3,6,7],
+					[6,7,8],
+					[7,8,5],
+				 ];
+	var win = null;	
+	lvl=$('#lvl1');
+
+	lvl.height(($(document).height())-($(document).height()%3));
+	lvl.width(($(document).width())-($(document).width()%3));
+	function randomizeinit()
+	{
+		t=Math.floor(Math.random()*3);
+		for(var i =0;i<=t;++i)
+		{
+			k= Math.floor(Math.random()*9);
+			for(var j=0;j<change[k].length;++j)
+			{
+				switch(saogridinit[change[k][j]])
+				{
+					case 0 : saogridinit[change[k][j]]=1;
+								break;
+					case 1 : saogridinit[change[k][j]]=2;
+								break;
+					case 2 : saogridinit[change[k][j]]=0;
+								break;
+				}
+			}
+		}
+		init();
+	};
+	randomizeinit();
+
+	function init()
+	{
+		ht=Math.floor((lvl.height())/3.04);
+		wt=Math.floor((lvl.width())/3.04);
+		var color = 'box';
+		for(var i=0;i<9;++i)
+		{
+			
+			if(saogridinit[i]==1)
+			{
+				color='box red';
+			}
+			else if(saogridinit[i]==2)
+			{
+				color='box blue';
+			}
+			var $div = $("<div>", {class: color});
+			$
+			lvl.append($div);
+			color='box';
+		}
+	}	
+	
+	function update(obj)
+	{
+		var obji = $(obj).index();
+		for (i=0;i<change[obji].length;++i)
+			{	
+				if(saogridinit[change[obji][i]]==0)
+				{
+					saogridinit[change[obji][i]]=1;
+					$(lvl.children()[change[obji][i]]).addClass('red');
+
+				}
+				else if(saogridinit[change[obji][i]]==1)
+				{
+					saogridinit[change[obji][i]]=2;	
+					$(lvl.children()[change[obji][i]]).attr('class','box blue');
+				}
+				else if(saogridinit[change[obji][i]]==2)
+				{
+					saogridinit[change[obji][i]]=0;
+					$(lvl.children()[change[obji][i]]).removeClass('blue');	
+				}
+			}
+		check();
+	};
+	function check()
+	{
+		win = 1;
+		for(var i =0;i<saogridinit.length;++i)
+		{
+
+			if(saogridinit[i]!=0)
+				{
+					win =0;
+					break;
+				}	
+
+		}
+		if(win)
+		{
+			alert("YOU WIN");
+		}
+
+		return false;
+	}
+	$('.box').on('click',function(){update(this)}); 
+
+};
