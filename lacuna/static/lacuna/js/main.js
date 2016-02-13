@@ -341,19 +341,16 @@ $('.story').click(function(e){
 	cur_story=t;
 	go_to_pos(t);
 });
-$('.story_but').click(function(){
-	if(!($(this).parent().hasClass('my_level')))
-	{		
-		if($(this).hasClass('story_prev'))
-		{
-			--cur_story;
-			go_to_pos(cur_story);
-		}
-		else if($(this).hasClass('story_next'))	
-		{
-			++cur_story;
-			go_to_pos(cur_story);
-		}
+$('.story_but').click(function(){		
+	if($(this).hasClass('story_prev'))
+	{
+		--cur_story;
+		go_to_pos(cur_story);
+	}
+	else if($(this).hasClass('story_next'))	
+	{
+		++cur_story;
+		go_to_pos(cur_story);
 	}
 })
 // PUZZLE 5
