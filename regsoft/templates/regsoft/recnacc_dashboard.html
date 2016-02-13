@@ -143,8 +143,8 @@ function checkall(gauss){
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Participant details:</h5>
-                                <strong>{% if check == 1 %}<p class="category" colour='Green'> This participant has been alloted a room.</strong></p>
-                                    {% elif check == 2 %}<p class="category" colour='#EE0000'>This participant has not been alloted a room.</strong></p>
+                                <strong>{% if check == 1 %}<p class="category" color='Green'> This participant has been alloted a room.</strong></p>
+                                    {% elif check == 2 %}<p class="category" color='#EE0000'>This participant has not been alloted a room.</strong></p>
                                     {% endif %}
                             </div>
                             {% if check == 2 %}
@@ -159,9 +159,8 @@ function checkall(gauss){
                                         <th>PCr Approved</th>
                                         <th>Passed Firewallz Booth</th>
                                         <th>Passed Controlz Booth</th>
-
+                                        <th>Room</th>
                                          
-                                        </th>
                                     </thead>
                                     <tbody>
                                         <form method= "POST" action = '../allot/{{gl.id}}' id ="form1">
@@ -180,7 +179,7 @@ function checkall(gauss){
                                             <td>{{part_ob.firewallzo}}</td>
 
                                             <td>{{part_ob.controlz}}</td>
-                                            
+                                            <td>None</td>                                            
 
                                             <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
                                             <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
