@@ -45,7 +45,9 @@ def dvm_level_get(request):
         levelobj = Level.objects.get(level=level, dept='DVM')
         response = {
             'status' : 1,
-            'content' : levelobj.content
+            'html_file' : levelobj.html_file,
+            'css_file' : levelobj.css_file,
+            'js_file' : levelobj.js_file,
         }
     else:
         response = {

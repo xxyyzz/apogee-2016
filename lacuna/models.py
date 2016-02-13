@@ -31,7 +31,9 @@ class Level(models.Model):
     )
     dept = models.CharField(max_length=10, choices=DEPARTMENTS)
     level = models.PositiveSmallIntegerField()
-    content = models.TextField()
+    js_file = models.TextField(default='NA')
+    html_file = models.TextField(default='NA')
+    css_file = models.TextField(default='NA')
     answer = models.CharField(max_length=500, null=True, blank=True)
     def __str__(self):
         return str(self.level)
