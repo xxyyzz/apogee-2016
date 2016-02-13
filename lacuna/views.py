@@ -29,7 +29,7 @@ def status(request):
     response = {
         'fbid' : part.fbid,
         'name' : part.name,
-        'score' : part.score,
+        'score' : part.progress,
         'dvm_level' : part.current_dvm_level,
         'informals_stats' : part.informals_stats,
     }
@@ -85,20 +85,64 @@ def time_taken(ref_time):
     td = delta - timedelta(microseconds=delta.microseconds)
     return td
 
+def verify_final(request, error):
+    PROGRESS = [3,6,11,16,23,31,40,50,61,73,86,100]
+    fbid = request.POST['fbid']
+    level = request.POST['level']
+    level = int(level)
+    if error == False:
+        part = Participant.objects.get(fbid=fbid)
+        if part.current_dvm_level == level:
+            part.current_dvm_level = level+1
+            delta = timezone.now() - part.start_time
+            td = delta - timedelta(microseconds=delta.microseconds)
+            # part['dvm_%s_time' % str(level)] = td
+            part.start_time = timezone.now()
+            part.progress = PROGRESS[level-1]
+            part.save()
+            attr = 'dvm_%s_time' % str(level)
+            setattr(part, attr, td)
+            part.save()
+        response = {
+            'status' : 1,
+        }
+    else:
+        response = {
+            'status' : 0,
+        }
+    return JsonResponse(response)
+
+
 @csrf_exempt
 def dvm1verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
     sol = json.loads(sol)
+    level = request.POST['level']
+    level = int(level)
     error = False
     for value in sol:
         if value != 0:
             error = True
+    return verify_final(request, error)
+
+@csrf_exempt
+def dvm2verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    sol = json.loads(sol)
+    error = False
+    # Error Check
+    # for value in sol:
+    #     if value != 0:
+    #         error = True
     if error == False:
         part = Participant.objects.get(fbid=fbid)
-        if part.current_dvm_level == 1:
-            part.current_dvm_level = 2
-            part.dvm_1_time = time_taken(part.start_time)
+        if part.current_dvm_level == 2:
+            part.current_dvm_level = 3
+            part.dvm_2_time = time_taken(part.start_time)
+            part.start_time = timezone.now()
+            part.progress = 6
             part.save()
         response = {
             'status' : 1,
