@@ -828,15 +828,19 @@ def recnacc_checkout(request,pid):
 #   postcheck = False
 	if request.method == 'POST':
 		part_ob = Participant.objects.get(id=pid)       
-		proom = part_ob.room
-		proom.vacancy += 1
-		proom.save()
-		part_ob.room = Room.objects.get(id=1)
-		croom = Room.objects.get(id=1)
-		croom.vacancy -= 1
-		croom.save()
-		part_ob.save()
-		check = 1
+		if part_ob.room:
+			part_ob = Participant.objects.get(id=pid)       
+			proom = part_ob.room
+			proom.vacancy += 1
+			proom.save()
+			part_ob.room = Room.objects.get(id=1)
+			croom = Room.objects.get(id=1)
+			croom.vacancy -= 1
+			croom.save()
+			part_ob.save()
+			check = 1
+		else:
+			return HttpResponse('Assign a room to the participant.')
 #         # participant_name = str(participant.name) 
 #         # participant_gender = str(participant.gender)[0].upper()
 #         # if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
