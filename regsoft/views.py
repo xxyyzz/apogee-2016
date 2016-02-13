@@ -868,6 +868,8 @@ def recnacc_checkout(request,pid):
 				check = 1
 			else:
 				check = 2
+		else:
+			return HttpResponse('Assign a room to the participant.')
 		context = RequestContext(request)
 		context_dict = {'part_ob':part_ob,'check':check}
 		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
