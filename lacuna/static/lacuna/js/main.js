@@ -549,7 +549,7 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
-			for(var i=0;i<=level_id[dvm_level];i++){
+			for(var i=0;i<=level_id['dvm_level'];i++){
 				$('#g'+i).addClass('enable_level');
 			}
 			$('.dash_score').html(data.score);
