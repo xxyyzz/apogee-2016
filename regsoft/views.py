@@ -890,16 +890,16 @@ def recnacc_deallocate(request,pid):
 # 		if x.room.id != 1:
 # 			alist.append(x)
 	if request.POST:
-			if part_ob.room:
-				selected_room = part_ob.room
-				selected_room.vacancy += 1
-				selected_room.save()
-				part_ob.room = None
-				part_ob.save()
-
+		if part_ob.room:
+			selected_room = part_ob.room
+			selected_room.vacancy += 1
+			selected_room.save()
+			part_ob.room = None
+			part_ob.save()
 		context = RequestContext(request)
 		context_dict = {'part_ob':part_ob}
 		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+
 	else:
 		context = RequestContext(request)
 		context_dict = {'part_ob':part_ob}
