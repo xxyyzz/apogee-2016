@@ -595,7 +595,7 @@ function submit_ans(ans,x){
 // level ============================END============================
 // Login lacuna===================================================
 function call_fb_login(){
-	FB.login();
+	checkLoginState();
 }
 function statusChangeCallback(response) {
 	console.log('statusChangeCallback');
@@ -609,10 +609,12 @@ function statusChangeCallback(response) {
 		testAPI();
 	} else if (response.status === 'not_authorized') {
 	  // The person is logged into Facebook, but not your app.
+	  	Fb.login();
 		console.log('Please log ' + 'into this app.');
 	} else {
 	  // The person is not logged into Facebook, so we're not sure if
 	  // they are logged into this app or not.
+	  	Fb.login();
 		console.log('Please log ' + 'into Facebook.');
 	}
 }
