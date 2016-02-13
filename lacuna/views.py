@@ -101,7 +101,12 @@ def verify_final(request, error):
             # part['dvm_%s_time' % str(level)] = td
             part.start_time = timezone.now()
             part.progress = PROGRESS[level-1]
-            part.save()
+            # part.save()
+            total_time = 0
+            for i in range(1, 13):
+                attr = 'dvm_%s_time' % str(i)
+                total_time = total_time + getattr(part, attr)
+            part.total_time = total_time
             attr = 'dvm_%s_time' % str(level)
             setattr(part, attr, td)
             part.save()
@@ -143,3 +148,7 @@ def dvm2verify(request):
             if sol[a][b]!=0 and ((a!=0 and sol[a-1][b]!=0 and (sol[a][b] != sol[a-1][b] or sol[a][b+1] != sol[a-1][b+1])) or (b!=0 and sol[a][b-1]!=0 and (sol[a][b] != sol[a][b-1] or sol[a+1][b] != sol[a+1][b-1]))):
                 error = True;
     return verify_final(request, error)
+
+def leaderboard(request):
+    parts = Participant.objects.order_by('-score', 'total_time')
+    pass
