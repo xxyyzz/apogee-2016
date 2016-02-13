@@ -37,12 +37,12 @@ body,html{
     color: #555;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
 }
-.unlocked_level{
+.my_level{
+	opacity: 0.5;
+}
+.enable_level{
 	opacity: 1;
 	cursor: pointer;
-}
-.my_level{
-	opacity: 0.2;
 }
 .dashboard{
 	display:none;
