@@ -539,10 +539,8 @@ function loadCss(url,x){
 
 // async script===============END==================
 // login===================================================
-var user = {
-	id:"",
-	name:"",
-}
+var user = {id:"", name:"", };
+var level_id = [0,3,6,10,13,17,21,24,27,30,32,37,39,41];
 function send_login(id,name){
 	$.ajax({
 		url: './login/',
@@ -564,6 +562,9 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
+			for(var i=0;i<=level_id[dvm_level];i++){
+				$('#g'+i).addClass('enable_level');
+			}
 			$('.dash_score').html(data.score);
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
@@ -583,8 +584,9 @@ function getStory(x){
 }
 // login=====================END==============================
 $(window).load(function(){
-	$('#_x30_').click(function(){
-		call_level(1);
+	$('.my_level').click(function(){
+		// call_level();
+		console.log("level_called");
 	});
 });
 // dashboard=================================================
@@ -655,7 +657,6 @@ function fb_logout(){
 	});
 }
 function statusChangeCallback(response) {
-	console.log('statusChangeCallback');
 	console.log(response);
 	// The response object is returned with a status field that lets the
 	// app know the current login status of the person.
