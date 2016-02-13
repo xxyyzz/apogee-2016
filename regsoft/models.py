@@ -2,16 +2,10 @@ from django.db import models
 from backend.models import *
 from Event.models import *
 
-# class Bhavan(models.Model):
-# 	a_capacity = models.IntegerField(null=True, default=0)
-# 	b_capacity = models.IntegerField(null=True, default=0)
-# 	c_capacity = models.IntegerField(null=True, default=0)
-# 	d_capacity = models.IntegerField(null=True, default=0)
-# 	e_capacity = models.IntegerField(null=True, default=0)
-# 	f_capacity = models.IntegerField(null=True, default=0)
-# 	name=models.CharField(max_length=50)
-# 	def __unicode__(self):
-# 		return self.name
+class Bhavan(models.Model):
+	name=models.CharField(max_length=50)
+	def __unicode__(self):
+		return self.name
 
 # class Inventory(models.Model):
 # 	a = models.IntegerField(default=0, null=True)
@@ -25,12 +19,12 @@ from Event.models import *
 # 	def __unicode__(self):
 # 		return str(self.room)
 
-# class Room(models.Model):
-# 	bhavan=models.ForeignKey('Bhavan')
-# 	room=models.CharField(max_length=50)
-# 	vacancy=models.IntegerField()
-# 	def __unicode__(self):
-# 		return str(self.bhavan.name+' '+self.room)
+class Room(models.Model):
+	bhavan=models.ForeignKey('Bhavan')
+	room=models.CharField(max_length=50)
+	vacancy=models.IntegerField()
+	def __unicode__(self):
+		return str(self.bhavan.name+' '+self.room)
 
 
 #class bill(models.Model):
