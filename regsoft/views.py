@@ -877,7 +877,7 @@ def recnacc_allot(request,pid):
 # 		done_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.is_faculty!=True]
 # 		context = RequestContext(request)
 		room_list= Room.objects.all()
-		part_ob = Participant.objects.filter(id = pid)[0]
+		part_ob = Participant.objects.get(id = pid)
 
 		context = RequestContext(request)		
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
