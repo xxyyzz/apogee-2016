@@ -785,7 +785,7 @@ def recnacc_allot(request,pid):
             part_ob = Participant.objects.get(id = pid)
             if part_ob.gender == 'F':
                 part_ob.room = selectedroom
-                part_ob.save
+                part_ob.save()
                 selectedroom.vacancy -= 1
                 selectedroom.save()
             
@@ -793,7 +793,7 @@ def recnacc_allot(request,pid):
             part_ob = Participant.objects.get(id = pid)
             if part_ob.gender == 'M':
                 part_ob.room = selectedroom
-                part_ob.save
+                part_ob.save()
                 selectedroom.vacancy -= 1
                 selectedroom.save()
 
