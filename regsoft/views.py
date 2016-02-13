@@ -757,7 +757,12 @@ def recnacc_allot(request,pid):
 		#   context = RequestContext(request)
 		#   context_dict = {'error':error}
 		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-		room_list= Room.objects.all()
+		room_list_a= Room.objects.all()
+		room_list = {}
+		for x in room_list_a:
+			if x.id != 1:
+				room_list.append[x]
+
 		part_ob = Participant.objects.get(id = pid)
 	
 		selectedroom = Room.objects.get(id=roomid) 
@@ -785,7 +790,11 @@ def recnacc_allot(request,pid):
 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
 
 	else:
-		room_list= Room.objects.all()
+		room_list_a= Room.objects.all()
+		room_list = {}
+		for x in room_list_a:
+			if x.id != 1:
+				room_list.append[x]
 		part_ob = Participant.objects.get(id = pid)
 		context = RequestContext(request)       
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
