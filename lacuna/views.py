@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 import json
+import yaml
 
 # Create your views here.
 # @staff_member_required
@@ -44,8 +45,7 @@ def storyline(request):
     # story = Story.objects.all()
     story = Story.objects.get(level=level)
     content = story.content
-    response = json.loads(content)
-    return JsonResponse(response)
+    return JsonResponse(content, safe=False)
 
 @csrf_exempt
 def dvm_level_get(request):
@@ -178,8 +178,10 @@ def dvm4verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -189,8 +191,10 @@ def dvm5verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -200,8 +204,10 @@ def dvm6verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -231,8 +237,10 @@ def dvm8verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -242,8 +250,10 @@ def dvm9verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -253,8 +263,10 @@ def dvm10verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -280,8 +292,10 @@ def dvm12verify(request):
     sol = json.loads(sol)
     level = request.POST['level']
     level = int(level)
-    error = False
-    # if sol.upper() == ''
+    error = True
+    # remove spaces and convert to upper
+    # if sol.upper().replace(' ', '') == '':
+        # error = False
     return verify_final(request, error)
 
 def leaderboard(request):
