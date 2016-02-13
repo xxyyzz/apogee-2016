@@ -29,9 +29,9 @@
                     </a>
                 </li> 
                 <li>
-                    <a href="../../groupcodes">
+                    <a href="../../firewallzouter/pcodes">
                         <i class="pe-7s-note2"></i> 
-                        <p>GroupCode list</p>
+                        <p>Participant Code list</p>
                     </a>            
                 </li>
                 <li>
@@ -40,18 +40,7 @@
                         <p>Recnacc Bill Print</p>
                     </a>            
                 </li>
-                <li>
-                    <a href="{% url 'regsoft:controlz_stats' %}">
-                        <i class="pe-7s-news-paper"></i> 
-                        <p>STATS</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'regsoft:common_search' %}">
-                        <i class="pe-7s-news-paper"></i> 
-                        <p>Search</p>
-                    </a>
-                </li> 
+
 
             </ul> 
         </div>
@@ -75,7 +64,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><strong> BITS Oasis 2015 </strong></a>
+                    <a class="navbar-brand" href="#"><strong> BITS Apogee 2016 </strong></a>
                 </div>
                 <div class="collapse navbar-collapse">       
                     <ul class="nav navbar-nav navbar-left">
@@ -137,18 +126,16 @@
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">Notifications</h4>
-                                <p class="category">Following Group Codes are generated at Firewallz</p>
+                                <p class="category">Following Participant Codes are generated at Firewallz</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>S.no</th>
-                                        <th>Group Leader</th>
+                                        <th>Name</th>
                                         <th>College </th>
-                                        <th>Group Code</th>
-                                        <th>Player Count (M | F)</th>
-                                        <th>Faculty Count (M | F)</th>
-                                        <th>GL Phone</th>
+                                        <th>Participant Code</th>
+                                        <th>Phone</th>
                                     </thead>
                                     <tbody id="rec_notif">
 
@@ -174,7 +161,7 @@
         <script>
         setInterval(function(){
             var rec_not = new XMLHttpRequest();
-            var url = "http://www.bits-oasis.org/2015/group_notify/";
+            var url = "http://www.bits-apogee.org/2016/group_notify/";
             var out="" ;
             rec_not.onreadystatechange = function() {
                 if (rec_not.readyState == 4 && rec_not.status == 200) {

@@ -17,9 +17,9 @@ urlpatterns = [
 
 # 	url(r'^common/search/$', common_search,  name="common_search"),
 
-# 	url(r'^controlz/home/$', controlz_home),
+	url(r'^controlz/home/$', controlz_home),
+	url(r'^controlz/home/(?P<part_id>\d+)$', controlz_dashboard),
 # 	url(r'^controlz/stats/$', controlz_stats, name="controlz_stats"),
-# 	url(r'^controlz/home/(?P<gl_id>\d+)$', controlz_dashboard),
 # 	url(r'^controlz/edit/(?P<part_id>\d+)$', controlz_edit_part),
 # 	url(r'^controlz/bill_select/$', controlz_bill_select),
 # 	url(r'^controlz/bill_delete/$', controlz_delete_bill),

@@ -484,7 +484,20 @@ function puzzle5init()
 
 }
 puzzle5init();
-
+// async script=================================
+var initList = [lacunainit]
+jQuery.loadScript = function (url, callback) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'script',
+        success: callback,
+        async: true
+    });
+}
+// $.loadScript('url_to_someScript.js', function(){
+//     //Stuff to do after someScript has loaded
+// });
+// async script===============END==================
 // login===================================================
 function send_login(){
 	$.ajax({
@@ -516,6 +529,7 @@ function call_level(x){
 		data: {fbid:12344567891,level: parseInt(x)},
 		success: function(data){
 			console.log(data);
+			// content: {page:,files:[{name:,callback:}],}
 		},
 	});
 }
