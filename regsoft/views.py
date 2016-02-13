@@ -863,10 +863,11 @@ def recnacc_checkout(request,pid):
 	else:
 		part_ob = Participant.objects.get(id=pid)
 		proom = part_ob.room
-		if proom.id == 1:
-			check = 1
-		else:
-			check = 2
+		if part_ob.room != None:
+			if proom.id == 1:
+				check = 1
+			else:
+				check = 2
 		context = RequestContext(request)
 		context_dict = {'part_ob':part_ob,'check':check}
 		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
