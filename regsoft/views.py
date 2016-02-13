@@ -1363,32 +1363,30 @@ def recnacc_checkout(request,pid):
 #       context['error_message'] = "Winners added."
 #       return redirect('regsoft:main')
 
-# @csrf_exempt
-# def recnacc_room_list(request):
-#   rooms = Room.objects.all()
-#   plist = []
-#   for x in rooms:
-#       prtno = InitialRegistration.objects.filter(room = x).count()
-#       plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
+@csrf_exempt
+def recnacc_room_list(request):
+	rooms = Room.objects.all()
+	plist = []
+	for x in rooms:
+		prtno = Participant.objects.filter(room = x).count()
+		plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
 
-#   context = RequestContext(request)
-#   context_dict = {'plist':plist}
-#   # return HttpResponse(plist)
-#   # return HttpResponse(plist)
-#   # return render_to_response('regsoft/recnacc_room_participants_list.html', context_dict, context)
-#   return render(request,'regsoft/recnacc_room_participants_list.html', context_dict)
-# @csrf_exempt
-# def recnacc_room_details(request, room_id):
-#   room = Room.objects.get(id = room_id)
-#   plist = InitialRegistration.objects.filter(room = room)
-#   # plist = []
-#   # for x in rooms:
-#   #   prtno = InitialRegistration.objects.filter(room = x).count()
-#   #   plist.append({x.bhavan.name,x.room,prtno})
-#   context = RequestContext(request)
-#   context_dict = {'plist':plist,'room':room}
-#   # return HttpResponse(plist)
-#   return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
+	context = RequestContext(request)
+	context_dict = {'plist':plist}
+	return render(request,'regsoft/recnacc_room_participants_list.html', context_dict)
+
+@csrf_exempt
+def recnacc_room_details(request, room_id):
+  room = Room.objects.get(id = room_id)
+  plist = Participant.objects.filter(room = room)
+  # plist = []
+  # for x in rooms:
+  #   prtno = InitialRegistration.objects.filter(room = x).count()
+  #   plist.append({x.bhavan.name,x.room,prtno})
+  context = RequestContext(request)
+  context_dict = {'plist':plist,'room':room}
+  # return HttpResponse(plist)
+  return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
 
 
 # # @csrf_exempt

@@ -47,8 +47,8 @@ urlpatterns = [
 # 	url(r'^recnacc/bhavan_inventory_list/$', recnacc_bhavan_inventory_list),
 # 	url(r'^recnacc/room_availibility_list/$', recnacc_room_availibility_list),
 # 	url(r'^recnacc/bhavan_gleader_list/$', recnacc_bhavan_gleader_list),
-# 	url(r'^recnacc/room_list/$', recnacc_room_list),
-# 	url(r'^recnacc/room_details/(?P<room_id>\d+)$', recnacc_room_details),
+	url(r'^recnacc/room_list/$', recnacc_room_list),
+	url(r'^recnacc/room_details/(?P<room_id>\d+)$', recnacc_room_details),
 	
 
 # 	url(r'^teams/$', mainScreen, name='main'),
