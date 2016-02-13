@@ -14,9 +14,9 @@ def user_login(request):
     fbid = request.POST['fbid']
     name = request.POST['name']
     try:
-        lacuna = Lacuna.objects.get(fbid=fbid)
+        part = Participant.objects.get(fbid=fbid)
     except:
-        lacuna = Lacuna.objects.create(fbid=fbid, name=name, start_time=timezone.now())
+        part = Participant.objects.create(fbid=fbid, name=name, start_time=timezone.now())
     response = {
         'status' : 1,
     }
@@ -25,14 +25,13 @@ def user_login(request):
 @csrf_exempt
 def status(request):
     fbid = request.POST['fbid']
-    lacuna = Lacuna.objects.get(fbid=fbid)
-    score = lacuna.score
+    part = Participant.objects.get(fbid=fbid)
     response = {
-        'fbid' : lacuna.fbid,
-        'name' : lacuna.name,
-        'score' : lacuna.score,
-        'dvm_level' : lacuna.current_dvm_level,
-        'informals_level' : lacuna.current_informals_level,
+        'fbid' : part.fbid,
+        'name' : part.name,
+        'score' : part.score,
+        'dvm_level' : part.current_dvm_level,
+        'informals_stats' : part.informals_stats,
     }
     return JsonResponse(response)
 
@@ -41,12 +40,12 @@ def dvm_level_get(request):
     fbid = request.POST['fbid']
     level = request.POST['level']
     level = int(level)
-    lacuna = Lacuna.objects.get(fbid=fbid)
-    if level <= lacuna.current_dvm_level:
-        leveldata = Level.objects.get(level=level, dept='DVM')
+    part = Participant.objects.get(fbid=fbid)
+    if level <= part.current_dvm_level:
+        levelobj = Level.objects.get(level=level, dept='DVM')
         response = {
             'status' : 1,
-            'content' : leveldata.content
+            'content' : levelobj.content
         }
     else:
         response = {
@@ -55,8 +54,27 @@ def dvm_level_get(request):
         }
     return JsonResponse(response)
 
-def informalsverify():
-    pass
+def informals_level_verify(request):
+    fbid = request.POST['fbid']
+    level = request.POST['level']
+    level = int(level)
+    sol = request.POST['sol']
+    levelobj = Level.objects.get(level=level)
+    if sol == levelobj.answer:
+        part = Participant.objects.get(fbid=fbid)
+        stats = list(part.informals_stats)
+        stats[level-1] = '2'
+        stats = ''.join(stats)
+        part.informals_stats = stats
+        part.save()
+        response = {
+            'status' : 1,
+        }
+    else:
+        response = {
+            'status' : 0,
+        }
+    return JsonResponse(response)
 
 
 @csrf_exempt
@@ -69,7 +87,7 @@ def dvm1verify(request):
         if value != 0:
             error = True
     if error == False:
-        part = Lacuna.objects.get(fbid=fbid)
+        part = Participant.objects.get(fbid=fbid)
         part.current_dvm_level = 2
         part.dvm_1_time = part.start_time - timezone.now()
         # score change
