@@ -496,18 +496,18 @@ $(window).load(function(){
 // window load====================END===================================
 // async script=================================
 var initList = [
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){level4init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
-	{func: function(){lvl1init();}},
 	{func: function(){chessinit();}},
-	{func: function(){colorinit();}},
+	{func: function(){crypt();}},
+	{func: function(){lvl1init();}},
+	{func: function(){crypt();}},
+	{func: function(){level4init();}},
+	{func: function(){crypt();}},
 	{func: function(){magicinit();}},
+	{func: function(){crypt();}},
+	{func: function(){onetwothreeinit();}},
+	{func: function(){crypt();}},
+	{func: function(){colorinit();}},
+	{func: function(){crypt();}},
 	];
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({
