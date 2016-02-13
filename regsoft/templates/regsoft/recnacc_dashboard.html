@@ -163,9 +163,7 @@ function checkall(gauss){
                                          
                                     </thead>
                                     <tbody>
-                                        <form method= "POST" action = '../allot/{{part_ob.id}}' id ="form1">
-                                            {% csrf_token %}
-                                       </form>
+                                        
                                         <tr>
                                             <td>{{part_ob.id}}</td>
                                             <td>{{part_ob.name}}</td>
@@ -179,7 +177,7 @@ function checkall(gauss){
                                             <td>{{part_ob.firewallzo}}</td>
 
                                             <td>{{part_ob.controlz}}</td>
-                                            <td>None</td>                                            
+                                            <td>{{part_ob.room}}</td>                            
 
                                             <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
                                             <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
@@ -192,7 +190,7 @@ function checkall(gauss){
                             </div>
                         
                         </div>
-                        <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1"><strong>ALLOT ROOMS</strong></button>    
+                        <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" href="../allot/{{part_ob.id}}"><strong>ALLOT ROOMS</strong></button>    
                             
                     {% elif check == 1 %}
                     <div class="content table-responsive table-full-width">
