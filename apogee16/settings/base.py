@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'regsoft',
     'ems',
     'lacuna',
+    'revengg',
 )
 
 MIDDLEWARE_CLASSES = (
