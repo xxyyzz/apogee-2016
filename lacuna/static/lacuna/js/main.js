@@ -342,15 +342,18 @@ $('.story').click(function(e){
 	go_to_pos(t);
 });
 $('.story_but').click(function(){
-	if($(this).hasClass('story_prev'))
-	{
-		--cur_story;
-		go_to_pos(cur_story);
-	}
-	else if($(this).hasClass('story_next'))	
-	{
-		++cur_story;
-		go_to_pos(cur_story);
+	if(!($(this).parent().hasClass('my_level')))
+	{		
+		if($(this).hasClass('story_prev'))
+		{
+			--cur_story;
+			go_to_pos(cur_story);
+		}
+		else if($(this).hasClass('story_next'))	
+		{
+			++cur_story;
+			go_to_pos(cur_story);
+		}
 	}
 })
 // PUZZLE 5
