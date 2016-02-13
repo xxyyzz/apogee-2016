@@ -189,3 +189,43 @@ body,html{
 
 }
 /*dashboard==============END===============
+
+/*-------------------INSTRUCTIONS--------------*/
+#instr_cont{
+	height:100%;
+	width: 100%;
+}
+#instr_cont>.overlay
+{
+	background-color: rgba(0,0,0,0.7);
+	height:100%;
+	width: 100%;
+}
+#instr_det{
+	height: 80%;
+	width:80%;
+	border-radius: 4px;
+	background-color: #eee;
+	color:#444;
+}
+#instr_det>.cross{
+	position: absolute;
+	right: 15px;
+    top: 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+#instr_det>.head{
+	height: 20%;
+	line-height: 2.5em;
+	font-size: 2.5em;
+	text-align: center;
+	border-bottom: 1px solid #444;
+}
+#instr_det>.content{
+	height: 80%;
+	font-size: 1.5em;
+	text-align: center;
+	padding: 20px;
+	overflow-y: auto;
+}
