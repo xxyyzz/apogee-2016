@@ -318,18 +318,18 @@ def gcodelist(request):
 
 # # def controlz_dashboard(request):
 
-# @csrf_exempt
-# def controlz_home(request):
-#   if request.POST:
-#       try:
-#           encoded = str( request.POST['code'] )
-#           decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+@csrf_exempt
+def controlz_home(request):
+  if request.POST:
+	  try:
+		  encoded = str( request.POST['code'] )
+		  decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
 
-#       except:
-#           return render(request, 'regsoft/controlz_home.html', {'status' : 0})
-#       return HttpResponseRedirect("../home/" + str(decoded) )
+	  except:
+		  return render(request, 'regsoft/controlz_home.html', {'status' : 0})
+	  return HttpResponseRedirect("../home/" + str(decoded) )
 
-#   return render(request, "regsoft/controlz_home.html")
+  return render(request, "regsoft/controlz_home.html")
 
 # def controlz_stats(request):
 #   passed_controls = InitialRegistration.objects.filter(controlz=True).count()
@@ -352,32 +352,15 @@ def gcodelist(request):
 
 #   return render(request, "regsoft/controlz_stats.html", context)
 
-# def controlz_dashboard(request,gl_id):
-#   gl_ob = gleader.objects.filter(id = gl_id)
-#   if gl_ob:
-#       gl_ob = gl_ob[0]
-#       plist = gl_ob.initialregistration_set.filter(controlz =False)
-#       plist_two = gl_ob.initialregistration_set.filter(controlz =True)
-#       maleno = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'M', controlz= False).count()
-#       femaleno = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', controlz= False).count()
-#       maleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'M', controlz= True).count()
-#       femaleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', controlz= True).count()
+def controlz_dashboard(request,part_id):
+	part_ob = Participant.objects.filter(id = part_id)
+	if part_ob:
+		part_ob = part_ob[0]
+		context= {'part': part_ob}
+		return render(request, 'regsoft/controlz_dashboard.html', context)
+	else:
+		return render(request, 'regsoft/controlz_home.html', {'status' : 0})
 
-#       context ={
-#       'gl' : gl_ob, 
-#       'plist' : plist,
-#       'plist_two' : plist_two,
-#       'maleno' : maleno,
-#       'femaleno' : femaleno,
-#       'maleno_two' : maleno_two,
-#       'femaleno_two' : femaleno_two,
-
-
-#       }
-#       return render(request, 'regsoft/controlz_dashboard.html', context)
-
-#   else:
-#       return render(request, 'regsoft/controlz_home.html', {'status' : 0})
 
 
 
@@ -785,7 +768,7 @@ def recnacc_allot(request,pid):
 			part_ob = Participant.objects.get(id = pid)
 			if part_ob.gender == 'F':
 				part_ob.room = selectedroom
-				part_ob.save()
+				part_ob.save
 				selectedroom.vacancy -= 1
 				selectedroom.save()
 			
@@ -793,7 +776,7 @@ def recnacc_allot(request,pid):
 			part_ob = Participant.objects.get(id = pid)
 			if part_ob.gender == 'M':
 				part_ob.room = selectedroom
-				part_ob.save()
+				part_ob.save
 				selectedroom.vacancy -= 1
 				selectedroom.save()
 
@@ -807,7 +790,8 @@ def recnacc_allot(request,pid):
 		context = RequestContext(request)       
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-
+				part_ob.save()
+		
 
 @csrf_exempt
 def recnacc_deallocate(request,pid):
@@ -817,18 +801,19 @@ def recnacc_deallocate(request,pid):
 #   for x in alloted_people:
 #       if x.room.id != 1:
 #           alist.append(x)
+
 	if request.method == 'POST':
-		part_ob = Participant.objects.get(id=pid)    
-		selected_room = part_ob.room
-		selected_room.vacancy += 1
-		selected_room.save()
-		part_ob.room = None
-		part_ob.save()
-		context = RequestContext(request)
-		context_dict = {'part_ob':part_ob}
-		return HttpResponseRedirect('../home/'+part_ob.id)
-		# return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-	
+		if part_ob.room:
+			selected_room = part_ob.room
+			selected_room.vacancy += 1
+			selected_room.save()
+			part_ob.room = None
+			part_ob.save()
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
 	else:
 		if part_ob.room:
 			context = RequestContext(request)
