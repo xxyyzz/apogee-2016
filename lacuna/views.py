@@ -45,7 +45,7 @@ def dvm_level_get(request):
         levelobj = Level.objects.get(level=level, dept='DVM')
         response = {
             'status' : 1,
-            'content' : json.dumps(levelobj.content)
+            'content' : levelobj.content
         }
     else:
         response = {
