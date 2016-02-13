@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 267 267"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#FD2928}
+    .fil2 {fill:#AB0000;fill-rule:nonzero}
+    .fil0 {fill:url(#id0)}
+    .fil4 {fill:url(#id1)}
+    .fil6 {fill:url(#id2)}
+    .fil8 {fill:url(#id3)}
+    .fil5 {fill:url(#id4)}
+    .fil7 {fill:url(#id5)}
+    .fil3 {fill:url(#id6)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="259.795" y1="254.39" x2="6.8622" y2="12.2677">
+   <stop offset="0" style="stop-opacity:1; stop-color:#C30001"/>
+   <stop offset="0.631373" style="stop-opacity:1; stop-color:#E02A28"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FE5550"/>
+  </linearGradient>
+  <radialGradient id="id1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.56726 -0.909779 0.909875 1.5671 -298 65)" cx="198.154" cy="203.831" r="17.9016" fx="198.154" fy="203.831">
+   <stop offset="0" style="stop-opacity:1; stop-color:#D1D1D1"/>
+   <stop offset="0.301961" style="stop-opacity:1; stop-color:#E8E8E8"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FEFEFE"/>
+  </radialGradient>
+  <radialGradient id="id2" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.56726 -0.909779 0.909875 1.5671 -192 130)" xlink:href="#id1" cx="198.154" cy="87.8386" r="17.9016" fx="198.154" fy="87.8386">
+  </radialGradient>
+  <radialGradient id="id3" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.56726 -0.909779 0.909875 1.5671 -245 97)" xlink:href="#id1" cx="197.764" cy="145.835" r="17.9016" fx="197.764" fy="145.835">
+  </radialGradient>
+  <radialGradient id="id4" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.56726 -0.909779 0.909875 1.5671 -232 -41)" xlink:href="#id1" cx="81.689" cy="203.831" r="17.9016" fx="81.689" fy="203.831">
+  </radialGradient>
+  <radialGradient id="id5" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.56726 -0.909779 0.909875 1.5671 -179 -8)" xlink:href="#id1" cx="82.3858" cy="145.835" r="17.9016" fx="82.3858" fy="145.835">
+  </radialGradient>
+  <radialGradient id="id6" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.56726 -0.909779 0.909875 1.5671 -127 25)" xlink:href="#id1" cx="82.3858" cy="87.8386" r="17.9016" fx="82.3858" fy="87.8386">
+  </radialGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2237380056992">
+   <path class="fil0" d="M27 18c69,-23 141,-23 215,0 4,1 7,4 8,8 21,69 17,141 0,216 -1,4 -4,6 -8,7 -66,22 -137,22 -215,0 -4,-1 -7,-3 -8,-7 -20,-70 -24,-142 0,-216 1,-4 4,-7 8,-8z"/>
+   <circle class="fil1" cx="133" cy="133" r="131"/>
+   <path class="fil2" d="M133 -1c37,0 71,15 95,39 25,25 40,58 40,95 0,37 -15,71 -40,95 -24,25 -58,40 -95,40 -37,0 -70,-15 -95,-40 -24,-24 -39,-58 -39,-95 0,-37 15,-70 39,-95 25,-24 58,-39 95,-39zm91 44c-24,-23 -55,-37 -91,-37 -35,0 -67,14 -90,37 -23,23 -37,55 -37,90 0,36 14,67 37,91 23,23 55,37 90,37 36,0 67,-14 91,-37 23,-24 37,-55 37,-91 0,-35 -14,-67 -37,-90z"/>
+   <circle class="fil3" cx="77" cy="80" r="19"/>
+   <circle class="fil4" cx="193" cy="196" r="19"/>
+   <circle class="fil5" cx="76" cy="196" r="19"/>
+   <circle class="fil6" cx="193" cy="80" r="19"/>
+   <circle class="fil7" cx="77" cy="138" r="19"/>
+   <circle class="fil8" cx="193" cy="138" r="19"/>
+  </g>
+ </g>
+</svg>
