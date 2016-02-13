@@ -19,6 +19,7 @@ body,html{
 	left: 0;
 	height: 100%;
 	width: 100%;
+	font-family: 'Cabin', sans-serif;
 }
 
 .abs_center{
@@ -116,7 +117,7 @@ body,html{
 }
 /*puzzle div===========================================*/
 #puzzle_cont{
-	z-index: 500;
+	z-index: 1000;
 	/*background-color: red;*/
 	position: absolute;
 	top: 0;
@@ -131,6 +132,7 @@ body,html{
 	left:0;
 	width: 100%;
 	z-index: 1000;
+	padding: 20px;
 }
 #puzzle
 {
@@ -139,6 +141,19 @@ body,html{
 	width: 100%;
 	top:0;
 	left: 0;
+}
+
+#BackToDashboard{
+	border: 1px solid #eee;
+	border-radius: 2px; 
+	padding: 10px 20px;
+	display: inline-block;
+	line-height: 1.5em;
+	float: left;
+}
+#BackToDashboard>i{
+	color: inherit;
+	padding-right: 5px;
 }
 /*puzzle div===============END============================*/
 /*login==============================*/
