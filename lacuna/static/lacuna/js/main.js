@@ -534,6 +534,10 @@ function loadCss(url,x){
 
 // async script===============END==================
 // login===================================================
+var user = {
+	id:"",
+	name:"",
+}
 function send_login(id,name){
 	$.ajax({
 		url: './login/',
@@ -549,10 +553,9 @@ function get_level_status(){
 	$.ajax({
 		url: './status/',
 		method: 'POST',
-		data: {fbid:12344567891},
+		data: {fbid:user.id},
 		success: function(data){
 			console.log(data);
-			// {score: 0, informals_level: 1, name: "Smit Patwa", dvm_level: 1}
 		},
 	});
 }
@@ -562,7 +565,7 @@ function call_level(x){
 	$.ajax({
 		url: './dvm/getlevel/',
 		method: 'POST',
-		data: {fbid:12344567891,level: parseInt(x)},
+		data: {fbid:user.id,level: parseInt(x)},
 		success: function(data){
 			console.log(data);
 			load_level(data,x-1);
@@ -585,7 +588,7 @@ function submit_ans(ans,x){
 	$.ajax({
 		url: './dvm/'+level_url[x-1],
 		method: 'POST',
-		data: {fbid:'12344567891',sol: JSON.stringify(ans),level:x},
+		data: {fbid:user.id,sol: JSON.stringify(ans),level:x},
 		success: function(data){
 			console.log(data);
 		},
@@ -665,6 +668,8 @@ FB.getLoginStatus(function(response) {
 // successful.  See statusChangeCallback() for when this call is made.
 function testAPI() {
 	FB.api('/me', function(response) {
+		user.id = response.id;
+		user.name = response.name;
 	  send_login(response.id,response.name);
 	});
 }
