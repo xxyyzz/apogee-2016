@@ -556,6 +556,7 @@ function get_level_status(){
 		data: {fbid:user.id},
 		success: function(data){
 			console.log(data);
+			$('.login_lacuna').fadeOut();
 		},
 	});
 }
