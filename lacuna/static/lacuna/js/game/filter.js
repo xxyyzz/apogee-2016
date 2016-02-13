@@ -44,6 +44,7 @@ function lvl1init()
 
 	function init()
 	{
+		lvl.html("");
 		ht=Math.floor((lvl.height())/3.04);
 		wt=Math.floor((lvl.width())/3.04);
 		var color = 'box';

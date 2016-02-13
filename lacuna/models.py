@@ -8,6 +8,7 @@ class Participant(models.Model):
     progress = models.IntegerField(default=0)
     current_dvm_level = models.PositiveSmallIntegerField(default=1)
     start_time = models.DateTimeField()
+    total_time = models.DurationField(null=True, blank=True)
     dvm_1_time = models.DurationField(null=True, blank=True)
     dvm_2_time = models.DurationField(null=True, blank=True)
     dvm_3_time = models.DurationField(null=True, blank=True)
