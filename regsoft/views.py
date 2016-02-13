@@ -902,11 +902,15 @@ def recnacc_deallocate(request,pid):
 			context = RequestContext(request)
 			context_dict = {'part_ob':part_ob}
 			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
 	else:
-		context = RequestContext(request)
-		context_dict = {'part_ob':part_ob}
-		return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		if part_ob.room:
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
 
 @csrf_exempt
 def recnacc_checkout(request,pid):
