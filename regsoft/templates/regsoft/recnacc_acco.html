@@ -184,16 +184,16 @@ function checkall(gauss){
                                         <th></th>
                                         
                                         
-                                        <th width="8%">Select </th>
+                                        <th>Select </th>
                                     </thead>
                                     <tbody>
-                                        <form method= "POST" action = "../allot/{{gl.id}}" id ="form2">
+                                        <form method= "POST" action = "../allot/{{part_ob.id}}" id ="form2">
                                           {% for x in all_rooms %}
                                             <tr class="trprop">
                                                 <td>{{x.bhavan.name}}</td>
                                                 <td>{{x.room}}</td>
                                                 <td id="{{x.id}}" >{{x.vacancy}}</td>
-                                                <td><label class="radio"><input type ="radio" name="roomid"  value = "{{x.id}}" ></label></td>
+                                                <td><input type ="radio" name="roomid"  value = "{{x.id}}" ></td>
                                             </tr>
                                         {% endfor %}
                                       

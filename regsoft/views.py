@@ -20,167 +20,167 @@ from django.core.exceptions import ObjectDoesNotExist
 
 @csrf_exempt
 def firewallzo_dashboard(request):
-    if request.POST:
-        try:
-            encoded = request.POST['code']
-            decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
+	if request.POST:
+		try:
+			encoded = request.POST['code']
+			decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
 
-        except:
-            if request.POST.get('crepid', False):
-                decoded = int( request.POST['crepid'] )
-            else:
-                return render(request, 'regsoft/scan.html', {'status' : 0})
-        return HttpResponseRedirect("../scan/" + str(decoded) )
-
-
-        decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
-        
-        part = Participant.objects.filter(id = decoded)
-        if part:
-            part=  part[0]
-            context = {
-            'part' :part,
-            }
-            return render(request, 'regsoft/table.html', context)
-        else:
-            return render(request, 'regsoft/scan.html', {'status' : 0})
+		except:
+			if request.POST.get('crepid', False):
+				decoded = int( request.POST['crepid'] )
+			else:
+				return render(request, 'regsoft/scan.html', {'status' : 0})
+		return HttpResponseRedirect("../scan/" + str(decoded) )
 
 
-    return render(request, 'regsoft/scan.html')
+		decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
+		
+		part = Participant.objects.filter(id = decoded)
+		if part:
+			part=  part[0]
+			context = {
+			'part' :part,
+			}
+			return render(request, 'regsoft/table.html', context)
+		else:
+			return render(request, 'regsoft/scan.html', {'status' : 0})
+
+
+	return render(request, 'regsoft/scan.html')
 
 
 
 
 def firewallzo_dashboard_two(request,part_id):
 
-    decoded = part_id
-    # decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning    
-    part = Participant.objects.filter(id = decoded)
-    if part:
-        part=  part[0]
-        context = {
-        'part' : part,
+	decoded = part_id
+	# decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning    
+	part = Participant.objects.filter(id = decoded)
+	if part:
+		part=  part[0]
+		context = {
+		'part' : part,
 
-        }
-        return render(request, 'regsoft/table.html', context)
-    else:
-        return render(request, 'regsoft/scan.html', {'status' : 0})
+		}
+		return render(request, 'regsoft/table.html', context)
+	else:
+		return render(request, 'regsoft/scan.html', {'status' : 0})
 
 
-    return render(request, 'regsoft/scan.html')
+	return render(request, 'regsoft/scan.html')
 
 def firewallzo_confirm(request):
-    if request.POST:
-        # pid = request.POST.get('confirm',False)
-        pid = request.POST['confirm']
-        if pid:
-            p_ob = Participant.objects.get(id= int(pid))
-            googol = "000000000"
-            clg = p_ob.college.name
-            p_ob.firewallzo= True
-            num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
-            pcode= "0"
-            try:
-                pcode = str(clg)[:3].upper() + num_part
-            except:
-                pcode = "0"
-            p_ob.aadhaar = pcode
-            p_ob.save()
-        else:
-            return HttpResponse('Error Contact Satwik : 9928823099')            
+	if request.POST:
+		# pid = request.POST.get('confirm',False)
+		pid = request.POST['confirm']
+		if pid:
+			p_ob = Participant.objects.get(id= int(pid))
+			googol = "000000000"
+			clg = p_ob.college.name
+			p_ob.firewallzo= True
+			num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
+			pcode= "0"
+			try:
+				pcode = str(clg)[:3].upper() + num_part
+			except:
+				pcode = "0"
+			p_ob.aadhaar = pcode
+			p_ob.save()
+		else:
+			return HttpResponse('Error Contact Satwik : 9928823099')            
 
-        # clg = k.name
-        # pid = init_ob.id
-        # init_ob.save()
+		# clg = k.name
+		# pid = init_ob.id
+		# init_ob.save()
 
 
-        return HttpResponseRedirect('../scan/'+ str(p_ob.id))
-    else:
-        return HttpResponse('Dude! Its not a POST request _|_')
+		return HttpResponseRedirect('../scan/'+ str(p_ob.id))
+	else:
+		return HttpResponse('Dude! Its not a POST request _|_')
 
 def firewallzo_unconfirm(request, part_id):
-    p_ob = Participant.objects.get(id = int(part_id))
-    p_ob.firewallzo = False
-    p_ob.save()
-    return HttpResponseRedirect('../scan/' + str(p_ob.id) )
+	p_ob = Participant.objects.get(id = int(part_id))
+	p_ob.firewallzo = False
+	p_ob.save()
+	return HttpResponseRedirect('../scan/' + str(p_ob.id) )
 
 
 
 def firewallzo_edit_part(request, part_id):
-    if request.POST:
-        part_ob = Participant.objects.get(id = part_id)
-        part_ob.name = str(request.POST['name'])
-        part_ob.email_id = str(request.POST['email'])
-        part_ob.phone_one = int(request.POST['phone'])
-        part_ob.gender = str(request.POST['gender'])
-        if request.POST.get('pcr_approval', False):
-            part_ob.pcr_approval=True
-        else:
-            part_ob.pcr_approval = False
+	if request.POST:
+		part_ob = Participant.objects.get(id = part_id)
+		part_ob.name = str(request.POST['name'])
+		part_ob.email_id = str(request.POST['email'])
+		part_ob.phone_one = int(request.POST['phone'])
+		part_ob.gender = str(request.POST['gender'])
+		if request.POST.get('pcr_approval', False):
+			part_ob.pcr_approval=True
+		else:
+			part_ob.pcr_approval = False
 
-        part_ob.events.clear()
-        if request.POST.get('events', False):
-            for k in request.POST.getlist('events'):                                    
-                event = Event.objects.get(pk=k)
-                part_ob.events.add(event)
-        part_ob.save()
-        return HttpResponseRedirect('../scan/' + str(part_ob.id) )
+		part_ob.events.clear()
+		if request.POST.get('events', False):
+			for k in request.POST.getlist('events'):                                    
+				event = Event.objects.get(pk=k)
+				part_ob.events.add(event)
+		part_ob.save()
+		return HttpResponseRedirect('../scan/' + str(part_ob.id) )
 
 
-    part_ob = Participant.objects.get(id= part_id)
-    elist = Event.objects.all()
-    # crep = init_ob.college_rep
-    return render(request, 'regsoft/fire_edit.html' , {'part' : part_ob, 'events' : elist})
+	part_ob = Participant.objects.get(id= part_id)
+	elist = Event.objects.all()
+	# crep = init_ob.college_rep
+	return render(request, 'regsoft/fire_edit.html' , {'part' : part_ob, 'events' : elist})
 
 
 
 
 def firewallzo_add(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        sex = request.POST['gender']
-        phone_one = request.POST['phone']
-        email = request.POST['email']
-        col_id= int(request.POST['college'])
-        events = request.POST.getlist('events')
-        check = 1
-        try:
-            college= College.objects.get(id= col_id)
-        except:
-            college=None
-        # check = check_limits(request)
+	if request.method == 'POST':
+		name = request.POST['name']
+		sex = request.POST['gender']
+		phone_one = request.POST['phone']
+		email = request.POST['email']
+		col_id= int(request.POST['college'])
+		events = request.POST.getlist('events')
+		check = 1
+		try:
+			college= College.objects.get(id= col_id)
+		except:
+			college=None
+		# check = check_limits(request)
 
-        try:
-            participant = Participant.objects.create(name=name, gender=sex, phone_one=phone_one, email_id=email, college=college,  pcr_approval = True)
-        except IntegrityError:
-        # errors = []
-            errorsx = 'The email '+str(email)+' has already been registered. Try a different email.'
-            events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-            clg_list =  College.objects.all()
-            context = {
-                'clg_list' : clg_list ,
-                'errors' : errorsx,
-                'events' : events,
-            }
-            return render(request, 'regsoft/fire_add.html', context)
-        # #### FireWallz bypass for bitsians
-        # if str(user_pr.college) == 'BITS Pilani':
-        #     participant.firewallz= True
-        #     participant.confirmation= True
-        for k in events:
-            event = Event.objects.get(id=k)
-            participant.events.add(event)
-        participant.save()
-        return HttpResponseRedirect('../scan/' + str(participant.id))
-        
-    # userprofile = request.user.userprofile_set.all()[0]
-    events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-    clg_list= College.objects.all()
-    context = {
-        'clg_list':clg_list,
-        'events' : events,
-    }
-    return render(request, 'regsoft/fire_add.html', context)
+		try:
+			participant = Participant.objects.create(name=name, gender=sex, phone_one=phone_one, email_id=email, college=college,  pcr_approval = True)
+		except IntegrityError:
+		# errors = []
+			errorsx = 'The email '+str(email)+' has already been registered. Try a different email.'
+			events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+			clg_list =  College.objects.all()
+			context = {
+				'clg_list' : clg_list ,
+				'errors' : errorsx,
+				'events' : events,
+			}
+			return render(request, 'regsoft/fire_add.html', context)
+		# #### FireWallz bypass for bitsians
+		# if str(user_pr.college) == 'BITS Pilani':
+		#     participant.firewallz= True
+		#     participant.confirmation= True
+		for k in events:
+			event = Event.objects.get(id=k)
+			participant.events.add(event)
+		participant.save()
+		return HttpResponseRedirect('../scan/' + str(participant.id))
+		
+	# userprofile = request.user.userprofile_set.all()[0]
+	events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+	clg_list= College.objects.all()
+	context = {
+		'clg_list':clg_list,
+		'events' : events,
+	}
+	return render(request, 'regsoft/fire_add.html', context)
 
 
 
@@ -234,7 +234,7 @@ def firewallzo_add(request):
 #       participant.save()
 
 #       return HttpResponseRedirect('../add_guest/')
-        
+		
 #   # userprofile = request.user.userprofile_set.all()[0]
 
 #   # crep= UserProfile.objects.get(id= crep_id)
@@ -270,7 +270,7 @@ def firewallzo_add(request):
 #       partid = part.id
 #       newgl = gleader(details = part, groupcode= '')
 #       newgl.save()
-        
+		
 #       googol = '000000000'
 #       glid = newgl.id 
 #       num_gl  = googol[ : (4 - len(str(glid)) ) ] + str(glid)
@@ -292,11 +292,11 @@ def firewallzo_add(request):
 
 ##### GROUP CODE LIST #####
 def gcodelist(request):
-    plist = Participant.objects.filter(firewallzo=True)
-    context = {
-    'plist' : plist,
-    }
-    return render(request, 'regsoft/groupcodelist.html', context)
+	plist = Participant.objects.filter(firewallzo=True)
+	context = {
+	'plist' : plist,
+	}
+	return render(request, 'regsoft/groupcodelist.html', context)
 
 
 
@@ -318,18 +318,18 @@ def gcodelist(request):
 
 # # def controlz_dashboard(request):
 
-# @csrf_exempt
-# def controlz_home(request):
-#   if request.POST:
-#       try:
-#           encoded = str( request.POST['code'] )
-#           decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+@csrf_exempt
+def controlz_home(request):
+  if request.POST:
+	  try:
+		  encoded = str( request.POST['code'] )
+		  decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
 
-#       except:
-#           return render(request, 'regsoft/controlz_home.html', {'status' : 0})
-#       return HttpResponseRedirect("../home/" + str(decoded) )
+	  except:
+		  return render(request, 'regsoft/controlz_home.html', {'status' : 0})
+	  return HttpResponseRedirect("../home/" + str(decoded) )
 
-#   return render(request, "regsoft/controlz_home.html")
+  return render(request, "regsoft/controlz_home.html")
 
 # def controlz_stats(request):
 #   passed_controls = InitialRegistration.objects.filter(controlz=True).count()
@@ -352,32 +352,15 @@ def gcodelist(request):
 
 #   return render(request, "regsoft/controlz_stats.html", context)
 
-# def controlz_dashboard(request,gl_id):
-#   gl_ob = gleader.objects.filter(id = gl_id)
-#   if gl_ob:
-#       gl_ob = gl_ob[0]
-#       plist = gl_ob.initialregistration_set.filter(controlz =False)
-#       plist_two = gl_ob.initialregistration_set.filter(controlz =True)
-#       maleno = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'M', controlz= False).count()
-#       femaleno = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', controlz= False).count()
-#       maleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'M', controlz= True).count()
-#       femaleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', controlz= True).count()
+def controlz_dashboard(request,part_id):
+	part_ob = Participant.objects.filter(id = part_id)
+	if part_ob:
+		part_ob = part_ob[0]
+		context= {'part': part_ob}
+		return render(request, 'regsoft/controlz_dashboard.html', context)
+	else:
+		return render(request, 'regsoft/controlz_home.html', {'status' : 0})
 
-#       context ={
-#       'gl' : gl_ob, 
-#       'plist' : plist,
-#       'plist_two' : plist_two,
-#       'maleno' : maleno,
-#       'femaleno' : femaleno,
-#       'maleno_two' : maleno_two,
-#       'femaleno_two' : femaleno_two,
-
-
-#       }
-#       return render(request, 'regsoft/controlz_dashboard.html', context)
-
-#   else:
-#       return render(request, 'regsoft/controlz_home.html', {'status' : 0})
 
 
 
@@ -424,7 +407,7 @@ def gcodelist(request):
 #               onlinepaid+=1
 
 #       totalamt= onlinepaid*500
-        
+		
 
 #       gl = plist[0].grpleader
 #       total = len(plist) 
@@ -518,7 +501,7 @@ def gcodelist(request):
 #           balance += -(n10) * 10 
 #       else:
 #           given+= n10 * 10                                                     
-            
+			
 
 
 
@@ -542,7 +525,7 @@ def gcodelist(request):
 #                 test.append({part.name, newbill.id})
 #                 part.save()
 
-                
+				
 #         newbill.notes_1000 = int(n1000)
 #         newbill.notes_500 = int(n500)
 #         newbill.notes_100 = int(n100)
@@ -665,17 +648,17 @@ def gcodelist(request):
 
 @csrf_exempt
 def recnacc_home(request):
-    if request.POST:
-        try:
-            encoded = str( request.POST['code'] )
-            decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+	if request.POST:
+		try:
+			encoded = str( request.POST['code'] )
+			decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
 
-        except:
-            return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
-        return HttpResponseRedirect("../home/" + str(decoded) )
+		except:
+			return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
+		return HttpResponseRedirect("../home/" + str(decoded) )
 
 
-    return render(request, "regsoft/recnacc_home.html")
+	return render(request, "regsoft/recnacc_home.html")
 
 
 # def recnacc_notify(request):
@@ -730,21 +713,21 @@ def recnacc_home(request):
 #       return HttpResponseRedirect("../home/" + str(decoded) )
 
 #   return render(request, "regsoft/recnacc_home.html")
-
+@csrf_exempt
 def recnacc_dashboard(request,pid):
-    part_ob = Participant.objects.filter(id = pid)
-    
-    if part_ob:
-        part_ob = part_ob[0]
-        if part_ob.recnacc == True:
-            check = 1
-        elif part_ob.recnacc == False:
-            check = 2
-            
-        
-        context ={
-        'part_ob' : part_ob, 
-        'check' : check,
+	part_ob = Participant.objects.filter(id = pid)
+	
+	if part_ob:
+		part_ob = part_ob[0]
+		if part_ob.recnacc == True:
+			check = 1
+		elif part_ob.recnacc == False:
+			check = 2
+			
+		
+		context ={
+		'part_ob' : part_ob, 
+		'check' : check,
 #       'plist_faculty' : plistfinal_faculty,
 #       'plist_two' : plistfinal_two,
 #       'maleno_faculty' : maleno_faculty,
@@ -753,105 +736,205 @@ def recnacc_dashboard(request,pid):
 #       'femaleno_participant' : femaleno_participant,
 #       'maleno_two' : maleno_two,
 #       'femaleno_two' : femaleno_two,
-        
-        }
+		
+		}
 
-        return render(request, 'regsoft/recnacc_dashboard.html', context)
+		return render(request, 'regsoft/recnacc_dashboard.html', context)
 
-    else:
-        return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
+	else:
+		return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
 
 @csrf_exempt
 def recnacc_allot(request,pid):
-    try:
-        Participant.objects.get(id = pid)
-    except:
-        return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
-    if request.method == 'POST':
-        roomid = request.POST['roomid']
-        # except:
-        #   error="Invalid Room Selected"
-        #   context = RequestContext(request)
-        #   context_dict = {'error':error}
-        #   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-        room_list= Room.objects.all()
-        part_ob = Participant.objects.get(id = pid)
-    
-        selectedroom = Room.objects.get(id=roomid) 
-        selectedroom_availibilty = selectedroom.vacancy
+	try:
+		Participant.objects.get(id = pid)
+	except:
+		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
+	if request.method == 'POST':
+		roomid = request.POST['roomid']
+		# except:
+		#   error="Invalid Room Selected"
+		#   context = RequestContext(request)
+		#   context_dict = {'error':error}
+		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+	
+		selectedroom = Room.objects.get(id=roomid) 
+		selectedroom_availibilty = selectedroom.vacancy
 
 
-        if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
-            part_ob = Participant.objects.get(id = pid)
-            if part_ob.gender == 'F':
-                part_ob.room = selectedroom
-                part_ob.save
-                selectedroom.vacancy -= 1
-                selectedroom.save()
-            
-        else:
-            part_ob = Participant.objects.get(id = pid)
-            if part_ob.gender == 'M':
-                part_ob.room = selectedroom
-                part_ob.save
-                selectedroom.vacancy -= 1
-                selectedroom.save()
+		if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'F':
+				part_ob.room = selectedroom
+				part_ob.save
+				selectedroom.vacancy -= 1
+				selectedroom.save()
+			
+		else:
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'M':
+				part_ob.room = selectedroom
+				part_ob.save
+				selectedroom.vacancy -= 1
+				selectedroom.save()
 
-        context = RequestContext(request)
-        context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
-        return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
 
-    else:
-        room_list= Room.objects.all()
-        part_ob = Participant.objects.get(id = pid)
-        context = RequestContext(request)       
-        context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
-        return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+	else:
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+		context = RequestContext(request)       
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+	try:
+		Participant.objects.get(id = pid)
+	except:
+		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
+	if request.method == 'POST':
+		roomid = request.POST['roomid']
+		# except:
+		#   error="Invalid Room Selected"
+		#   context = RequestContext(request)
+		#   context_dict = {'error':error}
+		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+	
+		selectedroom = Room.objects.get(id=roomid) 
+		selectedroom_availibilty = selectedroom.vacancy
+
+
+		if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'F':
+				part_ob.room = selectedroom
+				part_ob.save()
+				selectedroom.vacancy -= 1
+				selectedroom.save()
+			
+		else:
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'M':
+				part_ob.room = selectedroom
+				part_ob.save()
+				selectedroom.vacancy -= 1
+				selectedroom.save()
+
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+
+	else:
+		room_list= Room.objects.all()
+		part_ob = Participant.objects.get(id = pid)
+		context = RequestContext(request)       
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+
 
 
 @csrf_exempt
 def recnacc_deallocate(request,pid):
-    part_ob = Participant.objects.get(id=pid)
-    # alloted_people = InitialRegistration.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
+	part_ob = Participant.objects.get(id=pid)
+	# alloted_people = InitialRegistration.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
 #   alist=[]
 #   for x in alloted_people:
 #       if x.room.id != 1:
 #           alist.append(x)
-    if request.POST:
-        if part_ob.room:
-            selected_room = part_ob.room
-            selected_room.vacancy += 1
-            selected_room.save()
-            part_ob.room = None
-            part_ob.save()
-            context = RequestContext(request)
-            context_dict = {'part_ob':part_ob}
-            return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-        else:
-            return HttpResponse('This person has to be alloted a room first.')
-    else:
-        if part_ob.room:
-            context = RequestContext(request)
-            context_dict = {'part_ob':part_ob}
-            return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-        else:
-            return HttpResponse('This person has to be alloted a room first.')
+	if request.POST:
+		if part_ob.room:
+			selected_room = part_ob.room
+			selected_room.vacancy += 1
+			selected_room.save()
+			part_ob.room = None
+			part_ob.save()
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
+	else:
+		if part_ob.room:
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
+	if request.POST:
+		selected_room = part_ob.room
+		selected_room.vacancy += 1
+		selected_room.save()
+		part_ob.room = ''
+		part_ob.save()
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob}
+		return HttpResponseRedirect('../home/'+part_ob.id)
+		# return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+	
+	else:
+		if part_ob.room:
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
+	if request.POST:
+		selected_room = part_ob.room
+		selected_room.vacancy += 1
+		selected_room.save()
+		part_ob.room = ''
+		part_ob.save()
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob}
+		return HttpResponseRedirect('../home/'+part_ob.id)
+		# return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+	
+	else:
+		if part_ob.room:
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
+	if request.POST:
+		part_ob = Participant.objects.get(id=pid)    
+		selected_room = part_ob.room
+		selected_room.vacancy += 1
+		selected_room.save()
+		part_ob.room = ''
+		part_ob.save()
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob}
+		return HttpResponseRedirect('../home/'+part_ob.id)
+		# return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+	
+	else:
+		if part_ob.room:
+			context = RequestContext(request)
+			context_dict = {'part_ob':part_ob}
+			return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
+		else:
+			return HttpResponse('This person has to be alloted a room first.')
 
 @csrf_exempt
 def recnacc_checkout(request,pid):
 #   #simple template to enter id
 #   postcheck = False
-    if request.method == 'POST':
-        part_ob = Participant.objects.get(id=pid)       
-        proom = part_ob.room
-        proom.vacancy += 1
-        proom.save()
-        part_ob.room = Room.objects.get(id=1)
-        croom = Room.objects.get(id=1)
-        croom.vacancy -= 1
-        croom.save()
-        part_ob.save()
-        check = 1
+	if request.method == 'POST':
+		part_ob = Participant.objects.get(id=pid)       
+		proom = part_ob.room
+		proom.vacancy += 1
+		proom.save()
+		part_ob.room = Room.objects.get(id=1)
+		croom = Room.objects.get(id=1)
+		croom.vacancy -= 1
+		croom.save()
+		part_ob.save()
+		check = 1
 #         # participant_name = str(participant.name) 
 #         # participant_gender = str(participant.gender)[0].upper()
 #         # if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
@@ -866,21 +949,21 @@ def recnacc_checkout(request,pid):
 #       gl.save()
 #       participant_list = gl.initialregistration_set.all() 
 #       final_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.room.bhavan.id != 1]
-        context = RequestContext(request)
-        context_dict = {'part_ob':part_ob, 'check':check}
-        return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob, 'check':check}
+		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
 
 
-    else:
-        part_ob = Participant.objects.get(id=pid)
-        proom = part_ob.room
-        if proom.id == 1:
-            check = 1
-        else:
-            check = 2
-        context = RequestContext(request)
-        context_dict = {'part_ob':part_ob,'check':check}
-        return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
+	else:
+		part_ob = Participant.objects.get(id=pid)
+		proom = part_ob.room
+		if proom.id == 1:
+			check = 1
+		else:
+			check = 2
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob,'check':check}
+		return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
 
 
 
@@ -1097,7 +1180,7 @@ def recnacc_checkout(request,pid):
 # def choose_leader(request):
 #   if request.method == "POST":
 #       context = RequestContext(request)
-        
+		
 #       id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
 #       outside_list = [x for x in id_list if len(x) < 5]
 #       bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
@@ -1156,12 +1239,12 @@ def recnacc_checkout(request,pid):
 #           team_obj.is_winner=True
 #       team_obj.save()
 #       context = {}
-        
+		
 #       id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list','').replace(",","").split(" "))]
 #       outside_list = [x for x in id_list if len(x) < 5]
 #       bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
 #       bitsian_long_list = [x for x in id_list if len(x) >= 11]
-        
+		
 #       try:
 #           reg_objs = InitialRegistration.objects.filter(id__in = outside_list)
 #           for r in reg_objs:
@@ -1180,7 +1263,7 @@ def recnacc_checkout(request,pid):
 #           return redirect('regsoft:main')
 
 #       team_obj.save()
-        
+		
 #       context['error_message'] = "Team Generated Successfully"
 
 #       return redirect('regsoft:main')
@@ -1218,7 +1301,7 @@ def recnacc_checkout(request,pid):
 #   if request.method == "POST":
 #       request = RequestContext(request)
 #       del_teams = request.POST.getlist('del_teams')
-        
+		
 #       for t in del_teams:
 #           Team.objects.get(id=t).delete()
 
@@ -1276,7 +1359,7 @@ def recnacc_checkout(request,pid):
 #   #if request.method == "POST":
 #   context = RequestContext(request)
 #   #print request.POST['event_name']
-    
+	
 #   event_name=request.POST.get('event_name','')
 #   event_obj = Event.objects.get(name=event_name)
 #   teams = Team.objects.filter(event=event_obj)
@@ -1291,7 +1374,7 @@ def recnacc_checkout(request,pid):
 #   if request.method == "POST":
 
 #       f_teams = request.POST.getlist('finalist_teams')
-        
+		
 #       for t in f_teams:
 #           ob = Team.objects.get(id=t)
 #           ob.is_finalist = True
@@ -1358,7 +1441,7 @@ def recnacc_checkout(request,pid):
 #           ob.is_winner = True
 #           ob.position = 5
 #           ob.save()       
-            
+			
 #       context['error_message'] = "Winners added."
 #       return redirect('regsoft:main')
 
@@ -1401,7 +1484,7 @@ def recnacc_checkout(request,pid):
 # #             context = RequestContext(request)
 # #             context_dict = {'error':error}
 # #             return render_to_response('regsoft/recnacc_inventory_return.html', context_dict, context)
-            
+			
 # #         for inventoryid in request.POST.getlist('inventoryid'):
 # #             noa = 'a'+inventoryid
 # #             nob = 'b'+inventoryid   
@@ -1411,7 +1494,7 @@ def recnacc_checkout(request,pid):
 # #             nof = 'f'+inventoryid
 
 # #             inventoryid = int(inventoryid)        
-                     
+					 
 # #             a_no=int(request.POST.get(noa, False))
 # #             b_no=int(request.POST.get(nob, False))
 # #             c_no=int(request.POST.get(noc, False))
@@ -1565,26 +1648,26 @@ def recnacc_checkout(request,pid):
 #   return render_to_response('regsoft/receipt_recnacc.html', context)
 
 def encode_glid(gl_id):
-    gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
-    mixed = string.ascii_uppercase + string.ascii_lowercase
-    count = 51
-    encoded = ''
-    for x in gl_ida:
-        encoded = encoded + x
-        encoded = encoded + mixed[randint(0,51)]
-    return encoded
+	gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
+	mixed = string.ascii_uppercase + string.ascii_lowercase
+	count = 51
+	encoded = ''
+	for x in gl_ida:
+		encoded = encoded + x
+		encoded = encoded + mixed[randint(0,51)]
+	return encoded
 def get_barcode(request):
-    list_of_people_selected = Participant.objects.filter(pcr_approval=True)
-    final_display = []
-    for x in list_of_people_selected:
-        name = x.name
-        college = x.college.name
-        pid= x.id
-        encoded = encode_glid(pid)
-        final_display.append((name,college,encoded, pid))
-    context = RequestContext(request)
-    context_dict = {'final_display':final_display}
-    return render_to_response('regsoft/get_barcode.html', context_dict, context)
+	list_of_people_selected = Participant.objects.filter(pcr_approval=True)
+	final_display = []
+	for x in list_of_people_selected:
+		name = x.name
+		college = x.college.name
+		pid= x.id
+		encoded = encode_glid(pid)
+		final_display.append((name,college,encoded, pid))
+	context = RequestContext(request)
+	context_dict = {'final_display':final_display}
+	return render_to_response('regsoft/get_barcode.html', context_dict, context)
 
 
 # def recnacc_bill_list(request):
@@ -1629,7 +1712,7 @@ def get_barcode(request):
 
 #       for k in members_ob_bits:
 #           fopen.write(str(k.name.upper() ) + '$' + str(k.college) + '$' + str(tm.event) +'$' + str(tm.position)+'\n'  )
-        
+		
 #       # if tm.:
 #       # if tm.is_winner:
 #   fopen.close()
@@ -1647,7 +1730,7 @@ def get_barcode(request):
 
 #       for k in members_ob_bits:
 #           fopen.write(str(k.name.upper() ) + '$' + str(k.college) + '$' + str(tm.event) +'$' + str(tm.position)+'\n'  )
-        
+		
 #       # if tm.:
 #       # if tm.is_winner:
 #   fopen.close()
@@ -1684,7 +1767,7 @@ def get_barcode(request):
 #   #   fopen.write(str(k.name.upper() ) + '$' + str(k.college) + '$Stage Play\n'   )
 #   #   # members_ob = k.members.all()
 #   #   # for init_ob in members_ob:
-    
+	
 #   # fopen.close()
 
 
@@ -1975,7 +2058,7 @@ def get_barcode(request):
 # #             newuser.phone = int(request.POST['phone'])
 # #             newuser.email_id= newgl.email_id
 # #             newuser.save()
-            
+			
 # #             context = RequestContext(request)
 # #             context_dict = {'newgl' : newuser}
 # #             return render_to_response('newglshow.html',context_dict, context)
@@ -2036,7 +2119,7 @@ def get_barcode(request):
 # #         #       context = RequestContext(request)
 # #         #       context_dict = {'not_approved_participants':not_approved_participants,'error':error,'gl_id':gl_id}
 # #         #       return render_to_response('newglcheckbox.html', context_dict, context)
-            
+			
 # #             # request.session['newglidlist'] = new_members_id_string
 # #             # new_members_list = [Participant.objects.get(id=y) for y in new_members_id]
 # #             # context = RequestContext(request)
@@ -2074,13 +2157,13 @@ def get_barcode(request):
 # #             context = RequestContext(request)
 # #             context_dict = {'encoded':encoded}
 # #             return render_to_response('firewallzi_home.html', context_dict, context)
-        
+		
 # #         if request.POST:
 # #             if str(request.POST['formtype']) == 'finalform':
 # #                 gl_id = int(request.session.get('glidfire'))
 # #                 gl = UserProfile.objects.get(id=gl_id)
 # #                 participant_list = gl.user.participant_set.all()
-            
+			
 # #                 firewallz_controlz_approved = [x for x in participant_list if x.firewallz == True and x.fid != True and x.controlzpay == True]
 # #                 for x in firewallz_controlz_approved:
 # #                     if x.id in request.POST:
@@ -2092,7 +2175,7 @@ def get_barcode(request):
 # #                 context = RequestContext(request)
 # #                 context_dict = {'firewallz_controlz_approved':firewallz_controlz_approved,'done_list':done_list}
 # #                 return render_to_response('firewallzi_checkout.html', context_dict, context)
-        
+		
 # #             else:
 # #                 gl_id = int(request.session.get('glidfire'))
 # #                 gl = UserProfile.objects.get(id=gl_id)
@@ -2257,7 +2340,7 @@ def get_barcode(request):
 # #                     selectedroom.vacancy -= 1
 # #                     selectedroom.save()
 # #                     unalloted_females[y].save()
-            
+			
 # #             else:
 # #                 if no_males<noalloted:
 # #                     return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-bosm.org/2015/regsoft/recnacc/allot/%s/">Back</a>' % gl_id)
@@ -2364,7 +2447,7 @@ def get_barcode(request):
 # #         context = RequestContext(request)
 # #         context_dict = {'done_people':done_people, 'alloted_people':alloted_people,"gl_id":gl_id}
 # #         return render_to_response('reconec_deallocate.html', context_dict, context)
-        
+		
 # # @csrf_exempt
 # # @staff_member_required
 # # def phonedetails(request,gl_id):
@@ -2517,7 +2600,7 @@ def get_barcode(request):
 # #         # eventwise = [x for x in all_participants if events in x.events.all()]
 # #         # all_participants = Participant.objects.filter(controlzpay=True)
 # #         # participants = [x for x in all_participants if x.gleader == college and event in x.event_set.all()]
-        
+		
 # #     users = [x for x in UserProfile.objects.all()]
 # #     sports = [x for x in EventNew.objects.all()]
 # #     context = {
@@ -2537,7 +2620,7 @@ def get_barcode(request):
 # #         for x in selectedpeople_list:
 # #             participant = Participant.objects.get(id=x)
 # #             display_table.append(participant)
-    
+	
 # #     #people = [x for x in gl.user.participant_set.all() if x.firewallz == True and x.controlzpay != True and x.coach != True]
 # #     #bill_no_raw = len(Bill_new.objects.all()) + 1
 # #     #rec = '0'*(4-len(str(bill_no_raw)))+str(bill_no_raw)
@@ -2554,8 +2637,8 @@ def get_barcode(request):
 # #             # bill_part = request.POST['left']
 # #             # college = gl.college
 # #             # participant = Participant.objects.filter(bill_id=bill_part)
-            
-                
+			
+				
 # #     # encoded = encode_glid(gl_id)
 # #     # #billno = request.POST['billid']
 # #     # gl=UserProfile.objects.get(id=gl_id)
@@ -2566,7 +2649,7 @@ def get_barcode(request):
 # #             # if str(p.bill_id) not in b_list:
 # #                 # bid = str(p.bill_id)
 # #                 # b_list.append(bid)
-    
+	
 # #     # context = RequestContext(request)
 # #     # context_dict = {'b_list':b_list}
 # #     # # # p = Participant.objects.filter(gleader=gl)
@@ -2574,12 +2657,12 @@ def get_barcode(request):
 # #             # # # x.controlzpay = False
 # #             # # # x.bill_id = None
 # #             # # # x.fid = False
-        
+		
 # #         # # # a = Bill_new.objects.filter(number=billno)[0]
 # #         # # # a.remove()
 # #         # # #return render_to_response('revertbill.html',{'message':'This Bill_new has been cancelled'} )
 # #     # return render_to_response('revertbill.html', context_dict, context)
-    
+	
 # # @csrf_exempt
 # # def generate_receipt(request,gl_id):
 # #     if request.POST:
@@ -2594,14 +2677,14 @@ def get_barcode(request):
 # #         selectedpeople_list = [int(x) for x in list_of_people_selected]
 # #         register=750
 # #         number_of_participants = len(selectedpeople_list)
-        
+		
 # #         amount=750*number_of_participants
 # #         ddno = request.POST['dd']
-        
+		
 # #     #calculationg amount
-        
+		
 # #     #now make Bill_new
-        
+		
 # #         a = Bill_new()
 # #         # a.notes_1000= n1000
 # #         # a.notes_500= n500
@@ -2616,7 +2699,7 @@ def get_barcode(request):
 # #         a.amount = amount
 # #         a.save()
 # #         rec = '0'*(4-len(str(a.id)))+str(a.id)
-        
+		
 # #         display_table = []
 # #         #bill_no_raw = len(Bill_new.objects.all()) + 1
 # #         for x in selectedpeople_list:
@@ -2624,9 +2707,9 @@ def get_barcode(request):
 # #             participant.controlzpay= True
 # #             participant.bill_id = a.id
 # #             participant.save()
-        
+		
 # #         uid = request.session['uid']
-        
+		
 # #         return render_to_response('controlz_gen_bill.html',{'college':gl.college,'uid':uid,'register':register,'amount':amount,'receiptno':rec,'gl_id':gl.id})
 
 
@@ -2639,7 +2722,7 @@ def get_barcode(request):
 # #         amount=request.POST['amount']
 # #         rec=request.POST['receiptno']
 # #         return render_to_response('receipt.html',{'college':college,'uid':uid,'register':register,'amount':amount,'receiptno':rec})
-        
+		
 # # @csrf_exempt
 # # def controlz_edit_participant(request,participant_id):
 # #     try:
@@ -2720,10 +2803,10 @@ def get_barcode(request):
 # #         context = RequestContext(request)
 # #         context_dict = {'participant':participant,'message':message, 'encoded':encoded,'gl_id':gl_id,'participant_event_list':participant_event_list,'participant_sport_leader':participant_sport_leader}
 # #         return render_to_response('make_sl.html', context_dict, context)
-        
+		
 # #     #participant_event_list = participant.events.all()
 # #     #event_add_list = [x for x in event_list if x not in participant_event_list]
-    
+	
 # #     usr_ob = participant.gleader
 # #     user_ob= UserProfile.objects.filter(user = usr_ob)[0]
 # #     gl_id = user_ob.id
@@ -2732,7 +2815,7 @@ def get_barcode(request):
 # #     context_dict = {'participant':participant,'message':message, 'encoded':encoded,'gl_id':gl_id,'participant_event_list':participant_event_list,'participant_sport_leader':participant_sport_leader}
 
 # #     return render_to_response('make_sl.html', context_dict, context)
-    
+	
 # # @csrf_exempt
 # # @staff_member_required
 # # def controlz_event_details(request):
@@ -2804,11 +2887,11 @@ def get_barcode(request):
 # #                     x.bill_id = None
 # #                     x.save()
 # #             a = Bill_new.objects.filter(id=bill_part).delete()
-        
+		
 # #         # if str(request.POST['formtype']) == 'partform':
 # #             # bill_number = request.POST['bill_number']
 # #             # participant_list_bill_ref = Participant.objects.filter(bill_id=bill_number)
-                    
+					
 # #     encoded = encode_glid(gl_id)
 # #     #billno = request.POST['billid']
 # #     gl=UserProfile.objects.get(id=gl_id)
@@ -2821,7 +2904,7 @@ def get_barcode(request):
 # #                 bid = str(p.bill_id)
 # #                 p_ref_name = str(p.name)
 # #                 b_list.append((bid,p_ref_name))
-    
+	
 # #     context = RequestContext(request)
 # #     context_dict = {'b_list':b_list}
 # #     # # p = Participant.objects.filter(gleader=gl)
@@ -2829,7 +2912,7 @@ def get_barcode(request):
 # #             # # x.controlzpay = False
 # #             # # x.bill_id = None
 # #             # # x.fid = False
-        
+		
 # #         # # a = Bill_new.objects.filter(number=billno)[0]
 # #         # # a.remove()
 # #         # #return render_to_response('revertbill.html',{'message':'This Bill_new has been cancelled'} )

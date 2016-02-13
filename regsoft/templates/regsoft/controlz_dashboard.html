@@ -27,16 +27,16 @@
                 </li>
 
                 <li>                  
-                    <a href="./{{gl.id}}">
+                    <a href="./{{part.id}}">
                         <i class="pe-7s-menu"></i> 
                         <p>Dashboard</p>
                     </a>
                     <!-- </form>         -->
                 </li>
                 <li>
-                    <a href="../../groupcodes">
+                    <a href="../../firewallzouter/pcodes">
                         <i class="pe-7s-note2"></i> 
-                        <p>groupcode list</p>
+                        <p>Participant Code list</p>
                     </a>            
                 </li>
 
@@ -120,48 +120,37 @@ function checkall(gauss){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participants for {{gl.details.college}}</h4> <h5> Males : {{maleno}} Females : {{femaleno}} </h5>
-                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>College Representative: {{gl.details.college_rep.details.name}} <br>The following have not been Billed</p>
+                                <h4 class="title">Participants for {{part.college.name}}</h4> 
+                                <p class="category"> <br>The following has not been Billed</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
+                                        <th>ID</th>
+                                        <th>Name | (Pcr Approved)</th>
                                         <th>Gender</th>
                                         <th> Events </th>
                                         <th>Phone</th>
                                         <th>EDIT </th>
                                         
-                                         <th>Select All <!-- <label class= "checkbox" > --> 
-                                            <input type= 'checkbox'  name= 'selectall' onclick= "checkall(this)">
-                                        <!-- </label> -->
+                                         <th>Online Paid
                                         </th>
                                     </thead>
                                     <tbody>
                                         <form method= "POST" action = '../bill_select/' id ="form1">
                                             {% csrf_token %}
-                                        {% for prt in plist %}
                                         <tr>
-                                            <td>{{forloop.counter}}</td>
+                                            <td>{{part.aadhaar}}</td>
                                             
-                                            <td>{{prt.name}}{% if prt.is_faculty %}(Faculty){% endif %}
-                                            {% if prt.reg_paid %}(onlinepaid){% endif %}
+                                            <td>{{part.name}}{% if part.pcr_approval %}(Approved){% else %}(Not Approved){% endif %}
                                             </td>
-                                            <!-- <td>{{prt.name}}</td> -->
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <td>{{prt.phone_one}}</td>
-                                            <td> <a href="../edit/{{prt.id}}"><i class= 'fa fa-edit'></i> Edit </a>
-                                            <td>
-                                                <!-- <label class="checkbox"> -->
-
-                                                    <input type='checkbox'   name='part' value = '{{prt.id}}' />
-
-                                                <!-- </label> -->
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td> <a href="../edit/{{part.id}}"><i class= 'fa fa-edit'></i> Edit </a>
+                                            <td>{% if part.fee_paid %}Yes{% else %} No {% endif %}
                                             </td>
                                         </tr>
-                                        {% endfor  %}
                                        </form>
                                     </tbody>
                                 </table>
@@ -177,33 +166,28 @@ function checkall(gauss){
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">Billed</h4>
-                                <p class="category"><strong>Males : {{maleno_two}} Females : {{femaleno_two}}</strong></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>
-                                        <th>S.no</th>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th>Events</th>
-                                        <!-- <th>Phone</th> -->
-                                        <th>Group Code</th>
-                                        <th>Group Leader</th>
+                                        <th>Phone</th>
+                                        <th>Bill Id</th>
                                         
                                     </thead>
                                     <tbody>
-                                        {% for prt in plist_two %}
                                         <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{prt.name}}</td>
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
-                                            <td>{{prt.grpleader.groupcode}}</td>
-                                            <td>{{prt.grpleader.details.name}} </td>
+                                            <td>{{part.aadhaar}}</td>
+                                            <td>{{part.name}}</td>
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td>{{part.grpleader.details.name}} </td>
 
                                         </tr>
-                                        {% endfor  %}
                                        
                                     </tbody>
                                 </table>
