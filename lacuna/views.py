@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from lacuna.models import *
-import json
 from datetime import datetime
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 def home(request):
@@ -15,7 +16,7 @@ def user_login(request):
     try:
         lacuna = Lacuna.objects.get(fbid=fbid)
     except:
-        lacuna = Lacuna.objects.create(fbid=fbid, name=name, start_time=datetime.now())
+        lacuna = Lacuna.objects.create(fbid=fbid, name=name, start_time=timezone.now())
     response = {
         'status' : 1,
     }
@@ -54,6 +55,9 @@ def dvm_level_get(request):
         }
     return JsonResponse(response)
 
+def informalsverify():
+    pass
+
 
 @csrf_exempt
 def dvm1verify(request):
@@ -67,7 +71,7 @@ def dvm1verify(request):
     if error == False:
         part = Lacuna.objects.get(fbid=fbid)
         part.current_dvm_level = 2
-        part.dvm_1_time = part.start_time - datetime.now()
+        part.dvm_1_time = part.start_time - timezone.now()
         # score change
         part.save()
         response = {
