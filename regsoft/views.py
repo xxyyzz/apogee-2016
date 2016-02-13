@@ -797,55 +797,20 @@ def recnacc_home(request):
 
 # 	return render(request, "regsoft/recnacc_home.html")
 
-# def recnacc_dashboard(request,gl_id):
-# 	gl_ob = gleader.objects.filter(id = gl_id)
+def recnacc_dashboard(request,pid):
+	part_ob = Participant.objects.filter(id = pid)
 	
-# 	if gl_ob:
-# 		gl_ob = gl_ob[0]
-# 		plistfinal_two = []
-# 		plistfinal_participant = []
-# 		plistfinal_faculty = []
-# 		plist_participant = []
-# 		plist_faculty = []
-# 		plist_participant = gl_ob.initialregistration_set.filter(firewallzo =True, recnacc=False, is_faculty=False)
-# 		plist_faculty = gl_ob.initialregistration_set.filter(firewallzo =True, recnacc=False, is_faculty=True)
-# 		maleno_participant = 0
-# 		maleno_faculty = 0
-# 		maleno_two = 0
-# 		femaleno_participant = 0
-# 		femaleno_faculty     = 0
-# 		femaleno_two = 0
-# 		for x in plist_participant:
-# 			plistfinal_participant.append(x)
-# 			if x.gender == 'M':
-# 				maleno_participant += 1
-# 			else:
-# 				femaleno_participant += 1
-# 		for x in plist_faculty:
-# 			plistfinal_faculty.append(x)
-# 			if x.gender == 'M':
-# 				maleno_faculty += 1
-# 			else:
-# 				femaleno_faculty += 1
-# 		plist_two = gl_ob.initialregistration_set.filter(firewallzo =True, recnacc=True)
-# 		for x in plist_two:
-# 			if x.room.room != "Checkout":
-# 				plistfinal_two.append(x)
-# 				if x.gender == 'M':
-# 					maleno_two += 1
-# 				else:
-# 					femaleno_two += 1
-# 		# maleno = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'M', firewallzo= True, recnacc=False).count()
-# 		# femaleno = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', firewallzo= True, recnacc=False).count()
-# 		# maleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'M', firewallzo= True, recnacc=True).count()
-# 		# femaleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', firewallzo= True, recnacc=True).count()
-# 		# for p in plist_two:
-# 		#     p.bhavan = p.room+' '+p.room.bhavan.name
+	if part_ob:
+		part_ob = part_ob[0]
+		if part_ob.recnacc == 'True':
+			check = 1
+		elif part_ob.recnacc == 'False':
+			check = 2
 			
 		
-# 		context ={
-# 		'gl' : gl_ob, 
-# 		'plist_participant' : plistfinal_participant,
+		context ={
+		'part_ob' : part_ob, 
+		'check' : check,
 # 		'plist_faculty' : plistfinal_faculty,
 # 		'plist_two' : plistfinal_two,
 # 		'maleno_faculty' : maleno_faculty,
@@ -855,12 +820,12 @@ def recnacc_home(request):
 # 		'maleno_two' : maleno_two,
 # 		'femaleno_two' : femaleno_two,
 		
-# 		}
+		}
 
-# 		return render(request, 'regsoft/recnacc_dashboard.html', context)
+		return render(request, 'regsoft/recnacc_dashboard.html', context)
 
-# 	else:
-# 		return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
+	else:
+		return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
 
 # @csrf_exempt
 # def recnacc_allot(request,gl_id):

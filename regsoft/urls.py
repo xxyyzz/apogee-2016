@@ -35,7 +35,7 @@ urlpatterns = [
 
 
 	url(r'^recnacc/home/$', recnacc_home),
-# 	url(r'^recnacc/home/(?P<gl_id>\d+)$', recnacc_dashboard),
+	url(r'^recnacc/home/(?P<pid>\d+)$', recnacc_dashboard),
 # 	url(r'^recnacc/allot/(?P<gl_id>\d+)$', recnacc_allot),
 # 	url(r'^recnacc/faculty_allot/(?P<gl_id>\d+)$', recnacc_faculty_allot),
 # 	url(r'^recnacc/deallocate/(?P<gl_id>\d+)$', recnacc_deallocate),
