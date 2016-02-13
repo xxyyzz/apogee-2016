@@ -1,0 +1,89 @@
+
+#scroll{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left:0;
+	overflow: hidden;
+	background-image: url('./../../img/puzzle/scrollback.jpg');
+
+}
+
+#scroll > #scroll-center{
+	width: 60%;
+	height: 80%;
+}
+
+#scroll-container{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top:0;
+	left:0;
+}
+
+#scroll-container >p{
+    position: absolute;
+    width: 55%;
+    top: 25%;
+    left: 15%;
+    font-size: 18px;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: monospace;
+    font-weight: 800;
+    color: #312019;
+}
+#scroll-container > .mmail{
+    width: 47%;
+    marign-left: auto;
+    position: absolute;
+    bottom: 22%;
+    left: 21%;
+}
+
+#scroll-container .mmail input{	display: inline-block;
+    width: 75%;
+    height: 50px;
+    padding: 10px 12px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #211403;
+    background-color: #E4DED6;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+	outline: none;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+#scroll-container .mmail input:placeholder{
+	color:#E8C594;
+}
+
+#scroll-container .mmail button{	display: inline-block;
+    width: 25%;
+    height: 50px;
+    padding: 10px 12px;
+    margin-left: -2px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #E8C594;
+    background-color: #211403;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
