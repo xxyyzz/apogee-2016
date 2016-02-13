@@ -22,6 +22,7 @@ class Participant(models.Model):
     dvm_11_time = models.DurationField(null=True, blank=True)
     dvm_12_time = models.DurationField(null=True, blank=True)
     informals_stats = models.CharField(max_length=100, default='000000000000')
+    informals_score = models.IntegerField(default=0)
     def __str__(self):
         return self.name
 

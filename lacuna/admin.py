@@ -6,3 +6,4 @@ class LevelAdmin(admin.ModelAdmin):
 
 admin.site.register(Participant)
 admin.site.register(Level, LevelAdmin)
+admin.site.register(Story)
