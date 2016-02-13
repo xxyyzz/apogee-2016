@@ -128,6 +128,7 @@ function colorinit(){
 		}
 		if(s)
 		{
+			submit_ans(v,11);
 			alert("you won");
 		}
 	}

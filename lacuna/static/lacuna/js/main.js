@@ -497,7 +497,14 @@ $(window).load(function(){
 // async script=================================
 var initList = [
 	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
 	{func: function(){level4init();}},
+	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
+	{func: function(){lvl1init();}},
 	{func: function(){chessinit();}},
 	{func: function(){colorinit();}},
 	{func: function(){magicinit();}},
@@ -574,12 +581,12 @@ function load_level(d,x){
 }
 // dashboard========================END=========================
 // level ========================================================
-var level_url = ['filterpuzzle/']
+var level_url = ['chesspuzzle/','qrcode/','filterpuzzle/','brainfuck/','directionalist/','mapcoordinates/','magicsquare/','unzipthemystery/','onetwothree/','poster/','colourmatch/','dancingman/'];
 function submit_ans(ans,x){
 	$.ajax({
 		url: './dvm/'+level_url[x-1],
 		method: 'POST',
-		data: {fbid:'12344567891',sol: JSON.stringify(ans)},
+		data: {fbid:'12344567891',sol: JSON.stringify(ans),level:x},
 		success: function(data){
 			console.log(data);
 		},

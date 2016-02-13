@@ -136,8 +136,8 @@ def dvm2verify(request):
     level = request.POST['level']
     level = int(level)
     error = False
-    for i in range(0, len(sol)/2):
-        for j in range(0, len(sol[i])/2):
+    for i in range(0, int(len(sol)/2)):
+        for j in range(0, int(len(sol[i])/2)):
             a = 2*i
             b = 2*j
             if sol[a][b]!=0 and ((a!=0 and sol[a-1][b]!=0 and (sol[a][b] != sol[a-1][b] or sol[a][b+1] != sol[a-1][b+1])) or (b!=0 and sol[a][b-1]!=0 and (sol[a][b] != sol[a][b-1] or sol[a+1][b] != sol[a+1][b-1]))):
