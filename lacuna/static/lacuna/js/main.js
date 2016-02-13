@@ -1,7 +1,7 @@
 // loader
 $(window).load(function(){
 	$('#loader').remove();
-})
+});
 
 // Array for game
 var cur_pos = 0;
@@ -648,6 +648,11 @@ function submit_ans(ans,x){
 // Login lacuna===================================================
 function call_fb_login(){
 	checkLoginState();
+}
+function fb_logout(){
+	FB.logout(function(response) {
+		$('.fb_login_cont').fadeIn();
+	});
 }
 function statusChangeCallback(response) {
 	console.log('statusChangeCallback');

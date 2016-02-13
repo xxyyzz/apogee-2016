@@ -1,4 +1,5 @@
 /*z-index map
+	loader				2000
 	login lacuna		1500
 	dashboard			1200
 	puzzle_cont			1000
@@ -109,6 +110,7 @@ body,html{
 /*-------------------STORY--------------*/
 
 .story_container{
+	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -209,7 +211,7 @@ body,html{
 	background-size: cover;
 }
 .fb_login_cont{
-	top:50%;
+	top:65%;
 	position: absolute;
 	left:50%;
 	-moz-transform: translate(-50%,-50%);
@@ -218,6 +220,7 @@ body,html{
 }
 .fb_login_cont img{
 	width: 300px;
+	border-radius: 5px;
 }
 /*login==============================*/
 /*dashboard=============================*/
