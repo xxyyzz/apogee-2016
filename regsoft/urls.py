@@ -7,7 +7,7 @@ urlpatterns = [
 	url(r'^firewallzouter/confirm/$', firewallzo_confirm),
 # 	url(r'^firewallzouter/confirm/(?P<crep_id>\d+)$', firewallzo_setgleader),
 	url(r'^firewallzouter/edit/(?P<part_id>\d+)$', firewallzo_edit_part),
-# 	url(r'^firewallzouter/groupcodes/$', gcodelist),
+	url(r'^firewallzouter/pcodes/$', gcodelist),
 # 	url(r'^firewallzouter/testx/$', testx),
 	url(r'^firewallzouter/unconfirm/(?P<part_id>\d+)$', firewallzo_unconfirm),
 # 	url(r'^firewallzouter/unconfirmed/(?P<crep_id>\d+)$', firewallzo_unconfirm),

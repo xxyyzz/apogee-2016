@@ -35,18 +35,11 @@
    
                 </li>
                 <li>
-                    <a href="../../groupcodes">
+                    <a href="../pcodes/">
                         <i class="pe-7s-note2"></i> 
                         <p>Passed Members</p>
                     </a>            
                 </li>
-
-                <li>
-                    <a href="../unconfirm/">
-                        <i class="pe-7s-delete-user"></i> 
-                        <p>Unconfirm </p>
-                    </a>
-                </li> 
 
                 <li>
                   <a href="../barcodelist">
@@ -138,10 +131,10 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Gender</label><br> &nbsp;
+                                                <label>Gender</label>
 
                                                 
-                                                <select name="gender" >
+                                                <select name="gender" class='form-control'>
                                                    
                                                   <option value="M" >Male</option>
                                                   <option value="F" {% if part.gender == 'F'%} selected = "selected" {% endif %} >Female</option>
@@ -152,7 +145,7 @@
                                             </div>        
                                         </div>
 
-                                        <div class="col-md-3">
+                                            &nbsp; &nbsp; &nbsp;<div class="col-md-3">
                                             <div class="form-group">
                                            <label class="checkbox"> PCR Approval                 
                                             <input type="checkbox" name="pcr_approval" value="True" {% if part.pcr_approval %} checked {% endif %}  data-toggle= "checkbox"></label>

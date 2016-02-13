@@ -20,7 +20,7 @@
                        
             <ul class="nav">
                 <li>
-                    <a href="../firewallzouter/scan/">
+                    <a href="../scan/">
                         <i class="pe-7s-home"></i> 
                         <p>Firewallz</p>
                     </a>            
@@ -28,14 +28,14 @@
 
                 <li>
 
-                    <a href="../controlz/home/">
+                    <a href="../../controlz/home/">
                         <i class="pe-7s-menu"></i> 
                         <p>Controlz</p>
                     </a>
    
                 </li>
                 <li>
-                    <a href="../recnacc/home/">
+                    <a href="../../recnacc/home/">
                         <i class="pe-7s-note2"></i> 
                         <p>Recnacc</p>
                     </a>            
@@ -87,26 +87,25 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">Group Codes</h4>
-                                <p class="category">Following Group Codes are generated at Firewallz</p>
+                                <h4 class="title">Participant Codes</h4>
+                                <p class="category">Following Participant Codes are generated at Firewallz</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>S.no</th>
-                                        <th>Group Leader</th>
+                                        <th>Name</th>
                                         <th>College </th>
-                                        <th>Group Code</th>
-                                        
-                                        <th>GL Phone</th>
+                                        <th>Participant Code</th>
+                                        <th>Phone</th>
                                     </thead>
                                     <tbody>
-                                        {% for gl in gllist %}
+                                        {% for part in plist %}
                                         <td>{{forloop.counter}} </td>
-                                        <td>{{gl.details.name}} </td>
-                                        <td>{{gl.details.college}} </td>
-                                        <td>{{gl.groupcode}} </td>
-                                        <td>{{gl.details.phone_one}} </td>
+                                        <td>{{part.name}} </td>
+                                        <td>{{part.college.name}} </td>
+                                        <td>{{part.aadhaar}} </td>
+                                        <td>{{part.phone_one}} </td>
                                     </tbody>
                                     {% endfor %}
                                 </table>

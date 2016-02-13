@@ -290,17 +290,13 @@ def firewallzo_add(request):
 
 
 
-# ##### GROUP CODE LIST #####
-# def gcodelist(request):
-# 	gllist = gleader.objects.all()
-# 	gllist1 =[]
-# 	for x in gllist:
-# 		if x.details.firewallzo == True and x.initialregistration_set.all().count():
-# 			gllist1.append(x)
-# 	context = {
-# 	'gllist' : gllist1,
-# 	}
-# 	return render(request, 'regsoft/groupcodelist.html', context)
+##### GROUP CODE LIST #####
+def gcodelist(request):
+	plist = Participant.objects.filter(firewallzo=True)
+	context = {
+	'plist' : plist,
+	}
+	return render(request, 'regsoft/groupcodelist.html', context)
 
 
 
