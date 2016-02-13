@@ -189,14 +189,12 @@ function checkall(gauss){
                                     <tbody>
                                         <form method= "POST" action = "../allot/{{gl.id}}" id ="form2">
                                           {% for x in all_rooms %}
-                                            {% if x.id > 0 %}
                                             <tr class="trprop">
                                                 <td>{{x.bhavan.name}}</td>
                                                 <td>{{x.room}}</td>
                                                 <td id="{{x.id}}" >{{x.vacancy}}</td>
                                                 <td><label class="radio"><input type ="radio" name="roomid"  value = "{{x.id}}" ></label></td>
                                             </tr>
-                                            {% endif %}
                                         {% endfor %}
                                       
                                        </form>
