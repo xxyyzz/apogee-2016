@@ -486,8 +486,6 @@ function puzzle5init()
 puzzle5init();
 // window load=======================================================
 $(window).load(function(){
-	send_login();
-	get_level_status()
 	$('.levels').click(function(){
 		var x= $(this).index()+1;
 		call_level(x);
@@ -536,13 +534,14 @@ function loadCss(url,x){
 
 // async script===============END==================
 // login===================================================
-function send_login(){
+function send_login(id,name){
 	$.ajax({
 		url: './login/',
 		method: 'POST',
-		data: {fbid:12344567891,name:'Smit Patwa'},
+		data: {fbid:id,name:name},
 		success: function(data){
 			console.log(data);
+			get_level_status()
 		},
 	});
 }
@@ -666,8 +665,7 @@ FB.getLoginStatus(function(response) {
 // successful.  See statusChangeCallback() for when this call is made.
 function testAPI() {
 	FB.api('/me', function(response) {
-	  console.log(response);
-	  console.log('Successful login for: ' + response.name);
+	  (response.name,response.id);
 	});
 }
 // Login lacuna===================END=============================
