@@ -761,7 +761,7 @@ def recnacc_allot(request,pid):
 		room_list = []
 		for x in room_list_a:
 			if x.id != 1:
-				room_list.append[x]
+				room_list.append(x)
 
 		part_ob = Participant.objects.get(id = pid)
 	
@@ -794,7 +794,7 @@ def recnacc_allot(request,pid):
 		room_list = []
 		for x in room_list_a:
 			if x.id != 1:
-				room_list.append[x]
+				room_list.append(x)
 		part_ob = Participant.objects.get(id = pid)
 		context = RequestContext(request)       
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
