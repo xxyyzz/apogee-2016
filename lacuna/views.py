@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from lacuna.models import *
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -45,7 +45,7 @@ def dvm_level_get(request):
         levelobj = Level.objects.get(level=level, dept='DVM')
         response = {
             'status' : 1,
-            'content' : levelobj.content
+            'content' : json.dumps(levelobj.content)
         }
     else:
         response = {
@@ -54,6 +54,7 @@ def dvm_level_get(request):
         }
     return JsonResponse(response)
 
+@csrf_exempt
 def informals_level_verify(request):
     fbid = request.POST['fbid']
     level = request.POST['level']
@@ -76,6 +77,10 @@ def informals_level_verify(request):
         }
     return JsonResponse(response)
 
+def time_taken(ref_time):
+    delta = timezone.now() - ref_time
+    td = delta - timedelta(microseconds=delta.microseconds)
+    return td
 
 @csrf_exempt
 def dvm1verify(request):
@@ -88,10 +93,10 @@ def dvm1verify(request):
             error = True
     if error == False:
         part = Participant.objects.get(fbid=fbid)
-        part.current_dvm_level = 2
-        part.dvm_1_time = part.start_time - timezone.now()
-        # score change
-        part.save()
+        if part.current_dvm_level == 1:
+            part.current_dvm_level = 2
+            part.dvm_1_time = time_taken(part.start_time)
+            part.save()
         response = {
             'status' : 1,
         }
