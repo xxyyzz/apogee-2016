@@ -233,6 +233,8 @@ function level4init()
 	}
 	function win()
 	{
+		console.log(dirmap);
+		submit_ans(,5);
 		alert('win');
 	}
 }
