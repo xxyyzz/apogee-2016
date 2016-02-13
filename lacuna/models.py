@@ -5,7 +5,7 @@ from django.http import JsonResponse
 class Participant(models.Model):
     fbid = models.BigIntegerField()
     name = models.CharField(max_length=200)
-    score = models.IntegerField(default=0)
+    progress = models.IntegerField(default=0)
     current_dvm_level = models.PositiveSmallIntegerField(default=1)
     start_time = models.DateTimeField()
     dvm_1_time = models.DurationField(null=True, blank=True)
