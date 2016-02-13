@@ -7,7 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 import json
 
 # Create your views here.
-@staff_member_required
+# @staff_member_required
 def home(request):
     return render(request, 'lacuna/index.html')
 
@@ -41,6 +41,7 @@ def status(request):
 def storyline(request):
     level = request.POST['level']
     level = int(level)
+    # story = Story.objects.all()
     story = Story.objects.get(level=level)
     content = story.content
     response = json.loads(content)
@@ -80,20 +81,16 @@ def informals_level_verify(request):
         stats = list(part.informals_stats)
         count = stats.count('0')
         count = 12 - count
-        for val in stats:
-            if val != '0':
-                count += 1
-        stats[level-1] = '2'
-        stats = ''.join(stats)
-        part.informals_stats = stats
-        part.save()
-        stats = list(part.informals_stats)
-        count = stats.count('0')
-        count = 12 - count
-        part.score = part.score + count*50
-        part.save()
-
-
+        if stats[level-1] == '0':
+            stats[level-1] = '2'
+            stats = ''.join(stats)
+            part.informals_stats = stats
+            part.save()
+            stats = list(part.informals_stats)
+            count = stats.count('0')
+            count = 12 - count
+            part.informals_score = part.informals_score + count*50
+            part.save()
         response = {
             'status' : 1,
         }
@@ -156,7 +153,7 @@ def dvm2verify(request):
     level = request.POST['level']
     level = int(level)
     error = True
-    if sol.replace(" ", "").upper() == 'SAMYEMONASTERY':
+    if sol == 'f4ed3a1660d08c32a10768f517efaa7a':
         error = False
     return verify_final(request, error)
 
