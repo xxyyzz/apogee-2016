@@ -328,6 +328,12 @@ function go_to_pos(ch){
 		$('.story_container').fadeIn();
 		$('.dashboard').fadeOut();
 	}
+	if(story_seq[ch]['type']=='puzzle')
+	{
+		story_seq[ch]['func']();
+		$('.story_container').fadeOut();
+		$('.dashboard').fadeOut();
+	}
 }
 
 function moveto_story(img,text){
