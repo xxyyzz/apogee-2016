@@ -69,180 +69,118 @@ def firewallzo_dashboard_two(request,part_id):
 
 	return render(request, 'regsoft/scan.html')
 
-# def firewallzo_confirm(request):
-# 	if request.POST:
-# 		pidlist = request.POST.getlist('part')
-# 		try:
-# 			testlist =pidlist[0]
-# 		except:
-# 			return HttpResponse("Please Select any participant")
-# 		plist=[]
-# 		maleno=0
-# 		femaleno =0
-# 		p_ob = InitialRegistration.objects.get(id= int(pidlist[0]))
-# 		crep = p_ob.college_rep
-# 		googol = "000000000"
-# 		clg = p_ob.college
-# 		for x in pidlist:
-# 			pid = int(x)
-# 			p_ob = InitialRegistration.objects.get(id=pid)
-# 			p_ob.firewallzo= True
-# 			num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
-# 			pcode= "0"
-# 			try:
-# 				pcode = str(clg)[:3].upper() + num_part
-# 			except:
-# 				pcode = "0"
-# 			p_ob.aadhaar = pcode
-# 			p_ob.save()
+def firewallzo_confirm(request):
+	if request.POST:
+		# pid = request.POST.get('confirm',False)
+		pid = request.POST['confirm']
+		if pid:
+			p_ob = Participant.objects.get(id= int(pid))
+			googol = "000000000"
+			clg = p_ob.college.name
+			p_ob.firewallzo= True
+			num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
+			pcode= "0"
+			try:
+				pcode = str(clg)[:3].upper() + num_part
+			except:
+				pcode = "0"
+			p_ob.aadhaar = pcode
+			p_ob.save()
+		else:
+			return HttpResponse('Error Contact Satwik : 9928823099')			
 
-# 			if p_ob.gender == 'M':
-# 				maleno+=1
-# 			elif p_ob.gender == 'F':
-# 				femaleno+= 1
-# 			plist.append(p_ob)
-
-# 		# clg = k.name
-# 		# pid = init_ob.id
-# 		# init_ob.save()
-
-# 		context = {
-# 			'plist':plist,
-# 			'maleno' : maleno,
-# 			'femaleno' :femaleno,
-# 			'crep' :crep
-# 			}
-# 		return render(request, 'regsoft/firewallzo_confirm.html', context) 
+		# clg = k.name
+		# pid = init_ob.id
+		# init_ob.save()
 
 
-# def firewallzo_unconfirm(request, crep_id):
-# 	if request.POST:
-# 		pidlist = request.POST.getlist('part')
-# 		plist=[]
-# 		try:
-# 			testlist = pidlist[0]
-# 		except:
-# 			return HttpResponse("Please Select any Participant")
-# 		p_ob = InitialRegistration.objects.get(id = int(pidlist[0]))
-# 		crep = p_ob.college_rep
+		return HttpResponseRedirect('../scan/'+ str(p_ob.id))
+	else:
+		return HttpResponse('Dude! Its not a POST request _|_')
+
+def firewallzo_unconfirm(request, part_id):
+	p_ob = Participant.objects.get(id = int(part_id))
+	p_ob.firewallzo = False
+	p_ob.save()
+	return HttpResponseRedirect('../scan/' + str(p_ob.id) )
+
+
+
+def firewallzo_edit_part(request, part_id):
+	if request.POST:
+		part_ob = Participant.objects.get(id = part_id)
+		part_ob.name = str(request.POST['name'])
+		part_ob.email_id = str(request.POST['email'])
+		part_ob.phone_one = int(request.POST['phone'])
+		part_ob.gender = str(request.POST['gender'])
+		if request.POST.get('pcr_approval', False):
+			part_ob.pcr_approval=True
+		else:
+			part_ob.pcr_approval = False
+
+		part_ob.events.clear()
+		if request.POST.get('events', False):
+			for k in request.POST.getlist('events'):                                    
+				event = Event.objects.get(pk=k)
+				part_ob.events.add(event)
+		part_ob.save()
+		return HttpResponseRedirect('../scan/' + str(part_ob.id) )
+
+
+	part_ob = Participant.objects.get(id= part_id)
+	elist = Event.objects.all()
+	# crep = init_ob.college_rep
+	return render(request, 'regsoft/fire_edit.html' , {'part' : part_ob, 'events' : elist})
+
+
+
+
+def firewallzo_add(request):
+	if request.method == 'POST':
+		name = request.POST['name']
+		sex = request.POST['gender']
+		phone_one = request.POST['phone']
+		email = request.POST['email']
+		col_id= int(request.POST['college'])
+		events = request.POST.getlist('events')
+		check = 1
+		try:
+			college= College.objects.get(id= col_id)
+		except:
+			college=None
+		# check = check_limits(request)
+
+		try:
+			participant = Participant.objects.create(name=name, gender=sex, phone_one=phone_one, email_id=email, college=college,  pcr_approval = True)
+		except IntegrityError:
+		# errors = []
+			errorsx = 'The email '+str(email)+' has already been registered. Try a different email.'
+			events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+			clg_list =  College.objects.all()
+			context = {
+				'clg_list' : clg_list ,
+				'errors' : errorsx,
+				'events' : events,
+			}
+			return render(request, 'regsoft/fire_add.html', context)
+		# #### FireWallz bypass for bitsians
+		# if str(user_pr.college) == 'BITS Pilani':
+		#     participant.firewallz= True
+		#     participant.confirmation= True
+		for k in events:
+			event = Event.objects.get(id=k)
+			participant.events.add(event)
+		participant.save()
+		return HttpResponseRedirect('../scan/' + str(participant.id))
 		
-
-# 		for x in pidlist:
-# 			p_ob = InitialRegistration.objects.get(id = int(x))
-# 			if p_ob.grpleader:
-# 				if p_ob.grpleader.details.id == p_ob.id:
-# 					gl = p_ob.grpleader
-# 					plist = InitialRegistration.objects.filter(grpleader = p_ob.grpleader)
-# 					for z in plist:
-# 						z.firewallzo = False
-# 						z.grpleader = None
-# 						z.save()
-# 					gl.delete()
-# 			pid = int(x)
-# 			p_ob = InitialRegistration.objects.get(id=pid)
-# 			p_ob.firewallzo= False
-# 			p_ob.grpleader = None
-# 			p_ob.save()
-# 		return HttpResponseRedirect('../scan/' + str(crep.id) )
-
-
-# 	crep = UserProfile.objects.get(id = crep_id)
-# 	plist = InitialRegistration.objects.filter(college_rep = crep, firewallzo = True)
-# 	maleno = InitialRegistration.objects.filter(college_rep = crep, firewallzo = True, gender= 'M').count()
-# 	femaleno = InitialRegistration.objects.filter(college_rep = crep, firewallzo = True, gender= 'F').count()
-# 	context = {
-# 		'plist':plist,
-# 		'maleno' : maleno,
-# 		'femaleno' :femaleno,
-# 		'crep' :crep
-# 		}
-# 	return render(request, 'regsoft/firewallzo_unconfirm.html', context) 
-
-
-# def firewallzo_edit_part(request, part_id):
-# 	if request.POST:
-# 		init_ob = InitialRegistration.objects.get(id = part_id)
-# 		init_ob.name = str(request.POST['name'])
-# 		init_ob.email_id = str(request.POST['email'])
-# 		init_ob.phone_one = int(request.POST['phone'])
-# 		init_ob.gender = str(request.POST['gender'])
-# 		if request.POST.get('is_faculty', False):
-# 			init_ob.is_faculty=True
-# 		else:
-# 			init_ob.is_faculty = False
-
-# 		init_ob.events.clear()
-# 		if request.POST.get('events', False):
-# 			for k in request.POST.getlist('events'):                                    
-# 				event = Event.objects.get(pk=k)
-# 				init_ob.events.add(event)
-# 		init_ob.save()
-
-# 		crep = init_ob.college_rep
-# 		return HttpResponseRedirect('../scan/' + str(crep.id) )
-
-
-# 	init_ob = InitialRegistration.objects.get(id= part_id)
-# 	elist = Event.objects.all()
-# 	crep = init_ob.college_rep
-# 	return render(request, 'regsoft/fire_edit.html' , {'part' : init_ob, 'events' : elist, 'crep' : crep})
-
-
-
-
-# def firewallzo_add(request,crep_id):
-# 	if request.method == 'POST':
-# 		name = request.POST['name']
-# 		sex = request.POST['gender']
-# 		phone_one = request.POST['phone']
-# 		# phone_two = request.POST['phone_two']
-# 		crep = UserProfile.objects.get(id = crep_id)
-# 		email = request.POST['email']
-# 		events = request.POST.getlist('events')
-# 		college = crep.details.college
-# 		college_rep = crep
-# 		check = 1
-
-# 		if request.POST.get('is_faculty', False):
-# 			is_faculty=True
-# 		else:
-# 			is_faculty = False
-# 		# check = check_limits(request)
-
-# 		try:
-# 			participant = InitialRegistration.objects.create(name=name, gender=sex, phone_one=phone_one, email_id=email, college=college, college_rep=college_rep, pcr_approval = True, is_faculty= is_faculty)
-# 		except IntegrityError:
-# 		# errors = []
-# 			errorsx = 'The email '+str(email)+' has already been registered. Try a different email.'
-# 			events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-# 			context = {
-# 				'crep' : crep ,
-# 				'college' : college ,
-# 				'errors' : errorsx,
-# 				'events' : events,
-# 			}
-# 			return render(request, 'regsoft/fire_add.html', context)
-# 		# #### FireWallz bypass for bitsians
-# 		# if str(user_pr.college) == 'BITS Pilani':
-# 		#     participant.firewallz= True
-# 		#     participant.confirmation= True
-# 		for k in events:
-# 			event = Event.objects.get(id=k)
-# 			participant.events.add(event)
-# 		participant.save()
-# 		return HttpResponseRedirect('../scan/' + str(crep.id))
-		
-# 	# userprofile = request.user.userprofile_set.all()[0]
-# 	events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-# 	crep= UserProfile.objects.get(id= crep_id)
-# 	clg = crep.details.college
-# 	context = {
-# 		'crep' : crep ,
-# 		'college' : clg ,
-		
-# 		'events' : events,
-# 	}
-# 	return render(request, 'regsoft/fire_add.html', context)
+	# userprofile = request.user.userprofile_set.all()[0]
+	events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+	clg_list= College.objects.all()
+	context = {
+		'clg_list':clg_list,
+		'events' : events,
+	}
+	return render(request, 'regsoft/fire_add.html', context)
 
 
 
@@ -1629,31 +1567,32 @@ def recnacc_checkout(request,pid):
 # 		}
 
 # 	return render_to_response('regsoft/receipt_recnacc.html', context)
-# def encode_glid(gl_id):
-# 	gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
-# 	mixed = string.ascii_uppercase + string.ascii_lowercase
-# 	count = 51
-# 	encoded = ''
-# 	for x in gl_ida:
-# 		encoded = encoded + x
-# 		encoded = encoded + mixed[randint(0,51)]
-# 	return encoded
-# def get_barcode(request):
-# 	list_of_people_selected = UserProfile.objects.all()
-# 	# list_of_people_selected = [x for x in list_of_people_selected if x.user]
-# 	# list_of_people_selected = UserProfile.objects.all()
-# 	# list_of_people_selected = [x for x in list_of_people_selected]
-# 	final_display = []
-# 	for x in list_of_people_selected:
-# 		if InitialRegistration.objects.filter(college_rep=x, pcr_approval=True).count():
-# 			gl_id = x.id
-# 			name = x.details.name
-# 			college = x.details.college
-# 			encoded = encode_glid(gl_id)
-# 			final_display.append((name,college,encoded))
-# 	context = RequestContext(request)
-# 	context_dict = {'final_display':final_display}
-# 	return render_to_response('regsoft/get_barcode.html', context_dict, context)
+
+def encode_glid(gl_id):
+	gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
+	mixed = string.ascii_uppercase + string.ascii_lowercase
+	count = 51
+	encoded = ''
+	for x in gl_ida:
+		encoded = encoded + x
+		encoded = encoded + mixed[randint(0,51)]
+	return encoded
+
+def get_barcode(request):
+	list_of_people_selected = Participant.objects.filter(pcr_approval=True)
+	# list_of_people_selected = [x for x in list_of_people_selected if x.user]
+	# list_of_people_selected = UserProfile.objects.all()
+	# list_of_people_selected = [x for x in list_of_people_selected]
+	final_display = []
+	for x in list_of_people_selected:
+		name = x.name
+		college = x.college.name
+		encoded = encode_glid(x.id)
+		pid= x.id
+		final_display.append((name,college,encoded,pid))
+	context = RequestContext(request)
+	context_dict = {'final_display':final_display}
+	return render_to_response('regsoft/get_barcode.html', context_dict, context)
 
 
 # def recnacc_bill_list(request):
