@@ -490,7 +490,7 @@ function send_login(){
 	$.ajax({
 		url: './login/',
 		method: 'POST',
-		data: {fbid:'12344567891',name:'Smit Patwa'},
+		data: {fbid:12344567891,name:'Smit Patwa'},
 		success: function(data){
 			console.log(data);
 		},
@@ -500,7 +500,7 @@ function get_level_status(){
 	$.ajax({
 		url: './status/',
 		method: 'POST',
-		data: {fbid:'12344567891'},
+		data: {fbid:12344567891},
 		success: function(data){
 			console.log(data);
 			// {score: 0, informals_level: 1, name: "Smit Patwa", dvm_level: 1}
@@ -513,7 +513,7 @@ function call_level(x){
 	$.ajax({
 		url: './dvm/getlevel/',
 		method: 'POST',
-		data: {fbid:'12344567891',level: x},
+		data: {fbid:12344567891,level: parseInt(x)},
 		success: function(data){
 			console.log(data);
 		},
@@ -521,11 +521,12 @@ function call_level(x){
 }
 // dashboard========================END=========================
 // level ========================================================
+var level_url = ['filterpuzzle/']
 function submit_ans(ans,x){
 	$.ajax({
-		url: './dvm/getlevel/',
+		url: './dvm/'+level_url[x-1],
 		method: 'POST',
-		data: {fbid:'12344567891',level: x,answer: ans},
+		data: {fbid:'12344567891',sol: ans},
 		success: function(data){
 			console.log(data);
 		},

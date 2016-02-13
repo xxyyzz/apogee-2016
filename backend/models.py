@@ -36,13 +36,13 @@ class Participant(models.Model):
     address = models.TextField(max_length=1000)
 
 
-    # firewallzo = models.BooleanField('passed firewallz', default=False)
+    firewallzo = models.BooleanField('passed firewallz', default=False)
     # firewallzi = models.BooleanField('passed inner booth', default=False)
-    # recnacc = models.BooleanField('passed recnacc', default=False)
-    # controlz = models.BooleanField('passed controlz', default=False)
+    recnacc = models.BooleanField('passed recnacc', default=False)
+    controlz = models.BooleanField('passed controlz', default=False)
 
     # bill_id = models.CharField(max_length=10, default='', blank=True)
-    # room = models.ForeignKey('regsoft.Room',null=True,blank = True)
+    room = models.ForeignKey('regsoft.Room',null=True,blank = True)
     class Meta:
         verbose_name_plural = 'Participants'
     def __unicode__(self):

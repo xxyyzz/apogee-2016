@@ -138,92 +138,58 @@ function checkall(gauss){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participants for {{gl.details.college}}</h4> <h5> Males : {{no_males}} Females : {{no_females}} </h5>
-                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>College Representative: {{gl.details.college_rep.details.name}} <br>The following participants can be <strong>deallocated</strong>.</p>
-                                
+                                <h4 class="title">Participant Details:</h4>                                 
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>S.No</th>
+                                        <th>Id</th>
                                         <th>Name</th>
+                                        <th>College</th>
                                         <th>Gender</th>
-                                        <th>Status</th>
                                         <th>Phone</th>
-                                                
-                                        
-                                         <th>Select All <!-- <label class= "checkbox" > --> 
-                                            <input type= 'checkbox'  name= 'selectall' onclick= "checkall(this)">
-                                        <!-- </label> -->
+                                        <th>PCr Approved</th>
+                                        <th>Passed Firewallz Booth</th>
+                                        <th>Passed Controlz Booth</th>
+                                        <th>Room</th>
+
+                                         
                                         </th>
                                     </thead>
                                     <tbody>
-                                        <form method="POST" action="./{{gl.id}}">
-                                            {% for p in alloted_people %}
-                                            
-                                            <tr>
-                                                <td>{{forloop.counter}}</td>
-                                                <td>{{p.name}}</a></td>
-                                                <td>{{p.gender}}</td>
-                                                <td>{% if p.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
-                                                <td>{{p.phone_one}}</td>
-                                                <td><input type ="checkbox" name="deallocate" id="left" value = "{{ p.id }}" checked/></td>
-                                            </tr>
-                                            
-                                        {% endfor %}
-                                      
+                                       <form method='POST' action='./{{part_ob.id}}'>
                                        
+                                        <tr>
+                                            <td>{{part_ob.id}}</td>
+                                            <td>{{part_ob.name}}</td>
+                                            <td>{{part_ob.college}}</td>
+
+                                            <td> {{part_ob.gender}} </td>
+
+                                            <td>{{part_ob.phone_one}}</td>
+
+                                            <td>{{part_ob.pcr_approval }}</td>
+                                            <td>{{part_ob.firewallzo}}</td>
+
+                                            <td>{{part_ob.controlz}}</td>
+                                            <td>{{part_ob.room}}</td>
+
+                                            <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
+                                            <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
+                                            
+                                        </tr>
                                     </tbody>
                                 </table>
 
                                    
                             </div>
+                    
                         </div>
                             <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" value="Confirm"/ onclick="return checkvalue();" ><strong>Deallocate</strong></button></form>
+                    </form>
                     </div>  
                     
                     
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">The following participants have been <strong>deallocated</strong>.</h4>
-                                
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Status</th>
-                                        
-                                        <th>Phone</th>
-                                        <th>Group Code</th>
-                                        <th>Group Leader</th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        {% for x in done_people %}
-                                        <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{x.name}}</td>
-                                            <td> {{x.gender}} </td>
-                                           
-                                            <td>{% if x.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
-                                            <td>{{x.phone_one}}</td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
-                                            <td>{{x.grpleader.groupcode}}</td>
-                                            <td>{{x.grpleader.details.name}} </td>
-
-                                        </tr>
-                                        {% endfor  %}
-                                       
-                                    </tbody>
-                                </table>
-                                   
-                            </div>
-                        </div>
-                    </div> 
                     
                                  
                 </div>                    

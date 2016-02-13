@@ -8,7 +8,7 @@
     <br>
     <a href="/2015/regsoft/recnacc/all_bhavans/" target="_blank">Overall Room Availibilty</a> -->
 <div class="wrapper">
-    <div class="sidebar" data-color="azure" data-image="/static/regsoft/img/sidebar-4.jpg">  
+    <div class="sidebar" data-color="azure" >  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -133,43 +133,68 @@ function checkall(gauss){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participants for {{gl.details.college}}</h4> <h5> Males : {{no_males}} Females : {{no_females}} </h5>
-                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>College Representative: {{gl.details.college_rep.details.name}} <br>The following have not been alloted rooms.</p>
+                                <h4 class="title">Participant Details:</h4> 
                             </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>College</th>
+                                        <th>Gender</th>
+                                        <th>Phone</th>
+                                        <th>PCr Approved</th>
+                                        <th>Passed Firewallz Booth</th>
+                                        <th>Passed Controlz Booth</th>
+                                        <th>Room</th>
+                                         
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{part_ob.id}}</td>
+                                            <td>{{part_ob.name}}</td>
+                                            <td>{{part_ob.college}}</td>
+
+                                            <td> {{part_ob.gender}} </td>
+
+                                            <td>{{part_ob.phone_one}}</td>
+
+                                            <td>{{part_ob.pcr_approval }}</td>
+                                            <td>{{part_ob.firewallzo}}</td>
+
+                                            <td>{{part_ob.controlz}}</td>
+                                            <td>{{part_ob.room}}</td>                                            
+
+                                            <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
+                                            <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                   
+                            </div>
+                        </br>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>Bhawan</th>
                                         <th>Room</th>
                                         <th>Availibilty</th>
-                                        <th>Allot Seats</th>
-                                        <th>a</th>
-                                        <th>b</th>
-                                        <th>c</th>
-                                        <th>d</th>
-                                        <th>e</th>
-                                        <th>f</th>
+                                        <th></th>
+                                        
                                         
                                         <th width="8%">Select </th>
                                     </thead>
                                     <tbody>
                                         <form method= "POST" action = "../allot/{{gl.id}}" id ="form2">
                                           {% for x in all_rooms %}
-                                            {% if x.id > 0 %}
                                             <tr class="trprop">
                                                 <td>{{x.bhavan.name}}</td>
                                                 <td>{{x.room}}</td>
                                                 <td id="{{x.id}}" >{{x.vacancy}}</td>
-                                                <td><input type ="number" name="{{x.id}}alloted" id="{{x.id}}alloted" value="0"/></td>
-                                                <td>{{x.bhavan.a_capacity}}</td>
-                                                <td>{{x.bhavan.b_capacity}}</td>
-                                                <td>{{x.bhavan.c_capacity}}</td>
-                                                <td>{{x.bhavan.d_capacity}}</td>
-                                                <td>{{x.bhavan.e_capacity}}</td>
-                                                <td>{{x.bhavan.f_capacity}}</td>
-                                                <td><label class="checkbox"><input type ="checkbox" name="roomid"  value = "{{x.id}}" data-toggle= "checkbox"></label></td>
+                                                <td><label class="radio"><input type ="radio" name="roomid"  value = "{{x.id}}" ></label></td>
                                             </tr>
-                                            {% endif %}
                                         {% endfor %}
                                       
                                        </form>
@@ -179,7 +204,7 @@ function checkall(gauss){
                                    
                             </div>
                         </div>
-                            <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" value="Confirm"/ onclick="return checkvalue();" form= "form2"><strong>Allot</strong></button>
+                            <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" value="Confirm"/  form= "form2"><strong>Allot</strong></button>
                     </div>  
                     
                     <style type="text/css">
@@ -199,48 +224,6 @@ function checkall(gauss){
                         }
                     </style>
                     
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">Done Participants</h4>
-                                
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Status</th>
-                                        <th>Room</th>
-                                        <th>Phone</th>
-                                        <th>Group Code</th>
-                                        <th>Group Leader</th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        {% for x in done_participants %}
-                                        <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{x.name}}</td>
-                                            <td> {{x.gender}} </td>
-                                            
-                                            <td>{% if x.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
-                                            <td> {{x.room}} </td>
-                                            <td>{{x.phone_one}}</td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
-                                            <td>{{x.grpleader.groupcode}}</td>
-                                            <td>{{x.grpleader.details.name}} </td>
-
-                                        </tr>
-                                        {% endfor  %}
-                                       
-                                    </tbody>
-                                </table>
-                                   
-                            </div>
-                        </div>
-                    </div> 
                     
                                  
                 </div>                    
