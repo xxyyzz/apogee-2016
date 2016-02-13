@@ -115,9 +115,16 @@ body,html{
 	background-color: rgba(0,0,0,0.9);	
 }
 /*puzzle div===========================================*/
-.puzzle_cont{
-	z-index: 1000;
-	background-color: #fff;
+#puzzle_cont{
+	z-index: 500;
+	background-color: red;
+}
+#puzzle_nav
+{
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
 }
 /*puzzle div===============END============================*/
 /*login==============================*/
