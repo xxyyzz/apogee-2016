@@ -487,17 +487,11 @@ function getStory(x){
 }
 // login=====================END==============================
 $(window).load(function(){
-<<<<<<< HEAD
-	$('.my_level').click(function(){
-		//call_level();
-		console.log("level_called");
-=======
 	$('.my_level').click(function(e){
 		var tp_id = $(e.target).parent()[0].id;
 		cur_story=tp_id.substr(1);
 		go_to_pos(cur_story);
 		console.log("level_called",tp_id.substr(1));
->>>>>>> 587534facae2ce36f26857eba451a891e1e6464b
 	});
 	$('.clue_dash').click(function(){
 		$('#clue_jumbo').fadeOut();
