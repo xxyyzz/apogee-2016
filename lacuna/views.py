@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 import json
 import sys
+import re
 
 # Create your views here.
 # @staff_member_required
@@ -165,10 +166,7 @@ def dvm_level_verify(request):
     level = int(level)
     error = True
     levelobj = Level.objects.get(level=level, dept='DVM')
-    print >> sys.stderr, "Python message"
-    print >> sys.stderr, sol.upper().replace(' ', '')
-    print >> sys.stderr, levelobj.answer.upper().replace(' ', '')
-    if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+    if re.sub(r'[^\w]', '', sol.upper()) == re.sub(r'[^\w]', '', levelobj.answer.upper()):
         error = False
     return verify_final(request, error)
 
