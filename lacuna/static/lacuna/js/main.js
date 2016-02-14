@@ -322,7 +322,7 @@ var story_seq=[
 ];
 
 function go_to_pos(ch){
-	console.log(ch);
+	// console.log(ch);
 	if(story_seq[ch]['type']=='story')
 	{
 		$('#game_loader').fadeIn(200);
@@ -351,7 +351,7 @@ var cur_story=0;
 $('.story').click(function(e){
 	var id = e.target.id;
 	var t = id.substr(1);
-	console.log('story',t,id);
+	// console.log('story click',t,id);
 	cur_story=parseInt(t);
 	go_to_pos(t);
 });
@@ -359,14 +359,15 @@ $('.start').click(function(){
 	cur_story=0;
 	go_to_pos(cur_story);
 });
-$('.story_but').click(function(){		
+$('.story_but').click(function(){	
+	// console.log('story_but');	
 	if($(this).hasClass('story_prev'))
 	{
 		if(cur_story>0)
-			--cur_story;
+			{--cur_story;
+						go_to_pos(cur_story);}
 		else
 			alert('This is first page.');
-		go_to_pos(cur_story);
 	}
 	else if($(this).hasClass('story_next'))	
 	{
@@ -391,7 +392,7 @@ $(window).load(function(){
 			method: 'POST',
 			data: {fbid:user.id,sol: tp3,level:cur_inf},
 			success: function(data){
-				console.log(data);
+				// console.log(data);
 				if(data.status==1){
 					$('#b'+cur_inf).addClass('cstar_sol');
 					alert('Congratulations! your answer was right');
@@ -471,7 +472,7 @@ function send_login(id,name){
 		method: 'POST',
 		data: {fbid:id,name:name},
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 			get_level_status()
 		},
 	});
@@ -482,7 +483,7 @@ function get_level_status(){
 		method: 'POST',
 		data: {fbid:user.id},
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
@@ -499,8 +500,9 @@ function get_level_status(){
 			    return parseInt(item, 10);
 			});
 			for(i in inf_lev){
-				if(inf_lev[i]==2)
-					$('#b'+inf_lev[i]).addClass('cstar_sol');
+				if(inf_lev[i]==2){
+					$('#b'+(parseInt(i)+1)).addClass('cstar_sol');
+				}
 			}
 			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
@@ -522,11 +524,12 @@ function getStory(x){
 // login=====================END==============================
 $(window).load(function(){
 	$('body').on('click','.enable_level',function(e){
-		var tp_id = $(e.target).parent()[0].id;
-		var tmp_story=tp_id.substr(1);
-		cur_story=parseInt(tmp_story);
-		// console.log(e,tp_id,tmp_story,cur_story);
-		go_to_pos(cur_story);
+		if(!$(this).hasClass('story')){
+			var tp_id = $(e.target).parent()[0].id;
+			var tmp_story=tp_id.substr(1);
+			cur_story=parseInt(tmp_story);
+			go_to_pos(cur_story);
+		}
 	});
 	$('.clue_dash').click(function(){
 		$('#clue_jumbo').fadeOut();
@@ -542,7 +545,7 @@ function call_level(x){
 		method: 'POST',
 		data: {fbid:user.id,level: parseInt(x)},
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 			load_level(data,x-1);
 			// content: {page:,files:[{name:,callback:}],}
 		},
@@ -706,5 +709,6 @@ $('#wintodash').click(function(){
 $('#wintonext').click(function(){
 		$('#wino_cont').fadeOut();
 		++cur_story;
+		// console.log('wintonext');
 		go_to_pos(cur_story);
 });
