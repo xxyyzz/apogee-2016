@@ -18,7 +18,7 @@ def user_login(request):
     try:
         part = Participant.objects.get(fbid=fbid)
     except:
-        part = Participant.objects.create(fbid=fbid, name=name, start_time=timezone.now())
+        part = Participant.objects.create(fbid=fbid, name=name, start_time=timezone.now(), total_time=timedelta(seconds=0))
     response = {
         'status' : 1,
     }
@@ -229,7 +229,13 @@ def dvm11verify(request):
     return verify_final(request, error)
 
 def leaderboard(request):
-    parts = Participant.objects.order_by('-progress', '-informals_score', 'total_time')
+    participants = Participant.objects.order_by('-progress', '-informals_score', 'total_time')
+    parts = []
+    for part in participants:
+        extra_time = timezone.now() - part.start_time
+        extra_time_stripped = extra_time - timedelta(microseconds=extra_time.microseconds)
+        part.live_time = part.total_time + extra_time_stripped
+        parts.append(part)
     context = {
         'parts' : parts,
     }

@@ -4,7 +4,7 @@
         <th>Name</th>
         <th>Progress</th>
         <th>Bonus Score</th>
-        <th>Time Taken</th>
+        <th>Time Taken (hh:mm:ss)</th>
     </thead>
     <tbody>
         {% for part in parts %}
@@ -13,7 +13,7 @@
                 <td>{{ part.name }}</td>
                 <td>{{ part.progress }}</td>
                 <td>{{ part.informals_score }}</td>
-                <td>{{ part.total_time }}</td>
+                <td>{{ part.live_time }}</td>
             </tr>
         {% endfor %}
     </tbody>
