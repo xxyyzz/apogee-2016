@@ -226,13 +226,30 @@ $("#start_test").click(function() {
 	{
 		return;
 	}
-	$("#start_panel").hide();
-	populateQuestionsList();
-	flushQuestion(0);
-	$("#quesanspanel").show();
-	stage = 1;
-	// start the timer and set up handler to update clock.
-	timer_init();
+
+	var dat = {
+		'name' : $("#feedbackName").val(),
+		'phone' : $("#feedbackPhone").val(),
+		'email' : $("#feedbackMail").val()
+ 	}
+
+ 	$.ajax({
+ 		url : '/revengg/create/',
+ 		data : dat,
+ 		method : "POST",
+ 		success : function(data) {
+ 			console.log(data);
+ 			$("#start_panel").hide();
+			populateQuestionsList();
+			flushQuestion(0);
+			$("#quesanspanel").show();
+			stage = 1;
+			// start the timer and set up handler to update clock.
+			timer_init();
+ 		}
+ 	});
+
+	
 });
 $(document).on('keyup',"#detSubmit input", function() {
 	var filled =true;
