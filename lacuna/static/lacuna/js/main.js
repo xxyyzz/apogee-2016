@@ -377,6 +377,7 @@ var cur_inf=0;
 $(window).load(function(){
 	$('.cstar').click(function(e){
 		var t = e.target.id;
+		cur_inf = t.substr(1);
 		call_informal(t.substr(1));
 	});
 	$('#inf_submit').click(function(){
@@ -588,12 +589,16 @@ function statusChangeCallback(response) {
 		testAPI();
 	} else if (response.status === 'not_authorized') {
 	  // The person is logged into Facebook, but not your app.
-	  	FB.login();
+	  	FB.login(function() {
+			checkLoginState();
+		});
 		console.log('Please log ' + 'into this app.');
 	} else {
 	  // The person is not logged into Facebook, so we're not sure if
 	  // they are logged into this app or not.
-	  	FB.login();
+	  	FB.login(function() {
+			checkLoginState();
+		});
 		console.log('Please log ' + 'into Facebook.');
 	}
 }

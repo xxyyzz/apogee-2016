@@ -15,7 +15,7 @@
 	<div id="loader" class="abs_center" style="z-index:2000;background-color:#fff;position:fixed;">
 		<img src="{% static 'lacuna/img/preloader.gif' %}" class="abs_center" style="height:60px;">
 	</div>
-	<div class="login_lacuna abs_center" style="display:none">
+	<div class="login_lacuna abs_center">
 		<img src="{% static 'lacuna/img/lacuna_logo.png' %}" class="hor_center" style="width:40%;padding:5%;right:auto;">
 		<div class="fb_login_cont" style="cursor:pointer" onclick="call_fb_login();">
 			<img src="{% static 'lacuna/img/fb_login.png' %}" alt="">
@@ -23,7 +23,7 @@
 		<img src="{% static 'lacuna/img/dvm.svg' %}" style="position: absolute; padding: 20px; width: 15%; bottom: 0;">
 		<img src="{% static 'lacuna/img/informalz.svg' %}" style="position:absolute;padding:20px;width:20%;bottom:0;right:0;">
 	</div>
-	<div class="dashboard abs_center" style="display:block;">
+	<div class="dashboard abs_center">
 		<!-- <div class="btn_sty btn1 leaderBoard">LeaderBoard</div> -->
 		<div class="btn_sty btn1">Game Progress:&nbsp;<span class="dash_score"></span></div>
 		<div class="btn_sty btn4">Hi! &nbsp;<span class="dash_user"></span></div>
@@ -52,7 +52,7 @@
 			<div class="head">Bonus Round <span id="inf_round"></span></div>
 			<img class="clue_img" >
 			<div class="ans">
-				<input type="text"><button id="inf_submit" type="submit">SUBMIT</button>
+				<input id="inf_ans" type="text"><button id="inf_submit" type="submit">SUBMIT</button>
 			</div>
 		</div>
 	</div>
