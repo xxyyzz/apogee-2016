@@ -379,6 +379,27 @@ $(window).load(function(){
 		var t = e.target.id;
 		call_informal(t.substr(1));
 	});
+	$('#inf_submit').click(function(){
+		var tp1 = $('#inf_ans').val();
+		var tp2 = tp1.toLowerCase();
+		var tp3 = tp2.replace(/ /g, '');
+		$.ajax({
+			url: './informals/verifylevel/',
+			method: 'POST',
+			data: {fbid:user.id,sol: tp3,level:cur_inf},
+			success: function(data){
+				console.log(data);
+				if(data.status==1){
+					$('#clue_jumbo').fadeOut();
+					$('.dashboard').fadeIn();
+					get_level_status();
+				}
+				else{
+					alert('Your answer was wrong!');
+				}
+			},
+		});
+	})
 });
 function call_informal(x){
 	$.ajax({
