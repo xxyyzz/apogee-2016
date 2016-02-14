@@ -68,6 +68,28 @@ def dvm_level_get(request):
         }
     return JsonResponse(response)
 
+@csrf_exempt
+def informals_level_get(request):
+    fbid = request.POST['fbid']
+    level = request.POST['level']
+    level = int(level)
+    part = Participant.objects.get(fbid=fbid)
+    even_level = part.current_dvm_level - part.current_dvm_level % 2
+    if level <= even_level:
+        levelobj = Level.objects.get(level=level, dept='INFORMALS')
+        response = {
+            'status' : 1,
+            'html_file' : levelobj.html_file,
+            'css_file' : levelobj.css_file,
+            'js_file' : levelobj.js_file,
+        }
+    else:
+        response = {
+            'status' : 0,
+            'message' : 'Bad Request',
+        }
+    return JsonResponse(response)
+
 
 @csrf_exempt
 def informals_level_verify(request):

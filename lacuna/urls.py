@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^login/$', user_login),
     url(r'^storyline/$', storyline),
     url(r'^dvm/getlevel/$', dvm_level_get),
+    url(r'^informals/getlevel/$', informals_level_get),
     url(r'^informals/verifylevel/$', informals_level_verify),
     url(r'^dvm/chesspuzzle/$', dvm1verify),
     url(r'^dvm/qrcode/$', dvm2verify),
