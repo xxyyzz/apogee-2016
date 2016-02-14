@@ -409,7 +409,7 @@ var initList = [
 	{func: function(){lvl1init();}},
 	{func: function(){return;}},
 	{func: function(){directinit();}},
-	{func: function(){return;}},
+	{func: function(){redfortinit();}},
 	{func: function(){magicinit();}},
 	{func: function(){return;}},
 	{func: function(){level5init();}},
