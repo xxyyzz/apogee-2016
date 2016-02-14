@@ -104,7 +104,7 @@
                                    
 <br> <br>
 <div align= "center">
-    {% if check == '1'%}
+    {% if part_ob.fee_paid == True %}
                                 <p >
                                     <h4><strong> Bill Details </strong></h4><br>
                                     <strong>Receipt No. : {{bill_id}} </strong><br>
@@ -117,7 +117,7 @@
                                     <strong>Amount per onlinepaid: 0 </strong> <br>
                                     <strong>Total Amount Paid : {{total}} </strong>
                                     <br></p>
-    {% elif check == '2'%}                                    
+    {% elif part_ob.fee_paid == False %}                                    
                                 <p >
                                     <h4><strong> Bill Details </strong></h4><br>
                                     <strong>Receipt No. : {{bill_id}} </strong><br>
