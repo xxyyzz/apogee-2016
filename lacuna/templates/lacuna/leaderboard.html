@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ewrtyui</title>
+    <meta http-equiv="refresh" content="30">
+    <title>LACUNA LEADERBOARD</title>
     <style type="text/css">
 *{
     box-sizing:border-box;
@@ -71,7 +72,7 @@ body,html{
     padding-left: 1em;
 }
 .ranking_user>div.rank{
-    width: 8%;
+    width: 12%;
 }
 .ranking_user>div.name{
     width: 40%;
@@ -88,13 +89,13 @@ body,html{
     width: 12%;
 }
 .ranking_user>div.gp{
-    width: 12%;
+    width: 16%;
 }
 .ranking_user>div.bs{
-    width: 12%;
+    width: 16%;
 }
 .ranking_user>div.ts{
-    width: 12%;
+    width: 16%;
 }
 .hor_center{
     position: absolute;
@@ -118,7 +119,7 @@ body,html{
 </style>
 </head>
 <body>
-    <div  class="bonus_container" style="background: {% static 'lacuna/img/leadback.png' %}">
+    <div  class="bonus_container" style="background: url({% static 'lacuna/img/leadback.png') %}">
         <div id="leader_board" class="hor_center">
             <div class="title"><img src="{% static 'lacuna/img/leaderboard.png' %}">LEADERBOARD</div>
             <div class="ranking_user head">
