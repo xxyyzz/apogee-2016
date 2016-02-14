@@ -377,6 +377,7 @@ var cur_inf=0;
 $(window).load(function(){
 	$('.cstar').click(function(e){
 		var t = e.target.id;
+		cur_inf = t.substr(1);
 		call_informal(t.substr(1));
 	});
 	$('#inf_submit').click(function(){
