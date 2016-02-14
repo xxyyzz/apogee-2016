@@ -352,7 +352,7 @@ $('.story').click(function(e){
 	var id = e.target.id;
 	var t = id.substr(1);
 	console.log('story',t,id);
-	cur_story=t;
+	cur_story=parseInt(t);
 	go_to_pos(t);
 });
 $('.start').click(function(){
@@ -515,7 +515,8 @@ function getStory(x){
 $(window).load(function(){
 	$('body').on('click','.enable_level',function(e){
 		var tp_id = $(e.target).parent()[0].id;
-		cur_story=tp_id.substr(1);
+		tmp_story=tp_id.substr(1);
+		cur_story=parseInt(tmp_story);
 		go_to_pos(cur_story);
 	});
 	$('.clue_dash').click(function(){
