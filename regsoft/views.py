@@ -356,7 +356,12 @@ def controlz_dashboard(request,part_id):
 	part_ob = Participant.objects.filter(id = part_id)
 	if part_ob:
 		part_ob = part_ob[0]
-		context= {'part': part_ob}
+		if part_ob.controlz == True:
+			bill = Bill.objects.filter(participant=part_ob)[0]
+			bill_id = bill.id
+			context= {'part': part_ob, 'bill_id':bill_id}
+		else:
+			context = {'part':part_ob}
 		return render(request, 'regsoft/controlz_dashboard.html', context)
 	else:
 		return render(request, 'regsoft/controlz_home.html', {'status' : 0})
@@ -575,26 +580,34 @@ def controlz_bill_print(request):
 		part_id = int(request.POST['part_ob_id'])
 		bill_ob = Bill.objects.get(id=bill_id)
 		part_ob = Participant.objects.get(id=part_id)
-		college = part_ob.college
-		receiptno = bill_ob.id
-		total = bill_ob.amount
+		if part_ob.fee_paid == True:
+			college = part_ob.college
+			receiptno = bill_ob.id
+			total = bill_ob.amount
 
-		if bill_ob.draft_number:
-			ddno = bill_ob.draft_number
-		else:
-			ddno = '-'
+			if bill_ob.draft_number:
+				ddno = bill_ob.draft_number
+			else:
+				ddno = '-'
 
-		context = {
-			'college': college,
-			'receiptno' : bill_id,
-			'amount' : total,
-			'given' : bill_ob.given,
-			'balance' : bill_ob.balance,
-			'ddno' : ddno,
-		}
+			context = {
+				'college': college,
+				'receiptno' : bill_id,
+				'amount' : total,
+				'given' : bill_ob.given,
+				'balance' : bill_ob.balance,
+				'ddno' : ddno,
+			}
 
-		return render_to_response('regsoft/receipt.html', context)
+			return render_to_response('regsoft/receipt_offline.html', context)
+		elif part_ob.fee_paid == False:
+			context = {
+				'college': part_ob.college,
+				'receiptno' : bill_id,
+				'amount' : total,
+			}
 
+			return render_to_response('regsoft/receipt_online.html', context)
 
 
 

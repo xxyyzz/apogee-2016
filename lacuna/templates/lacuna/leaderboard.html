@@ -1,20 +1,148 @@
-<table class="table table-hover table-striped">
-    <thead>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Progress</th>
-        <th>Bonus Score</th>
-        <th>Time Taken (hh:mm:ss)</th>
-    </thead>
-    <tbody>
-        {% for part in parts %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ part.name }}</td>
-                <td>{{ part.progress }}</td>
-                <td>{{ part.informals_score }}</td>
-                <td>{{ part.live_time }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="30">
+    <title>LACUNA LEADERBOARD</title>
+    <style type="text/css">
+*{
+    box-sizing:border-box;
+}
+
+body,html{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.bonus_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat;
+    /*background-size: cover;*/
+    /*background-position: center; */
+}
+#leader_board{
+    background-color: #eee;
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 2%;  
+    padding: 1.5em;
+    box-shadow: 0px 0px 50px -10px #111;
+    overflow-y: auto;
+}
+#leader_board>.title{
+    text-align: center;
+    font-size: 1.5em;
+    border-bottom:1px solid #888; 
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+#leader_board>.title>img{
+    height: 2.5em;
+    vertical-align: middle;
+    padding-bottom: 0.2em;
+}
+#leader_board>.ranking{
+    padding: 1em;
+}
+#leader_board>.head{
+    padding: 1em;
+}
+.ranking_user{
+    position: relative;
+    border-bottom: 1px solid #aaa;
+    line-height: 3em;
+    font-size: 1em;
+    padding: 0.5em 0;
+}
+.ranking_user>div{
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 1em;
+}
+.ranking_user>div.rank{
+    width: 12%;
+}
+.ranking_user>div.name{
+    width: 40%;
+}
+.ranking_user>div.name>img{
+    width: 3em;
+    height: 3em;
+    border-radius: 100%;
+    background: black;
+    vertical-align: middle;
+    margin-right: 1em;
+}
+.ranking_user>div.ta{
+    width: 12%;
+}
+.ranking_user>div.gp{
+    width: 16%;
+}
+.ranking_user>div.bs{
+    width: 16%;
+}
+.ranking_user>div.ts{
+    width: 16%;
+}
+.hor_center{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;  
+    margin-right: auto; 
+}
+.ranking_user>div>div.type
+{
+    font-size: 0.7em;
+    line-height: 1em;
+    text-align: center;
+}
+.ranking_user>div>div.score
+{
+    font-size: 1.4em;
+    line-height: 1.8em;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+    <div  class="bonus_container" style="background: url({% static 'lacuna/img/leadback.png' %});">
+        <div id="leader_board" class="hor_center">
+            <div class="title"><img src="{% static 'lacuna/img/leaderboard.png' %}">LEADERBOARD</div>
+            <div class="ranking_user head">
+                    <div class="rank">RANK</div>
+                    <div class="name">USER</div>
+                    <div class="gp">Game Progress</div>
+                    <div class="bs">Bonus Score</div>
+                    <div class="ts">Time Active</div>
+            </div>
+            <div class="ranking">
+            {% for part in parts %}
+
+                <div class="ranking_user">
+                    <div class="rank">{{ forloop.counter }}</div>
+                    <div class="name"><img src="https://graph.facebook.com/{{ part.fbid }}/picture?type=small">{{ part.name }}</div>
+                    <div class="gp">{{ part.progress }}</div>
+                    <div class="gp">{{ part.informals_score }}</div>
+                    <div class="bs">{{ part.live_time }}</div>
+                </div>
+            {% endfor %}  
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
