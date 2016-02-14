@@ -678,6 +678,7 @@ $('.dash_instr').click(function(){
 
 $('#BackToDashboard').click(function(){
 	$('#puzzle_cont').fadeOut();
+	cur_story=0;
 	$('.dashboard').fadeIn();
 })
 
