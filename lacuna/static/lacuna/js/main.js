@@ -475,12 +475,26 @@ function puzzle5init()
 }
 puzzle5init();
 // window load=======================================================
+var cur_inf=0;
 $(window).load(function(){
-	$('.levels').click(function(){
-		var x= $(this).index()+1;
-		call_level(x);
+	$('.cstar').click(function(e){
+		var t = e.target.id;
+		call_informal(t);
 	});
 });
+function call_informal(x){
+	$.ajax({
+		url: './informals/getlevel/',
+		method: 'POST',
+		data: {fbid:user.id,level: parseInt(x)},
+		success: function(data){
+			$('#inf_round').html(x);
+			$('.clue_img').attr('src',imgpre+'img/informalz/'+ data.html_file);
+			$('.dashboard').fadeOut();
+			$('#clue_jumbo').fadeIn();
+		},
+	});
+}
 // window load====================END===================================
 // async script=================================
 var initList = [
@@ -547,7 +561,13 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
-			for(var i=0;i<=level_id['dvm_level'];i++){
+			var i=2;
+			while(i<data.dvm_level){
+				$('#b'+(i-1)).fadeIn();
+				$('#b'+i).fadeIn();
+				i+=2;
+			}
+			for(var i=0;i<=level_id[data.dvm_level];i++){
 				$('#g'+i).addClass('enable_level');
 			}
 			$('.dash_score').html(data.score+'%');
@@ -639,6 +659,9 @@ function call_fb_login(){
 function fb_logout(){
 	FB.logout(function(response) {
 		$('.fb_login_cont').fadeIn();
+		$('.dashboard').fadeOut();
+		$('#clue_jumbo').fadeOut();
+		$('#puzzle_cont').fadeOut();
 	});
 }
 function statusChangeCallback(response) {
