@@ -488,7 +488,7 @@ function get_level_status(){
 				$('#b'+i).fadeIn();
 				i+=2;
 			}
-			for(var i=0;i<=level_id[data.dvm_level];i++){
+			for(var i=1;i<=level_id[data.dvm_level];i++){
 				$('#g'+i).addClass('enable_level');
 			}
 			$('.dash_score').html(data.score+'%');
