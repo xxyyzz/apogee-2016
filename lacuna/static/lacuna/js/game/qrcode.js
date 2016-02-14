@@ -37,9 +37,7 @@ function qrcodeinit()
 		}
 	});
 	$('#qrsubmit').click(function(){
-		var tp1 = $('#qrinput').val();
-		var tp2 = tp1.toLowerCase();
-		var tp3 = tp2.replace(/ /g, '');
-		submit_ans(tp3,2);
+		var tp = $('#qrinput').val();
+		submit_ans(tp,2);
 	});
 };
