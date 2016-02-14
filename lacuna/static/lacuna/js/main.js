@@ -499,7 +499,8 @@ function get_level_status(){
 			    return parseInt(item, 10);
 			});
 			for(i in inf_lev){
-				$('#b'+inf_lev[i]).addClass('cstar_sol');
+				if(inf_lev[i]==2)
+					$('#b'+inf_lev[i]).addClass('cstar_sol');
 			}
 			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
