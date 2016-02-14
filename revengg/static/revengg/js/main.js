@@ -141,7 +141,7 @@ function renderTime() {
 
 
 		$.ajax({
-	 		url : '/revengg/update/',
+	 		url : 'update/',
 	 		data : dat,
 	 		method : "POST",
 	 		success : function(data) {
@@ -252,7 +252,7 @@ $("#start_test").click(function() {
  	}
 
  	$.ajax({
- 		url : '/revengg/create/',
+ 		url : 'create/',
  		data : dat,
  		method : "POST",
  		success : function(data) {
@@ -329,7 +329,7 @@ $("#warnquitconfirm").click(function() {
 
 
 		$.ajax({
- 		url : '/revengg/update/',
+ 		url : 'update/',
  		data : dat,
  		method : "POST",
  		success : function(data) {
