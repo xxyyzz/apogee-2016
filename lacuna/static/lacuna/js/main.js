@@ -33,6 +33,7 @@ var story_seq=[
 		{	
 			name:"puzzle01",
 			type:"puzzle",
+			instr:"There are two black and two white bishops on the grid. Your goal is to interchange their positions, adhering to the rules of chess. The bishops can only move diagonally, and if it is possible for a bishop to kill a bishop of the opposite colour, you lose the game.",
 			func: function(){call_level(1);},
 		 },	
 		{	
@@ -52,6 +53,7 @@ var story_seq=[
 		{	
 			name:"crypt01",
 			type:"puzzle",
+			instr:"Well all you gotta do is make a continuous sequence of  dark block in specific row and columns associating to their number.<br><br>for Eg. 7 2 3 means 7darkbox...random number of lightbox...2darkbox...random number of lightbox...3darkbox<br><br>Simple enough right?",
 			func: function(){call_level(2);}, 
 		 },	
 		{	
@@ -78,6 +80,7 @@ var story_seq=[
 		{	
 			name:"puzzle02",
 			type:"puzzle",
+			instr:"The image you see seems a bit off. The colours make no sense. Filters, obviously. Clicking each tile changes the filters in a different manner. You must change the filters so as to obtain the original image.",
 			func: function(){call_level(3);},
 		 },	
 		{	
@@ -97,6 +100,7 @@ var story_seq=[
 		{	
 			name:"crypt02",
 			type:"puzzle",
+			instr:"BrainF**k is all  you get.",
 			func: function(){call_level(4);},
 		 }, 
 		{	
@@ -123,6 +127,7 @@ var story_seq=[
 		{	
 			name:"puzzle03",
 			type:"puzzle",
+			instr:"Each face of a dice has a specific number of dots. However, you can add a specific direction to each face too. A direction once assigned to a face cannot be taken by another face, and a face can have only one direction. Your goal is to get from the die at the bottom left to the die at the top right.",
 			func: function(){call_level(5);},
 		 },	 
 		{	
@@ -149,6 +154,7 @@ var story_seq=[
 		{	
 			name:"crypt03",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(6);}, 
 		 },  
 		{	
@@ -168,6 +174,7 @@ var story_seq=[
 		{	
 			name:"puzzle04",
 			type:"puzzle",
+			instr:"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
 			func: function(){call_level(7);}, 
 		 },	 
 		{	
@@ -187,6 +194,7 @@ var story_seq=[
 		{	
 			name:"crypt04",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(8);}, 
 		 },  
 		{	
@@ -206,6 +214,7 @@ var story_seq=[
 		{	
 			name:"puzzle05",
 			type:"puzzle",
+			instr:"The entirety of the grid needs to be covered, one at a time, moving only vertically or horizontally without going to the same tile twice. There is a catch, however. You can only follow a particular pattern: 1-2-3-1-2-3....",
 			func: function(){call_level(9);}, 
 		 },	 
 		{	
@@ -218,6 +227,7 @@ var story_seq=[
 		{	
 			name:"crypt05",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(10);}, 
 		 }, 
 		{	
@@ -237,6 +247,7 @@ var story_seq=[
 		{	
 			name:"puzzle06",
 			type:"puzzle",
+			instr:"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
 			func: function(){call_level(11);}, 
 		 },
 		{	
@@ -270,6 +281,7 @@ var story_seq=[
 		{	
 			name:"crypt06",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(12);}, 
 		 },  
 		{	
@@ -348,7 +360,10 @@ $('.start').click(function(e){
 $('.story_but').click(function(){		
 	if($(this).hasClass('story_prev'))
 	{
-		--cur_story;
+		if(cur_story>0)
+			--cur_story;
+		else
+			alert('This is first page.');
 		go_to_pos(cur_story);
 	}
 	else if($(this).hasClass('story_next'))	
@@ -357,130 +372,27 @@ $('.story_but').click(function(){
 		go_to_pos(cur_story);
 	}
 })
-// PUZZLE 5
-function puzzle5init()
-{	var grid= [
-		[3,2,1,3,2,1,3,1,3],
-		[1,2,3,3,1,2,2,2,2],
-		[3,2,1,2,1,3,1,3,1],
-		[3,1,2,2,3,1,1,2,3],
-		[2,1,3,1,1,2,3,2,1],
-		[2,3,1,3,2,3,1,2,3],
-		[1,3,2,2,3,1,2,3,1],
-		[1,2,3,1,1,3,3,2,2],
-		[3,2,1,3,2,2,1,1,3],
-	];
-	var row=grid.length,col=grid[0].length;
-	var count=0;
-
-
-	function GenerateGrid()
-	{
-		var html = '<div class="puzzle5grid">';
-		for(i=0;i<grid.length;++i)
-		{
-			for(j=0;j<grid[i].length;++j)
-			{
-				
-				html+='<div class="puzzle5box" data-x="'+i+'" data-y="'+j+'">'+grid[i][j]+'</div>';
-			}
-		}
-		html+='</div>';
-		$('#puzzle5 .puzzle_deti').html(html);
-		var initbox = ((row - 1) * col) + 1;
-		// $('.puzzle5box:nth-child('+initbox+')').trigger("click");
-		// setTimeout(function(){
-		// 	$('.puzzle5grid').css({height:row*70,width:col*70});
-		// },200);
-		
-	}		
-	GenerateGrid();
-	function CheckSurrounding()
-	{
-		var box=$('.puzzle5box.sel');
-		var x=box.data('x'),y=box.data('y');
-		var arr = [
-					$('.puzzle5box[data-x="'+x+'"][data-y="'+(y-1)+'"]')[0],
-					$('.puzzle5box[data-x="'+(x+1)+'"][data-y="'+y+'"]')[0],
-					$('.puzzle5box[data-x="'+x+'"][data-y="'+(y+1)+'"]')[0],
-					$('.puzzle5box[data-x="'+(x-1)+'"][data-y="'+y+'"]')[0],
-				];
-		// console.log(pos,arr);
-		for(i=0;i<arr.length;++i)
-		{
-			if( !($(arr[i]).hasClass('visited')) && (((count+1)%3)==(parseInt($(arr[i]).html()))%3))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	function CheckMovePossible()
-	{
-		if(!CheckSurrounding())
-		{
-			if($('.puzzle5box:not(.visited)')[0]==undefined)
-				win();
-			else
-				lost();
-		}
-	}
-
-	function CheckIsNeighbor(prev,cur)
-	{
-		var dx=Math.abs($(prev).data('x') - $(cur).data('x')),  dy=Math.abs($(prev).data('y') - $(cur).data('y'));
-		if((dx==1 && dy==0) || (dx==0 && dy==1))
-		{
-			$(prev).removeClass('sel');
-			$(cur).addClass('visited sel');
-			CheckMovePossible();
-		}
-		else
-		{
-			--count;
-			alert('not neightbor');
-		}	
-	}
-
-	$('.puzzle5box').click(function(){
-		++count;
-		// console.log(count);
-		if((count%3) == (parseInt($(this).html())%3) &&  !($(this).hasClass('visited'))  )
-		{
-			if(count>1)
-				CheckIsNeighbor($('.puzzle5box.sel')[0],this);
-			else
-			{
-				$('.puzzle5box.sel').removeClass('sel');
-				$(this).addClass('visited sel');
-			}
-		}
-		else
-		{
-			alert('can only click in order 1..2...3 or it is already selected');
-			--count;
-		}	
-	});
-
-	function  lost()
-	{
-		alert('lost');
-	}
-	function win()
-	{
-		if(count==row*col)
-			alert('win');
-	}
-
-}
-puzzle5init();
 // window load=======================================================
+var cur_inf=0;
 $(window).load(function(){
-	$('.levels').click(function(){
-		var x= $(this).index()+1;
-		call_level(x);
+	$('.cstar').click(function(e){
+		var t = e.target.id;
+		call_informal(t.substr(1));
 	});
 });
+function call_informal(x){
+	$.ajax({
+		url: './informals/getlevel/',
+		method: 'POST',
+		data: {fbid:user.id,level: parseInt(x)},
+		success: function(data){
+			$('#inf_round').html(x);
+			$('.clue_img').attr('src',imgpre+'img/informalz/'+ data.html_file);
+			$('.dashboard').fadeOut();
+			$('#clue_jumbo').fadeIn();
+		},
+	});
+}
 // window load====================END===================================
 // async script=================================
 var initList = [
@@ -547,7 +459,13 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
-			for(var i=0;i<=level_id['dvm_level'];i++){
+			var i=2;
+			while(i<data.dvm_level){
+				$('#b'+(i-1)).fadeIn();
+				$('#b'+i).fadeIn();
+				i+=2;
+			}
+			for(var i=0;i<=level_id[data.dvm_level];i++){
 				$('#g'+i).addClass('enable_level');
 			}
 			$('.dash_score').html(data.score+'%');
@@ -569,26 +487,18 @@ function getStory(x){
 }
 // login=====================END==============================
 $(window).load(function(){
-	$('.my_level').click(function(){
-		// call_level();
-		console.log("level_called");
+	$('.my_level').click(function(e){
+		var tp_id = $(e.target).parent()[0].id;
+		cur_story=tp_id.substr(1);
+		go_to_pos(cur_story);
+		console.log("level_called",tp_id.substr(1));
+	});
+	$('.clue_dash').click(function(){
+		$('#clue_jumbo').fadeOut();
+		$('.dashboard').fadeIn();
 	});
 });
 // dashboard=================================================
-var instruct_arr = [
-						"There are two black and two white bishops on the grid. Your goal is to interchange their positions, adhering to the rules of chess. The bishops can only move diagonally, and if it is possible for a bishop to kill a bishop of the opposite colour, you lose the game.",
-						"Well all you gotta do is make a continuous sequence of  dark block in specific row and columns associating to their number.<br><br>for Eg. 7 2 3 means 7darkbox...random number of lightbox...2darkbox...random number of lightbox...3darkbox<br><br>Simple enough right?",
-						"The image you see seems a bit off. The colours make no sense. Filters, obviously. Clicking each tile changes the filters in a different manner. You must change the filters so as to obtain the original image.",
-						"BrainF**k is all  you get.",
-						"Each face of a dice has a specific number of dots. However, you can add a specific direction to each face too. A direction once assigned to a face cannot be taken by another face, and a face can have only one direction. Your goal is to get from the die at the bottom left to the die at the top right.",
-						"",
-						"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
-						"",
-						"The entirety of the grid needs to be covered, one at a time, moving only vertically or horizontally without going to the same tile twice. There is a catch, however. You can only follow a particular pattern: 1-2-3-1-2-3....",
-						"",
-						"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
-						"",
-	];
 
 function call_level(x){
 	$.ajax({
@@ -609,7 +519,7 @@ function load_level(d,x){
 	$('#puzzle').html(d.html_file);
 	console.log('../static/lacuna/js/game/'+d.js_file);
 	$.loadScript('../static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
-	open_instr(instruct_arr[x]);
+	open_instr(story_seq[cur_story]['instr']);
 	loadCss('../static/lacuna/css/game/'+d.css_file,x);
 }
 // dashboard========================END=========================
@@ -628,6 +538,9 @@ function submit_ans(ans,x){
 				$('.dashboard').fadeIn();
 				get_level_status();
 			}
+			else{
+				alert('Your answer was wrong!');
+			}
 		},
 	});
 }
@@ -638,7 +551,11 @@ function call_fb_login(){
 }
 function fb_logout(){
 	FB.logout(function(response) {
+		$('.login_lacuna').fadeIn();
 		$('.fb_login_cont').fadeIn();
+		$('.dashboard').fadeOut();
+		$('#clue_jumbo').fadeOut();
+		$('#puzzle_cont').fadeOut();
 	});
 }
 function statusChangeCallback(response) {
@@ -728,6 +645,9 @@ $('#instr_det>.cross,#instr_cont>.overlay').click(function(){
 	$('#instr_cont .content').html('');
 	$('#instr_cont').fadeOut(250);
 });
+$('#wino_cont>.overlay').click(function(){
+	$('#wino_cont').fadeOut(250);
+});
 
 $('.dash_instr').click(function(){
 	$(this).fadeOut();
@@ -737,3 +657,18 @@ $('#BackToDashboard').click(function(){
 	$('#puzzle_cont').fadeOut();
 	$('.dashboard').fadeIn();
 })
+
+// win situation
+function  openwin()
+{
+	$('#wino_cont').fadeIn();
+}
+
+$('#wintodash').click(function(){
+	$('#wino_cont').fadeOut();
+	$('#BackToDashboard').click();
+});
+
+$('#wintonext').click(function(){
+
+});
