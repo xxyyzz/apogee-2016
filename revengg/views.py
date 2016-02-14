@@ -20,9 +20,9 @@ def create(request):
 
 @csrf_exempt
 def update(request):
-    score = request.POST['name']
+    score = request.POST['score']
     email = request.POST['email']
-    time = request.POST['phone']
+    time = request.POST['time']
     part = Participant.objects.get(email=email)
     part.time = time
     part.score = score
