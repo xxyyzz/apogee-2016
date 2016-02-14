@@ -33,6 +33,7 @@ var story_seq=[
 		{	
 			name:"puzzle01",
 			type:"puzzle",
+			instr:"There are two black and two white bishops on the grid. Your goal is to interchange their positions, adhering to the rules of chess. The bishops can only move diagonally, and if it is possible for a bishop to kill a bishop of the opposite colour, you lose the game.",
 			func: function(){call_level(1);},
 		 },	
 		{	
@@ -52,6 +53,7 @@ var story_seq=[
 		{	
 			name:"crypt01",
 			type:"puzzle",
+			instr:"Well all you gotta do is make a continuous sequence of  dark block in specific row and columns associating to their number.<br><br>for Eg. 7 2 3 means 7darkbox...random number of lightbox...2darkbox...random number of lightbox...3darkbox<br><br>Simple enough right?",
 			func: function(){call_level(2);}, 
 		 },	
 		{	
@@ -78,6 +80,7 @@ var story_seq=[
 		{	
 			name:"puzzle02",
 			type:"puzzle",
+			instr:"The image you see seems a bit off. The colours make no sense. Filters, obviously. Clicking each tile changes the filters in a different manner. You must change the filters so as to obtain the original image.",
 			func: function(){call_level(3);},
 		 },	
 		{	
@@ -97,6 +100,7 @@ var story_seq=[
 		{	
 			name:"crypt02",
 			type:"puzzle",
+			instr:"BrainF**k is all  you get.",
 			func: function(){call_level(4);},
 		 }, 
 		{	
@@ -123,6 +127,7 @@ var story_seq=[
 		{	
 			name:"puzzle03",
 			type:"puzzle",
+			instr:"Each face of a dice has a specific number of dots. However, you can add a specific direction to each face too. A direction once assigned to a face cannot be taken by another face, and a face can have only one direction. Your goal is to get from the die at the bottom left to the die at the top right.",
 			func: function(){call_level(5);},
 		 },	 
 		{	
@@ -149,6 +154,7 @@ var story_seq=[
 		{	
 			name:"crypt03",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(6);}, 
 		 },  
 		{	
@@ -168,6 +174,7 @@ var story_seq=[
 		{	
 			name:"puzzle04",
 			type:"puzzle",
+			instr:"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
 			func: function(){call_level(7);}, 
 		 },	 
 		{	
@@ -187,6 +194,7 @@ var story_seq=[
 		{	
 			name:"crypt04",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(8);}, 
 		 },  
 		{	
@@ -206,6 +214,7 @@ var story_seq=[
 		{	
 			name:"puzzle05",
 			type:"puzzle",
+			instr:"The entirety of the grid needs to be covered, one at a time, moving only vertically or horizontally without going to the same tile twice. There is a catch, however. You can only follow a particular pattern: 1-2-3-1-2-3....",
 			func: function(){call_level(9);}, 
 		 },	 
 		{	
@@ -218,6 +227,7 @@ var story_seq=[
 		{	
 			name:"crypt05",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(10);}, 
 		 }, 
 		{	
@@ -237,6 +247,7 @@ var story_seq=[
 		{	
 			name:"puzzle06",
 			type:"puzzle",
+			instr:"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
 			func: function(){call_level(11);}, 
 		 },
 		{	
@@ -270,6 +281,7 @@ var story_seq=[
 		{	
 			name:"crypt06",
 			type:"puzzle",
+			instr:"",
 			func: function(){call_level(12);}, 
 		 },  
 		{	
@@ -593,27 +605,13 @@ function getStory(x){
 // login=====================END==============================
 $(window).load(function(){
 	$('.my_level').click(function(e){
-		// call_level();
 		var tp_id = $(e.target).parent()[0].id;
 		cur_story=tp_id.substr(1);
+		go_to_pos(cur_story);
 		console.log("level_called",tp_id.substr(1));
 	});
 });
 // dashboard=================================================
-var instruct_arr = [
-						"There are two black and two white bishops on the grid. Your goal is to interchange their positions, adhering to the rules of chess. The bishops can only move diagonally, and if it is possible for a bishop to kill a bishop of the opposite colour, you lose the game.",
-						"Well all you gotta do is make a continuous sequence of  dark block in specific row and columns associating to their number.<br><br>for Eg. 7 2 3 means 7darkbox...random number of lightbox...2darkbox...random number of lightbox...3darkbox<br><br>Simple enough right?",
-						"The image you see seems a bit off. The colours make no sense. Filters, obviously. Clicking each tile changes the filters in a different manner. You must change the filters so as to obtain the original image.",
-						"BrainF**k is all  you get.",
-						"Each face of a dice has a specific number of dots. However, you can add a specific direction to each face too. A direction once assigned to a face cannot be taken by another face, and a face can have only one direction. Your goal is to get from the die at the bottom left to the die at the top right.",
-						"",
-						"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
-						"",
-						"The entirety of the grid needs to be covered, one at a time, moving only vertically or horizontally without going to the same tile twice. There is a catch, however. You can only follow a particular pattern: 1-2-3-1-2-3....",
-						"",
-						"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
-						"",
-	];
 
 function call_level(x){
 	$.ajax({
@@ -634,7 +632,7 @@ function load_level(d,x){
 	$('#puzzle').html(d.html_file);
 	console.log('../static/lacuna/js/game/'+d.js_file);
 	$.loadScript('../static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
-	open_instr(instruct_arr[x]);
+	open_instr(story_seq[cur_story]['instr']);
 	loadCss('../static/lacuna/css/game/'+d.css_file,x);
 }
 // dashboard========================END=========================
