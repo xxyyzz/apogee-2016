@@ -3,6 +3,7 @@
 	login lacuna		1500
 	dashboard			1200
 	puzzle_cont			1300
+	informal clue		1350
 z-index map*/
 
 /*--------------------------------GENERAL-------------------------------------*/
@@ -161,6 +162,79 @@ body,html{
 }
 .text_container:hover{
 	background-color: rgba(0,0,0,0.9);	
+}
+/*klas*/
+.cstar{
+	display:none;
+}
+#clue_jumbo{
+	display:none;
+	z-index: 1350;
+	background: url("../img/clueback.png");
+}
+#clue_cont{
+	height: 90vh;
+	width: 70vw;
+	text-align: center;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	overflow: hidden;
+}
+#clue_cont>.head{
+	height: 9vh;
+	line-height: 9vh;
+	font-size: 4vh;
+    background: #eee;
+}
+#clue_cont>.clue_img{
+	height: 72vh;
+	width: 100%;
+}
+#clue_cont>.ans{
+	height: 9vh;
+}
+
+#clue_cont .ans input{	display: inline-block;
+    width: 75%;
+    height: 100%;
+    left: 0;
+    vertical-align: top;
+    padding: 10px 12px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #211403;
+    background-color: #E4DED6;
+    background-image: none;
+    border: 1px solid #ccc;
+	outline: none;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+#clue_cont .ans input:placeholder{
+	color:#E8C594;
+}
+
+#clue_cont .ans button{	display: inline-block;
+    width: 25%;
+    height: 100%;
+    padding: 10px 12px;
+    margin-left: -2px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #EEE;
+    cursor: pointer;
+    background-color: #222;
+    background-image: none;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 /*puzzle div===========================================*/
 #puzzle_cont{
