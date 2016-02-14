@@ -322,6 +322,7 @@ var story_seq=[
 ];
 
 function go_to_pos(ch){
+	console.log(ch);
 	if(story_seq[ch]['type']=='story')
 	{
 		$('#game_loader').fadeIn(200);
@@ -348,14 +349,15 @@ function moveto_story(img,text){
 }
 var cur_story=0;
 $('.story').click(function(e){
-	console.log('story');
 	var id = e.target.id;
 	var t = id.substr(1);
+	console.log('story',t,id);
 	cur_story=t;
 	go_to_pos(t);
 });
-$('.start').click(function(e){
-	go_to_pos(0);
+$('.start').click(function(){
+	cur_story=0;
+	go_to_pos(cur_story);
 });
 $('.story_but').click(function(){		
 	if($(this).hasClass('story_prev'))
@@ -393,6 +395,7 @@ $(window).load(function(){
 				if(data.status==1){
 					$('#clue_jumbo').fadeOut();
 					$('.dashboard').fadeIn();
+					cur_story=0;
 					get_level_status();
 				}
 				else{
@@ -487,13 +490,14 @@ function get_level_status(){
 				$('#b'+i).fadeIn();
 				i+=2;
 			}
-			for(var i=0;i<=level_id[data.dvm_level];i++){
+			for(var i=1;i<=level_id[data.dvm_level];i++){
 				$('#g'+i).addClass('enable_level');
 			}
 			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 			$('.dashboard').fadeIn();
+			cur_story=0;
 		},
 	});
 }
@@ -517,6 +521,7 @@ $(window).load(function(){
 	$('.clue_dash').click(function(){
 		$('#clue_jumbo').fadeOut();
 		$('.dashboard').fadeIn();
+		cur_story=0;
 	});
 });
 // dashboard=================================================
@@ -678,6 +683,7 @@ $('.dash_instr').click(function(){
 
 $('#BackToDashboard').click(function(){
 	$('#puzzle_cont').fadeOut();
+	cur_story=0;
 	$('.dashboard').fadeIn();
 })
 
