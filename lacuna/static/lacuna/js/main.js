@@ -322,6 +322,7 @@ var story_seq=[
 ];
 
 function go_to_pos(ch){
+	console.log(ch);
 	if(story_seq[ch]['type']=='story')
 	{
 		$('#game_loader').fadeIn(200);
@@ -354,9 +355,9 @@ $('.story').click(function(e){
 	cur_story=t;
 	go_to_pos(t);
 });
-$('.start').click(function(e){
+$('.start').click(function(){
 	cur_story=0;
-	go_to_pos(0);
+	go_to_pos(cur_story);
 });
 $('.story_but').click(function(){		
 	if($(this).hasClass('story_prev'))
