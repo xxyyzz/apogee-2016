@@ -25,6 +25,6 @@ def update(request):
     time = request.POST['time']
     part = Participant.objects.get(email=email)
     part.time = time
-    part.score = int(score)
+    part.score = score
     part.save()
     return HttpResponse('1')
