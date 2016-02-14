@@ -498,7 +498,6 @@ function get_level_status(){
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 			$('.dashboard').fadeIn();
-			cur_story=0;
 		},
 	});
 }
@@ -508,7 +507,7 @@ function getStory(x){
 		method: 'POST',
 		data: {fbid:user.id,level:x},
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 		},
 	});
 }
@@ -518,7 +517,7 @@ $(window).load(function(){
 		var tp_id = $(e.target).parent()[0].id;
 		var tmp_story=tp_id.substr(1);
 		cur_story=parseInt(tmp_story);
-		console.log(e,tp_id,tmp_story,cur_story);
+		// console.log(e,tp_id,tmp_story,cur_story);
 		go_to_pos(cur_story);
 	});
 	$('.clue_dash').click(function(){
