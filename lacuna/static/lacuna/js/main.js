@@ -351,7 +351,7 @@ var cur_story=0;
 $('.story').click(function(e){
 	var id = e.target.id;
 	var t = id.substr(1);
-	console.log('story',t,id);
+	console.log('story click',t,id);
 	cur_story=parseInt(t);
 	go_to_pos(t);
 });
@@ -359,14 +359,15 @@ $('.start').click(function(){
 	cur_story=0;
 	go_to_pos(cur_story);
 });
-$('.story_but').click(function(){		
+$('.story_but').click(function(){	
+	console.log('story_but');	
 	if($(this).hasClass('story_prev'))
 	{
 		if(cur_story>0)
-			--cur_story;
+			{--cur_story;
+						go_to_pos(cur_story);}
 		else
 			alert('This is first page.');
-		go_to_pos(cur_story);
 	}
 	else if($(this).hasClass('story_next'))	
 	{
