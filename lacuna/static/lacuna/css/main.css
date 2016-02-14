@@ -175,7 +175,7 @@ body,html{
 }
 .puzzle_nav
 {
-	position: absolute;
+	position: fixed;
 	margin: 20px;
 	z-index: 2;
 	border: 1px solid #444;
@@ -239,26 +239,27 @@ body,html{
 /*dashboard==============END===============
 
 /*-------------------INSTRUCTIONS--------------*/
-#instr_cont{
+#instr_cont,#wino_cont{
+	position: fixed;
 	height:100%;
 	width: 100%;
 	z-index: 5;
 	display: none;
 }
-#instr_cont>.overlay
+#instr_cont>.overlay,#wino_cont>.overlay
 {
 	background-color: rgba(0,0,0,0.7);
 	height:100%;
 	width: 100%;
 }
-#instr_det{
+#instr_det,,#wino_det{
 	height: 80%;
 	width:80%;
 	border-radius: 4px;
 	background-color: #eee;
 	color:#444;
 }
-#instr_det>.cross{
+#instr_det>.cross,,#wino_det>.cross{
 	position: absolute;
 	right: 15px;
     top: 15px;
@@ -266,19 +267,22 @@ body,html{
     font-size: 1.5em;
     cursor: pointer;
 }
-#instr_det>.head{
+#instr_det>.head,,#wino_det>.head{
 	height: 20%;
 	line-height: 2.5em;
 	font-size: 2.5em;
 	text-align: center;
 	border-bottom: 1px solid #444;
 }
-#instr_det>.content{
+#instr_det>.content,,#wino_det>.content{
 	height: 80%;
 	font-size: 1.5em;
 	text-align: center;
 	padding: 20px;
 	overflow-y: auto;
+}
+#wino_cont{
+	display: block;
 }
 
 .story{
