@@ -137,8 +137,9 @@ function renderTime() {
 		dat['score'] = calcScore();
 		dat['time'] = $("#topContainer1").html();
 
-		console.log(dat);
+		$(".scoreIs").html(dat['score']);
 
+		//console.log(dat);
 
 		$.ajax({
 	 		url : 'update/',
@@ -324,6 +325,8 @@ $("#warnquitconfirm").click(function() {
 
 		dat['score'] = calcScore();
 		dat['time'] = $("#topContainer1").html();
+
+		$(".scoreIs").html(dat['score']);
 
 		console.log(dat);
 
