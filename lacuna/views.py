@@ -239,7 +239,7 @@ def leaderboard(request):
         else:
             extra_time = timezone.now() - part.start_time
             extra_time_stripped = extra_time - timedelta(microseconds=extra_time.microseconds)
-            part.live_time = extra_time_stripped
+            part.live_time = part.total_time + extra_time_stripped
         parts.append(part)
     context = {
         'parts' : parts,
