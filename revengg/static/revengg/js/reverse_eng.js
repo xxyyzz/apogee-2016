@@ -616,7 +616,7 @@ var set =[
       'num':21,
       'cat':'mechanical',
       'ques':'Nothing is known about the material x. The color of the material is bluish green. On drilling it gives two chips in the two flutes. Vibrations observed during drilling are low. The chips formed are segmented in nature. (shown in image) guess the material x. ',
-      'ques_img':'media/qimg/reverse_eng/q21.png',
+      'ques_img':'/2016/static/revengg/qimg/reverse_eng/q21.png',
       'options':[  
          {  
             'type':'text',
@@ -954,19 +954,19 @@ var set =[
       'options':[  
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q32a.png'
+            'desc':'/2016/static/revengg/revengg/qimg/reverse_eng/q32a.png'
          },
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q32b.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q32b.png'
          },
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q32c.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q32c.png'
          },
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q32d.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q32d.png'
          }
       ],
       'correct':0,
@@ -984,19 +984,19 @@ var set =[
       'options':[  
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q33a.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q33a.png'
          },
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q33b.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q33b.png'
          },
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q33c.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q33c.png'
          },
          {  
             'type':'image',
-            'desc':'media/qimg/reverse_eng/q33d.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q33d.png'
          }
       ],
       'correct':3,
