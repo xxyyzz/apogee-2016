@@ -230,16 +230,17 @@ def dvm11verify(request):
                 error = True;
     return verify_final(request, error)
 
+def strip_microseconds(td):
+    return td - timedelta(microseconds=td.microseconds)
+
 def leaderboard(request):
-    participants = Participant.objects.order_by('-progress', '-informals_score', 'total_time')
+    participants = Participant.objects.order_by('-progress', '-informals_score', '-time_started')
     parts = []
     for part in participants:
         if part.progress == 100 and part.informals_stats == '222222222222':
             part.live_time = part.total_time
         else:
-            extra_time = timezone.now() - part.start_time
-            extra_time_stripped = extra_time - timedelta(microseconds=extra_time.microseconds)
-            part.live_time = part.total_time + extra_time_stripped
+            part.live_time = strip_microseconds(timezone.now() - part.start_time)
         parts.append(part)
     # parts = sorted(parts, key = lambda x: (x.progress, x.informals_score, x.live_time), reverse=True)
     context = {
