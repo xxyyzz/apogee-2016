@@ -123,7 +123,7 @@ body,html{
             <div class="title"><img src="{% static 'lacuna/img/leaderboard.png' %}">LEADERBOARD</div>
             <div class="ranking_user head">
                     <div class="rank">RANK</div>
-                    <div class="name"><img src="">USER</div>
+                    <div class="name">USER</div>
                     <div class="gp">Game Progress</div>
                     <div class="bs">Bonus Score</div>
                     <div class="ts">Time Active</div>
@@ -133,7 +133,7 @@ body,html{
 
                 <div class="ranking_user">
                     <div class="rank">{{ forloop.counter }}</div>
-                    <div class="name"><img src="https://graph.facebook.com/username/picture/{{ part.fbid }}/picture?type=small">{{ part.name }}</div>
+                    <div class="name"><img src="https://graph.facebook.com/{{ part.fbid }}/picture?type=small">{{ part.name }}</div>
                     <div class="gp">{{ part.progress }}</div>
                     <div class="gp">{{ part.informals_score }}</div>
                     <div class="bs">{{ part.live_time }}</div>
