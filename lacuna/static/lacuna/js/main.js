@@ -393,6 +393,7 @@ $(window).load(function(){
 			success: function(data){
 				console.log(data);
 				if(data.status==1){
+					alert('Congratulations! your answer was right');
 					$('#clue_jumbo').fadeOut();
 					$('.dashboard').fadeIn();
 					cur_story=0;
@@ -425,7 +426,7 @@ var initList = [
 	{func: function(){qrcodeinit();}},
 	{func: function(){lvl1init();}},
 	{func: function(){crypt();}},
-	{func: function(){level4init();}},
+	{func: function(){directinit();}},
 	{func: function(){crypt();}},
 	{func: function(){magicinit();}},
 	{func: function(){crypt();}},

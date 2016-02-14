@@ -1,6 +1,6 @@
-var win_w=$('body').width(),win_h=$('body').height();
-function level4init()
+function directinit()
 {
+	var win_w=$('body').width(),win_h=$('body').height();
 	// console.log('hi');
 	//7-finish, starts a bottom-left,0 is  empty  space
 	var grid= [
