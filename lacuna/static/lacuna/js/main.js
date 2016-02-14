@@ -393,6 +393,7 @@ $(window).load(function(){
 			success: function(data){
 				console.log(data);
 				if(data.status==1){
+					$('#b'+cur_inf).addClass('cstar_sol');
 					alert('Congratulations! your answer was right');
 					$('#clue_jumbo').fadeOut();
 					$('.dashboard').fadeIn();
@@ -493,6 +494,12 @@ function get_level_status(){
 			}
 			for(var i=1;i<=level_id[data.dvm_level];i++){
 				$('#g'+i).addClass('enable_level');
+			}
+			var inf_lev = user.informals_stats.split("").map(function(item) {
+			    return parseInt(item, 10);
+			});
+			for(i in inf_lev){
+				$('#b'+inf_lev[i]).addClass('cstar_sol');
 			}
 			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
