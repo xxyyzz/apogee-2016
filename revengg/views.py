@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from lacuna.models import *
+from revengg.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
