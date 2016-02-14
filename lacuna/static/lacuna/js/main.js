@@ -294,7 +294,6 @@ var story_seq=[
 ];
 
 function go_to_pos(ch){
-	// console.log(ch);
 	if(story_seq[ch]['type']=='story')
 	{
 		$('#game_loader').fadeIn(200);
@@ -334,7 +333,6 @@ $('.start').click(function(){
 	go_to_pos(cur_story);
 });
 $('.story_but').click(function(){	
-	// console.log('story_but');	
 	if($(this).hasClass('story_prev'))
 	{
 		if(cur_story>0)
@@ -372,7 +370,6 @@ $(window).load(function(){
 			method: 'POST',
 			data: {fbid:user.id,sol: tp3,level:cur_inf},
 			success: function(data){
-				// console.log(data);
 				if(data.status==1){
 					$('#b'+cur_inf).addClass('cstar_sol');
 					alert('Congratulations! your answer was right');
@@ -465,7 +462,6 @@ function get_level_status(){
 		method: 'POST',
 		data: {fbid:user.id},
 		success: function(data){
-			// console.log(data);
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
@@ -496,7 +492,7 @@ function getStory(x){
 		method: 'POST',
 		data: {fbid:user.id,level:x},
 		success: function(data){
-			// console.log(data);
+			console.log(data);
 		},
 	});
 }
@@ -524,9 +520,7 @@ function call_level(x){
 		method: 'POST',
 		data: {fbid:user.id,level: parseInt(x)},
 		success: function(data){
-			// console.log(data);
 			load_level(data,x-1);
-			// content: {page:,files:[{name:,callback:}],}
 		},
 	});
 }
@@ -535,7 +529,6 @@ function load_level(d,x){
 	$('#puzzle').fadeIn();
 	$('#puzzle_cont').fadeIn();
 	$('#puzzle').html(d.html_file);
-	console.log('../static/lacuna/js/game/'+d.js_file);
 	$.loadScript('../static/lacuna/js/game/'+d.js_file, function(){initList[x].func();});
 	open_instr(story_seq[cur_story]['instr']);
 	loadCss('../static/lacuna/css/game/'+d.css_file,x);
@@ -549,7 +542,6 @@ function submit_ans(ans,x){
 		method: 'POST',
 		data: {fbid:user.id,sol: JSON.stringify(ans),level:x},
 		success: function(data){
-			console.log(data);
 			if(data.status==1){
 				$('#wino_cont').fadeIn();
 				get_level_status();
@@ -575,7 +567,6 @@ function fb_logout(){
 	});
 }
 function statusChangeCallback(response) {
-	console.log(response);
 	// The response object is returned with a status field that lets the
 	// app know the current login status of the person.
 	// Full docs on the response object can be found in the documentation
@@ -588,14 +579,12 @@ function statusChangeCallback(response) {
 	  	FB.login(function() {
 			checkLoginState();
 		});
-		console.log('Please log ' + 'into this app.');
 	} else {
 	  // The person is not logged into Facebook, so we're not sure if
 	  // they are logged into this app or not.
 	  	FB.login(function() {
 			checkLoginState();
 		});
-		console.log('Please log ' + 'into Facebook.');
 	}
 }
 
@@ -657,7 +646,6 @@ function testAPI() {
 // instruction---------------------------
 function open_instr(cont)
 {
-	console.log('yo',cont);
 	$('#instr_det>.content').html(cont);
 	$('#instr_cont').fadeIn(250);
 }
@@ -688,6 +676,5 @@ $('#wintodash').click(function(){
 $('#wintonext').click(function(){
 		$('#wino_cont').fadeOut();
 		++cur_story;
-		// console.log('wintonext');
 		go_to_pos(cur_story);
 });
