@@ -546,7 +546,7 @@ function get_level_status(){
 			for(var i=0;i<=level_id['dvm_level'];i++){
 				$('#g'+i).addClass('enable_level');
 			}
-			$('.dash_score').html(data.score);
+			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 			$('.dashboard').fadeIn();
@@ -716,6 +716,7 @@ function testAPI() {
 // instruction---------------------------
 function open_instr(cont)
 {
+	console.log('yo',cont);
 	$('#instr_det>.content').html(cont);
 	$('#instr_cont').fadeIn(250);
 }
@@ -723,3 +724,12 @@ $('#instr_det>.cross,#instr_cont>.overlay').click(function(){
 	$('#instr_cont .content').html('');
 	$('#instr_cont').fadeOut(250);
 });
+
+$('.dash_instr').click(function(){
+	$(this).fadeOut();
+})
+
+$('#BackToDashboard').click(function(){
+	$('#puzzle_cont').fadeOut();
+	$('.dashboard').fadeIn();
+})
