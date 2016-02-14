@@ -232,9 +232,12 @@ def leaderboard(request):
     participants = Participant.objects.order_by('-progress', '-informals_score', 'total_time')
     parts = []
     for part in participants:
-        extra_time = timezone.now() - part.start_time
-        extra_time_stripped = extra_time - timedelta(microseconds=extra_time.microseconds)
-        part.live_time = part.total_time + extra_time_stripped
+        if part.progress == 100 and part.informals_stats == '000000000000':
+            part.live_time = part.total_time
+        else:
+            extra_time = timezone.now() - part.start_time
+            extra_time_stripped = extra_time - timedelta(microseconds=extra_time.microseconds)
+            part.live_time = part.total_time + extra_time_stripped
         parts.append(part)
     context = {
         'parts' : parts,
