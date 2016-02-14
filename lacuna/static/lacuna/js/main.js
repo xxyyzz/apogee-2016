@@ -348,7 +348,10 @@ $('.start').click(function(e){
 $('.story_but').click(function(){		
 	if($(this).hasClass('story_prev'))
 	{
-		--cur_story;
+		if(cur_story>0)
+			--cur_story;
+		else
+			alert('This is first page.');
 		go_to_pos(cur_story);
 	}
 	else if($(this).hasClass('story_next'))	
@@ -569,9 +572,11 @@ function getStory(x){
 }
 // login=====================END==============================
 $(window).load(function(){
-	$('.my_level').click(function(){
+	$('.my_level').click(function(e){
 		// call_level();
-		console.log("level_called");
+		var tp_id = $(e.target).parent()[0].id;
+		cur_story=tp_id.substr(1);
+		console.log("level_called",tp_id.substr(1));
 	});
 });
 // dashboard=================================================
@@ -728,6 +733,9 @@ $('#instr_det>.cross,#instr_cont>.overlay').click(function(){
 	$('#instr_cont .content').html('');
 	$('#instr_cont').fadeOut(250);
 });
+$('#wino_cont>.overlay').click(function(){
+	$('#wino_cont').fadeOut(250);
+});
 
 $('.dash_instr').click(function(){
 	$(this).fadeOut();
@@ -737,3 +745,18 @@ $('#BackToDashboard').click(function(){
 	$('#puzzle_cont').fadeOut();
 	$('.dashboard').fadeIn();
 })
+
+// win situation
+function  openwin()
+{
+	$('#wino_cont').fadeIn();
+}
+
+$('#wintodash').click(function(){
+	$('#wino_cont').fadeOut();
+	$('#BackToDashboard').click();
+});
+
+$('#wintonext').click(function(){
+
+});

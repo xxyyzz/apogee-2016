@@ -252,14 +252,14 @@ body,html{
 	height:100%;
 	width: 100%;
 }
-#instr_det,,#wino_det{
+#instr_det,#wino_det{
 	height: 80%;
 	width:80%;
 	border-radius: 4px;
 	background-color: #eee;
 	color:#444;
 }
-#instr_det>.cross,,#wino_det>.cross{
+#instr_det>.cross{
 	position: absolute;
 	right: 15px;
     top: 15px;
@@ -267,23 +267,45 @@ body,html{
     font-size: 1.5em;
     cursor: pointer;
 }
-#instr_det>.head,,#wino_det>.head{
+#instr_det>.head{
 	height: 20%;
 	line-height: 2.5em;
 	font-size: 2.5em;
 	text-align: center;
 	border-bottom: 1px solid #444;
 }
-#instr_det>.content,,#wino_det>.content{
+#instr_det>.content{
 	height: 80%;
 	font-size: 1.5em;
 	text-align: center;
 	padding: 20px;
 	overflow-y: auto;
 }
-#wino_cont{
-	display: block;
+
+#wino_cont button {
+	border: 0px solid black;
+    margin: 15px;
+    font-size: 20px;
+    border-radius: 3px;
+    height: auto;
+    width: auto;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease-in;
+    -webkit-transition: all 0.15s ease-in;
+    -moz-transition: all 0.15s ease-in;
+    box-sizing: border-box;
+    outline: none;
+    /*background: #6EB729;*/
 }
+#wintodash{background: #3e9cbf;}
+#wintodash:hover{background: #2B6F88;}
+#wintonext{background: #6EB729}
+#wintonext:hover{background: #52881F}
+
 
 .story{
 	cursor: pointer;
