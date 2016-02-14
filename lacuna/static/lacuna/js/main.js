@@ -407,15 +407,15 @@ var initList = [
 	{func: function(){chessinit();}},
 	{func: function(){qrcodeinit();}},
 	{func: function(){lvl1init();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	{func: function(){directinit();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	{func: function(){magicinit();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	{func: function(){level5init();}},
 	{func: function(){posterinit();}},
 	{func: function(){colorinit();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	];
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({
