@@ -15,7 +15,7 @@ body,html{
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
     position: absolute;
     top:0;
     left: 0;
@@ -37,7 +37,7 @@ body,html{
     background-color: #eee;
     width: 80%;
     margin-top: 2%;
-    margin-bottom: 2%;  
+    margin-bottom: 2%;
     padding: 1.5em;
     box-shadow: 0px 0px 50px -10px #111;
     overflow-y: auto;
@@ -45,7 +45,7 @@ body,html{
 #leader_board>.title{
     text-align: center;
     font-size: 1.5em;
-    border-bottom:1px solid #888; 
+    border-bottom:1px solid #888;
     padding-top: 0.5em;
     padding-bottom: 1em;
 }
@@ -103,8 +103,8 @@ body,html{
     position: absolute;
     left: 0;
     right: 0;
-    margin-left: auto;  
-    margin-right: auto; 
+    margin-left: auto;
+    margin-right: auto;
 }
 .ranking_user>div>div.type
 {
@@ -136,15 +136,14 @@ body,html{
 
                 <div class="ranking_user">
                     <div class="rank">{{ forloop.counter }}</div>
-                    <div class="name"><img src="https://graph.facebook.com/{{ part.fbid }}/picture?type=small">{{ part.name }}</div>
+                    <div class="name"><a href="https://facebook.com/{{ part.fbid }}"><img src="https://graph.facebook.com/{{ part.fbid }}/picture?type=small"></a>{{ part.name }}</div>
                     <div class="gp">{{ part.progress }}</div>
                     <div class="gp">{{ part.informals_score }}</div>
                     <div class="bs">{{ part.live_time }}</div>
                 </div>
-            {% endfor %}  
+            {% endfor %}
             </div>
         </div>
     </div>
 </body>
 </html>
-
