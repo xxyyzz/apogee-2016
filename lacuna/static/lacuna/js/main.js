@@ -240,7 +240,7 @@ var story_seq=[
 		{	
 			name:"story25",
 			type:"story",
-			img:imgpre+'img/story/story01.png',
+			img:imgpre+'img/story/story25.jpg',
 			text:'Sherlock was stunned. How was Mycroft possibly in cahoots with The Baron? This seemed to make no sense. Mycroft continued, “He helped us eliminate everyone else Moriarty trusted. We must let him be.” And just like that, the line was dead. Just like Sherlock’s faith in his brother.<br><br>Sherlock entered his small cell a different man from the one who had exit it. He sat there quietly as the official restrained him to his chair. He was in total despair. The official then, to Sherlock’s great surprise, brought in a package and placed it quietly within his handcuffed arms’ reach. The man then just as silently removed Sherlock’s restraints and left the room. Sherlock ripped open the package with trembling fingers, the fingers of a man who no longer has anything to lose.',
 			func: moveto_story, 
 		 },
