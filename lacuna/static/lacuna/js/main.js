@@ -245,15 +245,9 @@ var story_seq=[
 			func: moveto_story, 
 		 },
 		{	
-			name:"puzzle06",
-			type:"puzzle",
-			instr:"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
-			func: function(){call_level(11);}, 
-		 },
-		{	
 			name:"story26",
 			type:"story",
-			img:imgpre+'img/story/story26.png',
+			img:imgpre+'img/story/story26.jpg',
 			text:'Sherlock was stunned at the message he had just received. He rushed out of his cell out into a surprisingly empty corridor. Not a single guard or official was in sight. Retrieving his belongings from the empty guard’s desk, he started sprinting. He ran to hangar number 3, which was also very conveniently unguarded, and hid on board the aircraft. And waited. And waited. And fell asleep.<br><br>Sherlock woke up with a jerk. The aircraft was up in the sky, he was sure of it. Cursing himself inwardly, he tried to analyse the situation. Apparently Maupertuis had boarded the plane and they were flying to Siberia. This was the worst possible situation he could be in. Judging by how rich The Baron was, there must be attendants on board. Two attendants maybe. Not more. ',
 			func: moveto_story, 
 		 },
@@ -265,17 +259,16 @@ var story_seq=[
 			func: moveto_story, 
 		 },
 		{	
+			name:"puzzle06",
+			type:"puzzle",
+			instr:"Each square has four coloured grids. The squares need to positioned so that each grid on each square touches only the same coloured grid on other squares. However, you can rotate the squares to accomodate this restriction. Do you have what it takes?",
+			func: function(){call_level(11);}, 
+		 },
+		{	
 			name:"story28",
 			type:"story",
 			img:imgpre+'img/story/story28.jpg',
 			text:'Sherlock walked into the cabin like he owned the place, making The Baron almost spill his drink in surprise. The Baron reached for the drawer in the table next to him, but Sherlock was quicker. Grabbing a hold of The Baron’s wrist, Sherlock broke it with a twist of his arm. Looking into the drawer, Sherlock found a Magnum .52. Sherlock looked in horror at the weapon in his hand.',
-			func: moveto_story, 
-		 },
-		{	
-			name:"story29",
-			type:"story",
-			img:imgpre+'img/story/story29.jpg',
-			text:'This was Moriarty’s last agent. Surely he deserved this. Surely. The last thread in the intricate web that Moriarty had spun. This man needed to die for the good of the rest of the world. But Sherlock just couldn’t bring himself to do it. He couldn’t pull the trigger. Maupertuis saw Sherlock hesitating, and tried to capitalize on the situation. The duo struggled for supremacy, and this struggle ended only once Sherlock pulled the trigger.<br><br>This was no time to panic. The plane was going to land in Serbia. He would surely be caught and tortured. He could not escape once he landed. All he could do now was send a message for help to his brother from Maupertuis’ computer. And wait. He was surprised by his brother’s quick reply.',
 			func: moveto_story, 
 		 },
 		{	
@@ -285,38 +278,17 @@ var story_seq=[
 			func: function(){call_level(12);}, 
 		 },  
 		{	
+			name:"story29",
+			type:"story",
+			img:imgpre+'img/story/story29.jpg',
+			text:'This was Moriarty’s last agent. Surely he deserved this. Surely. The last thread in the intricate web that Moriarty had spun. This man needed to die for the good of the rest of the world. But Sherlock just couldn’t bring himself to do it. He couldn’t pull the trigger. Maupertuis saw Sherlock hesitating, and tried to capitalize on the situation. The duo struggled for supremacy, and this struggle ended only once Sherlock pulled the trigger.<br><br>This was no time to panic. The plane was going to land in Serbia. He would surely be caught and tortured. He could not escape once he landed. All he could do now was send a message for help to his brother from Maupertuis’ computer. And wait. He was surprised by his brother’s quick reply.',
+			func: moveto_story, 
+		 },
+		{	
 			name:"story30",
 			type:"story",
-			img:imgpre+'img/story/story01.jpg',
-			text:'Sherlock couldn’t help but laugh. His brother was sending him puzzles even at a time like this. He would find his brother in Serbia now, all he needed to do was get captured. It was all going to be okay.<br><br>John sighed with relief as his fingers typed out the last few words of his latest blog. After months of heckling, Sherlock had finally told him about how he had dismantled Moriarty’s network. But he knew that Sherlock wasn’t sharing his whole story. There were a few loopholes and inconsistencies. Though John respected Sherlock too much to question his story, he couldn’t possibly write a lie in his memoirs of Sherlock’s life. He inhaled deeply. This is the only possible way, he thought as he selected',
-			func: moveto_story, 
-		 },
-		{	
-			name:"story31",
-			type:"story",
 			img:imgpre+'img/story/story30.jpg',
-			text:null,
-			func: moveto_story, 
-		 },
-		{	
-			name:"story32",
-			type:"story",
-			img:imgpre+'img/story/story01.png',
-			text:null,
-			func: moveto_story, 
-		 },
-		{	
-			name:"story33",
-			type:"story",
-			img:imgpre+'img/story/story01.png',
-			text:null,
-			func: moveto_story, 
-		 },
-		{	
-			name:"story34",
-			type:"story",
-			img:imgpre+'img/story/story01.png',
-			text:null,
+			text:'Sherlock couldn’t help but laugh. His brother was sending him puzzles even at a time like this. He would find his brother in Serbia now, all he needed to do was get captured. It was all going to be okay.<br><br>John sighed with relief as his fingers typed out the last few words of his latest blog. After months of heckling, Sherlock had finally told him about how he had dismantled Moriarty’s network. But he knew that Sherlock wasn’t sharing his whole story. There were a few loopholes and inconsistencies. Though John respected Sherlock too much to question his story, he couldn’t possibly write a lie in his memoirs of Sherlock’s life. He inhaled deeply. This is the only possible way, he thought as he selected',
 			func: moveto_story, 
 		 },
 ];
@@ -373,8 +345,14 @@ $('.story_but').click(function(){
 	}
 	else if($(this).hasClass('story_next'))	
 	{
-		++cur_story;
-		go_to_pos(cur_story);
+		if(cur_story<41)
+		{
+			++cur_story;
+			go_to_pos(cur_story);
+		}
+		else
+			alert('The End. You have completed the story line.');
+
 	}
 })
 // window load=======================================================
