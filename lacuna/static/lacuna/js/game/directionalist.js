@@ -1,8 +1,6 @@
-var win_w=$('body').width(),win_h=$('body').height();
-function level4init()
+function directinit()
 {
-	// console.log('hi');
-	//7-finish, starts a bottom-left,0 is  empty  space
+	var win_w=$('body').width(),win_h=$('body').height();
 	var grid= [
 				[4,1,5,6,2,6,'fin'],	
 				[1,6,4,3,0,2,4],
@@ -12,16 +10,6 @@ function level4init()
 				[1,2,1,6,5,4,6],
 				[4,3,2,5,2,1,3],
 			];
-
-		// var grid=[
-		// 			[4,1,3,3,5,2],	
-		// 			[3,4,1,2,'fin',3],	
-		// 			[5,1,5,5,4,2],	
-		// 			[1,3,2,5,2,1],	
-		// 			[6,2,4,1,5,4],	
-		// 			[6,2,1,6,6,3],	
-		// 		];
-	//
 	var row=grid.length,col=grid[0].length;
 	var dirmap = [
 				{
@@ -112,7 +100,6 @@ function level4init()
 		html+='</div>';
 		$('#level4').html(html);
 		var initbox = ((row - 1) * col) + 1;
-		// $('.level4box:nth-child('+initbox+')').trigger("click");
 		setTimeout(function(){
 			$('.level4grid').css({height:row*70,width:col*70});
 			$('.level4box:nth-child('+initbox+')>.valcont').trigger("click");
@@ -120,9 +107,6 @@ function level4init()
 		
 	}		
 	generategrid();
-
-	
-
 	function showdir(t)
 	{
 		var flag=0; //not found
@@ -143,14 +127,9 @@ function level4init()
 			else if(y==(col - 1))
 			{dirmap[1].allow=false;dirmap[2].allow=false;dirmap[3].allow=false;}	
 
-			// for(i=0;i<dirmap.length;++i)
-			// {console.log(dirmap[i].dir,dirmap[i].allow)}
 		}
-
-		// console.log(x,y,val);
 		getalloweddir();
 		var dir_box = '<div class="dir_box">';
-		// $(t).append('<div class="dir_box"><div  class="w ver_center">|</div></div>');
 		for(i=0;i<dirmap.length;++i)
 		{
 			if(dirmap[i].num==val) 
@@ -162,7 +141,6 @@ function level4init()
 		}
 		if(flag==1 )
 		{
-			// console.log(i,dirmap[i].num);
 			if(dirmap[i].allow)
 			{
 				dir_box += dirmap[i].div_data + '</div>';
@@ -188,21 +166,13 @@ function level4init()
 	}
 
 	$('.level4box').on("click",'.dir_box>div',function(){
-		// console.log('yo',this);
 		t=$(this).parent().parent();
-		// var x=$(t).data('x'),y=$(t).data('y'),val=parseInt($(t).find('.valcont').html());
-		// console.log($(t).index(),dirmap[$(this).data('index')].dc,parseInt($(t).find('.valcont').html()));
 		$(this).siblings().hide();
-		// console.log($(this).siblings());
 		var $box = $(t).find('.valcont');
 		dirmap[$(this).data('index')].num = parseInt($box.data('val')) ;
 		$(t).addClass('visited').removeClass('sel');
 		$box.css('background','url(/2016/static/lacuna/img/puzzle/blue/b'+$box.data("val")+'.svg)');
-
 		var initbox = ($(t).index() + 1) + dirmap[$(this).data('index')].dc;
-		// console.log(initbox);
-		
-		
 		if($('.level4box:nth-child('+initbox+')').hasClass('visited') || (parseInt($('.level4box:nth-child('+initbox+') .valcont').data("val")) ==0))
 			lost();
 		else{
@@ -211,8 +181,6 @@ function level4init()
 			$box.css('background','url(/2016/static/lacuna/img/puzzle/red/r'+$box.data("val")+'.svg)');
 			$('.level4box:nth-child('+initbox+')>.valcont').trigger("click");
 		}
-
-		
 	});
 
 	$('.level4box>.valcont').click(function(){
@@ -235,7 +203,6 @@ function level4init()
 	function win()
 	{
 		console.log(dirmap);
-		submit_ans(,5);
-		// alert('win');
+		submit_ans('win',5);
 	}
 }
