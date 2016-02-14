@@ -607,7 +607,7 @@ def controlz_bill_print(request):
 				'amount' : total,
 			}
 
-			return render_to_response('regsoft/receipt_offline.html', context)
+			return render_to_response('regsoft/receipt_online.html', context)
 
 
 
