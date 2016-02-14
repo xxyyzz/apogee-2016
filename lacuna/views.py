@@ -165,6 +165,7 @@ def dvm_level_verify(request):
     error = True
     levelobj = Level.objects.get(level=level, dept='DVM')
     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+        print sol.upper().replace(' ', ''), levelobj.answer.upper().replace(' ', '')
         error = False
     return verify_final(request, error)
 
