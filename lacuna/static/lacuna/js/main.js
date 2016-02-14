@@ -355,6 +355,7 @@ $('.story').click(function(e){
 	go_to_pos(t);
 });
 $('.start').click(function(e){
+	cur_story=0;
 	go_to_pos(0);
 });
 $('.story_but').click(function(){		
