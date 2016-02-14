@@ -509,7 +509,7 @@ function getStory(x){
 }
 // login=====================END==============================
 $(window).load(function(){
-	$('.enable_level').click(function(e){
+	$('body').on('click','.enable_level',function(e){
 		var tp_id = $(e.target).parent()[0].id;
 		cur_story=tp_id.substr(1);
 		go_to_pos(cur_story);
