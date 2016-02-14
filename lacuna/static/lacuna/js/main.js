@@ -473,8 +473,12 @@ function getStory(x){
 // login=====================END==============================
 $(window).load(function(){
 	$('.my_level').click(function(){
-		// call_level();
+		//call_level();
 		console.log("level_called");
+	});
+	$('.clue_dash').click(function(){
+		$('#clue_jumbo').fadeOut();
+		$('.dashboard').fadeIn();
 	});
 });
 // dashboard=================================================
@@ -531,6 +535,9 @@ function submit_ans(ans,x){
 				$('.dashboard').fadeIn();
 				get_level_status();
 			}
+			else{
+				alert('Your answer was wrong!');
+			}
 		},
 	});
 }
@@ -541,6 +548,7 @@ function call_fb_login(){
 }
 function fb_logout(){
 	FB.logout(function(response) {
+		$('.login_lacuna').fadeIn();
 		$('.fb_login_cont').fadeIn();
 		$('.dashboard').fadeOut();
 		$('#clue_jumbo').fadeOut();
