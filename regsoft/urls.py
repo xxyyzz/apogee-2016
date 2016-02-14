@@ -24,12 +24,12 @@ urlpatterns = [
 # 	url(r'^controlz/bill_select/$', controlz_bill_select),
 # 	url(r'^controlz/bill_delete/$', controlz_delete_bill),
 # 	url(r'^controlz/bill_view/(?P<billid>\d+)/$', controlz_view_bill),
-# 	url(r'^controlz/bill_details/(?P<part_id>\d+)$', controlz_bill_details),
+	url(r'^controlz/bill_details/(?P<part_id>\d+)$', controlz_bill_details),
 # 	url(r'^controlz/recnacc_bill_list/$', recnacc_bill_list),
 # 	url(r'^controlz/recnacc_bill_print/(?P<gl_id>\d+)$', recnacc_bill_print),
 # 	# url(r'^controlz/billdetails/(?P<bill_id>\d+)$', ),
 
-# 	url(r'^controlz/bill_print/$', controlz_bill_print),
+	# url(r'^controlz/bill_print/$', controlz_bill_print),
 # 	url(r'^group_notify/$', recnacc_notify),
 
 
