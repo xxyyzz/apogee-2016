@@ -97,7 +97,7 @@ def informals_level_verify(request):
     level = request.POST['level']
     level = int(level)
     sol = request.POST['sol']
-    levelobj = Level.objects.get(level=level)
+    levelobj = Level.objects.get(level=level, dept='INFORMALS')
     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
         part = Participant.objects.get(fbid=fbid)
         stats = list(part.informals_stats)
@@ -158,6 +158,19 @@ def verify_final(request, error):
     return JsonResponse(response)
 
 @csrf_exempt
+def dvm_level_verify(request):
+    fbid = request.POST['fbid']
+    sol = request.POST['sol']
+    level = request.POST['level']
+    level = int(level)
+    error = True
+    levelobj = Level.objects.get(level=level, dept='DVM')
+    if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+        error = False
+    return verify_final(request, error)
+
+
+@csrf_exempt
 def dvm1verify(request):
     fbid = request.POST['fbid']
     sol = request.POST['sol']
@@ -167,17 +180,18 @@ def dvm1verify(request):
     error = False
     return verify_final(request, error)
 
-@csrf_exempt
-def dvm2verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    if sol.upper().replace(' ', '') == 'SAMYEMONASTERY':
-        error = False
-    return verify_final(request, error)
+# @csrf_exempt
+# def dvm2verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
 
 @csrf_exempt
 def dvm3verify(request):
@@ -193,44 +207,44 @@ def dvm3verify(request):
     return verify_final(request, error)
 
 
-@csrf_exempt
-def dvm4verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
+# @csrf_exempt
+# def dvm4verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
 
-@csrf_exempt
-def dvm5verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
-
-@csrf_exempt
-def dvm6verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
+# @csrf_exempt
+# def dvm5verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
+#
+# @csrf_exempt
+# def dvm6verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
 
 @csrf_exempt
 def dvm7verify(request):
@@ -252,44 +266,44 @@ def dvm7verify(request):
             error = True
     return verify_final(request, error)
 
-@csrf_exempt
-def dvm8verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
-
-@csrf_exempt
-def dvm9verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
-
-@csrf_exempt
-def dvm10verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
+# @csrf_exempt
+# def dvm8verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
+#
+# @csrf_exempt
+# def dvm9verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
+#
+# @csrf_exempt
+# def dvm10verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
 
 @csrf_exempt
 def dvm11verify(request):
@@ -307,18 +321,18 @@ def dvm11verify(request):
                 error = True;
     return verify_final(request, error)
 
-@csrf_exempt
-def dvm12verify(request):
-    fbid = request.POST['fbid']
-    sol = request.POST['sol']
-    sol = json.loads(sol)
-    level = request.POST['level']
-    level = int(level)
-    error = True
-    # remove spaces and convert to upper
-    # if sol.upper().replace(' ', '') == '':
-        # error = False
-    return verify_final(request, error)
+# @csrf_exempt
+# def dvm12verify(request):
+#     fbid = request.POST['fbid']
+#     sol = request.POST['sol']
+#     sol = json.loads(sol)
+#     level = request.POST['level']
+#     level = int(level)
+#     error = True
+#     levelobj = Level.objects.get(level=level, dept='DVM')
+#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
+#         error = False
+#     return verify_final(request, error)
 
 def leaderboard(request):
     parts = Participant.objects.order_by('-progress', 'total_time')
