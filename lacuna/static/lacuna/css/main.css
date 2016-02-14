@@ -166,6 +166,10 @@ body,html{
 /*klas*/
 .cstar{
 	display:none;
+	cursor: pointer;
+}
+.cstar_sol{
+	fill: yellow !important;
 }
 #clue_jumbo{
 	display:none;

@@ -393,6 +393,7 @@ $(window).load(function(){
 			success: function(data){
 				console.log(data);
 				if(data.status==1){
+					$('#b'+cur_inf).addClass('cstar_sol');
 					alert('Congratulations! your answer was right');
 					$('#clue_jumbo').fadeOut();
 					$('.dashboard').fadeIn();
@@ -494,11 +495,17 @@ function get_level_status(){
 			for(var i=1;i<=level_id[data.dvm_level];i++){
 				$('#g'+i).addClass('enable_level');
 			}
+			var inf_lev = user.informals_stats.split("").map(function(item) {
+			    return parseInt(item, 10);
+			});
+			for(i in inf_lev){
+				if(inf_lev[i]==2)
+					$('#b'+inf_lev[i]).addClass('cstar_sol');
+			}
 			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 			$('.dashboard').fadeIn();
-			cur_story=0;
 		},
 	});
 }
@@ -508,7 +515,7 @@ function getStory(x){
 		method: 'POST',
 		data: {fbid:user.id,level:x},
 		success: function(data){
-			console.log(data);
+			// console.log(data);
 		},
 	});
 }
@@ -518,7 +525,7 @@ $(window).load(function(){
 		var tp_id = $(e.target).parent()[0].id;
 		var tmp_story=tp_id.substr(1);
 		cur_story=parseInt(tmp_story);
-		console.log(e,tp_id,tmp_story,cur_story);
+		// console.log(e,tp_id,tmp_story,cur_story);
 		go_to_pos(cur_story);
 	});
 	$('.clue_dash').click(function(){
@@ -697,6 +704,7 @@ $('#wintodash').click(function(){
 });
 
 $('#wintonext').click(function(){
+		$('#wino_cont').fadeOut();
 		++cur_story;
 		go_to_pos(cur_story);
 });
