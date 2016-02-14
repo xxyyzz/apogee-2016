@@ -393,6 +393,7 @@ $(window).load(function(){
 				if(data.status==1){
 					$('#clue_jumbo').fadeOut();
 					$('.dashboard').fadeIn();
+					cur_story=0;
 					get_level_status();
 				}
 				else{
@@ -494,6 +495,7 @@ function get_level_status(){
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 			$('.dashboard').fadeIn();
+			cur_story=0;
 		},
 	});
 }
@@ -517,6 +519,7 @@ $(window).load(function(){
 	$('.clue_dash').click(function(){
 		$('#clue_jumbo').fadeOut();
 		$('.dashboard').fadeIn();
+		cur_story=0;
 	});
 });
 // dashboard=================================================
@@ -678,6 +681,7 @@ $('.dash_instr').click(function(){
 
 $('#BackToDashboard').click(function(){
 	$('#puzzle_cont').fadeOut();
+	cur_story=0;
 	$('.dashboard').fadeIn();
 })
 
