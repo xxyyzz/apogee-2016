@@ -533,9 +533,7 @@ function submit_ans(ans,x){
 		success: function(data){
 			console.log(data);
 			if(data.status==1){
-				$('#puzzle').fadeOut();
-				$('#puzzle_cont').fadeOut();
-				$('.dashboard').fadeIn();
+				$('#wino_cont').fadeIn();
 				get_level_status();
 			}
 			else{
@@ -659,11 +657,6 @@ $('#BackToDashboard').click(function(){
 })
 
 // win situation
-function  openwin()
-{
-	$('#wino_cont').fadeIn();
-}
-
 $('#wintodash').click(function(){
 	$('#wino_cont').fadeOut();
 	$('#BackToDashboard').click();
