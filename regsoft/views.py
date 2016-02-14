@@ -459,10 +459,7 @@ def controlz_bill_details(request,part_id):
 #               if part.reg_paid:
 #                   onlinepaid+=1
 #               part.save()
-		if part_ob.fee_paid == True:
-			check = 2
-		elif part_ob.fee_paid == False:
-			check = 1
+		
 
 		ddno = request.POST.get('ddno' ,  False)
 		n1000 = int(request.POST.get('n_1000',0) )
@@ -555,8 +552,6 @@ def controlz_bill_details(request,part_id):
 			'total' : total,
 			'bill_id' : newbill.id,
 			'ddno' : ddno,
-			'check' : check,
-
 		}
 
 
