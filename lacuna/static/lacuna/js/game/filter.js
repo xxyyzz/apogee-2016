@@ -106,7 +106,7 @@ function lvl1init()
 		if(win)
 		{
 			submit_ans(saogridinit,3);
-			alert('you win');
+			// alert('you win');
 		}
 
 		return false;

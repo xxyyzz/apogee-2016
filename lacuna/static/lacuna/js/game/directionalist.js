@@ -229,12 +229,13 @@ function level4init()
 	
 	function lost()
 	{
-		alert('lost');
+		alert('You Lost. Try Again!');
+		level4init();
 	}
 	function win()
 	{
 		console.log(dirmap);
 		submit_ans(,5);
-		alert('win');
+		// alert('win');
 	}
 }

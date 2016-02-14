@@ -99,7 +99,8 @@ function level5init()
 
 	function  lost()
 	{
-		alert('lost');
+		alert('You lost. Try Again!');
+		level5init();
 	}
 	function win()
 	{
