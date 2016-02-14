@@ -321,5 +321,8 @@ def dvm12verify(request):
     return verify_final(request, error)
 
 def leaderboard(request):
-    parts = Participant.objects.order_by('-score', 'total_time')
-    pass
+    parts = Participant.objects.order_by('-progress', 'total_time')
+    context = {
+        'parts' : parts,
+    }
+    return render(request, 'lacuna/leaderboard.html', context)
