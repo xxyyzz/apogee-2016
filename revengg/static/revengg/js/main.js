@@ -213,6 +213,8 @@ function destroyClickedElement(event)
 	document.body.removeChild(event.target);
 }
 
+var dat;
+
 
 /*
 Start button click event.
@@ -227,7 +229,7 @@ $("#start_test").click(function() {
 		return;
 	}
 
-	var dat = {
+	dat = {
 		'name' : $("#feedbackName").val(),
 		'phone' : $("#feedbackPhone").val(),
 		'email' : $("#feedbackMail").val()
@@ -238,7 +240,7 @@ $("#start_test").click(function() {
  		data : dat,
  		method : "POST",
  		success : function(data) {
- 			console.log(data);
+ 			//console.log(data);
  			$("#start_panel").hide();
 			populateQuestionsList();
 			flushQuestion(0);
@@ -299,9 +301,25 @@ $("#warnquitconfirm").click(function() {
 	if(stage == 2) {
 		$("#quesanspanel").hide();
 		$("#warnquitpanel").hide();
-		$("#testendpanel").show();
-		stage = 3;
+		//$("#testendpanel").show();
+		$("#feedbackpanel").show();
+		stage = 4;
 		clearInterval(timer);
+
+		dat['score'] = calcScore();
+		dat['time'] = $("#topContainer1").html();
+
+		console.log(dat);
+
+
+		$.ajax({
+ 		url : '/revengg/update/',
+ 		data : dat,
+ 		method : "POST",
+ 		success : function(data) {
+ 			console.log(data);
+ 		}
+ 	});
 	}
 	// stop timer.
 });
@@ -310,7 +328,7 @@ $("#warnquitconfirm").click(function() {
 /*
 calculates score, useless !!!
 */
-$("#scorecalcbutton").click(function() {
+/*$("#scorecalcbutton").click(function() {
 	if(stage == 3) {
 		var thescoreis = calcScore();
 		$(".scoreIs").html(thescoreis);
@@ -318,7 +336,7 @@ $("#scorecalcbutton").click(function() {
 		$("#feedbackpanel").show();
 		stage = 4;
 	}
-});
+});*/
 
 
 
