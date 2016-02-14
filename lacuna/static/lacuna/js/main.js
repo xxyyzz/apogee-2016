@@ -348,9 +348,9 @@ function moveto_story(img,text){
 }
 var cur_story=0;
 $('.story').click(function(e){
-	console.log('story');
 	var id = e.target.id;
 	var t = id.substr(1);
+	console.log('story',t,id);
 	cur_story=t;
 	go_to_pos(t);
 });
