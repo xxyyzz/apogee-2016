@@ -526,7 +526,7 @@ $(window).load(function(){
 		var tp_id = $(e.target).parent()[0].id;
 		var tmp_story=tp_id.substr(1);
 		cur_story=parseInt(tmp_story);
-		// console.log(e,tp_id,tmp_story,cur_story);
+		console.log('bvffv',e,tp_id,tmp_story,cur_story);
 		go_to_pos(cur_story);
 	});
 	$('.clue_dash').click(function(){
@@ -707,5 +707,6 @@ $('#wintodash').click(function(){
 $('#wintonext').click(function(){
 		$('#wino_cont').fadeOut();
 		++cur_story;
+		console.log('wintonext');
 		go_to_pos(cur_story);
 });
