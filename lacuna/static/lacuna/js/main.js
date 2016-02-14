@@ -426,7 +426,7 @@ var initList = [
 	{func: function(){magicinit();}},
 	{func: function(){crypt();}},
 	{func: function(){level5init();}},
-	{func: function(){crypt();}},
+	{func: function(){posterinit();}},
 	{func: function(){colorinit();}},
 	{func: function(){crypt();}},
 	];
