@@ -909,7 +909,7 @@ var set =[
             'desc':'Jim Yong Kim'
          }
       ],
-      'correct':2,
+      'correct':3,
       'scoring':[  
          3,
          -1,
@@ -954,7 +954,7 @@ var set =[
       'options':[  
          {  
             'type':'image',
-            'desc':'/2016/static/revengg/revengg/qimg/reverse_eng/q32a.png'
+            'desc':'/2016/static/revengg/qimg/reverse_eng/q32a.png'
          },
          {  
             'type':'image',
@@ -1189,24 +1189,24 @@ var set =[
    {  
       'num':40,
       'cat':'miscellaneous',
-      'ques':'40. Which of the following <b>sitting </b>Prime Ministers were awarded the Bharat Ratna',
+      'ques':'40. Which of the following <b>sitting </b>Prime Ministers were awarded the Bharat Ratna<br><ol><li>Jawaharlal Nehru</li><li>Indira Gandhi</li><li>Rajiv Gandhi</li><li>A.B. Vajpayee</li></ol>Select the correct options.',
       'ques_img':null,
       'options':[  
          {  
             'type':'text',
-            'desc':'Jawaharlal Nehru'
+            'desc':'1, 2, and 3 only'
          },
          {  
             'type':'text',
-            'desc':'Indira Gandhi'
+            'desc':'2, and 3 only'
          },
          {  
             'type':'text',
-            'desc':'Rajiv Gandhi'
+            'desc':'1 and 2 only'
          },
          {  
             'type':'text',
-            'desc':'A.B. Vajpayee'
+            'desc':'1 and 4 only'
          }
       ],
       'correct':2,
