@@ -20,7 +20,7 @@ def user_login(request):
     try:
         part = Participant.objects.get(fbid=fbid)
     except:
-        part = Participant.objects.create(fbid=fbid, name=name, start_time=timezone.now(), total_time=timedelta(seconds=0))
+        part = Participant.objects.create(fbid=fbid, name=name, time_started=timezone.now(), start_time=timezone.now(), total_time=timedelta(seconds=0))
     response = {
         'status' : 1,
     }
