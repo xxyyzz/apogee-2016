@@ -24,12 +24,12 @@
 
 #scroll-container >p{
     position: absolute;
-    width: 55%;
-    top: 25%;
+    width: 70%;
+    top: 22%;
     left: 15%;
     font-size: 18px;
-    overflow-wrap: break-word;
-    overflow-x: hidden;
+    word-break: break-all;
+    /* overflow-x: hidden; */
     overflow-y: auto;
     font-family: monospace;
     font-weight: 800;
