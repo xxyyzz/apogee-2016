@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 import json
+import sys
 
 # Create your views here.
 # @staff_member_required
@@ -165,7 +166,8 @@ def dvm_level_verify(request):
     error = True
     levelobj = Level.objects.get(level=level, dept='DVM')
     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-        print sol.upper().replace(' ', ''), levelobj.answer.upper().replace(' ', '')
+        print >> sys.stderr, "Python message"
+        print >> sys.stderr, "sol.upper().replace(' ', ''), levelobj.answer.upper().replace(' ', '')"
         error = False
     return verify_final(request, error)
 
