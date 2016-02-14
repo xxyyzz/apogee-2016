@@ -162,7 +162,7 @@
                                         </th>
                                     </thead>
                                     <tbody>
-                                        <form method= "POST" action = '../bill_select/' id ="form1">
+                                        <form method= "POST" action = '../bill_details/{{part.id}}' id ="form1">
                                             {% csrf_token %}
                                         <tr>
                                             <td>{{part.aadhaar}}</td>
