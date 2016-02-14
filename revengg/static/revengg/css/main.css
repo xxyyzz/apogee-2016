@@ -163,10 +163,12 @@ body,html {
 #instrs ul>li{
 	margin: 5px 0;
 }
-#aarohan_logo{
-	width: 350px;
-	display: block;
-	margin: auto;
+#logo{
+	text-align: center;
+	font-size: 40px;
+	font-weight: 900;
+	width: 100%;
+	padding-bottom: 30px;
 }
 #start_test,#next_instr{
     display: block;
