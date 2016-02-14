@@ -472,8 +472,10 @@ function send_login(id,name){
 		method: 'POST',
 		data: {fbid:id,name:name},
 		success: function(data){
-			// console.log(data);
-			get_level_status()
+			$('.login_lacuna').fadeOut();;
+			$('.dashboard').fadeIn();
+			$('.dash_user').html(name);
+			get_level_status();
 		},
 	});
 }
@@ -504,10 +506,7 @@ function get_level_status(){
 					$('#b'+(parseInt(i)+1)).addClass('cstar_sol');
 				}
 			}
-			$('.dash_score').html(data.score+'%');
-			$('.dash_user').html(user.name);
-			$('.login_lacuna').fadeOut();
-			$('.dashboard').fadeIn();
+			$('.dash_score').html(data.score+'%');			
 		},
 	});
 }
