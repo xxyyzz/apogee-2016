@@ -493,6 +493,10 @@ $(window).load(function(){
 		go_to_pos(cur_story);
 		console.log("level_called",tp_id.substr(1));
 	});
+	$('.clue_dash').click(function(){
+		$('#clue_jumbo').fadeOut();
+		$('.dashboard').fadeIn();
+	});
 });
 // dashboard=================================================
 
@@ -529,10 +533,11 @@ function submit_ans(ans,x){
 		success: function(data){
 			console.log(data);
 			if(data.status==1){
-				$('#puzzle').fadeOut();
-				$('#puzzle_cont').fadeOut();
-				$('.dashboard').fadeIn();
+				$('#wino_cont').fadeIn();
 				get_level_status();
+			}
+			else{
+				alert('Your answer was wrong!');
 			}
 		},
 	});
@@ -544,6 +549,7 @@ function call_fb_login(){
 }
 function fb_logout(){
 	FB.logout(function(response) {
+		$('.login_lacuna').fadeIn();
 		$('.fb_login_cont').fadeIn();
 		$('.dashboard').fadeOut();
 		$('#clue_jumbo').fadeOut();
@@ -651,11 +657,6 @@ $('#BackToDashboard').click(function(){
 })
 
 // win situation
-function  openwin()
-{
-	$('#wino_cont').fadeIn();
-}
-
 $('#wintodash').click(function(){
 	$('#wino_cont').fadeOut();
 	$('#BackToDashboard').click();

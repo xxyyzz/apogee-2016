@@ -98,7 +98,7 @@ def informals_level_verify(request):
     level = int(level)
     sol = request.POST['sol']
     levelobj = Level.objects.get(level=level)
-    if sol == levelobj.answer:
+    if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
         part = Participant.objects.get(fbid=fbid)
         stats = list(part.informals_stats)
         count = stats.count('0')
@@ -175,7 +175,7 @@ def dvm2verify(request):
     level = request.POST['level']
     level = int(level)
     error = True
-    if sol == 'f4ed3a1660d08c32a10768f517efaa7a':
+    if sol.upper().replace(' ', '') == 'SAMYEMONASTERY':
         error = False
     return verify_final(request, error)
 
