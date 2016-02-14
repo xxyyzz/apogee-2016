@@ -509,11 +509,10 @@ function getStory(x){
 }
 // login=====================END==============================
 $(window).load(function(){
-	$('.my_level').click(function(e){
+	$('body').on('click','.enable_level',function(e){
 		var tp_id = $(e.target).parent()[0].id;
 		cur_story=tp_id.substr(1);
 		go_to_pos(cur_story);
-		console.log("level_called",tp_id.substr(1));
 	});
 	$('.clue_dash').click(function(){
 		$('#clue_jumbo').fadeOut();
