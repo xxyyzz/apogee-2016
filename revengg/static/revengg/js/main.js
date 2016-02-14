@@ -130,9 +130,25 @@ function renderTime() {
 	{
 		clearInterval(timer);
 		$("#quesanspanel").hide();
-		$("#testendpanel").show();
-		stage = 3;
-		
+		$("#feedbackpanel").show();
+		stage = 4;
+		clearInterval(timer);
+
+		dat['score'] = calcScore();
+		dat['time'] = $("#topContainer1").html();
+
+		console.log(dat);
+
+
+		$.ajax({
+	 		url : '/revengg/update/',
+	 		data : dat,
+	 		method : "POST",
+	 		success : function(data) {
+	 			console.log(data);
+	 		}
+	 	});
+			
 	}
 }
 
