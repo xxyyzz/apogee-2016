@@ -352,7 +352,7 @@ $('.story').click(function(e){
 	var id = e.target.id;
 	var t = id.substr(1);
 	console.log('story',t,id);
-	cur_story=t;
+	cur_story=parseInt(t);
 	go_to_pos(t);
 });
 $('.start').click(function(){
@@ -393,6 +393,7 @@ $(window).load(function(){
 			success: function(data){
 				console.log(data);
 				if(data.status==1){
+					alert('Congratulations! your answer was right');
 					$('#clue_jumbo').fadeOut();
 					$('.dashboard').fadeIn();
 					cur_story=0;
@@ -425,7 +426,7 @@ var initList = [
 	{func: function(){qrcodeinit();}},
 	{func: function(){lvl1init();}},
 	{func: function(){crypt();}},
-	{func: function(){level4init();}},
+	{func: function(){directinit();}},
 	{func: function(){crypt();}},
 	{func: function(){magicinit();}},
 	{func: function(){crypt();}},
@@ -515,7 +516,8 @@ function getStory(x){
 $(window).load(function(){
 	$('body').on('click','.enable_level',function(e){
 		var tp_id = $(e.target).parent()[0].id;
-		cur_story=tp_id.substr(1);
+		tmp_story=tp_id.substr(1);
+		cur_story=parseInt(tmp_story);
 		go_to_pos(cur_story);
 	});
 	$('.clue_dash').click(function(){
