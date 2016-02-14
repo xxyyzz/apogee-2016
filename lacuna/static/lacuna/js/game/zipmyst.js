@@ -1,4 +1,4 @@
-function zipmyst5nit(){
+function zipmystinit(){
     $('#zipmyst_submit').click(function(){
         var tp=$('#zipmyst_input').val();
         console.log(tp);
