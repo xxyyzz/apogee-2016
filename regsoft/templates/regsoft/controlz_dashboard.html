@@ -130,7 +130,7 @@
                                             <td> {{part.gender}} </td>
                                             <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
                                             <td>{{part.phone_one}}</td>
-                                            <td> </td>
+                                            <td> {{bill_id}}</td>
 
                                         </tr>
                                        
