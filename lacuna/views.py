@@ -241,6 +241,7 @@ def leaderboard(request):
             extra_time_stripped = extra_time - timedelta(microseconds=extra_time.microseconds)
             part.live_time = part.total_time + extra_time_stripped
         parts.append(part)
+    # parts = sorted(parts, key = lambda x: (x.progress, x.informals_score, x.live_time), reverse=True)
     context = {
         'parts' : parts,
     }

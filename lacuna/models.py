@@ -1,12 +1,14 @@
 from django.db import models
 from backend.models import *
 from django.http import JsonResponse
-# Create your models here.
+from django.utils import timezone
+
 class Participant(models.Model):
     fbid = models.BigIntegerField()
     name = models.CharField(max_length=200)
     progress = models.IntegerField(default=0)
     current_dvm_level = models.PositiveSmallIntegerField(default=1)
+    time_started = models.DateTimeField(null=True, blank=True, default=None)
     start_time = models.DateTimeField()
     total_time = models.DurationField(null=True, blank=True)
     dvm_1_time = models.DurationField(null=True, blank=True)
