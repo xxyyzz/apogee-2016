@@ -106,16 +106,16 @@
 <div align= "center">
     {% if part_ob.fee_paid == True %}
                                 <p >
+                                    <h3>This participant has paid online</h4>
                                     <h4><strong> Bill Details </strong></h4><br>
                                     <strong>Receipt No. : {{bill_id}} </strong><br>
+                                    
+                                    <strong>Name : {{part_ob.name}} </strong><br>
                                     <strong>College : {{part_ob.college}} </strong><br>
-                                    <strong>Cash Given : {{given}} </strong><br>
-                                    <strong>Balance: {{balance}} </strong><br>
-                                    <strong>DD nummber: {{ddno}} </strong><br>
+                                    <strong>Fee paid online : 800 </strong><br>
+                                    <strong>Balance: 0 </strong><br>
 
-                                    <strong>Amount per participant: 800 </strong> <br>
-                                    <strong>Amount per onlinepaid: 0 </strong> <br>
-                                    <strong>Total Amount Paid : {{total}} </strong>
+                                    <strong>Total Amount Paid : 800 </strong>
                                     <br></p>
     {% elif part_ob.fee_paid == False %}                                    
                                 <p >
@@ -126,8 +126,7 @@
                                     <strong>Balance: Paid online </strong><br>
                                     <strong>DD nummber: Paid online </strong>1\<br>
 
-                                    <strong>Amount per participant: 800 </strong> <br>
-                                    <strong>Amount per onlinepaid: 0 </strong> <br>
+                                    <strong>Amount to be taken for offline participant: 900 </strong> <br>
                                     <strong>Total Amount Paid : Paid online </strong>
                                     <br></p>
                                 
