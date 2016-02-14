@@ -1,82 +1,56 @@
-
-#scroll{
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0;
-	left:0;
-	overflow: hidden;
-	background-image: url('./../../img/puzzle/scrollback.jpg');
-
+.poster_cont{
+    background: url('./../../img/puzzle/pale_tan.png');
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    overflow-y:auto;: 
 }
-
-#scroll > #scroll-center{
-	width: 60%;
-	height: 80%;
+.poster_ques{
+    text-align: center;
 }
-
-#scroll-container{
-	width: 100%;
-	height: 100%;
-	position: relative;
-	top:0;
-	left:0;
+.poster_ques>img{
+    position: relative;
+    top:20px;
+    height: 90vh;
 }
-
-#scroll-container >p{
+.pos_sub{
+    width: 63vh;
+    margin: auto;
+    text-align: center;
     position: absolute;
-    width: 55%;
-    top: 25%;
-    left: 15%;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+}
+#poster_input{
+    display: inline-block;
+    width: 72%;
+    height: 40px;
+    padding: 8px 12px;
     font-size: 18px;
-    overflow-wrap: break-word;
-    overflow-x: hidden;
-    overflow-y: auto;
-    font-family: monospace;
-    font-weight: 800;
-    color: #312019;
-}
-#scroll-container > .mmail{
-    width: 47%;
-    marign-left: auto;
-    position: absolute;
-    bottom: -5%;
-    left: 21%;
-}
-
-#scroll-container .mmail input{	display: inline-block;
-    width: 75%;
-    height: 50px;
-    padding: 10px 12px;
-    font-size: 20px;
-    line-height: 30px;
-    color: #211403;
-    background-color: #E4DED6;
+    line-height: 24px;
+    color: #555;
+    background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-	outline: none;
+    outline: none;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
-
-#scroll-container .mmail input:placeholder{
-	color:#E8C594;
-}
-
-#scroll-container .mmail button{	display: inline-block;
+#poster_submit{
+    display: inline-block;
     width: 25%;
-    height: 50px;
-    padding: 10px 12px;
+    height: 40px;
+    padding: 8px 12px;
     margin-left: -2px;
-    font-size: 20px;
-    line-height: 30px;
-    color: #E8C594;
-    background-color: #211403;
+    font-size: 18px;
+    line-height: 24px;
+    color: #eee;
+    background-color: #4387F6;
     background-image: none;
     border: 1px solid #ccc;
     border-top-right-radius: 4px;
