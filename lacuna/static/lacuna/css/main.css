@@ -2,7 +2,7 @@
 	loader				2000
 	login lacuna		1500
 	dashboard			1200
-	puzzle_cont			1000
+	puzzle_cont			1300
 z-index map*/
 
 /*--------------------------------GENERAL-------------------------------------*/
@@ -114,6 +114,7 @@ body,html{
 	position: absolute;
 	top: 0;
 	left: 0;
+	z-index: 1400;
 	height: 100%;
 	width: 100%;
 	background-size: cover;
@@ -164,7 +165,7 @@ body,html{
 /*puzzle div===========================================*/
 #puzzle_cont{
 	display: none;
-	z-index: 1000;
+	z-index: 1300;
 	background-color: #fff;
 	position: absolute;
 	top: 0;
@@ -172,14 +173,20 @@ body,html{
 	height: 100%;
 	width: 100%;
 }
-#puzzle_nav
+.puzzle_nav
 {
-	position: absolute;
-	top:0;
-	left:0;
-	width: 100%;
-	z-index: 1000;
-	padding: 20px;
+	position: fixed;
+	margin: 20px;
+	z-index: 2;
+	border: 1px solid #444;
+	color: #444;
+	background-color: #f0f0f0;
+	padding: 10px 20px;
+	line-height: 2em;
+	font-size: 1.5em
+	display: inline-block;
+	border-radius: 4px; 
+	cursor: pointer;
 }
 #puzzle
 {
@@ -190,15 +197,8 @@ body,html{
 	left: 0;
 }
 
-#BackToDashboard{
-	border: 1px solid #eee;
-	border-radius: 2px; 
-	padding: 10px 20px;
-	display: inline-block;
-	line-height: 1.5em;
-	float: left;
-}
-#BackToDashboard>i{
+
+.puzzle_nav i{
 	color: inherit;
 	padding-right: 5px;
 }
@@ -239,41 +239,52 @@ body,html{
 /*dashboard==============END===============
 
 /*-------------------INSTRUCTIONS--------------*/
-#instr_cont{
+#instr_cont,#wino_cont{
+	position: fixed;
 	height:100%;
 	width: 100%;
+	z-index: 5;
+	display: none;
 }
-#instr_cont>.overlay
+#instr_cont>.overlay,#wino_cont>.overlay
 {
 	background-color: rgba(0,0,0,0.7);
 	height:100%;
 	width: 100%;
 }
-#instr_det{
+#instr_det,,#wino_det{
 	height: 80%;
 	width:80%;
 	border-radius: 4px;
 	background-color: #eee;
 	color:#444;
 }
-#instr_det>.cross{
+#instr_det>.cross,,#wino_det>.cross{
 	position: absolute;
 	right: 15px;
     top: 15px;
     font-weight: bold;
     font-size: 1.5em;
+    cursor: pointer;
 }
-#instr_det>.head{
+#instr_det>.head,,#wino_det>.head{
 	height: 20%;
 	line-height: 2.5em;
 	font-size: 2.5em;
 	text-align: center;
 	border-bottom: 1px solid #444;
 }
-#instr_det>.content{
+#instr_det>.content,,#wino_det>.content{
 	height: 80%;
 	font-size: 1.5em;
 	text-align: center;
 	padding: 20px;
 	overflow-y: auto;
+}
+#wino_cont{
+	display: block;
+}
+
+.story{
+	cursor: pointer;
 }

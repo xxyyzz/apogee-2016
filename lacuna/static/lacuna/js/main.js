@@ -6,15 +6,9 @@ $(window).load(function(){
 // Array for game
 var cur_pos = 0;
 // var game_seq = ["dashboard","story01","story02","story03","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",]
-var imgpre = '../2016/static/lacuna/'
+var imgpre = '/2016/static/lacuna/'
 
 var story_seq=[
-		{
-			name:"dashboard",
-			type:"game_start",
-			img:"",
-
-		 },
 		{	
 			name:"story01",
 			type:"story",
@@ -39,9 +33,7 @@ var story_seq=[
 		{	
 			name:"puzzle01",
 			type:"puzzle",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			func: function(){call_level(1);},
 		 },	
 		{	
 			name:"story04",
@@ -59,10 +51,8 @@ var story_seq=[
 		 },
 		{	
 			name:"crypt01",
-			type:"crypt",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			type:"puzzle",
+			func: function(){call_level(2);}, 
 		 },	
 		{	
 			name:"story06",
@@ -88,9 +78,7 @@ var story_seq=[
 		{	
 			name:"puzzle02",
 			type:"puzzle",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			func: function(){call_level(3);},
 		 },	
 		{	
 			name:"story09",
@@ -108,10 +96,8 @@ var story_seq=[
 		 },
 		{	
 			name:"crypt02",
-			type:"crypt",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			type:"puzzle",
+			func: function(){call_level(4);},
 		 }, 
 		{	
 			name:"story11",
@@ -137,9 +123,7 @@ var story_seq=[
 		{	
 			name:"puzzle03",
 			type:"puzzle",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			func: function(){call_level(5);},
 		 },	 
 		{	
 			name:"story14",
@@ -164,10 +148,8 @@ var story_seq=[
 		 },
 		{	
 			name:"crypt03",
-			type:"crypt",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			type:"puzzle",
+			func: function(){call_level(6);}, 
 		 },  
 		{	
 			name:"story17",
@@ -186,9 +168,7 @@ var story_seq=[
 		{	
 			name:"puzzle04",
 			type:"puzzle",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			func: function(){call_level(7);}, 
 		 },	 
 		{	
 			name:"story19",
@@ -206,10 +186,8 @@ var story_seq=[
 		 },
 		{	
 			name:"crypt04",
-			type:"crypt",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			type:"puzzle",
+			func: function(){call_level(8);}, 
 		 },  
 		{	
 			name:"story21",
@@ -228,9 +206,7 @@ var story_seq=[
 		{	
 			name:"puzzle05",
 			type:"puzzle",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			func: function(){call_level(9);}, 
 		 },	 
 		{	
 			name:"story23",
@@ -241,10 +217,8 @@ var story_seq=[
 		 },
 		{	
 			name:"crypt05",
-			type:"crypt",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			type:"puzzle",
+			func: function(){call_level(10);}, 
 		 }, 
 		{	
 			name:"story24",
@@ -263,9 +237,7 @@ var story_seq=[
 		{	
 			name:"puzzle06",
 			type:"puzzle",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			func: function(){call_level(11);}, 
 		 },
 		{	
 			name:"story26",
@@ -297,10 +269,8 @@ var story_seq=[
 		 },
 		{	
 			name:"crypt06",
-			type:"crypt",
-			img:imgpre+'img/story/story04.png',
-			text:'Sherlock took another puff of his pipe as he stared out into the busy bustling marketplace of Baghdad. He was bored. Bored. How could I not be bored? My brother asks me to stay here pretending to be dead. Sherlock winced at the bitter irony. Of all the things he had in his previous life, the one thing he missed the most after he had to fake his death was John. His first friend. His only friend. And he had had to betray him. Sherlock had faked his death to protect John, but that didn’t lessen the pain of lying to him',
-			func: moveto_story, 
+			type:"puzzle",
+			func: function(){call_level(12);}, 
 		 },  
 		{	
 			name:"story30",
@@ -340,38 +310,53 @@ var story_seq=[
 ];
 
 function go_to_pos(ch){
-	cur_pos = cur_pos + ch;
-	if(story_seq[cur_pos]['type']=='story')
+	if(story_seq[ch]['type']=='story')
 	{
-		console.log('yo');
 		$('#game_loader').fadeIn(200);
 		var $downloadingImage = $("<img>");
 		$downloadingImage.load(function(){	
-		    story_seq[cur_pos]['func'](story_seq[cur_pos]['img'],story_seq[cur_pos]['text']);
+		    story_seq[ch]['func'](story_seq[ch]['img'],story_seq[ch]['text']);
 			$('#game_loader').fadeOut(200);
 		});
-		$downloadingImage.attr("src", story_seq[cur_pos]['img']);
+		$downloadingImage.attr("src", story_seq[ch]['img']);
+		$('.story_container').fadeIn();
+		$('.dashboard').fadeOut();
+	}
+	if(story_seq[ch]['type']=='puzzle')
+	{
+		story_seq[ch]['func']();
+		$('.story_container').fadeOut();
+		$('.dashboard').fadeOut();
 	}
 }
 
 function moveto_story(img,text){
-	console.log('in');
 	$('.story_container').css({'background-image':'url('+img+')'});
 	$('.text_container').html(text);
 }
-
-$('.story_but').click(function(){
+var cur_story=0;
+$('.story').click(function(e){
+	console.log('story');
+	var id = e.target.id;
+	var t = id.substr(1);
+	cur_story=t;
+	go_to_pos(t);
+});
+$('.start').click(function(e){
+	go_to_pos(0);
+});
+$('.story_but').click(function(){		
 	if($(this).hasClass('story_prev'))
 	{
-		go_to_pos(-1);
+		--cur_story;
+		go_to_pos(cur_story);
 	}
-	else if($(this).hasClass('story_next'))
+	else if($(this).hasClass('story_next'))	
 	{
-		go_to_pos(1);
+		++cur_story;
+		go_to_pos(cur_story);
 	}
-
-});
-
+})
 // PUZZLE 5
 function puzzle5init()
 {	var grid= [
@@ -562,10 +547,10 @@ function get_level_status(){
 			user.informals_stats = data.informals_stats;
 			user.dvm_level = data.dvm_level;
 			user.score = data.score;
-			for(var i=0;i<=level_id[dvm_level];i++){
+			for(var i=0;i<=level_id['dvm_level'];i++){
 				$('#g'+i).addClass('enable_level');
 			}
-			$('.dash_score').html(data.score);
+			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
 			$('.login_lacuna').fadeOut();
 			$('.dashboard').fadeIn();
@@ -735,6 +720,7 @@ function testAPI() {
 // instruction---------------------------
 function open_instr(cont)
 {
+	console.log('yo',cont);
 	$('#instr_det>.content').html(cont);
 	$('#instr_cont').fadeIn(250);
 }
@@ -742,3 +728,12 @@ $('#instr_det>.cross,#instr_cont>.overlay').click(function(){
 	$('#instr_cont .content').html('');
 	$('#instr_cont').fadeOut(250);
 });
+
+$('.dash_instr').click(function(){
+	$(this).fadeOut();
+})
+
+$('#BackToDashboard').click(function(){
+	$('#puzzle_cont').fadeOut();
+	$('.dashboard').fadeIn();
+})

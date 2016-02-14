@@ -426,134 +426,136 @@ def controlz_dashboard(request,part_id):
 #       return render(request, 'regsoft/controlz_bill_amt.html', context)
 
 
-# def controlz_bill_details(request,gl_id):
-#   if request.POST:
-#       pidlist= str(request.POST['pidlist'])
-#       gl_id = gl_id
-#       gl= gleader.objects.get(id=gl_id)
-#       college = gl.details.college
-#       femaleno =0
-#       maleno  =0
-#       pidlistx = pidlist.split(',')
-#       pidlist = pidlist.split(',')
-#       onlinepaid = 0
-#       is_faculty=0
-#       for k in pidlist:
-#           if k != '' :
-#               k=int(k)
-#               part = InitialRegistration.objects.get(id =k)
-#               part.controlz = True
-#               if part.gender == 'M':
-#                   maleno+=1
-#               else:
-#                   femaleno+=1
+###### SATWIK MAKE MIGRATIONS AND UNCOMMEN THE BELOW CODE ONCE also UNCOMMENT THE URLS
+# def controlz_bill_details(request,part_id):
+# 	if request.POST:
+# #       pidlist= str(request.POST['pidlist'])
+# #       gl_id = gl_id
+# 		part_ob = Participant.objects.get(id=gl_id)
+# #       college = gl.details.college
+# #       femaleno =0
+# #       maleno  =0
+# #       pidlistx = pidlist.split(',')
+# #       pidlist = pidlist.split(',')
+# #       onlinepaid = 0
+# #       is_faculty=0
+# #       for k in pidlist:
+# #           if k != '' :
+# #               k=int(k)
+# #               part = InitialRegistration.objects.get(id =k)
+# #               part.controlz = True
+# #               if part.gender == 'M':
+# #                   maleno+=1
+# #               else:
+# #                   femaleno+=1
 
-#               if part.is_faculty:
-#                   is_faculty+=1
-#               if part.reg_paid:
-#                   onlinepaid+=1
-#               part.save()
+# #               if part.is_faculty:
+# #                   is_faculty+=1
+# #               if part.reg_paid:
+# #                   onlinepaid+=1
+# #               part.save()
+# 		if part_ob.fee_paid == True:
+# 			check = 2
+# 		elif part_ob.fee_paid == False:
+# 			check = 1
 
-#       ddno = request.POST.get('ddno' ,  False)
-#       n1000 = int(request.POST.get('n_1000',0) )
-#       n500 = int(request.POST.get('n_500',      0) )
-#       n100 = int(request.POST.get('n_100',      0) )
-#       n50 = int(request.POST.get('n_50',        0) )
-#       n20 = int(request.POST.get('n_20',        0) )
-#       n10 = int(request.POST.get('n_10' ,      0) )
-
-
-#       # totalamt = 1000*n1000 + 500*n500 + 100*n100 + 50*n50 + 20*n20 + 10*n10
-
-
-#       balance = 0
-#       given=0
-#       if n1000 < 0:
-#           balance += -(n1000) * 1000
-#       else:
-#           given+= n1000 * 1000
+# 		ddno = request.POST.get('ddno' ,  False)
+# 		n1000 = int(request.POST.get('n_1000',0) )
+# 		n500 = int(request.POST.get('n_500',      0) )
+# 		n100 = int(request.POST.get('n_100',      0) )
+# 		n50 = int(request.POST.get('n_50',        0) )
+# 		n20 = int(request.POST.get('n_20',        0) )
+# 		n10 = int(request.POST.get('n_10' ,      0) )
 
 
-#       if n500 < 0:
-#           balance += -(n500) * 500
-#       else:
-#           given+= n500 * 500
+# #       # totalamt = 1000*n1000 + 500*n500 + 100*n100 + 50*n50 + 20*n20 + 10*n10
 
 
-#       if n100 < 0:
-#           balance += -(n100) * 100
-#       else:
-#           given+= n100 * 100
+# 		balance = 0
+# 		given=0
+# 		if n1000 < 0:
+# 			balance += -(n1000) * 1000
+# 		else:
+# 			given+= n1000 * 1000
 
 
-#       if n50 < 0:
-#           balance += -(n50) * 50
-#       else:
-#           given+= n50 * 50
+# 		if n500 < 0:
+# 			balance += -(n500) * 500
+# 		else:
+# 			given+= n500 * 500
 
 
-#       if n20 < 0:
-#           balance += -(n20) * 20 
-#       else:
-#           given+= n20 * 20     
+# 		if n100 < 0:
+# 			balance += -(n100) * 100
+# 		else:
+# 			given+= n100 * 100
 
-#       if n10 < 0:
-#           balance += -(n10) * 10 
-#       else:
-#           given+= n10 * 10                                                     
+
+# 		if n50 < 0:
+# 			balance += -(n50) * 50
+# 		else:
+# 			given+= n50 * 50
+
+
+# 		if n20 < 0:
+# 			balance += -(n20) * 20 
+# 		else:
+# 			given+= n20 * 20     
+
+# 		if n10 < 0:
+# 			balance += -(n10) * 10 
+# 		else:
+# 			given+= n10 * 10                                                     
 			
 
 
 
-#       total = request.POST.get('total', 0)
-#       if total == '':
-#           total = 0   
-#       if ddno:
-#           newbill = Bill_new(gleader = gl_id, amount= total, college=college, given=given, balance=balance, draft_number= ddno)
-#       else:
-#           newbill = Bill_new(gleader = gl_id, amount= total, given=given, balance=balance, college=college)
-#           ddno= 'None'
+# 		total = request.POST.get('total', 0)
+# 		if total == '':
+# 			total = 0   
+# 		if ddno:
+# 			newbill = Bill_new(participant = part_ob, amount= total, given=given, balance=balance, draft_number= ddno)
+# 		else:
+# 			newbill = Bill_new(participant = part_ob, amount= total, given=given, balance=balance)
+# 			ddno= 'None'
 
-#         newbill.save()
-
-#         test = []
-#         for k in pidlistx:
-#             if k != '' :
-#                 k=int(k)
-#                 part = InitialRegistration.objects.get(id =k)
-#                 part.bill_id = int(newbill.id)
-#                 test.append({part.name, newbill.id})
-#                 part.save()
+# 		newbill.save()
+# 		part_ob.controlz = True
+# 		part_ob.save()
+# #         test = []
+# #         for k in pidlistx:
+# #             if k != '' :
+# #                 k=int(k)
+# #                 part = InitialRegistration.objects.get(id =k)
+# #                 part.bill_id = int(newbill.id)
+# #                 test.append({part.name, newbill.id})
+# #                 part.save()
 
 				
-#         newbill.notes_1000 = int(n1000)
-#         newbill.notes_500 = int(n500)
-#         newbill.notes_100 = int(n100)
-#         newbill.notes_50 = int(n50)
-#         newbill.notes_20 = int(n20)
-#         newbill.notes_10 = int(n10)
-#         newbill.save()
+# 		newbill.notes_1000 = int(n1000)
+# 		newbill.notes_500 = int(n500)
+# 		newbill.notes_100 = int(n100)
+# 		newbill.notes_50 = int(n50)
+# 		newbill.notes_20 = int(n20)
+# 		newbill.notes_10 = int(n10)
+# 		newbill.save()
 
 
 
-#       # return HttpResponse(test)
-#   context={
-#       'gl' : gl,
-#       'college' : college,
-#       'given' : given,
-#       'balance' : balance, 
-#       'total' : total,
-#       'maleno' : maleno,
-#       'femaleno' : femaleno,
-#       'bill_id' : newbill.id,
-#       'totalpart' : (maleno+femaleno),
-#       'ddno' : ddno,
-#       'onlinepaid' : onlinepaid,
+# #       # return HttpResponse(test)
+# 		context={
+# 			'part_ob' : part_ob,
+# 			'given' : given,
+# 			'balance' : balance, 
+# 			'total' : total,
+# 			'bill_id' : newbill.id,
+# 			'ddno' : ddno,
+# 			'check' : check,
 
-#   }
+# 		}
 
 
-#   return render(request, 'regsoft/controlz_bill_details.html', context)
+# 	return render(request, 'regsoft/controlz_bill_details.html', context)
 
 
 

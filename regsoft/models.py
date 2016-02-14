@@ -51,24 +51,23 @@ class Room(models.Model):
 	# def __unicode__(self):
 		# return str(self.number)
 		
-# class Bill_new(models.Model):
-# 	gleader= models.IntegerField(null=True, default=0)
-# 	amount=models.IntegerField(default=0)
-# 	college=models.CharField(max_length=200, default='')
-# 	given=models.IntegerField(default =0)
-# 	balance=models.IntegerField( default=0)
+class Bill(models.Model):
+	participant = models.ForeignKey('backend.Participant', null=True, blank=True)
+	amount = models.IntegerField(default=0)
+	given=models.IntegerField(default =0)
+	balance=models.IntegerField( default=0)
 
-# 	notes_1000 = models.IntegerField(null=True, blank=True, default=0)
-# 	notes_500 = models.IntegerField(null=True, blank=True, default=0)
-# 	notes_100 = models.IntegerField(null=True, blank=True, default=0)
-# 	notes_50 = models.IntegerField(null=True, blank=True, default=0)
-# 	notes_20 = models.IntegerField(null=True, blank=True, default=0)
-# 	notes_10 = models.IntegerField(null=True, blank=True, default=0)
+	notes_1000 = models.IntegerField(null=True, blank=True, default=0)
+	notes_500 = models.IntegerField(null=True, blank=True, default=0)
+	notes_100 = models.IntegerField(null=True, blank=True, default=0)
+	notes_50 = models.IntegerField(null=True, blank=True, default=0)
+	notes_20 = models.IntegerField(null=True, blank=True, default=0)
+	notes_10 = models.IntegerField(null=True, blank=True, default=0)
 
-# 	#number = models.IntegerField()
-# 	draft_number = models.CharField(max_length=100, default='')
-# 	def __unicode__(self):
-# 		return str(self.id)
+	#number = models.IntegerField()
+	draft_number = models.CharField(max_length=100, default='')
+	def __unicode__(self):
+		return str(self.id)
 		
 # class Team(models.Model):
 # 	event =  models.ForeignKey(Event)
