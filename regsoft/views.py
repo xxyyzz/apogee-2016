@@ -431,7 +431,7 @@ def controlz_bill_details(request,part_id):
 	if request.POST:
 #       pidlist= str(request.POST['pidlist'])
 #       gl_id = gl_id
-		part_ob = Participant.objects.get(id=gl_id)
+		part_ob = Participant.objects.get(id=part_id)
 #       college = gl.details.college
 #       femaleno =0
 #       maleno  =0
