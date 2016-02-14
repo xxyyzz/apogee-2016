@@ -516,8 +516,9 @@ function getStory(x){
 $(window).load(function(){
 	$('body').on('click','.enable_level',function(e){
 		var tp_id = $(e.target).parent()[0].id;
-		tmp_story=tp_id.substr(1);
+		var tmp_story=tp_id.substr(1);
 		cur_story=parseInt(tmp_story);
+		console.log(e,tp_id,tmp_story,cur_story);
 		go_to_pos(cur_story);
 	});
 	$('.clue_dash').click(function(){
