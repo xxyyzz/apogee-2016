@@ -663,5 +663,6 @@ $('#wintodash').click(function(){
 });
 
 $('#wintonext').click(function(){
-
+		++cur_story;
+		go_to_pos(cur_story);
 });
