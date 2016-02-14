@@ -84,7 +84,7 @@ function directinit()
 				}
 				else if(grid[i][j]=='fin')
 				{
-					html+='<div class="level4box fin" data-x="'+i+'" data-y="'+j+'"><div class="valcont" data-val="'+grid[i][j]+'" style="background:url(/2016/static/lacuna/img/puzzle/white/w'+grid[i][j]+'.svg);"></div></div>';	
+					html+='<div class="level4box fin" data-x="'+i+'" data-y="'+j+'"><div class="valcont" data-val="'+grid[i][j]+'" style="background:#16b816;color:#eee;">fin</div></div>';	
 				}
 				else if((i==(row - 1) && j==0))
 				{
