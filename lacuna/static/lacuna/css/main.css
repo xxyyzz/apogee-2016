@@ -173,14 +173,20 @@ body,html{
 	height: 100%;
 	width: 100%;
 }
-#puzzle_nav
+.puzzle_nav
 {
 	position: absolute;
-	top:0;
-	left:0;
-	width: 100%;
-	z-index: 1000;
-	padding: 20px;
+	margin: 20px;
+	z-index: 2;
+	border: 1px solid #444;
+	color: #444;
+	background-color: #f0f0f0;
+	padding: 10px 20px;
+	line-height: 2em;
+	font-size: 1.5em
+	display: inline-block;
+	border-radius: 4px; 
+	cursor: pointer;
 }
 #puzzle
 {
@@ -191,15 +197,8 @@ body,html{
 	left: 0;
 }
 
-#BackToDashboard{
-	border: 1px solid #eee;
-	border-radius: 2px; 
-	padding: 10px 20px;
-	display: inline-block;
-	line-height: 1.5em;
-	float: left;
-}
-#BackToDashboard>i{
+
+.puzzle_nav i{
 	color: inherit;
 	padding-right: 5px;
 }
@@ -243,6 +242,8 @@ body,html{
 #instr_cont{
 	height:100%;
 	width: 100%;
+	z-index: 5;
+	display: none;
 }
 #instr_cont>.overlay
 {
@@ -263,6 +264,7 @@ body,html{
     top: 15px;
     font-weight: bold;
     font-size: 1.5em;
+    cursor: pointer;
 }
 #instr_det>.head{
 	height: 20%;
