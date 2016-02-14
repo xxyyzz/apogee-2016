@@ -240,7 +240,7 @@ def leaderboard(request):
         if part.progress == 100 and part.informals_stats == '222222222222':
             part.live_time = part.total_time
         else:
-            part.live_time = strip_microseconds(timezone.now() - part.start_time)
+            part.live_time = strip_microseconds(timezone.now() - part.time_started)
         parts.append(part)
     # parts = sorted(parts, key = lambda x: (x.progress, x.informals_score, x.live_time), reverse=True)
     context = {
