@@ -253,7 +253,7 @@ var story_seq=[
 		{	
 			name:"story26",
 			type:"story",
-			img:imgpre+'img/story/story26.png',
+			img:imgpre+'img/story/story26.jpg',
 			text:'Sherlock was stunned at the message he had just received. He rushed out of his cell out into a surprisingly empty corridor. Not a single guard or official was in sight. Retrieving his belongings from the empty guard’s desk, he started sprinting. He ran to hangar number 3, which was also very conveniently unguarded, and hid on board the aircraft. And waited. And waited. And fell asleep.<br><br>Sherlock woke up with a jerk. The aircraft was up in the sky, he was sure of it. Cursing himself inwardly, he tried to analyse the situation. Apparently Maupertuis had boarded the plane and they were flying to Siberia. This was the worst possible situation he could be in. Judging by how rich The Baron was, there must be attendants on board. Two attendants maybe. Not more. ',
 			func: moveto_story, 
 		 },
@@ -429,15 +429,15 @@ var initList = [
 	{func: function(){chessinit();}},
 	{func: function(){qrcodeinit();}},
 	{func: function(){lvl1init();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	{func: function(){directinit();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	{func: function(){magicinit();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	{func: function(){level5init();}},
 	{func: function(){posterinit();}},
 	{func: function(){colorinit();}},
-	{func: function(){crypt();}},
+	{func: function(){return;}},
 	];
 jQuery.loadScript = function (url, callback) {
     jQuery.ajax({
