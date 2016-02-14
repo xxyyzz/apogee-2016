@@ -408,7 +408,10 @@ def controlz_bill_select(request, part_id):
 #               onlinepaid+=1
 
 #       totalamt= onlinepaid*500
-		
+		if part_ob.fee_paid == True:
+			check = 1
+		elif part_ob.fee_paid == False:
+			check = 2
 
 #       gl = plist[0].grpleader
 #       total = len(plist) 
@@ -416,6 +419,7 @@ def controlz_bill_select(request, part_id):
 #       pcount = (total - is_faculty - onlinepaid)
 		context ={
 			'part_ob' : part_ob, 
+			'check' : check,
 #       'plist' : plist,
 #       'facultyno' : is_faculty,
 #       'total' : total,
@@ -440,7 +444,7 @@ def controlz_bill_details(request,part_id):
 #       pidlist = pidlist.split(',')
 #       onlinepaid = 0
 #       is_faculty=0
-#       for k in pidlist:
+#      	for k in pidlist:
 #           if k != '' :
 #               k=int(k)
 #               part = InitialRegistration.objects.get(id =k)
@@ -556,7 +560,7 @@ def controlz_bill_details(request,part_id):
 		}
 
 
-	return render(request, 'regsoft/controlz_bill_details.html', context)
+		return render(request, 'regsoft/controlz_bill_details.html', context)
 
 
 
