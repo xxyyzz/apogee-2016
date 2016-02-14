@@ -336,10 +336,14 @@ function moveto_story(img,text){
 }
 var cur_story=0;
 $('.story').click(function(e){
+	console.log('story');
 	var id = e.target.id;
 	var t = id.substr(1);
 	cur_story=t;
 	go_to_pos(t);
+});
+$('.start').click(function(e){
+	go_to_pos(0);
 });
 $('.story_but').click(function(){		
 	if($(this).hasClass('story_prev'))
