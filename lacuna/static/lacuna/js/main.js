@@ -704,6 +704,7 @@ $('#wintodash').click(function(){
 });
 
 $('#wintonext').click(function(){
+		$('#wino_cont').fadeOut();
 		++cur_story;
 		go_to_pos(cur_story);
 });
