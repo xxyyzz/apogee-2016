@@ -28,7 +28,7 @@
 
                 <li>
 
-                    <a href="../home/{{gl.id}}">
+                    <a href="../home/{{part_ob.id}}">
                         <i class="pe-7s-menu"></i> 
                         <p>Dashboard</p>
                     </a>
@@ -104,27 +104,34 @@
                                    
 <br> <br>
 <div align= "center">
+    {% if check == '1'%}
                                 <p >
                                     <h4><strong> Bill Details </strong></h4><br>
                                     <strong>Receipt No. : {{bill_id}} </strong><br>
-                                    <strong>College : {{gl.details.college}} </strong><br>
+                                    <strong>College : {{part_ob.college}} </strong><br>
                                     <strong>Cash Given : {{given}} </strong><br>
                                     <strong>Balance: {{balance}} </strong><br>
                                     <strong>DD nummber: {{ddno}} </strong><br>
 
-                                    <strong>Amount per participant: 750 </strong> <br>
-                                    <strong>Amount per onlinepaid: 500 </strong> <br>
-                                    <strong>Amount per faculty: 0 </strong> <br>
+                                    <strong>Amount per participant: 800 </strong> <br>
+                                    <strong>Amount per onlinepaid: 0 </strong> <br>
                                     <strong>Total Amount Paid : {{total}} </strong>
-                                    <br>
-                                    <br>
-                                    <strong>Online Paid: {{onlinepaid}} </strong> <br>
-                                    <strong>No. of faculty: {{is_faculty}} </strong> <br>
-                                    <strong>No. of Males : {{maleno}} </strong><br>
-                                    <strong>No. of Females : {{femaleno}} </strong><br>
-                                    <strong>Total Individuals : {{totalpart}} </strong><br>
+                                    <br></p>
+    {% elif check == '2'%}                                    
+                                <p >
+                                    <h4><strong> Bill Details </strong></h4><br>
+                                    <strong>Receipt No. : {{bill_id}} </strong><br>
+                                    <strong>College : {{part_ob.college}} </strong><br>
+                                    <strong>Cash Given : Paid online </strong><br>
+                                    <strong>Balance: Paid online </strong><br>
+                                    <strong>DD nummber: Paid online </strong>1\<br>
 
-                                </p>
+                                    <strong>Amount per participant: 800 </strong> <br>
+                                    <strong>Amount per onlinepaid: 0 </strong> <br>
+                                    <strong>Total Amount Paid : Paid online </strong>
+                                    <br></p>
+                                
+{% endif %}
 </div>
 <div class="row">
                                         <div class="col-md-6">
@@ -134,7 +141,7 @@
 
 <form method= "POST" action="../bill_print/" >
     {% csrf_token %}
-    <input type = "hidden" name = 'gl_id' value="{{gl.id}}" >
+    <input type = "hidden" name = 'part_ob_id' value="{{part_ob.id}}" >
     <input type = 'hidden' name='bill_id' value= "{{bill_id}}" >
     <!-- <input type = 'hidden' name='pidlist' value="{% for k in plist %}{{k.id}},{% endfor %}" >   -->
 
