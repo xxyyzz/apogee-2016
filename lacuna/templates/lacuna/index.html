@@ -58,7 +58,7 @@
 	</div>
 	<div id="puzzle_cont">
 		<div id="BackToDashboard" class="puzzle_nav"  style="top:0;left:0;"><i class="fa fa-tachometer"></i>DASHBOARD</div>
-		<div id="puzzle_instr" class="puzzle_nav" style="bottom:0;left:0;" onclick="open_instr(instruct_arr[user.dvm_level - 1])"><i class="fa fa-info"></i>Instructions</div>	
+		<div id="puzzle_instr" class="puzzle_nav" style="bottom:0;left:0;" onclick="open_instr(story_seq[cur_story]['instr'])"><i class="fa fa-info"></i>Instructions</div>	
 		<div id="Forum" onclick=" window.open('https://www.facebook.com/lacuna.bits/', '_blank');" class="puzzle_nav"  style="bottom:0;right:0;"><i class="fa fa-facebook-square"></i>Forum</div>	
 		<div id="instr_cont">
 			<div class="overlay"></div>
@@ -70,10 +70,10 @@
 		</div>
 		<div id="wino_cont">
 			<div class="overlay"></div>
-			<div id="wino_det" class="abs_center">
-				<div class="cross">X</div>
-				<div class="head">Level Cleared</div>
-				<div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius impedit error illo placeat obcaecati vel voluptates consectetur cum animi aspernatur officiis molestias eos hic, minima atque odio incidunt quam accusantium!</div>
+			<div class="abs_center" style="height:30%;text-align:center;">
+				<div style="color: #eee;font-size: 40px;">CONGRATULATIONS! You have cleared this level... </div>
+				<button id="wintodash">return to dashboard</button>
+				<button id="wintonext">Proceed to next Level</button>
 			</div>
 		</div>
 		
