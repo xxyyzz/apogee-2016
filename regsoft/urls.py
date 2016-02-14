@@ -21,7 +21,7 @@ urlpatterns = [
 	url(r'^controlz/home/(?P<part_id>\d+)$', controlz_dashboard),
 # 	url(r'^controlz/stats/$', controlz_stats, name="controlz_stats"),
 # 	url(r'^controlz/edit/(?P<part_id>\d+)$', controlz_edit_part),
-# 	url(r'^controlz/bill_select/$', controlz_bill_select),
+	url(r'^controlz/bill_select/(?P<part_id>\d+)$', controlz_bill_select),
 # 	url(r'^controlz/bill_delete/$', controlz_delete_bill),
 # 	url(r'^controlz/bill_view/(?P<billid>\d+)/$', controlz_view_bill),
 	url(r'^controlz/bill_details/(?P<part_id>\d+)$', controlz_bill_details),

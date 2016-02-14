@@ -391,8 +391,9 @@ def controlz_dashboard(request,part_id):
 
 
 
-# def controlz_bill_select(request):
-#   if request.POST:
+def controlz_bill_select(request, part_id):
+	if request.POST:
+		part_ob = Participant.objects.get(id=part_id)
 #       pidlist = request.POST.getlist('part')
 #       plist= []
 #       is_faculty= 0
@@ -413,17 +414,17 @@ def controlz_dashboard(request,part_id):
 #       total = len(plist) 
 #       totalamt += (total- is_faculty - onlinepaid) * 750
 #       pcount = (total - is_faculty - onlinepaid)
-#       context ={
-#       'gl' : gl, 
+		context ={
+			'part_ob' : part_ob, 
 #       'plist' : plist,
 #       'facultyno' : is_faculty,
 #       'total' : total,
 #       'totalamt' : totalamt,
 #       'onlinepaid' : onlinepaid,
 #       'pcount' : pcount,
-#       }
+		}
 
-#       return render(request, 'regsoft/controlz_bill_amt.html', context)
+		return render(request, 'regsoft/controlz_bill_amt.html', context)
 
 
 ###### SATWIK MAKE MIGRATIONS AND UNCOMMEN THE BELOW CODE ONCE also UNCOMMENT THE URLS

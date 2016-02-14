@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.admin.views.decorators import staff_member_required
 import json
-# import yaml
 
 # Create your views here.
 # @staff_member_required
@@ -180,19 +179,6 @@ def dvm1verify(request):
     error = False
     return verify_final(request, error)
 
-# @csrf_exempt
-# def dvm2verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-
 @csrf_exempt
 def dvm3verify(request):
     fbid = request.POST['fbid']
@@ -205,46 +191,6 @@ def dvm3verify(request):
         if value != 0:
             error = True
     return verify_final(request, error)
-
-
-# @csrf_exempt
-# def dvm4verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-
-# @csrf_exempt
-# def dvm5verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-#
-# @csrf_exempt
-# def dvm6verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
 
 @csrf_exempt
 def dvm7verify(request):
@@ -266,45 +212,6 @@ def dvm7verify(request):
             error = True
     return verify_final(request, error)
 
-# @csrf_exempt
-# def dvm8verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-#
-# @csrf_exempt
-# def dvm9verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-#
-# @csrf_exempt
-# def dvm10verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-
 @csrf_exempt
 def dvm11verify(request):
     fbid = request.POST['fbid']
@@ -321,21 +228,8 @@ def dvm11verify(request):
                 error = True;
     return verify_final(request, error)
 
-# @csrf_exempt
-# def dvm12verify(request):
-#     fbid = request.POST['fbid']
-#     sol = request.POST['sol']
-#     sol = json.loads(sol)
-#     level = request.POST['level']
-#     level = int(level)
-#     error = True
-#     levelobj = Level.objects.get(level=level, dept='DVM')
-#     if sol.upper().replace(' ', '') == levelobj.answer.upper().replace(' ', ''):
-#         error = False
-#     return verify_final(request, error)
-
 def leaderboard(request):
-    parts = Participant.objects.order_by('-progress', 'total_time')
+    parts = Participant.objects.order_by('-progress', '-informals_score', 'total_time')
     context = {
         'parts' : parts,
     }
