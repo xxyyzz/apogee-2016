@@ -500,7 +500,7 @@ function get_level_status(){
 			});
 			for(i in inf_lev){
 				if(inf_lev[i]==2)
-					$('#b'+inf_lev[i]).addClass('cstar_sol');
+					$('#b'+(i+1)).addClass('cstar_sol');
 			}
 			$('.dash_score').html(data.score+'%');
 			$('.dash_user').html(user.name);
