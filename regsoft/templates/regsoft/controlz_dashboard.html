@@ -100,27 +100,52 @@
             </div>
         </nav>
                      
-
-<script type= 'text/javascript'>
-function checkall(gauss){
-  var cbx = document.getElementsByTagName('input');
-  for(var i=0; i< cbx.length ; ++i)
-  {
-    if(cbx[i].type == 'checkbox')
-      cbx[i].checked = gauss.checked;
-
-  }
-}
-
-</script>
                      
         <div class="content">
             <div class="container-fluid">
-                <div class="row">                   
+                <div class="row">   
+
+            {% if part.controlz %}
+                    
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">Billed</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Events</th>
+                                        <th>Phone</th>
+                                        <th>Bill Id</th>
+                                        
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{part.aadhaar}}</td>
+                                            <td>{{part.name}}</td>
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td> </td>
+
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                   
+                            </div>
+                        </div>
+                    </div> 
+                    {% else %}
+                                                 
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participants for {{part.college.name}}</h4> 
+                                <h4 class="title">Participant of {{part.college.name}}</h4> 
                                 <p class="category"> <br>The following has not been Billed</p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -160,43 +185,8 @@ function checkall(gauss){
                         </div>
                             <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1"><strong>BILL</strong></button>
                     </div>  
-                    
-                    
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">Billed</h4>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Events</th>
-                                        <th>Phone</th>
-                                        <th>Bill Id</th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{part.aadhaar}}</td>
-                                            <td>{{part.name}}</td>
-                                            <td> {{part.gender}} </td>
-                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <td>{{part.phone_one}}</td>
-                                            <td>{{part.grpleader.details.name}} </td>
+                    {% endif %}
 
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                                   
-                            </div>
-                        </div>
-                    </div> 
-                    
-                                 
                 </div>                    
             </div>
         </div>
