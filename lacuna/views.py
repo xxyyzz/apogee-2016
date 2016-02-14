@@ -231,10 +231,10 @@ def dvm11verify(request):
     return verify_final(request, error)
 
 def leaderboard(request):
-    participants = Participant.objects.order_by('-progress', '-informals_score', '-start_time')
+    participants = Participant.objects.order_by('-progress', '-informals_score', '-total_time')
     parts = []
     for part in participants:
-        if part.progress == 100 and part.informals_stats == '000000000000':
+        if part.progress == 100 and part.informals_stats == '222222222222':
             part.live_time = part.total_time
         else:
             extra_time = timezone.now() - part.start_time
