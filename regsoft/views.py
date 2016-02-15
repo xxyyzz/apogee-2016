@@ -465,7 +465,7 @@ def controlz_bill_details(request,part_id):
 #                   onlinepaid+=1
 #               part.save()
 		
-		if part_ob.fee_paid == True:
+		if part_ob.fee_paid == False:
 			ddno = request.POST.get('ddno' ,  False)
 			n1000 = int(request.POST.get('n_1000',0) )
 			n500 = int(request.POST.get('n_500',      0) )
@@ -561,10 +561,11 @@ def controlz_bill_details(request,part_id):
 
 			return render(request, 'regsoft/controlz_bill_details.html', context)
 
-		elif part_ob.fee_paid == False:
+		elif part_ob.fee_paid == True:
 			newbill = Bill(participant = part_ob, amount= 800, given= 800, balance= 0, draft_number= 'None')
 			newbill.save()
 			part_ob.controlz = True
+			ddno='None'
 			context={
 				'part_ob' : part_ob,
 				'bill_id' : newbill.id,
@@ -580,7 +581,7 @@ def controlz_bill_print(request):
 		part_id = int(request.POST['part_ob_id'])
 		bill_ob = Bill.objects.get(id=bill_id)
 		part_ob = Participant.objects.get(id=part_id)
-		if part_ob.fee_paid == True:
+		if part_ob.fee_paid == False:
 			college = part_ob.college
 			receiptno = bill_ob.id
 			total = bill_ob.amount
@@ -600,7 +601,7 @@ def controlz_bill_print(request):
 			}
 
 			return render_to_response('regsoft/receipt_offline.html', context)
-		elif part_ob.fee_paid == False:
+		elif part_ob.fee_paid == True:
 			context = {
 				'college': part_ob.college,
 				'receiptno' : bill_id,
