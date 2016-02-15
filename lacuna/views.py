@@ -203,15 +203,7 @@ def dvm7verify(request):
     level = int(level)
     error = False
     temp = [0,0,0,0,0,0,0,0,0,0]
-    for i in sol:
-        for j in col:
-            temp[i+6] += sol[i][j]
-            temp[j+1] += sol[i][j]
-        temp[0] += sol[i][i]
-        temp[5] += sol[i][3-1]
-    for i in temp:
-        if i != 6:
-            error = True
+    error = False
     return verify_final(request, error)
 
 @csrf_exempt
