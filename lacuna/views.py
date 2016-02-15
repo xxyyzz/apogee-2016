@@ -226,7 +226,7 @@ def strip_microseconds(td):
     return td - timedelta(microseconds=td.microseconds)
 
 def leaderboard(request):
-    participants = Participant.objects.order_by('-progress', '-informals_score', '-time_started')
+    participants = Participant.objects.order_by('-progress', '-informals_score', 'start_time')
     parts = []
     for part in participants:
         if part.progress == 100 and part.informals_stats == '222222222222':
