@@ -32,7 +32,7 @@ function magicinit() {
             t[0] += i[o][o], t[5] += i[o][3 - o]
         }
         for (var o = 0; o < t.length; o++) $("#sum" + (o + 1)).html(t[o]), t[o] != d && (a = !1);
-        a && submit_ans(t, 7)
+        a && submit_ans(i, 7)
     }
     var i = [
             [0, 0, 0, 0],
