@@ -93,13 +93,13 @@ body,html{
     width: 12%;
 }
 .ranking_user>div.gp{
-    width: 16%;
+    width: 14%;
 }
 .ranking_user>div.bs{
-    width: 16%;
+    width: 14%;
 }
 .ranking_user>div.ts{
-    width: 16%;
+    width: 20%;
 }
 .hor_center{
     position: absolute;
@@ -131,7 +131,7 @@ body,html{
                     <div class="name">USER</div>
                     <div class="gp">Game Progress</div>
                     <div class="bs">Bonus Score</div>
-                    <div class="ts">Time Elapsed</div>
+                    <div class="ts">Last Completed</div>
             </div>
             <div class="ranking">
             {% for part in parts %}
@@ -140,8 +140,8 @@ body,html{
                     <div class="rank">{{ forloop.counter }}</div>
                     <div class="name"><img src="https://graph.facebook.com/{{ part.fbid }}/picture?type=small">{{ part.name }}</div>
                     <div class="gp">{{ part.progress }}%</div>
-                    <div class="gp">{{ part.informals_score }}</div>
-                    <div class="bs">{{ part.live_time }}</div>
+                    <div class="bs">{{ part.informals_score }}</div>
+                    <div class="ts">{{ part.start_time }}</div>
                 </div>
             {% endfor %}
             </div>
