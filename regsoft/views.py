@@ -782,6 +782,7 @@ def recnacc_allot(request,pid):
 			part_ob = Participant.objects.get(id = pid)
 			if part_ob.gender == 'F':
 				part_ob.room = selectedroom
+				part_ob.recnacc = True
 				part_ob.save()
 				selectedroom.vacancy -= 1
 				selectedroom.save()
@@ -789,6 +790,7 @@ def recnacc_allot(request,pid):
 		else:
 			part_ob = Participant.objects.get(id = pid)
 			if part_ob.gender == 'M':
+				part_ob.recnacc = True
 				part_ob.room = selectedroom
 				part_ob.save()
 				selectedroom.vacancy -= 1
@@ -833,6 +835,7 @@ def recnacc_deallocate(request,pid):
             selected_room.vacancy += 1
             selected_room.save()
             part_ob.room = None
+            part_ob.recnacc = False
             part_ob.save()
             context = RequestContext(request)
             context_dict = {'part_ob':part_ob}
