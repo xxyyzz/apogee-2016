@@ -758,7 +758,7 @@ def recnacc_dashboard(request,pid):
 
 @csrf_exempt
 def recnacc_allot(request,pid):
-<<<<<<< HEAD
+
 	try:
 		Participant.objects.get(id = pid)
 	except:
