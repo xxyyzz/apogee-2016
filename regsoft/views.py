@@ -775,11 +775,7 @@ def recnacc_allot(request,pid):
 		#   context = RequestContext(request)
 		#   context_dict = {'error':error}
 		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-		room_list_a= Room.objects.all()
-		room_list = []
-		for x in room_list_a:
-			if x.id != 1:
-				room_list.append(x)
+		
 
 		part_ob = Participant.objects.get(id = pid)
 	
@@ -802,6 +798,12 @@ def recnacc_allot(request,pid):
 				part_ob.save()
 				selectedroom.vacancy -= 1
 				selectedroom.save()
+
+		room_list_a= Room.objects.all()
+		room_list = []
+		for x in room_list_a:
+			if x.id != 1:
+				room_list.append(x)
 
 		context = RequestContext(request)
 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
@@ -827,7 +829,7 @@ def recnacc_deallocate(request,pid):
 #   alist=[]
 #   for x in alloted_people:
 #       if x.room.id != 1:
-#           alist.append(x)
+#           alist.append(x)s
 
 	if request.method == 'POST':
 		if part_ob.room != None:
