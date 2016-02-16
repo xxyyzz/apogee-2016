@@ -120,13 +120,13 @@ function checkall(gauss){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participants</h4>
-                                <p class="category">Group Leader: <strong>{{gleader.details.name}}</strong><br>College Representative: <strong>{{gleader.details.college_rep.details.name}}</strong> <br>College: <strong>{{ gleader.details.college }}</strong></p>
+                                <h4 class="title">Participant</h4>
+                                <p class="category">College: <strong>{{ part.college.name }}</strong></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>S.no</th>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th> Events </th>
@@ -135,17 +135,16 @@ function checkall(gauss){
                                     <tbody>
                                         <form method= "POST" action = '../bill_select/' id ="form1">
                                             {% csrf_token %}
-                                        {% for member in participants %}
                                         <tr>
-                                            <td>{{forloop.counter}}</td>
+                                            <td>{{part.aadhaar}}</td>
                                             
-                                            <td>{{member.name}}{% if member.is_faculty %}(Faculty){% endif %}</td>
+                                            <td>{{part.name}}</td>
                                             <!-- <td>{{prt.name}}</td> -->
-                                            <td> {{member.gender}} </td>
-                                            <td>{% for k in member.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <td>{{member.phone_one}}</td>
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
                                         </tr>
-                                        {% endfor  %}
+
                                        </form>
                                     </tbody>
                                 </table>
@@ -160,7 +159,6 @@ function checkall(gauss){
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">Bill Details</h4>
-                                <p class="category"><strong>Males : {{maleno_two}} Females : {{femaleno_two}}</strong></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">

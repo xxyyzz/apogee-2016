@@ -108,10 +108,9 @@ function checkall(gauss){
                                 <table class="table table-hover">
                                     <thead>
                                         <th>S.no</th>
-                                        <th>Group Leader</th>
+                                        <th>Participant</th>
                                         <th>College</th>
                                         <th>Bill No </th>
-                                        <th>No. of participants</th>
                                         <th> Amount</th>
                                         <th>Details</th>
                                         <th>Print </th>
@@ -131,14 +130,12 @@ function checkall(gauss){
 
                                         <tr>
                                             <td>{{forloop.counter}}</td>
-                                            <td>{{bill.1.details.name}}
+                                            <td>{{bill.1.name}}
                                             </td>
-                                            <td> {{bill.0.college}} </td>
+                                            <td> {{bill.1.college.name}} </td>
                                             <td> {{bill.0.id}}</td>
-                                            <td> {{bill.2}}</td>
                                             <td>{{bill.0.amount}}</td>
                                             <td><a href='../bill_view/{{bill.0.id}}/'>Details </a></td>
-                                            <input type= "hidden" name='gl_id' value = '{{bill.1.id}}' form='print'>
                                <td>
                                <button type="submit" name='bill_id' class='btn btn-info btn-fill ' value="{{bill.0.id}}" form= "print">Print</button> 
                            </td>
