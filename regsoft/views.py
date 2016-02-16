@@ -758,61 +758,67 @@ def recnacc_dashboard(request,pid):
 
 @csrf_exempt
 def recnacc_allot(request,pid):
-    try:
-        Participant.objects.get(id = pid)
-    except:
-        return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
-    if request.method == 'POST':
-        roomid = request.POST['roomid']
-        # except:
-        #   error="Invalid Room Selected"
-        #   context = RequestContext(request)
-        #   context_dict = {'error':error}
-        #   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-        room_list_a= Room.objects.all()
-        room_list = []
-        for x in room_list_a:
-            if x.id != 1:
-                room_list.append(x)
 
-        part_ob = Participant.objects.get(id = pid)
-    
-        selectedroom = Room.objects.get(id=roomid) 
-        selectedroom_availibilty = selectedroom.vacancy
+	try:
+		Participant.objects.get(id = pid)
+	except:
+		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
+	if request.method == 'POST':
+		roomid = request.POST['roomid']
+		# except:
+		#   error="Invalid Room Selected"
+		#   context = RequestContext(request)
+		#   context_dict = {'error':error}
+		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		
+
+		part_ob = Participant.objects.get(id = pid)
+	
+		selectedroom = Room.objects.get(id=roomid) 
+		selectedroom_availibilty = selectedroom.vacancy
 
 
-        if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
-            part_ob = Participant.objects.get(id = pid)
-            if part_ob.gender == 'F':
-                part_ob.room = selectedroom
-                part_ob.save()
-                selectedroom.vacancy -= 1
-                selectedroom.save()
-            
-        else:
-            part_ob = Participant.objects.get(id = pid)
-            if part_ob.gender == 'M':
-                part_ob.room = selectedroom
-                part_ob.save()
-                selectedroom.vacancy -= 1
-                selectedroom.save()
+		if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'F':
+				part_ob.room = selectedroom
+				part_ob.recnacc = True
+				part_ob.save()
+				selectedroom.vacancy -= 1
+				selectedroom.save()
+			
+		else:
+			part_ob = Participant.objects.get(id = pid)
+			if part_ob.gender == 'M':
+				part_ob.recnacc = True
+				part_ob.room = selectedroom
+				part_ob.save()
+				selectedroom.vacancy -= 1
+				selectedroom.save()
 
-        context = RequestContext(request)
-        context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
-        return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+		room_list_a= Room.objects.all()
+		room_list = []
+		for x in room_list_a:
+			if x.id != 1:
+				room_list.append(x)
 
-    else:
-        room_list_a= Room.objects.all()
-        room_list = []
-        for x in room_list_a:
-            if x.id != 1:
-                room_list.append(x)
-        part_ob = Participant.objects.get(id = pid)
-        context = RequestContext(request)       
-        context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
-        return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-                
-        
+		context = RequestContext(request)
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+
+	else:
+		room_list_a= Room.objects.all()
+		room_list = []
+		for x in room_list_a:
+			if x.id != 1:
+				room_list.append(x)
+		part_ob = Participant.objects.get(id = pid)
+		context = RequestContext(request)       
+		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
+		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
+				
+		
+
 
 @csrf_exempt
 def recnacc_deallocate(request,pid):
@@ -821,7 +827,7 @@ def recnacc_deallocate(request,pid):
 #   alist=[]
 #   for x in alloted_people:
 #       if x.room.id != 1:
-#           alist.append(x)
+#           alist.append(x)s
 
     if request.method == 'POST':
         if part_ob.room != None:
@@ -829,6 +835,7 @@ def recnacc_deallocate(request,pid):
             selected_room.vacancy += 1
             selected_room.save()
             part_ob.room = None
+            part_ob.recnacc = False
             part_ob.save()
             context = RequestContext(request)
             context_dict = {'part_ob':part_ob}
