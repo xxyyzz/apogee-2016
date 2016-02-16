@@ -19,6 +19,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 @csrf_exempt
+@staff_member_required
 def firewallzo_dashboard(request):
     if request.POST:
         try:
@@ -50,7 +51,7 @@ def firewallzo_dashboard(request):
 
 
 
-
+@staff_member_required
 def firewallzo_dashboard_two(request,part_id):
 
     decoded = part_id
