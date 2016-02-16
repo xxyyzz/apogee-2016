@@ -3,8 +3,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 
-from Event.models import *
-from backend.models import *
+from ems.models import Score, Level, Judge, Label
+from Event.models import Event
+from backend.models import Participant, Team
 
 # Create your views here.
 EMSADMINS = [
@@ -159,7 +160,7 @@ def participant_details(request, partid):
     return render(request, 'ems/participant_details.html', context)
 
 @staff_member_required
-def events_home(request):
+def events_select(request):
     if request.user.username in EMSADMINS:
         events = Event.objects.order_by('name')
     else:
@@ -167,13 +168,13 @@ def events_home(request):
     context = {
         'events' : events,
     }
-    return render(request, 'ems/events_home.html', context)
+    return render(request, 'ems/events_select.html', context)
 
 @csrf_exempt
 @staff_member_required
-def events_detail(request, eventid):
+def events_home(request, eventid):
     if request.POST:
-        # eventid = request.POST['event']
+        eventid = request.POST['eventid']
         # return redirect('ems:events_detail', eventid)    if request.POST:
         if "add-finalists" in request.POST:
             teamids = request.POST.getlist('registered')
@@ -199,12 +200,32 @@ def events_detail(request, eventid):
     winners = [x for x in registered if x.is_winner == True]
     finalists = [x for x in registered if x.is_finalist == True]
     context = {
-        'registered' : registered,
-        'finalists' : finalists,
-        'winners' : winners,
         'event' : event,
     }
-    return render(request, 'ems/events_detail.html', context)
+    return render(request, 'ems/events_home.html', context)
+
+def events_levels(request, eventid):
+    event = Event.objects.get(id=eventid)
+    if request.method == 'POST':
+        if 'add' in request.POST:
+            name = request.POST['name']
+            position = request.POST['position']
+            level = Level.objects.create(name=name, position=position, event=event)
+            if 'judgesheet' in request.POST:
+                labelid = request.POST['label']
+                label = Label.objects.get(id=labelid)
+                level.label.add(label)
+                judges = request.POST.getlist('judge')
+                for judgeid in jugdes:
+                    judge = Judge.objects.get(id=judgeid)
+                    level.judges.add(judge)
+    context = {
+        'event' : event,
+    }
+    return render(request, 'ems/events_levels.html', context)
+
+
+
 
 @staff_member_required
 def upload_list(request):
