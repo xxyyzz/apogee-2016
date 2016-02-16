@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^dvm/mapcoordinates/$', dvm_level_verify),
     url(r'^dvm/magicsquare/$', dvm7verify),
     url(r'^dvm/unzipthemystery/$', dvm_level_verify),
-    url(r'^dvm/onetwotheree/$', dvm_level_verify),
+    url(r'^dvm/onetwothree/$', dvm_level_verify),
     url(r'^dvm/poster/$', dvm_level_verify),
     url(r'^dvm/colourmatch/$', dvm11verify),
     url(r'^dvm/dancingman/$', dvm_level_verify),

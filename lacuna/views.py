@@ -203,15 +203,7 @@ def dvm7verify(request):
     level = int(level)
     error = False
     temp = [0,0,0,0,0,0,0,0,0,0]
-    for i in sol:
-        for j in col:
-            temp[i+6] += sol[i][j]
-            temp[j+1] += sol[i][j]
-        temp[0] += sol[i][i]
-        temp[5] += sol[i][3-1]
-    for i in temp:
-        if i != 6:
-            error = True
+    error = False
     return verify_final(request, error)
 
 @csrf_exempt
@@ -234,7 +226,7 @@ def strip_microseconds(td):
     return td - timedelta(microseconds=td.microseconds)
 
 def leaderboard(request):
-    participants = Participant.objects.order_by('-progress', '-informals_score', '-time_started')
+    participants = Participant.objects.order_by('-progress', '-informals_score', 'start_time')
     parts = []
     for part in participants:
         if part.progress == 100 and part.informals_stats == '222222222222':
