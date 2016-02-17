@@ -31,7 +31,7 @@ class Score(models.Model):
 class Level(models.Model):
     # score_set
     event = models.ForeignKey('Event.Event')
-    label = models.ForeignKey('Label')
+    label = models.ForeignKey('Label', null=True, blank=True)
     judges = models.ManyToManyField('Judge')
     name = models.CharField(max_length=100)
     position = models.PositiveSmallIntegerField()

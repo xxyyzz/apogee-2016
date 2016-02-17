@@ -1657,7 +1657,7 @@ a.arch-lnk {
 }
 .workshop-img{
 	display: inline-block;
-	background-color: #fff;
+	background-color: #444;
 	width: 250px;
 	height: 100%;
 	top:0;
@@ -1668,7 +1668,9 @@ a.arch-lnk {
 }
 .workshop-img>img
 {
+	left: 5%;
 	width: 95%;
+	border-radius: 100%;
 }
 .workshop-desc{
 	display: inline-block;
@@ -1690,7 +1692,29 @@ a.arch-lnk {
 }
 .workshop-desc>div{padding: 7px 0;}
 .workshop-desc>div>a{color:#f0f0f0;margin: 10px 0;}
+.workmoredet{
+	color: #f0f0f0;
+    margin: 0 2em;
+    border-top: 2px solid #555;
+    background: #444;
+    /*padding-top: 26px;*/
+    max-height: 0;
+    transition: max-height 0.5s ease,padding 0.3s ease;
+    -moz-transition: max-height 0.5s ease,padding 0.3s ease;
+    -webkit-transition: max-height 0.5s ease,padding 0.3s ease;
+    visibility: hidden;
+    /*display: none;*/
 
+}
+.workmoredet li{
+	padding: 4px 0;
+}
+.workmoredet.open{
+	max-height: 1000px;
+	padding: 26px 0; 
+    /*margin: 2em;*/
+    visibility: visible;
+}
 /*Profile*/
 
 .hover_dark{
