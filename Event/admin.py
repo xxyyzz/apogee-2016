@@ -9,7 +9,7 @@ class EventAdmin(admin.ModelAdmin):
 	def get_queryset(self, request):
 		# """Limit Pages to those that belong to the request's user."""
 		qs = super(EventAdmin, self).get_queryset(request)
-		if request.user.is_superuser:
+		if request.user.is_superuser or request.user.username == 'junioradmin':
 			# It is mine, all mine. Just return everything.
 			return qs
 		# Now we just add an extra filter on the queryset and
