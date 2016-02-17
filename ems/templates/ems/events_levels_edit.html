@@ -23,20 +23,20 @@
                         {% csrf_token %}
                         <input type="hidden" name="eventid" value="{{ event.id }}">
                         <div class="header">
-                            <h4 class="title">Add Level</h4>
+                            <h4 class="title">Edit Level</h4>
                         </div>
                         <div class="content">
                                <div class="row">
                                     <div class="col-md-7">
                                         <div class="form-group">
                                             <label>Level Name</label>
-                                            <input type="text" class="form-control" required placeholder="Semifinals" name="name" size="12">
+                                            <input type="text" class="form-control" required value="{{ level.name }}" name="name" size="12">
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label>Level Rank</label>
-                                            <input type="text" list="genders" class="form-control" required placeholder="2" name="position">
+                                            <input type="text" list="genders" class="form-control" required value="{{ level.position }}" name="position">
                                             <datalist id="genders">
                                                 <option value="1">Finals</option>
                                                 <option value="2">Semi-Finals</option>
@@ -89,61 +89,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-info btn-fill" name="add">Save</button>
-                                <div class="clearfix"></div>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="card">
-                    <form action="." method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="eventid" value="{{ event.id }}">
-                        <div class="header">
-                            <h4 class="title">Levels</h4>
-                        </div>
-                        <div class="content table-responsive table-full-width">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                    <th>Edit</th>
-                                    <th>Rank</th>
-                                    <th>Name</th>
-                                    <th>Participants</th>
-                                    <th>Delete</th>
-                                </thead>
-                                <tbody>
-                                {% for level in levels|dictsort:"position" %}
-                                <tr>
-                                    <td>
-                                        <a href="{% url 'ems:events_levels_edit' event.id level.id %}" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
-                                    <td>{{ level.position }}</td>
-                                    <td>{{ level.name }}</td>
-                                    <td>{{ level.teams.all.count }}</td>
-                                    {% if not level.name == "Registered" %}
-                                    <td><button name="delete" value="{{ level.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
-                                        <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                    {% else %}
-                                    <td></td>
-                                    {% endif %}
-                                    <td>{{ team.category }}</td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="10" style="text-align:center">Nothing in here!</td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                <button type="submit" class="btn btn-info btn-fill" name="edit">Edit</button>
+                                <button type="submit" class="btn btn-danger btn-fill" name="delete">Delete</button>
+                            <div class="clearfix"></div>
                         </div>
                     </form>
                     </div>

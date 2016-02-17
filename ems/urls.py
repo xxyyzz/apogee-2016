@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^participantdetails/$', participant_details_home, name="participant_home"),
     url(r'^events/$', events_select, name="events_select"),
     url(r'^events/(?P<eventid>\d+)/levels/$', events_levels, name="events_levels"),
+    url(r'^events/(?P<eventid>\d+)/levels/(?P<levelid>\d+)/edit/$', events_levels_edit, name="events_levels_edit"),
     url(r'^events/(?P<eventid>\d+)/home/$', events_home, name="events_home"),
     url(r'^teamdetails/(?P<teamid>\d+)/$', team_details, name="team_details"),
     url(r'^teamdetails/$', team_details_home, name="team_home"),
