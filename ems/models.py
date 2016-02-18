@@ -42,28 +42,33 @@ class Level(models.Model):
 
 class Judge(models.Model):
     name = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.name
     # score_set
     # level_set
 
 class Label(models.Model):
     # level_set
-    var1name = models.CharField(max_length=100)
+    event = models.ForeignKey('Event.Event')
+    var1name = models.CharField(max_length=100, blank=True)
     var1max = models.PositiveSmallIntegerField(default=10)
-    var2name = models.CharField(max_length=100)
+    var2name = models.CharField(max_length=100, blank=True)
     var2max = models.PositiveSmallIntegerField(default=10)
-    var3name = models.CharField(max_length=100)
+    var3name = models.CharField(max_length=100, blank=True)
     var3max = models.PositiveSmallIntegerField(default=10)
-    var4name = models.CharField(max_length=100)
+    var4name = models.CharField(max_length=100, blank=True)
     var4max = models.PositiveSmallIntegerField(default=10)
-    var5name = models.CharField(max_length=100)
+    var5name = models.CharField(max_length=100, blank=True)
     var5max = models.PositiveSmallIntegerField(default=10)
-    var6name = models.CharField(max_length=100)
+    var6name = models.CharField(max_length=100, blank=True)
     var6max = models.PositiveSmallIntegerField(default=10)
-    var7name = models.CharField(max_length=100)
+    var7name = models.CharField(max_length=100, blank=True)
     var7max = models.PositiveSmallIntegerField(default=10)
-    var8name = models.CharField(max_length=100)
+    var8name = models.CharField(max_length=100, blank=True)
     var8max = models.PositiveSmallIntegerField(default=10)
-    var9name = models.CharField(max_length=100)
+    var9name = models.CharField(max_length=100, blank=True)
     var9max = models.PositiveSmallIntegerField(default=10)
-    var10name = models.CharField(max_length=100)
+    var10name = models.CharField(max_length=100, blank=True)
     var10max = models.PositiveSmallIntegerField(default=10)
+    def __unicode__(self):
+        return self.event.name

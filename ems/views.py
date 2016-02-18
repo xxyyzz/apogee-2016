@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
-
+from django.http import HttpResponse
 from ems.models import Score, Level, Judge, Label
 from Event.models import Event
 from backend.models import Participant, Team
@@ -179,16 +179,28 @@ def events_home(request, eventid):
         if "promote" in request.POST:
             position = int(request.POST['promote'])
             teams = request.POST.getlist('teams')
-            curr_level = Level.objects.get(event=event, position=position)
-            next_level = Level.objects.get(event=event, position=position-1)
+            try:
+                curr_level = Level.objects.get(event=event, position=position)
+            except:
+                return HttpResponse("Error: Duplicate levels with rank %s. <br> Please Ensure correct them from the 'Manage Levels' pane." % str(position))
+            try:
+                next_level = Level.objects.get(event=event, position=position-1)
+            except:
+                return HttpResponse("Error: Cannot find level with rank %s. <br> Please Ensure Level Rankings are in continuous order, starting from 1. Correct them from the 'Manage Levels' pane." % str(position-1))
             for teamid in teams:
                 team = Team.objects.get(id=teamid)
                 next_level.teams.add(team)
         if "demote" in request.POST:
             position = int(request.POST['demote'])
             teams = request.POST.getlist('teams')
-            curr_level = Level.objects.get(event=event, position=position)
-            prev_level = Level.objects.get(event=event, position=position+1)
+            try:
+                curr_level = Level.objects.get(event=event, position=position)
+            except:
+                return HttpResponse("Error: Duplicate levels with rank %s. <br> Please Ensure correct them from the 'Manage Levels' pane." % str(position))
+            try:
+                prev_level = Level.objects.get(event=event, position=position+1)
+            except:
+                return HttpResponse("Error: Cannot find Level with rank %s. <br> Please Ensure Level Rankings are in continuous order, starting from 1. Correct them from the 'Manage Levels' pane." % str(position+1))
             for teamid in teams:
                 team = Team.objects.get(id=teamid)
                 curr_level.teams.remove(team)
@@ -251,7 +263,7 @@ def events_levels(request, eventid):
 def events_levels_edit(request, eventid, levelid):
     event = Event.objects.get(id=eventid)
     level = Level.objects.get(id=levelid)
-    if 'edit' in request.POST:
+    if 'save' in request.POST:
         name = request.POST['name']
         position = int(request.POST['position'])
         level.name = name
@@ -265,6 +277,7 @@ def events_levels_edit(request, eventid, levelid):
             for judgeid in jugdes:
                 judge = Judge.objects.get(id=judgeid)
                 level.judges.add(judge)
+        return redirect('ems:events_levels_edit', event.id, level.id)
     if 'delete' in request.POST:
         level.delete()
         return redirect('ems:events_home', event.id)
@@ -273,6 +286,47 @@ def events_levels_edit(request, eventid, levelid):
         'level' : level,
     }
     return render(request, 'ems/events_levels_edit.html', context)
+
+def events_levels_judge(request, eventid, levelid, judgeid):
+    event = Event.objects.get(id=eventid)
+    level = Level.objects.get(id=levelid)
+    judge = Judge.objects.get(id=judgeid)
+    if request.method == 'POST':
+        for team in level.teams.all():
+            scores = request.POST.getlist(str(team.id))
+            print scores
+            try:
+                score = Score.objects.get(level=level, team=team, judge=judge)
+            except:
+                score = Score.objects.create(level=level, team=team, judge=judge)
+            for i, val in enumerate(scores):
+                attr = 'var' + str(i+1)
+                setattr(score, attr, val)
+            score.save()
+    teams = []
+    for team in level.teams.all():
+        try:
+            score = Score.objects.get(level=level, team=team, judge=judge)
+            team.score = score
+        except:
+            pass
+        teams.append(team)
+    context = {
+        'event' : event,
+        'level' : level,
+        'judge' : judge,
+        'teams' : teams,
+    }
+    return render(request, 'ems/events_judge.html', context)
+
+def events_participants(request, eventid):
+    event = Event.objects.get(id=eventid)
+    teams = Team.objects.filter(event=event)
+    context = {
+        'event' : event,
+        'teams' : teams,
+    }
+    return render(request, 'ems/events_participants.html', context)
 
 @staff_member_required
 def upload_list(request):

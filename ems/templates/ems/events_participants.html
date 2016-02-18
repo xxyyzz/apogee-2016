@@ -7,9 +7,9 @@
         </a>
     </li>
     <li>
-        <a href="{% url 'ems:events_participants' event.id %}">
+        <a href="{% url 'ems:events_levels' event.id %}">
             <i class="pe-7s-news-paper"></i>
-            <p>Manage Participants</p>
+            <p>Manage Levels</p>
         </a>
     </li>
 {% endblock sidebar_content %}
@@ -23,7 +23,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="eventid" value="{{ event.id }}">
                         <div class="header">
-                            <h4 class="title">Add Level</h4>
+                            <h4 class="title">Add Participant</h4>
                         </div>
                         <div class="content">
                                <div class="row">
@@ -105,28 +105,43 @@
                         {% csrf_token %}
                         <input type="hidden" name="eventid" value="{{ event.id }}">
                         <div class="header">
-                            <h4 class="title">Levels</h4>
+                            <h4 class="title">Participants</h4>
                         </div>
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
                                 <thead>
                                     <th>Edit</th>
-                                    <th>Rank</th>
+                                    <th>S.No</th>
+                                    {% if event.is_team %}
+                                    <th>Team Name</th>
+                                    <th>Team Leader</th>
+                                    <th>Members</th>
+                                    <th>Leader College</th>
+                                    {% else %}
                                     <th>Name</th>
-                                    <th>Participants</th>
+                                    <th>College</th>
+                                    {% endif %}
+                                    <th>Rank</th>
                                     <th>Delete</th>
                                 </thead>
                                 <tbody>
-                                {% for level in levels|dictsort:"position" %}
+                                {% for team in teams %}
                                 <tr>
                                     <td>
-                                        <a href="{% url 'ems:events_levels_edit' event.id level.id %}" class="btn btn-info btn-simple btn-xs">
+                                        <a href="" class="btn btn-info btn-simple btn-xs">
                                         <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
-                                    <td>{{ level.position }}</td>
-                                    <td>{{ level.name }}</td>
-                                    <td>{{ level.teams.all.count }}</td>
+                                    <td>{{ forloop.counter }}</td>
+                                    {% if event.is_team %}
+                                    <td>{{ team.name }}</td>
+                                    <td>{{ team.leader.name }}</td>
+                                    <td>{{ team.members.all.count|add:1 }}</td>
+                                    {% else %}
+                                    <td>{{ team.leader.name }}</td>
+                                    {% endif %}
+                                    <td>{{ team.leader.college.name }}</td>
+                                    <td>{{ team.rank }}</td>
                                     {% if not level.is_protected %}
                                     <td><button name="delete" value="{{ level.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
                                         <i class="fa fa-times"></i>

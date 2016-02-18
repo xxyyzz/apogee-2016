@@ -7,6 +7,12 @@
         </a>
     </li>
     <li>
+        <a href="{% url 'ems:events_levels' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Levels Home</p>
+        </a>
+    </li>
+    <li>
         <a href="{% url 'ems:team_home' %}">
             <i class="pe-7s-news-paper"></i>
             <p>Manage Participants</p>
@@ -89,8 +95,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-info btn-fill" name="edit">Edit</button>
+                                <button type="submit" class="btn btn-info btn-fill" name="save">Save</button>
+                                {% if not level.is_protected %}
                                 <button type="submit" class="btn btn-danger btn-fill" name="delete">Delete</button>
+                                {% endif %}
                             <div class="clearfix"></div>
                         </div>
                     </form>

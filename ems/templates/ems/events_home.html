@@ -1,13 +1,13 @@
 {% extends "ems/base.html" %}
 {% block sidebar_content %}
-<li>
-    <a href="{% url 'ems:events_levels' event.id %}">
-        <i class="pe-7s-news-paper"></i>
-        <p>Manage Levels</p>
-    </a>
-</li>
     <li>
-        <a href="{% url 'ems:team_home' %}">
+        <a href="{% url 'ems:events_levels' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Manage Levels</p>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'ems:events_participants' event.id %}">
             <i class="pe-7s-news-paper"></i>
             <p>Manage Participants</p>
         </a>
@@ -31,12 +31,17 @@
                                     <thead>
                                         <th>Check</th>
                                         <th>Edit</th>
-                                        <th>S.no</th>
+                                        <th>S.No</th>
+                                        {% if event.is_team %}
                                         <th>Team Name</th>
-                                        <th>Leader Name</th>
+                                        <th>Team Leader</th>
                                         <th>Members</th>
                                         <th>Leader College</th>
-                                        <th>Position</th>
+                                        {% else %}
+                                        <th>Name</th>
+                                        <th>College</th>
+                                        {% endif %}
+                                        <th>Rank</th>
                                     </thead>
                                     <tbody>
                                     {% for team in level.teams.all %}
@@ -52,11 +57,15 @@
                                             </a>
                                         </td>
                                         <td>{{ forloop.counter }}</td>
+                                        {% if event.is_team %}
                                         <td>{{ team.name }}</td>
                                         <td>{{ team.leader.name }}</td>
                                         <td>{{ team.members.all.count|add:1 }}</td>
+                                        {% else %}
+                                        <td>{{ team.leader.name }}</td>
+                                        {% endif %}
                                         <td>{{ team.leader.college.name }}</td>
-                                        <td>{{ team.name }}</td>
+                                        <td>{{ team.rank }}</td>
                                     </tr>
                                     {% empty %}
                                     <tr>
