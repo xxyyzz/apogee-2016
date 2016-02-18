@@ -3,6 +3,7 @@ from regsoft.views import *
 
 urlpatterns = [
 	url(r'^firewallzouter/scan/$', firewallzo_dashboard),
+	url(r'^firewallzouter/select/$', firewallzo_board),
 	url(r'^firewallzouter/scan/(?P<part_id>\d+)$', firewallzo_dashboard_two),
 	url(r'^firewallzouter/confirm/$', firewallzo_confirm),
 # 	url(r'^firewallzouter/confirm/(?P<crep_id>\d+)$', firewallzo_setgleader),

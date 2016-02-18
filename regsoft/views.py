@@ -17,6 +17,33 @@ import json
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
+@csrf_exempt
+@staff_member_required
+def firewallzo_board(request):
+    if request.POST:
+        try:
+            pidlist= request.POST.getlist('pidlist',False) #taking alternative character because alphabets were random and had no meaning
+            part_ob_list =[]
+            plist2=[]
+            for part in pidlist:
+                part_ob = Participant.objects.get(id=int(part))
+                if part_ob.firewallzo:
+                    part_ob_list.append(part_ob)
+                else:
+                    plist2.append(part_ob)
+            context={
+            'plist' : part_ob_list,
+            'plist2' : plist2,
+            }
+            return render(request, 'regsoft/table_apogee.html', context)            
+        except:
+            return HttpResponse('Error')
+    else:
+        return HttpResponseRedirect('../barcodelist/')
+
+
+
+
 
 @csrf_exempt
 @staff_member_required
