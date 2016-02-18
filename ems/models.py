@@ -32,10 +32,13 @@ class Level(models.Model):
     # score_set
     event = models.ForeignKey('Event.Event')
     label = models.ForeignKey('Label', null=True, blank=True)
-    judges = models.ManyToManyField('Judge')
+    judges = models.ManyToManyField('Judge', blank=True)
     name = models.CharField(max_length=100)
     position = models.PositiveSmallIntegerField()
-    teams = models.ManyToManyField('backend.Team', related_name='levels')
+    teams = models.ManyToManyField('backend.Team', related_name='levels', blank=True)
+    is_protected = models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.name
 
 class Judge(models.Model):
     name = models.CharField(max_length=200)
