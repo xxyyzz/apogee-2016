@@ -28,16 +28,16 @@ def firewallzo_board(request):
             for part in pidlist:
                 part_ob = Participant.objects.get(id=int(part))
                 if part_ob.firewallzo:
-                    part_ob_list.append(part_ob)
-                else:
                     plist2.append(part_ob)
+                else:
+                    part_ob_list.append(part_ob)
             context={
             'plist' : part_ob_list,
             'plist2' : plist2,
             }
             return render(request, 'regsoft/table_apogee.html', context)            
         except:
-            return HttpResponse('Error')
+            return HttpResponse('Error : Call Satwik : 9928823099')
     else:
         return HttpResponseRedirect('../barcodelist/')
 
@@ -100,31 +100,49 @@ def firewallzo_dashboard_two(request,part_id):
 def firewallzo_confirm(request):
     if request.POST:
         # pid = request.POST.get('confirm',False)
-        pid = request.POST['confirm']
-        if pid:
-            p_ob = Participant.objects.get(id= int(pid))
-            googol = "000000000"
-            clg = p_ob.college.name
-            p_ob.firewallzo= True
-            num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
-            pcode= "0"
-            try:
-                pcode = str(clg)[:3].upper() + num_part
-            except:
-                pcode = "0"
-            p_ob.aadhaar = pcode
-            p_ob.save()
+        pidlist = request.POST.getlist('pidlist',False)
+        glid= int(request.POST.getlist('gleader')[0])
+        grp_part_ob = Participant.objects.get(id= glid)
+        grp_part_ob.firewallzo=True
+        grp_part_ob.save()
+        grp_ob= gleader(details=grp_part_ob, groupcode="")
+        grp_ob.save()
+        grp_id = grp_ob.id
+        googol = "000000000"        
+        num_part = googol[ : ( 4 - len(str(grp_id)) ) ] + str(grp_id)
+        grpcode= "0"
+        try:
+            grpcode = str(grp_ob.details.name)[:3].upper() + num_part
+        except:
+            grpcode = "0"
+        grp_ob.groupcode= grpcode
+        grp_ob.save()
+        plist=[]
+        if pidlist:
+            for pid in pidlist:
+                pid = int(pid)
+                p_ob= Participant.objects.get(id= int(pid))
+                p_ob.firewallzo=True
+                p_ob.grpleader= grp_ob
+                p_ob.save()
+                googol = "000000000"
+                clg = p_ob.college.name
+                num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
+                pcode= "0"
+                try:
+                    pcode = str(clg)[:3].upper() + num_part
+                except:
+                    pcode = "0"
+                p_ob.aadhaar = pcode
+                p_ob.save()
+                plist.append(p_ob)
         else:
-            return HttpResponse('Error Contact Satwik : 9928823099')            
+            return HttpResponse('Please select atleast 1 participant')            
+        context={
+        'plist2' : plist,
+        }
+        return render(request,'regsoft/table_apogee.html', context)
 
-        # clg = k.name
-        # pid = init_ob.id
-        # init_ob.save()
-
-
-        return HttpResponseRedirect('../scan/'+ str(p_ob.id))
-    else:
-        return HttpResponse('Dude! Its not a POST request _|_')
 
 def firewallzo_unconfirm(request, part_id):
     p_ob = Participant.objects.get(id = int(part_id))
