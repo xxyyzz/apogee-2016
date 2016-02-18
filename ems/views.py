@@ -173,9 +173,28 @@ def events_select(request):
 @csrf_exempt
 @staff_member_required
 def events_home(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
     if request.POST:
-        eventid = request.POST['eventid']
-        # return redirect('ems:events_detail', eventid)    if request.POST:
+        if "promote" in request.POST:
+            position = int(request.POST['promote'])
+            teams = request.POST.getlist('teams')
+            curr_level = Level.objects.get(event=event, position=position)
+            next_level = Level.objects.get(event=event, position=position-1)
+            for teamid in teams:
+                team = Team.objects.get(id=teamid)
+                next_level.teams.add(team)
+        if "demote" in request.POST:
+            position = int(request.POST['demote'])
+            teams = request.POST.getlist('teams')
+            curr_level = Level.objects.get(event=event, position=position)
+            prev_level = Level.objects.get(event=event, position=position+1)
+            for teamid in teams:
+                team = Team.objects.get(id=teamid)
+                curr_level.teams.remove(team)
+                print prev_level.teams.all()
+                if team not in prev_level.teams.all():
+                    prev_level.teams.add(team)
         if "add-finalists" in request.POST:
             teamids = request.POST.getlist('registered')
             for teamid in teamids:
@@ -195,21 +214,19 @@ def events_home(request, eventid):
         if "delete-team" in request.POST:
             teamid = request.POST['delete-team']
             Team.objects.get(id=teamid).delete()
-    event = Event.objects.get(id=eventid)
-    registered = Team.objects.filter(event__id=eventid)
-    winners = [x for x in registered if x.is_winner == True]
-    finalists = [x for x in registered if x.is_finalist == True]
     context = {
         'event' : event,
+        'levels' : levels,
     }
     return render(request, 'ems/events_home.html', context)
 
 def events_levels(request, eventid):
     event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
     if request.method == 'POST':
         if 'add' in request.POST:
             name = request.POST['name']
-            position = request.POST['position']
+            position = int(request.POST['position'])
             level = Level.objects.create(name=name, position=position, event=event)
             if 'judgesheet' in request.POST:
                 labelid = request.POST['label']
@@ -219,13 +236,43 @@ def events_levels(request, eventid):
                 for judgeid in jugdes:
                     judge = Judge.objects.get(id=judgeid)
                     level.judges.add(judge)
+        if 'delete' in request.POST:
+            levelid = request.POST['delete']
+            level = Level.objects.get(id=levelid)
+            print level
+            level.teams.clear()
+            level.delete()
     context = {
         'event' : event,
+        'levels' : levels,
     }
     return render(request, 'ems/events_levels.html', context)
 
-
-
+def events_levels_edit(request, eventid, levelid):
+    event = Event.objects.get(id=eventid)
+    level = Level.objects.get(id=levelid)
+    if 'edit' in request.POST:
+        name = request.POST['name']
+        position = int(request.POST['position'])
+        level.name = name
+        level.position = position
+        level.save()
+        if 'judgesheet' in request.POST:
+            labelid = request.POST['label']
+            label = Label.objects.get(id=labelid)
+            level.label.add(label)
+            judges = request.POST.getlist('judge')
+            for judgeid in jugdes:
+                judge = Judge.objects.get(id=judgeid)
+                level.judges.add(judge)
+    if 'delete' in request.POST:
+        level.delete()
+        return redirect('ems:events_home', event.id)
+    context = {
+        'event' : event,
+        'level' : level,
+    }
+    return render(request, 'ems/events_levels_edit.html', context)
 
 @staff_member_required
 def upload_list(request):

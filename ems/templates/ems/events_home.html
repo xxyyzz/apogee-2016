@@ -17,56 +17,46 @@
         <div class="content">
             <div class="container-fluid">
             <form action="." method="POST">
+                {% for level in levels|dictsort:"position" %}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Registered</h4>
-                                <p class="category">The following teams have registered for {{ event.name }}</p>
+                                <h4 class="title">{{ level.position }}. {{ level.name }}</h4>
+                                <p class="category">The following particpants are currently in {{ level.name }} level of {{ event.name }}</p>
                             </div>
+
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>Check</th>
                                         <th>Edit</th>
                                         <th>S.no</th>
-                                        <th>Leader</th>
-                                        <th>College</th>
-                                        <th>Phone</th>
+                                        <th>Team Name</th>
+                                        <th>Leader Name</th>
                                         <th>Members</th>
+                                        <th>Leader College</th>
                                         <th>Position</th>
-                                        <th>Delete</th>
-                                        <th>Category</th>
                                     </thead>
                                     <tbody>
-                                    {% for team in registered %}
+                                    {% for team in level.teams.all %}
                                     <tr>
                                         <td>
                                             <label class="checkbox">
-                                                <input type="checkbox" name="registered" value="{{ team.id }}" data-toggle="checkbox">
+                                                <input type="checkbox" name="teams" value="{{ team.id }}" data-toggle="checkbox">
                                             </label>
                                         </td>
                                         <td>
                                             <a href="{% url 'ems:team_details' team.id %}" class="btn btn-info btn-simple btn-xs">
-                                            <i class="fa fa-edit"><
-
-
-                                            /i>
+                                            <i class="fa fa-edit"></i>
                                             </a>
                                         </td>
                                         <td>{{ forloop.counter }}</td>
-                                        <td>{% if team.leader %} {{ team.leader }} {% elif team.bitsian_leader %} {{ team.bitsian_leader }}{% endif %}</td>
-                                        <td>{{ team.college }}</td>
-                                        <td>{{ team.leader.phone_one }}</td>
-                                        <td>{{ team.members.all.count|add:team.bitsian_members.all.count }}</td>
-                                        <td>{{ team.position }}</td>
-                                        <td><button name="delete-team" value="{{ team.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Really Remove?">
-                                            <i class="fa fa-times"><
-
-
-                                            /i>
-                                            </button></td>
-                                        <td>{{ team.category }}</td>
+                                        <td>{{ team.name }}</td>
+                                        <td>{{ team.leader.name }}</td>
+                                        <td>{{ team.members.all.count|add:1 }}</td>
+                                        <td>{{ team.leader.college.name }}</td>
+                                        <td>{{ team.name }}</td>
                                     </tr>
                                     {% empty %}
                                     <tr>
@@ -75,16 +65,18 @@
                                     {% endfor %}
                                     <tr>
                                         <td colspan="10">
-                                            <button type="submit" class="btn btn-info btn-fill" name="add-finalists">Make Finalists</button>
-                                            <button type="submit" class="btn btn-info btn-fill" name="add-winners">Make Winners</button>
+                                            {% if not forloop.first %}<button type="submit" class="btn btn-info btn-fill" name="promote" value="{{ level.position }}">Promote</button>{% endif %}
+                                            {% if not forloop.last %}<button type="submit" class="btn btn-danger btn-fill" name="demote" value="{{ level.position }}">Demote</button>{% endif %}
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </form>
             </div>
         </div>
