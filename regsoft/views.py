@@ -185,75 +185,32 @@ def firewallzo_add(request):
 
 
 
-
-
-# def firewallzo_add_guest(request):
-#   if request.method == 'POST':
-#       name = request.POST['name']
-#       sex = request.POST['gender']
-#       phone_one = request.POST['phone']
-#       email = request.POST['email']
-#       college = "Guests"
-#       check = 1
-#       plist = InitialRegistration.objects.filter(college= 'Guests')
-#       maleno = InitialRegistration.objects.filter(college= 'Guests', gender='M').count()
-#       femaleno = InitialRegistration.objects.filter(college= 'Guests', gender='F').count()
-#       # check = check_limits(request)
-
-#       try:
-#           participant = InitialRegistration(name=name, gender=sex, phone_one=phone_one, email_id=email, college=college, bill_id="0", pcr_approval = True)
-#       except IntegrityError:
-#       # errors = []
-#           errorsx = 'The email '+str(email)+' has already been registered. Try a different email.'
-#           # events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-#           context = {
-#               # 'crep' : crep ,
-#               'college' : college ,
-#               'errors' : errorsx,
-#               'plist' : plist,
-#               'maleno' :maleno,
-#               'femaleno' : femaleno,
-
-#               # 'events' : events,
-#           }
-#           return render(request, 'regsoft/fire_add_guest.html', context)
-#       # #### FireWallz bypass for bitsians
-#       # if str(user_pr.college) == 'BITS Pilani':
-#       #     participant.firewallz= True
-#       #     participant.confirmation= True
-#       googol = '00000000000'
-#       participant.save()
-#       pid = participant.id
-#       clg = 'Guests'
-#       num_part = googol[ : ( 4 - len(str(pid)) ) ] + str(pid)
-#       pcode= "0"
-#       try:
-#           pcode = str(clg)[:3] + num_part
-#       except:
-#           pcode = "0"
-#       participant.aadhaar = pcode
-#       participant.save()
-
-#       return HttpResponseRedirect('../add_guest/')
+def firewallzo_setgleader(request, crep_id):
+  if request.POST:
+      part_id = request.POST['pid']
+      # pidlist = request.POST.getlist['pidlist']
+      part = InitialRegistration.objects.get(id = part_id)
+      crep = UserProfile.objects.get(id= crep_id )
+      partid = part.id
+      newgl = gleader(details = part, groupcode= '')
+      newgl.save()
         
-#   # userprofile = request.user.userprofile_set.all()[0]
+      googol = '000000000'
+      glid = newgl.id 
+      num_gl  = googol[ : (4 - len(str(glid)) ) ] + str(glid)
+      grpcode = str(part.college)[:3] + num_gl
+      newgl.groupcode = grpcode
+      newgl.save()
 
-#   # crep= UserProfile.objects.get(id= crep_id)
-#   plist = InitialRegistration.objects.filter(college= 'Guests')
-#   maleno = InitialRegistration.objects.filter(college= 'Guests', gender='M').count()
-#   femaleno = InitialRegistration.objects.filter(college= 'Guests', gender='F').count()
-
-#   clg = 'Guests'
-#   context = {
-#       'college' : clg ,
-#       'plist' : plist,
-#       'maleno' :maleno,
-#       'femaleno' : femaleno,
-#   }
-#   return render(request, 'regsoft/fire_add_guest.html', context)
+      for pid in request.POST:
+          if pid != 'pid' and pid != 'csrfmiddlewaretoken':
+              pid = int(pid)
+              part = InitialRegistration.objects.get(id =pid)
+              part.grpleader = newgl
+              part.save()
 
 
-
+      return HttpResponseRedirect('../scan/' + str(crep.id))
 
 
 
@@ -262,32 +219,15 @@ def firewallzo_add(request):
 
 
 
-# def firewallzo_setgleader(request, crep_id):
-#   if request.POST:
-#       part_id = request.POST['pid']
-#       # pidlist = request.POST.getlist['pidlist']
-#       part = InitialRegistration.objects.get(id = part_id)
-#       crep = UserProfile.objects.get(id= crep_id )
-#       partid = part.id
-#       newgl = gleader(details = part, groupcode= '')
-#       newgl.save()
-        
-#       googol = '000000000'
-#       glid = newgl.id 
-#       num_gl  = googol[ : (4 - len(str(glid)) ) ] + str(glid)
-#       grpcode = str(part.college)[:3] + num_gl
-#       newgl.groupcode = grpcode
-#       newgl.save()
-
-#       for pid in request.POST:
-#           if pid != 'pid' and pid != 'csrfmiddlewaretoken':
-#               pid = int(pid)
-#               part = InitialRegistration.objects.get(id =pid)
-#               part.grpleader = newgl
-#               part.save()
 
 
-#       return HttpResponseRedirect('../scan/' + str(crep.id))
+
+
+
+
+
+
+
 
 
 
@@ -332,26 +272,7 @@ def controlz_home(request):
 
   return render(request, "regsoft/controlz_home.html")
 
-# def controlz_stats(request):
-#   passed_controls = InitialRegistration.objects.filter(controlz=True).count()
-#   passed_faculty = InitialRegistration.objects.filter(controlz=True, is_faculty=True).count()
-#   passed_offline = InitialRegistration.objects.filter(controlz=True, is_faculty=False, reg_paid= False ).count()
-#   passed_online = InitialRegistration.objects.filter(controlz=True, reg_paid=True, is_faculty=False).count()
-#   passed_faculty_online = InitialRegistration.objects.filter(controlz=True, reg_paid=True, is_faculty=True).count()
-#   all_bills = Bill_new.objects.all()
-#   amount_total = 0
-#   for bill in all_bills:
-#       amount_total += bill.amount
-#   context = {
-#       'passed_controls' : passed_controls,
-#       'passed_faculty' : passed_faculty,
-#       'passed_offline' : passed_offline,
-#       'passed_online' : passed_online,
-#       'passed_faculty_online' : passed_faculty_online,
-#       'amount_total' : amount_total,
-#   }
 
-#   return render(request, "regsoft/controlz_stats.html", context)
 
 def controlz_dashboard(request,part_id):
     part_ob = Participant.objects.filter(id = part_id)
@@ -1575,7 +1496,7 @@ def encode_glid(gl_id):
         encoded = encoded + mixed[randint(0,51)]
     return encoded
 def get_barcode(request):
-    list_of_people_selected = Participant.objects.filter(pcr_approval=True)
+    list_of_people_selected = Participant.objects.filter(pcr_approval=True).order_by('college__name')
     final_display = []
     for x in list_of_people_selected:
         name = x.name
@@ -1586,6 +1507,7 @@ def get_barcode(request):
     context = RequestContext(request)
     context_dict = {'final_display':final_display}
     return render_to_response('regsoft/get_barcode.html', context_dict, context)
+
 
 
 # def recnacc_bill_list(request):
