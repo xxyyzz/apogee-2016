@@ -14,9 +14,9 @@ from django.db import models
 # 		return str(self.name)
 
 class Score(models.Model):
-    level = models.ForeignKey('Level')
-    team = models.ForeignKey('backend.Team')
-    judge = models.ForeignKey('Judge')
+    level = models.ForeignKey('Level', on_delete=models.PROTECT)
+    team = models.ForeignKey('backend.Team', on_delete=models.PROTECT)
+    judge = models.ForeignKey('Judge', on_delete=models.PROTECT)
     is_frozen = models.BooleanField(default=False)
     var1 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var2 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)

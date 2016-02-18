@@ -57,16 +57,22 @@
                                     <td>{{ level.position }}</td>
                                     <td>{{ level.name }}</td>
                                     <td>{{ level.teams.all.count }}</td>
-                                    {% if not level.is_protected %}
-                                    <td><button name="delete-level" value="{{ level.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
-                                        <i class="fa fa-times"></i>
-                                        </button>
+                                    {% if level.score_set.all %}
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: One or more Judges has already graded this level">
+                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        </a>
                                     </td>
-                                    {% else %}
+                                    {% elif level.is_protected %}
                                     <td>
                                         <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: This is a protected level">
                                         <span style="color:black;"><i class="fa fa-times"></i></span>
                                         </a>
+                                    </td>
+                                    {% else %}
+                                    <td><button name="delete-level" value="{{ level.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
+                                        <i class="fa fa-times"></i>
+                                        </button>
                                     </td>
                                     {% endif %}
                                     <td>{{ team.category }}</td>

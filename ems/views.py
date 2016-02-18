@@ -355,17 +355,19 @@ def events_levels_judge(request, eventid, levelid, judgeid):
     level = Level.objects.get(id=levelid)
     judge = Judge.objects.get(id=judgeid)
     if request.method == 'POST':
-        for team in level.teams.all():
-            scores = request.POST.getlist(str(team.id))
-            print scores
-            try:
-                score = Score.objects.get(level=level, team=team, judge=judge)
-            except:
-                score = Score.objects.create(level=level, team=team, judge=judge)
-            for i, val in enumerate(scores):
-                attr = 'var' + str(i+1)
-                setattr(score, attr, val)
-            score.save()
+        if "save" or "freeze" in request.POST:
+            for team in level.teams.all():
+                scores = request.POST.getlist(str(team.id))
+                try:
+                    score = Score.objects.get(level=level, team=team, judge=judge)
+                except:
+                    score = Score.objects.create(level=level, team=team, judge=judge)
+                for i, val in enumerate(scores):
+                    attr = 'var' + str(i+1)
+                    setattr(score, attr, val)
+                if "freeze" in request.POST:
+                    score.is_frozen = True
+                score.save()
     teams = []
     for team in level.teams.all():
         try:
