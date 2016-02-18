@@ -17,6 +17,7 @@ class Score(models.Model):
     level = models.ForeignKey('Level')
     team = models.ForeignKey('backend.Team')
     judge = models.ForeignKey('Judge')
+    is_frozen = models.BooleanField(default=False)
     var1 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var2 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var3 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
@@ -72,4 +73,4 @@ class Label(models.Model):
     var10name = models.CharField(max_length=100, blank=True)
     var10max = models.PositiveSmallIntegerField(default=10)
     def __unicode__(self):
-        return self.event.name
+        return self.event.name + " - " + " ".join([self.var1name, self.var2name, self.var3name, self.var4name]) + " ..."

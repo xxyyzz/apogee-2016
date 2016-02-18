@@ -7,6 +7,18 @@
         </a>
     </li>
     <li>
+        <a href="{% url 'ems:events_levels' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Event Setup</p>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'ems:events_judge_home' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Judge Event</p>
+        </a>
+    </li>
+    <li>
         <a href="{% url 'ems:events_participants' event.id %}">
             <i class="pe-7s-news-paper"></i>
             <p>Manage Participants</p>
@@ -23,84 +35,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="eventid" value="{{ event.id }}">
                         <div class="header">
-                            <h4 class="title">Add Level</h4>
-                        </div>
-                        <div class="content">
-                               <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="form-group">
-                                            <label>Level Name</label>
-                                            <input type="text" class="form-control" required placeholder="Semifinals" name="name" size="12">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label>Level Rank</label>
-                                            <input type="text" list="genders" class="form-control" required placeholder="2" name="position">
-                                            <datalist id="genders">
-                                                <option value="1">Finals</option>
-                                                <option value="2">Semi-Finals</option>
-                                                <option value="3">Elims</option>
-                                                <option value="4">Prelims</option>
-                                            </datalist>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="checkbox">
-                                                    <input type="checkbox" id="judgesheet" data-toggle="checkbox" name="judgesheet" onchange="toggle(this)">Use JudgeSheets
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 judgesheet">
-                                        <label>Judges</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    {% for judge in judges %}
-                                    <div class="col-md-4">
-                                        <div class="form-group judgesheet">
-                                            <label class="checkbox">
-                                                <input type="checkbox" data-toggle="checkbox" name="judge" value="{{ judge.id }}">{{ judge.name }}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group judgesheet">
-                                            <label>Judging Parameters</label>
-                                                <select class="form-control">
-                                                <option value="1">1</option>
-                                                <option value="1">2</option>
-                                                <option value="1">3</option>
-                                                <option value="1">4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-info btn-fill" name="add">Save</button>
-                                <div class="clearfix"></div>
-                        </div>
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="card">
-                    <form action="." method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="eventid" value="{{ event.id }}">
-                        <div class="header">
-                            <h4 class="title">Levels</h4>
+                            <h4 class="title">Levels<a href="{% url 'ems:events_levels_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
                         </div>
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
@@ -123,12 +58,16 @@
                                     <td>{{ level.name }}</td>
                                     <td>{{ level.teams.all.count }}</td>
                                     {% if not level.is_protected %}
-                                    <td><button name="delete" value="{{ level.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
+                                    <td><button name="delete-level" value="{{ level.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
                                         <i class="fa fa-times"></i>
                                         </button>
                                     </td>
                                     {% else %}
-                                    <td></td>
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: This is a protected level">
+                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        </a>
+                                    </td>
                                     {% endif %}
                                     <td>{{ team.category }}</td>
                                 </tr>
@@ -145,6 +84,105 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="card">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="eventid" value="{{ event.id }}">
+                        <div class="header">
+                            <h4 class="title">Judges<a href="{% url 'ems:events_judges_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Used By Levels</th>
+                                    <th>Delete</th>
+                                </thead>
+                                <tbody>
+                                {% for judge in event.judge_set.all|dictsort:"name" %}
+                                <tr>
+                                    <td>{{ judge.name }}</td>
+                                    <td>{% for level in judge.level_set.all %}{{ level.position }} {% empty %}None{% endfor %}</td>
+                                    {% if not judge.score_set.all %}
+                                    <td><button name="delete-judge" value="{{ judge.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Really Remove?">
+                                        <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: Judge has already graded one or more judgesheets.">
+                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        </a>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ team.category }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="10" style="text-align:center">Nothing in here!</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="card">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="eventid" value="{{ event.id }}">
+                        <div class="header">
+                            <h4 class="title">Judging Criteria<a href="{% url 'ems:events_labels_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Parameters</th>
+                                    <th>Used By Levels</th>
+                                    <th>Delete</th>
+                                </thead>
+                                <tbody>
+                                {% for label in event.label_set.all %}
+                                <tr>
+                                    <td>{{ label }}</td>
+                                    <td>{% for level in label.level_set.all %}{{ level.position }} {% empty %}None{% endfor %}</td>
+                                    {% if not label.level_set.all %}
+                                    <td><button name="delete-label" value="{{ label.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
+                                        <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: Used by another level">
+                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        </a>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ team.category }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="10" style="text-align:center">Nothing in here!</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock main_content %}
