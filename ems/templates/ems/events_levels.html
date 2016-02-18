@@ -60,13 +60,13 @@
                                     {% if level.score_set.all %}
                                     <td>
                                         <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: One or more Judges has already graded this level">
-                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        <span style="color:grey;"><i class="fa fa-times"></i></span>
                                         </a>
                                     </td>
                                     {% elif level.is_protected %}
                                     <td>
                                         <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: This is a protected level">
-                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        <span style="color:grey;"><i class="fa fa-times"></i></span>
                                         </a>
                                     </td>
                                     {% else %}
@@ -120,7 +120,7 @@
                                     {% else %}
                                     <td>
                                         <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: Judge has already graded one or more judgesheets.">
-                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        <span style="color:grey;"><i class="fa fa-times"></i></span>
                                         </a>
                                     </td>
                                     {% endif %}
@@ -147,7 +147,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="eventid" value="{{ event.id }}">
                         <div class="header">
-                            <h4 class="title">Judging Criteria<a href="{% url 'ems:events_labels_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
+                            <h4 class="title">Judging Parameters<a href="{% url 'ems:events_labels_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
                         </div>
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
@@ -162,14 +162,14 @@
                                     <td>{{ label }}</td>
                                     <td>{% for level in label.level_set.all %}{{ level.position }} {% empty %}None{% endfor %}</td>
                                     {% if not label.level_set.all %}
-                                    <td><button name="delete-label" value="{{ label.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Warning: Removes all participnats from this level">
+                                    <td><button name="delete-label" value="{{ label.id }}" rel="tooltip" class="btn btn-danger btn-simple btn-xs" data-original-title="Really Remove?">
                                         <i class="fa fa-times"></i>
                                         </button>
                                     </td>
                                     {% else %}
                                     <td>
                                         <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-original-title="Cannot Delete: Used by another level">
-                                        <span style="color:black;"><i class="fa fa-times"></i></span>
+                                        <span style="color:grey;"><i class="fa fa-times"></i></span>
                                         </a>
                                     </td>
                                     {% endif %}

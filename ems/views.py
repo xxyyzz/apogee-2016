@@ -325,9 +325,14 @@ def events_levels_edit(request, eventid, levelid):
         position = int(request.POST['position'])
         level.name = name
         level.position = position
+        level.label = None
         level.save()
         level.judges.clear()
         if 'judgesheet' in request.POST:
+            labelid = request.POST['label']
+            label = Label.objects.get(id=labelid)
+            level.label = label
+            level.save()
             judges = request.POST.getlist('judge')
             for judgeid in judges:
                 judge = Judge.objects.get(id=judgeid)

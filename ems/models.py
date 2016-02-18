@@ -73,4 +73,4 @@ class Label(models.Model):
     var10name = models.CharField(max_length=100, blank=True)
     var10max = models.PositiveSmallIntegerField(default=10)
     def __unicode__(self):
-        return self.event.name + " - " + " ".join([self.var1name, self.var2name, self.var3name, self.var4name]) + " ..."
+        return " ".join([self.var1name, self.var2name, self.var3name, self.var4name, self.var4name, self.var5name]) + " ..."

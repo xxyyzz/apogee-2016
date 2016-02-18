@@ -62,7 +62,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="checkbox">
-                                                    <input type="checkbox" id="judgesheet" data-toggle="checkbox" name="judgesheet" onchange="toggle(this)" {% if level.label %}checked{% endif %} disabled>Use JudgeSheets
+                                                    <input type="checkbox" id="judgesheet" data-toggle="checkbox" name="judgesheet" onchange="toggle(this)" {% if level.label %}checked{% endif %} {% if level.score_set.all %}disabled{% endif %}>Use JudgeSheets
                                             </label>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group judgesheet">
                                             <label class="checkbox">
-                                                <input type="checkbox" data-toggle="checkbox" name="judge" value="{{ judge.id }}" {% if level in judge.level_set.all %}checked{% endif %}>{{ judge.name }}
+                                                <input type="checkbox" data-toggle="checkbox" name="judge" value="{{ judge.id }}" {% if level in judge.level_set.all %}checked{% endif %} {% if level.score_set.all %}disabled{% endif %}>{{ judge.name }}
                                             </label>
                                         </div>
                                     </div>
@@ -89,16 +89,13 @@
                                             <label>Judging Parameters <span style="color:red;">*</span></label>
                                             {% for label in event.label_set.all %}
                                             <label class="radio">
-                                                <input type="radio" data-toggle="radio" name="label" value="{{ label.id }}" required {% if level.label == label %}checked{% endif %} disabled>{{ label }}
+                                                <input type="radio" data-toggle="radio" name="label" value="{{ label.id }}" required {% if level.label == label %}checked{% endif %} {% if level.score_set.all %}disabled{% endif %}>{{ label }}
                                             </label>
                                             {% endfor %}
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-info btn-fill" name="save">Save</button>
-                                {% if not level.is_protected %}
-                                <button type="submit" class="btn btn-danger btn-fill" name="delete">Delete</button>
-                                {% endif %}
                             <div class="clearfix"></div>
                         </div>
                     </form>
