@@ -42,6 +42,7 @@ class Level(models.Model):
 
 class Judge(models.Model):
     name = models.CharField(max_length=200)
+    event = models.ForeignKey('Event.Event')
     def __unicode__(self):
         return self.name
     # score_set

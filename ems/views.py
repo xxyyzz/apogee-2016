@@ -235,6 +235,7 @@ def events_home(request, eventid):
 def events_levels(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
+    judges = Judge.objects.all()
     if request.method == 'POST':
         if 'add' in request.POST:
             name = request.POST['name']
@@ -257,6 +258,7 @@ def events_levels(request, eventid):
     context = {
         'event' : event,
         'levels' : levels,
+        'judges' : judges,
     }
     return render(request, 'ems/events_levels.html', context)
 

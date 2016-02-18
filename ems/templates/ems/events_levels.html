@@ -61,20 +61,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    {% for judge in judges %}
                                     <div class="col-md-4">
                                         <div class="form-group judgesheet">
                                             <label class="checkbox">
-                                                <input type="checkbox" data-toggle="checkbox" name="judge" value="">Nikhil Verma
+                                                <input type="checkbox" data-toggle="checkbox" name="judge" value="{{ judge.id }}">{{ judge.name }}
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group judgesheet">
-                                            <label class="checkbox">
-                                                <input type="checkbox" data-toggle="checkbox" name="judge" value="">Nikhil Verma
-                                            </label>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
