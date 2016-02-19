@@ -20,7 +20,7 @@
                        
             <ul class="nav">
                 <li>
-                    <a href="../scan/">
+                    <a href="../../scan/">
                         <i class="pe-7s-home"></i> 
                         <p>Firewallz</p>
                     </a>            
@@ -28,14 +28,14 @@
 
                 <li>
 
-                    <a href="../../controlz/home/">
+                    <a href="../../../controlz/home/">
                         <i class="pe-7s-menu"></i> 
                         <p>Controlz</p>
                     </a>
    
                 </li>
                 <li>
-                    <a href="../../recnacc/home/">
+                    <a href="../../../recnacc/home/">
                         <i class="pe-7s-note2"></i> 
                         <p>Recnacc</p>
                     </a>            
@@ -87,25 +87,27 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">Group Codes</h4>
-                                <p class="category">Following Participant Codes are generated at Firewallz</p>
+                                <h4 class="title">Group Details</h4>
+                                <p class="category">Group Leader: {{gl_ob.details.name}} &nbsp; &nbsp; Group Code : {{gl_ob.groupcode}}<br></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>S.no</th>
-                                        <th>Gl Name</th>
-                                        <th>Group Code </th>
-                                        <th>Count M | F</th>
-                                        <th>details</th>
+                                        <th>Name</th>
+                                        <th>College</th>
+                                        <th>Phone</th>
+                                        <th>Online Paid</th>
+                                        <th>Unique ID</th>
                                     </thead>
                                     <tbody>
-                                        {% for d in data %}
+                                        {% for part in plist %}
                                         <td>{{forloop.counter}} </td>
-                                        <td>{{d.0}} </td>
-                                        <td>{{d.1}} </td>
-                                        <td>{{d.3}} | {{d.4}} </td>
-                                        <td><a href="./{{d.2}}/">Details</a> </td>
+                                        <td>{{part.name}} </td>
+                                        <td>{{part.college}} </td>
+                                        <td>{{part.phone_one}} </td>
+                                        <td>{{part.fee_paid}} </td>
+                                        <td>{{part.aadhaar}} </td>
                                     </tbody>
                                     {% endfor %}
                                 </table>
