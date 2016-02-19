@@ -235,7 +235,30 @@ def events_home(request, eventid):
 def events_levels(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
-    judges = Judge.objects.all()
+    if request.method == 'POST':
+        if 'delete-level' in request.POST:
+            levelid = request.POST['delete-level']
+            level = Level.objects.get(id=levelid)
+            level.teams.clear()
+            level.delete()
+        if 'delete-judge' in request.POST:
+            judgeid = request.POST['delete-judge']
+            judge = Judge.objects.get(id=judgeid)
+            judge.level_set.clear()
+            judge.delete()
+        if 'delete-label' in request.POST:
+            labelid = request.POST['delete-label']
+            label = Label.objects.get(id=labelid)
+            label.delete()
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_levels.html', context)
+
+def events_levels_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
     if request.method == 'POST':
         if 'add' in request.POST:
             name = request.POST['name']
@@ -244,23 +267,55 @@ def events_levels(request, eventid):
             if 'judgesheet' in request.POST:
                 labelid = request.POST['label']
                 label = Label.objects.get(id=labelid)
-                level.label.add(label)
+                level.label = label
+                level.save()
                 judges = request.POST.getlist('judge')
-                for judgeid in jugdes:
+                for judgeid in judges:
                     judge = Judge.objects.get(id=judgeid)
                     level.judges.add(judge)
-        if 'delete' in request.POST:
-            levelid = request.POST['delete']
-            level = Level.objects.get(id=levelid)
-            print level
-            level.teams.clear()
-            level.delete()
+        return redirect('ems:events_levels', event.id)
     context = {
         'event' : event,
         'levels' : levels,
-        'judges' : judges,
     }
-    return render(request, 'ems/events_levels.html', context)
+    return render(request, 'ems/events_levels_add.html', context)
+
+def events_labels_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'add' in request.POST:
+            names = request.POST.getlist("name")
+            maxvalues = request.POST.getlist("max")
+            label = Label(event=event)
+            for i, name in enumerate(names):
+                attr = "var" + str(i+1) + "name"
+                setattr(label, attr, name)
+            for i, maxvalue in enumerate(maxvalues):
+                attr = "var" + str(i+1) + "max"
+                setattr(label, attr, maxvalue)
+            label.save()
+        return redirect('ems:events_levels', event.id)
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_labels_add.html', context)
+
+def events_judges_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'add' in request.POST:
+            name = request.POST['name']
+            Judge.objects.create(name=name, event=event)
+            return redirect('ems:events_levels', event.id)
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_judges_add.html', context)
+
 
 def events_levels_edit(request, eventid, levelid):
     event = Event.objects.get(id=eventid)
@@ -270,16 +325,19 @@ def events_levels_edit(request, eventid, levelid):
         position = int(request.POST['position'])
         level.name = name
         level.position = position
+        level.label = None
         level.save()
+        level.judges.clear()
         if 'judgesheet' in request.POST:
             labelid = request.POST['label']
             label = Label.objects.get(id=labelid)
-            level.label.add(label)
+            level.label = label
+            level.save()
             judges = request.POST.getlist('judge')
-            for judgeid in jugdes:
+            for judgeid in judges:
                 judge = Judge.objects.get(id=judgeid)
                 level.judges.add(judge)
-        return redirect('ems:events_levels_edit', event.id, level.id)
+        return redirect('ems:events_levels', event.id)
     if 'delete' in request.POST:
         level.delete()
         return redirect('ems:events_home', event.id)
@@ -289,22 +347,32 @@ def events_levels_edit(request, eventid, levelid):
     }
     return render(request, 'ems/events_levels_edit.html', context)
 
+def events_judge_home(request, eventid):
+    event = Event.objects.get(id=eventid)
+    context = {
+        'event' : event,
+    }
+    return render(request, 'ems/events_judge_home.html', context)
+
+
 def events_levels_judge(request, eventid, levelid, judgeid):
     event = Event.objects.get(id=eventid)
     level = Level.objects.get(id=levelid)
     judge = Judge.objects.get(id=judgeid)
     if request.method == 'POST':
-        for team in level.teams.all():
-            scores = request.POST.getlist(str(team.id))
-            print scores
-            try:
-                score = Score.objects.get(level=level, team=team, judge=judge)
-            except:
-                score = Score.objects.create(level=level, team=team, judge=judge)
-            for i, val in enumerate(scores):
-                attr = 'var' + str(i+1)
-                setattr(score, attr, val)
-            score.save()
+        if "save" or "freeze" in request.POST:
+            for team in level.teams.all():
+                scores = request.POST.getlist(str(team.id))
+                try:
+                    score = Score.objects.get(level=level, team=team, judge=judge)
+                except:
+                    score = Score.objects.create(level=level, team=team, judge=judge)
+                for i, val in enumerate(scores):
+                    attr = 'var' + str(i+1)
+                    setattr(score, attr, val)
+                if "freeze" in request.POST:
+                    score.is_frozen = True
+                score.save()
     teams = []
     for team in level.teams.all():
         try:
@@ -319,7 +387,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
         'judge' : judge,
         'teams' : teams,
     }
-    return render(request, 'ems/events_judge.html', context)
+    return render(request, 'ems/events_judge_edit.html', context)
 
 def events_participants(request, eventid):
     event = Event.objects.get(id=eventid)

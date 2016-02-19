@@ -1069,7 +1069,7 @@ $("#help-button-2,#map-help-2").click(function() {
 
 $("g.struct").on('mousedown', function (evt) {
 	var init_x=evt.pageX,init_y=evt.pageY;
-	console.log(init_x,init_y,evt);
+	// console.log(init_x,init_y,evt);
   $("g.struct").on('mouseup', function handler(evt) {
  	var fin_x=evt.pageX,fin_y=evt.pageY;
  	// console.log(init_x,fin_x,init_y,fin_y,evt);
@@ -1242,7 +1242,7 @@ var map_ele_info = {
 
 	'literaryFest'			:		{
 										ename:'Literary Fest',
-										content:'<div class="c_soon">Coming soon...</div>',
+										content:'<div style="padding-bottom:30px;"> <h2>Papyrus Trails - A Literature Festival</h2> <i>"Literature is the art of discovering something extraordinary about ordinary people, and saying with ordinary words something extraordinary"</i> <br><br> This APOGEE, Think Again presents to you, the inaugural edition of Papyrus Trails, BITS Pilani\'s very own Literature Festival. Prepare to be enthralled by a fascinating gathering of authors, speakers and poets. With numerous literary events, guest lectures, book introductions, book releases and book signings on offer, Papyrus Trails promises to be the answer to every literature lover\'s prayers.<br><br> The speaker lineup for the event is as follows : </div> <div class="lf_cont"> <div class="lfimg_cont"> <img src="/2016/static/cover/main/img/litfest/lf1.jpg" class="lf_img ver_center"> </div> <div class="lf_content"> <div class="lf_header">Ajay Chaturvedi</div> <div style="padding:10px 0;"><b>A BITSian</b>, Ajay Chaturvedi is the founder and chairman of <b>Harva</b>, the first NPO set up in rural India which employs only women. Ajay was awarded <b>CNN IBN Youth Icon / Young Indian Leader</b> of the year 2011. Mr. Chaturvedi\'s new book, titled \'Lost Wisdom of the Swastika\', will be released by Annurag Batra, chairman, Business World.</div> <div class="lf_main"><div>Date: 26/02/2016</div><div>Time: 11.00 hours</div><div>Venue: NAB Audi</div></div> </div> </div> <div class="lf_cont"> <div class="lfimg_cont"> <img src="/2016/static/cover/main/img/litfest/lf2.jpg" class="lf_img ver_center"> </div> <div class="lf_content"> <div class="lf_header">Jeet Thayil</div> <div style="padding:10px 0;">A multi-faceted personality, he is a poet, novelist, librettist and also a  musician. His book <i>"Narcopolis"</i> was shortlisted for the 2012 <b>Man Booker Prize</b>, and was the winner of the DSC Prize for South Asian Literature. The <b>topic</b> of Mr. Thayil\'s address will be <b>"How to be a poet!"</b>.</div> <div class="lf_main"><div>Date: 26/02/2016</div><div>Time: 14.00 hours</div><div>Venue: NAB Audi</div></div> </div> </div> <div class="lf_cont"> <div class="lfimg_cont"> <img src="/2016/static/cover/main/img/litfest/lf3.jpg" class="lf_img ver_center"> </div> <div class="lf_content"> <div class="lf_header">Ashok Vajpeyi</div> <div style="padding:10px 0;">A Sahitya Akademi awardee , Ashok Vajpeyi is an eminent poet and essayist and one of the most revered literary and cultural critics in the country. He was also the chairman of the <i>Lalit Kala Akademi</i>, Ministry of Culture, Govt of India, 2008–2011. Mr. Vajpeyi\'s address will deal with <b>\'Problems with regional publishing\'</b> and will be followed by a recitation session.</div> <div class="lf_main"><div>Date: 26/02/2016</div><div>Time: 16.00 hours</div><div>Venue: NAB Audi</div></div> </div> </div> <div class="lf_cont"> <div class="lfimg_cont"> <img src="/2016/static/cover/main/img/litfest/lf4.jpg" class="lf_img ver_center"> </div> <div class="lf_content"> <div class="lf_header">Anand Neelakantan</div> <div style="padding:10px 0;"> Arguably, the author who invented a new genre in Indian writing- <i>The counter telling of mythology</i>. Chosen as one of the six most remarkable writers of 2012 by DNA,  Anand\'s debut work was Asura: <i>Tale of the Vanquished</i> which was one of the biggest bestsellers of 2012. With the <i>Ajaya series</i>, he has validated his standing as one of the most revered authors in the country. Mr. Neelakantan will be delivering a talk on <b>\'The Power of Perspective in mythological fiction\'.</b></div> <div class="lf_main"><div>Date: 27/02/2016</div><div>Time: 12.00 hours</div><div>Venue: NAB Audi</div></div> </div> </div> <div class="lf_cont"> <div class="lfimg_cont"> <img src="/2016/static/cover/main/img/litfest/lf5.jpg" class="lf_img ver_center"> </div> <div class="lf_content"> <div class="lf_header">Rukmini Bhaya Nair</div> <div style="padding:10px 0;"> A vociferous critic of the Hindutva ideology and the religious and caste discrimination that it promotes, Rukmini Bhaya Nair is an eminent linguist, award winning poet, exalted writer and critic. She is the recipient of The <b>Hornby Foundation Award</b> and the <b>Dorothy Lee Grant</b> among other prestigious awards. The topic of Ms. Nair\'s talk will be  <b>\'FACEBOOKS OF THE FUTURE: The Evolution of English, Creative Communication & Techno-talk in the Twenty-first Century\'</b>.</div> <div class="lf_main"><div>Date: 27/02/2016</div><div>Time: 14.00 hours</div><div>Venue: NAB Audi</div></div> </div> </div> <div class="lf_cont"> <div class="lfimg_cont"> <img src="/2016/static/cover/main/img/litfest/lf6.jpg" class="lf_img ver_center"> </div> <div class="lf_content"> <div class="lf_header">Radhika Vaz</div> <div style="padding:10px 0;">A writer and stand-up comedian, she has been hailed as the <i>"funniest person you\'ll ever meet"</i> by Harper Bazaar. She wrote and co-produced the edgy web-series <i>“Shugs & Fats”</i>, which won the prestigious <b>Gotham Awards</b> in New York last year. Her one-woman shows <i>"Older. Angrier. Hairier."</i> and <i>"Unladylike: The Pitfalls of Propriety"</i> have sold out to audiences in NY, LA and all over India.</div> <div class="lf_main"><div>Date: 27/02/2016</div><div>Time: 16.00 hours</div><div>Venue: NAB Audi</div></div> </div> </div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/literaryFest.svg',
 										func:content_link,
 									},
@@ -1349,7 +1349,7 @@ function content_link(b_icon,b_name,b_content){
 }
 
 $('#updates-wrapper').click(function(){
-	console.log('yo');
+	// console.log('yo');
 	$.ajax({
 		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
 		method:'GET',
@@ -1357,7 +1357,7 @@ $('#updates-wrapper').click(function(){
 		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
 		datatype: 'jsonp',
 		success:function(data){
-			console.log(data);
+			// console.log(data);
 			var icon = imgpre+'/static/cover/main/img/lb-icons/updates.svg'
 			var content='';
 			for(i=0;i<data['upd'].length;++i)

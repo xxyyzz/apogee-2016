@@ -13,6 +13,9 @@ def preIntro(request) :
 def intro(request) :
 	return render(request, "intro/index.html")	
 
+def spons(request):
+	return render(request,"main/sponsors.html")
+
 @ensure_csrf_cookie
 def main(request) :
 	return render(request, "main/index.html")

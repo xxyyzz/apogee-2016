@@ -229,7 +229,7 @@ def events_check(request):
         container['category'] = category.name
         container['events'] = []
         eventlist = {}
-        for event in category.event_set.all():
+        for event in category.event_set.filter(is_displayed=True):
             try:
                 registered = True if event in request.user.participant.events.all() else False
             except:
@@ -250,6 +250,10 @@ def register_single(request, eventid):
     event = Event.objects.get(id=eventid)
     participant = request.user.participant
     try:
+        try:
+            team = Team.objects.get(event=event, leader=participant, members=None)
+        except:
+            team = Team.objects.create(event=event, leader=participant)
         participant.events.add(event)
         participant.save()
         response = {

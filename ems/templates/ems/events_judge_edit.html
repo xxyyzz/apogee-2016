@@ -6,15 +6,23 @@
             <p>Event Home</p>
         </a>
     </li>
-    <li>
-        <a href="{% url 'ems:events_participants' event.id %}">
-            <i class="pe-7s-news-paper"></i>
-            <p>Manage Participants</p>
-        </a>
-    </li>
 {% endblock sidebar_content %}
 {% block main_content %}
     <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">{{ judge.name }}</h4>
+                            <p class="category">Please click "Save & Lock" once you are done to finalise your evaluation</p>
+                        </div>
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -65,27 +73,37 @@
                                     <td>{{ team.name }}</td>
                                     {% endif %}
                                     <td>{{ team.leader.name }}</td>
-                                    {% if level.label.var1name %}
+                                    {% if level.label.var1name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var1 }}" min="0" max="{{ level.label.var1max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var2name %}
+                                    {% else %}<td>{{ team.score.var1 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var2name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var2 }}" min="0" max="{{ level.label.var2max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var3name %}
+                                    {% else %}<td>{{ team.score.var2 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var3name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var3 }}" min="0" max="{{ level.label.var3max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var4name %}
+                                    {% else %}<td>{{ team.score.var3 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var4name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var4 }}" min="0" max="{{ level.label.var4max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var5name %}
+                                    {% else %}<td>{{ team.score.var4 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var5name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var5 }}" min="0" max="{{ level.label.var5max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var6name %}
+                                    {% else %}<td>{{ team.score.var5 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var6name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var6 }}" min="0" max="{{ level.label.var6max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var7name %}
+                                    {% else %}<td>{{ team.score.var6 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var7name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var7 }}" min="0" max="{{ level.label.var7max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var8name %}
+                                    {% else %}<td>{{ team.score.var7 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var8name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var8 }}" min="0" max="{{ level.label.var8max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var9name %}
+                                    {% else %}<td>{{ team.score.var8 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var9name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var9 }}" min="0" max="{{ level.label.var9max }}" name="{{ team.id }}"></td>
-                                    {% endif %}{% if level.label.var10name %}
+                                    {% else %}<td>{{ team.score.var9 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var10name %}{% if not team.score.is_frozen %}
                                     <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var10 }}" min="0" max="{{ level.label.var10max }}" name="{{ team.id }}"></td>
-                                    {% endif %}
+                                    {% else %}<td>{{ team.score.var10 }}</td>
+                                    {% endif %}{% endif %}
                                 </tr>
                                 {% empty %}
                                 <tr>
@@ -95,6 +113,7 @@
                                 <tr>
                                     <td colspan="13">
                                         <button type="submit" class="btn btn-info btn-fill" name="save" value="save">Save</button>
+                                        <button type="submit" class="btn btn-info btn-fill btn-danger" name="freeze" value="freeze">Save & Lock</button>
                                     </td>
                                 </tr>
                                 </tbody>

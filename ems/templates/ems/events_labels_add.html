@@ -1,0 +1,92 @@
+{% extends "ems/base.html" %}
+{% block sidebar_content %}
+<li>
+    <a href="{% url 'ems:events_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Home</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_levels' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Setup</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_participants' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Manage Participants</p>
+    </a>
+</li>
+{% endblock sidebar_content %}
+{% block main_content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="card">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="eventid" value="{{ event.id }}">
+                        <div class="header">
+                            <h4 class="title">Add Judging Criteria</h4>
+                        </div>
+                        <div class="content">
+                            {% for param in "0123456789" %}
+                            <div class="row">
+                                 <div class="col-md-7">
+                                     <div class="form-group">
+                                         <label>Parameter {{ forloop.counter }} Name</label>
+                                         <input type="text" class="form-control" placeholder="Innovation" name="name">
+                                     </div>
+                                 </div>
+                                 <div class="col-md-5">
+                                     <div class="form-group">
+                                         <label>Max Value</label>
+                                         <input type="number" class="form-control" value="10" name="max">
+                                     </div>
+                                 </div>
+                             </div>
+                            {% endfor %}
+                                <button type="submit" class="btn btn-info btn-fill" name="add">Add</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock main_content %}
+{% block script %}
+<script type= 'text/javascript'>
+window.onload = function () {
+    checkbox = document.getElementById('judgesheet');
+    toggle(checkbox);
+}
+function toggle(checkbox){
+  var js = document.getElementsByClassName('judgesheet');
+  for(var i=0; i< js.length ; ++i)
+  {
+      if (checkbox.checked) {
+          js[i].disabled = false;
+          js[i].parentElement.style.display = 'block';
+      }
+      else {
+          js[i].disabled = true;
+          js[i].parentElement.style.display = 'none';
+      }
+  }
+  var label = document.getElementsByClassName('label-select-radio');
+  console.log(label)
+  {
+      if (checkbox.checked) {
+          label[i].required = true;
+      }
+      else {
+          label[i].required = false;
+      }
+  }}
+</script>
+{% endblock script %}

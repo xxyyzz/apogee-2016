@@ -1,0 +1,139 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apogee | Sponsors</title>
+<link rel="shortcut icon" href="{% static 'cover/main/img/favicon.ico' %}" type="image/x-icon"/>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<style>
+body{
+	background-color: #2b333b;
+	text-align: center;
+}
+html,body
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+*{
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+}
+#apogee_logo{
+	position:relative;
+	margin: 15px auto;
+	width: 500px;
+    max-width: 90%;
+	min-width:250px;
+}
+#spons_title{
+	font-size: 3em;
+    text-align: center;
+    margin: 20px 0;
+    color: white;
+}
+.spons_type_cont{
+	display: inline-block;
+    background: #fff;
+    margin: 20px 1%;
+    border-radius: 10px;
+    padding: 10px 25px 25px 25px;
+    box-shadow: 1px 2px 5px 0 #158039;
+    text-align: center;
+    vertical-align: middle;
+}
+.type-2-inLine .spons_type_cont{
+	width: 43%;
+	max-width: 645px;
+}
+.spons_type_cont:first-child{
+	margin-left:0;
+}
+.spons_type_cont:last-child{
+	margin-right: 0;
+}
+.type_head{
+	margin-bottom: 15px;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+    border-bottom: 1px solid #AFA3A3;
+}
+.logo_cont{
+	display: inline-block;
+    vertical-align: middle;
+    width: 80%;
+    margin: 0 2%;
+}
+.type-2-inLine .logo_cont{
+	width: 60%;
+}
+.logo_cont>img{
+	width:100%;
+}
+@media screen and (max-width: 600px){
+	.spons_type_cont{
+		width: 90% !important;
+		max-width: 90% !important;
+	}
+}
+</style>
+</head>
+<body>
+<img src="{% static 'cover/main/img/logo.png' %}" id="apogee_logo">
+<div id="spons_title">Sponsors</div>
+
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Associate Title</div>
+		<a href="http://www.sap.com/india/ms/sap-labs-india.html" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/Sap.jpg' %}"></div></a>
+	</div>
+</div>
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Outreach Workshops Partner</div>
+		<a href="http://jarvisindia.net/" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/Jarvis.jpg' %}"></div></a>
+	</div>
+</div>
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Workshops Partner</div>
+		<a href="http://www.twenty19.com/" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/Twenty19.jpg' %}"></div></a>
+	</div>
+</div>
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Workshops Partner</div>
+		<a href="http://authentictechs.com/" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/AuthenticTechs.jpg' %}"></div></a>
+	</div>
+</div>
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Campus Ambassador Partner</div>
+		<a href="http://www.youth4work.com/" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/Youth4work.jpg' %}"></div></a>
+	</div>
+</div>
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Media and Youth Outreach Partner</div>
+		<a href="http://www.campusindia.org/" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/CampusGuide.jpg' %}"></div></a>
+	</div>
+</div>
+<div class="type-2-inLine">
+	<div class="spons_type_cont title_spons">
+		<div class="type_head">Payment Partner</div>
+		<a href="https://www.instamojo.com/" target="_blank"><div class="logo_cont" style="width:100%;"><img src="{% static 'cover/main/img/spons/instamojo.jpg' %}"></div></a>
+	</div>
+</div>
+
+</body>
+</html>
