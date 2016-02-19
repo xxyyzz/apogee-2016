@@ -229,7 +229,7 @@ def events_check(request):
         container['category'] = category.name
         container['events'] = []
         eventlist = {}
-        for event in category.event_set.all():
+        for event in category.event_set.filter(is_displayed=True):
             try:
                 registered = True if event in request.user.participant.events.all() else False
             except:
