@@ -136,6 +136,7 @@ CKEDITOR_CONFIGS = {
 	{'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
 
 	{'name': 'document', 'items': ['Source', '-', 'NewPage', 'Preview', 'Print'] },
+    { 'name' : 'links', 'items' : [ 'Link','Unlink','Anchor' ] },
 	'/',
 	],
 	'toolbar': 'customConfig', # put selected toolbar config here
