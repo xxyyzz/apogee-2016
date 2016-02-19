@@ -76,6 +76,11 @@ def unregister_single(request, eventid):
 	try:
 		event = Event.objects.get(id=eventid)
 		member = request.user.participant
+		try:
+			team = Team.objects.get(event=event, leader=member, members=None)
+			team.delete()
+		except:
+			pass
 		member.events.remove(event)
 		member.save()
 		response = {

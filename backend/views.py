@@ -250,6 +250,10 @@ def register_single(request, eventid):
     event = Event.objects.get(id=eventid)
     participant = request.user.participant
     try:
+        try:
+            team = Team.objects.get(event=event, leader=participant, members=None)
+        except:
+            team = Team.objects.create(event=event, leader=participant)
         participant.events.add(event)
         participant.save()
         response = {
