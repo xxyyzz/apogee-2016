@@ -13,13 +13,16 @@ for team in teams:
         team.members.remove(leader)
 
 # teams for individual registration
+count = 0
 for part in parts:
     for event in part.events.filter(is_team=False):
         try:
             team = Team.objects.get(leader=part, event=event, members=None)
         except:
             team = Team.objects.create(leader=part, event=event)
+            count += 1
             print "New Single Team ID " + str(team.id)
+            print count
 
 # Two levels for each event
 for event in events:
@@ -36,12 +39,30 @@ try:
     college = College.objects.get(name="BITS Pilani")
 except:
     college = College.objects.create(name="BITS Pilani")
-for sid, name in enumerate(BITSIANS):
+
+for part in parts:
+    if part.aadhaar is not None:
+        part.aadhaar = part.aadhaar.upper()
+        part.save()
+        print "Part " + part.aadhaar + " changed."
+
+for sid, name in BITSIANS:
     try:
         part = Participant.objects.get(aadhaar__icontains=sid)
         part.name = name
+        part.email_id = sid.lower() + "@pilani.bits-pilani.ac.in"
+        part.college = college
         part.save()
-        print sid + " changed"
+        print "Match found! " + sid + " changed"
     except:
-        part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college)
+        email = sid.lower() + "@pilani.bits-pilani.ac.in"
+        phone = 9999999999
+        part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college, email_id=email)
         print sid + " created"
+
+
+
+for part in parts:
+    if part.aadhaar == "":
+        part.aadhaar = None
+        part.save()
