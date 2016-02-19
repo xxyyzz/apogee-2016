@@ -1,0 +1,150 @@
+{% extends "ems/base.html" %}
+{% block sidebar_content %}
+    <li>
+        <a href="{% url 'ems:events_home' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Event Home</p>
+        </a>
+    </li>
+{% endblock sidebar_content %}
+{% block main_content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">{{ judge.name }}</h4>
+                            <p class="category">Please click "Save & Lock" once you are done to finalise your evaluation</p>
+                        </div>
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="eventid" value="{{ event.id }}">
+                        <div class="header">
+                            <h4 class="title">{{ level.position }}. {{ level.name }}</h4>
+                            <p class="category">The following particpants are currently in {{ level.name }} level of {{ event.name }}</p>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>S.No</th>
+                                    {% if event.is_team %}
+                                    <th>Team Name</th>
+                                    <th>Team Leader</th>
+                                    {% else %}
+                                    <th>Name</th>
+                                    {% endif %}{% if level.label.var1name %}
+                                    <th>{{ level.label.var1name }}<br>({{ level.label.var1max }})</th>
+                                    {% endif %}{% if level.label.var2name %}
+                                    <th>{{ level.label.var2name }}<br>({{ level.label.var2max }})</th>
+                                    {% endif %}{% if level.label.var3name %}
+                                    <th>{{ level.label.var3name }}<br>({{ level.label.var3max }})</th>
+                                    {% endif %}{% if level.label.var4name %}
+                                    <th>{{ level.label.var4name }}<br>({{ level.label.var4max }})</th>
+                                    {% endif %}{% if level.label.var5name %}
+                                    <th>{{ level.label.var5name }}<br>({{ level.label.var5max }})</th>
+                                    {% endif %}{% if level.label.var6name %}
+                                    <th>{{ level.label.var6name }}<br>({{ level.label.var6max }})</th>
+                                    {% endif %}{% if level.label.var7name %}
+                                    <th>{{ level.label.var7name }}<br>({{ level.label.var7max }})</th>
+                                    {% endif %}{% if level.label.var8name %}
+                                    <th>{{ level.label.var8name }}<br>({{ level.label.var8max }})</th>
+                                    {% endif %}{% if level.label.var9name %}
+                                    <th>{{ level.label.var9name }}<br>({{ level.label.var9max }})</th>
+                                    {% endif %}{% if level.label.var10name %}
+                                    <th>{{ level.label.var10name }}<br>({{ level.label.var10max }})</th>
+                                    {% endif %}
+                                </thead>
+                                <tbody>
+                                {% for team in teams %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    {% if event.is_team %}
+                                    <td>{{ team.name }}</td>
+                                    {% endif %}
+                                    <td>{{ team.leader.name }}</td>
+                                    {% if level.label.var1name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var1 }}" min="0" max="{{ level.label.var1max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var1 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var2name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var2 }}" min="0" max="{{ level.label.var2max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var2 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var3name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var3 }}" min="0" max="{{ level.label.var3max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var3 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var4name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var4 }}" min="0" max="{{ level.label.var4max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var4 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var5name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var5 }}" min="0" max="{{ level.label.var5max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var5 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var6name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var6 }}" min="0" max="{{ level.label.var6max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var6 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var7name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var7 }}" min="0" max="{{ level.label.var7max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var7 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var8name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var8 }}" min="0" max="{{ level.label.var8max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var8 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var9name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var9 }}" min="0" max="{{ level.label.var9max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var9 }}</td>
+                                    {% endif %}{% endif %}{% if level.label.var10name %}{% if not team.score.is_frozen %}
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var10 }}" min="0" max="{{ level.label.var10max }}" name="{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.var10 }}</td>
+                                    {% endif %}{% endif %}
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="10" style="text-align:center">Nothing in here!</td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="13">
+                                        <button type="submit" class="btn btn-info btn-fill" name="save" value="save">Save</button>
+                                        <button type="submit" class="btn btn-info btn-fill btn-danger" name="freeze" value="freeze">Save & Lock</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main_content %}
+{% block script %}
+<script type= 'text/javascript'>
+window.onload = function () {
+    checkbox = document.getElementById('judgesheet');
+    toggle(checkbox);
+}
+function toggle(checkbox){
+  var js = document.getElementsByClassName('judgesheet');
+  for(var i=0; i< js.length ; ++i)
+  {
+      if (checkbox.checked) {
+          js[i].disabled = false;
+          js[i].parentElement.style.display = 'block';
+      }
+      else {
+          js[i].disabled = true;
+          js[i].parentElement.style.display = 'none';
+      }
+  }
+}
+</script>
+{% endblock script %}
