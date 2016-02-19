@@ -1,17 +1,29 @@
 {% extends "ems/base.html" %}
 {% block sidebar_content %}
 <li>
-    <a href="{% url 'ems:events_levels' event.id %}">
+    <a href="{% url 'ems:events_home' event.id %}">
         <i class="pe-7s-news-paper"></i>
-        <p>Manage Levels</p>
+        <p>Event Home</p>
     </a>
 </li>
-    <li>
-        <a href="{% url 'ems:team_home' %}">
-            <i class="pe-7s-news-paper"></i>
-            <p>Manage Participants</p>
-        </a>
-    </li>
+<li>
+    <a href="{% url 'ems:events_levels' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Setup</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_judge_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Judge Event</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_participants' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Manage Participants</p>
+    </a>
+</li>
 {% endblock sidebar_content %}
 {% block main_content %}
         <div class="content">
@@ -31,12 +43,17 @@
                                     <thead>
                                         <th>Check</th>
                                         <th>Edit</th>
-                                        <th>S.no</th>
+                                        <th>S.No</th>
+                                        {% if event.is_team %}
                                         <th>Team Name</th>
-                                        <th>Leader Name</th>
+                                        <th>Team Leader</th>
                                         <th>Members</th>
                                         <th>Leader College</th>
-                                        <th>Position</th>
+                                        {% else %}
+                                        <th>Name</th>
+                                        <th>College</th>
+                                        {% endif %}
+                                        <th>Rank</th>
                                     </thead>
                                     <tbody>
                                     {% for team in level.teams.all %}
@@ -52,11 +69,15 @@
                                             </a>
                                         </td>
                                         <td>{{ forloop.counter }}</td>
+                                        {% if event.is_team %}
                                         <td>{{ team.name }}</td>
                                         <td>{{ team.leader.name }}</td>
                                         <td>{{ team.members.all.count|add:1 }}</td>
+                                        {% else %}
+                                        <td>{{ team.leader.name }}</td>
+                                        {% endif %}
                                         <td>{{ team.leader.college.name }}</td>
-                                        <td>{{ team.name }}</td>
+                                        <td>{{ team.rank }}</td>
                                     </tr>
                                     {% empty %}
                                     <tr>
@@ -66,7 +87,7 @@
                                     <tr>
                                         <td colspan="10">
                                             {% if not forloop.first %}<button type="submit" class="btn btn-info btn-fill" name="promote" value="{{ level.position }}">Promote</button>{% endif %}
-                                            {% if not forloop.last %}<button type="submit" class="btn btn-danger btn-fill" name="demote" value="{{ level.position }}">Demote</button>{% endif %}
+                                            {% if not forloop.last and not level.is_protected %}<button type="submit" class="btn btn-danger btn-fill" name="demote" value="{{ level.position }}">Demote</button>{% endif %}
                                         </td>
                                     </tr>
                                     </tbody>
