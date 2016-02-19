@@ -31,3 +31,17 @@ for event in events:
             registered[0].teams.add(team)
     winner = Level.objects.get_or_create(name="Winners", event=event, position=1, is_protected=True)
     print "New Winner Level for " + event.name+  " ? " + str(winner[1]) + " ID " + str(winner[0].id)
+
+try:
+    college = College.objects.get(name="BITS Pilani")
+except:
+    college = College.objects.create(name="BITS Pilani")
+for sid, name in enumerate(BITSIANS):
+    try:
+        part = Participant.objects.get(aadhaar__icontains=sid)
+        part.name = name
+        part.save()
+        print sid + " changed"
+    except:
+        part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college)
+        print sid + " created"
