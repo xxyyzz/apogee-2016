@@ -882,7 +882,7 @@ def recnacc_allot(request,gl_id):
             gl.save()
         no_males=0
         no_females=0
-        participant_list = gl.initialregistration_set.all()
+        participant_list = gl.participant_set.all()
         for p in participant_list:
             if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True:
                 no_males+=1
