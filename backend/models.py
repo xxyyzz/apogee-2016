@@ -26,7 +26,7 @@ class Participant(models.Model):
     )
     is_bitsian = models.BooleanField(default=False)
     user = models.OneToOneField(User, null=True)
-    aadhaar = models.CharField(max_length=8, null=True, blank=True, default=None, unique=True)
+    aadhaar = models.CharField(max_length=8, null=True, blank=True, default=None)
     name = models.CharField(max_length=200)
     gender = models.CharField(max_length=1, choices=GENDERS)
     college = models.ForeignKey('College')
