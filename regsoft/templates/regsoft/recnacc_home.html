@@ -3,7 +3,7 @@
     
 
 <div class="wrapper">
- <div class="sidebar" data-color="azure" data-image="/2016/static/regsoft/img/sidebar-4.jpg">
+    <div class="sidebar" data-color="azure" >  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -22,36 +22,36 @@
                         <p>HOME</p>
                     </a>            
                 </li>
-                <!-- <li>
+                <li>
                     <a href="../bhavan_gleader_list/">
                         <i class="pe-7s-news-paper"></i> 
                         <p>Bhavan-Leader List</p>
                     </a>
-                </li>   -->
+                </li>  
                 <li>
-                    <a href="../barcodelist">
+                    <a href="../../groupcodes">
                         <i class="pe-7s-note2"></i> 
                         <p>GroupCode list</p>
                     </a>            
                 </li>
-                <!-- <li>
+                <li>
                     <a href="../checkedout_select_gl/">
                         <i class="pe-7s-credit"></i> 
                         <p>Checkedout List</p>
                     </a>            
-                </li> -->
-               <!--  <li>
+                </li>
+                <li>
                     <a href="../bhavan_inventory_list/">
                         <i class="pe-7s-safe"></i> 
                         <p>Inventory Availabilty</p>
                     </a>            
-                </li> -->
-               <!--  <li>
+                </li>
+                <li>
                     <a href="../room_availibility_list/">
                         <i class="pe-7s-culture"></i> 
                         <p>Room Vacancy</p>
                     </a>            
-                </li> -->
+                </li>
                 <li>
                     <a href="../room_list/">
                         <i class="pe-7s-culture"></i> 
@@ -173,32 +173,32 @@
 
 
 
-        // <script>
-        // setInterval(function(){
-        //     var rec_not = new XMLHttpRequest();
-        //     var url = "http://www.bits-oasis.org/2015/group_notify/";
-        //     var out="" ;
-        //     rec_not.onreadystatechange = function() {
-        //         if (rec_not.readyState == 4 && rec_not.status == 200) {
-        //             var myArr = JSON.parse(rec_not.responseText);
-        //             // console.log(myArr);
-        //             myFunction(myArr["gauss"]);
-        //         }
-        //     }
-        //     rec_not.open("GET", url, true);
-        //     rec_not.send();
+        <script>
+        setInterval(function(){
+            var rec_not = new XMLHttpRequest();
+            var url = "http://www.bits-oasis.org/2015/group_notify/";
+            var out="" ;
+            rec_not.onreadystatechange = function() {
+                if (rec_not.readyState == 4 && rec_not.status == 200) {
+                    var myArr = JSON.parse(rec_not.responseText);
+                    // console.log(myArr);
+                    myFunction(myArr["gauss"]);
+                }
+            }
+            rec_not.open("GET", url, true);
+            rec_not.send();
 
-        //     function myFunction(arr) {
-        //         for(i = 0; i < arr.length; i++) 
-        //         {
-        //            out += '<tr><td>'+ (i+1) + '</td><td>' + arr[i].glname + '</td><td>' + arr[i].college + '</td><td>' + arr[i].groupcode + '</td><td>' + arr[i].partno + '</td><td>' + arr[i].facno + '</td><td>' +  arr[i].phone  + '</td></tr>' ; 
-        //         }
-        //         document.getElementById("rec_notif").innerHTML = out;
-        //     }
-        // },3000);
+            function myFunction(arr) {
+                for(i = 0; i < arr.length; i++) 
+                {
+                   out += '<tr><td>'+ (i+1) + '</td><td>' + arr[i].glname + '</td><td>' + arr[i].college + '</td><td>' + arr[i].groupcode + '</td><td>' + arr[i].partno + '</td><td>' + arr[i].facno + '</td><td>' +  arr[i].phone  + '</td></tr>' ; 
+                }
+                document.getElementById("rec_notif").innerHTML = out;
+            }
+        },3000);
         
 
-        // </script>
+        </script>
 
         
         
@@ -211,7 +211,7 @@
 
 
                 <p class="pull-right">
-                    For any queries contact : <strong>9928823099 / 8058868682 / 9928834365</strong>
+                    For any queries contact : <strong>9928823099 / 8058868682</strong> / 9928834365
                 </p>
             </div>
         </footer>
