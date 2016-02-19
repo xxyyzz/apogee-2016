@@ -55,7 +55,7 @@ def summary(request):
 						'short_desc':event.short_description,
 						'tags':[tag.name for tag in event.tags.all()] + (['kernel'] if event.is_kernel else []),
 					}
-						for event in category.event_set.all()
+						for event in category.event_set.filter(is_displayed=True)
 				]
 		container['events'] = events
 		response.append(container)

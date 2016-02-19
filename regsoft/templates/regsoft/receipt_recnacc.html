@@ -7,54 +7,21 @@
 <!--<img src = "http://bits-apogee.org/2013/site_media/images/BITSLogo.png" style = "margin-right: 20px;"> -->
 <img src = "http://www.bits-oasis.org/images/logoB.png"  width="250" height="100" style = "    margin-right: 20px;position: relative;left: 50%;margin-left: -125px;">
 <div id = "collegeName" style="background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle;">
-College Name: {{ gl.details.college }}
+College Name: {{ part_ob.college }}
 </div>
-	
-	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		Safety Deposit per person: Rs. 300
-	</div>
 
 
 	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		Total (Caution Deposit): {{totalamt}} 
+		Total (Caution Deposit): 300 
 	</div>
 	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
 		Amount Deducted:  
 	</div>
+
 	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		Males : {{maleno}}  |  Females : {{femaleno}}
+		Apogee Hospitality Number: +91 7073256550
 	</div>
 
-<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		Group Leader: {{ gl.details.name }}
-	</div>
-	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		College Representative: {{gl.details.college_rep.details.name}}
-	</div>
-	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		Oasis Hospitality Number: +91 7073256550
-	</div>
-<div id = "Receipt" style="background: #FFFFFF;color: #000000;font-size: 23px;padding: 10px;vertical-align: top;margin-top: 10px;">
-		<table>
-		<thead>
-			<th>SrNo.</th>
-			<th>Name</th>
-			<th>Room No.</th>
-			<th>Phone no.</th>
-		</thead>
-		<tbody>
-			{% for x in prtlist %}
-			<tr>
-				<td>{{forloop.counter}}</td>
-				<td>{{x.name}}</td>
-				<td>{{x.room}}</td>
-				<td>{{x.phone_one}}</td>
-				<tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-	</div>
 <style type="text/css">
 th,tr
 {
@@ -68,7 +35,7 @@ th,tr
 		Signature (For RecnAcc)
 	</div>
 <div id="Signature" style="background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align:top;float:right;margin-top: 50px;margin-right: 20px;">
-		Signature (For Group Leader)
+		Signature (For Paticipant)
 	</div>	
 <!-- <div id="Signature" style="background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align:top;float:right;margin-top: -260px;margin-right: 20px;">
 		Group Leader:
@@ -135,6 +102,6 @@ College Name: {{ gl.details.college }}
 	</div> -->
 <!--<a href = './../../controlz/'><img src = "http://bits-oasis.org/images/print.png" style = "float: right;"></a> -->
 <input type="button" value="Print" onclick="window.print()" style = "float: right;position: absolute;top: 15px;right: 20px;font-size: 20px;"/>
-<br><a align="centre" href = "http://bits-oasis.org/2015/controlz/home/" style="position: absolute;top: 10px;left: 15px;font-size: 18px;"><strong>Go to Home</strong></a>
+<br><a align="centre" href = "http://bits-apogee.org/2016/controlz/home/" style="position: absolute;top: 10px;left: 15px;font-size: 18px;"><strong>Go to Home</strong></a>
 </body>
 <html>

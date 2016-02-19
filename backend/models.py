@@ -2,7 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
-# Create your models here.
+
+
+
+class gleader(models.Model):
+    details = models.ForeignKey("Participant", blank=True, null=True, default=None)
+    groupcode =  models.CharField(max_length=100,null=True,blank=True) 
+    amount_deducted = models.IntegerField(null=True, default=0)
+    amount_taken = models.IntegerField(null=True, default=0)
+    def __unicode__(self):
+        return str(self.details.name)
+    class Meta:
+        verbose_name='Group Leader'
+
+
+
 
 class Participant(models.Model):
     GENDERS = (
@@ -35,18 +49,23 @@ class Participant(models.Model):
     bank_account_no = models.CharField(max_length=20)
     address = models.TextField(max_length=1000)
 
-
+    grpleader =  models.ForeignKey("gleader", blank=True, null=True, default=None)
     firewallzo = models.BooleanField('passed firewallz', default=False)
     # firewallzi = models.BooleanField('passed inner booth', default=False)
     recnacc = models.BooleanField('passed recnacc', default=False)
     controlz = models.BooleanField('passed controlz', default=False)
 
-    # bill_id = models.CharField(max_length=10, default='', blank=True)
+    bill_id = models.CharField(max_length=10, default='', blank=True)
     room = models.ForeignKey('regsoft.Room',null=True,blank = True)
     class Meta:
         verbose_name_plural = 'Participants'
     def __unicode__(self):
         return str(self.name)
+
+
+
+
+
 
 # ToDo: Port this model to the EMS app next time
 class Team(models.Model):

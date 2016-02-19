@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Q
 from django.core.mail import send_mass_mail
+
 def controls_check(user):
     if user.id:
         if user.is_superuser or user.email == 'controls@bits-apogee.org':

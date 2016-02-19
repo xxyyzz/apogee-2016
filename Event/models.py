@@ -51,6 +51,7 @@ class Event(models.Model):
     is_kernel = models.NullBooleanField(null=True,blank=True)
     # online_reg = models.NullBooleanField(null=True,blank=True)
     org= models.ForeignKey(Organization, blank= True, null=True, default=None)
+    is_displayed = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name

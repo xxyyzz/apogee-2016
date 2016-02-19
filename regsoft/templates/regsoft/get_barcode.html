@@ -3,7 +3,7 @@
     
 
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="/static/regsoft/img/sidebar-4.jpg">  
+    <div class="sidebar" data-color="blue" data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -58,7 +58,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><strong> BITS Oasis 2015 </strong></a>
+                    <a class="navbar-brand" href="#"><strong> BITS Apogee 2016 </strong></a>
                 </div>
                 <div class="collapse navbar-collapse">       
                     <ul class="nav navbar-nav navbar-left">
@@ -76,7 +76,11 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h2>Barcode List</h2>
+                                <h2>Participant List</h2>
+                                <form action="../select/" method='POST'>
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-info btn-fill">Select</button>
+                                    <div class="clearfix"></div>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -84,6 +88,7 @@
             <th>Name</th>
             <th>College</th>
             <th>Code</th>
+            <th>Select</th>
 
         </thead>
         <tbody>
@@ -92,7 +97,13 @@
                 <td>{{x.0}}</td>
                 <td>{{x.1}}</td>
                 <td>{{x.2}}</td>
-                <td><a href="../scan/{{x.3}}"> Scan </a></td>
+                <td><div class="col-md-3"> 
+                        <label class="checkbox">                
+                            <input type="checkbox" name="pidlist" value="{{x.3}}" data-toggle= "checkbox">
+                        </label>
+                    </div>         
+                </td>        
+                <!-- <td><a href="../scan/{{x.3}}"> Scan </a></td> -->
             </tr>
         {% endfor %}
         </tbody>
@@ -102,7 +113,7 @@
                         </div>
                     </div>  
                     
-                                 
+                       </form>          
                 </div>                    
             </div>
         </div>
@@ -117,7 +128,7 @@
 
 
                 <p class="pull-right">
-                    For any queries contact : 9928823099 / 8058868682 / 9928834365 
+                    For any queries contact :<strong> 9928823099 </strong> / 8058868682 / 9928834365 
                 </p>
             </div>
         </footer>

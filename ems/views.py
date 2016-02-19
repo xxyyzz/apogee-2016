@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
-
-from Event.models import *
-from backend.models import *
+from django.http import HttpResponse
+from ems.models import Score, Level, Judge, Label
+from Event.models import Event
+from backend.models import Participant, Team
 
 # Create your views here.
 EMSADMINS = [
@@ -159,7 +160,7 @@ def participant_details(request, partid):
     return render(request, 'ems/participant_details.html', context)
 
 @staff_member_required
-def events_home(request):
+def events_select(request):
     if request.user.username in EMSADMINS:
         events = Event.objects.order_by('name')
     else:
@@ -167,14 +168,45 @@ def events_home(request):
     context = {
         'events' : events,
     }
-    return render(request, 'ems/events_home.html', context)
+    return render(request, 'ems/events_select.html', context)
 
 @csrf_exempt
 @staff_member_required
-def events_detail(request, eventid):
+def events_home(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
     if request.POST:
-        # eventid = request.POST['event']
-        # return redirect('ems:events_detail', eventid)    if request.POST:
+        if "promote" in request.POST:
+            position = int(request.POST['promote'])
+            teams = request.POST.getlist('teams')
+            try:
+                curr_level = Level.objects.get(event=event, position=position)
+            except:
+                return HttpResponse("Error: Duplicate levels with rank %s. <br> Please Ensure correct them from the 'Manage Levels' pane." % str(position))
+            try:
+                next_level = Level.objects.get(event=event, position=position-1)
+            except:
+                return HttpResponse("Error: Cannot find level with rank %s. <br> Please Ensure Level Rankings are in continuous order, starting from 1. Correct them from the 'Manage Levels' pane." % str(position-1))
+            for teamid in teams:
+                team = Team.objects.get(id=teamid)
+                next_level.teams.add(team)
+        if "demote" in request.POST:
+            position = int(request.POST['demote'])
+            teams = request.POST.getlist('teams')
+            try:
+                curr_level = Level.objects.get(event=event, position=position)
+            except:
+                return HttpResponse("Error: Duplicate levels with rank %s. <br> Please Ensure correct them from the 'Manage Levels' pane." % str(position))
+            try:
+                prev_level = Level.objects.get(event=event, position=position+1)
+            except:
+                return HttpResponse("Error: Cannot find Level with rank %s. <br> Please Ensure Level Rankings are in continuous order, starting from 1. Correct them from the 'Manage Levels' pane." % str(position+1))
+            for teamid in teams:
+                team = Team.objects.get(id=teamid)
+                curr_level.teams.remove(team)
+                print prev_level.teams.all()
+                if team not in prev_level.teams.all():
+                    prev_level.teams.add(team)
         if "add-finalists" in request.POST:
             teamids = request.POST.getlist('registered')
             for teamid in teamids:
@@ -194,17 +226,177 @@ def events_detail(request, eventid):
         if "delete-team" in request.POST:
             teamid = request.POST['delete-team']
             Team.objects.get(id=teamid).delete()
-    event = Event.objects.get(id=eventid)
-    registered = Team.objects.filter(event__id=eventid)
-    winners = [x for x in registered if x.is_winner == True]
-    finalists = [x for x in registered if x.is_finalist == True]
     context = {
-        'registered' : registered,
-        'finalists' : finalists,
-        'winners' : winners,
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_home.html', context)
+
+def events_levels(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'delete-level' in request.POST:
+            levelid = request.POST['delete-level']
+            level = Level.objects.get(id=levelid)
+            level.teams.clear()
+            level.delete()
+        if 'delete-judge' in request.POST:
+            judgeid = request.POST['delete-judge']
+            judge = Judge.objects.get(id=judgeid)
+            judge.level_set.clear()
+            judge.delete()
+        if 'delete-label' in request.POST:
+            labelid = request.POST['delete-label']
+            label = Label.objects.get(id=labelid)
+            label.delete()
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_levels.html', context)
+
+def events_levels_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'add' in request.POST:
+            name = request.POST['name']
+            position = int(request.POST['position'])
+            level = Level.objects.create(name=name, position=position, event=event)
+            if 'judgesheet' in request.POST:
+                labelid = request.POST['label']
+                label = Label.objects.get(id=labelid)
+                level.label = label
+                level.save()
+                judges = request.POST.getlist('judge')
+                for judgeid in judges:
+                    judge = Judge.objects.get(id=judgeid)
+                    level.judges.add(judge)
+        return redirect('ems:events_levels', event.id)
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_levels_add.html', context)
+
+def events_labels_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'add' in request.POST:
+            names = request.POST.getlist("name")
+            maxvalues = request.POST.getlist("max")
+            label = Label(event=event)
+            for i, name in enumerate(names):
+                attr = "var" + str(i+1) + "name"
+                setattr(label, attr, name)
+            for i, maxvalue in enumerate(maxvalues):
+                attr = "var" + str(i+1) + "max"
+                setattr(label, attr, maxvalue)
+            label.save()
+        return redirect('ems:events_levels', event.id)
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_labels_add.html', context)
+
+def events_judges_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    levels = Level.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'add' in request.POST:
+            name = request.POST['name']
+            Judge.objects.create(name=name, event=event)
+            return redirect('ems:events_levels', event.id)
+    context = {
+        'event' : event,
+        'levels' : levels,
+    }
+    return render(request, 'ems/events_judges_add.html', context)
+
+
+def events_levels_edit(request, eventid, levelid):
+    event = Event.objects.get(id=eventid)
+    level = Level.objects.get(id=levelid)
+    if 'save' in request.POST:
+        name = request.POST['name']
+        position = int(request.POST['position'])
+        level.name = name
+        level.position = position
+        level.label = None
+        level.save()
+        level.judges.clear()
+        if 'judgesheet' in request.POST:
+            labelid = request.POST['label']
+            label = Label.objects.get(id=labelid)
+            level.label = label
+            level.save()
+            judges = request.POST.getlist('judge')
+            for judgeid in judges:
+                judge = Judge.objects.get(id=judgeid)
+                level.judges.add(judge)
+        return redirect('ems:events_levels', event.id)
+    if 'delete' in request.POST:
+        level.delete()
+        return redirect('ems:events_home', event.id)
+    context = {
+        'event' : event,
+        'level' : level,
+    }
+    return render(request, 'ems/events_levels_edit.html', context)
+
+def events_judge_home(request, eventid):
+    event = Event.objects.get(id=eventid)
+    context = {
         'event' : event,
     }
-    return render(request, 'ems/events_detail.html', context)
+    return render(request, 'ems/events_judge_home.html', context)
+
+
+def events_levels_judge(request, eventid, levelid, judgeid):
+    event = Event.objects.get(id=eventid)
+    level = Level.objects.get(id=levelid)
+    judge = Judge.objects.get(id=judgeid)
+    if request.method == 'POST':
+        if "save" or "freeze" in request.POST:
+            for team in level.teams.all():
+                scores = request.POST.getlist(str(team.id))
+                try:
+                    score = Score.objects.get(level=level, team=team, judge=judge)
+                except:
+                    score = Score.objects.create(level=level, team=team, judge=judge)
+                for i, val in enumerate(scores):
+                    attr = 'var' + str(i+1)
+                    setattr(score, attr, val)
+                if "freeze" in request.POST:
+                    score.is_frozen = True
+                score.save()
+    teams = []
+    for team in level.teams.all():
+        try:
+            score = Score.objects.get(level=level, team=team, judge=judge)
+            team.score = score
+        except:
+            pass
+        teams.append(team)
+    context = {
+        'event' : event,
+        'level' : level,
+        'judge' : judge,
+        'teams' : teams,
+    }
+    return render(request, 'ems/events_judge_edit.html', context)
+
+def events_participants(request, eventid):
+    event = Event.objects.get(id=eventid)
+    teams = Team.objects.filter(event=event)
+    context = {
+        'event' : event,
+        'teams' : teams,
+    }
+    return render(request, 'ems/events_participants.html', context)
 
 @staff_member_required
 def upload_list(request):

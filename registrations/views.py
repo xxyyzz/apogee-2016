@@ -403,7 +403,7 @@ def edit_paper(request):
 		}
 		return JsonResponse(response)
 
-
+@csrf_exempt
 def edit_project(request):
 	if request.method == 'GET':
 		data = request.GET
