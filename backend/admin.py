@@ -9,7 +9,7 @@ class ParticipantAdmin(admin.ModelAdmin):
     filter_horizontal = ['events', 'teams']
     search_fields = ['name']
     list_filter = ['is_bitsian', 'college']
-    list_display = ['name', 'is_bitsian', 'aadhaar']
+    list_display = ['name', 'is_bitsian', 'aadhaar', 'email_id']
     list_editable = ['is_bitsian', 'aadhaar']
 
 
