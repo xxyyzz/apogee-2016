@@ -1263,7 +1263,7 @@ def recnacc_allot(request,gl_id):
             unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True]
             if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
                 if no_females<noalloted:
-                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
+                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apoogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
                 for y in range(noalloted):
                     unalloted_females[y].recnacc=True
                     unalloted_females[y].room = selectedroom
@@ -1273,7 +1273,7 @@ def recnacc_allot(request,gl_id):
             
             else:
                 if no_males<noalloted:
-                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
+                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
                 for y in range(noalloted):
                     unalloted_males[y].recnacc=True
                     unalloted_males[y].room = selectedroom
@@ -1419,42 +1419,11 @@ def recnacc_checkout(request,gl_id):
 
 
 
-@csrf_exempt
-def recnacc_room_list(request):
-    rooms = Room.objects.all()
-    plist = []
-    for x in rooms:
-        prtno = Participant.objects.filter(room = x).count()
-        if x.id != 1:
-            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
-
-    context = RequestContext(request)
-    context_dict = {'plist':plist}
-    return render(request,'regsoft/recnacc_room_participants_list.html', context_dict)
-
-@csrf_exempt
-def recnacc_room_details(request, room_id):
-  room = Room.objects.get(id = room_id)
-  plist = Participant.objects.filter(room = room)
-  # plist = []
-  # for x in rooms:
-  #   prtno = InitialRegistration.objects.filter(room = x).count()
-  #   plist.append({x.bhavan.name,x.room,prtno})
-  context = RequestContext(request)
-  context_dict = {'plist':plist,'room':room}
-  # return HttpResponse(plist)
-  return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
 
 
 
-@csrf_exempt
-def recnacc_bill_print(request, part_id):
-    part_ob = Participant.objects.get(id = part_id)
 
 
-    context = {'part_ob': part_ob}
-
-    return render_to_response('regsoft/receipt_recnacc.html', context)
 
 def encode_glid(gl_id):
     gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
@@ -1482,1050 +1451,96 @@ def get_barcode(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @csrf_exempt
-# def recnacc_home(request):
-#     if request.POST:
-#         try:
-#             encoded = str( request.POST['code'] )
-#             decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
-
-#         except:
-#             return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
-#         return HttpResponseRedirect("../home/" + str(decoded) )
-
-
-#     return render(request, "regsoft/recnacc_home.html")
-
-
-# # def recnacc_notify(request):
-# #   gl_list = gleader.objects.all()
-# #   res = {}
-# #   res['gauss'] =[]
-# #   for gl in gl_list:
-# #       temp = {}
-# #       if gl.initialregistration_set.filter(firewallzo= True, recnacc= False).count() or gl.initialregistration_set.filter(firewallzo= True, controlz= False).count():
-# #           temp['glname'] = gl.details.name
-# #           temp['college'] = gl.details.college
-# #           temp['groupcode']  = gl.groupcode
-# #           temp['phone'] = gl.details.phone_one
-# #           partmalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='M')
-# #           partfemalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='F')
-# #           partmaleno = 0
-# #           partfemaleno = 0
-# #           facmaleno = 0
-# #           facfemaleno = 0
-# #           for x in partmalenolist:
-# #               if x.is_faculty!=True:
-# #                   partmaleno += 1
-# #           for x in partfemalenolist:
-# #               if x.is_faculty!=True:
-# #                   partfemaleno += 1
-# #           for x in partmalenolist:
-# #               if x.is_faculty==True:
-# #                   facmaleno += 1
-# #           for x in partfemalenolist:
-# #               if x.is_faculty==True:
-# #                   facfemaleno += 1
-# #           temp['partno'] = str(partmaleno) + ' | ' + str(partfemaleno)
-# #           temp['facno'] = str(facmaleno) + ' | ' + str(facfemaleno)
-
-# #           res['gauss'].append(temp)
-
-
-# #   try:
-# #       return HttpResponse(json.dumps(res), content_type="application/json")
-# #   except:
-# #       return Http404
-
-# # @csrf_exempt
-# # def recnacc_home(request):
-# #   if request.POST:
-# #       try:
-# #           encoded = str( request.POST['code'] )
-# #           decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
-
-# #       except:
-# #           return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
-# #       return HttpResponseRedirect("../home/" + str(decoded) )
-
-# #   return render(request, "regsoft/recnacc_home.html")
-# @csrf_exempt
-# def recnacc_dashboard(request,pid):
-#     part_ob = Participant.objects.filter(id = pid)
-    
-#     if part_ob:
-#         part_ob = part_ob[0]
-#         if part_ob.recnacc == True:
-#             check = 1
-#         elif part_ob.recnacc == False:
-#             check = 2
-            
-        
-#         context ={
-#         'part_ob' : part_ob, 
-#         'check' : check,
-# #       'plist_faculty' : plistfinal_faculty,
-# #       'plist_two' : plistfinal_two,
-# #       'maleno_faculty' : maleno_faculty,
-# #       'femaleno_faculty' : femaleno_faculty,
-# #       'maleno_participant' : maleno_participant,
-# #       'femaleno_participant' : femaleno_participant,
-# #       'maleno_two' : maleno_two,
-# #       'femaleno_two' : femaleno_two,
-        
-#         }
-
-#         return render(request, 'regsoft/recnacc_dashboard.html', context)
-
-#     else:
-#         return render(request, 'regsoft/recnacc_home.html', {'status' : 0})
-
-# @csrf_exempt
-# def recnacc_allot(request,pid):
-
-# 	try:
-# 		Participant.objects.get(id = pid)
-# 	except:
-# 		return HttpResponse('Please Check if firewallz has not unconfirmed this user. Check Notifications and if it still shows the group code then call Kunal.')
-# 	if request.method == 'POST':
-# 		roomid = request.POST['roomid']
-# 		# except:
-# 		#   error="Invalid Room Selected"
-# 		#   context = RequestContext(request)
-# 		#   context_dict = {'error':error}
-# 		#   return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-		
-
-# 		part_ob = Participant.objects.get(id = pid)
-	
-# 		selectedroom = Room.objects.get(id=roomid) 
-# 		selectedroom_availibilty = selectedroom.vacancy
-
-
-# 		if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or
-# 			part_ob = Participant.objects.get(id = pid)
-# 			if part_ob.gender == 'F':
-# 				part_ob.room = selectedroom
-# 				part_ob.recnacc = True
-# 				part_ob.save()
-# 				selectedroom.vacancy -= 1
-# 				selectedroom.save()
-			
-# 		else:
-# 			part_ob = Participant.objects.get(id = pid)
-# 			if part_ob.gender == 'M':
-# 				part_ob.recnacc = True
-# 				part_ob.room = selectedroom
-# 				part_ob.save()
-# 				selectedroom.vacancy -= 1
-# 				selectedroom.save()
-
-# 		room_list_a= Room.objects.all()
-# 		room_list = []
-# 		for x in room_list_a:
-# 			if x.id != 1:
-# 				room_list.append(x)
-
-# 		context = RequestContext(request)
-# 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
-# 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-
-# 	else:
-# 		room_list_a= Room.objects.all()
-# 		room_list = []
-# 		for x in room_list_a:
-# 			if x.id != 1:
-# 				room_list.append(x)
-# 		part_ob = Participant.objects.get(id = pid)
-# 		context = RequestContext(request)       
-# 		context_dict = {'part_ob':part_ob, 'all_rooms':room_list}
-# 		return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
-				
-		
-
-
-# @csrf_exempt
-# def recnacc_deallocate(request,pid):
-#     part_ob = Participant.objects.get(id=pid)
-#     # alloted_people = InitialRegistration.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
-# #   alist=[]
-# #   for x in alloted_people:
-# #       if x.room.id != 1:
-# #           alist.append(x)s
-
-#     if request.method == 'POST':
-#         if part_ob.room != None:
-#             selected_room = part_ob.room
-#             selected_room.vacancy += 1
-#             selected_room.save()
-#             part_ob.room = None
-#             part_ob.recnacc = False
-#             part_ob.save()
-#             context = RequestContext(request)
-#             context_dict = {'part_ob':part_ob}
-#             return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-#         else:
-#             return HttpResponse('This person has to be alloted a room first.')
-#     else:
-#         if part_ob.room:
-#             context = RequestContext(request)
-#             context_dict = {'part_ob':part_ob}
-#             return render_to_response('regsoft/recnacc_deallocate.html', context_dict, context)
-#         else:
-#             return HttpResponse('This person has to be alloted a room first.')
-
-# @csrf_exempt
-# def recnacc_checkout(request,pid):
-# #   #simple template to enter id
-# #   postcheck = False
-#     if request.method == 'POST':
-#         part_ob = Participant.objects.get(id=pid)       
-#         if part_ob.room != None:
-#             part_ob = Participant.objects.get(id=pid)       
-#             proom = part_ob.room
-#             proom.vacancy += 1
-#             proom.save()
-#             part_ob.room = Room.objects.get(id=1)
-#             croom = Room.objects.get(id=1)
-#             croom.vacancy -= 1
-#             croom.save()
-#             part_ob.save()
-#             check = 1
-#         else:
-#             return HttpResponse('Assign a room to the participant.')
-# #         # participant_name = str(participant.name) 
-# #         # participant_gender = str(participant.gender)[0].upper()
-# #         # if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
-# #         #         participant_event = str(participant.events.all()[0].name)
-# #         # else:
-# #         #     participant_event = ''
-# #           display_table.append(participant)
-# #       gl = gleader.objects.get(id=gl_id)
-# #       amt_ret = request.POST['amt_ret']
-# #       amt_ret = int(amt_ret)
-# #       gl.amount_deducted += amt_ret
-# #       gl.save()
-# #       participant_list = gl.initialregistration_set.all() 
-# #       final_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.room.bhavan.id != 1]
-#         context = RequestContext(request)
-#         context_dict = {'part_ob':part_ob, 'check':check}
-#         return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
-
-
-#     else:
-#         part_ob = Participant.objects.get(id=pid)
-#         proom = part_ob.room
-#         if part_ob.room != None:
-#             if proom.id == 1:
-#                 check = 1
-#             else:
-#                 check = 2
-#         else:
-#             return HttpResponse('Assign a room to the participant.')
-#         context = RequestContext(request)
-#         context_dict = {'part_ob':part_ob,'check':check}
-#         return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
-
-
-# def get_barcode_recnacc(request):
-#     list_of_people_selected = Participant.objects.filter(pcr_approval=True)
-#     final_display = []
-#     for x in list_of_people_selected:
-#         name = x.name
-#         college = x.college.name
-#         pid= x.id
-#         encoded = encode_glid(pid)
-#         final_display.append((name,college,encoded, pid))
-#     context = RequestContext(request)
-#     context_dict = {'final_display':final_display}
-#     return render_to_response('regsoft/get_barcode_recnacc.html', context_dict, context)
-# # Create your views here.
-# @csrf_exempt
-# @staff_member_required
-# def mainScreen(request):
-#   return render(request, "regsoft/index.html", {})
-
-# @staff_member_required
-# def bitsian_add(request):
-#     if request.POST:
-#         long_id = request.POST['long_id'].upper()
-#         short_id = request.POST['short_id']
-#         gender = request.POST['gender'].upper()
-#         name = request.POST['name'].upper()
-#         import re
-#         verify = re.match(r'\d{4}.{4}\d{3}P', long_id)
-#         if verify:
-#             try:
-#                 bitsian = Bitsian.objects.get(long_id=long_id)
-#                 context = {
-#                     'status' : 0,
-#                     'bitsian' : bitsian,
-#                 }
-#                 return render(request, 'regsoft/bitsian_add.html', context)
-#             except ObjectDoesNotExist:
-#                 bitsian = Bitsian()
-#                 bitsian.long_id = long_id
-#                 bitsian.short_id = short_id
-#                 bitsian.name = name
-#                 bitsian.gender = gender[0]
-#                 bitsian.college = 'BITS Pilani'
-#                 bitsian.save()
-#                 context = {
-#                     'status' : 1,
-#                     'bitsian' : bitsian,
-#                 }
-#                 return render(request, 'regsoft/bitsian_add.html', context)
-#         else:
-#             context = {
-#                 'status' : 0,
-#                 'wrongid' : long_id,
-#             }   
-#             return render(request, 'regsoft/bitsian_add.html', context)
-
-#     else:
-#         return render(request, 'regsoft/bitsian_add.html')
-
-
-# @staff_member_required
-# def team_details_home(request):
-#   if request.POST:
-#       teamid = request.POST['code']
-#       return redirect('regsoft:team_details', teamid)
-#   else:
-#       return render(request, 'regsoft/team_team_home.html')
-
-# @staff_member_required
-# def team_details(request, teamid):
-#   if request.POST:
-#       team = Team.objects.get(id=teamid)
-#       if request.POST['position'] == '':
-#           team.position = None        
-#       else:       
-#           team.position = request.POST['position']
-#       team.name_cheque = request.POST['name_cheque']
-#       team.address = request.POST['address']
-#       team.category = request.POST['category']
-#       team.save()
-#       if 'add' in request.POST:
-#           id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('idlist', '').replace(",","").split(" "))]
-#           outside_list = [x for x in id_list if len(x) < 5]
-#           bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-#           bitsian_long_list = [x for x in id_list if len(x) >= 11]
-
-#           try:
-#               reg_objs = InitialRegistration.objects.filter(id__in = outside_list)
-#               for r in reg_objs:
-#                   team.members.add(r)
-#           except: 
-#               context['error_message'] = "Error Generating Team"
-#               return redirect('regsoft:main')
-#           try:
-#               bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-#               bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-#               bitsians = bitsian_long_objs | bitsian_short_objs
-#               for r in bitsians:
-#                   team.bitsian_members.add(r)
-#           except: 
-#               context['error_message'] = "Error Generating Team"
-#               return redirect('regsoft:main')
-#           team.save()
-#       if 'delete-outstation' in request.POST:
-#           memberid = request.POST['delete-outstation']
-#           member = InitialRegistration.objects.get(id=memberid)
-#           team.members.remove(member)
-#           team.save()
-#       if 'delete-bitsian' in request.POST:
-#           memberid = request.POST['delete-bitsian']
-#           member = Bitsian.objects.get(id=memberid)
-#           team.bitsian_members.remove(member)
-#           team.save()
-
-#   try:
-#       team = Team.objects.get(id=teamid)
-#   except:
-#       return render(request, 'regsoft/team_team_home.html', {'status' : 0})
-#   context = {
-#       'team' : team,
-#   }
-#   return render(request, 'regsoft/team_team_details.html', context)
-
-# @staff_member_required
-# def participant_details_home(request):
-#   if request.POST:
-#       partid = request.POST['code']
-#       return redirect('regsoft:participant_details', partid)
-#   else:
-#       return render(request, 'regsoft/team_participant_home.html')
-
-# @staff_member_required
-# def participant_details(request, partid):
-#   try:
-#       participant = InitialRegistration.objects.get(id=partid)
-#   except:
-#       return render(request, 'regsoft/team_participant_home.html', {'status' : 0})
-#   context = {
-#       'participant' : participant,
-#   }
-#   return render(request, 'regsoft/team_participant_details.html', context)
-
-# @staff_member_required
-# def event_details_home(request):
-#   if request.POST:
-#       eventid = request.POST['event']
-#       return redirect('regsoft:event_details', eventid)
-#   else:
-#       events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-#       context = {
-#           'events' : events,
-#       }
-#       return render(request, 'regsoft/team_event_home.html', context)
-
-# @csrf_exempt
-# @staff_member_required
-# def event_details(request, eventid):
-#   if request.POST:
-#       if "add-finalists" in request.POST:
-#           teamids = request.POST.getlist('registered')
-#           for teamid in teamids:
-#               Team.objects.filter(id=teamid).update(is_finalist=True)
-#       if "remove-finalists" in request.POST:
-#           teamids = request.POST.getlist('finalists')
-#           for teamid in teamids:
-#               Team.objects.filter(id=teamid).update(is_finalist=False)
-#       if "add-winners" in request.POST:
-#           teamids = request.POST.getlist('registered')
-#           for teamid in teamids:
-#               Team.objects.filter(id=teamid).update(is_winner=True)
-#       if "remove-winners" in request.POST:
-#           teamids = request.POST.getlist('winners')
-#           for teamid in teamids:
-#               Team.objects.filter(id=teamid).update(is_winner=False)
-#       if "delete-team" in request.POST:
-#           teamid = request.POST['delete-team']
-#           Team.objects.get(id=teamid).delete()
-#   event = Event.objects.get(id=eventid)
-#   registered = Team.objects.filter(event__id=eventid)
-#   winners = [x for x in registered if x.is_winner == True]
-#   finalists = [x for x in registered if x.is_finalist == True]
-#   context = {
-#       'registered' : registered,
-#       'finalists' : finalists,
-#       'winners' : winners,
-#       'event' : event,
-#   }
-#   return render(request, 'regsoft/team_event_details.html', context)
-
-# @staff_member_required
-# def upload_list(request):
-#   events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-#   context = {
-#       'events' : events,
-#   }
-#   return render(request, "regsoft/upload_list.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def getParticipantList(request):
-#   print request.POST.get('id_list')
-#   id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
-
-#   outside_list = [x for x in id_list if len(x) < 5]
-#   bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-#   bitsian_long_list = [x for x in id_list if len(x) >= 11]
-#   outsiders = InitialRegistration.objects.filter(id__in = outside_list)
-#   bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-#   bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-#   bitsians = bitsian_long_objs | bitsian_short_objs
-
-#   context = {}
-#   context['ids'] = [r.id for r in outsiders] + [r.long_id for r in bitsians]
-#   context['names'] = [r.name for r in outsiders] + [r.name for r in bitsians]
-#   context['colleges'] = [r.college for r in outsiders] + [r.college for r in bitsians]
-#   context['phones'] = [r.phone_one for r in outsiders] + [None for r in bitsians]
-#   print context
-#   return JsonResponse(context, safe=False)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def choose_leader(request):
-#   if request.method == "POST":
-#       context = RequestContext(request)
-        
-#       id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
-#       outside_list = [x for x in id_list if len(x) < 5]
-#       bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-#       bitsian_long_list = [x for x in id_list if len(x) >= 11]
-#       outsiders = InitialRegistration.objects.filter(id__in = outside_list)
-#       bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-#       bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-#       bitsians = bitsian_long_objs | bitsian_short_objs
-#       context = RequestContext(request)
-#       context['outsiders'] = outsiders
-#       context['bitsians'] = bitsians
-#       context['event_name'] = request.POST['event_name']
-#       context['id_list'] = request.POST.get('id_list', '')
-#       # context['names'] = [r.name for r in reg_objs]
-#       # context['colleges'] = [r.college for r in reg_objs]
-#       # context['phones'] = [r.phone_one for r in reg_objs]
-
-#       return render(request, "regsoft/chooseLeader.html", context)
-#   else:
-#       return redirect('regsoft:main')
-
-# @csrf_exempt
-# @staff_member_required
-# def genTeam(request):
-#   if request.method == "POST":
-#       leader_id = request.POST['leader_id']
-#       try:
-#           leader_obj = InitialRegistration.objects.get(id=leader_id)
-#       except:
-#           leader_obj = Bitsian.objects.get(long_id=leader_id)
-#       event_obj = Event.objects.get(name=request.POST['event_name'])
-#       college_obj = College.objects.get(name=leader_obj.college)
-#       team_obj = Team()
-#       team_obj.event = event_obj
-#       try:
-#           team_obj.leader = leader_obj
-#           team_obj.bitsian_leader = None
-#       except:
-#           team_obj.bitsian_leader = leader_obj
-#           team_obj.leader = None
-#       team_obj.address = request.POST['address']
-#       team_obj.name_cheque = request.POST['name_cheque']
-#       team_obj.college = college_obj
-#       try:
-#           team_obj.position = int(request.POST['position'])
-#       except:
-#           team_obj.position = None
-#       category = request.POST['category']     
-#       if category == '':      
-#           team_obj.category = None        
-#       else:       
-#           team_obj.category = request.POST['category']
-#       if 'generate' in request.POST:
-#           team_obj.is_winner=False
-#       if 'generate-winner' in request.POST:
-#           team_obj.is_winner=True
-#       team_obj.save()
-#       context = {}
-        
-#       id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list','').replace(",","").split(" "))]
-#       outside_list = [x for x in id_list if len(x) < 5]
-#       bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-#       bitsian_long_list = [x for x in id_list if len(x) >= 11]
-        
-#       try:
-#           reg_objs = InitialRegistration.objects.filter(id__in = outside_list)
-#           for r in reg_objs:
-#               team_obj.members.add(r)
-#       except: 
-#           context['error_message'] = "Error Generating Team"
-#           return redirect('regsoft:main')
-#       try:
-#           bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-#           bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-#           bitsians = bitsian_long_objs | bitsian_short_objs
-#           for r in bitsians:
-#               team_obj.bitsian_members.add(r)
-#       except: 
-#           context['error_message'] = "Error Generating Team"
-#           return redirect('regsoft:main')
-
-#       team_obj.save()
-        
-#       context['error_message'] = "Team Generated Successfully"
-
-#       return redirect('regsoft:main')
-#   else:
-#       return redirect('regsoft:main')
-
-
-# @csrf_exempt
-# @staff_member_required
-# def selectEvent_manageTeams(request):
-#   if request.method == "POST":
-#       context = RequestContext(request)
-#       event_list = Event.objects.all()
-#       event_names = [n.name for n in event_list]
-#       context['event_names'] = event_names
-
-#       return render(request, "regsoft/manageTeams_event.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def showTeams_manageTeams(request):
-#   if request.method == "POST":
-#       request = RequestContext(request)
-#       event_obj = Event.objects.get(name=request.POST['event_name'])
-#       teams = Team.objects.filter(event=event_obj)
-#       context['teams_list'] = teams
-
-#       return render(request, "regsoft/deleteTeams.html", context)     
-
-
-# @csrf_exempt
-# @staff_member_required
-# def deleteTeam_manageTeams(request):
-#   if request.method == "POST":
-#       request = RequestContext(request)
-#       del_teams = request.POST.getlist('del_teams')
-        
-#       for t in del_teams:
-#           Team.objects.get(id=t).delete()
-
-#       return redirect("regsoft/selectEvent_manageTeams", {})
-
-
-# @csrf_exempt
-# @staff_member_required
-# def singleTeamList(request, team_id):
-#   context = RequestContext(request)
-#   team_obj = Team.objects.get(id=team_id)
-
-#   context['members'] = team_obj.members.all()
-#   return render(request, "regsoft/singleTeamList.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def eventList_selectEvent(request):
-#   if request.method == "POST":
-#       context = RequestContext(request)
-#       event_list = Event.objects.all()
-#       event_names = [n.name for n in event_list]
-#       context['event_names'] = event_names
-
-#       return render(request, "regsoft/eventList_select.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def eventlist_showTeams(request):
-#   if request.method == "POST":
-#       request = RequestContext(request)
-#       event_obj = Event.objects.get(name=request.POST['event_name'])
-#       teams = Team.objects.filter(event=event_obj)
-#       context['teams_list'] = teams
-#       context['event_name'] = request.POST['event_name']
-#       return render(request, "regsoft/showTeams.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def finalist_selectEvent(request):
-#   context = RequestContext(request)
-#   event_list = Event.objects.all()
-#   event_names = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
-#   context['event_names'] = event_names
-
-#   return render(request, "regsoft/finalist_eventselect.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def finalist_showTeams(request):
-#   #if request.method == "POST":
-#   context = RequestContext(request)
-#   #print request.POST['event_name']
-    
-#   event_name=request.POST.get('event_name','')
-#   event_obj = Event.objects.get(name=event_name)
-#   teams = Team.objects.filter(event=event_obj)
-#   context['teams_list'] = teams
-#   context['event_name'] = request.POST['event_name']
-#   return render(request, "regsoft/finalist_showTeams.html", context)
-
-
-# @csrf_exempt
-# @staff_member_required
-# def setFinalist(request):
-#   if request.method == "POST":
-
-#       f_teams = request.POST.getlist('finalist_teams')
-        
-#       for t in f_teams:
-#           ob = Team.objects.get(id=t)
-#           ob.is_finalist = True
-#           ob.save()
-
-#       return redirect('regsoft:main')
-
-# @staff_member_required
-# def winner_selectEvent(request):
-#   if request.method == "POST":
-#       context = RequestContext(request)
-#       event_list = Event.objects.all()
-#       event_names = [n.name for n in event_list]
-#       context['event_names'] = event_names
-
-#       return render(request, "regsoft/winner_eventselect.html", context)
-
-# @staff_member_required
-# def winner_showTeams(request):
-#   if request.method == "POST":
-#       request = RequestContext(request)
-#       event_obj = Event.objects.get(name=request.POST['event_name'])
-#       teams = Team.objects.filter(event=event_obj, is_finalist=True)
-#       context['teams_list'] = teams
-#       context['event_name'] = request.POST['event_name']
-#       return render(request, "regsoft/winner_showTeams.html", context)
-
-# @staff_member_required
-# def setWinner(request):
-#   if request.method == "POST":
-#       request = RequestContext(request)
-
-#       id_list = [int(sg_id) for sg_id in filter(lambda a: a != '', request.POST['first'].split(" "))]
-#       for sg_id in id_list:
-#           ob = Team.objects.get(id=sg_id)
-#           ob.is_winner = True
-#           ob.position = 1
-#           ob.save()
-
-#       id_list = [int(sg_id) for sg_id in filter(lambda a: a != '', request.POST['second'].split(" "))]
-#       for sg_id in id_list:
-#           ob = Team.objects.get(id=sg_id)
-#           ob.is_winner = True
-#           ob.position = 2
-#           ob.save()
-
-#       id_list = [int(sg_id) for sg_id in filter(lambda a: a != '', request.POST['third'].split(" "))]
-#       for sg_id in id_list:
-#           ob = Team.objects.get(id=sg_id)
-#           ob.is_winner = True
-#           ob.position = 3
-#           ob.save()
-
-#       id_list = [int(sg_id) for sg_id in filter(lambda a: a != '', request.POST['fourth'].split(" "))]
-#       for sg_id in id_list:
-#           ob = Team.objects.get(id=sg_id)
-#           ob.is_winner = True
-#           ob.position = 4
-#           ob.save()
-
-#       id_list = [int(sg_id) for sg_id in filter(lambda a: a != '', request.POST['fifth'].split(" "))]
-#       for sg_id in id_list:
-#           ob = Team.objects.get(id=sg_id)
-#           ob.is_winner = True
-#           ob.position = 5
-#           ob.save()       
-            
-#       context['error_message'] = "Winners added."
-#       return redirect('regsoft:main')
-
-
-
-# # @csrf_exempt
-# # def recnacc_return_inventory(request, gl_id):
-# #     gl = gleader.objects.get(id=gl_id)
-# #     if request.POST:
-# #         try:
-# #             request.POST.getlist('inventoryid')
-# #         except:
-# #             error="Invalid Inventory Selected"
-# #             context = RequestContext(request)
-# #             context_dict = {'error':error}
-# #             return render_to_response('regsoft/recnacc_inventory_return.html', context_dict, context)
-            
-# #         for inventoryid in request.POST.getlist('inventoryid'):
-# #             noa = 'a'+inventoryid
-# #             nob = 'b'+inventoryid   
-# #             noc = 'c'+inventoryid
-# #             nod = 'd'+inventoryid
-# #             noe = 'e'+inventoryid
-# #             nof = 'f'+inventoryid
-
-# #             inventoryid = int(inventoryid)        
-                     
-# #             a_no=int(request.POST.get(noa, False))
-# #             b_no=int(request.POST.get(nob, False))
-# #             c_no=int(request.POST.get(noc, False))
-# #             d_no=int(request.POST.get(nod, False))
-# #             e_no=int(request.POST.get(noe, False))
-# #             f_no=int(request.POST.get(nof, False))
-
-# #             selectedinventory = Inventory.objects.get(id = inventoryid)
-# #             selectedinventory.a -= a_no
-# #             selectedinventory.b -= b_no
-# #             selectedinventory.c -= c_no
-# #             selectedinventory.d -= d_no
-# #             selectedinventory.e -= e_no
-# #             selectedinventory.f -= f_no
-# #             if selectedinventory.a==0 and selectedinventory.b==0 and selectedinventory.c==0 and selectedinventory.d==0 and selectedinventory.e==0 and selectedinventory.f==0:
-# #                 selectedinventory.delete()        
-# #             else:
-# #                 selectedinventory.save()
-
-# #             selectedbhavan = Bhavan.objects.get(id = selectedinventory.room.bhavan.id)
-# #             selectedbhavan.a_capacity += a_no
-# #             selectedbhavan.b_capacity += b_no
-# #             selectedbhavan.c_capacity += c_no
-# #             selectedbhavan.d_capacity += d_no
-# #             selectedbhavan.e_capacity += e_no
-# #             selectedbhavan.f_capacity += f_no
-# #             selectedbhavan.save()
-
-# #         inven_ob = Inventory.objects.filter(gl_id = gl_id)
-# #         context_dict = {'inven_ob':inven_ob, 'gl':gl}
-# #         context = RequestContext(request)
-# #         return render_to_response('regsoft/recnacc_inventory_return.html', context_dict, context)
-
-
-
-#   # #context = RequestContext(request)
-#   # else:
-#   #     inven_ob = Inventory.objects.filter(gl_id = gl_id)
-#   #     context_dict = {'inven_ob':inven_ob, 'gl':gl}
-#   #     context = RequestContext(request)
-#   #     return render_to_response('regsoft/recnacc_inventory_return.html', context_dict, context)
-#   #    # if request.POST:
-
-# @csrf_exempt
-# def recnacc_checkedout_select_gl(request):
-#   gl = gleader.objects.all()
-#   gllist = []
-#   for x in gl:
-#       if x.initialregistration_set.filter(room = 1):
-#           gllist.append(x)
-#   context_dict = {'gllist':gllist}
-#   context = RequestContext(request)
-#   return render_to_response('regsoft/recnacc_checkedout_select_gl.html', context_dict, context)
-
-# @csrf_exempt
-# def recnacc_checked_out_participants(request, gl_id):
-#   gl = gleader.objects.get(id = gl_id)
-#   prtlist = gl.initialregistration_set.filter(room = 1)
-#   context_dict = {'prtlist':prtlist, 'gl':gl}
-#   context = RequestContext(request)
-#   return render_to_response('regsoft/recnacc_checked_out_participants.html', context_dict, context)
-
-# @csrf_exempt
-# def recnacc_checked_out_participants_in(request, gl_id):
-#   gl = gleader.objects.get(id = gl_id)
-#   if request.method == "POST":
-#       amtded = request.POST['amt_ded']
-#       gl.amount_deducted = amtded
-#       gl.save()
-#       prtlist = gl.initialregistration_set.filter(room = 1)
-#       context_dict = {'prtlist':prtlist, 'gl':gl}
-#       context = RequestContext(request)
-#       return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
-#   else:
-#       prtlist = gl.initialregistration_set.filter(room = 1)
-#       context_dict = {'prtlist':prtlist, 'gl':gl}
-#       context = RequestContext(request)
-#       return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
-
-# @csrf_exempt
-# def recnacc_bhavan_inventory_list(request):
-#   bhavanall = Bhavan.objects.all()
-#   all_bhavans=[]
-#   for x in bhavanall:
-#       if x.id != 1:
-#           all_bhavans.append(x)
-#   context_dict = {'all_bhavans':all_bhavans}
-#   context = RequestContext(request)
-#   return render_to_response('regsoft/recnacc_bhavan_inventory_list.html', context_dict, context)  
-
-# @csrf_exempt
-# def recnacc_room_availibility_list(request):
-#   roomall = Room.objects.all()
-#   all_rooms=[]
-#   for x in roomall:
-#       if x.id != 1:
-#           all_rooms.append(x)
-#   context_dict = {'all_rooms':all_rooms}
-#   context = RequestContext(request)
-#   return render_to_response('regsoft/recnacc_room_availibility_list.html', context_dict, context)      
-
-# @csrf_exempt
-# def recnacc_bhavan_gleader_list(request):
-#   gl = gleader.objects.all()
-#   glist = []   
-#   for x in gl:
-#       if x.details.room:
-#           if x.details.room.id != 1:
-#               glist.append(x)
-#   context_dict = {'glist':glist}
-#   context = RequestContext(request)
-#   return render_to_response('regsoft/recnacc_bhavan_gleader_list.html', context_dict, context)                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def recnacc_bill_list(request):
-#   gl = gleader.objects.all()
-#   gllist = []
-#   for x in gl:
-#       if x.details.recnacc == True and InitialRegistration.objects.filter(grpleader= x).count():
-#           gllist.append(x)
-#   context = RequestContext(request)
-#   context_dict = {'gllist':gllist}
-#   return render_to_response('regsoft/controlz_recnacc_bill_print.html', context_dict, context)
+@csrf_exempt
+def recnacc_room_list(request):
+    rooms = Room.objects.all()
+    plist = []
+    for x in rooms:
+        prtno = Participant.objects.filter(room = x).count()
+        if x.id != 1:
+            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
+
+    context = RequestContext(request)
+    context_dict = {'plist':plist}
+    return render(request,'regsoft/recnacc_room_participants_list.html', context_dict)
+
+@csrf_exempt
+def recnacc_room_details(request, room_id):
+    room = Room.objects.get(id = room_id)
+    plist = Participant.objects.filter(room = room)
+    # plist = []
+    # for x in rooms:
+    #   prtno = InitialRegistration.objects.filter(room = x).count()
+    #   plist.append({x.bhavan.name,x.room,prtno})
+    context = RequestContext(request)
+    context_dict = {'plist':plist,'room':room}
+    # return HttpResponse(plist)
+    return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
+
+@csrf_exempt
+def recnacc_checked_out_participants_in(request, gl_id):
+    gl = gleader.objects.get(id = gl_id)
+    if request.method == "POST":
+        amtded = request.POST['amt_ded']
+        gl.amount_deducted = amtded
+        gl.save()
+        prtlist = gl.participant_set.filter(room = 1)
+        context_dict = {'prtlist':prtlist, 'gl':gl}
+        context = RequestContext(request)
+        return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
+    else:
+        prtlist = gl.participant_set.filter(room = 1)
+        context_dict = {'prtlist':prtlist, 'gl':gl}
+        context = RequestContext(request)
+        return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
+
+
+@csrf_exempt
+def recnacc_bill_print(request, gl_id):
+    gl = gleader.objects.get(id = gl_id)
+    plist = gl.participant_set.filter(firewallzo=True, recnacc=True)
+    prtlist = []
+    for x in plist:
+        if x.room.id != 1:
+            prtlist.append(x)
+
+
+    maleno = gl.participant_set.filter(gender= 'M', recnacc=True)
+    femaleno = gl.participant_set.filter(gender= 'F', recnacc=True)
+    malelist = 0
+    femalelist = 0
+    for x in maleno:
+        if x.room.id != 1:
+            malelist += 1
+    for x in femaleno:
+        if x.room.id != 1:
+            femalelist += 1
+
+    total_ppl = malelist + femalelist
+    totalamt = total_ppl*300
+    context = {
+        'gl': gl,
+        'prtlist' : prtlist,
+        'maleno' : malelist,
+        'femaleno' : femalelist,
+        'totalamt' : totalamt,
+        }
+
+    return render_to_response('regsoft/receipt_recnacc.html', context)
+
+
+
+
+
+def recnacc_bill_list(request):
+    gl = gleader.objects.all()
+    gllist = []
+    for x in gl:
+        if x.details.recnacc == True and Participant.objects.filter(grpleader= x).count():
+            gllist.append(x)
+    context = RequestContext(request)
+    context_dict = {'gllist':gllist}
+    return render_to_response('regsoft/controlz_recnacc_bill_print.html', context_dict, context)
 
 
 

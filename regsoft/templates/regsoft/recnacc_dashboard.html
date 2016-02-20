@@ -34,7 +34,7 @@
                     <!-- </form>         -->
                 </li>
                 <li>
-                    <a href="../../groupcodes">
+                    <a href="../firewallzouter/gcodes/">
                         <i class="pe-7s-note2"></i> 
                         <p>groupcode list</p>
                     </a>            
@@ -45,12 +45,7 @@
                         <p>Allot Participants</p>
                     </a>
                 </li>
-                <li>
-                    <a href="../faculty_allot/{{gl.id}}">
-                        <i class="pe-7s-next-2"></i> 
-                        <p>Allot Faculty</p>
-                    </a>
-                </li>
+                
                 <li>
                     <a href="../deallocate/{{gl.id}}">
                         <i class="pe-7s-back-2"></i> 
@@ -143,7 +138,7 @@ function checkall(gauss){
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Participants for {{gl.details.college}}</h4> <h5> Males : {{maleno_participant}} Females : {{femaleno_participant}} </h5>
-                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>College Representative: {{gl.details.college_rep.details.name}} <br>The following have <strong>NOT</strong> been alloted Rooms</p>
+                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>The following have <strong>NOT</strong> been alloted Rooms</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -151,7 +146,6 @@ function checkall(gauss){
                                         <th>S.no</th>
                                         <th>Name</th>
                                         <th>Gender</th>
-                                        <th>Status</th>
                                         <th>Phone</th>
                                         
                                         
@@ -167,7 +161,6 @@ function checkall(gauss){
                                             <td>{{forloop.counter}}</td>
                                             <td>{{prt.name}}</td>
                                             <td> {{prt.gender}} </td>
-                                            <td>{% if prt.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
                                             <td>{{prt.phone_one}}</td>
                                             <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
                                             <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
@@ -185,54 +178,7 @@ function checkall(gauss){
                             
                     
                     </div>  
-            <div class="content">
-                <div class="container-fluid">    
-                    <div class="row">                   
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Faculty Members for {{gl.details.college}}</h4> <h5> Male faculty members : {{maleno_faculty}} Female faculty members : {{femaleno_faculty}} </h5>
-                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>College Representative: {{gl.details.college_rep.details.name}} <br>The following have <strong>NOT</strong> been alloted Rooms</p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Status</th>
-                                        <th>Phone</th>
-                                        
-                                        
-                                         
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        <form method= "POST" action = '../faculty_allot/{{gl.id}}' id ="form2">
-                                            {% csrf_token %}
-                                       </form>
-                                        {% for prt in plist_faculty %}
-                                        <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{prt.name}}</td>
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% if prt.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
-                                            <td>{{prt.phone_one}}</td>
-                                            <!-- <td><input type ="checkbox" name="pid" value = "{{prt.id}}" form = 'form1'/></td>
-                                            <input type="hidden" name ="val1" value = "val1" form = 'form1'/> -->
-                                            
-                                        </tr>
-                                        {% endfor  %}
-                                    </tbody>
-                                </table>
-
-                                   
-                            </div>
-                        
-                        </div>
-                        <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form2"><strong>ALLOT ROOMS TO FACULTY</strong></button>    
-                    </div>
-                    </div>
+                   
                 </div>
                     <div class="col-md-12">
                         <div class="card card-plain">
@@ -247,8 +193,7 @@ function checkall(gauss){
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th>Room</th>
-                                        <th>Status</th>
-                                        <!-- <th>Phone</th> -->
+                                        <th>Phone</th>
                                         
                                         <th>Group Code</th>
                                         <th>Group Leader</th>
@@ -261,8 +206,7 @@ function checkall(gauss){
                                             <td>{{prt.name}}</td>
                                             <td> {{prt.gender}} </td>
                                             <td> {{prt.room}} </td>
-                                            <td>{% if prt.is_faculty %}<font color="Red">Faculty</font>{% else %}<font color="green">Participant</font> {% endif %}</td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
+                                            <td>{{prt.phone_one}}</td>
                                             <td>{{prt.grpleader.groupcode}}</td>
                                             <td>{{prt.grpleader.details.name}} </td>
 
@@ -290,7 +234,7 @@ function checkall(gauss){
             <div class="copyright container-fluid">
 
                     <p class="pull-left">
-                &copy; 2015 <a >Department of Visual Media</a>   
+                &copy; 2016 <a >Department of Visual Media</a>   
                 </p>
 
 

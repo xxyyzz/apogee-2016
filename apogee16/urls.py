@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from Event.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -37,4 +38,5 @@ urlpatterns = [
     url(r'^ems/', include('ems.urls', namespace='ems')),
     url(r'^lacuna/', include('lacuna.urls', namespace='lacuna')),
     url(r'^revengg/', include('revengg.urls', namespace='revengg')),
+    url(r'^windows_json/$', windows_json),    
 ]

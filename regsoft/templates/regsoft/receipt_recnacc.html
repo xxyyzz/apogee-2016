@@ -28,14 +28,12 @@ College Name: {{ gl.details.college }}
 <div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
 		Group Leader: {{ gl.details.name }}
 	</div>
+
 	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		College Representative: {{gl.details.college_rep.details.name}}
-	</div>
-	<div style = "background: #FFFFFF; height: 20px; color: #000000; font-size: 23px; padding: 10px; vertical-align: middle; margin-top:10px;">
-		Oasis Hospitality Number: +91 7073256550
+		Apogee Hospitality Number: +91 7073256550
 	</div>
 <div id = "Receipt" style="background: #FFFFFF;color: #000000;font-size: 23px;padding: 10px;vertical-align: top;margin-top: 10px;">
-		<table>
+		<table border='1'>
 		<thead>
 			<th>SrNo.</th>
 			<th>Name</th>
@@ -47,7 +45,7 @@ College Name: {{ gl.details.college }}
 			<tr>
 				<td>{{forloop.counter}}</td>
 				<td>{{x.name}}</td>
-				<td>{{x.room}}</td>
+				<td>      {{x.room}}</td>
 				<td>{{x.phone_one}}</td>
 				<tr>
 			{% endfor %}
