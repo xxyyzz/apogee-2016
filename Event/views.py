@@ -5,7 +5,7 @@ from Event.models import *
 from backend.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
-import html2text as gaussx
+import html2text
 # Create your views here.
 @csrf_exempt
 def geteventdata(request,event_id):
@@ -105,67 +105,67 @@ def windows_json(request):
 		itemdict['Title'] = itemdict['UniqueId']
 		itemdict['ImagePath'] = "Assets/"+ str(k.name.replace(" ","").lower() ) + ".png"
 		try:
-			itemdict['Overview'] = str(   gaussx.gaussx( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
+			itemdict['Overview'] = str(   html2text.html2text( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
 		except:
 			itemdict['Overview'] = ""
 		try:
-			itemdict['Rules'] = str(   gaussx.gaussx( str((Tab.objects.get(event=k, heading= rules_ob ) ).content) )   )
+			itemdict['Rules'] = str(   html2text.html2text( str((Tab.objects.get(event=k, heading= rules_ob ) ).content) )   )
 		except:
 			itemdict['Rules'] = ""
 
 		try:			
-			itemdict['Eligibility'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
+			itemdict['Eligibility'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
 		except:
 			itemdict['Eligibility'] = ""
 
 		try:			
-			itemdict['Guidlines'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
+			itemdict['Guidlines'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
 		except:
 			itemdict['Guidlines'] = ""
 
 		try:			
-			itemdict['Judging Criteria'] =str(    gaussx.gaussx((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
+			itemdict['Judging Criteria'] =str(    html2text.html2text((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
 		except:
 			itemdict['Judging Criteria'] =""
 
 		try:			
-			itemdict['Problem Statements'] = str(    gaussx.gaussx((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
+			itemdict['Problem Statements'] = str(    html2text.html2text((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
 		except:
 			itemdict['Problem Statements'] = ""
 
 
 		try:			
-			itemdict['Resources'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
+			itemdict['Resources'] = str(   html2text.html2text((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
 		except:
 			itemdict['Resources'] = ""
 
 		try:
-			itemdict['Sample Questions'] =str( gaussx.gaussx((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
+			itemdict['Sample Questions'] =str( html2text.html2text((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
 		except:
 			itemdict['Sample Questions'] =""
 
 		try:			
-			itemdict['Specifications'] = str(  gaussx.gaussx((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
+			itemdict['Specifications'] = str(  html2text.html2text((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
 		except:
 			itemdict['Specifications'] = ""
 
 		try:			
-			itemdict['Materials'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
+			itemdict['Materials'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
 		except:
 			itemdict['Materials'] = ""
 
 		try:			
-			itemdict['Registration Details'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
+			itemdict['Registration Details'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
 		except:
 			itemdict['Registration Details'] = ""
 
 		try:			
-			itemdict['FAQs'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
+			itemdict['FAQs'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
 		except:
 			itemdict['FAQs'] = ""
 
 		try:			
-			itemdict['Sponsors'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
+			itemdict['Sponsors'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
 		except:
 			itemdict['Sponsors'] = ""
 
@@ -191,67 +191,67 @@ def windows_json(request):
 			itemdict['Title'] = itemdict['UniqueId']
 			itemdict['ImagePath'] = "Assets/"+ str(e_ob.name.replace(" ","").lower() ) + ".png"
 			try:
-				itemdict['Overview'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= overview_ob) ).content )   )
+				itemdict['Overview'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= overview_ob) ).content )   )
 			except:
 				itemdict['Overview'] = ""
 			try:
-				itemdict['Rules'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= rules_ob ) ).content )   )
+				itemdict['Rules'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= rules_ob ) ).content )   )
 			except:
 				itemdict['Rules'] = ""
 
 			try:			
-				itemdict['Eligibility'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
+				itemdict['Eligibility'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
 			except:
 				itemdict['Eligibility'] = ""
 
 			try:			
-				itemdict['Guidlines'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
+				itemdict['Guidlines'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
 			except:
 				itemdict['Guidlines'] = ""
 
 			try:			
-				itemdict['Judging Criteria'] =str(    gaussx.gaussx((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
+				itemdict['Judging Criteria'] =str(    html2text.html2text((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
 			except:
 				itemdict['Judging Criteria'] =""
 
 			try:			
-				itemdict['Problem Statements'] = str(    gaussx.gaussx((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
+				itemdict['Problem Statements'] = str(    html2text.html2text((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
 			except:
 				itemdict['Problem Statements'] = ""
 
 
 			try:			
-				itemdict['Resources'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
+				itemdict['Resources'] = str(   html2text.html2text((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
 			except:
 				itemdict['Resources'] = ""
 
 			try:
-				itemdict['Sample Questions'] =str( gaussx.gaussx((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
+				itemdict['Sample Questions'] =str( html2text.html2text((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
 			except:
 				itemdict['Sample Questions'] =""
 
 			try:			
-				itemdict['Specifications'] = str(  gaussx.gaussx((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
+				itemdict['Specifications'] = str(  html2text.html2text((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
 			except:
 				itemdict['Specifications'] = ""
 
 			try:			
-				itemdict['Materials'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
+				itemdict['Materials'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
 			except:
 				itemdict['Materials'] = ""
 
 			try:			
-				itemdict['Registration Details'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
+				itemdict['Registration Details'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
 			except:
 				itemdict['Registration Details'] = ""
 
 			try:			
-				itemdict['FAQs'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
+				itemdict['FAQs'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
 			except:
 				itemdict['FAQs'] = ""
 
 			try:			
-				itemdict['Sponsors'] = str(   gaussx.gaussx((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
+				itemdict['Sponsors'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
 			except:
 				itemdict['Sponsors'] = ""
 
