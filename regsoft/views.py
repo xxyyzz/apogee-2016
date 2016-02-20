@@ -1263,7 +1263,7 @@ def recnacc_allot(request,gl_id):
             unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True]
             if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
                 if no_females<noalloted:
-                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
+                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apoogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
                 for y in range(noalloted):
                     unalloted_females[y].recnacc=True
                     unalloted_females[y].room = selectedroom
@@ -1273,7 +1273,7 @@ def recnacc_allot(request,gl_id):
             
             else:
                 if no_males<noalloted:
-                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
+                    return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
                 for y in range(noalloted):
                     unalloted_males[y].recnacc=True
                     unalloted_males[y].room = selectedroom
