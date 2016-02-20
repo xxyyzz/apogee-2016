@@ -24,7 +24,16 @@
         <p>Manage Participants</p>
     </a>
 </li>
+<li>
+    <a href="{% url 'ems:events_judge_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Judge Event</p>
+    </a>
+</li>
 {% endblock sidebar_content %}
+{% block sub_title %}
+    {{ event.name }}
+{% endblock sub_title %}
 {% block main_content %}
     <div class="content">
         <div class="container-fluid">
@@ -42,7 +51,7 @@
                                     <div class="col-md-7">
                                         <div class="form-group">
                                             <label>Level Name</label>
-                                            <input type="text" class="form-control" required value="{{ level.name }}" name="name" size="12" {% if level.is_protected %}disabled{% endif %}>
+                                            <input type="text" class="form-control" required value="{{ level.name }}" name="name" size="12" {% if level.is_protected %}readonly{% endif %}>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
@@ -89,7 +98,7 @@
                                             <label>Judging Parameters <span style="color:red;">*</span></label>
                                             {% for label in event.label_set.all %}
                                             <label class="radio">
-                                                <input type="radio" data-toggle="radio" name="label" value="{{ label.id }}" required {% if level.label == label %}checked{% endif %} {% if level.score_set.all %}disabled{% endif %}>{{ label }}
+                                                <input type="radio" class="labels" data-toggle="radio" name="label" value="{{ label.id }}" required {% if level.label == label %}checked{% endif %} {% if level.score_set.all %}disabled{% endif %}>{{ label }}
                                             </label>
                                             {% endfor %}
                                         </div>

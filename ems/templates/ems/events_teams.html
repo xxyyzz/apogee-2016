@@ -23,7 +23,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="eventid" value="{{ event.id }}">
                         <div class="header">
-                            <h4 class="title">Participants<a href="{% url 'ems:events_participants_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
+                            <h4 class="title">Teams<a href="{% url 'ems:events_teams_add' event.id %}" class="btn btn-info btn-sm btn-fill pull-right" role="button">Add</a></h4>
                         </div>
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">

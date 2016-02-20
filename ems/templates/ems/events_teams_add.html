@@ -1,0 +1,156 @@
+{% extends "ems/base.html" %}
+{% block sidebar_content %}
+    <li>
+        <a href="{% url 'ems:events_home' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Event Home</p>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'ems:events_levels' event.id %}">
+            <i class="pe-7s-news-paper"></i>
+            <p>Manage Levels</p>
+        </a>
+    </li>
+{% endblock sidebar_content %}
+{% block main_content %}
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="card">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        <div class="header">
+                            <h4 class="title">Add Team</h4>
+                            {% if errors %}
+                            <p class="content">
+                                Cannot create a team because:
+                                <ul>
+                                    {% for error in errors %}
+                                        <li  style="color:red;">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </p>
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                           <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Participant Codes, separated by spaces" name="aadhaar" size="12">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-info btn-fill" name="fetch">Get Info</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if parts %}
+                        <div class="header">
+                            <p class="category">Select Team Members<p>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Check</th>
+                                    <th>Aadhaar</th>
+                                    <th>Name</th>
+                                    <th>College</th>
+                                </thead>
+                                <tbody>
+                                    {% for part in parts %}
+                                    <tr>
+                                    <td>
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="part" value="{{ part.id }}" data-toggle="checkbox">
+                                        </label>
+                                    </td>
+                                    <td>{{ part.aadhaar }}</td>
+                                    <td>{{ part.name }}</td>
+                                    <td>{{ part.college.name }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="content">
+                            <button type="submit" class="btn btn-info btn-fill" name="next">Next</button>
+                        </div>
+                        {% endif %}
+                        {% if select %}
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Team Name</label>
+                                        <input type="text" class="form-control" placeholder="LA Lakers" name="name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header">
+                            <p class="category">Select Team Leader</p>
+                        </div>
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Check</th>
+                                    <th>Aadhaar</th>
+                                    <th>Name</th>
+                                    <th>College</th>
+                                </thead>
+                                <tbody>
+                                    {% for part in select %}
+                                    <tr>
+                                    <input type="hidden" name="part" value="{{ part.id }}">
+                                    <td>
+                                        <label class="radio">
+                                            <input type="radio" name="leader" value="{{ part.id }}" data-toggle="radio">
+                                        </label>
+                                    </td>
+                                    <td>{{ part.aadhaar }}</td>
+                                    <td>{{ part.name }}</td>
+                                    <td>{{ part.college.name }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="content">
+                            <button type="submit" class="btn btn-info btn-fill" name="add">Add</button>
+                        </div>
+                        {% endif %}
+                        <div class="clearfix"></div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock main_content %}
+{% block script %}
+<script type= 'text/javascript'>
+window.onload = function () {
+    checkbox = document.getElementById('judgesheet');
+    toggle(checkbox);
+}
+function toggle(checkbox){
+  var js = document.getElementsByClassName('judgesheet');
+  for(var i=0; i< js.length ; ++i)
+  {
+      if (checkbox.checked) {
+          js[i].disabled = false;
+          js[i].parentElement.style.display = 'block';
+      }
+      else {
+          js[i].disabled = true;
+          js[i].parentElement.style.display = 'none';
+      }
+  }
+}
+</script>
+{% endblock script %}
