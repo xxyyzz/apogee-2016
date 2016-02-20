@@ -1769,16 +1769,33 @@ def recnacc_room_list(request):
 
 @csrf_exempt
 def recnacc_room_details(request, room_id):
-  room = Room.objects.get(id = room_id)
-  plist = Participant.objects.filter(room = room)
-  # plist = []
-  # for x in rooms:
-  #   prtno = InitialRegistration.objects.filter(room = x).count()
-  #   plist.append({x.bhavan.name,x.room,prtno})
-  context = RequestContext(request)
-  context_dict = {'plist':plist,'room':room}
-  # return HttpResponse(plist)
-  return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
+    room = Room.objects.get(id = room_id)
+    plist = Participant.objects.filter(room = room)
+    # plist = []
+    # for x in rooms:
+    #   prtno = InitialRegistration.objects.filter(room = x).count()
+    #   plist.append({x.bhavan.name,x.room,prtno})
+    context = RequestContext(request)
+    context_dict = {'plist':plist,'room':room}
+    # return HttpResponse(plist)
+    return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
+
+@csrf_exempt
+def recnacc_checked_out_participants_in(request, gl_id):
+    gl = gleader.objects.get(id = gl_id)
+    if request.method == "POST":
+        amtded = request.POST['amt_ded']
+        gl.amount_deducted = amtded
+        gl.save()
+        prtlist = gl.participant_set.filter(room = 1)
+        context_dict = {'prtlist':prtlist, 'gl':gl}
+        context = RequestContext(request)
+        return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
+    else:
+        prtlist = gl.participant_set.filter(room = 1)
+        context_dict = {'prtlist':prtlist, 'gl':gl}
+        context = RequestContext(request)
+        return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
 
 
 # # @csrf_exempt
@@ -1865,22 +1882,6 @@ def recnacc_room_details(request, room_id):
 #   context = RequestContext(request)
 #   return render_to_response('regsoft/recnacc_checked_out_participants.html', context_dict, context)
 
-# @csrf_exempt
-# def recnacc_checked_out_participants_in(request, gl_id):
-#   gl = gleader.objects.get(id = gl_id)
-#   if request.method == "POST":
-#       amtded = request.POST['amt_ded']
-#       gl.amount_deducted = amtded
-#       gl.save()
-#       prtlist = gl.initialregistration_set.filter(room = 1)
-#       context_dict = {'prtlist':prtlist, 'gl':gl}
-#       context = RequestContext(request)
-#       return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
-#   else:
-#       prtlist = gl.initialregistration_set.filter(room = 1)
-#       context_dict = {'prtlist':prtlist, 'gl':gl}
-#       context = RequestContext(request)
-#       return render_to_response('regsoft/recnacc_checked_out_participants_in.html', context_dict, context)
 
 # @csrf_exempt
 # def recnacc_bhavan_inventory_list(request):
@@ -1917,13 +1918,36 @@ def recnacc_room_details(request, room_id):
 #   return render_to_response('regsoft/recnacc_bhavan_gleader_list.html', context_dict, context)                
 
 @csrf_exempt
-def recnacc_bill_print(request, part_id):
-	part_ob = Participant.objects.get(id = part_id)
+def recnacc_bill_print(request, gl_id):
+    gl = gleader.objects.get(id = gl_id)
+    plist = gl.participant_set.filter(firewallzo=True, recnacc=True)
+    prtlist = []
+    for x in plist:
+        if x.room.id != 1:
+            prtlist.append(x)
 
+    maleno = gl.participant_set.filter(gender= 'M', recnacc=True)
+    femaleno = gl.participant_set.filter(gender= 'F', recnacc=True)
+    malelist = 0
+    femalelist = 0
+    for x in maleno:
+        if x.room.id != 1:
+            malelist += 1
+    for x in femaleno:
+        if x.room.id != 1:
+            femalelist += 1
 
-	context = {'part_ob': part_ob}
+    total_ppl = malelist + femalelist
+    totalamt = total_ppl*300
+    context = {
+        'gl': gl,
+        'prtlist' : prtlist,
+        'maleno' : malelist,
+        'femaleno' : femalelist,
+        'totalamt' : totalamt,
+        }
 
-	return render_to_response('regsoft/receipt_recnacc.html', context)
+    return render_to_response('regsoft/receipt_recnacc.html', context)
 
 def encode_glid(gl_id):
     gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
@@ -1949,15 +1973,15 @@ def get_barcode(request):
 
 
 
-# def recnacc_bill_list(request):
-#   gl = gleader.objects.all()
-#   gllist = []
-#   for x in gl:
-#       if x.details.recnacc == True and InitialRegistration.objects.filter(grpleader= x).count():
-#           gllist.append(x)
-#   context = RequestContext(request)
-#   context_dict = {'gllist':gllist}
-#   return render_to_response('regsoft/controlz_recnacc_bill_print.html', context_dict, context)
+def recnacc_bill_list(request):
+  gl = gleader.objects.all()
+  gllist = []
+  for x in gl:
+      if x.details.recnacc == True and Participant.objects.filter(grpleader= x).count():
+          gllist.append(x)
+  context = RequestContext(request)
+  context_dict = {'gllist':gllist}
+  return render_to_response('regsoft/controlz_recnacc_bill_print.html', context_dict, context)
 
 
 

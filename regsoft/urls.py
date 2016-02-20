@@ -27,7 +27,7 @@ urlpatterns = [
 	url(r'^controlz/bill_view/(?P<billid>\d+)/$', controlz_view_bill),
 	url(r'^controlz/bill_details/(?P<part_id>\d+)$', controlz_bill_details),
 # 	url(r'^controlz/recnacc_bill_list/$', recnacc_bill_list),
-	url(r'^controlz/recnacc_bill_print/(?P<part_id>\d+)$', recnacc_bill_print),
+	url(r'^controlz/recnacc_bill_print/(?P<gl_id>\d+)$', recnacc_bill_print),
 # 	# url(r'^controlz/billdetails/(?P<bill_id>\d+)$', ),
 
 	url(r'^controlz/bill_print/$', controlz_bill_print),
@@ -46,7 +46,7 @@ urlpatterns = [
 	#Uncomment later
 	# url(r'^recnacc/checkedout_select_gl/$', recnacc_checkedout_select_gl),
 	# url(r'^recnacc/checked_out_participants/(?P<gl_id>\d+)$', recnacc_checked_out_participants),
-	# url(r'^recnacc/checked_out_list/(?P<gl_id>\d+)$', recnacc_checked_out_participants_in),
+	url(r'^recnacc/checked_out_list/(?P<gl_id>\d+)$', recnacc_checked_out_participants_in),
 	# url(r'^recnacc/bhavan_inventory_list/$', recnacc_bhavan_inventory_list),
 	# url(r'^recnacc/room_availibility_list/$', recnacc_room_availibility_list),
 	# url(r'^recnacc/bhavan_gleader_list/$', recnacc_bhavan_gleader_list),
