@@ -1537,7 +1537,7 @@ def recnacc_bill_list(request):
     gllist = []
     for x in gl:
         if x.details.recnacc == True and Participant.objects.filter(grpleader= x).count():
-        gllist.append(x)
+            gllist.append(x)
     context = RequestContext(request)
     context_dict = {'gllist':gllist}
     return render_to_response('regsoft/controlz_recnacc_bill_print.html', context_dict, context)
