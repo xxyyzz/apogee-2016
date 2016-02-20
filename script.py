@@ -26,12 +26,15 @@ for part in parts:
 
 # Two levels for each event
 for event in events:
-    registered = Level.objects.get_or_create(name="Registered", event=event, position=2, is_protected=True)
-    print "New Registered Level for " + event.name+  " ? " + str(registered[1]) + " ID " + str(registered[0].id)
+    try:
+        registered = Level.objects.get(name="Registered", event=event, is_protected=True)
+    except:
+        registered = Level.objects.create(name="Registered", event=event, position=2, is_protected=True)
+        print "New Registered Level for " + event.name + " ID " + str(registered.id)
     for team in teams:
         if team.event == event:
             print "Add Team " + str(team.id)
-            registered[0].teams.add(team)
+            registered.teams.add(team)
     winner = Level.objects.get_or_create(name="Winners", event=event, position=1, is_protected=True)
     print "New Winner Level for " + event.name+  " ? " + str(winner[1]) + " ID " + str(winner[0].id)
 
@@ -43,26 +46,33 @@ except:
 for part in parts:
     if part.aadhaar is not None:
         part.aadhaar = part.aadhaar.upper()
+        part.name = part.name.title()
         part.save()
         print "Part " + part.aadhaar + " changed."
 
-for sid, name in BITSIANS:
+import bitsians
+for sid, name in bitsians.BITSIANS:
+    email = sid.lower() + "@pilani.bits-pilani.ac.in"
     try:
         part = Participant.objects.get(aadhaar__icontains=sid)
+        part.is_bitsian = True
         part.name = name
-        part.email_id = sid.lower() + "@pilani.bits-pilani.ac.in"
+        part.email_id = email
         part.college = college
         part.save()
         print "Match found! " + sid + " changed"
     except:
-        email = sid.lower() + "@pilani.bits-pilani.ac.in"
-        phone = 9999999999
-        part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college, email_id=email)
-        print sid + " created"
-
-
-
-for part in parts:
-    if part.aadhaar == "":
-        part.aadhaar = None
-        part.save()
+        try:
+            from django.db import IntegrityError
+            part = Participant.objects.get(email_id=email)
+            part.aadhaar = sid
+            part.is_bitsian = True
+            part.name = name
+            part.email_id = email
+            part.college = college
+            part.save()
+            print "Match found! " + email + " changed"
+        except:
+            phone = 9999999999
+            part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college, email_id=email)
+            print sid + " created"
