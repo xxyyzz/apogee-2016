@@ -134,4 +134,20 @@ def windows_json(request):
 
 	resp['Groups'].append(temp)
 
-	return HttpResponse(json.dumps(resp), content_type="application/json")    	
+	###### events end here : apart from events,(notable speakers n all) #########
+
+	temp= {}
+	temp['UniqueId'] = "ApartFromEvents"
+	temp['Title'] = "ApartFromEvents"
+	temp['Items'] = []
+
+
+	tempx = {}
+	tempx['UniqueId'] = "NotableSpeakers"
+	tempx['Title']  =  "NotableSpeakers"
+	tempx['ImagePath'] = ""
+	tempx['SubItems'] = []
+	itemdict={}
+	itemdict
+
+	return HttpResponse(json.dumps(resp), content_type="application/json")
