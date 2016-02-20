@@ -170,7 +170,7 @@ def firewallzo_edit_part(request, part_id):
                 event = Event.objects.get(pk=k)
                 part_ob.events.add(event)
         part_ob.save()
-        return HttpResponseRedirect('../scan/' + str(part_ob.id) )
+        return HttpResponseRedirect('../barcodelist/' )
 
 
     part_ob = Participant.objects.get(id= part_id)
@@ -217,7 +217,7 @@ def firewallzo_add(request):
             event = Event.objects.get(id=k)
             participant.events.add(event)
         participant.save()
-        return HttpResponseRedirect('../scan/' + str(participant.id))
+        return HttpResponseRedirect('../scan/')
         
     # userprofile = request.user.userprofile_set.all()[0]
     events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
@@ -278,13 +278,30 @@ def firewallzo_setgleader(request, crep_id):
 
 ##### GROUP CODE LIST #####
 def gcodelist(request):
-    plist = Participant.objects.filter(firewallzo=True)
+    gl_list = gleader.objects.all()
+    data=[]
+    for k in gl_list:
+        gcode= k.groupcode
+        glname= k.details.name
+        glid= k.id
+        males = Participant.objects.filter(gender='M', grpleader=k).count()
+        females = Participant.objects.filter(gender='F', grpleader=k).count()
+        data.append( (glname,gcode,glid,males,females) )
+
     context = {
-    'plist' : plist,
+    'data' : data,
     }
     return render(request, 'regsoft/groupcodelist.html', context)
 
 
+def grp_details(request,gl_id):
+    gl_ob = gleader.objects.get(id=int(gl_id))
+    plist = Participant.objects.filter(grpleader=gl_ob)
+    context = {
+    'gl_ob' : gl_ob,
+    'plist' : plist,
+    }
+    return render(request, 'regsoft/grp_details.html', context)
 
 # def testx(request):
 #   return render(request, 'regsoft/testx.html')
@@ -855,8 +872,8 @@ def recnacc_allot(request,gl_id):
                     no_females+=1
             selectedroom = Room.objects.get(id=roomid) 
             selectedroom_availibilty = selectedroom.vacancy
-            unalloted_males = [x for x in participant_list if x.firewallzo == True and x.is_faculty!=True and x.gender[0].upper() == 'M' and x.recnacc != True]
-            unalloted_females = [x for x in participant_list if x.firewallzo == True and x.is_faculty!=True and x.gender[0].upper() == 'F' and x.recnacc != True]
+            unalloted_males = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'M' and x.recnacc != True]
+            unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True]
             if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
                 if no_females<noalloted:
                     return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-oasis.org/2015/recnacc/allot/%s/">Back</a>' % gl_id)
@@ -882,7 +899,7 @@ def recnacc_allot(request,gl_id):
             gl.save()
         no_males=0
         no_females=0
-        participant_list = gl.initialregistration_set.all()
+        participant_list = gl.participant_set.all()
         for p in participant_list:
             if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True:
                 no_males+=1
