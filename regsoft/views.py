@@ -144,11 +144,11 @@ def firewallzo_confirm(request):
         return render(request,'regsoft/table_apogee.html', context)
 
 
-def firewallzo_unconfirm(request, part_id):
-    p_ob = Participant.objects.get(id = int(part_id))
-    p_ob.firewallzo = False
-    p_ob.save()
-    return HttpResponseRedirect('../scan/' + str(p_ob.id) )
+# def firewallzo_unconfirm(request, part_id):
+#     p_ob = Participant.objects.get(id = int(part_id))
+#     p_ob.firewallzo = False
+#     p_ob.save()
+#     return HttpResponseRedirect('../scan/' + str(p_ob.id) )
 
 
 
@@ -292,6 +292,36 @@ def gcodelist(request):
     'data' : data,
     }
     return render(request, 'regsoft/groupcodelist.html', context)
+
+
+def unconfirm_list(request):
+    gl_list = gleader.objects.all()
+    data=[]
+    for k in gl_list:
+        gcode= k.groupcode
+        glname= k.details.name
+        glid= k.id
+        males = Participant.objects.filter(gender='M', grpleader=k).count()
+        females = Participant.objects.filter(gender='F', grpleader=k).count()
+        data.append( (glname,gcode,glid,males,females) )
+    context = {
+    'data' : data,
+    }
+    return render(request, 'regsoft/fire_unconfirm_2.html', context)
+
+
+def fire_unconfirm(request,glid):
+    gl_ob= gleader.objects.get(id=int(glid))
+    plist = Participant.objects.filter(grpleader=gl_ob)
+    for k in plist:
+        k.firewallzo= False
+        k.grpleader= None
+        k.save()
+    gl_ob.details= None
+    gl_ob.save()
+    gl_ob.delete()
+    return HttpResponseRedirect('../')
+
 
 
 def grp_details(request,gl_id):
