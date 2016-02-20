@@ -28,6 +28,8 @@ class Score(models.Model):
     var8 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var9 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
     var10 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
+    def __unicode__(self):
+        return self.team.name
 
 class Level(models.Model):
     # score_set

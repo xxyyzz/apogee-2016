@@ -26,8 +26,11 @@ for part in parts:
 
 # Two levels for each event
 for event in events:
-    registered = Level.objects.get_or_create(name="Registered", event=event, position=2, is_protected=True)
-    print "New Registered Level for " + event.name+  " ? " + str(registered[1]) + " ID " + str(registered[0].id)
+    try:
+        registered = Level.objects.get(name="Registered", event=event, is_protected=True)
+    except:
+        registered = Level.objects.create(name="Registered", event=event, position=2, is_protected=True)
+        print "New Registered Level for " + event.name + " ID " + str(registered.id)
     for team in teams:
         if team.event == event:
             print "Add Team " + str(team.id)
