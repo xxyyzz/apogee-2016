@@ -1,3 +1,4 @@
+# encoding=utf8
 from django.http import HttpResponse, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from Event.models import *
@@ -249,9 +250,7 @@ He has authored some extremely insightful books, including Byline, Nehru: The Ma
 	itemdict['Title'] = "Ashok Vajpeyi"
 	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
 	itemdict['Overview'] = """Ashok Vajpeyi  (born 1941) is an Indian poet in Hindi, essayist, literary-cultural critic, apart from being a noted cultural and arts administrator, and a former civil servant. Noted for works like Kahin Nahin Wahin, Tatpurush, Bahuri Akela, Ibarat Se Giri Matrayen,among others , he has also published works on literary and art criticism like Filhal, Kuchh Poorvagrah, Samay se Bahar, Kavita ka Galp and Sidhiyan Shuru ho Gayi Hain. 
-
  He was chairman, Lalit Kala Akademi India's National Academy of Arts, Ministry of Culture, Govt of India, 2008–2011. He has published over 23 books of poetry, criticism and art, and was awarded the Sahitya Akademi Award given by Sahitya Akademi, India's National Academy of Letters, in 1994 for his poetry collection, Kahin Nahin Wahin.
-
 He has also won the Dayavati Modi Kavi Shekhar Samman, 1994, and the Kabir Samman (2006) among others. """                                  ### content
 	
 
