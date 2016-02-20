@@ -105,7 +105,7 @@ def windows_json(request):
 		itemdict['Title'] = itemdict['UniqueId']
 		itemdict['ImagePath'] = "Assets/"+ str(k.name.replace(" ","").lower() ) + ".png"
 		try:
-			itemdict['Overview'] = str(   gaussx.gaussx( str(Tab.objects.get(event=k, heading= overview_ob) ).content) )   )
+			itemdict['Overview'] = str(   gaussx.gaussx( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
 		except:
 			itemdict['Overview'] = ""
 		try:
