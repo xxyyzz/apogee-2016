@@ -42,7 +42,7 @@
                                     <div class="col-md-7">
                                         <div class="form-group">
                                             <label>Level Name</label>
-                                            <input type="text" class="form-control" required value="{{ level.name }}" name="name" size="12">
+                                            <input type="text" class="form-control" required value="{{ level.name }}" name="name" size="12" {% if level.is_protected %}disabled{% endif %}>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
@@ -62,7 +62,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="checkbox">
-                                                    <input type="checkbox" id="judgesheet" data-toggle="checkbox" name="judgesheet" onchange="toggle(this)" {% if level.label %}checked{% endif %} {% if level.score_set.all %}disabled{% endif %}>Use JudgeSheets
+                                                    <input type="checkbox" id="judgesheet" data-toggle="checkbox" name="judgesheet" onchange="toggle(this)" {% if level.label %}checked{% endif %} {% if level.score_set.all or level.is_protected %}disabled{% endif %}>Use JudgeSheets
                                             </label>
                                         </div>
                                     </div>

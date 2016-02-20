@@ -34,7 +34,7 @@ for event in events:
     for team in teams:
         if team.event == event:
             print "Add Team " + str(team.id)
-            registered[0].teams.add(team)
+            registered.teams.add(team)
     winner = Level.objects.get_or_create(name="Winners", event=event, position=1, is_protected=True)
     print "New Winner Level for " + event.name+  " ? " + str(winner[1]) + " ID " + str(winner[0].id)
 
