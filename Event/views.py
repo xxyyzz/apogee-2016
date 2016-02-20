@@ -104,20 +104,78 @@ def windows_json(request):
 		itemdict["UniqueId"] = str(k.name).replace(' ','') + str(k.id)
 		itemdict['Title'] = itemdict['UniqueId']
 		itemdict['ImagePath'] = "Assets/"+ str(k.name.replace(" ","").lower() ) + ".png"
-		itemdict['Overview'] = str(   (Tab.objects.get(event=k, heading= overview_ob) ).content   )
-		itemdict['Rules'] = str(   (Tab.objects.get(event=k, heading= rules_ob ) ).content   )
-		itemdict['Eligibility'] = str(   (Tab.objects.get(event=k, heading= eligibility_ob) ).content   )
-		itemdict['Guidlines'] = str(   (Tab.objects.get(event=k, heading= guidelines_ob ) ).content   )
-		itemdict['Judging Criteria'] =str(    (Tab.objects.get(event=k, heading= judging_ob) ).content   )
-		itemdict['Problem Statements'] = str(    (Tab.objects.get(event=k, heading= prob_ob)  ).content  )
-		itemdict['Resources'] = str(   (Tab.objects.get(event=k, heading=resources_ob) ).content   )
-		itemdict['Sample Questions'] =str( (Tab.objects.get(event=k, heading= sampleq_ob) ).content   )
-		itemdict['Specifications'] = str(  (Tab.objects.get(event=k, heading= specifications_ob) ).content   )
-		itemdict['Materials'] = str(   (Tab.objects.get(event=k, heading= materials_ob) ).content   )
-		itemdict['Registration Details'] = str(   (Tab.objects.get(event=k, heading= regdetails_ob) ).content   )
-		itemdict['FAQs'] = str(   (Tab.objects.get(event=k, heading= faqs_ob) ).content   )
-		itemdict['Sponsors'] = str(   (Tab.objects.get(event=k, heading= sponsors_ob) ).content   )
-		itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+		try:
+			itemdict['Overview'] = str(   (Tab.objects.get(event=k, heading= overview_ob) ).content   )
+		except:
+			itemdict['Overview'] = ""
+		try:
+			itemdict['Rules'] = str(   (Tab.objects.get(event=k, heading= rules_ob ) ).content   )
+		except:
+			itemdict['Rules'] = ""
+
+		try:			
+			itemdict['Eligibility'] = str(   (Tab.objects.get(event=k, heading= eligibility_ob) ).content   )
+		except:
+			itemdict['Eligibility'] = ""
+
+		try:			
+			itemdict['Guidlines'] = str(   (Tab.objects.get(event=k, heading= guidelines_ob ) ).content   )
+		except:
+			itemdict['Guidlines'] = ""
+
+		try:			
+			itemdict['Judging Criteria'] =str(    (Tab.objects.get(event=k, heading= judging_ob) ).content   )
+		except:
+			itemdict['Judging Criteria'] =""
+
+		try:			
+			itemdict['Problem Statements'] = str(    (Tab.objects.get(event=k, heading= prob_ob)  ).content  )
+		except:
+			itemdict['Problem Statements'] = ""
+
+
+		try:			
+			itemdict['Resources'] = str(   (Tab.objects.get(event=k, heading=resources_ob) ).content   )
+		except:
+			itemdict['Resources'] = ""
+
+		try:
+			itemdict['Sample Questions'] =str( (Tab.objects.get(event=k, heading= sampleq_ob) ).content   )
+		except:
+			itemdict['Sample Questions'] =""
+
+		try:			
+			itemdict['Specifications'] = str(  (Tab.objects.get(event=k, heading= specifications_ob) ).content   )
+		except:
+			itemdict['Specifications'] = ""
+
+		try:			
+			itemdict['Materials'] = str(   (Tab.objects.get(event=k, heading= materials_ob) ).content   )
+		except:
+			itemdict['Materials'] = ""
+
+		try:			
+			itemdict['Registration Details'] = str(   (Tab.objects.get(event=k, heading= regdetails_ob) ).content   )
+		except:
+			itemdict['Registration Details'] = ""
+
+		try:			
+			itemdict['FAQs'] = str(   (Tab.objects.get(event=k, heading= faqs_ob) ).content   )
+		except:
+			itemdict['FAQs'] = ""
+
+		try:			
+			itemdict['Sponsors'] = str(   (Tab.objects.get(event=k, heading= sponsors_ob) ).content   )
+		except:
+			itemdict['Sponsors'] = ""
+
+		try:			
+			itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+		except:
+			itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+
+
+
 		tempx['SubItems'].append(itemdict)
 
 	temp['Items'].append(tempx)
@@ -127,25 +185,80 @@ def windows_json(request):
 		tempx['UniqueId'] = str(z.name.replace(' ','')) + str(z.id)
 		tempx['Title'] = tempx['UniqueId']
 		tempx['SubItems'] = []
-		for e_ob in Event.objects.filter(category=z):
+		for e_ob in Event.objects.filter(category=z,is_displayed=True):
 			itemdict= {}
 			itemdict["UniqueId"] = str(e_ob.name).replace(' ','') + str(e_ob.id)
 			itemdict['Title'] = itemdict['UniqueId']
 			itemdict['ImagePath'] = "Assets/"+ str(e_ob.name.replace(" ","").lower() ) + ".png"
-			itemdict['Overview'] = str(   (Tab.objects.get(event=k, heading= overview_ob) ).content   )
-			itemdict['Rules'] = str(   (Tab.objects.get(event=k, heading= rules_ob ) ).content   )
-			itemdict['Eligibility'] = str(   (Tab.objects.get(event=k, heading= eligibility_ob) ).content   )
-			itemdict['Guidlines'] = str(   (Tab.objects.get(event=k, heading= guidelines_ob ) ).content   )
-			itemdict['Judging Criteria'] =str(    (Tab.objects.get(event=k, heading= judging_ob) ).content   )
-			itemdict['Problem Statements'] = str(    (Tab.objects.get(event=k, heading= prob_ob)  ).content  )
-			itemdict['Resources'] = str(   (Tab.objects.get(event=k, heading=resources_ob) ).content   )
-			itemdict['Sample Questions'] =str( (Tab.objects.get(event=k, heading= sampleq_ob) ).content   )
-			itemdict['Specifications'] = str(  (Tab.objects.get(event=k, heading= specifications_ob) ).content   )
-			itemdict['Materials'] = str(   (Tab.objects.get(event=k, heading= materials_ob) ).content   )
-			itemdict['Registration Details'] = str(   (Tab.objects.get(event=k, heading= regdetails_ob) ).content   )
-			itemdict['FAQs'] = str(   (Tab.objects.get(event=k, heading= faqs_ob) ).content   )
-			itemdict['Sponsors'] = str(   (Tab.objects.get(event=k, heading= sponsors_ob) ).content   )
-			itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+			try:
+				itemdict['Overview'] = str(   (Tab.objects.get(event=k, heading= overview_ob) ).content   )
+			except:
+				itemdict['Overview'] = ""
+			try:
+				itemdict['Rules'] = str(   (Tab.objects.get(event=k, heading= rules_ob ) ).content   )
+			except:
+				itemdict['Rules'] = ""
+
+			try:			
+				itemdict['Eligibility'] = str(   (Tab.objects.get(event=k, heading= eligibility_ob) ).content   )
+			except:
+				itemdict['Eligibility'] = ""
+
+			try:			
+				itemdict['Guidlines'] = str(   (Tab.objects.get(event=k, heading= guidelines_ob ) ).content   )
+			except:
+				itemdict['Guidlines'] = ""
+
+			try:			
+				itemdict['Judging Criteria'] =str(    (Tab.objects.get(event=k, heading= judging_ob) ).content   )
+			except:
+				itemdict['Judging Criteria'] =""
+
+			try:			
+				itemdict['Problem Statements'] = str(    (Tab.objects.get(event=k, heading= prob_ob)  ).content  )
+			except:
+				itemdict['Problem Statements'] = ""
+
+
+			try:			
+				itemdict['Resources'] = str(   (Tab.objects.get(event=k, heading=resources_ob) ).content   )
+			except:
+				itemdict['Resources'] = ""
+
+			try:
+				itemdict['Sample Questions'] =str( (Tab.objects.get(event=k, heading= sampleq_ob) ).content   )
+			except:
+				itemdict['Sample Questions'] =""
+
+			try:			
+				itemdict['Specifications'] = str(  (Tab.objects.get(event=k, heading= specifications_ob) ).content   )
+			except:
+				itemdict['Specifications'] = ""
+
+			try:			
+				itemdict['Materials'] = str(   (Tab.objects.get(event=k, heading= materials_ob) ).content   )
+			except:
+				itemdict['Materials'] = ""
+
+			try:			
+				itemdict['Registration Details'] = str(   (Tab.objects.get(event=k, heading= regdetails_ob) ).content   )
+			except:
+				itemdict['Registration Details'] = ""
+
+			try:			
+				itemdict['FAQs'] = str(   (Tab.objects.get(event=k, heading= faqs_ob) ).content   )
+			except:
+				itemdict['FAQs'] = ""
+
+			try:			
+				itemdict['Sponsors'] = str(   (Tab.objects.get(event=k, heading= sponsors_ob) ).content   )
+			except:
+				itemdict['Sponsors'] = ""
+
+			try:			
+				itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+			except:
+				itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
 			tempx['SubItems'].append(itemdict)
 		temp['Items'].append(tempx)
 
