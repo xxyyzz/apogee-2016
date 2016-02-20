@@ -52,7 +52,7 @@ class Room(models.Model):
 		# return str(self.number)
 		
 class Bill(models.Model):
-	participant = models.ForeignKey('backend.Participant', null=True, blank=True)
+	gleader = models.CharField(max_length=10, null=True,blank=True)
 	amount = models.IntegerField(default=0)
 	given=models.IntegerField(default =0)
 	balance=models.IntegerField( default=0)
