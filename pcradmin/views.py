@@ -67,7 +67,7 @@ def pcr_logout(request):
 
 
 def part_list(request):
-    part_obs = Participant.objects.all()
+    part_obs = Participant.objects.filter(is_bitsian=False)
     # amb_list=[]
     # collegelist = [x.name for x in College.objects.filter(is_displayed=True)]
     return render(request, 'pcradmin/part_list.html', {'part_list' : part_obs})
