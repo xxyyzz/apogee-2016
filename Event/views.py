@@ -83,25 +83,41 @@ def windows_json(request):
 	tempx['Title'] = "Kernel Events"
 	tempx['ImagePath'] = "Assets/LightGray.png"
 	tempx['SubItems'] = []
+
+
+	overview_ob  =Heading.objects.get(name='Overview')
+	rules_ob  =Heading.objects.get(name='Rules')
+	eligibility_ob  =Heading.objects.get(name='Eligibility')
+	guidelines_ob  =Heading.objects.get(name='Guidlines')
+	judging_ob  =Heading.objects.get(name='Judging Criteria')
+	prob_ob  =Heading.objects.get(name='Problem Statements')
+	resources_ob  =Heading.objects.get(name='Resources')
+	sampleq_ob  =Heading.objects.get(name='Sample Questions')
+	specifications_ob  =Heading.objects.get(name='Specifications')
+	materials_ob  =Heading.objects.get(name='Materials')
+	regdetails_ob  =Heading.objects.get(name='Registration Details')
+	faqs_ob  =Heading.objects.get(name='FAQs')
+	sponsors_ob  =Heading.objects.get(name='Sponsors')
+
 	for k in krn_events:
 		itemdict= {}
 		itemdict["UniqueId"] = str(k.name).replace(' ','') + str(k.id)
 		itemdict['Title'] = itemdict['UniqueId']
 		itemdict['ImagePath'] = "Assets/"+ str(k.name.replace(" ","").lower() ) + ".png"
-		itemdict['Overview'] = str(k.short_description)
-		itemdict['Rules'] = ""
-		itemdict['Eligibility'] = ""
-		itemdict['Guidlines'] = ""
-		itemdict['Judging Criteria'] = ""
-		itemdict['Problem Statements'] = ""
-		itemdict['Resources'] = ""
-		itemdict['Sample Questions'] = ""
-		itemdict['Specifications'] = ""
-		itemdict['Materials'] = ""
-		itemdict['Registration Details'] = ""
-		itemdict['FAQs'] = ""
-		itemdict['Sponsors'] = ""
-		itemdict['Contacts'] = ""
+		itemdict['Overview'] = str(   (Tab.objects.get(event=k, heading= overview_ob) ).content   )
+		itemdict['Rules'] = str(   (Tab.objects.get(event=k, heading= rules_ob ) ).content   )
+		itemdict['Eligibility'] = str(   (Tab.objects.get(event=k, heading= eligibility_ob) ).content   )
+		itemdict['Guidlines'] = str(   (Tab.objects.get(event=k, heading= guidelines_ob ) ).content   )
+		itemdict['Judging Criteria'] =str(    (Tab.objects.get(event=k, heading= judging_ob) ).content   )
+		itemdict['Problem Statements'] = str(    (Tab.objects.get(event=k, heading= prob_ob)  ).content  )
+		itemdict['Resources'] = str(   (Tab.objects.get(event=k, heading=resources_ob) ).content   )
+		itemdict['Sample Questions'] =str( (Tab.objects.get(event=k, heading= sampleq_ob) ).content   )
+		itemdict['Specifications'] = str(  (Tab.objects.get(event=k, heading= specifications_ob) ).content   )
+		itemdict['Materials'] = str(   (Tab.objects.get(event=k, heading= materials_ob) ).content   )
+		itemdict['Registration Details'] = str(   (Tab.objects.get(event=k, heading= regdetails_ob) ).content   )
+		itemdict['FAQs'] = str(   (Tab.objects.get(event=k, heading= faqs_ob) ).content   )
+		itemdict['Sponsors'] = str(   (Tab.objects.get(event=k, heading= sponsors_ob) ).content   )
+		itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
 		tempx['SubItems'].append(itemdict)
 
 	temp['Items'].append(tempx)
@@ -116,20 +132,20 @@ def windows_json(request):
 			itemdict["UniqueId"] = str(e_ob.name).replace(' ','') + str(e_ob.id)
 			itemdict['Title'] = itemdict['UniqueId']
 			itemdict['ImagePath'] = "Assets/"+ str(e_ob.name.replace(" ","").lower() ) + ".png"
-			itemdict['Overview'] = str(e_ob.short_description)
-			itemdict['Rules'] = ""
-			itemdict['Eligibility'] = ""
-			itemdict['Guidlines'] = ""
-			itemdict['Judging Criteria'] = ""
-			itemdict['Problem Statements'] = ""
-			itemdict['Resources'] = ""
-			itemdict['Sample Questions'] = ""
-			itemdict['Specifications'] = ""
-			itemdict['Materials'] = ""
-			itemdict['Registration Details'] = ""
-			itemdict['FAQs'] = ""
-			itemdict['Sponsors'] = ""
-			itemdict['Contacts'] = ""
+			itemdict['Overview'] = str(   (Tab.objects.get(event=k, heading= overview_ob) ).content   )
+			itemdict['Rules'] = str(   (Tab.objects.get(event=k, heading= rules_ob ) ).content   )
+			itemdict['Eligibility'] = str(   (Tab.objects.get(event=k, heading= eligibility_ob) ).content   )
+			itemdict['Guidlines'] = str(   (Tab.objects.get(event=k, heading= guidelines_ob ) ).content   )
+			itemdict['Judging Criteria'] =str(    (Tab.objects.get(event=k, heading= judging_ob) ).content   )
+			itemdict['Problem Statements'] = str(    (Tab.objects.get(event=k, heading= prob_ob)  ).content  )
+			itemdict['Resources'] = str(   (Tab.objects.get(event=k, heading=resources_ob) ).content   )
+			itemdict['Sample Questions'] =str( (Tab.objects.get(event=k, heading= sampleq_ob) ).content   )
+			itemdict['Specifications'] = str(  (Tab.objects.get(event=k, heading= specifications_ob) ).content   )
+			itemdict['Materials'] = str(   (Tab.objects.get(event=k, heading= materials_ob) ).content   )
+			itemdict['Registration Details'] = str(   (Tab.objects.get(event=k, heading= regdetails_ob) ).content   )
+			itemdict['FAQs'] = str(   (Tab.objects.get(event=k, heading= faqs_ob) ).content   )
+			itemdict['Sponsors'] = str(   (Tab.objects.get(event=k, heading= sponsors_ob) ).content   )
+			itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
 			tempx['SubItems'].append(itemdict)
 		temp['Items'].append(tempx)
 
