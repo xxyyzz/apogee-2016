@@ -187,7 +187,7 @@ def windows_json(request):
 		tempx['SubItems'] = []
 		for e_ob in Event.objects.filter(category=z,is_displayed=True):
 			itemdict= {}
-			itemdict["UniqueId"] = str(e_ob.name).replace(' ','') + str(e_ob.id)
+			itemdict["UniqueId"] = (str(e_ob.name).replace(' ','') + str(e_ob.id)).encode('ascii','ignore')
 			itemdict['Title'] = itemdict['UniqueId']
 			itemdict['ImagePath'] = "Assets/"+ str(e_ob.name.replace(" ","").lower() ) + ".png"
 			try:
