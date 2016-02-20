@@ -17,6 +17,15 @@ import json
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
+
+
+
+
+#####################################FIREWALLZ###########################################
+
+
+
+
 @csrf_exempt
 @staff_member_required
 def firewallzo_board(request):
@@ -337,292 +346,287 @@ def grp_details(request,gl_id):
 #   return render(request, 'regsoft/testx.html')
 
 
-# def common_search(request):
-#   if 'keyword' in request.POST:
-#       keyword = request.POST['keyword']
-#       from django.db.models import Q
-#       results = InitialRegistration.objects.filter(Q(id__icontains=keyword) | Q(name__icontains=keyword) | Q(college__icontains=keyword)).order_by('name')
-#       return render(request, 'regsoft/common_search.html', {'results':results})
-#   return render(request, 'regsoft/common_search.html')
+##############################################CONTROLZ #########################################
 
-
-# # def controlz_home(request):
-#   # return render(request, "regsoft/controlz_home.html")
-
-# # def controlz_dashboard(request):
 
 @csrf_exempt
 def controlz_home(request):
-  if request.POST:
-      try:
-          encoded = str( request.POST['code'] )
-          decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+    if request.POST:
+        try:
+            encoded = str( request.POST['code'] )
+            decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
 
-      except:
-          return render(request, 'regsoft/controlz_home.html', {'status' : 0})
-      return HttpResponseRedirect("../home/" + str(decoded) )
+        except:
+            return render(request, 'regsoft/controlz_home.html', {'status' : 0})
+        return HttpResponseRedirect("../home/" + str(decoded) )
 
-  return render(request, "regsoft/controlz_home.html")
+    return render(request, "regsoft/controlz_home.html")
+
+def controlz_stats(request):
+    passed_controls = Participant.objects.filter(controlz=True).count()
+    passed_offline = Participant.objects.filter(controlz=True, fee_paid= False ).count()
+    passed_online = Participant.objects.filter(controlz=True, fee_paid=True).count()
+    all_bills = Bill.objects.all()
+    amount_total = 0
+    for bill in all_bills:
+        amount_total += bill.amount
+    context = {
+        'passed_controls' : passed_controls,
+        'passed_offline' : passed_offline,
+        'passed_online' : passed_online,
+        'amount_total' : amount_total,
+    }
+
+    return render(request, "regsoft/controlz_stats.html", context)
+
+def controlz_dashboard(request,gl_id):
+    gl_ob = gleader.objects.filter(id = gl_id)
+    if gl_ob:
+        gl_ob = gl_ob[0]
+        plist = gl_ob.participant_set.filter(controlz =False)
+        plist_two = gl_ob.participant_set.filter(controlz =True)
+        maleno = Participant.objects.filter(grpleader = gl_ob, gender= 'M', controlz= False).count()
+        femaleno = Participant.objects.filter(grpleader = gl_ob, gender= 'F', controlz= False).count()
+        maleno_two = Participant.objects.filter(grpleader = gl_ob, gender= 'M', controlz= True).count()
+        femaleno_two = Participant.objects.filter(grpleader = gl_ob, gender= 'F', controlz= True).count()
+
+        context ={
+        'gl' : gl_ob, 
+        'plist' : plist,
+        'plist_two' : plist_two,
+        'maleno' : maleno,
+        'femaleno' : femaleno,
+        'maleno_two' : maleno_two,
+        'femaleno_two' : femaleno_two,
 
 
-
-def controlz_dashboard(request,part_id):
-    part_ob = Participant.objects.filter(id = part_id)
-    if part_ob:
-        part_ob = part_ob[0]
-        if part_ob.controlz == True:
-            bill = Bill.objects.filter(participant=part_ob)[0]
-            bill_id = bill.id
-            context= {'part': part_ob, 'bill_id':bill_id}
-        else:
-            context = {'part':part_ob}
+        }
         return render(request, 'regsoft/controlz_dashboard.html', context)
+
     else:
         return render(request, 'regsoft/controlz_home.html', {'status' : 0})
 
 
 
 
-
-# def controlz_edit_part(request, part_id):
-#   if request.POST:
-#       init_ob = InitialRegistration.objects.get(id = part_id)
-#       init_ob.name = str(request.POST['name'])
-#       init_ob.email_id = str(request.POST['email'])
-#       init_ob.phone_one = int(request.POST['phone'])
-#       init_ob.gender = str(request.POST['gender'])
-
-#       init_ob.events.clear()
-#       if request.POST.get('events', False):
-#           for k in request.POST.getlist('events'):                                    
-#               event = Event.objects.get(pk=k)
-#               init_ob.events.add(event)
-#       init_ob.save()
-
-#       gl = init_ob.grpleader
-#       return HttpResponseRedirect('../home/' + str(gl.id) )
-
-
-#   init_ob = InitialRegistration.objects.get(id= part_id)
-#   elist = Event.objects.all()
-#   gl = init_ob.grpleader
-#   return render(request, 'regsoft/controlz_edit.html' , {'part' : init_ob, 'events' : elist, 'gl' : gl})
-
-
-
-def controlz_bill_select(request, part_id):
+def controlz_edit_part(request, part_id):
     if request.POST:
-        part_ob = Participant.objects.get(id=part_id)
-#       pidlist = request.POST.getlist('part')
-#       plist= []
-#       is_faculty= 0
-#       onlinepaid=0
-#       for k in pidlist:
-#           k= int(k)
-#           part = InitialRegistration.objects.get(id=k)
-#           plist.append(part)
-#           if part.is_faculty == True:
-#               is_faculty+=1
-#           if part.reg_paid == True:
-#               onlinepaid+=1
+        init_ob = Participant.objects.get(id = part_id)
+        init_ob.name = str(request.POST['name'])
+        init_ob.email_id = str(request.POST['email'])
+        init_ob.phone_one = int(request.POST['phone'])
+        init_ob.gender = str(request.POST['gender'])
 
-#       totalamt= onlinepaid*500
-        if part_ob.fee_paid == True:
-            check = 1
-        elif part_ob.fee_paid == False:
-            check = 2
+        init_ob.events.clear()
+        if request.POST.get('events', False):
+            for k in request.POST.getlist('events'):                                    
+                event = Event.objects.get(pk=k)
+                init_ob.events.add(event)
+        init_ob.save()
 
-#       gl = plist[0].grpleader
-#       total = len(plist) 
-#       totalamt += (total- is_faculty - onlinepaid) * 750
-#       pcount = (total - is_faculty - onlinepaid)
+        gl = init_ob.grpleader
+        return HttpResponseRedirect('../home/' + str(gl.id) )
+
+
+    init_ob = Participant.objects.get(id= part_id)
+    elist = Event.objects.all()
+    gl = init_ob.grpleader
+    return render(request, 'regsoft/controlz_edit.html' , {'part' : init_ob, 'events' : elist, 'gl' : gl})
+
+
+
+def controlz_bill_select(request):
+    if request.POST:
+        pidlist = request.POST.getlist('part')
+        plist= []
+        onlinepaid=0
+        for k in pidlist:
+            k= int(k)
+            part = Participant.objects.get(id=k)
+            plist.append(part)
+            if part.fee_paid == True:
+                onlinepaid+=1
+
+        totalamt= onlinepaid*0
+        
+
+        gl = plist[0].grpleader
+        total = len(plist) 
+        totalamt += (total - onlinepaid) * 900
+        pcount = (total - onlinepaid)
         context ={
-            'part_ob' : part_ob, 
-            'check' : check,
-#       'plist' : plist,
-#       'facultyno' : is_faculty,
-#       'total' : total,
-#       'totalamt' : totalamt,
-#       'onlinepaid' : onlinepaid,
-#       'pcount' : pcount,
+        'gl' : gl, 
+        'plist' : plist,
+        'total' : total,
+        'totalamt' : totalamt,
+        'onlinepaid' : onlinepaid,
+        'pcount' : pcount,
         }
 
         return render(request, 'regsoft/controlz_bill_amt.html', context)
 
 
-###### SATWIK MAKE MIGRATIONS AND UNCOMMEN THE BELOW CODE ONCE also UNCOMMENT THE URLS
-def controlz_bill_details(request,part_id):
+def controlz_bill_details(request,gl_id):
     if request.POST:
-#       pidlist= str(request.POST['pidlist'])
-#       gl_id = gl_id
-        part_ob = Participant.objects.get(id=part_id)
-#       college = gl.details.college
-#       femaleno =0
-#       maleno  =0
-#       pidlistx = pidlist.split(',')
-#       pidlist = pidlist.split(',')
-#       onlinepaid = 0
-#       is_faculty=0
-#       for k in pidlist:
-#           if k != '' :
-#               k=int(k)
-#               part = InitialRegistration.objects.get(id =k)
-#               part.controlz = True
-#               if part.gender == 'M':
-#                   maleno+=1
-#               else:
-#                   femaleno+=1
+        pidlist= str(request.POST['pidlist'])
+        gl_id = gl_id
+        gl= gleader.objects.get(id=gl_id)
+        college = gl.details.college
+        femaleno =0
+        maleno  =0
+        pidlistx = pidlist.split(',')
+        pidlist = pidlist.split(',')
+        onlinepaid = 0
+        for k in pidlist:
+            if k != '' :
+                k=int(k)
+                part = Participant.objects.get(id =k)
+                part.controlz = True
+                if part.gender == 'M':
+                    maleno+=1
+                else:
+                    femaleno+=1
+                if part.fee_paid:
+                    onlinepaid+=1
+                part.save()
 
-#               if part.is_faculty:
-#                   is_faculty+=1
-#               if part.reg_paid:
-#                   onlinepaid+=1
-#               part.save()
-        
-        if part_ob.fee_paid == False:
-            ddno = request.POST.get('ddno' ,  False)
-            n1000 = int(request.POST.get('n_1000',0) )
-            n500 = int(request.POST.get('n_500',      0) )
-            n100 = int(request.POST.get('n_100',      0) )
-            n50 = int(request.POST.get('n_50',        0) )
-            n20 = int(request.POST.get('n_20',        0) )
-            n10 = int(request.POST.get('n_10' ,      0) )
+        ddno = request.POST.get('ddno' ,  False)
+        n1000 = int(request.POST.get('n_1000',0) )
+        n500 = int(request.POST.get('n_500',      0) )
+        n100 = int(request.POST.get('n_100',      0) )
+        n50 = int(request.POST.get('n_50',        0) )
+        n20 = int(request.POST.get('n_20',        0) )
+        n10 = int(request.POST.get('n_10' ,      0) )
 
 
-#       # totalamt = 1000*n1000 + 500*n500 + 100*n100 + 50*n50 + 20*n20 + 10*n10
+        # totalamt = 1000*n1000 + 500*n500 + 100*n100 + 50*n50 + 20*n20 + 10*n10
 
 
-            balance = 0
-            given=0
-            if n1000 < 0:
-                balance += -(n1000) * 1000
-            else:
-                given+= n1000 * 1000
+        balance = 0
+        given=0
+        if n1000 < 0:
+            balance += -(n1000) * 1000
+        else:
+            given+= n1000 * 1000
 
 
-            if n500 < 0:
-                balance += -(n500) * 500
-            else:
-                given+= n500 * 500
+        if n500 < 0:
+            balance += -(n500) * 500
+        else:
+            given+= n500 * 500
 
 
-            if n100 < 0:
-                balance += -(n100) * 100
-            else:
-                given+= n100 * 100
+        if n100 < 0:
+            balance += -(n100) * 100
+        else:
+            given+= n100 * 100
 
 
-            if n50 < 0:
-                balance += -(n50) * 50
-            else:
-                given+= n50 * 50
+        if n50 < 0:
+            balance += -(n50) * 50
+        else:
+            given+= n50 * 50
 
 
-            if n20 < 0:
-                balance += -(n20) * 20 
-            else:
-                given+= n20 * 20     
+        if n20 < 0:
+            balance += -(n20) * 20 
+        else:
+            given+= n20 * 20     
 
-            if n10 < 0:
-                balance += -(n10) * 10 
-            else:
-                given+= n10 * 10                                                     
-                
+        if n10 < 0:
+            balance += -(n10) * 10 
+        else:
+            given+= n10 * 10                                                     
+            
 
 
 
-            total = request.POST.get('total', 0)
-            if total == '':
-                total = 0   
-            if ddno:
-                newbill = Bill(participant = part_ob, amount= total, given=given, balance=balance, draft_number= ddno)
-            else:
-                newbill = Bill(participant = part_ob, amount= total, given=given, balance=balance)
-                ddno= 'None'
+        total = request.POST.get('total', 0)
+        if total == '':
+            total = 0   
+        if ddno:
+            newbill = Bill(gleader = gl_id, amount= total, given=given, balance=balance, draft_number= ddno)
+        else:
+            newbill = Bill(gleader = gl_id, amount= total, given=given, balance=balance)
+            ddno= 'None'
 
-            newbill.save()
-            part_ob.controlz = True
-            part_ob.save()
-#         test = []
-#         for k in pidlistx:
-#             if k != '' :
-#                 k=int(k)
-#                 part = InitialRegistration.objects.get(id =k)
-#                 part.bill_id = int(newbill.id)
-#                 test.append({part.name, newbill.id})
-#                 part.save()
+        newbill.save()
+
+        test = []
+        for k in pidlistx:
+            if k != '' :
+                k=int(k)
+                part = Participant.objects.get(id =k)
+                part.bill_id = int(newbill.id)
+                test.append({part.name, newbill.id})
+                part.save()
 
                 
-            newbill.notes_1000 = int(n1000)
-            newbill.notes_500 = int(n500)
-            newbill.notes_100 = int(n100)
-            newbill.notes_50 = int(n50)
-            newbill.notes_20 = int(n20)
-            newbill.notes_10 = int(n10)
-            newbill.save()
+        newbill.notes_1000 = int(n1000)
+        newbill.notes_500 = int(n500)
+        newbill.notes_100 = int(n100)
+        newbill.notes_50 = int(n50)
+        newbill.notes_20 = int(n20)
+        newbill.notes_10 = int(n10)
+        newbill.save()
 
 
-#       # return HttpResponse(test)
-            context={
-                'part_ob' : part_ob,
-                'given' : given,
-                'balance' : balance, 
-                'total' : total,
-                'bill_id' : newbill.id,
-                'ddno' : ddno,
-            }
+
+        # return HttpResponse(test)
+    context={
+        'gl' : gl,
+        'college' : college,
+        'given' : given,
+        'balance' : balance, 
+        'total' : total,
+        'maleno' : maleno,
+        'femaleno' : femaleno,
+        'bill_id' : newbill.id,
+        'totalpart' : (maleno+femaleno),
+        'ddno' : ddno,
+        'onlinepaid' : onlinepaid,
+
+    }
 
 
-            return render(request, 'regsoft/controlz_bill_details.html', context)
+    return render(request, 'regsoft/controlz_bill_details.html', context)
 
-        elif part_ob.fee_paid == True:
-            newbill = Bill(participant = part_ob, amount= 800, given= 800, balance= 0, draft_number= 'None')
-            newbill.save()
-            part_ob.controlz = True
-            ddno='None'
-            context={
-                'part_ob' : part_ob,
-                'bill_id' : newbill.id,
-                'ddno' : ddno,
-            }
-            return render(request, 'regsoft/controlz_bill_details.html', context)
 
 
 
 def controlz_bill_print(request):
     if request.POST:
         bill_id = int(request.POST['bill_id'])
+        gl_id = int(request.POST['gl_id'])
         bill_ob = Bill.objects.get(id=bill_id)
-        part_ob = bill_ob.participant
-        if part_ob.fee_paid == False:
-            college = part_ob.college
-            receiptno = bill_ob.id
-            total = bill_ob.amount
+        gl = gleader.objects.get(id=bill_ob.gleader)
+        college =gl.details.college
+        grpcode = gl.groupcode
+        receiptno = bill_ob.id
+        total = bill_ob.amount
+        maleno = Participant.objects.filter(bill_id = bill_id, gender= 'M').count()
+        femaleno = Participant.objects.filter(bill_id = bill_id, gender= 'F').count()
 
-            if bill_ob.draft_number:
-                ddno = bill_ob.draft_number
-            else:
-                ddno = '-'
+        if bill_ob.draft_number:
+            ddno = bill_ob.draft_number
+        else:
+            ddno = '-'
 
-            context = {
-                'college': college,
-                'receiptno' : bill_id,
-                'amount' : total,
-                'given' : bill_ob.given,
-                'balance' : bill_ob.balance,
-                'ddno' : ddno,
-            }
+        context = {
+        'college': college,
+        'receiptno' : bill_id,
+        'amount' : total,
+        'grpcode' : grpcode,
+        'maleno' : maleno,
+        'femaleno' : femaleno,
+        'given' : bill_ob.given,
+        'balance' : bill_ob.balance,
+        'ddno' : ddno,
 
-            return render_to_response('regsoft/receipt_offline.html', context)
-        elif part_ob.fee_paid == True:
-            total= '800'
-            context = {
-                'college': part_ob.college,
-                'receiptno' : bill_id,
-                'amount' : total,
-            }
+        }
 
-            return render_to_response('regsoft/receipt_online.html', context)
+        return render_to_response('regsoft/receipt.html', context)
+
 
 
 
@@ -632,24 +636,27 @@ def controlz_delete_bill(request):
         for bill_id in bill_idlist:
             bill_id = int(bill_id)
             bill_ob = Bill.objects.get(id = bill_id)
-            try:
-                part= bill_ob.participant
+            plist = Participant.objects.filter(bill_id = bill_id)
+            for part in plist:
+                part.bill_id = 0
                 part.controlz = False
                 part.save()
-            except:
-                dumpvar=0
             bill_ob.delete()
+
         return HttpResponseRedirect('../bill_delete')
+ 
+
     bills = Bill.objects.all()
     details = []
     for bill in bills:
-      try:
-          part = bill.participant
-      except:
-          part = None
-          # bill.save()
-          # return HttpResponse(" Contact Satwik : 9928823099")
-      details.append( (bill,part) )
+        try:
+            gl = gleader.objects.get(id = bill.gleader)
+        except:
+            gl = None
+            # bill.save()
+            # return HttpResponse(" Contact Satwik : 9928823099")
+        partno = Participant.objects.filter(bill_id= bill.id).count()
+        details.append( (bill,gl,partno) )
 
     context ={
     'details' : details,
@@ -658,14 +665,364 @@ def controlz_delete_bill(request):
 
 def controlz_view_bill(request, billid):
     bill = Bill.objects.get(id=billid)
-    part = bill.participant 
+    gleaderid = bill.gleader
+    leader = gleader.objects.get(id=gleaderid)
+    participants = Participant.objects.filter(bill_id=billid)
 
     context = {
-      'part' : part,
-      'bill' : bill,
+        'participants' : participants,
+        'bill' : bill,
+        'gleader' : leader,
     }
 
     return render(request, 'regsoft/controlz_bill_view.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @csrf_exempt
+# def controlz_home(request):
+#   if request.POST:
+#       try:
+#           encoded = str( request.POST['code'] )
+#           decoded = int(encoded[-4:]) #taking alternative character because alphabets were random and had no meaning
+
+#       except:
+#           return render(request, 'regsoft/controlz_home.html', {'status' : 0})
+#       return HttpResponseRedirect("../home/" + str(decoded) )
+
+#   return render(request, "regsoft/controlz_home.html")
+
+
+
+# def controlz_dashboard(request,part_id):
+#     part_ob = Participant.objects.filter(id = part_id)
+#     if part_ob:
+#         part_ob = part_ob[0]
+#         if part_ob.controlz == True:
+#             bill = Bill.objects.filter(participant=part_ob)[0]
+#             bill_id = bill.id
+#             context= {'part': part_ob, 'bill_id':bill_id}
+#         else:
+#             context = {'part':part_ob}
+#         return render(request, 'regsoft/controlz_dashboard.html', context)
+#     else:
+#         return render(request, 'regsoft/controlz_home.html', {'status' : 0})
+
+
+
+
+
+# # def controlz_edit_part(request, part_id):
+# #   if request.POST:
+# #       init_ob = InitialRegistration.objects.get(id = part_id)
+# #       init_ob.name = str(request.POST['name'])
+# #       init_ob.email_id = str(request.POST['email'])
+# #       init_ob.phone_one = int(request.POST['phone'])
+# #       init_ob.gender = str(request.POST['gender'])
+
+# #       init_ob.events.clear()
+# #       if request.POST.get('events', False):
+# #           for k in request.POST.getlist('events'):                                    
+# #               event = Event.objects.get(pk=k)
+# #               init_ob.events.add(event)
+# #       init_ob.save()
+
+# #       gl = init_ob.grpleader
+# #       return HttpResponseRedirect('../home/' + str(gl.id) )
+
+
+# #   init_ob = InitialRegistration.objects.get(id= part_id)
+# #   elist = Event.objects.all()
+# #   gl = init_ob.grpleader
+# #   return render(request, 'regsoft/controlz_edit.html' , {'part' : init_ob, 'events' : elist, 'gl' : gl})
+
+
+
+# def controlz_bill_select(request, part_id):
+#     if request.POST:
+#         part_ob = Participant.objects.get(id=part_id)
+# #       pidlist = request.POST.getlist('part')
+# #       plist= []
+# #       is_faculty= 0
+# #       onlinepaid=0
+# #       for k in pidlist:
+# #           k= int(k)
+# #           part = InitialRegistration.objects.get(id=k)
+# #           plist.append(part)
+# #           if part.is_faculty == True:
+# #               is_faculty+=1
+# #           if part.reg_paid == True:
+# #               onlinepaid+=1
+
+# #       totalamt= onlinepaid*500
+#         if part_ob.fee_paid == True:
+#             check = 1
+#         elif part_ob.fee_paid == False:
+#             check = 2
+
+# #       gl = plist[0].grpleader
+# #       total = len(plist) 
+# #       totalamt += (total- is_faculty - onlinepaid) * 750
+# #       pcount = (total - is_faculty - onlinepaid)
+#         context ={
+#             'part_ob' : part_ob, 
+#             'check' : check,
+# #       'plist' : plist,
+# #       'facultyno' : is_faculty,
+# #       'total' : total,
+# #       'totalamt' : totalamt,
+# #       'onlinepaid' : onlinepaid,
+# #       'pcount' : pcount,
+#         }
+
+#         return render(request, 'regsoft/controlz_bill_amt.html', context)
+
+
+# ###### SATWIK MAKE MIGRATIONS AND UNCOMMEN THE BELOW CODE ONCE also UNCOMMENT THE URLS
+# def controlz_bill_details(request,part_id):
+#     if request.POST:
+# #       pidlist= str(request.POST['pidlist'])
+# #       gl_id = gl_id
+#         part_ob = Participant.objects.get(id=part_id)
+# #       college = gl.details.college
+# #       femaleno =0
+# #       maleno  =0
+# #       pidlistx = pidlist.split(',')
+# #       pidlist = pidlist.split(',')
+# #       onlinepaid = 0
+# #       is_faculty=0
+# #       for k in pidlist:
+# #           if k != '' :
+# #               k=int(k)
+# #               part = InitialRegistration.objects.get(id =k)
+# #               part.controlz = True
+# #               if part.gender == 'M':
+# #                   maleno+=1
+# #               else:
+# #                   femaleno+=1
+
+# #               if part.is_faculty:
+# #                   is_faculty+=1
+# #               if part.reg_paid:
+# #                   onlinepaid+=1
+# #               part.save()
+        
+#         if part_ob.fee_paid == False:
+#             ddno = request.POST.get('ddno' ,  False)
+#             n1000 = int(request.POST.get('n_1000',0) )
+#             n500 = int(request.POST.get('n_500',      0) )
+#             n100 = int(request.POST.get('n_100',      0) )
+#             n50 = int(request.POST.get('n_50',        0) )
+#             n20 = int(request.POST.get('n_20',        0) )
+#             n10 = int(request.POST.get('n_10' ,      0) )
+
+
+# #       # totalamt = 1000*n1000 + 500*n500 + 100*n100 + 50*n50 + 20*n20 + 10*n10
+
+
+#             balance = 0
+#             given=0
+#             if n1000 < 0:
+#                 balance += -(n1000) * 1000
+#             else:
+#                 given+= n1000 * 1000
+
+
+#             if n500 < 0:
+#                 balance += -(n500) * 500
+#             else:
+#                 given+= n500 * 500
+
+
+#             if n100 < 0:
+#                 balance += -(n100) * 100
+#             else:
+#                 given+= n100 * 100
+
+
+#             if n50 < 0:
+#                 balance += -(n50) * 50
+#             else:
+#                 given+= n50 * 50
+
+
+#             if n20 < 0:
+#                 balance += -(n20) * 20 
+#             else:
+#                 given+= n20 * 20     
+
+#             if n10 < 0:
+#                 balance += -(n10) * 10 
+#             else:
+#                 given+= n10 * 10                                                     
+                
+
+
+
+#             total = request.POST.get('total', 0)
+#             if total == '':
+#                 total = 0   
+#             if ddno:
+#                 newbill = Bill(participant = part_ob, amount= total, given=given, balance=balance, draft_number= ddno)
+#             else:
+#                 newbill = Bill(participant = part_ob, amount= total, given=given, balance=balance)
+#                 ddno= 'None'
+
+#             newbill.save()
+#             part_ob.controlz = True
+#             part_ob.save()
+# #         test = []
+# #         for k in pidlistx:
+# #             if k != '' :
+# #                 k=int(k)
+# #                 part = InitialRegistration.objects.get(id =k)
+# #                 part.bill_id = int(newbill.id)
+# #                 test.append({part.name, newbill.id})
+# #                 part.save()
+
+                
+#             newbill.notes_1000 = int(n1000)
+#             newbill.notes_500 = int(n500)
+#             newbill.notes_100 = int(n100)
+#             newbill.notes_50 = int(n50)
+#             newbill.notes_20 = int(n20)
+#             newbill.notes_10 = int(n10)
+#             newbill.save()
+
+
+# #       # return HttpResponse(test)
+#             context={
+#                 'part_ob' : part_ob,
+#                 'given' : given,
+#                 'balance' : balance, 
+#                 'total' : total,
+#                 'bill_id' : newbill.id,
+#                 'ddno' : ddno,
+#             }
+
+
+#             return render(request, 'regsoft/controlz_bill_details.html', context)
+
+#         elif part_ob.fee_paid == True:
+#             newbill = Bill(participant = part_ob, amount= 800, given= 800, balance= 0, draft_number= 'None')
+#             newbill.save()
+#             part_ob.controlz = True
+#             ddno='None'
+#             context={
+#                 'part_ob' : part_ob,
+#                 'bill_id' : newbill.id,
+#                 'ddno' : ddno,
+#             }
+#             return render(request, 'regsoft/controlz_bill_details.html', context)
+
+
+
+# def controlz_bill_print(request):
+#     if request.POST:
+#         bill_id = int(request.POST['bill_id'])
+#         bill_ob = Bill.objects.get(id=bill_id)
+#         part_ob = bill_ob.participant
+#         if part_ob.fee_paid == False:
+#             college = part_ob.college
+#             receiptno = bill_ob.id
+#             total = bill_ob.amount
+
+#             if bill_ob.draft_number:
+#                 ddno = bill_ob.draft_number
+#             else:
+#                 ddno = '-'
+
+#             context = {
+#                 'college': college,
+#                 'receiptno' : bill_id,
+#                 'amount' : total,
+#                 'given' : bill_ob.given,
+#                 'balance' : bill_ob.balance,
+#                 'ddno' : ddno,
+#             }
+
+#             return render_to_response('regsoft/receipt_offline.html', context)
+#         elif part_ob.fee_paid == True:
+#             total= '800'
+#             context = {
+#                 'college': part_ob.college,
+#                 'receiptno' : bill_id,
+#                 'amount' : total,
+#             }
+
+#             return render_to_response('regsoft/receipt_online.html', context)
+
+
+
+# def controlz_delete_bill(request):
+#     if request.POST:
+#         bill_idlist = request.POST.getlist('bill_id') 
+#         for bill_id in bill_idlist:
+#             bill_id = int(bill_id)
+#             bill_ob = Bill.objects.get(id = bill_id)
+#             try:
+#                 part= bill_ob.participant
+#                 part.controlz = False
+#                 part.save()
+#             except:
+#                 dumpvar=0
+#             bill_ob.delete()
+#         return HttpResponseRedirect('../bill_delete')
+#     bills = Bill.objects.all()
+#     details = []
+#     for bill in bills:
+#       try:
+#           part = bill.participant
+#       except:
+#           part = None
+#           # bill.save()
+#           # return HttpResponse(" Contact Satwik : 9928823099")
+#       details.append( (bill,part) )
+
+#     context ={
+#     'details' : details,
+#     }
+#     return render(request, 'regsoft/controlz_bill_delete.html', context)
+
+# def controlz_view_bill(request, billid):
+#     bill = Bill.objects.get(id=billid)
+#     part = bill.participant 
+
+#     context = {
+#       'part' : part,
+#       'bill' : bill,
+#     }
+
+#     return render(request, 'regsoft/controlz_bill_view.html', context)
 
 
 
@@ -1049,6 +1406,134 @@ def recnacc_checkout(request,gl_id):
         context = RequestContext(request)
         context_dict = {'final_participants':final_participants, 'gl':gl}
         return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+@csrf_exempt
+def recnacc_room_list(request):
+    rooms = Room.objects.all()
+    plist = []
+    for x in rooms:
+        prtno = Participant.objects.filter(room = x).count()
+        if x.id != 1:
+            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
+
+    context = RequestContext(request)
+    context_dict = {'plist':plist}
+    return render(request,'regsoft/recnacc_room_participants_list.html', context_dict)
+
+@csrf_exempt
+def recnacc_room_details(request, room_id):
+  room = Room.objects.get(id = room_id)
+  plist = Participant.objects.filter(room = room)
+  # plist = []
+  # for x in rooms:
+  #   prtno = InitialRegistration.objects.filter(room = x).count()
+  #   plist.append({x.bhavan.name,x.room,prtno})
+  context = RequestContext(request)
+  context_dict = {'plist':plist,'room':room}
+  # return HttpResponse(plist)
+  return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
+
+
+
+@csrf_exempt
+def recnacc_bill_print(request, part_id):
+    part_ob = Participant.objects.get(id = part_id)
+
+
+    context = {'part_ob': part_ob}
+
+    return render_to_response('regsoft/receipt_recnacc.html', context)
+
+def encode_glid(gl_id):
+    gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
+    mixed = string.ascii_uppercase + string.ascii_lowercase
+    count = 51
+    encoded = ''
+    for x in gl_ida:
+        encoded = encoded + x
+        encoded = encoded + mixed[randint(0,51)]
+    return encoded
+def get_barcode(request):
+    list_of_people_selected = Participant.objects.filter(pcr_approval=True).order_by('college__name')
+    final_display = []
+    for x in list_of_people_selected:
+        name = x.name
+        college = x.college.name
+        pid= x.id
+        encoded = encode_glid(pid)
+        final_display.append((name,college,encoded, pid))
+    context = RequestContext(request)
+    context_dict = {'final_display':final_display}
+    return render_to_response('regsoft/get_barcode.html', context_dict, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1801,31 +2286,6 @@ def recnacc_checkout(request,gl_id):
 #       context['error_message'] = "Winners added."
 #       return redirect('regsoft:main')
 
-@csrf_exempt
-def recnacc_room_list(request):
-    rooms = Room.objects.all()
-    plist = []
-    for x in rooms:
-        prtno = Participant.objects.filter(room = x).count()
-        if x.id != 1:
-            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
-
-    context = RequestContext(request)
-    context_dict = {'plist':plist}
-    return render(request,'regsoft/recnacc_room_participants_list.html', context_dict)
-
-@csrf_exempt
-def recnacc_room_details(request, room_id):
-  room = Room.objects.get(id = room_id)
-  plist = Participant.objects.filter(room = room)
-  # plist = []
-  # for x in rooms:
-  #   prtno = InitialRegistration.objects.filter(room = x).count()
-  #   plist.append({x.bhavan.name,x.room,prtno})
-  context = RequestContext(request)
-  context_dict = {'plist':plist,'room':room}
-  # return HttpResponse(plist)
-  return render_to_response('regsoft/recnacc_room_participants_details.html', context_dict, context)
 
 
 # # @csrf_exempt
@@ -1963,36 +2423,97 @@ def recnacc_room_details(request, room_id):
 #   context = RequestContext(request)
 #   return render_to_response('regsoft/recnacc_bhavan_gleader_list.html', context_dict, context)                
 
-@csrf_exempt
-def recnacc_bill_print(request, part_id):
-	part_ob = Participant.objects.get(id = part_id)
 
 
-	context = {'part_ob': part_ob}
 
-	return render_to_response('regsoft/receipt_recnacc.html', context)
 
-def encode_glid(gl_id):
-    gl_ida = '0'*(4-len(str(gl_id)))+str(gl_id)
-    mixed = string.ascii_uppercase + string.ascii_lowercase
-    count = 51
-    encoded = ''
-    for x in gl_ida:
-        encoded = encoded + x
-        encoded = encoded + mixed[randint(0,51)]
-    return encoded
-def get_barcode(request):
-    list_of_people_selected = Participant.objects.filter(pcr_approval=True).order_by('college__name')
-    final_display = []
-    for x in list_of_people_selected:
-        name = x.name
-        college = x.college.name
-        pid= x.id
-        encoded = encode_glid(pid)
-        final_display.append((name,college,encoded, pid))
-    context = RequestContext(request)
-    context_dict = {'final_display':final_display}
-    return render_to_response('regsoft/get_barcode.html', context_dict, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2948,7 +3469,7 @@ def get_barcode(request):
 # #             display_table.append(participant)
     
 # #     #people = [x for x in gl.user.participant_set.all() if x.firewallz == True and x.controlzpay != True and x.coach != True]
-# #     #bill_no_raw = len(Bill_new.objects.all()) + 1
+# #     #bill_no_raw = len(Bill.objects.all()) + 1
 # #     #rec = '0'*(4-len(str(bill_no_raw)))+str(bill_no_raw)
 # #     number_of_participants = len(selectedpeople_list)
 # #     register=750
@@ -2984,9 +3505,9 @@ def get_barcode(request):
 # #             # # # x.bill_id = None
 # #             # # # x.fid = False
         
-# #         # # # a = Bill_new.objects.filter(number=billno)[0]
+# #         # # # a = Bill.objects.filter(number=billno)[0]
 # #         # # # a.remove()
-# #         # # #return render_to_response('revertbill.html',{'message':'This Bill_new has been cancelled'} )
+# #         # # #return render_to_response('revertbill.html',{'message':'This Bill has been cancelled'} )
 # #     # return render_to_response('revertbill.html', context_dict, context)
     
 # # @csrf_exempt
@@ -3009,9 +3530,9 @@ def get_barcode(request):
         
 # #     #calculationg amount
         
-# #     #now make Bill_new
+# #     #now make Bill
         
-# #         a = Bill_new()
+# #         a = Bill()
 # #         # a.notes_1000= n1000
 # #         # a.notes_500= n500
 # #         # a.notes_100= n100
@@ -3027,7 +3548,7 @@ def get_barcode(request):
 # #         rec = '0'*(4-len(str(a.id)))+str(a.id)
         
 # #         display_table = []
-# #         #bill_no_raw = len(Bill_new.objects.all()) + 1
+# #         #bill_no_raw = len(Bill.objects.all()) + 1
 # #         for x in selectedpeople_list:
 # #             participant = Participant.objects.get(id=x)
 # #             participant.controlzpay= True
@@ -3167,7 +3688,7 @@ def get_barcode(request):
 # # @csrf_exempt
 # # def show_prev_bills(request):
 # #     all_participants = Participant.objects.filter(controlzpay = True)
-# #     bill_num = Bill_new.objects.all()
+# #     bill_num = Bill.objects.all()
 # #     all_bills = []
 # #     #if not bill_num:
 # #     for x in bill_num:
@@ -3212,7 +3733,7 @@ def get_barcode(request):
 # #                     x.controlzpay = False
 # #                     x.bill_id = None
 # #                     x.save()
-# #             a = Bill_new.objects.filter(id=bill_part).delete()
+# #             a = Bill.objects.filter(id=bill_part).delete()
         
 # #         # if str(request.POST['formtype']) == 'partform':
 # #             # bill_number = request.POST['bill_number']
@@ -3239,7 +3760,7 @@ def get_barcode(request):
 # #             # # x.bill_id = None
 # #             # # x.fid = False
         
-# #         # # a = Bill_new.objects.filter(number=billno)[0]
+# #         # # a = Bill.objects.filter(number=billno)[0]
 # #         # # a.remove()
-# #         # #return render_to_response('revertbill.html',{'message':'This Bill_new has been cancelled'} )
+# #         # #return render_to_response('revertbill.html',{'message':'This Bill has been cancelled'} )
 # #     return render_to_response('revertbill.html', context_dict, context)

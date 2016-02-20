@@ -6,7 +6,7 @@
 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
+    <div class="sidebar" data-color="purple" >  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -14,45 +14,42 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                    <strong>Firewallz</strong> 
+                    <strong>Controls </strong>
                 </a>
             </div>
                        
             <ul class="nav">
                 <li>
-                    <a href="../scan">
+                    <a href="../home">
                         <i class="pe-7s-home"></i> 
                         <p>Home</p>
                     </a>            
                 </li>
 
                 <li>
-                    <a href="../gcodes/">
+
+                    <a href="../home/{{gl.id}}">
+                        <i class="pe-7s-menu"></i> 
+                        <p>Dashboard</p>
+                    </a>
+   
+                </li>
+                <li>
+                    <a href="../../groupcodes">
                         <i class="pe-7s-note2"></i> 
-                        <p>Passed Groups</p>
+                        <p>Groupcode list</p>
                     </a>            
                 </li>
 
                 <li>
-                  <a href="../barcodelist">
+                    <a href="../bill_delete">
                         <i class="pe-7s-news-paper"></i> 
-                        <p>Barcodelist</p>
-                    </a>        
-                </li>
+                        <p>Delete Bill</p>
+                    </a>
+                </li> 
 
-                <li>
-                    <a href="../add/">
-                        <i class="pe-7s-user"></i> 
-                        <p>Add Participant </p>
-                    </a>
-                </li> 
-                <li>
-                    <a href="../unconfirm/">
-                        <i class="pe-7s-user"></i> 
-                        <p>Unconfirm Groups</p>
-                    </a>
-                </li> 
-                
+
+
             </ul> 
         </div>
 
@@ -69,7 +66,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><strong> Firewallz Outer Booth </strong> | DVM</a>
+                    <a class="navbar-brand" href="#"><strong> Controls Booth </strong></a>
                 </div>
                 <div class="collapse navbar-collapse">       
                     <ul class="nav navbar-nav navbar-left">
@@ -121,33 +118,24 @@
                                     </div>
                                     
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone No.</label>
                                                 <input type="text" name='phone' class="form-control" placeholder="Phone no." value="{{part.phone_one}}">
                                             </div>        
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Gender</label>
+                                                <label>Gender</label><br> &nbsp;
 
                                                 
-                                                <select name="gender" class='form-control'>
+                                                <select name="gender" >
                                                    
                                                   <option value="M" >Male</option>
                                                   <option value="F" {% if part.gender == 'F'%} selected = "selected" {% endif %} >Female</option>
                                                 </select>
 
-
-
-                                            </div>        
-                                        </div>
-
-                                            &nbsp; &nbsp; &nbsp;<div class="col-md-3">
-                                            <div class="form-group">
-                                           <label class="checkbox"> PCR Approval                 
-                                            <input type="checkbox" name="pcr_approval" value="True" {% if part.pcr_approval %} checked {% endif %}  data-toggle= "checkbox"></label>
-                         
+                     
                         
 
 
