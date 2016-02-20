@@ -6,7 +6,7 @@
 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple">  
+    <div class="sidebar" data-color="purple"  data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -32,9 +32,9 @@
                         <p>Dashboard</p>
                     </a>
                     <!-- </form>         -->
-                </li> -->
+
                 <li>
-                    <a href="../../../groupcodes">
+                    <a href="../../../firewallzouter/gcodes">
                         <i class="pe-7s-note2"></i> 
                         <p>groupcode list</p>
                     </a>            
@@ -121,7 +121,7 @@ function checkall(gauss){
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Participants</h4>
-                                <p class="category">Group Leader: <strong>{{gleader.details.name}}</strong><br>College Representative: <strong>{{gleader.details.college_rep.details.name}}</strong> <br>College: <strong>{{ gleader.details.college }}</strong></p>
+                                <p class="category">Group Leader: <strong>{{gleader.details.name}}</strong> <br> GL College: <strong>{{ gleader.details.college }}</strong></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -139,7 +139,7 @@ function checkall(gauss){
                                         <tr>
                                             <td>{{forloop.counter}}</td>
                                             
-                                            <td>{{member.name}}{% if member.is_faculty %}(Faculty){% endif %}</td>
+                                            <td>{{member.name}}{% if member.fee_paid %}(Online Paid){% endif %}</td>
                                             <!-- <td>{{prt.name}}</td> -->
                                             <td> {{member.gender}} </td>
                                             <td>{% for k in member.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
