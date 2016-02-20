@@ -88,7 +88,7 @@ def windows_json(request):
 	overview_ob  =Heading.objects.get(name='Overview')
 	rules_ob  =Heading.objects.get(name='Rules')
 	eligibility_ob  =Heading.objects.get(name='Eligibility')
-	guidelines_ob  =Heading.objects.get(name='Guidlines')
+	guidelines_ob  =Heading.objects.get(name='Guidelines')
 	judging_ob  =Heading.objects.get(name='Judging Criteria')
 	prob_ob  =Heading.objects.get(name='Problem Statements')
 	resources_ob  =Heading.objects.get(name='Resources')
