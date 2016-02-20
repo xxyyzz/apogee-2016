@@ -43,20 +43,33 @@ except:
 for part in parts:
     if part.aadhaar is not None:
         part.aadhaar = part.aadhaar.upper()
+        part.name = part.name.title()
         part.save()
         print "Part " + part.aadhaar + " changed."
 
 import bitsians
 for sid, name in bitsians.BITSIANS:
+    email = sid.lower() + "@pilani.bits-pilani.ac.in"
     try:
         part = Participant.objects.get(aadhaar__icontains=sid)
+        part.is_bitsian = True
         part.name = name
-        part.email_id = sid.lower() + "@pilani.bits-pilani.ac.in"
+        part.email_id = email
         part.college = college
         part.save()
         print "Match found! " + sid + " changed"
     except:
-        email = sid.lower() + "@pilani.bits-pilani.ac.in"
-        phone = 9999999999
-        part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college, email_id=email)
-        print sid + " created"
+        try:
+            from django.db import IntegrityError
+            part = Participant.objects.get(email_id=email)
+            part.aadhaar = sid
+            part.is_bitsian = True
+            part.name = name
+            part.email_id = email
+            part.college = college
+            part.save()
+            print "Match found! " + email + " changed"
+        except:
+            phone = 9999999999
+            part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college, email_id=email)
+            print sid + " created"
