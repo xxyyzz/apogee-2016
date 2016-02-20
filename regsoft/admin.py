@@ -7,7 +7,7 @@ class RoomAdmin(admin.ModelAdmin):
 	list_display = ('id','room', 'bhavan','vacancy')
 class BillAdmin(admin.ModelAdmin):
 	readonly_fields=('id',)
-	list_display = ('id', 'participant','amount')
+	list_display = ('id', 'gleader','amount')
 # class InventoryAdmin(admin.ModelAdmin):
 # 	readonly_fields=('id',)
 # 	list_display = ('id','gl_id','room','a','b','c','d','e','f')

@@ -13,15 +13,15 @@
     </a>
 </li>
 <li>
-    <a href="{% url 'ems:events_judge_home' event.id %}">
-        <i class="pe-7s-news-paper"></i>
-        <p>Judge Event</p>
-    </a>
-</li>
-<li>
     <a href="{% url 'ems:events_participants' event.id %}">
         <i class="pe-7s-news-paper"></i>
         <p>Manage Participants</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_judge_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Judge Event</p>
     </a>
 </li>
 {% endblock sidebar_content %}

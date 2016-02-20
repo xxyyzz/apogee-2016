@@ -6,8 +6,8 @@
 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple"  data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
-    
+     <div class="sidebar" data-color="purple" data-image="/2016/static/regsoft/img/sidebar-4.jpg">
+
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
     
@@ -27,26 +27,31 @@
                 </li>
 
                 <li>                  
-                    <a href="./{{gl.id}}">
+                    <a href="./{{part.id}}">
                         <i class="pe-7s-menu"></i> 
                         <p>Dashboard</p>
                     </a>
                     <!-- </form>         -->
                 </li>
                 <li>
-                    <a href="../../firewallzouter/gcodes">
+                    <a href="../../firewallzouter/pcodes">
                         <i class="pe-7s-note2"></i> 
-                        <p>groupcode list</p>
+                        <p>Participant Code list</p>
                     </a>            
                 </li>
 
                 <li>
                     <a href="../bill_delete">
                         <i class="pe-7s-news-paper"></i> 
-                        <p>Delete Bill</p>
+                        <p>Delete Controls Bill</p>
                     </a>
                 </li> 
-
+                <li>
+                    <a href="../recnacc_bill_print/{{part.id}}">
+                        <i class="pe-7s-news-paper"></i> 
+                        <p>Print Recnacc Bill</p>
+                    </a>
+                </li> 
 
 
 <!--                 <li>
@@ -100,68 +105,82 @@
             </div>
         </nav>
                      
-
-<script type= 'text/javascript'>
-function checkall(gauss){
-  var cbx = document.getElementsByTagName('input');
-  for(var i=0; i< cbx.length ; ++i)
-  {
-    if(cbx[i].type == 'checkbox')
-      cbx[i].checked = gauss.checked;
-
-  }
-}
-
-</script>
                      
         <div class="content">
             <div class="container-fluid">
-                <div class="row">                   
+                <div class="row">   
+
+            {% if part.controlz %}
+                    
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="header">
+                                <h4 class="title">Billed</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Events</th>
+                                        <th>Phone</th>
+                                        <th>Bill Id</th>
+                                        
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{part.aadhaar}}</td>
+                                            <td>{{part.name}}</td>
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td> {{bill_id}}</td>
+
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                   
+                            </div>
+                        </div>
+                    </div> 
+                    {% else %}
+                                                 
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Group Leader of {{gl.details.college}}</h4> <h5> Males : {{maleno}} Females : {{femaleno}} </h5>
-                                <p class="category"><strong>Group Leader: {{gl.details.name}}</strong><br>The following have not been Billed</p>
+                                <h4 class="title">Participant of {{part.college.name}}</h4> 
+                                <p class="category"> <br>The following has not been Billed</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
+                                        <th>ID</th>
+                                        <th>Name | (Pcr Approved)</th>
                                         <th>Gender</th>
                                         <th> Events </th>
                                         <th>Phone</th>
                                         <th>EDIT </th>
                                         
-                                         <th>Select All <!-- <label class= "checkbox" > --> 
-                                            <input type= 'checkbox'  name= 'selectall' onclick= "checkall(this)">
-                                        <!-- </label> -->
+                                         <th>Online Paid
                                         </th>
                                     </thead>
                                     <tbody>
-                                        <form method= "POST" action = '../bill_select/' id ="form1">
+                                        <form method= "POST" action = '../bill_select/{{part.id}}' id ="form1">
                                             {% csrf_token %}
-                                        {% for prt in plist %}
                                         <tr>
-                                            <td>{{forloop.counter}}</td>
+                                            <td>{{part.aadhaar}}</td>
                                             
-                                            <td>{{prt.name}}
-                                            {% if prt.fee_paid %}(onlinepaid){% endif %}
+                                            <td>{{part.name}}{% if part.pcr_approval %}(Approved){% else %}(Not Approved){% endif %}
                                             </td>
-                                            <!-- <td>{{prt.name}}</td> -->
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <td>{{prt.phone_one}}</td>
-                                            <td> <a href="../edit/{{prt.id}}"><i class= 'fa fa-edit'></i> Edit </a>
-                                            <td>
-                                                <!-- <label class="checkbox"> -->
-
-                                                    <input type='checkbox'   name='part' value = '{{prt.id}}' />
-
-                                                <!-- </label> -->
+                                            <td> {{part.gender}} </td>
+                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{part.phone_one}}</td>
+                                            <td> <a href="../edit/{{part.id}}"><i class= 'fa fa-edit'></i> Edit </a>
+                                            <td>{% if part.fee_paid %}Yes{% else %} No {% endif %}
                                             </td>
                                         </tr>
-                                        {% endfor  %}
                                        </form>
                                     </tbody>
                                 </table>
@@ -171,48 +190,8 @@ function checkall(gauss){
                         </div>
                             <button type="submit" class="btn btn-info btn-fill col-md-2 col-md-offset-5" form= "form1"><strong>BILL</strong></button>
                     </div>  
-                    
-                    
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">Billed</h4>
-                                <p class="category"><strong>Males : {{maleno_two}} Females : {{femaleno_two}}</strong></p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>S.no</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Events</th>
-                                        <!-- <th>Phone</th> -->
-                                        <th>Group Code</th>
-                                        <th>Group Leader</th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        {% for prt in plist_two %}
-                                        <tr>
-                                            <td>{{forloop.counter}}</td>
-                                            <td>{{prt.name}}</td>
-                                            <td> {{prt.gender}} </td>
-                                            <td>{% for k in prt.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <!-- <td>{{prt.phone_one}}</td> -->
-                                            <td>{{prt.grpleader.groupcode}}</td>
-                                            <td>{{prt.grpleader.details.name}} </td>
+                    {% endif %}
 
-                                        </tr>
-                                        {% endfor  %}
-                                       
-                                    </tbody>
-                                </table>
-                                   
-                            </div>
-                        </div>
-                    </div> 
-                    
-                                 
                 </div>                    
             </div>
         </div>
@@ -226,7 +205,7 @@ function checkall(gauss){
             <div class="copyright container-fluid">
 
                     <p class="pull-left">
-                &copy; 2016 <a >Department of Visual Media</a>   
+                &copy; 2015 <a >Department of Visual Media</a>   
                 </p>
 
 

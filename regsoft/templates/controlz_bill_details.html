@@ -6,7 +6,7 @@
 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple"  data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
+    <div class="sidebar" data-color="purple">  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -28,14 +28,14 @@
 
                 <li>
 
-                    <a href="../home/{{gl.id}}">
+                    <a href="../home/{{part_ob.id}}">
                         <i class="pe-7s-menu"></i> 
                         <p>Dashboard</p>
                     </a>
    
                 </li>
                 <li>
-                    <a href="../../firewallzouter/gcodes">
+                    <a href="../../groupcodes">
                         <i class="pe-7s-note2"></i> 
                         <p>Passed Groups</p>
                     </a>            
@@ -95,7 +95,7 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">Regsoft | DVM</h4>
+                                <h4 class="title">Regsoft</h4>
 
 
                             </div>
@@ -104,25 +104,33 @@
                                    
 <br> <br>
 <div align= "center">
+    {% if part_ob.fee_paid == True %}
+                                <p >
+                                    <h3>This participant has paid online</h4>
+                                    <h4><strong> Bill Details </strong></h4><br>
+                                    <strong>Receipt No. : {{bill_id}} </strong><br>
+                                    
+                                    <strong>Name : {{part_ob.name}} </strong><br>
+                                    <strong>College : {{part_ob.college}} </strong><br>
+                                    <strong>Fee paid online : 800 </strong><br>
+                                    <strong>Balance: 0 </strong><br>
+
+                                    <strong>Total Amount Paid : 800 </strong>
+                                    <br></p>
+    {% elif part_ob.fee_paid == False %}                                    
                                 <p >
                                     <h4><strong> Bill Details </strong></h4><br>
                                     <strong>Receipt No. : {{bill_id}} </strong><br>
-                                    <strong>GL College : {{gl.details.college}} </strong><br>
+                                    <strong>College : {{part_ob.college}} </strong><br>
                                     <strong>Cash Given : {{given}} </strong><br>
                                     <strong>Balance: {{balance}} </strong><br>
                                     <strong>DD nummber: {{ddno}} </strong><br>
 
-                                    <strong>Amount per participant: 900 </strong> <br>
-                                    <strong>Amount per onlinepaid: 800(paid before) </strong> <br>
-                                    <strong>Total Amount Paid here : {{total}} </strong>
-                                    <br>
-                                    <br>
-                                    <strong>Online Paid: {{onlinepaid}} </strong> <br>
-                                    <strong>No. of Males : {{maleno}} </strong><br>
-                                    <strong>No. of Females : {{femaleno}} </strong><br>
-                                    <strong>Total Individuals : {{totalpart}} </strong><br>
-
-                                </p>
+                                    <strong>Amount to be taken for offline participant: 900 </strong> <br>
+                                    <strong>Total Amount Paid : {{total}} </strong>
+                                    <br></p>
+                                
+{% endif %}
 </div>
 <div class="row">
                                         <div class="col-md-6">
@@ -132,7 +140,7 @@
 
 <form method= "POST" action="../bill_print/" >
     {% csrf_token %}
-    <input type = "hidden" name = 'gl_id' value="{{gl.id}}" >
+    <input type = "hidden" name = 'part_ob_id' value="{{part_ob.id}}" >
     <input type = 'hidden' name='bill_id' value= "{{bill_id}}" >
     <!-- <input type = 'hidden' name='pidlist' value="{% for k in plist %}{{k.id}},{% endfor %}" >   -->
 
@@ -171,7 +179,7 @@
             <div class="copyright container-fluid">
 
                     <p class="pull-left">
-                &copy; 2016 <a >Department of Visual Media</a>   
+                &copy; 2015 <a >Department of Visual Media</a>   
                 </p>
 
 

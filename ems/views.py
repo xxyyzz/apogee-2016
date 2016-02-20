@@ -204,7 +204,6 @@ def events_home(request, eventid):
             for teamid in teams:
                 team = Team.objects.get(id=teamid)
                 curr_level.teams.remove(team)
-                print prev_level.teams.all()
                 if team not in prev_level.teams.all():
                     prev_level.teams.add(team)
         if "add-finalists" in request.POST:
@@ -391,12 +390,138 @@ def events_levels_judge(request, eventid, levelid, judgeid):
 
 def events_participants(request, eventid):
     event = Event.objects.get(id=eventid)
+    if event.is_team:
+        return redirect('ems:events_teams', event.id)
     teams = Team.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'delete-team' in request.POST:
+            teamid = request.POST['delete-team']
+            team = Team.objects.get(id=teamid)
+            team.delete()
     context = {
         'event' : event,
         'teams' : teams,
     }
     return render(request, 'ems/events_participants.html', context)
+
+def events_participants_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    parts = []
+    if request.method == 'POST':
+        if 'fetch' in request.POST:
+            partid = request.POST['aadhaar']
+            partids = partid.split()
+            for partid in partids:
+                try:
+                    part = Participant.objects.get(aadhaar__icontains=partid)
+                    parts.append(part)
+                except:
+                    pass
+                try:
+                    part = Participant.objects.get(id__icontains=partid)
+                    parts.append(part)
+                except:
+                    pass
+        if 'add' in request.POST:
+            partids = request.POST.getlist('part')
+            for partid in partids:
+                part = Participant.objects.get(id=partid)
+                try:
+                    team = Team.objects.get(leader=part, event=event, members=None)
+                except:
+                    team = Team.objects.create(leader=part, event=event)
+                    registered = Level.objects.get(name="Registered", event=event)
+                    team.levels.add(registered)
+            return redirect('ems:events_participants', event.id)
+    context = {
+        'event' : event,
+        'parts' : parts,
+    }
+    return render(request, 'ems/events_participants_add.html', context)
+
+def events_teams(request, eventid):
+    event = Event.objects.get(id=eventid)
+    if not event.is_team:
+        return redirect('ems:events_participants', event.id)
+    teams = Team.objects.filter(event=event)
+    if request.method == 'POST':
+        if 'delete-team' in request.POST:
+            teamid = request.POST['delete-team']
+            team = Team.objects.get(id=teamid)
+            team.delete()
+    context = {
+        'event' : event,
+        'teams' : teams,
+    }
+    return render(request, 'ems/events_teams.html', context)
+
+def events_teams_add(request, eventid):
+    event = Event.objects.get(id=eventid)
+    parts = []
+    select = []
+    errors = []
+    if request.method == 'POST':
+        if 'fetch' in request.POST:
+            partid = request.POST['aadhaar']
+            partids = partid.split()
+            for partid in partids:
+                try:
+                    part = Participant.objects.get(aadhaar__icontains=partid)
+                    parts.append(part)
+                except:
+                    pass
+                try:
+                    part = Participant.objects.get(id__icontains=partid)
+                    parts.append(part)
+                except:
+                    pass
+        if 'next' in request.POST:
+            teams = event.team_set.all()
+            partids = request.POST.getlist('part')
+            for partid in partids:
+                part = Participant.objects.get(id=partid)
+                for team in teams:
+                    if part in team.members.all():
+                        error = part.name+" is already a part of "+team.leader.name+"'s Team."
+                        errors.append(error)
+                    if part == team.leader:
+                        error = part.name+" already have their own team."
+                        errors.append(error)
+            if not errors:
+                for partid in partids:
+                    part = Participant.objects.get(id=partid)
+                    select.append(part)
+        if "add" in request.POST:
+            teams = event.team_set.all()
+            partids = request.POST.getlist('part')
+            leaderid = request.POST['leader']
+            name = request.POST['name']
+            for partid in partids:
+                part = Participant.objects.get(id=partid)
+                for team in teams:
+                    if part in team.members.all():
+                        error = part.name+" is already a part of "+team.leader.name+"'s Team."
+                        errors.append(error)
+                    if part is team.leader:
+                        error = part.name+" already have their own team."
+                        errors.append(error)
+            if not errors:
+                leader = Participant.objects.get(id=leaderid)
+                team = Team.objects.create(leader=leader, event=event)
+                for partid in partids:
+                    if partid != leaderid:
+                        part = Participant.objects.get(id=partid)
+                        team.members.add(part)
+                registered = Level.objects.get(name="Registered", event=event)
+                team.levels.add(registered)
+                return redirect('ems:events_participants', event.id)
+    context = {
+        'event' : event,
+        'parts' : parts,
+        'select' : select,
+        'errors' : errors,
+    }
+    return render(request, 'ems/events_teams_add.html', context)
 
 @staff_member_required
 def upload_list(request):

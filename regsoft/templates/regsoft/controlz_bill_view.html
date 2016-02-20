@@ -6,7 +6,7 @@
 
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple">  
+    <div class="sidebar" data-color="purple"  data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -32,9 +32,9 @@
                         <p>Dashboard</p>
                     </a>
                     <!-- </form>         -->
-                </li> -->
+
                 <li>
-                    <a href="../../../groupcodes">
+                    <a href="../../../firewallzouter/gcodes">
                         <i class="pe-7s-note2"></i> 
                         <p>groupcode list</p>
                     </a>            
@@ -120,13 +120,13 @@ function checkall(gauss){
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Participant</h4>
-                                <p class="category">College: <strong>{{ part.college.name }}</strong></p>
+                                <h4 class="title">Participants</h4>
+                                <p class="category">Group Leader: <strong>{{gleader.details.name}}</strong> <br> GL College: <strong>{{ gleader.details.college }}</strong></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>ID</th>
+                                        <th>S.no</th>
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th> Events </th>
@@ -135,16 +135,17 @@ function checkall(gauss){
                                     <tbody>
                                         <form method= "POST" action = '../bill_select/' id ="form1">
                                             {% csrf_token %}
+                                        {% for member in participants %}
                                         <tr>
-                                            <td>{{part.aadhaar}}</td>
+                                            <td>{{forloop.counter}}</td>
                                             
-                                            <td>{{part.name}}</td>
+                                            <td>{{member.name}}{% if member.fee_paid %}(Online Paid){% endif %}</td>
                                             <!-- <td>{{prt.name}}</td> -->
-                                            <td> {{part.gender}} </td>
-                                            <td>{% for k in part.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
-                                            <td>{{part.phone_one}}</td>
+                                            <td> {{member.gender}} </td>
+                                            <td>{% for k in member.events.all %}{{k}},{% if forloop.counter == 4 %} <br> {% endif %} {% endfor %} </td>
+                                            <td>{{member.phone_one}}</td>
                                         </tr>
-
+                                        {% endfor  %}
                                        </form>
                                     </tbody>
                                 </table>
@@ -159,6 +160,7 @@ function checkall(gauss){
                         <div class="card card-plain">
                             <div class="header">
                                 <h4 class="title">Bill Details</h4>
+                                <p class="category"><strong>Males : {{maleno_two}} Females : {{femaleno_two}}</strong></p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">

@@ -3,7 +3,7 @@
     
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="/2016/static/regsoft/img/sidebar-4.jpg">  
+    <div class="sidebar" data-color="purple" data-image="/static/regsoft/img/sidebar-4.jpg">  
     
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
     
@@ -11,7 +11,7 @@
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="#" class="simple-text">
-                    <strong>Controls </strong>
+                    <strong>Controlz </strong>
                 </a>
             </div>
                        
@@ -29,22 +29,10 @@
                     </a>
                 </li> 
                 <li>
-                    <a href="../../firewallzouter/gcodes">
+                    <a href="../../groupcodes">
                         <i class="pe-7s-note2"></i> 
                         <p>GroupCode list</p>
                     </a>            
-                </li>
-                <li>
-                    <a href="../recnacc_bill_list/">
-                        <i class="pe-7s-note2"></i> 
-                        <p>Recnacc Bill Print</p>
-                    </a>            
-                </li>
-                <li>
-                    <a href="{% url 'regsoft:controlz_stats' %}">
-                        <i class="pe-7s-news-paper"></i> 
-                        <p>STATS</p>
-                    </a>
                 </li>
 
 
@@ -70,19 +58,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><strong> BITS Apogee 2016 </strong> | Department of Visual Media</a>
+                    <a class="navbar-brand" href="#"><strong> BITS Oasis 2015 </strong></a>
                 </div>
                 <div class="collapse navbar-collapse">       
                     <ul class="nav navbar-nav navbar-left">
                     </ul>
                     
-                    <ul class="nav navbar-nav navbar-right">
+                   <!--  <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="#">
                                 Log out
                             </a>
                         </li> 
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </nav>
@@ -90,13 +78,12 @@
                      
         <div class="content">
             <div class="container-fluid">
-                <div class="row">                   
+                <!-- <div class="row">                   
                     <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Controlz</h4>
-                                {% if status == 0 %} <p class="category" style = "color:red"> Invalid Code Entered</p>
-                                {% endif %}
+                                <h4 class="title">Controlz Recnacc Bill Print</h4>
+                                
                             </div>
                             <div class="content">
                                 <form method="POST" action=".">
@@ -122,7 +109,7 @@
                     </div>  
                     
                                  
-                </div>  
+                </div>  --> 
 
 
         <div class="row">                                        
@@ -131,20 +118,32 @@
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="header">
-                                <h4 class="title">Notifications</h4>
-                                <p class="category">Following Group Codes are generated at Firewallz</p>
+                                <h4 class="title">Recnacc Bill Print</h4>
+                                <!-- <p class="category">Following Group Codes are generated at Firewallz</p> -->
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <th>S.no</th>
                                         <th>Group Leader</th>
+                                        <th>College </th>
                                         <th>Group Code</th>
-                                        <th>Player Count (M | F)</th>
-                                        <th>GL Phone</th>
+                                        <!-- <th>Player Count (M | F)</th>
+                                        <th>Faculty Count (M | F)</th>
+                                         --><th>GL Phone</th>
+                                         <th>Print</th>
                                     </thead>
-                                    <tbody id="rec_notif">
-
+                                    <tbody>
+                                        {% for x in gllist %}
+                                        <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{x.details.name}}</td>
+                                        <td>{{x.details.college}}</td>
+                                        <td>{{x.groupcode}}</td>
+                                        <td>{{x.details.phone_one}}</td>
+                                        <td><a href="http://bits-oasis.org/2015/controlz/recnacc_bill_print/{{x.id}}">Print</a></td>
+                                    </tr>
+                                        {% endfor %}
 
                                     </tbody>
                                 </table>
@@ -164,32 +163,6 @@
 
 
 
-        <script>
-        setInterval(function(){
-            var rec_not = new XMLHttpRequest();
-            var url = "http://www.bits-oasis.org/2015/group_notify/";
-            var out="" ;
-            rec_not.onreadystatechange = function() {
-                if (rec_not.readyState == 4 && rec_not.status == 200) {
-                    var myArr = JSON.parse(rec_not.responseText);
-                    // console.log(myArr);
-                    myFunction(myArr["gauss"]);
-                }
-            }
-            rec_not.open("GET", url, true);
-            rec_not.send();
-
-            function myFunction(arr) {
-                for(i = 0; i < arr.length; i++) 
-                {
-                   out += '<tr><td>'+ (i+1) + '</td><td>' + arr[i].glname + '</td><td>' + arr[i].college + '</td><td>' + arr[i].groupcode + '</td><td>' + arr[i].partno  + '</td><td>' + arr[i].facno + '</td><td>' +  arr[i].phone  + '</td></tr>' ; 
-                }
-                document.getElementById("rec_notif").innerHTML = out;
-            }
-        },3000);
-        
-
-        </script>
 
 
 
