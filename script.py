@@ -46,7 +46,8 @@ for part in parts:
         part.save()
         print "Part " + part.aadhaar + " changed."
 
-for sid, name in BITSIANS:
+import bitsians
+for sid, name in bitsians.BITSIANS:
     try:
         part = Participant.objects.get(aadhaar__icontains=sid)
         part.name = name
@@ -59,10 +60,3 @@ for sid, name in BITSIANS:
         phone = 9999999999
         part = Participant.objects.create(is_bitsian=True, aadhaar=sid, name=name, college=college, email_id=email)
         print sid + " created"
-
-
-
-for part in parts:
-    if part.aadhaar == "":
-        part.aadhaar = None
-        part.save()
