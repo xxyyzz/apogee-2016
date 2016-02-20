@@ -496,25 +496,15 @@ def events_teams_add(request, eventid):
             partids = request.POST.getlist('part')
             leaderid = request.POST['leader']
             name = request.POST['name']
+            leader = Participant.objects.get(id=leaderid)
+            team = Team.objects.create(leader=leader, event=event, name=name)
             for partid in partids:
-                part = Participant.objects.get(id=partid)
-                for team in teams:
-                    if part in team.members.all():
-                        error = part.name+" is already a part of "+team.leader.name+"'s Team."
-                        errors.append(error)
-                    if part is team.leader:
-                        error = part.name+" already have their own team."
-                        errors.append(error)
-            if not errors:
-                leader = Participant.objects.get(id=leaderid)
-                team = Team.objects.create(leader=leader, event=event)
-                for partid in partids:
-                    if partid != leaderid:
-                        part = Participant.objects.get(id=partid)
-                        team.members.add(part)
-                registered = Level.objects.get(name="Registered", event=event)
-                team.levels.add(registered)
-                return redirect('ems:events_participants', event.id)
+                if partid != leaderid:
+                    part = Participant.objects.get(id=partid)
+                    team.members.add(part)
+            registered = Level.objects.get(name="Registered", event=event)
+            team.levels.add(registered)
+            return redirect('ems:events_participants', event.id)
     context = {
         'event' : event,
         'parts' : parts,
