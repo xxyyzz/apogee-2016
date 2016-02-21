@@ -12,27 +12,41 @@
  	margin: 0;
  	padding: 0;
  }
+ *{
+ 	box-sizing:border-box;
+ }
  #bg_container{
  	height: 100%;
  	width: 100%;
  	font-size: 1em;
  	background: url(Pranjal_DVM.jpg);
  	background-size:100% 100%;
+ 	text-align: center;
  }
  #user_details{
     position: absolute;
-    top: 30%;
+    top: 32%;
     padding: 4%;
+    right: 0;
+    left: 0;
+    width: 80%;
+    margin: 0 auto;
+
  }
+ #user_details th{vertical-align: top;}
  #user_details th,td{
  	text-align: left;
     padding: 0.2em 0.8em;
  }
  #user_barcode{
  	position: absolute;
-    bottom: 15%;
-    margin: 0 4%;
+    bottom: 12%;
+    margin: 5%;
     text-align: center;
+    width: 90%;
+ }
+ #user_barcode img{
+ 	width: 70%;
  }
 </style>
 </head>
@@ -41,22 +55,18 @@
 	<div id="user_details">
 		<table style="width:100%">
 			<tbody>
-				<tr><th>NAME</th><td>PRATEEK gUPTA</td></tr>
-				<tr><th>COLLEGE</th><td>PRATEEK gUPTA</td></tr>
-				<tr><th>GENDER</th><td>PRATEEK gUPTA</td></tr>
-				<tr><th>PHONE</th><td>PRATEEK gUPTA</td></tr>
-				<tr><th>EMAIL</th><td>PRATEEK gUPTA</td></tr>
-				<tr><th>EVENTS</th><td>PRATEEK gUPTA</td></tr>
+				<tr><th>NAME</th><td>{{part.name}}</td></tr>
+				<tr><th>COLLEGE</th><td>{{part.college.name}}</td></tr>
+				<tr><th>GENDER</th><td>{{part.gender}}</td></tr>
+				<tr><th>PHONE</th><td>{{part.phone_one}}</td></tr>
+				<tr><th>EMAIL</th><td>{{part.email_id}}</td></tr>
+				<tr><th>Online Paid</th><td>{% if part.fee_paid%}YES{% else %}NO{% endif %}</td></tr>
 			</tbody>
 		</table>
 	</div>
 	<div id="user_barcode">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<img src="http://bits-oasis.org/taruntest/oasiscode/{{barcode_name}}.png">
+		<div>{{encoded}}</div>
 	</div>
 </div>
 </body>

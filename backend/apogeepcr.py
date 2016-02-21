@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from registration.models import *
+from backend.models import *
 from barg import code128_image
 from django.template import Context
 from django.shortcuts import get_object_or_404, render_to_response, render
@@ -31,57 +31,24 @@ def gen_barcode(gl_id):
 		encoded = encoded + mixed[randint(0,51)]
 #	gl_ida = '6'
 	#image='/home/dvm/taruntest/%s.gif' % str(gl_id)
-	image='/home/dvm/bosm/public_html/taruntest/satwik_bosmcode/%s.gif' % str(gl_id)
+	image='/home/dvm/apogee16_barcodes/%s.gif' % str(gl_id)
 	code128_image(encoded).save(image)
 	return encoded
 
 
 def write_pdf(gl_id,encoded):
-	gl = UserProfile.objects.get(id=gl_id)
+	gl = Participant.objects.get(id=gl_id)
 	gl_name = gl.details.name
-	participant_list_temp = gl.initialregistration_set.filter(pcr_approval=True).order_by('name')
-	participant_list = [x for x in participant_list_temp if x.confirmed_events.count() != 0]
-	no_of_males = len([x for x in participant_list if str(x.gender) == 'M' or str(x.gender) == 'male'])
-	no_of_females = len(participant_list)-no_of_males
-	college = gl.details.college
 	barcode_name = str(gl_id)+'.gif'
-	plist_tab1 = []
-	linear_list = []
-	#linear_list = [((str(p.name ) + '    (' + str(p.gender)[0].upper() + ')'),str(p.events.all()[0].name)) for p in participant_list]
-	for p in participant_list:
-		x = str(p.name ) + '    (' + str(p.gender)[0].upper() + ')'
-		if len(p.confirmed_events.all()):
-			# y = ",".join([x.name for x in p.events.all()])
-			# y= p.events.all()[0].name
-			# if len(p.events.all()) < 5:
-			y = ",".join([str(z.name) for z in p.confirmed_events.all()])
-			# else:
-				# y = ",".join([str(z.name) for z in p.events.all()[:5]]) + '...'
-		elif p.is_faculty:
-			y = 'Faculty in charge'
-		else:
-			y = ''
-		linear_list.append((x,y))
 
-	if len(linear_list)%2 != 0:
-		linear_list.append(('',''))					#appending extra for symmetric table format
 
-	glen = len(linear_list)
-
-	# if len(linear_list)<=50:						#implies every detail can fit in one page
-		#template = get_template('pisatest.html')
-	first_half = linear_list[:len(linear_list)/2]
-	second_half = linear_list[len(linear_list)/2:]
-	plist_tab = []										#participant list for tabular format
-	for x in range(0,len(first_half)):
-		plist_tab.append((first_half[x],second_half[x]))
-	context = Context({'encoded':encoded,'plist_tab':plist_tab,'barcode_name':barcode_name,'gl_name' : gl_name, "college" : college})
+	context = Context({'encoded':encoded,'part':gl})
 	# html = template.render(context)
 	# #result = open('/home/dvm/taruntest/%s.pdf' %(str(gl_id)), 'wb')
 	# #pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
 	# #result.close()
 
-	template = get_template('registration/singlepageoasis.html')
+	template = get_template('pcradmin/pcrtemplate.html')
 	html = template.render(context)
 	text_file = open("/home/dvm/taruntest/apogee/output.html", "w")			#temporary only 
 	# text_file = open("/home/gauss/DVM Github/oasis2015/output.html", "w")			#temporary only 
@@ -90,15 +57,6 @@ def write_pdf(gl_id,encoded):
 	pdfkit.from_file('/home/dvm/taruntest/apogee/output.html', '/home/dvm/taruntest/apogee/%s.pdf' %(str(gl_id)))
 
 
-	'''
-	participant_list_formatted_n = [str(p.name ) for p in participant_list]
-	participant_list_formatted_e = [str(p.events.all()[0].name) for p in participant_list]
-	template_list1_n = participant_list_formatted_n[len(participant_list_formatted_n)/2:]
-	template_list1_e = participant_list_formatted_e[len(participant_list_formatted_e)/2:]
-	template_list2_n = participant_list_formatted_n[:len(participant_list_formatted_n)/2]
-	template_list2_e = participant_list_formatted_e[:len(participant_list_formatted_e)/2]
-	'''
-	
 	return html
 
 
@@ -156,37 +114,7 @@ def email_participant(request,gl_id):
 	no_of_males = len([x for x in participant_list if str(x.gender) == 'male' or str(x.gender) == 'M'])
 	no_of_females = len(participant_list)-no_of_males
 	body = '''
-Hello!
 
-It is our immense pleasure to confirm your college's participation at Oasis '15 - Around the World in 96 Hours. Kudos to your co-operation along the whole process - it was indeed an endeavour - an endeavour we hope is worth it and you have an Oasis you remember for years to come.
-
-Please find attached the list of confirmed participants along with
-their events, and note that only these participants will be allowed to
-enter the campus.
-
-College : %s
-Total no. of boys :%s
-Total no. of girls : %s
-College Representative : %s
-
-We require little bit of paper-work from your side regarding bona fide certificates. Check out http://bits-oasis.org/2015/registrationdetails
-1. Follow the ID requirements in the link here. Follow these guidelines faithfully to ensure hassle free entry into campus, especially regarding the bona fide certificates.
-[Please note that failure to will result in refusal of entry at the campus gate]
-2. Peruse the Security and Safety Instructions in the link given. The guidelines will be strictly enforced and you are liable to be thrown out of the campus in case of non-compliance.
-3. Peruse the Travel document in the link above. 
-4. Peruse the Accommodation document in the link above.
-5. You are automatically considered in the running for the titular event of the fest-Mr. and Ms. Oasis-if you are participating in any of the events showcasign art forms like music, dance etc. Taking place on the midnight of 31st October, it is your chance to stand out as the brightest in the midst of immense talent and to etch your name alongside that of this Oasis. Participants are selected on the basis of their college performances during their respective events. 
-
-
-For any clarifications call your assigned BITS point-of-contact.
-
-Good Luck. See you on campus!
--- 
-Maheep Tripathi
-StuCCAn (Head)
-Dept. of Publications & Correspondence
-Oasis '15-Around the World in 96 Hours 
-BITS, Pilani
 
 ''' % (college,no_of_males,no_of_females,inchaarge+", "+str(our_user.details.phone_one))
 	attachment = '/home/dvm/taruntest/apogee/%s.pdf' % gl_id
@@ -201,7 +129,7 @@ BITS, Pilani
 
 @staff_member_required
 def generate_pdf(request, gl_id):
-	our_participant = UserProfile.objects.get(id=gl_id)
+	our_participant = Participant.objects.get(id=gl_id)
 	if not our_participant.barcode:
 		encoded = gen_barcode(gl_id)
 		our_participant.barcode = encoded
@@ -214,7 +142,7 @@ def generate_pdf(request, gl_id):
 @staff_member_required
 def view_pdf(request, gl_id):
 	#first generating
-	our_participant = UserProfile.objects.get(id=gl_id)
+	our_participant = Participant.objects.get(id=gl_id)
 	if not our_participant.barcode:
 		encoded = gen_barcode(gl_id)
 		our_participant.barcode = encoded
