@@ -36,18 +36,20 @@
                     <form action="." method="POST">
                         {% csrf_token %}
                         <div class="header">
-                            <h4 class="title">Edit Team</h4>
+                            <h4 class="title">Edit</h4>
                         </div>
                         <div class="content">
                            <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Comments, if any" name="comments" size="12">
+                                        <label>Comments</label>
+                                        <input type="text" class="form-control" placeholder="Comments, if any" name="comments" value="{% if team.comments %}{{ team.comments }}{% endif %} ">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-info btn-fill" name="fetch">Get Info</button>
+                                        <label>Save</label>
+                                        <button type="submit" class="btn btn-info btn-fill" name="save">Save</button>
                                     </div>
                                 </div>
                             </div>

@@ -536,6 +536,11 @@ def events_teams_add(request, eventid):
 def events_teams_edit(request, eventid, teamid):
     event = Event.objects.get(id=eventid)
     team = Team.objects.get(id=teamid)
+    if request.method == 'POST':
+        if 'save' in request.POST:
+            comments = request.POST['comments']
+            team.comments = comments
+            team.save()
     context = {
         'event' : event,
         'team' : team,

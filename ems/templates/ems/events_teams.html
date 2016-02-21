@@ -42,6 +42,7 @@
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
                                 <thead>
+                                    <th>Edit</th>
                                     <th>S.No</th>
                                     {% if event.is_team %}
                                     <th>Team Name</th>
@@ -59,6 +60,11 @@
                                 <tbody>
                                 {% for team in teams %}
                                 <tr>
+                                    <td>
+                                        <a href="{% url 'ems:events_teams_edit' event.id team.id %}" class="btn btn-info btn-simple btn-xs">
+                                        <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
                                     <td>{{ forloop.counter }}</td>
                                     {% if event.is_team %}
                                     <td>{{ team.name }}</td>
