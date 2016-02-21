@@ -30,7 +30,7 @@ def gen_barcode(gl_id):
 		encoded = encoded + mixed[randint(0,51)]
 #	gl_ida = '6'
 	#image='/home/dvm/taruntest/%s.gif' % str(gl_id)
-	image='/home/dvm/apogee/public_html/taruntest/apogeecode/%s.gif' % str(gl_id)
+	image='/home/dvm/apogee/public_html/2016/apogee_code/%s.gif' % str(gl_id)
 	code128_image(encoded).save(image)
 	return encoded
 
@@ -50,8 +50,8 @@ def write_pdf(gl_id,encoded):
 
 	template = get_template('pcradmin/pcrtemplate.html')
 	html = template.render(context)
-	text_file = open("/home/dvm/taruntest/apogee/output.html", "w")			#temporary only 
-	# text_file = open("/home/gauss/DVM Github/oasis2015/output.html", "w")			#temporary only 
+	text_file = open("/home/dvm/taruntest/apogee/output.html", "w")			#temporary only
+	# text_file = open("/home/gauss/DVM Github/oasis2015/output.html", "w")			#temporary only
 	text_file.write(html)
 	text_file.close()
 	pdfkit.from_file('/home/dvm/taruntest/apogee/output.html', '/home/dvm/taruntest/apogee/%s.pdf' %(str(gl_id)))
@@ -201,12 +201,12 @@ def get_pdf(request):
 
 
 def xlsx(request):
-	from django.http import HttpResponse, HttpResponseRedirect  
+	from django.http import HttpResponse, HttpResponseRedirect
 	import xlsxwriter
 
-	try:  
+	try:
 	    import cStringIO as StringIO
-	except ImportError:  
+	except ImportError:
 	    import StringIO
 	a_list = []
 
@@ -226,7 +226,7 @@ def xlsx(request):
 				t = t.upper()
 				t = t[:t.find(" (GIRLS)")]
 				elist1.append(t.title())
-			else: 
+			else:
 				elist1.append(t)
 
 		p.event = ",".join(elist1)
@@ -251,9 +251,6 @@ def xlsx(request):
 	workbook.close()
 	filename = 'ExcelReport.xlsx'
 	output.seek(0)
-	response = HttpResponse(output.read(), content_type="application/ms-excel")  
+	response = HttpResponse(output.read(), content_type="application/ms-excel")
 	response['Content-Disposition'] = 'attachment; filename=%s' % filename
 	return response
-
-
-
