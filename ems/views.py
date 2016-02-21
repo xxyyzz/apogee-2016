@@ -10,6 +10,7 @@ from backend.models import Participant, Team
 # Create your views here.
 EMSADMINS = [
 # have access to all events
+    'admin',
     'controlsadmin',
 ]
 
@@ -17,7 +18,7 @@ EMSADMINS = [
 
 def home(request):
     if request.user.is_authenticated() and request.user.is_staff:
-        return render(request, 'ems/home.html')
+        return redirect('ems:events_select')
     else:
         return redirect('ems:user_login')
 
@@ -161,6 +162,9 @@ def participant_details(request, partid):
 
 @staff_member_required
 def events_select(request):
+    if request.method == 'POST':
+        eventid = request.POST['event']
+        return redirect('ems:events_home', eventid)
     if request.user.username in EMSADMINS:
         events = Event.objects.order_by('name')
     else:
@@ -175,6 +179,7 @@ def events_select(request):
 def events_home(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if request.POST:
         if "promote" in request.POST:
             position = int(request.POST['promote'])
@@ -228,6 +233,7 @@ def events_home(request, eventid):
     context = {
         'event' : event,
         'levels' : levels,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_home.html', context)
 
@@ -377,7 +383,17 @@ def events_levels_judge(request, eventid, levelid, judgeid):
         try:
             score = Score.objects.get(level=level, team=team, judge=judge)
             team.score = score
+            total = 0
+            for x in range(1, 11):
+                attr = 'var' + str(x)
+                try:
+                    val = getattr(score, attr)
+                    total += val
+                except:
+                    pass
+            team.score.total = total
         except:
+            print "pass"
             pass
         teams.append(team)
     context = {
@@ -390,6 +406,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
 
 def events_participants(request, eventid):
     event = Event.objects.get(id=eventid)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if event.is_team:
         return redirect('ems:events_teams', event.id)
     teams = Team.objects.filter(event=event)
@@ -401,6 +418,7 @@ def events_participants(request, eventid):
     context = {
         'event' : event,
         'teams' : teams,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_participants.html', context)
 
@@ -441,6 +459,7 @@ def events_participants_add(request, eventid):
 
 def events_teams(request, eventid):
     event = Event.objects.get(id=eventid)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if not event.is_team:
         return redirect('ems:events_participants', event.id)
     teams = Team.objects.filter(event=event)
@@ -452,6 +471,7 @@ def events_teams(request, eventid):
     context = {
         'event' : event,
         'teams' : teams,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_teams.html', context)
 
@@ -496,25 +516,15 @@ def events_teams_add(request, eventid):
             partids = request.POST.getlist('part')
             leaderid = request.POST['leader']
             name = request.POST['name']
+            leader = Participant.objects.get(id=leaderid)
+            team = Team.objects.create(leader=leader, event=event, name=name)
             for partid in partids:
-                part = Participant.objects.get(id=partid)
-                for team in teams:
-                    if part in team.members.all():
-                        error = part.name+" is already a part of "+team.leader.name+"'s Team."
-                        errors.append(error)
-                    if part is team.leader:
-                        error = part.name+" already have their own team."
-                        errors.append(error)
-            if not errors:
-                leader = Participant.objects.get(id=leaderid)
-                team = Team.objects.create(leader=leader, event=event)
-                for partid in partids:
-                    if partid != leaderid:
-                        part = Participant.objects.get(id=partid)
-                        team.members.add(part)
-                registered = Level.objects.get(name="Registered", event=event)
-                team.levels.add(registered)
-                return redirect('ems:events_participants', event.id)
+                if partid != leaderid:
+                    part = Participant.objects.get(id=partid)
+                    team.members.add(part)
+            registered = Level.objects.get(name="Registered", event=event)
+            team.levels.add(registered)
+            return redirect('ems:events_participants', event.id)
     context = {
         'event' : event,
         'parts' : parts,
@@ -523,113 +533,128 @@ def events_teams_add(request, eventid):
     }
     return render(request, 'ems/events_teams_add.html', context)
 
-@staff_member_required
-def upload_list(request):
-    events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+def events_teams_edit(request, eventid, teamid):
+    event = Event.objects.get(id=eventid)
+    team = Team.objects.get(id=teamid)
+    if request.method == 'POST':
+        if 'save' in request.POST:
+            comments = request.POST['comments']
+            team.comments = comments
+            team.save()
     context = {
-        'events' : events,
+        'event' : event,
+        'team' : team,
     }
-    return render(request, "ems/upload_list.html", context)
+    return render(request, 'ems/events_teams_edit.html', context)
 
-@csrf_exempt
-@staff_member_required
-def choose_leader(request):
-    if request.method == "POST":
-        context = RequestContext(request)
 
-        id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
-        outside_list = [x for x in id_list if len(x) < 5]
-        bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-        bitsian_long_list = [x for x in id_list if len(x) >= 11]
-        outsiders = InitialRegistration.objects.filter(id__in = outside_list)
-        bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-        bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-        bitsians = bitsian_long_objs | bitsian_short_objs
-        context = RequestContext(request)
-        context['outsiders'] = outsiders
-        context['bitsians'] = bitsians
-        context['event_name'] = request.POST['event_name']
-        context['id_list'] = request.POST.get('id_list', '')
-        # context['names'] = [r.name for r in reg_objs]
-        # context['colleges'] = [r.college for r in reg_objs]
-        # context['phones'] = [r.phone_one for r in reg_objs]
+# @staff_member_required
+# def upload_list(request):
+#     events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
+#     context = {
+#         'events' : events,
+#     }
+#     return render(request, "ems/upload_list.html", context)
+#
+# @csrf_exempt
+# @staff_member_required
+# def choose_leader(request):
+#     if request.method == "POST":
+#         context = RequestContext(request)
+#
+#         id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
+#         outside_list = [x for x in id_list if len(x) < 5]
+#         bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
+#         bitsian_long_list = [x for x in id_list if len(x) >= 11]
+#         outsiders = InitialRegistration.objects.filter(id__in = outside_list)
+#         bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
+#         bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
+#         bitsians = bitsian_long_objs | bitsian_short_objs
+#         context = RequestContext(request)
+#         context['outsiders'] = outsiders
+#         context['bitsians'] = bitsians
+#         context['event_name'] = request.POST['event_name']
+#         context['id_list'] = request.POST.get('id_list', '')
+#         # context['names'] = [r.name for r in reg_objs]
+#         # context['colleges'] = [r.college for r in reg_objs]
+#         # context['phones'] = [r.phone_one for r in reg_objs]
+#
+#         return render(request, "ems/chooseLeader.html", context)
+#     else:
+#         return redirect('ems:main')
+#
+# @csrf_exempt
+# @staff_member_required
+# def genTeam(request):
+#     if request.method == "POST":
+#         leader_id = request.POST['leader_id']
+#         try:
+#             leader_obj = InitialRegistration.objects.get(id=leader_id)
+#         except:
+#             leader_obj = Bitsian.objects.get(long_id=leader_id)
+#         event_obj = Event.objects.get(name=request.POST['event_name'])
+#         college_obj = College.objects.get(name=leader_obj.college)
+#         team_obj = Team()
+#         team_obj.event = event_obj
+#         try:
+#             team_obj.leader = leader_obj
+#             team_obj.bitsian_leader = None
+#         except:
+#             team_obj.bitsian_leader = leader_obj
+#             team_obj.leader = None
+#         team_obj.address = request.POST['address']
+#         team_obj.name_cheque = request.POST['name_cheque']
+#         team_obj.college = college_obj
+#         try:
+#             team_obj.position = int(request.POST['position'])
+#         except:
+#             team_obj.position = None
+#         category = request.POST['category']
+#         if category == '':
+#             team_obj.category = None
+#         else:
+#             team_obj.category = request.POST['category']
+#         if 'generate' in request.POST:
+#             team_obj.is_winner=False
+#         if 'generate-winner' in request.POST:
+#             team_obj.is_winner=True
+#         team_obj.save()
+#         context = {}
+#
+#         id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list','').replace(",","").split(" "))]
+#         outside_list = [x for x in id_list if len(x) < 5]
+#         bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
+#         bitsian_long_list = [x for x in id_list if len(x) >= 11]
+#
+#         try:
+#             reg_objs = InitialRegistration.objects.filter(id__in = outside_list)
+#             for r in reg_objs:
+#                 team_obj.members.add(r)
+#         except:
+#             context['error_message'] = "Error Generating Team"
+#             return redirect('ems:main')
+#         try:
+#             bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
+#             bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
+#             bitsians = bitsian_long_objs | bitsian_short_objs
+#             for r in bitsians:
+#                 team_obj.bitsian_members.add(r)
+#         except:
+#             context['error_message'] = "Error Generating Team"
+#             return redirect('ems:main')
+#
+#         team_obj.save()
+#
+#         context['error_message'] = "Team Generated Successfully"
+#
+#         return redirect('ems:main')
+#     else:
+#         return redirect('ems:main')
 
-        return render(request, "ems/chooseLeader.html", context)
-    else:
-        return redirect('ems:main')
-
-@csrf_exempt
-@staff_member_required
-def genTeam(request):
-    if request.method == "POST":
-        leader_id = request.POST['leader_id']
-        try:
-            leader_obj = InitialRegistration.objects.get(id=leader_id)
-        except:
-            leader_obj = Bitsian.objects.get(long_id=leader_id)
-        event_obj = Event.objects.get(name=request.POST['event_name'])
-        college_obj = College.objects.get(name=leader_obj.college)
-        team_obj = Team()
-        team_obj.event = event_obj
-        try:
-            team_obj.leader = leader_obj
-            team_obj.bitsian_leader = None
-        except:
-            team_obj.bitsian_leader = leader_obj
-            team_obj.leader = None
-        team_obj.address = request.POST['address']
-        team_obj.name_cheque = request.POST['name_cheque']
-        team_obj.college = college_obj
-        try:
-            team_obj.position = int(request.POST['position'])
-        except:
-            team_obj.position = None
-        category = request.POST['category']
-        if category == '':
-            team_obj.category = None
-        else:
-            team_obj.category = request.POST['category']
-        if 'generate' in request.POST:
-            team_obj.is_winner=False
-        if 'generate-winner' in request.POST:
-            team_obj.is_winner=True
-        team_obj.save()
-        context = {}
-
-        id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list','').replace(",","").split(" "))]
-        outside_list = [x for x in id_list if len(x) < 5]
-        bitsian_short_list = [x for x in id_list if len(x) >= 5 and len(x) < 11]
-        bitsian_long_list = [x for x in id_list if len(x) >= 11]
-
-        try:
-            reg_objs = InitialRegistration.objects.filter(id__in = outside_list)
-            for r in reg_objs:
-                team_obj.members.add(r)
-        except:
-            context['error_message'] = "Error Generating Team"
-            return redirect('ems:main')
-        try:
-            bitsian_short_objs =  Bitsian.objects.filter(short_id__in = bitsian_short_list)
-            bitsian_long_objs = Bitsian.objects.filter(long_id__in = bitsian_long_list)
-            bitsians = bitsian_long_objs | bitsian_short_objs
-            for r in bitsians:
-                team_obj.bitsian_members.add(r)
-        except:
-            context['error_message'] = "Error Generating Team"
-            return redirect('ems:main')
-
-        team_obj.save()
-
-        context['error_message'] = "Team Generated Successfully"
-
-        return redirect('ems:main')
-    else:
-        return redirect('ems:main')
-
-@csrf_exempt
-@staff_member_required
-def getParticipantList(request):
-    pass
+# @csrf_exempt
+# @staff_member_required
+# def getParticipantList(request):
+#     pass
 #     id_list = [sg_id for sg_id in filter(lambda a: a != '', request.POST.get('id_list', '').replace(",","").split(" "))]
 
 #     outside_list = [x for x in id_list if len(x) < 5]

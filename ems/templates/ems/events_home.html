@@ -6,12 +6,14 @@
         <p>Event Home</p>
     </a>
 </li>
+{% if emsadmin %}
 <li>
     <a href="{% url 'ems:events_levels' event.id %}">
         <i class="pe-7s-news-paper"></i>
         <p>Event Setup</p>
     </a>
 </li>
+{% endif %}
 <li>
     <a href="{% url 'ems:events_participants' event.id %}">
         <i class="pe-7s-news-paper"></i>
@@ -56,7 +58,7 @@
                                         <th>Name</th>
                                         <th>College</th>
                                         {% endif %}
-                                        <th>Rank</th>
+                                        <th>Comments</th>
                                     </thead>
                                     <tbody>
                                     {% for team in level.teams.all %}
@@ -67,7 +69,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <a href="{% url 'ems:team_details' team.id %}" class="btn btn-info btn-simple btn-xs">
+                                            <a href="{% url 'ems:events_teams_edit' event.id team.id %}" class="btn btn-info btn-simple btn-xs">
                                             <i class="fa fa-edit"></i>
                                             </a>
                                         </td>
@@ -80,7 +82,7 @@
                                         <td>{{ team.leader.name }}</td>
                                         {% endif %}
                                         <td>{{ team.leader.college.name }}</td>
-                                        <td>{{ team.rank }}</td>
+                                        <td>{{ team.comments }}</td>
                                     </tr>
                                     {% empty %}
                                     <tr>

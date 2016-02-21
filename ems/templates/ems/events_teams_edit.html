@@ -36,54 +36,49 @@
                     <form action="." method="POST">
                         {% csrf_token %}
                         <div class="header">
-                            <h4 class="title">Add Participant</h4>
+                            <h4 class="title">Edit</h4>
                         </div>
                         <div class="content">
                            <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Participant Codes, separated by spaces" name="aadhaar" size="12">
+                                        <label>Comments</label>
+                                        <input type="text" class="form-control" placeholder="Comments, if any" name="comments" value="{% if team.comments %}{{ team.comments }}{% endif %} ">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-info btn-fill" name="fetch">Get Info</button>
+                                        <label>Save</label>
+                                        <button type="submit" class="btn btn-info btn-fill" name="save">Save</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {% if parts %}
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
                                 <thead>
-                                    <th>Check</th>
                                     <th>Aadhaar</th>
                                     <th>Name</th>
                                     <th>College</th>
                                 </thead>
                                 <tbody>
-                                    {% for part in parts %}
                                     <tr>
-                                    <td>
-                                        <label class="checkbox">
-                                            <input type="checkbox" name="part" value="{{ part.id }}" data-toggle="checkbox">
-                                        </label>
-                                    </td>
-                                    <td>{{ part.aadhaar }}</td>
-                                    <td>{{ part.name }}</td>
-                                    <td>{{ part.college.name }}</td>
+                                    <td>{{ team.leader.aadhaar }}</td>
+                                    <td>{{ team.leader.name }}</td>
+                                    <td>{{ team.leader.college.name }}</td>
+                                    </tr>
+                                    {% for member in team.members.all %}
+                                    <tr>
+                                    <td>{{ member.aadhaar }}</td>
+                                    <td>{{ member.name }}</td>
+                                    <td>{{ member.college.name }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
                         </div>
-                        <div class="content">
-                            <button type="submit" class="btn btn-info btn-fill" name="add">Add</button>
-                        </div>
-                        {% endif %}
                         <div class="clearfix"></div>
                     </form>
-                        </div>
                     </div>
                 </div>
             </div>

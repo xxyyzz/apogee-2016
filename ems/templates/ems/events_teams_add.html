@@ -1,17 +1,31 @@
 {% extends "ems/base.html" %}
 {% block sidebar_content %}
-    <li>
-        <a href="{% url 'ems:events_home' event.id %}">
-            <i class="pe-7s-news-paper"></i>
-            <p>Event Home</p>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'ems:events_levels' event.id %}">
-            <i class="pe-7s-news-paper"></i>
-            <p>Manage Levels</p>
-        </a>
-    </li>
+<li>
+    <a href="{% url 'ems:events_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Home</p>
+    </a>
+</li>
+{% if emsadmin %}
+<li>
+    <a href="{% url 'ems:events_levels' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Setup</p>
+    </a>
+</li>
+{% endif %}
+<li>
+    <a href="{% url 'ems:events_participants' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Manage Participants</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_judge_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Judge Event</p>
+    </a>
+</li>
 {% endblock sidebar_content %}
 {% block main_content %}
     <div class="content">
@@ -34,6 +48,7 @@
                             </p>
                             {% endif %}
                         </div>
+                        {% if not parts and not select %}
                         <div class="content">
                            <div class="row">
                                 <div class="col-md-10">
@@ -48,6 +63,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% if parts %}
                         <div class="header">
                             <p class="category">Select Team Members<p>

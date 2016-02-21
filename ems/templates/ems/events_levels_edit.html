@@ -6,18 +6,14 @@
         <p>Event Home</p>
     </a>
 </li>
+{% if emsadmin %}
 <li>
     <a href="{% url 'ems:events_levels' event.id %}">
         <i class="pe-7s-news-paper"></i>
         <p>Event Setup</p>
     </a>
 </li>
-<li>
-    <a href="{% url 'ems:events_levels_add' event.id %}">
-        <i class="pe-7s-news-paper"></i>
-        <p>Add Levels</p>
-    </a>
-</li>
+{% endif %}
 <li>
     <a href="{% url 'ems:events_participants' event.id %}">
         <i class="pe-7s-news-paper"></i>
