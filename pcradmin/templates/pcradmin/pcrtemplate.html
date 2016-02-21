@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>USER Info</title>
 <style type="text/css">
  body,html{
@@ -62,13 +63,12 @@
 				<tr><th>PHONE</th><td>{{part.phone_one}}</td></tr>
 				<tr><th>EMAIL</th><td>{{part.email_id}}</td></tr>
 				<tr><th>BARCODE</th><td>{{encoded}}</td></tr>
-
 				<tr><th>Online Paid</th><td>{% if part.fee_paid%}YES{% else %}NO{% endif %}</td></tr>
+				<img src="http://bits-apogee.org/apogee_code/{{barcode_name}}">
 			</tbody>
 		</table>
 	</div>
 	<div id="user_barcode">
-		<!-- <img src="http://bits-apogee.org/apogee_code/{{barcode_name}}"> -->
 		<div>{{encoded}}</div>
 		Changed
 	</div>
