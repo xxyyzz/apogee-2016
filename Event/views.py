@@ -5,7 +5,7 @@ from Event.models import *
 from backend.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
-import html2text
+from html2text import html2text as gaussx
 # Create your views here.
 @csrf_exempt
 def geteventdata(request,event_id):
@@ -101,71 +101,71 @@ def windows_json(request):
 
 	for k in krn_events:
 		itemdict= {}
-		itemdict["UniqueId"] = str(k.name).replace(' ','') + str(k.id)
+		itemdict["UniqueId"] = str(k.name)
 		itemdict['Title'] = itemdict['UniqueId']
 		itemdict['ImagePath'] = "Assets/"+ str(k.name.replace(" ","").lower() ) + ".png"
 		try:
-			itemdict['Overview'] = str(   html2text.html2text( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
+			itemdict['Overview'] = str(   gaussx( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
 		except:
 			itemdict['Overview'] = ""
 		try:
-			itemdict['Rules'] = str(   html2text.html2text( str((Tab.objects.get(event=k, heading= rules_ob ) ).content) )   )
+			itemdict['Rules'] = str(   gaussx( str((Tab.objects.get(event=k, heading= rules_ob ) ).content) )   )
 		except:
 			itemdict['Rules'] = ""
 
 		try:			
-			itemdict['Eligibility'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
+			itemdict['Eligibility'] = str(   gaussx((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
 		except:
 			itemdict['Eligibility'] = ""
 
 		try:			
-			itemdict['Guidlines'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
+			itemdict['Guidelines'] = str(   gaussx((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
 		except:
-			itemdict['Guidlines'] = ""
+			itemdict['Guidelines'] = ""
 
 		try:			
-			itemdict['Judging Criteria'] =str(    html2text.html2text((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
+			itemdict['Judging Criteria'] =str(    gaussx((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
 		except:
 			itemdict['Judging Criteria'] =""
 
 		try:			
-			itemdict['Problem Statements'] = str(    html2text.html2text((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
+			itemdict['Problem Statements'] = str(    gaussx((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
 		except:
 			itemdict['Problem Statements'] = ""
 
 
 		try:			
-			itemdict['Resources'] = str(   html2text.html2text((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
+			itemdict['Resources'] = str(   gaussx((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
 		except:
 			itemdict['Resources'] = ""
 
 		try:
-			itemdict['Sample Questions'] =str( html2text.html2text((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
+			itemdict['Sample Questions'] =str( gaussx((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
 		except:
 			itemdict['Sample Questions'] =""
 
 		try:			
-			itemdict['Specifications'] = str(  html2text.html2text((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
+			itemdict['Specifications'] = str(  gaussx((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
 		except:
 			itemdict['Specifications'] = ""
 
 		try:			
-			itemdict['Materials'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
+			itemdict['Materials'] = str(   gaussx((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
 		except:
 			itemdict['Materials'] = ""
 
 		try:			
-			itemdict['Registration Details'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
+			itemdict['Registration Details'] = str(   gaussx((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
 		except:
 			itemdict['Registration Details'] = ""
 
 		try:			
-			itemdict['FAQs'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
+			itemdict['FAQs'] = str(   gaussx((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
 		except:
 			itemdict['FAQs'] = ""
 
 		try:			
-			itemdict['Sponsors'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
+			itemdict['Sponsors'] = str(   gaussx((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
 		except:
 			itemdict['Sponsors'] = ""
 
@@ -182,7 +182,7 @@ def windows_json(request):
 
 	for z in eve_cat:
 		tempx={}
-		tempx['UniqueId'] = str(z.name.replace(' ','')) + str(z.id)
+		tempx['UniqueId'] = str(z.name)
 		tempx['Title'] = tempx['UniqueId']
 		tempx['SubItems'] = []
 		for e_ob in Event.objects.filter(category=z,is_displayed=True):
@@ -191,67 +191,67 @@ def windows_json(request):
 			itemdict['Title'] = itemdict['UniqueId']
 			itemdict['ImagePath'] = "Assets/"+ str(e_ob.name.replace(" ","").lower() ) + ".png"
 			try:
-				itemdict['Overview'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= overview_ob) ).content )   )
+				itemdict['Overview'] = str(   gaussx((Tab.objects.get(event=k, heading= overview_ob) ).content )   )
 			except:
 				itemdict['Overview'] = ""
 			try:
-				itemdict['Rules'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= rules_ob ) ).content )   )
+				itemdict['Rules'] = str(   gaussx((Tab.objects.get(event=k, heading= rules_ob ) ).content )   )
 			except:
 				itemdict['Rules'] = ""
 
 			try:			
-				itemdict['Eligibility'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
+				itemdict['Eligibility'] = str(   gaussx((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
 			except:
 				itemdict['Eligibility'] = ""
 
 			try:			
-				itemdict['Guidlines'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
+				itemdict['Guidelines'] = str(   gaussx((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
 			except:
-				itemdict['Guidlines'] = ""
+				itemdict['Guidelines'] = ""
 
 			try:			
-				itemdict['Judging Criteria'] =str(    html2text.html2text((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
+				itemdict['Judging Criteria'] =str(    gaussx((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
 			except:
 				itemdict['Judging Criteria'] =""
 
 			try:			
-				itemdict['Problem Statements'] = str(    html2text.html2text((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
+				itemdict['Problem Statements'] = str(    gaussx((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
 			except:
 				itemdict['Problem Statements'] = ""
 
 
 			try:			
-				itemdict['Resources'] = str(   html2text.html2text((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
+				itemdict['Resources'] = str(   gaussx((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
 			except:
 				itemdict['Resources'] = ""
 
 			try:
-				itemdict['Sample Questions'] =str( html2text.html2text((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
+				itemdict['Sample Questions'] =str( gaussx((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
 			except:
 				itemdict['Sample Questions'] =""
 
 			try:			
-				itemdict['Specifications'] = str(  html2text.html2text((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
+				itemdict['Specifications'] = str(  gaussx((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
 			except:
 				itemdict['Specifications'] = ""
 
 			try:			
-				itemdict['Materials'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
+				itemdict['Materials'] = str(   gaussx((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
 			except:
 				itemdict['Materials'] = ""
 
 			try:			
-				itemdict['Registration Details'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
+				itemdict['Registration Details'] = str(   gaussx((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
 			except:
 				itemdict['Registration Details'] = ""
 
 			try:			
-				itemdict['FAQs'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
+				itemdict['FAQs'] = str(   gaussx((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
 			except:
 				itemdict['FAQs'] = ""
 
 			try:			
-				itemdict['Sponsors'] = str(   html2text.html2text((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
+				itemdict['Sponsors'] = str(   gaussx((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
 			except:
 				itemdict['Sponsors'] = ""
 
@@ -296,7 +296,7 @@ def windows_json(request):
 	itemdict['Overview'] = ""                                  ### content
 	itemdict['Rules'] = "28 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -324,7 +324,7 @@ The remarkable work undertaken by Dr. Stallman has been recognized worldwide and
 Dr. Stallman will speak at the Think Again Conclave on 26th February about the burning issue of Net Neutrality vs Free Basics and why it is important to take the right side."""                                  ### content
 	itemdict['Rules'] = "26 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -353,7 +353,7 @@ Dr. Stallman will speak at the Think Again Conclave on 26th February about the b
 He has authored some extremely insightful books, including Byline, Nehru: The Making of India, Kashmir: Behind the Vale, Riot After Riot and India: The Siege Within which have garnered praise from the critics and readers alike. His forays in the field of politics have seen him ease into the role of an accomplished statesman and have firmly established him as one of the leading voices on all social and political matters of the country."""                                  ### content
 	itemdict['Rules'] = "27 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -373,6 +373,30 @@ He has authored some extremely insightful books, including Byline, Nehru: The Ma
 
 
 
+	itemdict={}
+	itemdict["UniqueId"] = "Jairam Rames"
+	itemdict['Title'] = "Jairam Rames"
+	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['Overview'] = ""
+	itemdict['Rules'] = "27 February"
+	itemdict['Eligibility'] = ""
+	itemdict['Guidelines'] = ""
+	itemdict['Judging Criteria'] = ""
+	itemdict['Problem Statements'] = ""
+	itemdict['Resources'] = ""
+	itemdict['Sample Questions'] = ""
+	itemdict['Specifications'] = ""
+	itemdict['Materials'] = ""
+	itemdict['Registration Details'] = ""
+	itemdict['FAQs'] = ""
+	itemdict['Sponsors'] = ""
+	itemdict['Contacts'] = ""
+
+	tempx['SubItems'].append(itemdict)
+
+
+
+
 
 
 	itemdict={}
@@ -386,7 +410,7 @@ He has also won the Dayavati Modi Kavi Shekhar Samman, 1994, and the Kabir Samma
 
 	itemdict['Rules'] = "28 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -424,7 +448,7 @@ Her awards and fellowships include J.N. Tata Scholarship, the Hornby Foundation 
 
 	itemdict['Rules'] = "28 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -454,7 +478,7 @@ Asura: Tale of the Vanquished was Anand's debut novel. Upon release, it instantl
 Anand Neelakantan was rated as one of the most promising writers by the Indian Express, and was also featured as one of the six most remarkable writers of 2012 by DNA. Other than novels, he has written columns for Deccan Chronicle, Asian Age, The New Indian Expressand The Wall Street Journal. His book Asura has been translated into many languages, including Hindi, Tamil, Telugu, Malayalam, Kannada, Gujarati, Marathi and Italian. """                                  ### content
 	itemdict['Rules'] = "28 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -488,7 +512,7 @@ Ajay was CNN IBN's Youth Icon of the year 2011. He has also been honoured as an 
 	
 	itemdict['Rules'] = "28 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -534,7 +558,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "27-28 February"
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -559,7 +583,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict['Overview'] = "See more about Authentic Techs: http://authentictechs.com//"                                  ### content
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "26 February"
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -580,7 +604,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict['Overview'] = "See more about Authentic Techs: http://authentictechs.com//"                                  ### content
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "27-28 February"
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -602,7 +626,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict['Overview'] = ""                                  ### content
 	itemdict['Rules'] = "28 February"
 	itemdict['Eligibility'] = ""
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -625,7 +649,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Batch). He was awarded the BITS Global 30 under 30 award in 2009. """                                  ### content
 	itemdict['Rules'] = "Twenty19"
 	itemdict['Eligibility'] = "27 February"
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -649,7 +673,7 @@ Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Bat
 Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Batch). He was awarded the BITS Global 30 under 30 award in 2009. """                                  ### content
 	itemdict['Rules'] = "Twenty19"
 	itemdict['Eligibility'] = "27-28 February"
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
@@ -673,7 +697,7 @@ Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Bat
 Bentley is a global leader dedicated to providing architects, engineers, geospatial professionals, constructors, and owner-operators with comprehensive software solutions for advancing infrastructure. Founded in 1984, Bentley has more than 3,000 colleagues in over 50 countries, more than $600 million in annual revenues, and since 2006 has invested more than $1 billion in research, development, and acquisitions. """
 	itemdict['Rules'] = "Bentley"
 	itemdict['Eligibility'] = "27-28 February"
-	itemdict['Guidlines'] = ""
+	itemdict['Guidelines'] = ""
 	itemdict['Judging Criteria'] = ""
 	itemdict['Problem Statements'] = ""
 	itemdict['Resources'] = ""
