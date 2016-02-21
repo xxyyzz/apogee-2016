@@ -28,6 +28,7 @@ def gen_barcode(gl_id):
 	for x in gl_ida:
 		encoded = encoded + x
 		encoded = encoded + mixed[randint(0,51)]
+		encoded = encoded.upper()
 #	gl_ida = '6'
 	#image='/home/dvm/taruntest/%s.gif' % str(gl_id)
 	image='/home/dvm/apogee/public_html/2016/apogee_code/%s.gif' % str(gl_id)
