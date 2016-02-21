@@ -17,43 +17,16 @@
  *{
  	box-sizing:border-box;
  }
- #bg_container{
- 	height: 100%;
- 	width: 100%;
- 	font-size: 1em;
- 	/*background: url("http://bits-apogee.org/Pranjal_DVM.jpg");*/
- 	background-size:100% 100%;
- 	text-align: center;
- }
- #user_details{
-    position: absolute;
-    top: 32%;
-    padding: 4%;
-    right: 0;
-    left: 0;
-    width: 80%;
-    margin: 0 auto;
 
- }
  #user_details th{vertical-align: top;}
  #user_details th,td{
  	text-align: left;
     padding: 0.2em 0.8em;
  }
- #user_barcode{
- 	position: absolute;
-    top: 75%;
-    margin: 5%;
-    text-align: center;
-    width: 90%;
- }
- #user_barcode img{
- 	width: 70%;
- }
 </style>
 </head>
 <body>
-<div id="bg_container">
+<div id="bg_container" style="height: 100%; width: 100%; font-size: 1em; background: url("http://bits-apogee.org/Pranjal_DVM.jpg"); background-size:100% 100%; text-align: center;">
 	<div id="user_details">
 		<table style="width:100%">
 			<tbody>
@@ -67,8 +40,8 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="user_barcode">
-		<img src="http://bits-apogee.org/apogee_code/{{barcode_name}}">
+	<div id="user_barcode" style="position: absolute; top: 75%; margin: 5%; text-align: center; width: 90%;">
+		<img src="http://bits-apogee.org/apogee_code/{{barcode_name}}" style="width:70%;">
 		<div>{{encoded}}</div>
 	</div>
 </div>
