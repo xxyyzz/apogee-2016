@@ -1,0 +1,73 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>USER Info</title>
+<style type="text/css">
+ body,html{
+ 	position: absolute;
+ 	top:0;
+ 	left:0;
+ 	width: 100%;
+ 	height: 100%;
+ 	margin: 0;
+ 	padding: 0;
+ }
+ *{
+ 	box-sizing:border-box;
+ }
+ #bg_container{
+ 	height: 100%;
+ 	width: 100%;
+ 	font-size: 1em;
+ 	background: url("http://bits-apogee.org/taruntest/Pranjal_DVM.jpg");
+ 	background-size:100% 100%;
+ 	text-align: center;
+ }
+ #user_details{
+    position: absolute;
+    top: 32%;
+    padding: 4%;
+    right: 0;
+    left: 0;
+    width: 80%;
+    margin: 0 auto;
+
+ }
+ #user_details th{vertical-align: top;}
+ #user_details th,td{
+ 	text-align: left;
+    padding: 0.2em 0.8em;
+ }
+ #user_barcode{
+ 	position: absolute;
+    bottom: 12%;
+    margin: 5%;
+    text-align: center;
+    width: 90%;
+ }
+ #user_barcode img{
+ 	width: 70%;
+ }
+</style>
+</head>
+<body>	
+<div id="bg_container">
+	<div id="user_details">
+		<table style="width:100%">
+			<tbody>
+				<tr><th>NAME</th><td>{{part.name}}</td></tr>
+				<tr><th>COLLEGE</th><td>{{part.college.name}}</td></tr>
+				<tr><th>GENDER</th><td>{{part.gender}}</td></tr>
+				<tr><th>PHONE</th><td>{{part.phone_one}}</td></tr>
+				<tr><th>EMAIL</th><td>{{part.email_id}}</td></tr>
+				<tr><th>Online Paid</th><td>{% if part.fee_paid%}YES{% else %}NO{% endif %}</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="user_barcode">
+		<img src="http://bits-apogee.org/taruntest/apogeecode/{{barcode_name}}.png">
+		<div>{{encoded}}</div>
+	</div>
+</div>
+</body>
+</html>
