@@ -57,7 +57,7 @@ def write_pdf(gl_id,encoded):
 	# text_file = open("/home/gauss/DVM Github/oasis2015/output.html", "w")			#temporary only
 	text_file.write(html)
 	text_file.close()
-	pdfkit.from_file('/home/dvm/taruntest/apogee/output.html', '/home/dvm/taruntest/apogee/%s.pdf' %(str(gl_id)), css=css)
+	pdfkit.from_file('/home/dvm/taruntest/apogee/output.html', '/home/dvm/taruntest/apogee/%s.pdf' %(str(gl_id)))
 
 
 	return html
