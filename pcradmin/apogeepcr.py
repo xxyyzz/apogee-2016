@@ -130,12 +130,9 @@ def email_participant(request,gl_id):
 @staff_member_required
 def generate_pdf(request, gl_id):
 	our_participant = Participant.objects.get(id=gl_id)
-	if not our_participant.barcode:
-		encoded = gen_barcode(gl_id)
-		our_participant.barcode = encoded
-		our_participant.save()
-	else:
-		encoded = our_participant.barcode
+	encoded = gen_barcode(gl_id)
+	our_participant.barcode = encoded
+	our_participant.save()
 	write_pdf(gl_id,encoded)
 	return HttpResponse('generation sucessful')
 
