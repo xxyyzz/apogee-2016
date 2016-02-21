@@ -1,17 +1,31 @@
 {% extends "ems/base.html" %}
 {% block sidebar_content %}
-    <li>
-        <a href="{% url 'ems:events_home' event.id %}">
-            <i class="pe-7s-news-paper"></i>
-            <p>Event Home</p>
-        </a>
-    </li>
-    <li>
-        <a href="{% url 'ems:events_levels' event.id %}">
-            <i class="pe-7s-news-paper"></i>
-            <p>Manage Levels</p>
-        </a>
-    </li>
+<li>
+    <a href="{% url 'ems:events_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Home</p>
+    </a>
+</li>
+{% if emsadmin %}
+<li>
+    <a href="{% url 'ems:events_levels' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Event Setup</p>
+    </a>
+</li>
+{% endif %}
+<li>
+    <a href="{% url 'ems:events_participants' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Manage Participants</p>
+    </a>
+</li>
+<li>
+    <a href="{% url 'ems:events_judge_home' event.id %}">
+        <i class="pe-7s-news-paper"></i>
+        <p>Judge Event</p>
+    </a>
+</li>
 {% endblock sidebar_content %}
 {% block main_content %}
     <div class="content">
@@ -28,7 +42,6 @@
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
                                 <thead>
-                                    <th>Edit</th>
                                     <th>S.No</th>
                                     {% if event.is_team %}
                                     <th>Team Name</th>
@@ -41,15 +54,11 @@
                                     {% endif %}
                                     <th>Rank</th>
                                     <th>Delete</th>
+                                    <th>Info</th>
                                 </thead>
                                 <tbody>
                                 {% for team in teams %}
                                 <tr>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-simple btn-xs">
-                                        <i class="fa fa-edit"></i>
-                                        </a>
-                                    </td>
                                     <td>{{ forloop.counter }}</td>
                                     {% if event.is_team %}
                                     <td>{{ team.name }}</td>
@@ -72,7 +81,14 @@
                                         </button>
                                     </td>
                                     {% endif %}
-                                    <td>{{ team.category }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-simple btn-xs" rel="tooltip" data-html="true"
+                                        data-original-title="{% for member in team.members.all %}
+                                        {{ member.name }} <br />
+                                        {% endfor %}">
+                                        <i class="fa fa-info-circle"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 {% empty %}
                                 <tr>

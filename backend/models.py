@@ -75,7 +75,7 @@ class Team(models.Model):
     members = models.ManyToManyField('Participant')
     leader = models.ForeignKey('Participant', related_name='leader_team')
     event = models.ForeignKey('Event.Event')
-    rank = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
+    comments = models.CharField(max_length=200, default=None, null=True, blank=True)
     def __unicode__(self):
         return str(self.name)
 
