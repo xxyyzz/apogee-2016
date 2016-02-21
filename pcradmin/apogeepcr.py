@@ -30,7 +30,7 @@ def gen_barcode(gl_id):
 		encoded = encoded + mixed[randint(0,51)]
 #	gl_ida = '6'
 	#image='/home/dvm/taruntest/%s.gif' % str(gl_id)
-	image='/home/dvm/apogee16_barcodes/%s.gif' % str(gl_id)
+	image='/home/dvm/apogee/public_html/taruntest/apogeecode/%s.gif' % str(gl_id)
 	code128_image(encoded).save(image)
 	return encoded
 
@@ -41,7 +41,7 @@ def write_pdf(gl_id,encoded):
 	barcode_name = str(gl_id)+'.gif'
 
 
-	context = Context({'encoded':encoded,'part':gl})
+	context = Context({'encoded':encoded,'part':gl, 'barcode_name': barcode_name})
 	# html = template.render(context)
 	# #result = open('/home/dvm/taruntest/%s.pdf' %(str(gl_id)), 'wb')
 	# #pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
