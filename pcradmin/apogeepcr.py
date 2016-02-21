@@ -32,6 +32,8 @@ def gen_barcode(gl_id):
 	#image='/home/dvm/taruntest/%s.gif' % str(gl_id)
 	image='/home/dvm/apogee/public_html/2016/apogee_code/%s.gif' % str(gl_id)
 	code128_image(encoded).save(image)
+	print >>sys.stderr, 'log msg'
+	print >>sys.stderr, encoded
 	return encoded
 
 
