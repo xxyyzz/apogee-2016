@@ -36,6 +36,7 @@ def gen_barcode(gl_id):
 
 
 def write_pdf(gl_id,encoded):
+	gl_id=int(gl_id)
 	gl = Participant.objects.get(id=gl_id)
 	gl_name = gl.name
 	barcode_name = str(gl_id)+'.gif'
