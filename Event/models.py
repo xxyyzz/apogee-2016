@@ -59,6 +59,7 @@ class Event(models.Model):
 class Schedule(models.Model):
     event= models.ForeignKey(Event)
     date=models.CharField(max_length = 100,blank=True)
+    end_date=models.CharField(max_length = 100,blank=True)
     startingtime=models.CharField(max_length = 100,blank=True)
     endingtime=models.CharField(max_length = 100,blank=True)
     venue=models.CharField(max_length = 100,blank=True)
