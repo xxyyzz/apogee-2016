@@ -721,6 +721,7 @@ def schedule_json(request):
 	resp={}
 	resp['Groups'] = []
 
+	temp={}
 	temp['UniqueId'] = "Schedule"
 	temp['Title'] = "Schedule"
 	temp['Items'] = []
@@ -777,4 +778,7 @@ def schedule_json(request):
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
 
+	resp['Groups'].append(temp)
+
+	return HttpResponse(json.dumps(resp), content_type="application/json")	
 	
