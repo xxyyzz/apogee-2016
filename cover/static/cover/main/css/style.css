@@ -1819,7 +1819,7 @@ a.arch-lnk {
 	margin-right: 30px;
 }
 .conf_url{
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
 	cursor: pointer;
 	font-size: 1em !important;
 }
