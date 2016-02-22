@@ -17,8 +17,7 @@
  *{
  	box-sizing:border-box;
  }
- #bg_container{height: 100%; width: 100%; text-align: center;}
- #user_barcode{}
+
  #user_details th{vertical-align: top;}
  #user_details th,td{
  	text-align: left;
@@ -27,8 +26,10 @@
 </style>
 </head>
 <body>
-<div id="bg_container" style="background: url(http://bits-apogee.org/Pranjal_DVM.jpg) no-repeat center center fixed; ;background-size:100vw 100vh;padding:4%;position:relative;height: 100%; width: 100%; font-size: 1em; text-align: center;">
-	<div id="user_details" style="margin-top: 32vh;padding: 0 10%;">
+<div id="bg_container">
+	<img src="headerpcr.jpg" style="width:100%;">
+
+	<div id="user_details">
 		<table style="width:100%">
 			<tbody>
 				<tr><th>NAME</th><td>{{part.name}}</td></tr>
@@ -45,6 +46,8 @@
 		<img src="http://bits-apogee.org/apogee_code/{{barcode_name}}" style="width:70%;">
 		<div>{{encoded}}</div>
 	</div>
+	<img src="footerpcr.jpg" style="width:100%;">
+
 </div>
 </body>
 </html>
