@@ -202,9 +202,9 @@ def xlsx(request):
 	import xlsxwriter
 
 	try:
-	    import cStringIO as StringIO
+		import cStringIO as StringIO
 	except ImportError:
-	    import StringIO
+		import StringIO
 	a_list = []
 
 	from registration.models import Participant
@@ -234,20 +234,54 @@ def xlsx(request):
 	worksheet = workbook.add_worksheet('new-spreadsheet')
 	date_format = workbook.add_format({'num_format': 'mmmm d yyyy'})
 	for i, row in enumerate(data):
-	    """for each object in the date list, attribute1 & attribute2
-	    are written to the first & second column respectively,
-	    for the relevant row. The 3rd arg is a failure message if
-	    there is no data available"""
+		"""for each object in the date list, attribute1 & attribute2
+		are written to the first & second column respectively,
+		for the relevant row. The 3rd arg is a failure message if
+		there is no data available"""
 
-	    worksheet.write(i, 0, i+1)
-	    worksheet.write(i, 1, getattr(row['obj'], 'name', 'attribute1 not available'))
-	    worksheet.write(i, 2, getattr(row['obj'], 'gender', 'attribute2 not available'))
-	    worksheet.write(i, 3, getattr(row['obj'], 'phone', 'attribute1 not available'))
-	    worksheet.write(i, 4, getattr(row['obj'], 'event', 'attribute1 not available'))
-	    worksheet.write(i, 5, getattr(row['obj'], 'college', 'attribute1 not available'))
+		worksheet.write(i, 0, i+1)
+		worksheet.write(i, 1, getattr(row['obj'], 'name', 'attribute1 not available'))
+		worksheet.write(i, 2, getattr(row['obj'], 'gender', 'attribute2 not available'))
+		worksheet.write(i, 3, getattr(row['obj'], 'phone', 'attribute1 not available'))
+		worksheet.write(i, 4, getattr(row['obj'], 'event', 'attribute1 not available'))
+		worksheet.write(i, 5, getattr(row['obj'], 'college', 'attribute1 not available'))
 	workbook.close()
 	filename = 'ExcelReport.xlsx'
 	output.seek(0)
 	response = HttpResponse(output.read(), content_type="application/ms-excel")
 	response['Content-Disposition'] = 'attachment; filename=%s' % filename
 	return response
+
+def send_mail(request):
+	# parts = Participant.objects.all()
+	parts = Participant.objects.filter(id=30)
+	from django.core.mail.backends.smtp import EmailBackend
+	awsbackend = EmailBackend(
+		host='email-smtp.us-east-1.amazonaws.com',
+		port=587,
+		username='AKIAITSG5NOGTWUOKGKA',
+		password='AgMT6v+BaxhlW+3AyNxGiJ1m1F9RRxfGtRhLfk3kwoIi',
+		use_tls=True,
+		fail_silently=False,
+	)
+
+	for part in parts:
+		body = unicode(u'''
+Hello %s,
+
+We are pleased to confirm your participation in APOGEE 2015.
+Please find attached your confirmation letter, which you are required to produce while entering the campus.
+Good Luck!
+
+Pranjal Gupta
+CoStAAn (Head)
+Department of Visual Media
+ ''') % part.name
+		# attachment = '/home/dvm/taruntest/apogee/%s.pdf' % gl_id
+		# a_name = 'Oasis'+str(randint(9901,99000))
+		# shutil.copy2(attachment, '/home/dvm/taruntest/apogee/%s.pdf' % a_name)
+		email = EmailMessage('APOGEE 2016', body, 'noreply@bits-apogee.org', [part.email_id], connection=awsbackend)
+		email.attach_file('/home/dvm/taruntest/apogee/%s.pdf' % part.id)
+		# email.attach_file('/home/dvm/taruntest/apogee/BOSM_checklist.pdf')
+		email.send()
+	return HttpResponse("sent")
