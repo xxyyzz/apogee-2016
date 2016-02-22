@@ -43,6 +43,7 @@ class Participant(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     teams = models.ManyToManyField('Team', blank=True)
+    barcode = models.CharField(max_length=100,null=True,blank=True)
 
     bank_ifsc = models.CharField(max_length=11, blank=True)
     bank_name = models.CharField(max_length=200, blank=True)

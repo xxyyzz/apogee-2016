@@ -2,6 +2,7 @@ from pcradmin import views
 from registrations.views import *
 from cms import utilities
 from django.conf.urls import url, include
+from apogeepcr import *
 urlpatterns = [
     url(r'^$', views.dashboard2),
 
@@ -16,6 +17,9 @@ urlpatterns = [
     url(r'^participantxlsx/$', utilities.participant_stats_xlsx),
     url(r'^part_act/$', views.part_act),
 
+    url(r'^vpdf/(?P<gl_id>\d+)/$', view_pdf, name='view and generate pdf'),
+
+
     url(r'^mail_selected/$', views.mail_selected_amb),
 
     url(r'^dhiti_xlsx/$', views.dhiti_xlsx),
@@ -23,6 +27,7 @@ urlpatterns = [
     url(r'^innover_xlsx/$', views.innover_xlsx),
     # url(r'^username/save/(?P<user_id>\d+)/$', views.username_save),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
+    url(r'^sendconfirmationmails/$', send_mail),
     # url(r'^$', views.home),
     # url(r'^college/select/$', views.college_select),
     # # url(r'^username/set/(?P<user_id>\d+)/$', views.username_set),

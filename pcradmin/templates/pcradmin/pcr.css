@@ -1,0 +1,46 @@
+body,html{
+ 	position: absolute;
+ 	top:0;
+ 	left:0;
+ 	width: 100vw;
+ 	height: 100vh;
+ 	margin: 0;
+ 	padding: 0;
+ }
+ *{
+ 	box-sizing:border-box;
+ }
+ #bg_container{
+ 	height: 100%;
+ 	width: 100%;
+ 	font-size: 1em;
+ 	background: url("http://bits-apogee.org/taruntest/Pranjal_DVM.jpg");
+ 	background-size:100% 100%;
+ 	text-align: center;
+ }
+ #user_details{
+    position: absolute;
+    top: 32%;
+    padding: 4%;
+    right: 0;
+    left: 0;
+    width: 80%;
+    margin: 0 auto;
+    background-color: red;
+
+ }
+ #user_details th{vertical-align: top;}
+ #user_details th,td{
+ 	text-align: left;
+    padding: 0.2em 0.8em;
+ }
+ #user_barcode{
+ 	position: absolute;
+    bottom: 12%;
+    margin: 5%;
+    text-align: center;
+    width: 90%;
+ }
+ #user_barcode img{
+ 	width: 70%;
+ }
