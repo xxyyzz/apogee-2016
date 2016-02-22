@@ -139,17 +139,18 @@ def generate_pdf(request, gl_id):
 	write_pdf(gl_id,encoded)
 	return HttpResponse('generation sucessful')
 
-@staff_member_required
 def view_pdf(request, gl_id):
 	#first generating
 	our_participant = Participant.objects.get(id=gl_id)
-	encoded = gen_barcode(gl_id)
-	our_participant.barcode = encoded
-	our_participant.save()
-	write_pdf(gl_id,encoded)
-	return serve(request, os.path.basename('/home/dvm/taruntest/apogee/%s.pdf' % gl_id), os.path.dirname('/home/dvm/taruntest/apogee/%s.pdf' % gl_id))
+	if our_participant.pcr_approval:
+		encoded = gen_barcode(gl_id)
+		our_participant.barcode = encoded
+		our_participant.save()
+		write_pdf(gl_id,encoded)
+		return serve(request, os.path.basename('/home/dvm/taruntest/apogee/%s.pdf' % gl_id), os.path.dirname('/home/dvm/taruntest/apogee/%s.pdf' % gl_id))
+	else:
+		return HttpResponse("Sorry, you haven't been confirmed for APOGEE 16")
 
-@staff_member_required
 def genblah_pdf(request, gl_id):
 	#first generating
 	our_participant = Participant.objects.get(id=gl_id)
