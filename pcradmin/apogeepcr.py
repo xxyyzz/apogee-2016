@@ -149,8 +149,15 @@ def view_pdf(request, gl_id):
 	write_pdf(gl_id,encoded)
 	return serve(request, os.path.basename('/home/dvm/taruntest/apogee/%s.pdf' % gl_id), os.path.dirname('/home/dvm/taruntest/apogee/%s.pdf' % gl_id))
 
-
-
+@staff_member_required
+def genblah_pdf(request, gl_id):
+	#first generating
+	our_participant = Participant.objects.get(id=gl_id)
+	encoded = gen_barcode(gl_id)
+	our_participant.barcode = encoded
+	our_participant.save()
+	write_pdf(gl_id,encoded)
+	return True
 
 @staff_member_required
 def pcr_act(request):
@@ -253,8 +260,8 @@ def xlsx(request):
 	return response
 
 def send_mail(request):
-	# parts = Participant.objects.all()
-	parts = Participant.objects.filter(id=30)
+	parts = Participant.objects.filter(pcr_approval=True, is_bitsian=False)
+	# parts = Participant.objects.filter(id=30)
 	from django.core.mail.backends.smtp import EmailBackend
 	awsbackend = EmailBackend(
 		host='email-smtp.us-east-1.amazonaws.com',
@@ -266,22 +273,26 @@ def send_mail(request):
 	)
 
 	for part in parts:
-		body = unicode(u'''
+		if genblah_pdf(request, part.id):
+			body = unicode(u'''
 Hello %s,
 
 We are pleased to confirm your participation in APOGEE 2015.
+
 Please find attached your confirmation letter, which you are required to produce while entering the campus.
+
 Good Luck!
 
 Pranjal Gupta
 CoStAAn (Head)
 Department of Visual Media
- ''') % part.name
-		# attachment = '/home/dvm/taruntest/apogee/%s.pdf' % gl_id
-		# a_name = 'Oasis'+str(randint(9901,99000))
-		# shutil.copy2(attachment, '/home/dvm/taruntest/apogee/%s.pdf' % a_name)
-		email = EmailMessage('APOGEE 2016', body, 'noreply@bits-apogee.org', [part.email_id], connection=awsbackend)
-		email.attach_file('/home/dvm/taruntest/apogee/%s.pdf' % part.id)
-		# email.attach_file('/home/dvm/taruntest/apogee/BOSM_checklist.pdf')
-		email.send()
+BITS Pilani
+	 ''') % part.name
+			# attachment = '/home/dvm/taruntest/apogee/%s.pdf' % gl_id
+			# a_name = 'Oasis'+str(randint(9901,99000))
+			# shutil.copy2(attachment, '/home/dvm/taruntest/apogee/%s.pdf' % a_name)
+			email = EmailMessage('APOGEE 2016', body, 'APOGEE BITS Pilani <noreply@bits-apogee.org>', [part.email_id], connection=awsbackend)
+			email.attach_file('/home/dvm/taruntest/apogee/%s.pdf' % part.id)
+			# email.attach_file('/home/dvm/taruntest/apogee/BOSM_checklist.pdf')
+			email.send()
 	return HttpResponse("sent")
