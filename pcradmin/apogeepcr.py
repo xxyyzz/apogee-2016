@@ -149,7 +149,7 @@ def view_pdf(request, gl_id):
 		write_pdf(gl_id,encoded)
 		return serve(request, os.path.basename('/home/dvm/taruntest/apogee/%s.pdf' % gl_id), os.path.dirname('/home/dvm/taruntest/apogee/%s.pdf' % gl_id))
 	else:
-		return HttpRespons("Sorry, you haven't been confirmed for APOGEE 16")
+		return HttpResponse("Sorry, you haven't been confirmed for APOGEE 16")
 
 def genblah_pdf(request, gl_id):
 	#first generating
