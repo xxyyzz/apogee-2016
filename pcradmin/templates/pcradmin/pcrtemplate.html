@@ -1,50 +1,80 @@
-<!DOCTYPE html>
+<!DOCTYPE Html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>USER Info</title>
-<style type="text/css">
- body,html{
- 	position: absolute;
- 	top:0;
- 	left:0;
- 	width: 100vw;
- 	height: 100vh;
- 	margin: 0;
- 	padding: 0;
- }
- *{
- 	box-sizing:border-box;
- }
- #bg_container{height: 100%; width: 100%; text-align: center;}
- #user_barcode{}
- #user_details th{vertical-align: top;}
- #user_details th,td{
- 	text-align: left;
-    padding: 0.2em 0.8em;
- }
-</style>
+    <style type="text/css">
+            @page {
+            size: a4;
+        }
+            #header {
+                display: table-header-group;
+            }
+            #main {
+                display: table-row-group;
+            }
+            #footer {
+                display: table-footer-group;
+            }
+    </style>
+    <style type="text/css">
+        @media all {
+            table {
+                margin: auto;
+                font-family: arial;
+                font-size: 30px; 
+                /*border: 3px solid #000;*/
+                height: 50%;
+                table-layout: fixed;
+                position: absolute;
+                top: 0px;
+                width: 90%;
+                left: 5%;
+            }
+            td,
+            th {
+                text-align: center;
+        /*border: 1px solid black;*/
+                /*padding-top: 5px;*/
+        width:25%;
+        
+
+            }
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<body>
-<div id="bg_container" style="background: url(http://bits-apogee.org/Pranjal_DVM.jpg) no-repeat center center fixed; ;background-size:100vw 100vh;padding:4%;position:relative;height: 100%; width: 100%; font-size: 1em; text-align: center;">
-	<div id="user_details" style="margin-top: 32vh;padding: 0 10%;">
-		<table style="width:100%">
-			<tbody>
-				<tr><th>NAME</th><td>{{part.name}}</td></tr>
+<body style="background:url(http://bits-apogee.org/Pranjal_DVM.jpg); background-size:100% 100%;background-repeat: no-repeat;height:1400px">
+    <div id="main" style="font-size:20px;width:100%;height:65%;padding:20px;position:absolute;top:420px;">
+
+
+        <div id="contentWrapper">
+
+            <table>
+               <tbody>
+               	<tr><th>NAME</th><td>{{part.name}}</td></tr>
 				<tr><th>COLLEGE</th><td>{{part.college.name}}</td></tr>
 				<tr><th>GENDER</th><td>{{part.gender}}</td></tr>
 				<tr><th>PHONE</th><td>{{part.phone_one}}</td></tr>
 				<tr><th>EMAIL</th><td>{{part.email_id}}</td></tr>
 				<tr><th>BARCODE</th><td>{{encoded}}</td></tr>
 				<tr><th>Online Paid</th><td>{% if part.fee_paid%}YES{% else %}NO{% endif %}</td></tr>
-			</tbody>
-		</table>
-	</div>
-	<div id="user_barcode" style="position: absolute; top: 75%; margin: 5%; text-align: center; width: 90%;">
-		<img src="http://bits-apogee.org/apogee_code/{{barcode_name}}" style="width:70%;">
-		<div>{{encoded}}</div>
-	</div>
-</div>
+               </tbody>
+            </table>
+            <br>
+            
+        </div>
+
+    </div>
+        <!-- need to improve messy stuff here -->
+
+    <!-- <div id="footer">
+        <img src="/home/gauss/footer1.jpg">
+    </div> -->
+    <div id="barcode" style="position:absolute; bottom:370px; left:0;right:0;margin:auto;">
+    <center><img src="http://bits-apogee.org/apogee_code/{{barcode_name}}" style="width:70%" align="middle"></center>
+        <center>{{encoded}}</center>
+    </div>
+
 </body>
 </html>
+
+

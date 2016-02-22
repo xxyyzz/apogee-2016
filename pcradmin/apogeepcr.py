@@ -50,7 +50,7 @@ def write_pdf(gl_id,encoded):
 	# #result = open('/home/dvm/taruntest/%s.pdf' %(str(gl_id)), 'wb')
 	# #pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
 	# #result.close()
-
+	css='/home/dvm/apogee/apogee16/pcradmin/templates/pcradmin/pcr.css'
 	template = get_template('pcradmin/pcrtemplate.html')
 	html = template.render(context)
 	text_file = open("/home/dvm/taruntest/apogee/output.html", "w")			#temporary only
