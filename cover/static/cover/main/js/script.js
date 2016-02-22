@@ -1405,9 +1405,11 @@ function openProfile(){
 			$('textarea[name="address"]').val(data.address);
 			$('.update_bank').prop('disabled',false);
 			$('.update_bank').text('Update');
+			$('.conf_url').click(function(){window.open('http://bits-apogee.org/2016/pcradmin/vpdf/'+data["id"]+'/','_blank')});
 			if(!data.pcr_approval){
 				$('.approved').addClass('unapproved');
 				$('.unapproved').text('Account Unapproved');
+				$('.conf_url').css({'display':'none'});
 			}
 			if(!data.fee_paid){
 				$('.pay_rec').addClass('pay_nrec');

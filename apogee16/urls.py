@@ -39,4 +39,5 @@ urlpatterns = [
     url(r'^lacuna/', include('lacuna.urls', namespace='lacuna')),
     url(r'^revengg/', include('revengg.urls', namespace='revengg')),
     url(r'^windows_json/$', windows_json),    
+    url(r'^schedule_json/$', schedule_json),    
 ]
