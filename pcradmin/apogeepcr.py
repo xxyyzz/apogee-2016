@@ -53,7 +53,7 @@ def write_pdf(gl_id,encoded):
 	css='/home/dvm/apogee/apogee16/pcradmin/templates/pcradmin/pcr.css'
 	template = get_template('pcradmin/pcrtemplate.html')
 	html = template.render(context)
-	text_file = open("/home/dvm/taruntest/apogee/output.html", "w")			#temporary only
+	text_file = open("/home/dvm/taruntest/apogee/output.html", "w")
 	# text_file = open("/home/gauss/DVM Github/oasis2015/output.html", "w")			#temporary only
 	text_file.write(html)
 	text_file.close()

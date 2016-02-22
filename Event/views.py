@@ -715,3 +715,66 @@ Bentley is a global leader dedicated to providing architects, engineers, geospat
 	resp['Groups'].append(temp)
 
 	return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+def schedule_json(request):
+	resp={}
+	resp['Groups'] = []
+
+	temp['UniqueId'] = "Schedule"
+	temp['Title'] = "Schedule"
+	temp['Items'] = []
+	
+	tempx={}
+	tempx['UniqueId'] = "25Feb"
+	tempx['Title'] = "25Feb"
+	tempx['SubItems']= []
+	for k in Schedule.objects.filter(date='25-02-2016'):
+		itemdict={}
+		itemdict['UniqueId'] = k.event.name
+		itemdict['Title'] = k.event.name
+		itemdict['time'] = k.startingtime
+		itemdict['venue'] = k.venue
+		tempx['SubItems'].append(itemdict)
+	temp['Items'].append(tempx)
+
+	tempx={}
+	tempx['UniqueId'] = "26Feb"
+	tempx['Title'] = "26Feb"
+	tempx['SubItems']= []
+	for k in Schedule.objects.filter(date='26-02-2016'):
+		itemdict={}
+		itemdict['UniqueId'] = k.event.name
+		itemdict['Title'] = k.event.name
+		itemdict['time'] = k.startingtime
+		itemdict['venue'] = k.venue
+		tempx['SubItems'].append(itemdict)
+	temp['Items'].append(tempx)
+
+	tempx={}
+	tempx['UniqueId'] = "27Feb"
+	tempx['Title'] = "27Feb"
+	tempx['SubItems']= []
+	for k in Schedule.objects.filter(date='27-02-2016'):
+		itemdict={}
+		itemdict['UniqueId'] = k.event.name
+		itemdict['Title'] = k.event.name
+		itemdict['time'] = k.startingtime
+		itemdict['venue'] = k.venue
+		tempx['SubItems'].append(itemdict)
+	temp['Items'].append(tempx)
+
+	tempx={}
+	tempx['UniqueId'] = "28Feb"
+	tempx['Title'] = "28Feb"
+	tempx['SubItems']= []
+	for k in Schedule.objects.filter(date='28-02-2016'):
+		itemdict={}
+		itemdict['UniqueId'] = k.event.name
+		itemdict['Title'] = k.event.name
+		itemdict['time'] = k.startingtime
+		itemdict['venue'] = k.venue
+		tempx['SubItems'].append(itemdict)
+	temp['Items'].append(tempx)
+
+	
