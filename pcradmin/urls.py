@@ -2,7 +2,7 @@ from pcradmin import views
 from registrations.views import *
 from cms import utilities
 from django.conf.urls import url, include
-from apogeepcr import *
+from pcradmin.apogeepcr import *
 urlpatterns = [
     url(r'^$', views.dashboard2),
 

@@ -1338,7 +1338,7 @@ var map_ele_info = {
 										ename:'Schedule',
 										content:'ajax generated',
 										icon: imgpre+'/static/cover/main/img/lb-icons/schedule_icon.png',
-										func: schedule_gen(),
+										func: schedule_gen,
 									},								
 };
 
@@ -1367,7 +1367,7 @@ function schedule_gen(b_icon,b_name,b_content){
 			content_link(b_icon,b_name,content);
 		},
 	})
-};
+}
 
 $('.lb_descr').on("click",'.workshop-cont .lb_a',function(e){
  	e.preventDefault();
@@ -1383,7 +1383,6 @@ function content_link(b_icon,b_name,b_content){
 }
 
 $('#updates-wrapper').click(function(){
-	// console.log('yo');
 	$.ajax({
 		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
 		method:'GET',

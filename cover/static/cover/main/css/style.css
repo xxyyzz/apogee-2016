@@ -2092,5 +2092,7 @@ table.table {
 .date_sch .head{
 	font-size: 1.5em;
 	font-weight: bolder;
+	padding: 0.5em;
 	text-align: center;
+	border-bottom: 1px solid #999;
 }

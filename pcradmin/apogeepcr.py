@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from backend.models import *
-from barg import code128_image
+from pcradmin.barg import code128_image
 from django.template import Context
 from django.shortcuts import get_object_or_404, render_to_response, render
 #import GifImagePlugin
@@ -10,7 +10,7 @@ from django.template.loader import get_template
 from django.views.static import serve
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail, EmailMessage
-import pyPdf
+# import pyPdf
 import string
 from random import randint
 import shutil

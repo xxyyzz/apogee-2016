@@ -393,7 +393,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
                     pass
             team.score.total = total
         except:
-            print "pass"
+            # print "pass"
             pass
         teams.append(team)
     context = {
