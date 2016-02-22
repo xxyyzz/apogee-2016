@@ -1334,7 +1334,41 @@ var map_ele_info = {
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
 										func:content_link,
 									},
+	'schedule'			:		{
+										ename:'Schedule',
+										content:'ajax generated',
+										icon: imgpre+'/static/cover/main/img/lb-icons/schedule_icon.png',
+										func: schedule_gen,
+									},								
 };
+
+function schedule_gen(b_icon,b_name,b_content){
+	$.ajax({
+		url:'http://bits-apogee.org'+imgpre+'/schedule_json/',
+		method:'GET',
+        crossDomain: true,
+		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
+		datatype: 'jsonp',
+		success:function(resp){
+			// console.log(data);
+			var day_sch = resp.Groups[0].Items;
+			var content = '<div id="sch_box">';
+			for(var i = 0; i<day_sch.length;++i)
+			{	
+				content += '<div class="date_sch"><div class="head">'+ day_sch[i]['Title']+'</div><table class="table"><thead><tr><th>Event Name</th><th>Venue</th><th>Time</th></tr></thead><tbody>'
+
+				for(var j = 0;j< day_sch[i]["SubItems"].length;++j)
+				{
+					content+= '<tr><th>'+day_sch[i]["SubItems"][j]["Title"]+'</th><td>'+day_sch[i]["SubItems"][j]["venue"]+'</td><td>'+day_sch[i]["SubItems"][j]["time"].substr(0,2)+':'+day_sch[i]["SubItems"][j]["time"].substr(2)+'</td></tr>';
+				}
+				content +='</tbody></table></div>'
+			}
+			content+='</div';
+			content_link(b_icon,b_name,content);
+		},
+	})
+}
+
 $('.lb_descr').on("click",'.workshop-cont .lb_a',function(e){
  	e.preventDefault();
  	$('.workmoredet').removeClass('open');
@@ -1349,7 +1383,6 @@ function content_link(b_icon,b_name,b_content){
 }
 
 $('#updates-wrapper').click(function(){
-	// console.log('yo');
 	$.ajax({
 		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
 		method:'GET',
@@ -1405,9 +1438,11 @@ function openProfile(){
 			$('textarea[name="address"]').val(data.address);
 			$('.update_bank').prop('disabled',false);
 			$('.update_bank').text('Update');
+			$('.conf_url').click(function(){window.open('http://bits-apogee.org/2016/pcradmin/vpdf/'+data["id"]+'/','_blank')});
 			if(!data.pcr_approval){
 				$('.approved').addClass('unapproved');
 				$('.unapproved').text('Account Unapproved');
+				$('.conf_url').css({'display':'none'});
 			}
 			if(!data.fee_paid){
 				$('.pay_rec').addClass('pay_nrec');

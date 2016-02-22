@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from backend.models import *
-from barg import code128_image
+from pcradmin.barg import code128_image
 from django.template import Context
 from django.shortcuts import get_object_or_404, render_to_response, render
 #import GifImagePlugin
@@ -10,7 +10,7 @@ from django.template.loader import get_template
 from django.views.static import serve
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.mail import send_mail, EmailMessage
-import pyPdf
+# import pyPdf
 import string
 from random import randint
 import shutil
@@ -139,17 +139,18 @@ def generate_pdf(request, gl_id):
 	write_pdf(gl_id,encoded)
 	return HttpResponse('generation sucessful')
 
-@staff_member_required
 def view_pdf(request, gl_id):
 	#first generating
 	our_participant = Participant.objects.get(id=gl_id)
-	encoded = gen_barcode(gl_id)
-	our_participant.barcode = encoded
-	our_participant.save()
-	write_pdf(gl_id,encoded)
-	return serve(request, os.path.basename('/home/dvm/taruntest/apogee/%s.pdf' % gl_id), os.path.dirname('/home/dvm/taruntest/apogee/%s.pdf' % gl_id))
+	if our_participant.pcr_approval:
+		encoded = gen_barcode(gl_id)
+		our_participant.barcode = encoded
+		our_participant.save()
+		write_pdf(gl_id,encoded)
+		return serve(request, os.path.basename('/home/dvm/taruntest/apogee/%s.pdf' % gl_id), os.path.dirname('/home/dvm/taruntest/apogee/%s.pdf' % gl_id))
+	else:
+		return HttpResponse("Sorry, you haven't been confirmed for APOGEE 16")
 
-@staff_member_required
 def genblah_pdf(request, gl_id):
 	#first generating
 	our_participant = Participant.objects.get(id=gl_id)
