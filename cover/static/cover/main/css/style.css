@@ -2047,3 +2047,50 @@ a.arch-lnk {
 	padding-left: 5px;
 	padding-right:50px;
 }
+
+/*SCHEDULE*/
+	#sch_box .table>caption+thead>tr:first-child>td, #sch_box .table>caption+thead>tr:first-child>th, #sch_box .table>colgroup+thead>tr:first-child>td, #sch_box .table>colgroup+thead>tr:first-child>th, #sch_box .table>thead:first-child>tr:first-child>td, #sch_box .table>thead:first-child>tr:first-child>th {
+    border-top: 0;
+}
+
+#sch_box .table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+#sch_box .table>tbody>tr>td, #sch_box .table>tbody>tr>th, #sch_box .table>tfoot>tr>td, #sch_box .table>tfoot>tr>th, #sch_box .table>thead>tr>td, #sch_box .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+th {
+    text-align: left;}
+    #sch_box .table>tbody>tr>td, #sch_box .table>tbody>tr>th, #sch_box .table>tfoot>tr>td, #sch_box .table>tfoot>tr>th, #sch_box .table>thead>tr>td, #sch_box .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+td, th {
+    padding: 0;
+}
+table.table {
+	width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;}
+    #sch_box .table>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;}
+.date_sch{
+	padding: 20px 30px;
+    margin-bottom: 30px;
+    position: relative;
+    background: #Fefefe;
+    /* box-shadow: 0px 0px 1px 1px #888; */
+    box-shadow: 0 5px 10px -5px #999;
+    color: #666;
+}
+.date_sch .head{
+	font-size: 1.5em;
+	font-weight: bolder;
+	text-align: center;
+}
