@@ -274,7 +274,6 @@ def send_mail(request):
     )
     for part in parts:
         if not os.path.isfile("/home/dvm/taruntest/apogee/"+part.id+".pdf"):
-            print str(part.id)+" found"
             if genblah_pdf(request, part.id):
                 body = unicode(u'''
 Hello %s,
@@ -297,5 +296,4 @@ BITS Pilani
                 email.attach_file('/home/dvm/taruntest/apogee/%s.pdf' % part.id)
                 # email.attach_file('/home/dvm/taruntest/apogee/BOSM_checklist.pdf')
                 email.send()
-				print str(part.id)+" mail sent"
     return HttpResponse("sent")
