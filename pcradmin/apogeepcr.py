@@ -273,7 +273,7 @@ def send_mail(request):
         fail_silently=False,
     )
     for part in parts:
-        if not os.path.isfile("/home/dvm/taruntest/apogee/"+part.id+".pdf"):
+        if not os.path.isfile("/home/dvm/taruntest/apogee/"+str(part.id)+".pdf"):
             if genblah_pdf(request, part.id):
                 body = unicode(u'''
 Hello %s,
