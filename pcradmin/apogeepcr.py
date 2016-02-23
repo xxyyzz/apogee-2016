@@ -280,7 +280,7 @@ Hello %s,
 
 We are pleased to confirm your participation in APOGEE 2015.
 
-Please find attached your confirmation letter, which you are required to produce while entering the campus.
+Please find attached your confirmation letter, which you are required to produce while entering the campus. You can find the link to download the pdf in your profile page in bits-apogee.org.
 
 Good Luck!
 
