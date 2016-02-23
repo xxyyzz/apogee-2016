@@ -81,7 +81,7 @@ def windows_json(request):
 	tempx={}
 	tempx['UniqueId'] = "Kernel Events"
 	tempx['Title'] = "Kernel Events"
-	tempx['ImagePath'] = "Assets/LightGray.png"
+	tempx['ImagePath'] = ""
 	tempx['SubItems'] = []
 
 
@@ -172,7 +172,7 @@ def windows_json(request):
 		try:			
 			itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
 		except:
-			itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+			itemdict['Contacts'] = ""
 
 
 
@@ -184,81 +184,82 @@ def windows_json(request):
 		tempx={}
 		tempx['UniqueId'] = str(z.name)
 		tempx['Title'] = tempx['UniqueId']
+		tempx['ImagePath']= "Assets/DarkGray.png"
 		tempx['SubItems'] = []
 		for e_ob in Event.objects.filter(category=z,is_displayed=True):
 			itemdict= {}
-			itemdict["UniqueId"] = (str(e_ob.name).replace(' ','') + str(e_ob.id)).encode('ascii','ignore')
+			itemdict["UniqueId"] = str(e_ob.name)
 			itemdict['Title'] = itemdict['UniqueId']
 			itemdict['ImagePath'] = "Assets/"+ str(e_ob.name.replace(" ","").lower() ) + ".png"
 			try:
-				itemdict['Overview'] = str(   gaussx((Tab.objects.get(event=k, heading= overview_ob) ).content )   )
+				itemdict['Overview'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= overview_ob) ).content )   )
 			except:
 				itemdict['Overview'] = ""
 			try:
-				itemdict['Rules'] = str(   gaussx((Tab.objects.get(event=k, heading= rules_ob ) ).content )   )
+				itemdict['Rules'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= rules_ob ) ).content )   )
 			except:
 				itemdict['Rules'] = ""
 
 			try:			
-				itemdict['Eligibility'] = str(   gaussx((Tab.objects.get(event=k, heading= eligibility_ob) ).content )   )
+				itemdict['Eligibility'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= eligibility_ob) ).content )   )
 			except:
 				itemdict['Eligibility'] = ""
 
 			try:			
-				itemdict['Guidelines'] = str(   gaussx((Tab.objects.get(event=k, heading= guidelines_ob ) ).content )   )
+				itemdict['Guidelines'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= guidelines_ob ) ).content )   )
 			except:
 				itemdict['Guidelines'] = ""
 
 			try:			
-				itemdict['Judging Criteria'] =str(    gaussx((Tab.objects.get(event=k, heading= judging_ob) ).content )   )
+				itemdict['Judging Criteria'] =str(    gaussx((Tab.objects.get(event=e_ob, heading= judging_ob) ).content )   )
 			except:
 				itemdict['Judging Criteria'] =""
 
 			try:			
-				itemdict['Problem Statements'] = str(    gaussx((Tab.objects.get(event=k, heading= prob_ob)  ).content )  )
+				itemdict['Problem Statements'] = str(    gaussx((Tab.objects.get(event=e_ob, heading= prob_ob)  ).content )  )
 			except:
 				itemdict['Problem Statements'] = ""
 
 
 			try:			
-				itemdict['Resources'] = str(   gaussx((Tab.objects.get(event=k, heading=resources_ob) ).content )   )
+				itemdict['Resources'] = str(   gaussx((Tab.objects.get(event=e_ob, heading=resources_ob) ).content )   )
 			except:
 				itemdict['Resources'] = ""
 
 			try:
-				itemdict['Sample Questions'] =str( gaussx((Tab.objects.get(event=k, heading= sampleq_ob) ).content )   )
+				itemdict['Sample Questions'] =str( gaussx((Tab.objects.get(event=e_ob, heading= sampleq_ob) ).content )   )
 			except:
 				itemdict['Sample Questions'] =""
 
 			try:			
-				itemdict['Specifications'] = str(  gaussx((Tab.objects.get(event=k, heading= specifications_ob) ).content )   )
+				itemdict['Specifications'] = str(  gaussx((Tab.objects.get(event=e_ob, heading= specifications_ob) ).content )   )
 			except:
 				itemdict['Specifications'] = ""
 
 			try:			
-				itemdict['Materials'] = str(   gaussx((Tab.objects.get(event=k, heading= materials_ob) ).content )   )
+				itemdict['Materials'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= materials_ob) ).content )   )
 			except:
 				itemdict['Materials'] = ""
 
 			try:			
-				itemdict['Registration Details'] = str(   gaussx((Tab.objects.get(event=k, heading= regdetails_ob) ).content )   )
+				itemdict['Registration Details'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= regdetails_ob) ).content )   )
 			except:
 				itemdict['Registration Details'] = ""
 
 			try:			
-				itemdict['FAQs'] = str(   gaussx((Tab.objects.get(event=k, heading= faqs_ob) ).content )   )
+				itemdict['FAQs'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= faqs_ob) ).content )   )
 			except:
 				itemdict['FAQs'] = ""
 
 			try:			
-				itemdict['Sponsors'] = str(   gaussx((Tab.objects.get(event=k, heading= sponsors_ob) ).content )   )
+				itemdict['Sponsors'] = str(   gaussx((Tab.objects.get(event=e_ob, heading= sponsors_ob) ).content )   )
 			except:
 				itemdict['Sponsors'] = ""
 
 			try:			
-				itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+				itemdict['Contacts'] = str(   (Organization.objects.get(event=e_ob) ).phone   )
 			except:
-				itemdict['Contacts'] = str(   (Organization.objects.get(event=k) ).phone   )
+				itemdict['Contacts'] = ""
 			
 			tempx['SubItems'].append(itemdict)
 		temp['Items'].append(tempx)
@@ -287,29 +288,6 @@ def windows_json(request):
 	tempx['Title']  =  "NotableSpeakers"
 	tempx['ImagePath'] = ""
 	tempx['SubItems'] = []
-
-
-	itemdict={}
-	itemdict["UniqueId"] = "Dr.Richard Stallman"
-	itemdict['Title'] = "Dr.Richard Stallman"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
-	itemdict['Overview'] = ""                                  ### content
-	itemdict['Rules'] = "28 February"
-	itemdict['Eligibility'] = ""
-	itemdict['Guidelines'] = ""
-	itemdict['Judging Criteria'] = ""
-	itemdict['Problem Statements'] = ""
-	itemdict['Resources'] = ""
-	itemdict['Sample Questions'] = ""
-	itemdict['Specifications'] = ""
-	itemdict['Materials'] = ""
-	itemdict['Registration Details'] = ""
-	itemdict['FAQs'] = ""
-	itemdict['Sponsors'] = ""
-	itemdict['Contacts'] = ""
-
-	tempx['SubItems'].append(itemdict)
-
 
 
 
@@ -734,8 +712,8 @@ def schedule_json(request):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['time'] = k.startingtime
-		itemdict['venue'] = k.venue
+		itemdict['Time'] = k.startingtime
+		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
 
@@ -747,8 +725,8 @@ def schedule_json(request):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['time'] = k.startingtime
-		itemdict['venue'] = k.venue
+		itemdict['Time'] = k.startingtime
+		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
 
@@ -760,8 +738,8 @@ def schedule_json(request):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['time'] = k.startingtime
-		itemdict['venue'] = k.venue
+		itemdict['Time'] = k.startingtime
+		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
 
@@ -773,12 +751,11 @@ def schedule_json(request):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['time'] = k.startingtime
-		itemdict['venue'] = k.venue
+		itemdict['Time'] = k.startingtime
+		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
 
 	resp['Groups'].append(temp)
 
 	return HttpResponse(json.dumps(resp), content_type="application/json")	
-	
