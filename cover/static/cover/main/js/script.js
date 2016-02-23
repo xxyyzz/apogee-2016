@@ -1359,7 +1359,7 @@ function schedule_gen(b_icon,b_name,b_content){
 
 				for(var j = 0;j< day_sch[i]["SubItems"].length;++j)
 				{
-					content+= '<tr><th>'+day_sch[i]["SubItems"][j]["Title"]+'</th><td>'+day_sch[i]["SubItems"][j]["venue"]+'</td><td>'+day_sch[i]["SubItems"][j]["time"].substr(0,2)+':'+day_sch[i]["SubItems"][j]["time"].substr(2)+'</td></tr>';
+					content+= '<tr><th>'+day_sch[i]["SubItems"][j]["Title"]+'</th><td>'+day_sch[i]["SubItems"][j]["Venue"]+'</td><td>'+day_sch[i]["SubItems"][j]["Time"].substr(0,2)+':'+day_sch[i]["SubItems"][j]["Time"].substr(2)+'</td></tr>';
 				}
 				content +='</tbody></table></div>'
 			}
