@@ -413,7 +413,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
         return redirect('ems:events_judge_login', event.id, level.id, judge.id)
     if request.method == 'POST':
         if 'leave' in request.POST:
-            print "leave"
+            # print "leave"
             for team in level.teams.all():
                 try:
                     score = Score.objects.get(level=level, team=team, judge=judge)
@@ -427,7 +427,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
                     score.is_frozen = True
                     score.save()
         elif "save" or "freeze" in request.POST:
-            print "save"
+            # print "save"
             for team in level.teams.all():
                 scores = request.POST.getlist(str(team.id))
                 try:
