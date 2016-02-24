@@ -169,7 +169,7 @@ nav{
 	color: #333;
 }
 
-#updates-wrapper{
+#updates-wrapper,#schedule-wrapper{
 	background: #fafafa;
 	top: 20px;
 	left: 170px;
@@ -185,7 +185,10 @@ nav{
 	color: #555;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02);
 }
-#updates-wrapper:hover{
+#schedule-wrapper{
+	left: 345px;
+}
+#updates-wrapper:hover,#schedule-wrapper{
 	color: #333;
 }
 
@@ -555,17 +558,22 @@ input[type="range"]::-webkit-slider-thumb:active {
 }
 #social_updates {
 	position: fixed;
-	bottom: 25px;
+	bottom: 20px;
 	overflow: hidden;
 	display: block;
 	left: 30px;
-	width: 300px;
+	/*width: 300px;*/
 }
 
+
+.appicon>a>img{height: 40px;padding-right: 10px;
+}
 .fbb {
 	position: relative;
 	float: left;
-	margin-bottom: 12px;
+	margin-right: 10px;
+	display: inline-block;
+	/*margin-bottom: 12px;*/
 }
 
 .twb {
