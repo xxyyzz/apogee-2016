@@ -116,7 +116,7 @@ def windows_json(request):
 			itemdict['ImagePath'] = "Assets/kernel/robowars.png"	
 		elif str(k.name) == 'I-strike':
 			itemdict['ImagePath'] = "Assets/kernel/istrike.png"	
-		elif str(k.name) == 'Full Throttle Grand Prix'
+		elif str(k.name) == 'Full Throttle Grand Prix':
 			itemdict['ImagePath'] = "Assets/kernel/ftgp.png"	
 						
 		try:
@@ -327,7 +327,11 @@ def windows_json(request):
 	itemdict["UniqueId"] = "Dr.Richard Stallman"
 	itemdict['Title'] = "Dr.Richard Stallman"
 	itemdict['ImagePath'] = "Assets/ppl/stallman.png"
-	itemdict['Overview'] = ""                                  ### content
+	itemdict['Overview'] = """Dr. Richard Stallman launched the free software movement in 1983 and started the development of the GNU operating system in 1984 (which eventually helped develop Linux), and has been instrumental in the development of the GNU Project and the Free Software Foundation ever since. Richard developed a number of widely used programs that are components of GNU, including the original Emacs, the GNU Compiler Collection, the GNU symbolic debugger (gdb), GNU Emacs, and various others. He has been one of the most vociferous advocates of free software in his fight against software patents and dangerous extensions of copyright law.
+
+The remarkable work undertaken by Dr. Stallman has been recognized worldwide and has led to him being awarded the ACM Grace Hopper Award, a MacArthur Foundation fellowship, the Electronic Frontier Foundation's Pioneer Award, and the the Takeda Award for Social/Economic Betterment, as well as several doctorates honoris causa.
+
+Dr. Stallman will speak at the Think Again Conclave on 26th February about the burning issue of Net Neutrality vs Free Basics and why it is important to take the right side. """                                  ### content
 	itemdict['Rules'] = "26 February"
 	itemdict['Eligibility'] = ""
 	itemdict['Guidelines'] = ""
