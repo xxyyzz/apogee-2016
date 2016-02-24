@@ -561,7 +561,7 @@ Ajay was CNN IBN's Youth Icon of the year 2011. He has also been honoured as an 
 	itemdict={}
 	itemdict["UniqueId"] = "Ethical Hacking"
 	itemdict['Title'] = "Ethical Hacking"
-	itemdict['ImagePath'] = "Assets/ppl/hacking.png"
+	itemdict['ImagePath'] = "Assets/workshops/hacking.png"
 	itemdict['Overview'] = """The workshop will be taken by Mr Akshay Awasthi, the CEO of Authentic Techs. Akshay Awasthi is one of the country’s best Information Security & Cyber Crime Consultant. The young and dynamic Akshay has not only assisted in solving complicated cyber crime cases but has also played a key role in spreading awareness about information security and cyber crimes. Akshay has trained more than 8000 personnel globally which include students from various ﬁelds, professionals from companies like Microsoft, Cisco, Intel etc and cyber security personnel.
 See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """                                  ### content
 	
@@ -588,7 +588,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict={}
 	itemdict["UniqueId"] = "Surface Computing"
 	itemdict['Title'] = "Surface Computing"
-	itemdict['ImagePath'] = "Assets/ppl/surface1.png"
+	itemdict['ImagePath'] = "Assets/workshops/surface1.png"
 	itemdict['Overview'] = "See more about Authentic Techs: http://authentictechs.com//"                                  ### content
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "26 February"
@@ -609,7 +609,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict={}
 	itemdict["UniqueId"] = "Android App Development"
 	itemdict['Title'] = "Android App Development"
-	itemdict['ImagePath'] = "Assets/ppl/android-icon.png"
+	itemdict['ImagePath'] = "Assets/workshops/android-icon.png"
 	itemdict['Overview'] = "See more about Authentic Techs: http://authentictechs.com//"                                  ### content
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "27-28 February"
@@ -634,7 +634,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict={}
 	itemdict["UniqueId"] = "Financial Markets"
 	itemdict['Title'] = "Financial Markets"
-	itemdict['ImagePath'] = "Assets/ppl/financial2.png"
+	itemdict['ImagePath'] = "Assets/workshops/financial2.png"
 	itemdict['Overview'] = """The workshop will be taken by Mr Karthikyean Vijayakumar. Karthikeyan (KK) is the Founder & CEO of Twenty19. A firm believer in new technologies, he works at the intersection of technology and business. He co-founded Deepam, an NGO that provides opportunities & access to the less- privileged children through education. Deepam currently reaches out to over 220 children every weekend, in Chennai – India. He is a keen sportsman – Runs marathons, Plays ultimate Frisbee for Chakraa & Cricket for RunsnWickets. He has run 3 Marathons and 14 half marathons, officially and has also run at state-level sprint competitions.
 Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Batch). He was awarded the BITS Global 30 under 30 award in 2009. """                                  ### content
 	itemdict['Rules'] = "Twenty19"
@@ -658,7 +658,7 @@ Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Bat
 	itemdict={}
 	itemdict["UniqueId"] = "Matlab"
 	itemdict['Title'] = "Matlab"
-	itemdict['ImagePath'] = "Assets/ppl/matlab1.png"
+	itemdict['ImagePath'] = "Assets/workshops/matlab1.png"
 	itemdict['Overview'] = """The workshop will be taken by Mr Karthikyean Vijayakumar. Karthikeyan (KK) is the Founder & CEO of Twenty19. A firm believer in new technologies, he works at the intersection of technology and business. He co-founded Deepam, an NGO that provides opportunities & access to the less- privileged children through education. Deepam currently reaches out to over 220 children every weekend, in Chennai – India. He is a keen sportsman – Runs marathons, Plays ultimate Frisbee for Chakraa & Cricket for RunsnWickets. He has run 3 Marathons and 14 half marathons, officially and has also run at state-level sprint competitions.
 Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Batch). He was awarded the BITS Global 30 under 30 award in 2009. """                                  ### content
 	itemdict['Rules'] = "Twenty19"
@@ -681,7 +681,7 @@ Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Bat
 	itemdict={}
 	itemdict["UniqueId"] = "Context Capture"
 	itemdict['Title'] = "Context Capture"
-	itemdict['ImagePath'] = "Assets/ppl/context1.png"
+	itemdict['ImagePath'] = "Assets/workshops/context1.png"
 	itemdict['Overview'] = """ContextCapture is Bentley's first product release of the Acute3D software technology it acquired earlier this year. The software is ideally suited for any organization that could apply 3D models of real-world context to benefit infrastructure design, construction, or operations. 
 
 Bentley is a global leader dedicated to providing architects, engineers, geospatial professionals, constructors, and owner-operators with comprehensive software solutions for advancing infrastructure. Founded in 1984, Bentley has more than 3,000 colleagues in over 50 countries, more than $600 million in annual revenues, and since 2006 has invested more than $1 billion in research, development, and acquisitions. """
