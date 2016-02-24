@@ -15,7 +15,18 @@
                     <div class="card">
                         <div class="header">
                             <h4 class="title">{{ judge.name }}</h4>
-                            <p class="category">Please click "Save & Lock" once you are done to finalise your evaluation</p>
+                            <p>
+                                <form action="." method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-info btn-danger pull-right" name="leave" value="leave">Leave Event</button>
+                                </form>
+                            </p>
+                            <p class="category">
+                                <ul class="category">
+                                    <li>Please click "Save & Lock" once you are done to finalise your evaluation</li>
+                                    <li>Should you have to leave the event in betweeen, click "Leave Event".<br> This will discard your markings, and you <span style="color:red;">WON'T</span> be able to judge this round later</li>
+                                </ul>
+                            .</p>
                         </div>
                         <div class="content">
                         </div>
@@ -64,7 +75,9 @@
                                     {% endif %}{% if level.label.var10name %}
                                     <th>{{ level.label.var10name }}<br>({{ level.label.var10max }})</th>
                                     {% endif %}
-                                    <th>Total</th>
+                                    <th>Comments</th>
+                                    {% if emsadmin %}
+                                    <th>Total</th>{% endif %}
                                 </thead>
                                 <tbody>
                                     {% for team in teams %}
@@ -75,41 +88,45 @@
                                     {% endif %}
                                     <td>{{ team.leader.name }}</td>
                                     {% if level.label.var1name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var1 }}" min="0" max="{{ level.label.var1max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var1 }}" max="{{ level.label.var1max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var1 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var2name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var2 }}" min="0" max="{{ level.label.var2max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var2 }}" max="{{ level.label.var2max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var2 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var3name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var3 }}" min="0" max="{{ level.label.var3max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var3 }}" max="{{ level.label.var3max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var3 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var4name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var4 }}" min="0" max="{{ level.label.var4max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var4 }}" max="{{ level.label.var4max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var4 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var5name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var5 }}" min="0" max="{{ level.label.var5max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var5 }}" max="{{ level.label.var5max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var5 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var6name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var6 }}" min="0" max="{{ level.label.var6max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var6 }}" max="{{ level.label.var6max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var6 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var7name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var7 }}" min="0" max="{{ level.label.var7max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var7 }}" max="{{ level.label.var7max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var7 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var8name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var8 }}" min="0" max="{{ level.label.var8max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var8 }}" max="{{ level.label.var8max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var8 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var9name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var9 }}" min="0" max="{{ level.label.var9max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var9 }}" max="{{ level.label.var9max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var9 }}</td>
                                     {% endif %}{% endif %}{% if level.label.var10name %}{% if not team.score.is_frozen %}
-                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var10 }}" min="0" max="{{ level.label.var10max }}" name="{{ team.id }}"></td>
+                                    <td><input type="number" class="form-control" required placeholder="2" value="{{ team.score.var10 }}" max="{{ level.label.var10max }}" name="{{ team.id }}"></td>
                                     {% else %}<td>{{ team.score.var10 }}</td>
-                                    {% endif %}{% endif %}
-                                    <td>{{ team.score.total }}</td>
+                                    {% endif %}{% endif %}{% if not team.score.is_frozen %}
+                                    <td><input type="text" class="form-control" placeholder="Time Exceeded" value="{{ team.score.comments }}" name="comment-{{ team.id }}"></td>
+                                    {% else %}<td>{{ team.score.comments }}</td>
+                                    {% endif %}{% if emsadmin %}
+                                    <td>{{ team.score.total }}</td>{% endif %}
+
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="10" style="text-align:center">Nothing in here!</td>
+                                    <td colspan="13" style="text-align:center">Nothing in here!</td>
                                 </tr>
                                 {% endfor %}
                                 <tr>

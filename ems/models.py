@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 # Create your models here.
 
 # The Team model is reflected here, to be ported next time.
@@ -18,16 +19,17 @@ class Score(models.Model):
     team = models.ForeignKey('backend.Team', on_delete=models.PROTECT)
     judge = models.ForeignKey('Judge', on_delete=models.PROTECT)
     is_frozen = models.BooleanField(default=False)
-    var1 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var2 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var3 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var4 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var5 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var6 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var7 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var8 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var9 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    var10 = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
+    var1 = models.IntegerField(default=None, null=True, blank=True)
+    var2 = models.IntegerField(default=None, null=True, blank=True)
+    var3 = models.IntegerField(default=None, null=True, blank=True)
+    var4 = models.IntegerField(default=None, null=True, blank=True)
+    var5 = models.IntegerField(default=None, null=True, blank=True)
+    var6 = models.IntegerField(default=None, null=True, blank=True)
+    var7 = models.IntegerField(default=None, null=True, blank=True)
+    var8 = models.IntegerField(default=None, null=True, blank=True)
+    var9 = models.IntegerField(default=None, null=True, blank=True)
+    var10 = models.IntegerField(default=None, null=True, blank=True)
+    comments = models.CharField(max_length=500, blank=True)
     def __unicode__(self):
         return self.team.name
 
@@ -46,6 +48,7 @@ class Level(models.Model):
 class Judge(models.Model):
     name = models.CharField(max_length=200)
     event = models.ForeignKey('Event.Event')
+    user = models.OneToOneField(User)
     def __unicode__(self):
         return self.name
     # score_set

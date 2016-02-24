@@ -138,12 +138,12 @@ function checkall(gauss){
                                         <th>Room</th>
                                         <th>Availibilty</th>
                                         <th>Allot Seats</th>
-                                        <th>a</th>
-                                        <th>b</th>
-                                        <th>c</th>
-                                        <th>d</th>
-                                        <th>e</th>
-                                        <th>f</th>
+                                        <th>Mattresses</th>
+                                        <th>Bed Sheets</th>
+                                        <th>Buckets</th>
+                                        <th>Mugs</th>
+                                        <th>Extn Boxes</th>
+                                        <th>Quilts</th>
                                         
                                         <th width="8%">Select </th>
                                     </thead>
@@ -156,12 +156,12 @@ function checkall(gauss){
                                                 <td>{{x.room}}</td>
                                                 <td id="{{x.id}}" >{{x.vacancy}}</td>
                                                 <td><input type ="number" name="{{x.id}}alloted" id="{{x.id}}alloted" value="0"/></td>
-                                                <td>{{x.bhavan.a_capacity}}</td>
-                                                <td>{{x.bhavan.b_capacity}}</td>
-                                                <td>{{x.bhavan.c_capacity}}</td>
-                                                <td>{{x.bhavan.d_capacity}}</td>
-                                                <td>{{x.bhavan.e_capacity}}</td>
-                                                <td>{{x.bhavan.f_capacity}}</td>
+                                                <td>{{x.a}}</td>
+                                                <td>{{x.b}}</td>
+                                                <td>{{x.c}}</td>
+                                                <td>{{x.d}}</td>
+                                                <td>{{x.e}}</td>
+                                                <td>{{x.f}}</td>
                                                 <td><label class="checkbox"><input type ="checkbox" name="roomid"  value = "{{x.id}}" data-toggle= "checkbox"></label></td>
                                             </tr>
                                             {% endif %}

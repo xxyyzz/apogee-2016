@@ -16,6 +16,7 @@ from django.db import IntegrityError
 import json
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 
 
@@ -1046,45 +1047,35 @@ def recnacc_home(request):
     return render(request, "regsoft/recnacc_home.html")
 
 
-# def recnacc_notify(request):
-#     gl_list = gleader.objects.all()
-#     res = {}
-#     res['gauss'] =[]
-#     for gl in gl_list:
-#         temp = {}
-#         if gl.initialregistration_set.filter(firewallzo= True, recnacc= False).count() or gl.initialregistration_set.filter(firewallzo= True, controlz= False).count():
-#             temp['glname'] = gl.details.name
-#             temp['college'] = gl.details.college
-#             temp['groupcode']  = gl.groupcode
-#             temp['phone'] = gl.details.phone_one
-#             partmalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='M')
-#             partfemalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='F')
-#             partmaleno = 0
-#             partfemaleno = 0
-#             facmaleno = 0
-#             facfemaleno = 0
-#             for x in partmalenolist:
-#                 if x.is_faculty!=True:
-#                     partmaleno += 1
-#             for x in partfemalenolist:
-#                 if x.is_faculty!=True:
-#                     partfemaleno += 1
-#             for x in partmalenolist:
-#                 if x.is_faculty==True:
-#                     facmaleno += 1
-#             for x in partfemalenolist:
-#                 if x.is_faculty==True:
-#                     facfemaleno += 1
-#             temp['partno'] = str(partmaleno) + ' | ' + str(partfemaleno)
-#             temp['facno'] = str(facmaleno) + ' | ' + str(facfemaleno)
+def recnacc_notify(request):
+    gl_list = gleader.objects.all()
+    res = {}
+    res['gauss'] =[]
+    for gl in gl_list:
+        temp = {}
+        if gl.participant_set.filter(recnacc= False, firewallzo = True).count():
+            temp['glname'] = gl.details.name
+            temp['college'] = str(gl.details.college)
+            temp['groupcode']  = gl.groupcode
+            temp['phone'] = gl.details.phone_one
+            partmalenolist = Participant.objects.filter(grpleader = gl, gender='M')
+            partfemalenolist = Participant.objects.filter(grpleader = gl, gender='F')
+            partmaleno = 0
+            partfemaleno = 0
+            facmaleno = 0
+            facfemaleno = 0
+            for x in partmalenolist:
+                partmaleno += 1
+            for x in partfemalenolist:
+                partfemaleno += 1
 
-#             res['gauss'].append(temp)
+            temp['partno'] = str(partmaleno)
+            temp['facno'] = str(facmaleno)
 
+            res['gauss'].append(temp)
+            return HttpResponse(json.dumps(res), content_type="application/json")
+    
 
-#     try:
-#         return HttpResponse(json.dumps(res), content_type="application/json")
-#     except:
-#         return Http404
 
 def recnacc_dashboard(request,gl_id):
     gl_ob = gleader.objects.filter(id = gl_id)
@@ -1261,7 +1252,7 @@ def recnacc_allot(request,gl_id):
             selectedroom_availibilty = selectedroom.vacancy
             unalloted_males = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'M' and x.recnacc != True]
             unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True]
-            if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
+            if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' : #use or for extra bhavanas
                 if no_females<noalloted:
                     return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apoogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
                 for y in range(noalloted):
@@ -1458,7 +1449,7 @@ def recnacc_room_list(request):
     for x in rooms:
         prtno = Participant.objects.filter(room = x).count()
         if x.id != 1:
-            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
+            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id, "a":x.a,"b":x.b,"c":x.c,"d":x.d,"e":x.e,"f":x.f})
 
     context = RequestContext(request)
     context_dict = {'plist':plist}
