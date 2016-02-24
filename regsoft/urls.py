@@ -34,7 +34,7 @@ urlpatterns = [
 # 	# url(r'^controlz/billdetails/(?P<bill_id>\d+)$', ),
 
 	url(r'^controlz/bill_print/$', controlz_bill_print),
-# 	url(r'^group_notify/$', recnacc_notify),
+	url(r'^group_notify/$', recnacc_notify),
 
 
 
