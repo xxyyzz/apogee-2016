@@ -91,7 +91,8 @@
                                     {% endfor %}
                                     <tr>
                                         <td colspan="10">
-                                            {% if level.name == 'Registered' %}<button type="submit" class="btn btn-info btn-fill" name="promote" value="{{ level.position }}">Promote</button>{% endif %}
+                                            {% if not forloop.first %}<button type="submit" class="btn btn-info btn-fill" name="promote" value="{{ level.position }}">Promote</button>{% endif %}
+                                            {% if not forloop.last and not level.name == "Registered" %}<button type="submit" class="btn btn-danger btn-fill" name="demote" value="{{ level.position }}">Demote</button>{% endif %}
                                         </td>
                                     </tr>
                                     </tbody>

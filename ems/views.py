@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from ems.models import Score, Level, Judge, Label
 from Event.models import Event
 from backend.models import Participant, Team
+from django.contrib.auth.models import User
 
 # Create your views here.
 EMSADMINS = [
@@ -235,11 +236,15 @@ def events_home(request, eventid):
         'levels' : levels,
         'emsadmin' : emsadmin,
     }
-    return render(request, 'ems/events_home.html', context)
+    if emsadmin:
+        return render(request, 'ems/events_home_admin.html', context)
+    else:
+        return render(request, 'ems/events_home.html', context)
 
 def events_levels(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if request.method == 'POST':
         if 'delete-level' in request.POST:
             levelid = request.POST['delete-level']
@@ -258,12 +263,14 @@ def events_levels(request, eventid):
     context = {
         'event' : event,
         'levels' : levels,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_levels.html', context)
 
 def events_levels_add(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if request.method == 'POST':
         if 'add' in request.POST:
             name = request.POST['name']
@@ -282,12 +289,14 @@ def events_levels_add(request, eventid):
     context = {
         'event' : event,
         'levels' : levels,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_levels_add.html', context)
 
 def events_labels_add(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if request.method == 'POST':
         if 'add' in request.POST:
             names = request.POST.getlist("name")
@@ -304,25 +313,32 @@ def events_labels_add(request, eventid):
     context = {
         'event' : event,
         'levels' : levels,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_labels_add.html', context)
 
 def events_judges_add(request, eventid):
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
+    emsadmin = True if request.user.username in EMSADMINS else False
     if request.method == 'POST':
         if 'add' in request.POST:
             name = request.POST['name']
-            Judge.objects.create(name=name, event=event)
+            username = request.POST['username']
+            password = request.POST['password']
+            judge = Judge.objects.create(name=name, event=event)
+            # user = User.objects.create_user(username=username, password=password)
             return redirect('ems:events_levels', event.id)
     context = {
         'event' : event,
         'levels' : levels,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_judges_add.html', context)
 
 
 def events_levels_edit(request, eventid, levelid):
+    emsadmin = True if request.user.username in EMSADMINS else False
     event = Event.objects.get(id=eventid)
     level = Level.objects.get(id=levelid)
     if 'save' in request.POST:
@@ -349,6 +365,7 @@ def events_levels_edit(request, eventid, levelid):
     context = {
         'event' : event,
         'level' : level,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_levels_edit.html', context)
 
@@ -424,6 +441,7 @@ def events_participants(request, eventid):
 
 def events_participants_add(request, eventid):
     event = Event.objects.get(id=eventid)
+    emsadmin = True if request.user.username in EMSADMINS else False
     parts = []
     if request.method == 'POST':
         if 'fetch' in request.POST:
@@ -454,6 +472,7 @@ def events_participants_add(request, eventid):
     context = {
         'event' : event,
         'parts' : parts,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_participants_add.html', context)
 
@@ -483,18 +502,54 @@ def events_teams_add(request, eventid):
     if request.method == 'POST':
         if 'fetch' in request.POST:
             partid = request.POST['aadhaar']
-            partids = partid.split()
-            for partid in partids:
-                try:
-                    part = Participant.objects.get(aadhaar__icontains=partid)
-                    parts.append(part)
-                except:
-                    pass
-                try:
-                    part = Participant.objects.get(id__icontains=partid)
-                    parts.append(part)
-                except:
-                    pass
+            if ";" in partid:
+                existingteams = Team.objects.filter(event=event)
+                newteams = partid.split(";")
+                for newteam in newteams:
+                    team_parts = []
+                    team_partids = newteam.split()
+                    for team_partid in team_partids:
+                        try:
+                            part = Participant.objects.get(aadhaar__icontains=team_partid)
+                            team_parts.append(part)
+                        except:
+                            pass
+                        try:
+                            part = Participant.objects.get(id__icontains=team_partid)
+                            team_parts.append(part)
+                        except:
+                            pass
+                    if team_parts:
+                        for part in parts:
+                            for existingteam in existingteams:
+                                if part in existingteam.members.all():
+                                    error = part.name+" is already a part of "+team.leader.name+"'s Team."
+                                    errors.append(error)
+                                if part == existingteam.leader:
+                                    error = part.name+" already have their own team."
+                                    errors.append(error)
+                            if errors:
+                                return HttpResponse(error)
+                        leader = team_parts[0]
+                        team = Team.objects.create(leader=leader, event=event)
+                        members = team_parts[1:]
+                        for member in members:
+                            team.members.add(member)
+                return redirect('ems:events_participants', event.id)
+
+            else:
+                partids = partid.split()
+                for partid in partids:
+                    try:
+                        part = Participant.objects.get(aadhaar__icontains=partid)
+                        parts.append(part)
+                    except:
+                        pass
+                    try:
+                        part = Participant.objects.get(id__icontains=partid)
+                        parts.append(part)
+                    except:
+                        pass
         if 'next' in request.POST:
             teams = event.team_set.all()
             partids = request.POST.getlist('part')
@@ -516,8 +571,9 @@ def events_teams_add(request, eventid):
             partids = request.POST.getlist('part')
             leaderid = request.POST['leader']
             name = request.POST['name']
+            comments = request.POST['comments']
             leader = Participant.objects.get(id=leaderid)
-            team = Team.objects.create(leader=leader, event=event, name=name)
+            team = Team.objects.create(leader=leader, event=event, name=name, comments=comments)
             for partid in partids:
                 if partid != leaderid:
                     part = Participant.objects.get(id=partid)

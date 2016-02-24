@@ -28,6 +28,7 @@ urlpatterns = [
     # url(r'^username/save/(?P<user_id>\d+)/$', views.username_save),
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^sendconfirmationmails/$', send_mail),
+    url(r'^sendmails/$', send_mail_full),
     # url(r'^$', views.home),
     # url(r'^college/select/$', views.college_select),
     # # url(r'^username/set/(?P<user_id>\d+)/$', views.username_set),
