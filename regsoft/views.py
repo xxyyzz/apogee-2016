@@ -607,7 +607,7 @@ def controlz_bill_print(request):
         total = bill_ob.amount
         maleno = Participant.objects.filter(bill_id = bill_id, gender= 'M').count()
         femaleno = Participant.objects.filter(bill_id = bill_id, gender= 'F').count()
-
+        onlinepaid= Participant.objects.filter(bill_id = bill_id, fee_paid=True).count()
         if bill_ob.draft_number:
             ddno = bill_ob.draft_number
         else:
@@ -623,6 +623,7 @@ def controlz_bill_print(request):
         'given' : bill_ob.given,
         'balance' : bill_ob.balance,
         'ddno' : ddno,
+        'onlinepaid': onlinepaid,
 
         }
 
