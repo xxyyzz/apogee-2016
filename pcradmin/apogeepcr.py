@@ -280,7 +280,7 @@ Hello %s,
 
 We are pleased to confirm your participation in APOGEE 2015.
 
-Please find attached your confirmation letter, which you are required to produce while entering the campus.
+Please find attached your confirmation letter, which you are required to produce while entering the campus. You can find the link to download the pdf in your profile page in bits-apogee.org.
 
 Good Luck!
 
@@ -296,4 +296,43 @@ BITS Pilani
                 email.attach_file('/home/dvm/taruntest/apogee/%s.pdf' % part.id)
                 # email.attach_file('/home/dvm/taruntest/apogee/BOSM_checklist.pdf')
                 email.send()
+    return HttpResponse("sent")
+
+
+
+def send_mail_full(request):
+    parts = Participant.objects.filter(pcr_approval=True, is_bitsian=False)
+    # parts = Participant.objects.filter(id=30)
+    from django.core.mail.backends.smtp import EmailBackend
+    awsbackend = EmailBackend(
+        host='email-smtp.us-east-1.amazonaws.com',
+        port=587,
+        username='AKIAITSG5NOGTWUOKGKA',
+        password='AgMT6v+BaxhlW+3AyNxGiJ1m1F9RRxfGtRhLfk3kwoIi',
+        use_tls=True,
+        fail_silently=False,
+    )
+    for part in parts:
+        body = unicode(u'''
+Hello %s,
+
+We are pleased to confirm your participation in APOGEE 2015.
+
+You can find the link to download the confirmation pdf in your profile page in bits-apogee.org.
+
+ If you don't find the link to the pdf you are still confirmed and your participation is still confirmed and you are welcome to participate in the fest.
+
+Good Luck!
+
+Pranjal Gupta
+CoStAAn (Head)
+Department of Visual Media
+BITS Pilani
+ ''') % part.name
+        # attachment = '/home/dvm/taruntest/apogee/%s.pdf' % gl_id
+        # a_name = 'Oasis'+str(randint(9901,99000))
+        # shutil.copy2(attachment, '/home/dvm/taruntest/apogee/%s.pdf' % a_name)
+        email = EmailMessage('APOGEE 2016', body, 'APOGEE BITS Pilani <noreply@bits-apogee.org>', [part.email_id], connection=awsbackend)
+        # email.attach_file('/home/dvm/taruntest/apogee/BOSM_checklist.pdf')
+        email.send()
     return HttpResponse("sent")
