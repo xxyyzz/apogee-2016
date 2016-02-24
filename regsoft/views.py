@@ -16,6 +16,7 @@ from django.db import IntegrityError
 import json
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 
 
