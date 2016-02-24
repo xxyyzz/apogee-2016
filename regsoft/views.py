@@ -1073,7 +1073,7 @@ def recnacc_notify(request):
             temp['facno'] = str(facmaleno)
 
             res['gauss'].append(temp)
-            return HttpResponse(json.draft_numberps(res), content_type="application/json")
+            return HttpResponse(json.draft_numbers(res), content_type="application/json")
     
 
 
