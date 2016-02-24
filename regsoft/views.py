@@ -1053,7 +1053,7 @@ def recnacc_notify(request):
     res['gauss'] =[]
     for gl in gl_list:
         temp = {}
-        if gl.participant_set.filter(recnacc= False).count():
+        if gl.participant_set.filter(recnacc= False, firewallzo = True).count():
             temp['glname'] = gl.details.name
             temp['college'] = str(gl.details.college)
             temp['groupcode']  = gl.groupcode
