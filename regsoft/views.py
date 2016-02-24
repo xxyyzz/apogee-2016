@@ -1073,12 +1073,9 @@ def recnacc_notify(request):
             temp['facno'] = str(facmaleno)
 
             res['gauss'].append(temp)
+            return HttpResponse(json.draft_numberps(res), content_type="application/json")
+    
 
-
-    try:
-        return HttpResponse(json.dumps(res), content_type="application/json")
-    except:
-        return Http404
 
 def recnacc_dashboard(request,gl_id):
     gl_ob = gleader.objects.filter(id = gl_id)
