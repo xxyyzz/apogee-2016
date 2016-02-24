@@ -16,6 +16,7 @@ from django.db import IntegrityError
 import json
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 
 
 
@@ -1046,45 +1047,35 @@ def recnacc_home(request):
     return render(request, "regsoft/recnacc_home.html")
 
 
-# def recnacc_notify(request):
-#     gl_list = gleader.objects.all()
-#     res = {}
-#     res['gauss'] =[]
-#     for gl in gl_list:
-#         temp = {}
-#         if gl.initialregistration_set.filter(firewallzo= True, recnacc= False).count() or gl.initialregistration_set.filter(firewallzo= True, controlz= False).count():
-#             temp['glname'] = gl.details.name
-#             temp['college'] = gl.details.college
-#             temp['groupcode']  = gl.groupcode
-#             temp['phone'] = gl.details.phone_one
-#             partmalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='M')
-#             partfemalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='F')
-#             partmaleno = 0
-#             partfemaleno = 0
-#             facmaleno = 0
-#             facfemaleno = 0
-#             for x in partmalenolist:
-#                 if x.is_faculty!=True:
-#                     partmaleno += 1
-#             for x in partfemalenolist:
-#                 if x.is_faculty!=True:
-#                     partfemaleno += 1
-#             for x in partmalenolist:
-#                 if x.is_faculty==True:
-#                     facmaleno += 1
-#             for x in partfemalenolist:
-#                 if x.is_faculty==True:
-#                     facfemaleno += 1
-#             temp['partno'] = str(partmaleno) + ' | ' + str(partfemaleno)
-#             temp['facno'] = str(facmaleno) + ' | ' + str(facfemaleno)
+def recnacc_notify(request):
+    gl_list = gleader.objects.all()
+    res = {}
+    res['gauss'] =[]
+    for gl in gl_list:
+        temp = {}
+        if gl.participant_set.filter(firewallzo= True, recnacc= False).count() or gl.participant_set.filter(firewallzo= True, controlz= False).count():
+            temp['glname'] = gl.details.name
+            temp['college'] = str(gl.details.college)
+            temp['groupcode']  = gl.groupcode
+            temp['phone'] = gl.details.phone_one
+            partmalenolist = Participant.objects.filter(grpleader = gl, gender='M')
+            partfemalenolist = Participant.objects.filter(grpleader = gl, gender='F')
+            partmaleno = 0
+            partfemaleno = 0
+            facmaleno = 0
+            facfemaleno = 0
+            for x in partmalenolist:
+                partmaleno += 1
+            for x in partfemalenolist:
+                partfemaleno += 1
 
-#             res['gauss'].append(temp)
+            temp['partno'] = str(partmaleno)
+            temp['facno'] = str(facmaleno)
 
+            res['gauss'].append(temp)
+            return HttpResponse(json.dumps(res), content_type="application/json")
+    
 
-#     try:
-#         return HttpResponse(json.dumps(res), content_type="application/json")
-#     except:
-#         return Http404
 
 def recnacc_dashboard(request,gl_id):
     gl_ob = gleader.objects.filter(id = gl_id)
