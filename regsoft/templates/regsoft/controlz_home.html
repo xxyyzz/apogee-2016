@@ -167,7 +167,7 @@
         <script>
         setInterval(function(){
             var rec_not = new XMLHttpRequest();
-            var url = "http://www.bits-oasis.org/2015/group_notify/";
+            var url = "http://www.bits-apogee.org/2016/group_notify/";
             var out="" ;
             rec_not.onreadystatechange = function() {
                 if (rec_not.readyState == 4 && rec_not.status == 200) {
@@ -182,7 +182,7 @@
             function myFunction(arr) {
                 for(i = 0; i < arr.length; i++) 
                 {
-                   out += '<tr><td>'+ (i+1) + '</td><td>' + arr[i].glname + '</td><td>' + arr[i].college + '</td><td>' + arr[i].groupcode + '</td><td>' + arr[i].partno  + '</td><td>' + arr[i].facno + '</td><td>' +  arr[i].phone  + '</td></tr>' ; 
+                   out += '<tr><td>'+ (i+1) + '</td><td>' + arr[i].glname + '</td><td>' + arr[i].college + '</td><td>' + arr[i].groupcode + '</td><td>' + arr[i].partno + '</td><td>'  +  arr[i].phone  + '</td></tr>' ; 
                 }
                 document.getElementById("rec_notif").innerHTML = out;
             }
