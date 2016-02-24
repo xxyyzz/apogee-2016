@@ -1435,7 +1435,7 @@ def encode_glid(gl_id):
         encoded = encoded + mixed[randint(0,51)]
     return encoded
 def get_barcode(request):
-    list_of_people_selected = Participant.objects.filter(pcr_approval=True).order_by('college__name')
+    list_of_people_selected = Participant.objects.filter(pcr_approval=True, is_bitsian=False).order_by('college__name')
     final_display = []
     for x in list_of_people_selected:
         name = x.name
