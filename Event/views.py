@@ -63,7 +63,6 @@ def summary(request):
 	return JsonResponse(response, safe=False)
 
 
-
 def windows_json(request):
 	resp={}
 	resp['Groups'] =[]
@@ -81,7 +80,7 @@ def windows_json(request):
 	tempx={}
 	tempx['UniqueId'] = "Kernel Events"
 	tempx['Title'] = "Kernel Events"
-	tempx['ImagePath'] = ""
+	tempx['ImagePath'] = "Assets/eventscat/KernelEvents.png"
 	tempx['SubItems'] = []
 
 
@@ -103,7 +102,25 @@ def windows_json(request):
 		itemdict= {}
 		itemdict["UniqueId"] = str(k.name)
 		itemdict['Title'] = itemdict['UniqueId']
-		itemdict['ImagePath'] = "Assets/"+ str(k.name.replace(" ","").lower() ) + ".png"
+
+
+		if str(k.name) == 'Hackathon':
+			itemdict['ImagePath'] = "Assets/kernel/hackathon.png"
+		elif str(k.name) == 'Dhiti':
+			itemdict['ImagePath'] = "Assets/kernel/dhiti.png"
+		elif str(k.name) == 'Reverse Engineering':
+			itemdict['ImagePath'] = "Assets/kernel/reverse.png"	
+		elif str(k.name) == 'AIC':
+			itemdict['ImagePath'] = "Assets/kernel/aic.png"	
+		elif str(k.name) == 'Robots at war':
+			itemdict['ImagePath'] = "Assets/kernel/robowars.png"	
+		elif str(k.name) == 'I-strike':
+			itemdict['ImagePath'] = "Assets/kernel/istrike.png"	
+		elif str(k.name) == 'Full Throttle Grand Prix':
+			itemdict['ImagePath'] = "Assets/kernel/ftgp.png"	
+		else:
+			itemdict['ImagePath'] = ''
+						
 		try:
 			itemdict['Overview'] = str(   gaussx( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
 		except:
@@ -184,9 +201,27 @@ def windows_json(request):
 		tempx={}
 		tempx['UniqueId'] = str(z.name)
 		tempx['Title'] = tempx['UniqueId']
-		tempx['ImagePath']= "Assets/DarkGray.png"
+
+		if str(z.name) == 'miscellaneous':
+			tempx['ImagePath'] = "Assets/eventscat/misc.png"
+		elif str(z.name) == 'quizzes':
+			tempx['ImagePath'] = "Assets/eventscat/quizzes.png"
+		elif str(z.name) == 'develop and discover':
+			tempx['ImagePath'] = "Assets/eventscat/develop.png"
+		elif str(z.name) == 'economania':
+			tempx['ImagePath'] = "Assets/eventscat/economania.png"
+		elif str(z.name) == 'online events':
+			tempx['ImagePath'] = "Assets/eventscat/online.png"
+		elif str(z.name) == 'automation':
+			tempx['ImagePath'] = "Assets/eventscat/automation.png"
+		elif str(z.name) == 'code and simulate':
+			tempx['ImagePath'] = "Assets/eventscat/code.png"					
+		elif str(z.name) == 'build and design':
+			tempx['ImagePath'] = "Assets/eventscat/build.png"
+		else:
+			tempx['ImagePath'] = ''
 		tempx['SubItems'] = []
-		for e_ob in Event.objects.filter(category=z,is_displayed=True):
+		for e_ob in Event.objects.filter(category=z,is_displayed=True,is_kernel=False):
 			itemdict= {}
 			itemdict["UniqueId"] = str(e_ob.name)
 			itemdict['Title'] = itemdict['UniqueId']
@@ -294,12 +329,12 @@ def windows_json(request):
 	itemdict={}
 	itemdict["UniqueId"] = "Dr.Richard Stallman"
 	itemdict['Title'] = "Dr.Richard Stallman"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/ppl/stallman.png"
 	itemdict['Overview'] = """Dr. Richard Stallman launched the free software movement in 1983 and started the development of the GNU operating system in 1984 (which eventually helped develop Linux), and has been instrumental in the development of the GNU Project and the Free Software Foundation ever since. Richard developed a number of widely used programs that are components of GNU, including the original Emacs, the GNU Compiler Collection, the GNU symbolic debugger (gdb), GNU Emacs, and various others. He has been one of the most vociferous advocates of free software in his fight against software patents and dangerous extensions of copyright law.
 
 The remarkable work undertaken by Dr. Stallman has been recognized worldwide and has led to him being awarded the ACM Grace Hopper Award, a MacArthur Foundation fellowship, the Electronic Frontier Foundation's Pioneer Award, and the the Takeda Award for Social/Economic Betterment, as well as several doctorates honoris causa.
 
-Dr. Stallman will speak at the Think Again Conclave on 26th February about the burning issue of Net Neutrality vs Free Basics and why it is important to take the right side."""                                  ### content
+Dr. Stallman will speak at the Think Again Conclave on 26th February about the burning issue of Net Neutrality vs Free Basics and why it is important to take the right side. """                                  ### content
 	itemdict['Rules'] = "26 February"
 	itemdict['Eligibility'] = ""
 	itemdict['Guidelines'] = ""
@@ -317,14 +352,10 @@ Dr. Stallman will speak at the Think Again Conclave on 26th February about the b
 	tempx['SubItems'].append(itemdict)
 
 
-
-
-
-
 	itemdict={}
 	itemdict["UniqueId"] = "Mobasshar Javed Akbar"
 	itemdict['Title'] = "Mobasshar Javed Akbar"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/ppl/mkakbar.png"
 	itemdict['Overview'] = """Since starting his career at the Times of India way back in 1971, Mobasshar Javed Akbar has gone on to become one of the most revered and exalted faces in the world of Indian journalism. Be it his work at Sunday, India's first political weekly, or the conception of The Telegraph, Mr. Akbar has redefined quality journalism at every stage of his career. He has deftly shouldered the onerous responsibility of being the editor in chief of Deccan Chronicle and The Sunday Guardian, and also pioneered the launch of Asian Age, India's first global newspaper.
 
 
@@ -380,7 +411,7 @@ He has authored some extremely insightful books, including Byline, Nehru: The Ma
 	itemdict={}
 	itemdict["UniqueId"] = "Ashok Vajpeyi"
 	itemdict['Title'] = "Ashok Vajpeyi"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/ppl/ashok.png"
 	itemdict['Overview'] = """Ashok Vajpeyi  (born 1941) is an Indian poet in Hindi, essayist, literary-cultural critic, apart from being a noted cultural and arts administrator, and a former civil servant. Noted for works like Kahin Nahin Wahin, Tatpurush, Bahuri Akela, Ibarat Se Giri Matrayen,among others , he has also published works on literary and art criticism like Filhal, Kuchh Poorvagrah, Samay se Bahar, Kavita ka Galp and Sidhiyan Shuru ho Gayi Hain. 
  He was chairman, Lalit Kala Akademi India's National Academy of Arts, Ministry of Culture, Govt of India, 2008–2011. He has published over 23 books of poetry, criticism and art, and was awarded the Sahitya Akademi Award given by Sahitya Akademi, India's National Academy of Letters, in 1994 for his poetry collection, Kahin Nahin Wahin.
 He has also won the Dayavati Modi Kavi Shekhar Samman, 1994, and the Kabir Samman (2006) among others. """                                  ### content
@@ -410,7 +441,7 @@ He has also won the Dayavati Modi Kavi Shekhar Samman, 1994, and the Kabir Samma
 	itemdict={}
 	itemdict["UniqueId"] = "Rukmini Nair"
 	itemdict['Title'] = "Rukmini Nair"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/ppl/rukmini.png"
 	itemdict['Overview'] = """Rukmini Bhaya Nair is an eminent linguist, award winning poet, writer and critic of India. She won the First Prize for her poem Kali in the "All India Poetry Competition" in 1990 organised by The Poetry Society (India) in collaboration with British Council. She is currently a Professor at Humanities and Social Sciences department of the Indian Institute of Technology Delhi (IIT Delhi). Nair is known for being a trenchant critic of the Hindutva ideology and the religious and caste discrimination that it promotes.
 
 Nair serves on the editorial boards of the International Journal of Literary Semantics (De Gruyter: Berlin & New York), The Journal of Multicultural Discourses (Multilingual Matters: London and Beijing); The Journal of Pragmatics (Elseiver: Amsterdam); Psychology & Social Practice (an e-journal) and The Macmillan Essential Dictionary among others. 
@@ -449,7 +480,7 @@ Her awards and fellowships include J.N. Tata Scholarship, the Hornby Foundation 
 	itemdict={}
 	itemdict["UniqueId"] = "Anand Neelakantan"
 	itemdict['Title'] = "Anand Neelakantan"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/ppl/anand.png"
 	itemdict['Overview'] = """Anand Neelakantan is an Indian author from Kerala. His famous works include Asura: Tale of the Vanquished, Ajaya: Roll of the Dice andRise of Kali: Duryodhana's Mahabharata.
 Asura: Tale of the Vanquished was Anand's debut novel. Upon release, it instantly topped the charts, and went on to become a best seller. His second book, Ajaya: Roll of the Dice, topped the best seller charts for sixteen consecutive weeks. Anand is known to have created a whole new genre in literature - the counter telling of mythological epics. Asura narrates the Ramayana from the perspective of its anti-hero,Ravana. Similarly, Ajaya portrays the Mahabharata from the perspective of the Kauravas.
 
@@ -481,7 +512,7 @@ Anand Neelakantan was rated as one of the most promising writers by the Indian E
 	itemdict={}
 	itemdict["UniqueId"] = "Ajay Chaturvedi"
 	itemdict['Title'] = "Ajay Chaturvedi"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/ppl/ajay.png"
 	itemdict['Overview'] = """Ajay Chaturvedi is a social entrepreneur and author. He is an alumnus of BITS Pilani and the University of Pennsylvania School of Engineering and Applied Science. He is the founder of HarVa, a business process outsourcing organization. The organization aims to improve the lifestyle of rural India using innovative and practical techniques. It reflects his belief in the power of cost-effective innovation as a method of development across the world, especially in rural India.
 
 Ajay's book, Lost Wisdom of the Swastika, was a runaway best seller. Based on a true account, it is an engaging story of a man trying to find himself amidst the intricacies of the world around him. 
@@ -530,7 +561,7 @@ Ajay was CNN IBN's Youth Icon of the year 2011. He has also been honoured as an 
 	itemdict={}
 	itemdict["UniqueId"] = "Ethical Hacking"
 	itemdict['Title'] = "Ethical Hacking"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/workshops/hacking.png"
 	itemdict['Overview'] = """The workshop will be taken by Mr Akshay Awasthi, the CEO of Authentic Techs. Akshay Awasthi is one of the country’s best Information Security & Cyber Crime Consultant. The young and dynamic Akshay has not only assisted in solving complicated cyber crime cases but has also played a key role in spreading awareness about information security and cyber crimes. Akshay has trained more than 8000 personnel globally which include students from various ﬁelds, professionals from companies like Microsoft, Cisco, Intel etc and cyber security personnel.
 See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """                                  ### content
 	
@@ -557,7 +588,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict={}
 	itemdict["UniqueId"] = "Surface Computing"
 	itemdict['Title'] = "Surface Computing"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/workshops/surface1.png"
 	itemdict['Overview'] = "See more about Authentic Techs: http://authentictechs.com//"                                  ### content
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "26 February"
@@ -578,7 +609,7 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	itemdict={}
 	itemdict["UniqueId"] = "Android App Development"
 	itemdict['Title'] = "Android App Development"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/workshops/android-icon.png"
 	itemdict['Overview'] = "See more about Authentic Techs: http://authentictechs.com//"                                  ### content
 	itemdict['Rules'] = "Authentic Techs"
 	itemdict['Eligibility'] = "27-28 February"
@@ -597,32 +628,13 @@ See more about Akshay Awasthi: http://authentictechs.com/akshay-awasthi-2/ """  
 	tempx['SubItems'].append(itemdict)
 
 
-	itemdict={}
-	itemdict["UniqueId"] = "Dr.Richard Stallman"
-	itemdict['Title'] = "Dr.Richard Stallman"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
-	itemdict['Overview'] = ""                                  ### content
-	itemdict['Rules'] = "28 February"
-	itemdict['Eligibility'] = ""
-	itemdict['Guidelines'] = ""
-	itemdict['Judging Criteria'] = ""
-	itemdict['Problem Statements'] = ""
-	itemdict['Resources'] = ""
-	itemdict['Sample Questions'] = ""
-	itemdict['Specifications'] = ""
-	itemdict['Materials'] = ""
-	itemdict['Registration Details'] = ""
-	itemdict['FAQs'] = ""
-	itemdict['Sponsors'] = ""
-	itemdict['Contacts'] = ""
 
-	tempx['SubItems'].append(itemdict)
 
 
 	itemdict={}
 	itemdict["UniqueId"] = "Financial Markets"
 	itemdict['Title'] = "Financial Markets"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/workshops/financial2.png"
 	itemdict['Overview'] = """The workshop will be taken by Mr Karthikyean Vijayakumar. Karthikeyan (KK) is the Founder & CEO of Twenty19. A firm believer in new technologies, he works at the intersection of technology and business. He co-founded Deepam, an NGO that provides opportunities & access to the less- privileged children through education. Deepam currently reaches out to over 220 children every weekend, in Chennai – India. He is a keen sportsman – Runs marathons, Plays ultimate Frisbee for Chakraa & Cricket for RunsnWickets. He has run 3 Marathons and 14 half marathons, officially and has also run at state-level sprint competitions.
 Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Batch). He was awarded the BITS Global 30 under 30 award in 2009. """                                  ### content
 	itemdict['Rules'] = "Twenty19"
@@ -646,7 +658,7 @@ Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Bat
 	itemdict={}
 	itemdict["UniqueId"] = "Matlab"
 	itemdict['Title'] = "Matlab"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/workshops/matlab1.png"
 	itemdict['Overview'] = """The workshop will be taken by Mr Karthikyean Vijayakumar. Karthikeyan (KK) is the Founder & CEO of Twenty19. A firm believer in new technologies, he works at the intersection of technology and business. He co-founded Deepam, an NGO that provides opportunities & access to the less- privileged children through education. Deepam currently reaches out to over 220 children every weekend, in Chennai – India. He is a keen sportsman – Runs marathons, Plays ultimate Frisbee for Chakraa & Cricket for RunsnWickets. He has run 3 Marathons and 14 half marathons, officially and has also run at state-level sprint competitions.
 Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Batch). He was awarded the BITS Global 30 under 30 award in 2009. """                                  ### content
 	itemdict['Rules'] = "Twenty19"
@@ -669,7 +681,7 @@ Karthikeyan holds a degree in mechanical engineering from BITS, Pilani (2000 Bat
 	itemdict={}
 	itemdict["UniqueId"] = "Context Capture"
 	itemdict['Title'] = "Context Capture"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
+	itemdict['ImagePath'] = "Assets/workshops/context1.png"
 	itemdict['Overview'] = """ContextCapture is Bentley's first product release of the Acute3D software technology it acquired earlier this year. The software is ideally suited for any organization that could apply 3D models of real-world context to benefit infrastructure design, construction, or operations. 
 
 Bentley is a global leader dedicated to providing architects, engineers, geospatial professionals, constructors, and owner-operators with comprehensive software solutions for advancing infrastructure. Founded in 1984, Bentley has more than 3,000 colleagues in over 50 countries, more than $600 million in annual revenues, and since 2006 has invested more than $1 billion in research, development, and acquisitions. """
