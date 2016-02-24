@@ -255,6 +255,7 @@ def events_levels(request, eventid):
             judgeid = request.POST['delete-judge']
             judge = Judge.objects.get(id=judgeid)
             judge.level_set.clear()
+            judge.user.delete()
             judge.delete()
         if 'delete-label' in request.POST:
             labelid = request.POST['delete-label']
@@ -326,8 +327,13 @@ def events_judges_add(request, eventid):
             name = request.POST['name']
             username = request.POST['username']
             password = request.POST['password']
-            judge = Judge.objects.create(name=name, event=event)
-            # user = User.objects.create_user(username=username, password=password)
+            try:
+                user = User.objects.create_user(username=username, password=password)
+            except:
+                return HttpResponse("Please use a different username. Press the back button to continue")
+            judge = Judge.objects.create(name=name, event=event, user=user)
+            judge.user = user
+            judge.save()
             return redirect('ems:events_levels', event.id)
     context = {
         'event' : event,
@@ -381,8 +387,26 @@ def events_levels_judge(request, eventid, levelid, judgeid):
     event = Event.objects.get(id=eventid)
     level = Level.objects.get(id=levelid)
     judge = Judge.objects.get(id=judgeid)
+    emsadmin = True if request.user.username in EMSADMINS else False
+    if not emsadmin and request.user != judge.user:
+        return redirect('ems:user_login')
     if request.method == 'POST':
-        if "save" or "freeze" in request.POST:
+        if 'leave' in request.POST:
+            print "leave"
+            for team in level.teams.all():
+                try:
+                    score = Score.objects.get(level=level, team=team, judge=judge)
+                    if not score.is_frozen:
+                        score.delete()
+                        score = Score.objects.create(level=level, team=team, judge=judge)
+                        score.is_frozen = True
+                        score.save()
+                except:
+                    score = Score.objects.create(level=level, team=team, judge=judge)
+                    score.is_frozen = True
+                    score.save()
+        elif "save" or "freeze" in request.POST:
+            print "save"
             for team in level.teams.all():
                 scores = request.POST.getlist(str(team.id))
                 try:
@@ -392,6 +416,8 @@ def events_levels_judge(request, eventid, levelid, judgeid):
                 for i, val in enumerate(scores):
                     attr = 'var' + str(i+1)
                     setattr(score, attr, val)
+                comments = request.POST['comment-'+str(team.id)]
+                score.comments = comments
                 if "freeze" in request.POST:
                     score.is_frozen = True
                 score.save()
@@ -418,6 +444,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
         'level' : level,
         'judge' : judge,
         'teams' : teams,
+        'emsadmin' : emsadmin,
     }
     return render(request, 'ems/events_judge_edit.html', context)
 
@@ -535,6 +562,8 @@ def events_teams_add(request, eventid):
                         members = team_parts[1:]
                         for member in members:
                             team.members.add(member)
+                        registered = Level.objects.get(name="Registered", event=event)
+                        team.levels.add(registered)
                 return redirect('ems:events_participants', event.id)
 
             else:
