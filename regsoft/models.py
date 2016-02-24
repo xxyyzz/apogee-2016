@@ -8,12 +8,7 @@ class Bhavan(models.Model):
 		return self.name
 
 # class Inventory(models.Model):
-# 	a = models.IntegerField(default=0, null=True)
-# 	b = models.IntegerField(default=0, null=True)
-# 	c = models.IntegerField(default=0, null=True)
-# 	d = models.IntegerField(default=0, null=True)
-# 	e = models.IntegerField(default=0, null=True)
-# 	f = models.IntegerField(default=0, null=True)
+# 	
 # 	room = models.ForeignKey('Room', default = None)
 # 	gl_id= models.IntegerField(null=True, default=0)
 # 	def __unicode__(self):
@@ -23,6 +18,12 @@ class Room(models.Model):
 	bhavan=models.ForeignKey('Bhavan')
 	room=models.CharField(max_length=50)
 	vacancy=models.IntegerField()
+	a = models.IntegerField(default=0, null=True)
+	b = models.IntegerField(default=0, null=True)
+	c = models.IntegerField(default=0, null=True)
+	d = models.IntegerField(default=0, null=True)
+	e = models.IntegerField(default=0, null=True)
+	f = models.IntegerField(default=0, null=True)
 	def __unicode__(self):
 		return str(self.bhavan.name+' '+self.room)
 
