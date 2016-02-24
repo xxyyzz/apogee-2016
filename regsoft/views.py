@@ -1053,7 +1053,7 @@ def recnacc_notify(request):
     res['gauss'] =[]
     for gl in gl_list:
         temp = {}
-        if gl.participant_set.filter(firewallzo= True, recnacc= False).count() or gl.participant_set.filter(firewallzo= True, controlz= False).count():
+        if gl.participant_set.filter(recnacc= False).count():
             temp['glname'] = gl.details.name
             temp['college'] = str(gl.details.college)
             temp['groupcode']  = gl.groupcode
@@ -1252,7 +1252,7 @@ def recnacc_allot(request,gl_id):
             selectedroom_availibilty = selectedroom.vacancy
             unalloted_males = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'M' and x.recnacc != True]
             unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True]
-            if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' or selectedroom.bhavan.name == 'SQ' or selectedroom.bhavan.name == 'VY WH' or selectedroom.bhavan.name == 'SK WH' or selectedroom.bhavan.name == 'RM WH': #use or for extra bhavanas
+            if selectedroom.bhavan.name == 'MB' or selectedroom.bhavan.name == 'MB-1' or selectedroom.bhavan.name == 'MB-3' or selectedroom.bhavan.name == 'MB-4' or selectedroom.bhavan.name == 'MB 5' or selectedroom.bhavan.name == 'MB 6-1' or selectedroom.bhavan.name == 'MB 6-3' or selectedroom.bhavan.name == 'MB-7' or selectedroom.bhavan.name == 'MB-8' or selectedroom.bhavan.name == 'MB-9' : #use or for extra bhavanas
                 if no_females<noalloted:
                     return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apoogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
                 for y in range(noalloted):
@@ -1449,7 +1449,7 @@ def recnacc_room_list(request):
     for x in rooms:
         prtno = Participant.objects.filter(room = x).count()
         if x.id != 1:
-            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id})
+            plist.append({"name":x.bhavan.name,"room":x.room,"participants":prtno,"id":x.id, "a":x.a,"b":x.b,"c":x.c,"d":x.d,"e":x.e,"f":x.f})
 
     context = RequestContext(request)
     context_dict = {'plist':plist}
