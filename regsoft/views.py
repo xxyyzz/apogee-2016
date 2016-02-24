@@ -1057,8 +1057,8 @@ def recnacc_notify(request):
             temp['college'] = gl.details.college
             temp['groupcode']  = gl.groupcode
             temp['phone'] = gl.details.phone_one
-            partmalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='M')
-            partfemalenolist = InitialRegistration.objects.filter(grpleader = gl, gender='F')
+            partmalenolist = Participant.objects.filter(grpleader = gl, gender='M')
+            partfemalenolist = Participant.objects.filter(grpleader = gl, gender='F')
             partmaleno = 0
             partfemaleno = 0
             facmaleno = 0
