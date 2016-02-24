@@ -118,6 +118,8 @@ def windows_json(request):
 			itemdict['ImagePath'] = "Assets/kernel/istrike.png"	
 		elif str(k.name) == 'Full Throttle Grand Prix':
 			itemdict['ImagePath'] = "Assets/kernel/ftgp.png"	
+		else:
+			itemdict['ImagePath'] = ''
 						
 		try:
 			itemdict['Overview'] = str(   gaussx( str((Tab.objects.get(event=k, heading= overview_ob) ).content ) )   )
@@ -216,7 +218,8 @@ def windows_json(request):
 			tempx['ImagePath'] = "Assets/eventscat/code.png"					
 		elif str(z.name) == 'build and design':
 			tempx['ImagePath'] = "Assets/eventscat/build.png"
-
+		else:
+			tempx['ImagePath'] = ''
 		tempx['SubItems'] = []
 		for e_ob in Event.objects.filter(category=z,is_displayed=True):
 			itemdict= {}
