@@ -1070,7 +1070,7 @@ def recnacc_notify(request):
             for x in partfemalenolist:
                 partfemaleno += 1
 
-            temp['partno'] = str(partmaleno)
+            temp['partno'] = str(partmaleno)+ ' | ' + str(partfemaleno)
             temp['facno'] = str(facmaleno)
 
             res['gauss'].append(temp)
