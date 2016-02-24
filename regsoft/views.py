@@ -1055,7 +1055,7 @@ def recnacc_notify(request):
         temp = {}
         if gl.participant_set.filter(firewallzo= True, recnacc= False).count() or gl.participant_set.filter(firewallzo= True, controlz= False).count():
             temp['glname'] = gl.details.name
-            temp['college'] = gl.details.college
+            temp['college'] = str(gl.details.college)
             temp['groupcode']  = gl.groupcode
             temp['phone'] = gl.details.phone_one
             partmalenolist = Participant.objects.filter(grpleader = gl, gender='M')
