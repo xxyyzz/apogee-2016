@@ -106,7 +106,7 @@ def windows_json(request):
 
 		if str(k.name) == 'Hackathon':
 			itemdict['ImagePath'] = "Assets/kernel/hackathon.png"
-		elif str(k.name) == 'dhiti':
+		elif str(k.name) == 'Dhiti':
 			itemdict['ImagePath'] = "Assets/kernel/dhiti.png"
 		elif str(k.name) == 'Reverse Engineering':
 			itemdict['ImagePath'] = "Assets/kernel/reverse.png"	
@@ -221,7 +221,7 @@ def windows_json(request):
 		else:
 			tempx['ImagePath'] = ''
 		tempx['SubItems'] = []
-		for e_ob in Event.objects.filter(category=z,is_displayed=True):
+		for e_ob in Event.objects.filter(category=z,is_displayed=True,is_kernel=False):
 			itemdict= {}
 			itemdict["UniqueId"] = str(e_ob.name)
 			itemdict['Title'] = itemdict['UniqueId']
