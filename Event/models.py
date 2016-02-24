@@ -7,7 +7,6 @@ from ckeditor.fields import RichTextField
 class EventCategory(models.Model):
     name = models.CharField(max_length = 50)
     weight = models.IntegerField(help_text= 'Heavier items sink to the bottom of the menu.')
-    image_win = models.CharField(max_length=100,blank=True, null=True)    
     def __unicode__(self):
         return self.name
     class Meta:
@@ -34,7 +33,6 @@ class Event(models.Model):
     category = models.ForeignKey(EventCategory)
     tags = models.ManyToManyField(Tag,blank=True)
     short_description = models.CharField(max_length = 400)
-    image_win = models.CharField(max_length=100,blank=True, null=True)
     # contact = models.TextField(blank = 'True')
     # content = RichTextField()
    # attachments=models.FileField(blank=True,upload_to="attachments")
