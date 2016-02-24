@@ -1064,11 +1064,9 @@ def recnacc_notify(request):
             facmaleno = 0
             facfemaleno = 0
             for x in partmalenolist:
-                if x.is_faculty!=True:
-                    partmaleno += 1
+                partmaleno += 1
             for x in partfemalenolist:
-                if x.is_faculty!=True:
-                    partfemaleno += 1
+                partfemaleno += 1
 
             temp['partno'] = str(partmaleno)
             temp['facno'] = str(facmaleno)
