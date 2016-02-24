@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^events/(?P<eventid>\d+)/judges/add/$', events_judges_add, name="events_judges_add"),
     url(r'^events/(?P<eventid>\d+)/labels/add/$', events_labels_add, name="events_labels_add"),
     url(r'^events/(?P<eventid>\d+)/levels/(?P<levelid>\d+)/edit/$', events_levels_edit, name="events_levels_edit"),
+    url(r'^events/(?P<eventid>\d+)/levels/(?P<levelid>\d+)/judge/(?P<judgeid>\d+)/login/$', events_judge_login, name="events_judge_login"),
     url(r'^events/(?P<eventid>\d+)/levels/(?P<levelid>\d+)/judge/(?P<judgeid>\d+)/$', events_levels_judge, name="events_levels_judge"),
     url(r'^events/(?P<eventid>\d+)/home/$', events_home, name="events_home"),
     # url(r'^teamdetails/(?P<teamid>\d+)/$', team_details, name="team_details"),

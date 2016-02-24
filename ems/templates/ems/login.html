@@ -13,9 +13,14 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Responsibilities Ahead</h4>
-                                {% if status == 0 %} <p class="category" style = "color:red">Invalid Credentials. Looks like you're not worth it. </p>
+                                {% if status == 0 %} <p class="category" style = "color:red">Invalid Credentials.</p>
                                 {% endif %}
                             </div>
+                            {% if judge %}
+                            <div class="header">
+                                <h5 class="title">{{ judge.name }}</h5>
+                            </div>
+                            {% endif %}
                             <div class="content">
                                 <form method="POST" action=".">
                                 {% csrf_token %}

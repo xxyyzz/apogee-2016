@@ -176,8 +176,9 @@ def events_select(request):
     return render(request, 'ems/events_select.html', context)
 
 @csrf_exempt
-@staff_member_required
 def events_home(request, eventid):
+    if not request.user.is_staff:
+        return redirect('ems:user_login')
     event = Event.objects.get(id=eventid)
     levels = Level.objects.filter(event=event)
     emsadmin = True if request.user.username in EMSADMINS else False
@@ -382,6 +383,26 @@ def events_judge_home(request, eventid):
     }
     return render(request, 'ems/events_judge_home.html', context)
 
+def events_judge_login(request, eventid, levelid, judgeid):
+    event = Event.objects.get(id=eventid)
+    judge = Judge.objects.get(id=judgeid)
+    level = Level.objects.get(id=levelid)
+    context = {
+        'event' : event,
+        'level' : level,
+        'judge' : judge,
+    }
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active and user == judge.user:
+                login(request, user)
+                return redirect('ems:events_levels_judge', event.id, level.id, judge.id)
+            else:
+                context['status'] = 0
+    return render(request, 'ems/login.html', context)
 
 def events_levels_judge(request, eventid, levelid, judgeid):
     event = Event.objects.get(id=eventid)
@@ -389,7 +410,7 @@ def events_levels_judge(request, eventid, levelid, judgeid):
     judge = Judge.objects.get(id=judgeid)
     emsadmin = True if request.user.username in EMSADMINS else False
     if not emsadmin and request.user != judge.user:
-        return redirect('ems:user_login')
+        return redirect('ems:events_judge_login', event.id, level.id, judge.id)
     if request.method == 'POST':
         if 'leave' in request.POST:
             print "leave"
