@@ -436,6 +436,8 @@ def events_levels_judge(request, eventid, levelid, judgeid):
                     score = Score.objects.create(level=level, team=team, judge=judge)
                 for i, val in enumerate(scores):
                     attr = 'var' + str(i+1)
+                    if val == '':
+                        val = None
                     setattr(score, attr, val)
                 comments = request.POST['comment-'+str(team.id)]
                 score.comments = comments
