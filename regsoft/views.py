@@ -1509,7 +1509,7 @@ def recnacc_bill_print(request, gl_id):
             femalelist += 1
 
     total_ppl = malelist + femalelist
-    totalamt = total_ppl*300
+    totalamt = total_ppl*200
     context = {
         'gl': gl,
         'prtlist' : prtlist,
