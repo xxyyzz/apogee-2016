@@ -147,23 +147,19 @@
 {% endblock main_content %}
 {% block script %}
 <script type= 'text/javascript'>
-window.onload = function () {
-    checkbox = document.getElementById('judgesheet');
-    toggle(checkbox);
+function autosave(){
+    var sdata= $($('form')[1]).serialize();
+    $.ajax({
+        url: '.',
+        method:'POST',
+        data: sdata,
+        success:function(resp){
+            // console.log(resp);
+        },
+    });
 }
-function toggle(checkbox){
-  var js = document.getElementsByClassName('judgesheet');
-  for(var i=0; i< js.length ; ++i)
-  {
-      if (checkbox.checked) {
-          js[i].disabled = false;
-          js[i].parentElement.style.display = 'block';
-      }
-      else {
-          js[i].disabled = true;
-          js[i].parentElement.style.display = 'none';
-      }
-  }
-}
+setInterval(function(){
+    autosave();
+},300000);
 </script>
 {% endblock script %}
