@@ -1054,7 +1054,7 @@ def recnacc_notify(request):
     res['gauss'] =[]
     for gl in gl_list:
         temp = {}
-        if gl.participant_set.filter(recnacc= False, firewallzo = True).count():
+        if gl.participant_set.filter(recnacc= False, firewallzo = True).count() or gl.participant_set.filter(controlz= False, firewallzo = True).count():
             temp['glname'] = gl.details.name
             temp['college'] = str(gl.details.college)
             temp['groupcode']  = gl.groupcode
@@ -1269,7 +1269,7 @@ def recnacc_allot(request,gl_id):
                     selectedroom.save()
                     unalloted_males[y].save()
         #return HttpResponse(selectedroom.vacancy)
-            bal = noalloted*300
+            bal = noalloted*200
             gl.amount_taken += bal
             gl.save()
         no_males=0
@@ -1328,7 +1328,7 @@ def recnacc_deallocate(request,gl_id):
                 p.room = None
                 p.save()
                 done_people.append(p)
-                gl.amount_taken -= 300
+                gl.amount_taken -= 200
                 gl.save()
         alloted_people = Participant.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
         alist=[]
@@ -1505,7 +1505,7 @@ def recnacc_bill_print(request, gl_id):
             femalelist += 1
 
     total_ppl = malelist + femalelist
-    totalamt = total_ppl*300
+    totalamt = total_ppl*200
     context = {
         'gl': gl,
         'prtlist' : prtlist,
