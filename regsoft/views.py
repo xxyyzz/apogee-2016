@@ -1272,7 +1272,7 @@ def recnacc_allot(request,gl_id):
                     selectedroom.save()
                     unalloted_males[y].save()
         #return HttpResponse(selectedroom.vacancy)
-            bal = noalloted*300
+            bal = noalloted*200
             gl.amount_taken += bal
             gl.save()
         no_males=0
@@ -1331,7 +1331,7 @@ def recnacc_deallocate(request,gl_id):
                 p.room = None
                 p.save()
                 done_people.append(p)
-                gl.amount_taken -= 300
+                gl.amount_taken -= 200
                 gl.save()
         alloted_people = Participant.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
         alist=[]
