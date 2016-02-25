@@ -16,6 +16,9 @@ def intro(request) :
 def spons(request):
 	return render(request,"main/sponsors.html")
 
+def wallpaper(request) :
+	return render(request, "main/wallpaper.html")	
+
 @ensure_csrf_cookie
 def main(request) :
 	return render(request, "main/index.html")

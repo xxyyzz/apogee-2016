@@ -607,7 +607,7 @@ def controlz_bill_print(request):
         total = bill_ob.amount
         maleno = Participant.objects.filter(bill_id = bill_id, gender= 'M').count()
         femaleno = Participant.objects.filter(bill_id = bill_id, gender= 'F').count()
-
+        onlinepaid= Participant.objects.filter(bill_id = bill_id, fee_paid=True).count()
         if bill_ob.draft_number:
             ddno = bill_ob.draft_number
         else:
@@ -623,6 +623,7 @@ def controlz_bill_print(request):
         'given' : bill_ob.given,
         'balance' : bill_ob.balance,
         'ddno' : ddno,
+        'onlinepaid': onlinepaid,
 
         }
 
@@ -1069,7 +1070,7 @@ def recnacc_notify(request):
             for x in partfemalenolist:
                 partfemaleno += 1
 
-            temp['partno'] = str(partmaleno)
+            temp['partno'] = str(partmaleno)+ ' | ' + str(partfemaleno)
             temp['facno'] = str(facmaleno)
 
             res['gauss'].append(temp)
@@ -1426,7 +1427,7 @@ def encode_glid(gl_id):
         encoded = encoded + mixed[randint(0,51)]
     return encoded
 def get_barcode(request):
-    list_of_people_selected = Participant.objects.filter(pcr_approval=True).order_by('college__name')
+    list_of_people_selected = Participant.objects.filter(pcr_approval=True, is_bitsian=False).order_by('college__name')
     final_display = []
     for x in list_of_people_selected:
         name = x.name
