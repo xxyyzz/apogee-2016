@@ -21,9 +21,10 @@ class EventAdmin(admin.ModelAdmin):
 
 class TabAdmin(admin.ModelAdmin):
 	list_display = ['heading', 'event']
+	search_fields = ['event']
 	# list_display_links = ['name']
 	# list_filter = ['category']
-	search_fields = ['event.name']
+	# search_fields = ['event.name']
 	def get_queryset(self, request):
 		# """Limit Pages to those that belong to the request's user."""
 		qs = super(TabAdmin, self).get_queryset(request)
