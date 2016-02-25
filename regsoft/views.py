@@ -1064,17 +1064,13 @@ def recnacc_notify(request):
             partmaleno = 0
             partfemaleno = 0
             facmaleno = 0
-            facfemaleno = 0
             for x in partmalenolist:
                 partmaleno += 1
             for x in partfemalenolist:
                 partfemaleno += 1
-
             temp['partno'] = str(partmaleno)+ ' | ' + str(partfemaleno)
-            temp['facno'] = str(facmaleno)
-
             res['gauss'].append(temp)
-            return HttpResponse(json.dumps(res), content_type="application/json")
+    return HttpResponse(json.dumps(res), content_type="application/json")
     
 
 
