@@ -607,7 +607,7 @@ def controlz_bill_print(request):
         total = bill_ob.amount
         maleno = Participant.objects.filter(bill_id = bill_id, gender= 'M').count()
         femaleno = Participant.objects.filter(bill_id = bill_id, gender= 'F').count()
-
+        onlinepaid= Participant.objects.filter(bill_id = bill_id, fee_paid=True).count()
         if bill_ob.draft_number:
             ddno = bill_ob.draft_number
         else:
@@ -623,6 +623,7 @@ def controlz_bill_print(request):
         'given' : bill_ob.given,
         'balance' : bill_ob.balance,
         'ddno' : ddno,
+        'onlinepaid': onlinepaid,
 
         }
 
@@ -1053,7 +1054,7 @@ def recnacc_notify(request):
     res['gauss'] =[]
     for gl in gl_list:
         temp = {}
-        if gl.participant_set.filter(recnacc= False, firewallzo = True).count():
+        if gl.participant_set.filter(recnacc= False, firewallzo = True).count() or gl.participant_set.filter(controlz= False, firewallzo = True).count():
             temp['glname'] = gl.details.name
             temp['college'] = str(gl.details.college)
             temp['groupcode']  = gl.groupcode
@@ -1063,17 +1064,13 @@ def recnacc_notify(request):
             partmaleno = 0
             partfemaleno = 0
             facmaleno = 0
-            facfemaleno = 0
             for x in partmalenolist:
                 partmaleno += 1
             for x in partfemalenolist:
                 partfemaleno += 1
-
-            temp['partno'] = str(partmaleno)
-            temp['facno'] = str(facmaleno)
-
+            temp['partno'] = str(partmaleno)+ ' | ' + str(partfemaleno)
             res['gauss'].append(temp)
-            return HttpResponse(json.dumps(res), content_type="application/json")
+    return HttpResponse(json.dumps(res), content_type="application/json")
     
 
 
@@ -1272,7 +1269,7 @@ def recnacc_allot(request,gl_id):
                     selectedroom.save()
                     unalloted_males[y].save()
         #return HttpResponse(selectedroom.vacancy)
-            bal = noalloted*300
+            bal = noalloted*200
             gl.amount_taken += bal
             gl.save()
         no_males=0
@@ -1331,7 +1328,7 @@ def recnacc_deallocate(request,gl_id):
                 p.room = None
                 p.save()
                 done_people.append(p)
-                gl.amount_taken -= 300
+                gl.amount_taken -= 200
                 gl.save()
         alloted_people = Participant.objects.filter(firewallzo= True, recnacc= True, grpleader= gl)
         alist=[]
@@ -1426,7 +1423,7 @@ def encode_glid(gl_id):
         encoded = encoded + mixed[randint(0,51)]
     return encoded
 def get_barcode(request):
-    list_of_people_selected = Participant.objects.filter(pcr_approval=True).order_by('college__name')
+    list_of_people_selected = Participant.objects.filter(pcr_approval=True, is_bitsian=False).order_by('college__name')
     final_display = []
     for x in list_of_people_selected:
         name = x.name
@@ -1508,7 +1505,7 @@ def recnacc_bill_print(request, gl_id):
             femalelist += 1
 
     total_ppl = malelist + femalelist
-    totalamt = total_ppl*300
+    totalamt = total_ppl*200
     context = {
         'gl': gl,
         'prtlist' : prtlist,
