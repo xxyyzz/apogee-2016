@@ -693,10 +693,12 @@ def certi_gen_txt(request):
         team_list.append(t.teams.all())
     for tm in team_list:
         for team in tm:
+            fopen.write(str(team.leader.name.upper() ) + '$' + str(team.leader.college.name) + '$' + str(team.event.name) +'$' + str(team.comments)+'\n'  )
             members_ob = team.members.all()
             for k in members_ob:
                 fopen.write(str(k.name.upper() ) + '$' + str(k.college.name) + '$' + str(team.event.name) +'$' + str(team.comments)+'\n'  )
     fopen.close()
+    return HttpResponse('Done')
 
 
 
