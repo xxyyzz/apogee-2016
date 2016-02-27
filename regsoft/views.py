@@ -45,7 +45,7 @@ def firewallzo_board(request):
             'plist' : part_ob_list,
             'plist2' : plist2,
             }
-            return render(request, 'regsoft/table_apogee.html', context)            
+            return render(request, 'regsoft/table_apogee.html', context)
         except:
             return HttpResponse('Error : Call Satwik : 9928823099')
     else:
@@ -72,7 +72,7 @@ def firewallzo_dashboard(request):
 
 
         decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
-        
+
         part = Participant.objects.filter(id = decoded)
         if part:
             part=  part[0]
@@ -92,7 +92,7 @@ def firewallzo_dashboard(request):
 def firewallzo_dashboard_two(request,part_id):
 
     decoded = part_id
-    # decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning    
+    # decoded = int(encoded[0]+encoded[2]+encoded[4]+encoded[6]) #taking alternative character because alphabets were random and had no meaning
     part = Participant.objects.filter(id = decoded)
     if part:
         part=  part[0]
@@ -118,7 +118,7 @@ def firewallzo_confirm(request):
         grp_ob= gleader(details=grp_part_ob, groupcode="")
         grp_ob.save()
         grp_id = grp_ob.id
-        googol = "000000000"        
+        googol = "000000000"
         num_part = googol[ : ( 4 - len(str(grp_id)) ) ] + str(grp_id)
         grpcode= "0"
         try:
@@ -147,7 +147,7 @@ def firewallzo_confirm(request):
                 p_ob.save()
                 plist.append(p_ob)
         else:
-            return HttpResponse('Please select atleast 1 participant')            
+            return HttpResponse('Please select atleast 1 participant')
         context={
         'plist2' : plist,
         }
@@ -176,7 +176,7 @@ def firewallzo_edit_part(request, part_id):
 
         part_ob.events.clear()
         if request.POST.get('events', False):
-            for k in request.POST.getlist('events'):                                    
+            for k in request.POST.getlist('events'):
                 event = Event.objects.get(pk=k)
                 part_ob.events.add(event)
         part_ob.save()
@@ -228,7 +228,7 @@ def firewallzo_add(request):
             participant.events.add(event)
         participant.save()
         return HttpResponseRedirect('../scan/')
-        
+
     # userprofile = request.user.userprofile_set.all()[0]
     events = [x for x in Event.objects.order_by('name') if x.category.name != "Other"]
     clg_list= College.objects.all()
@@ -249,9 +249,9 @@ def firewallzo_setgleader(request, crep_id):
       partid = part.id
       newgl = gleader(details = part, groupcode= '')
       newgl.save()
-        
+
       googol = '000000000'
-      glid = newgl.id 
+      glid = newgl.id
       num_gl  = googol[ : (4 - len(str(glid)) ) ] + str(glid)
       grpcode = str(part.college)[:3] + num_gl
       newgl.groupcode = grpcode
@@ -392,7 +392,7 @@ def controlz_dashboard(request,gl_id):
         femaleno_two = Participant.objects.filter(grpleader = gl_ob, gender= 'F', controlz= True).count()
 
         context ={
-        'gl' : gl_ob, 
+        'gl' : gl_ob,
         'plist' : plist,
         'plist_two' : plist_two,
         'maleno' : maleno,
@@ -420,7 +420,7 @@ def controlz_edit_part(request, part_id):
 
         init_ob.events.clear()
         if request.POST.get('events', False):
-            for k in request.POST.getlist('events'):                                    
+            for k in request.POST.getlist('events'):
                 event = Event.objects.get(pk=k)
                 init_ob.events.add(event)
         init_ob.save()
@@ -449,14 +449,14 @@ def controlz_bill_select(request):
                 onlinepaid+=1
 
         totalamt= onlinepaid*0
-        
+
 
         gl = plist[0].grpleader
-        total = len(plist) 
+        total = len(plist)
         totalamt += (total - onlinepaid) * 900
         pcount = (total - onlinepaid)
         context ={
-        'gl' : gl, 
+        'gl' : gl,
         'plist' : plist,
         'total' : total,
         'totalamt' : totalamt,
@@ -530,21 +530,21 @@ def controlz_bill_details(request,gl_id):
 
 
         if n20 < 0:
-            balance += -(n20) * 20 
+            balance += -(n20) * 20
         else:
-            given+= n20 * 20     
+            given+= n20 * 20
 
         if n10 < 0:
-            balance += -(n10) * 10 
+            balance += -(n10) * 10
         else:
-            given+= n10 * 10                                                     
-            
+            given+= n10 * 10
+
 
 
 
         total = request.POST.get('total', 0)
         if total == '':
-            total = 0   
+            total = 0
         if ddno:
             newbill = Bill(gleader = gl_id, amount= total, given=given, balance=balance, draft_number= ddno)
         else:
@@ -562,7 +562,7 @@ def controlz_bill_details(request,gl_id):
                 test.append({part.name, newbill.id})
                 part.save()
 
-                
+
         newbill.notes_1000 = int(n1000)
         newbill.notes_500 = int(n500)
         newbill.notes_100 = int(n100)
@@ -578,7 +578,7 @@ def controlz_bill_details(request,gl_id):
         'gl' : gl,
         'college' : college,
         'given' : given,
-        'balance' : balance, 
+        'balance' : balance,
         'total' : total,
         'maleno' : maleno,
         'femaleno' : femaleno,
@@ -634,7 +634,7 @@ def controlz_bill_print(request):
 
 def controlz_delete_bill(request):
     if request.POST:
-        bill_idlist = request.POST.getlist('bill_id') 
+        bill_idlist = request.POST.getlist('bill_id')
         for bill_id in bill_idlist:
             bill_id = int(bill_id)
             bill_ob = Bill.objects.get(id = bill_id)
@@ -646,7 +646,7 @@ def controlz_delete_bill(request):
             bill_ob.delete()
 
         return HttpResponseRedirect('../bill_delete')
- 
+
 
     bills = Bill.objects.all()
     details = []
@@ -753,7 +753,7 @@ def controlz_view_bill(request, billid):
 
 # #       init_ob.events.clear()
 # #       if request.POST.get('events', False):
-# #           for k in request.POST.getlist('events'):                                    
+# #           for k in request.POST.getlist('events'):
 # #               event = Event.objects.get(pk=k)
 # #               init_ob.events.add(event)
 # #       init_ob.save()
@@ -792,11 +792,11 @@ def controlz_view_bill(request, billid):
 #             check = 2
 
 # #       gl = plist[0].grpleader
-# #       total = len(plist) 
+# #       total = len(plist)
 # #       totalamt += (total- is_faculty - onlinepaid) * 750
 # #       pcount = (total - is_faculty - onlinepaid)
 #         context ={
-#             'part_ob' : part_ob, 
+#             'part_ob' : part_ob,
 #             'check' : check,
 # #       'plist' : plist,
 # #       'facultyno' : is_faculty,
@@ -837,7 +837,7 @@ def controlz_view_bill(request, billid):
 # #               if part.reg_paid:
 # #                   onlinepaid+=1
 # #               part.save()
-        
+
 #         if part_ob.fee_paid == False:
 #             ddno = request.POST.get('ddno' ,  False)
 #             n1000 = int(request.POST.get('n_1000',0) )
@@ -878,21 +878,21 @@ def controlz_view_bill(request, billid):
 
 
 #             if n20 < 0:
-#                 balance += -(n20) * 20 
+#                 balance += -(n20) * 20
 #             else:
-#                 given+= n20 * 20     
+#                 given+= n20 * 20
 
 #             if n10 < 0:
-#                 balance += -(n10) * 10 
+#                 balance += -(n10) * 10
 #             else:
-#                 given+= n10 * 10                                                     
-                
+#                 given+= n10 * 10
+
 
 
 
 #             total = request.POST.get('total', 0)
 #             if total == '':
-#                 total = 0   
+#                 total = 0
 #             if ddno:
 #                 newbill = Bill(participant = part_ob, amount= total, given=given, balance=balance, draft_number= ddno)
 #             else:
@@ -911,7 +911,7 @@ def controlz_view_bill(request, billid):
 # #                 test.append({part.name, newbill.id})
 # #                 part.save()
 
-                
+
 #             newbill.notes_1000 = int(n1000)
 #             newbill.notes_500 = int(n500)
 #             newbill.notes_100 = int(n100)
@@ -925,7 +925,7 @@ def controlz_view_bill(request, billid):
 #             context={
 #                 'part_ob' : part_ob,
 #                 'given' : given,
-#                 'balance' : balance, 
+#                 'balance' : balance,
 #                 'total' : total,
 #                 'bill_id' : newbill.id,
 #                 'ddno' : ddno,
@@ -987,7 +987,7 @@ def controlz_view_bill(request, billid):
 
 # def controlz_delete_bill(request):
 #     if request.POST:
-#         bill_idlist = request.POST.getlist('bill_id') 
+#         bill_idlist = request.POST.getlist('bill_id')
 #         for bill_id in bill_idlist:
 #             bill_id = int(bill_id)
 #             bill_ob = Bill.objects.get(id = bill_id)
@@ -1017,7 +1017,7 @@ def controlz_view_bill(request, billid):
 
 # def controlz_view_bill(request, billid):
 #     bill = Bill.objects.get(id=billid)
-#     part = bill.participant 
+#     part = bill.participant
 
 #     context = {
 #       'part' : part,
@@ -1071,12 +1071,12 @@ def recnacc_notify(request):
             temp['partno'] = str(partmaleno)+ ' | ' + str(partfemaleno)
             res['gauss'].append(temp)
     return HttpResponse(json.dumps(res), content_type="application/json")
-    
+
 
 
 def recnacc_dashboard(request,gl_id):
     gl_ob = gleader.objects.filter(id = gl_id)
-    
+
     if gl_ob:
         gl_ob = gl_ob[0]
         plistfinal_two = []
@@ -1094,7 +1094,7 @@ def recnacc_dashboard(request,gl_id):
                 maleno_participant += 1
             else:
                 femaleno_participant += 1
-        
+
         plist_two = gl_ob.participant_set.filter(firewallzo =True, recnacc=True)
         for x in plist_two:
             if x.room.room != "Checkout":
@@ -1109,17 +1109,17 @@ def recnacc_dashboard(request,gl_id):
         # femaleno_two = InitialRegistration.objects.filter(grpleader = gl_ob, gender= 'F', firewallzo= True, recnacc=True).count()
         # for p in plist_two:
         #     p.bhavan = p.room+' '+p.room.bhavan.name
-            
-        
+
+
         context ={
-        'gl' : gl_ob, 
+        'gl' : gl_ob,
         'plist_participant' : plistfinal_participant,
         'plist_two' : plistfinal_two,
         'maleno_participant' : maleno_participant,
         'femaleno_participant' : femaleno_participant,
         'maleno_two' : maleno_two,
         'femaleno_two' : femaleno_two,
-        
+
         }
 
         return render(request, 'regsoft/recnacc_dashboard.html', context)
@@ -1148,7 +1148,7 @@ def recnacc_allot(request,gl_id):
             if len(rooms):
                 vacancy_display.append((bhavan_name,rooms))
         gl = gleader.objects.filter(id = gl_id)[0]
-    participant_list = gl.participant_set.all() 
+    participant_list = gl.participant_set.all()
     no_males=0
     no_females=0
     for p in participant_list:
@@ -1166,9 +1166,9 @@ def recnacc_allot(request,gl_id):
             return render_to_response('regsoft/recnacc_acco.html', context_dict, context)
         for roomid in request.POST.getlist('roomid'):
           # roomid=request.POST.getlist('roomid')
-            
+
             x = roomid + 'alloted'
-            noalloted=int(request.POST.get(x, False)) 
+            noalloted=int(request.POST.get(x, False))
             # noa = 'a'+roomid
             # nob = 'b'+roomid
             # noc = 'c'+roomid
@@ -1179,11 +1179,11 @@ def recnacc_allot(request,gl_id):
             roomid = int(roomid)
             no_males=0
             no_females=0
-            
-            # selectedroom = Room.objects.get(id=roomid)         
+
+            # selectedroom = Room.objects.get(id=roomid)
             # a_no=int(request.POST.get(noa, False))
             # if a_no == '':
-            #     a_no =0 
+            #     a_no =0
             # b_no=int(request.POST.get(nob, False))
             # if b_no == '':
             #     b_no =0
@@ -1199,7 +1199,7 @@ def recnacc_allot(request,gl_id):
             # f_no=int(request.POST.get(nof, False))
             # if f_no == '':
             #     f_no =0
-            
+
             # selectedbhavan = Bhavan.objects.get(id = selectedroom.bhavan.id)
             # selectedbhavan.a_capacity -= a_no
             # selectedbhavan.b_capacity -= b_no
@@ -1236,16 +1236,16 @@ def recnacc_allot(request,gl_id):
             #     ilist.f = f_no
             #     ilist.room = selectedroom
             #     ilist.gl_id = gl_id
-            #     ilist.save()        
+            #     ilist.save()
 
-            
-            
+
+
             for p in participant_list:
                 if p.gender[0].upper()=="M" and p.firewallzo ==True and p.recnacc!=True:
                     no_males+=1
                 elif p.gender[0].upper()=="F" and p.firewallzo ==True and p.recnacc!=True:
                     no_females+=1
-            selectedroom = Room.objects.get(id=roomid) 
+            selectedroom = Room.objects.get(id=roomid)
             selectedroom_availibilty = selectedroom.vacancy
             unalloted_males = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'M' and x.recnacc != True]
             unalloted_females = [x for x in participant_list if x.firewallzo == True and x.gender[0].upper() == 'F' and x.recnacc != True]
@@ -1258,7 +1258,7 @@ def recnacc_allot(request,gl_id):
                     selectedroom.vacancy -= 1
                     selectedroom.save()
                     unalloted_females[y].save()
-            
+
             else:
                 if no_males<noalloted:
                     return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-apogee.org/2016/recnacc/allot/%s/">Back</a>' % gl_id)
@@ -1284,7 +1284,7 @@ def recnacc_allot(request,gl_id):
             all_rooms =[]
             blist = [ x for x in bhavan_list if x.id != 1]
             for bhavan in bhavan_list:
-                if bhavan.id != 1:  
+                if bhavan.id != 1:
                     bhavan_name = bhavan.name
                     rooms = [x for x in bhavan.room_set.all() if x.vacancy != 0]
                     all_rooms += rooms
@@ -1366,7 +1366,7 @@ def recnacc_checkout(request,gl_id):
             croom.vacancy -= 1
             croom.save()
             participant.save()
-          # participant_name = str(participant.name) 
+          # participant_name = str(participant.name)
           # participant_gender = str(participant.gender)[0].upper()
           # if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
           #         participant_event = str(participant.events.all()[0].name)
@@ -1378,7 +1378,7 @@ def recnacc_checkout(request,gl_id):
         amt_ret = int(amt_ret)
         gl.amount_deducted += amt_ret
         gl.save()
-        participant_list = gl.participant_set.all() 
+        participant_list = gl.participant_set.all()
         final_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.room.bhavan.id != 1]
         context = RequestContext(request)
         context_dict = {'gl':gl,'display_table':display_table, 'postcheck':postcheck, 'final_participants':final_participants}
@@ -1387,7 +1387,7 @@ def recnacc_checkout(request,gl_id):
 
     else:
         gl = gleader.objects.get(id=gl_id)
-        participant_list = gl.participant_set.all() 
+        participant_list = gl.participant_set.all()
       #college = str(gl.college)
       #gl_name = str(gl.firstname + ' ' + gl.lastname)
         final_participants = [x for x in participant_list if x.firewallzo==True and x.recnacc==True and x.room.bhavan.id != 1]
@@ -1395,7 +1395,14 @@ def recnacc_checkout(request,gl_id):
         context_dict = {'final_participants':final_participants, 'gl':gl}
         return render_to_response('regsoft/recnacc_checkout.html', context_dict, context)
 
-
+def common_search(request):
+    if request.method == 'POST':
+        if 'keyword' in request.POST:
+            keyword = request.POST['keyword']
+            from django.db.models import Q
+            results = Participant.objects.filter(Q(id__icontains=keyword) | Q(aadhaar__icontains=keyword) | Q(name__icontains=keyword) | Q(college__name__icontains=keyword)).order_by('name')
+            return render(request, 'regsoft/common_search.html', {'results':results})
+    return render(request, 'regsoft/common_search.html')
 
 
 
@@ -1562,7 +1569,7 @@ def recnacc_bill_list(request):
 
 #       for k in members_ob_bits:
 #           fopen.write(str(k.name.upper() ) + '$' + str(k.college) + '$' + str(tm.event) +'$' + str(tm.position)+'\n'  )
-        
+
 #       # if tm.:
 #       # if tm.is_winner:
 #   fopen.close()
@@ -1580,7 +1587,7 @@ def recnacc_bill_list(request):
 
 #       for k in members_ob_bits:
 #           fopen.write(str(k.name.upper() ) + '$' + str(k.college) + '$' + str(tm.event) +'$' + str(tm.position)+'\n'  )
-        
+
 #       # if tm.:
 #       # if tm.is_winner:
 #   fopen.close()
@@ -1617,7 +1624,7 @@ def recnacc_bill_list(request):
 #   #   fopen.write(str(k.name.upper() ) + '$' + str(k.college) + '$Stage Play\n'   )
 #   #   # members_ob = k.members.all()
 #   #   # for init_ob in members_ob:
-    
+
 #   # fopen.close()
 
 
@@ -1706,13 +1713,13 @@ def recnacc_bill_list(request):
 # #             context_dict = {'error':error}
 # #             return render_to_response('firewallzo_home.html', context_dict, context)
 
-# #         participant_list = gl.user.participant_set.all() 
+# #         participant_list = gl.user.participant_set.all()
 # #         college = str(gl.college)
 # #         gl_name = str(gl.firstname) + ' ' + str(gl.lastname)
 # #         display_participants = []
 # #         done_participants = []
 # #         for p in participant_list:
-# #             participant_name = str(p.name) 
+# #             participant_name = str(p.name)
 # #             participant_gender = str(p.gender)[0].upper()#for using just M or F instead of fulll to save space.
 # #             participant_id = int(p.id)
 # #             if len(p.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
@@ -1781,7 +1788,7 @@ def recnacc_bill_list(request):
 # #             participant = Participant.objects.get(id=x)
 # #             participant.firewallz = False
 # #             participant.save()
-# #             participant_name = str(participant.name) 
+# #             participant_name = str(participant.name)
 # #             participant_gender = str(participant.gender[0].upper())
 # #             if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
 # #                 participant_event_list = [x.name for x in participant.events.all()]
@@ -1801,7 +1808,7 @@ def recnacc_bill_list(request):
 # #         gl = UserProfile.objects.get(id=gl_id)
 # #         participant_list = gl.user.participant_set.all()
 # #         approved_participant_list = [x for x in participant_list if x.firewallz == True]
-# #         encoded = encode_glid(gl_id)        
+# #         encoded = encode_glid(gl_id)
 # #         context = RequestContext(request)
 # #         context_dict = {'approved_participant_list':approved_participant_list, 'gl_id':gl_id,'encoded':encoded}
 # #         return render_to_response('firewallzo_remove.html', context_dict, context)
@@ -1846,7 +1853,7 @@ def recnacc_bill_list(request):
 # #         #save participant
 # #         message="New Participant added successfully"
 
-# #     encoded = encode_glid(gl_id)    
+# #     encoded = encode_glid(gl_id)
 # #     context = RequestContext(request)
 # #     context_dict = {'message':message, 'encoded':encoded,'gl_id':gl_id, 'event_list':event_list, 'category_name_list':category_name_list}
 # #     return render_to_response('firewallzo_add.html', context_dict, context)
@@ -1866,7 +1873,7 @@ def recnacc_bill_list(request):
 # #     u_id = int(participant.gleader.id)
 # #     user_ob = User.objects.filter(id= u_id)[0]
 # #     user_pr = UserProfile.objects.filter(user = user_ob)[0]
-# #     gl_id = int(user_pr.id) 
+# #     gl_id = int(user_pr.id)
 # #     encoded = encode_glid(gl_id)
 # #     context = RequestContext(request)
 # #     context_dict = {'participant':participant,'message':message, 'encoded':encoded,'gl_id':gl_id}
@@ -1884,7 +1891,7 @@ def recnacc_bill_list(request):
 # #         participant = Participant.objects.get(id=x)
 # #         participant.firewallz = True
 # #         participant.save()
-# #         participant_name = str(participant.name) 
+# #         participant_name = str(participant.name)
 # #         participant_gender = str(participant.gender)[0].upper()
 # #         if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
 # #                 participant_event = str(participant.events.all()[0].name)
@@ -1908,7 +1915,7 @@ def recnacc_bill_list(request):
 # #             newuser.phone = int(request.POST['phone'])
 # #             newuser.email_id= newgl.email_id
 # #             newuser.save()
-            
+
 # #             context = RequestContext(request)
 # #             context_dict = {'newgl' : newuser}
 # #             return render_to_response('newglshow.html',context_dict, context)
@@ -1969,7 +1976,7 @@ def recnacc_bill_list(request):
 # #         #       context = RequestContext(request)
 # #         #       context_dict = {'not_approved_participants':not_approved_participants,'error':error,'gl_id':gl_id}
 # #         #       return render_to_response('newglcheckbox.html', context_dict, context)
-            
+
 # #             # request.session['newglidlist'] = new_members_id_string
 # #             # new_members_list = [Participant.objects.get(id=y) for y in new_members_id]
 # #             # context = RequestContext(request)
@@ -2007,13 +2014,13 @@ def recnacc_bill_list(request):
 # #             context = RequestContext(request)
 # #             context_dict = {'encoded':encoded}
 # #             return render_to_response('firewallzi_home.html', context_dict, context)
-        
+
 # #         if request.POST:
 # #             if str(request.POST['formtype']) == 'finalform':
 # #                 gl_id = int(request.session.get('glidfire'))
 # #                 gl = UserProfile.objects.get(id=gl_id)
 # #                 participant_list = gl.user.participant_set.all()
-            
+
 # #                 firewallz_controlz_approved = [x for x in participant_list if x.firewallz == True and x.fid != True and x.controlzpay == True]
 # #                 for x in firewallz_controlz_approved:
 # #                     if x.id in request.POST:
@@ -2025,7 +2032,7 @@ def recnacc_bill_list(request):
 # #                 context = RequestContext(request)
 # #                 context_dict = {'firewallz_controlz_approved':firewallz_controlz_approved,'done_list':done_list}
 # #                 return render_to_response('firewallzi_checkout.html', context_dict, context)
-        
+
 # #             else:
 # #                 gl_id = int(request.session.get('glidfire'))
 # #                 gl = UserProfile.objects.get(id=gl_id)
@@ -2044,7 +2051,7 @@ def recnacc_bill_list(request):
 # # @staff_member_required
 # # def recnacc_dashboard(request, gl_id):
 # #         gl = UserProfile.objects.get(id=gl_id)
-# #         participant_list = gl.user.participant_set.all() 
+# #         participant_list = gl.user.participant_set.all()
 # #         college = str(gl.college)
 # #         gl_name = str(gl.firstname +' '+ gl.lastname)
 # #         display_participants = []
@@ -2055,8 +2062,8 @@ def recnacc_bill_list(request):
 # #             if p.gender[0].upper()=="M" and p.firewallz ==True and p.acco!=True:
 # #                 no_males+=1
 # #             elif p.gender[0].upper()=="F" and p.firewallz ==True and p.acco!=True:
-# #                 no_females+=1       
-# #             participant_name = str(p.name) 
+# #                 no_females+=1
+# #             participant_name = str(p.name)
 # #             participant_gender = str(p.gender)[0].upper()#for using just M or F instead of fulll to save space.
 # #             participant_id = int(p.id)
 # #             if p.acco == True and p.room:
@@ -2090,7 +2097,7 @@ def recnacc_bill_list(request):
 # #             context_dict = {'error':error}
 # #             return render_to_response('reconec_home2.html', context_dict, context)
 
-# #         # participant_list = gl.user.participant_set.all() 
+# #         # participant_list = gl.user.participant_set.all()
 # #         # college = str(gl.college)
 # #         # gl_name = str(gl.firstname +' '+ gl.lastname)
 # #         # display_participants = []
@@ -2101,8 +2108,8 @@ def recnacc_bill_list(request):
 # #         #   if p.gender[0].upper()=="M" and p.firewallz ==True and p.acco!=True:
 # #         #       no_males+=1
 # #         #   elif p.gender[0].upper()=="F" and p.firewallz ==True and p.acco!=True:
-# #         #       no_females+=1       
-# #         #   participant_name = str(p.name) 
+# #         #       no_females+=1
+# #         #   participant_name = str(p.name)
 # #         #   participant_gender = str(p.gender)[0].upper()#for using just M or F instead of fulll to save space.
 # #         #   participant_id = int(p.id)
 # #         #   if p.acco == True and p.room:
@@ -2149,7 +2156,7 @@ def recnacc_bill_list(request):
 # #             if len(rooms):
 # #                 vacancy_display.append((bhavan_name,rooms))
 # #     gl = UserProfile.objects.get(id=gl_id)
-# #     participant_list = gl.user.participant_set.all() 
+# #     participant_list = gl.user.participant_set.all()
 # #     no_males=0
 # #     no_females=0
 # #     for p in participant_list:
@@ -2190,7 +2197,7 @@ def recnacc_bill_list(request):
 # #                     selectedroom.vacancy -= 1
 # #                     selectedroom.save()
 # #                     unalloted_females[y].save()
-            
+
 # #             else:
 # #                 if no_males<noalloted:
 # #                     return HttpResponse('error: Alloted rooms are greater than the number of participants. <br /> <a href="http://www.bits-bosm.org/2015/regsoft/recnacc/allot/%s/">Back</a>' % gl_id)
@@ -2265,7 +2272,7 @@ def recnacc_bill_list(request):
 
 # #     context = RequestContext(request)
 # #     context_dict = {'room_list_mod':room_list_mod}
-# #     return render_to_response('room_details.html', context_dict, context)   
+# #     return render_to_response('room_details.html', context_dict, context)
 
 # # @csrf_exempt
 # # @staff_member_required
@@ -2297,7 +2304,7 @@ def recnacc_bill_list(request):
 # #         context = RequestContext(request)
 # #         context_dict = {'done_people':done_people, 'alloted_people':alloted_people,"gl_id":gl_id}
 # #         return render_to_response('reconec_deallocate.html', context_dict, context)
-        
+
 # # @csrf_exempt
 # # @staff_member_required
 # # def phonedetails(request,gl_id):
@@ -2332,7 +2339,7 @@ def recnacc_bill_list(request):
 # #             croom.vacancy -= 1
 # #             croom.save()
 # #             participant.save()
-# #             participant_name = str(participant.name) 
+# #             participant_name = str(participant.name)
 # #             participant_gender = str(participant.gender)[0].upper()
 # #             if len(participant.events.all()): #checks if the participant has the event otherwise the lenth of the list will be zero
 # #                     participant_event = str(participant.events.all()[0].name)
@@ -2340,7 +2347,7 @@ def recnacc_bill_list(request):
 # #                 participant_event = ''
 # #             display_table.append((participant_name,participant_gender,participant_event))
 # #         gl = UserProfile.objects.get(id=gl_id)
-# #         participant_list = gl.user.participant_set.all() 
+# #         participant_list = gl.user.participant_set.all()
 # #         college = str(gl.college)
 # #         gl_name = str(gl.firstname + ' ' + gl.lastname)
 # #         final_participants = [x for x in participant_list if x.firewallz==True and x.acco==True and x.room.bhavan.id != 1]
@@ -2351,7 +2358,7 @@ def recnacc_bill_list(request):
 
 # #     else:
 # #         gl = UserProfile.objects.get(id=gl_id)
-# #         participant_list = gl.user.participant_set.all() 
+# #         participant_list = gl.user.participant_set.all()
 # #         college = str(gl.college)
 # #         gl_name = str(gl.firstname + ' ' + gl.lastname)
 # #         final_participants = [x for x in participant_list if x.firewallz==True and x.acco==True and x.room.bhavan.id != 1]
@@ -2389,7 +2396,7 @@ def recnacc_bill_list(request):
 # #             gl = UserProfile.objects.get(id=gl_id)
 # #             if encoded == "":
 # #                 college = request.POST['college']
-# #                 gl = UserProfile.objects.get(college=college)           
+# #                 gl = UserProfile.objects.get(college=college)
 # #         except:
 # #             error="Invalid code entered " +encoded
 # #             context = RequestContext(request)
@@ -2413,7 +2420,7 @@ def recnacc_bill_list(request):
 
 # #         context = RequestContext(request)
 # #         context_dict = {'people':people, 'done_participants':done_participants,'gl_id':gl.id,'encoded':encoded}
-# #         return render_to_response('controlgl.html', context_dict, context)      
+# #         return render_to_response('controlgl.html', context_dict, context)
 
 
 # #     else:
@@ -2450,7 +2457,7 @@ def recnacc_bill_list(request):
 # #         # eventwise = [x for x in all_participants if events in x.events.all()]
 # #         # all_participants = Participant.objects.filter(controlzpay=True)
 # #         # participants = [x for x in all_participants if x.gleader == college and event in x.event_set.all()]
-        
+
 # #     users = [x for x in UserProfile.objects.all()]
 # #     sports = [x for x in EventNew.objects.all()]
 # #     context = {
@@ -2470,7 +2477,7 @@ def recnacc_bill_list(request):
 # #         for x in selectedpeople_list:
 # #             participant = Participant.objects.get(id=x)
 # #             display_table.append(participant)
-    
+
 # #     #people = [x for x in gl.user.participant_set.all() if x.firewallz == True and x.controlzpay != True and x.coach != True]
 # #     #bill_no_raw = len(Bill.objects.all()) + 1
 # #     #rec = '0'*(4-len(str(bill_no_raw)))+str(bill_no_raw)
@@ -2480,26 +2487,26 @@ def recnacc_bill_list(request):
 # #     return render_to_response('bill_template.html',{'college':gl.college,'number_of_participants':number_of_participants,'register':register,'amount':amount,'gl_id':gl.id,'display_table':display_table})
 
 # # # @csrf_exempt
-# # # def generate_receipt(request,gl_id):  
+# # # def generate_receipt(request,gl_id):
 # #     # gl=UserProfile.objects.get(id=gl_id)
 # #     # if request.POST:
 # #         # if str(request.POST['formtype']) == 'finalform':
 # #             # bill_part = request.POST['left']
 # #             # college = gl.college
 # #             # participant = Participant.objects.filter(bill_id=bill_part)
-            
-                
+
+
 # #     # encoded = encode_glid(gl_id)
 # #     # #billno = request.POST['billid']
 # #     # gl=UserProfile.objects.get(id=gl_id)
 # #     # participant_list = gl.user.participant_set.all()
 # #     # b_list=[]
-# #     # for p in participant_list:    
+# #     # for p in participant_list:
 # #         # if p.firewallz == True and p.controlzpay==True:
 # #             # if str(p.bill_id) not in b_list:
 # #                 # bid = str(p.bill_id)
 # #                 # b_list.append(bid)
-    
+
 # #     # context = RequestContext(request)
 # #     # context_dict = {'b_list':b_list}
 # #     # # # p = Participant.objects.filter(gleader=gl)
@@ -2507,12 +2514,12 @@ def recnacc_bill_list(request):
 # #             # # # x.controlzpay = False
 # #             # # # x.bill_id = None
 # #             # # # x.fid = False
-        
+
 # #         # # # a = Bill.objects.filter(number=billno)[0]
 # #         # # # a.remove()
 # #         # # #return render_to_response('revertbill.html',{'message':'This Bill has been cancelled'} )
 # #     # return render_to_response('revertbill.html', context_dict, context)
-    
+
 # # @csrf_exempt
 # # def generate_receipt(request,gl_id):
 # #     if request.POST:
@@ -2527,14 +2534,14 @@ def recnacc_bill_list(request):
 # #         selectedpeople_list = [int(x) for x in list_of_people_selected]
 # #         register=750
 # #         number_of_participants = len(selectedpeople_list)
-        
+
 # #         amount=750*number_of_participants
 # #         ddno = request.POST['dd']
-        
+
 # #     #calculationg amount
-        
+
 # #     #now make Bill
-        
+
 # #         a = Bill()
 # #         # a.notes_1000= n1000
 # #         # a.notes_500= n500
@@ -2545,11 +2552,11 @@ def recnacc_bill_list(request):
 # #         a.draft_number = ddno
 # #         a.gleader = gl.firstname + ' ' + gl.lastname
 # #         a.college = gl.college
-# #         #a.number = bill_no_raw 
+# #         #a.number = bill_no_raw
 # #         a.amount = amount
 # #         a.save()
 # #         rec = '0'*(4-len(str(a.id)))+str(a.id)
-        
+
 # #         display_table = []
 # #         #bill_no_raw = len(Bill.objects.all()) + 1
 # #         for x in selectedpeople_list:
@@ -2557,9 +2564,9 @@ def recnacc_bill_list(request):
 # #             participant.controlzpay= True
 # #             participant.bill_id = a.id
 # #             participant.save()
-        
+
 # #         uid = request.session['uid']
-        
+
 # #         return render_to_response('controlz_gen_bill.html',{'college':gl.college,'uid':uid,'register':register,'amount':amount,'receiptno':rec,'gl_id':gl.id})
 
 
@@ -2572,7 +2579,7 @@ def recnacc_bill_list(request):
 # #         amount=request.POST['amount']
 # #         rec=request.POST['receiptno']
 # #         return render_to_response('receipt.html',{'college':college,'uid':uid,'register':register,'amount':amount,'receiptno':rec})
-        
+
 # # @csrf_exempt
 # # def controlz_edit_participant(request,participant_id):
 # #     try:
@@ -2653,10 +2660,10 @@ def recnacc_bill_list(request):
 # #         context = RequestContext(request)
 # #         context_dict = {'participant':participant,'message':message, 'encoded':encoded,'gl_id':gl_id,'participant_event_list':participant_event_list,'participant_sport_leader':participant_sport_leader}
 # #         return render_to_response('make_sl.html', context_dict, context)
-        
+
 # #     #participant_event_list = participant.events.all()
 # #     #event_add_list = [x for x in event_list if x not in participant_event_list]
-    
+
 # #     usr_ob = participant.gleader
 # #     user_ob= UserProfile.objects.filter(user = usr_ob)[0]
 # #     gl_id = user_ob.id
@@ -2665,7 +2672,7 @@ def recnacc_bill_list(request):
 # #     context_dict = {'participant':participant,'message':message, 'encoded':encoded,'gl_id':gl_id,'participant_event_list':participant_event_list,'participant_sport_leader':participant_sport_leader}
 
 # #     return render_to_response('make_sl.html', context_dict, context)
-    
+
 # # @csrf_exempt
 # # @staff_member_required
 # # def controlz_event_details(request):
@@ -2686,7 +2693,7 @@ def recnacc_bill_list(request):
 
 # #     context = RequestContext(request)
 # #     context_dict = {'event_list_mod':event_list_mod}
-# #     return render_to_response('controlz_event_details.html', context_dict, context) 
+# #     return render_to_response('controlz_event_details.html', context_dict, context)
 
 # # @csrf_exempt
 # # def show_prev_bills(request):
@@ -2711,7 +2718,7 @@ def recnacc_bill_list(request):
 # #     return render_to_response('show_bills.html',context_dict, context)
 # #     #else:
 # #     #   return render_to_response('show_bills.html',{'message':'No bills are created yet'})
-# # @csrf_exempt    
+# # @csrf_exempt
 # # def bill_details(request, bid):
 # #     all_participants = Participant.objects.all()
 # #     all_parts = []
@@ -2721,7 +2728,7 @@ def recnacc_bill_list(request):
 # #             part_gender = x.gender
 # #             part_phone = x.phone
 # #             all_parts.append((part_name, part_gender, part_phone))
-# #     return render_to_response('bill_details.html',{'all_parts':all_parts})  
+# #     return render_to_response('bill_details.html',{'all_parts':all_parts})
 
 
 # # @csrf_exempt
@@ -2737,24 +2744,24 @@ def recnacc_bill_list(request):
 # #                     x.bill_id = None
 # #                     x.save()
 # #             a = Bill.objects.filter(id=bill_part).delete()
-        
+
 # #         # if str(request.POST['formtype']) == 'partform':
 # #             # bill_number = request.POST['bill_number']
 # #             # participant_list_bill_ref = Participant.objects.filter(bill_id=bill_number)
-                    
+
 # #     encoded = encode_glid(gl_id)
 # #     #billno = request.POST['billid']
 # #     gl=UserProfile.objects.get(id=gl_id)
 # #     participant_list = gl.user.participant_set.all()
 # #     b_list=[]
-# #     for p in participant_list:  
+# #     for p in participant_list:
 # #         if p.firewallz == True and p.controlzpay==True:
 # #             if str(p.bill_id) not in b_list:
 # #             #if p not in b_list:
 # #                 bid = str(p.bill_id)
 # #                 p_ref_name = str(p.name)
 # #                 b_list.append((bid,p_ref_name))
-    
+
 # #     context = RequestContext(request)
 # #     context_dict = {'b_list':b_list}
 # #     # # p = Participant.objects.filter(gleader=gl)
@@ -2762,7 +2769,7 @@ def recnacc_bill_list(request):
 # #             # # x.controlzpay = False
 # #             # # x.bill_id = None
 # #             # # x.fid = False
-        
+
 # #         # # a = Bill.objects.filter(number=billno)[0]
 # #         # # a.remove()
 # #         # #return render_to_response('revertbill.html',{'message':'This Bill has been cancelled'} )
