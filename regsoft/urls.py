@@ -19,7 +19,7 @@ urlpatterns = [
 # 	url(r'^firewallzouter/add_guest/$', firewallzo_add_guest),
 	url(r'^firewallzouter/barcodelist/$', get_barcode),
 
-# 	url(r'^common/search/$', common_search,  name="common_search"),
+	url(r'^controlz/search/$', common_search,  name="common_search"),
 
 	url(r'^controlz/home/$', controlz_home),
 	url(r'^controlz/stats/$', controlz_stats, name="controlz_stats"),
@@ -74,7 +74,7 @@ urlpatterns = [
 # # 	url(r'^recnacc/bhavan_gleader_list/$', recnacc_bhavan_gleader_list),
 # 	url(r'^recnacc/room_list/$', recnacc_room_list),
 # 	url(r'^recnacc/room_details/(?P<room_id>\d+)$', recnacc_room_details),
-	
+
 
 # 	url(r'^teams/$', mainScreen, name='main'),
 # 	url(r'^teams/uploadlist/$', upload_list, name='upload_list'),
@@ -98,13 +98,13 @@ urlpatterns = [
 # 	url(r'^teams/show_teamList/$', eventlist_showTeams, name='eventlist_showTeams'),
 # 	url(r'^teams/show_selectEvent/$', eventList_selectEvent, name='eventList_selectEvent'),
 # 	url(r'^teams/singleTeam/(?P<team_id>\d+)/$', eventList_selectEvent, name='eventList_selectEvent'),
- 
-#  	url(r'^teams/finalist_selectEvent/$', finalist_selectEvent, name="finalist_selectEvent"),   
-#  	url(r'^teams/finalist_showTeams/$', finalist_showTeams, name="finalist_showTeams"),   
-#  	url(r'^teams/setFinalist/$', setFinalist, name="setFinalist"),   
 
-#  	url(r'^teams/winner_selectEvent/$', winner_selectEvent, name="winner_selectEvent"),   
-#  	url(r'^teams/winner_showTeams/$', winner_showTeams, name="winner_showTeams"),   
-#  	url(r'^teams/setWinner/$', setWinner, name="setWinner"),   
+#  	url(r'^teams/finalist_selectEvent/$', finalist_selectEvent, name="finalist_selectEvent"),
+#  	url(r'^teams/finalist_showTeams/$', finalist_showTeams, name="finalist_showTeams"),
+#  	url(r'^teams/setFinalist/$', setFinalist, name="setFinalist"),
+
+#  	url(r'^teams/winner_selectEvent/$', winner_selectEvent, name="winner_selectEvent"),
+#  	url(r'^teams/winner_showTeams/$', winner_showTeams, name="winner_showTeams"),
+#  	url(r'^teams/setWinner/$', setWinner, name="setWinner"),
 
 ]
