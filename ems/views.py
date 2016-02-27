@@ -570,16 +570,16 @@ def events_teams_add(request, eventid):
                         except:
                             pass
                     if team_parts:
-                        for part in parts:
-                            for existingteam in existingteams:
-                                if part in existingteam.members.all():
-                                    error = part.name+" is already a part of "+team.leader.name+"'s Team."
-                                    errors.append(error)
-                                if part == existingteam.leader:
-                                    error = part.name+" already have their own team."
-                                    errors.append(error)
-                            if errors:
-                                return HttpResponse(error)
+                        # for part in parts:
+                        #     for existingteam in existingteams:
+                        #         if part in existingteam.members.all():
+                        #             error = part.name+" is already a part of "+team.leader.name+"'s Team."
+                        #             errors.append(error)
+                        #         if part == existingteam.leader:
+                        #             error = part.name+" already have their own team."
+                        #             errors.append(error)
+                        #     if errors:
+                        #         return HttpResponse(error)
                         leader = team_parts[0]
                         team = Team.objects.create(leader=leader, event=event)
                         members = team_parts[1:]
