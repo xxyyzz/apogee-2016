@@ -607,13 +607,13 @@ def events_teams_add(request, eventid):
             partids = request.POST.getlist('part')
             for partid in partids:
                 part = Participant.objects.get(id=partid)
-                for team in teams:
-                    if part in team.members.all():
-                        error = part.name+" is already a part of "+team.leader.name+"'s Team."
-                        errors.append(error)
-                    if part == team.leader:
-                        error = part.name+" already have their own team."
-                        errors.append(error)
+                # for team in teams:
+                #     if part in team.members.all():
+                #         error = part.name+" is already a part of "+team.leader.name+"'s Team."
+                #         errors.append(error)
+                #     if part == team.leader:
+                #         error = part.name+" already have their own team."
+                #         errors.append(error)
             if not errors:
                 for partid in partids:
                     part = Participant.objects.get(id=partid)
