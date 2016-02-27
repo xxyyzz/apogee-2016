@@ -383,32 +383,6 @@ He has authored some extremely insightful books, including Byline, Nehru: The Ma
 
 
 	itemdict={}
-	itemdict["UniqueId"] = "Jairam Rames"
-	itemdict['Title'] = "Jairam Rames"
-	itemdict['ImagePath'] = "Assets/ppl/ojas.png"
-	itemdict['Overview'] = ""
-	itemdict['Rules'] = "27 February"
-	itemdict['Eligibility'] = ""
-	itemdict['Guidelines'] = ""
-	itemdict['Judging Criteria'] = ""
-	itemdict['Problem Statements'] = ""
-	itemdict['Resources'] = ""
-	itemdict['Sample Questions'] = ""
-	itemdict['Specifications'] = ""
-	itemdict['Materials'] = ""
-	itemdict['Registration Details'] = ""
-	itemdict['FAQs'] = ""
-	itemdict['Sponsors'] = ""
-	itemdict['Contacts'] = ""
-
-	tempx['SubItems'].append(itemdict)
-
-
-
-
-
-
-	itemdict={}
 	itemdict["UniqueId"] = "Ashok Vajpeyi"
 	itemdict['Title'] = "Ashok Vajpeyi"
 	itemdict['ImagePath'] = "Assets/ppl/ashok.png"
@@ -720,11 +694,16 @@ def schedule_json(request):
 	tempx['UniqueId'] = "25Feb"
 	tempx['Title'] = "25Feb"
 	tempx['SubItems']= []
-	for k in Schedule.objects.filter(date='25-02-2016'):
+	for k in Schedule.objects.filter(date='25-02-2016').order_by('startingtime'):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['Time'] = k.startingtime
+		time=str(k.startingtime)
+		if len(time) == 3:
+			time= time[:1] + ':' + time[1:]
+		elif len(time) == 4:
+			time= time[:2] + ':'+ time[2:]
+		itemdict['Time'] = time	
 		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
@@ -733,11 +712,16 @@ def schedule_json(request):
 	tempx['UniqueId'] = "26Feb"
 	tempx['Title'] = "26Feb"
 	tempx['SubItems']= []
-	for k in Schedule.objects.filter(date='26-02-2016'):
+	for k in Schedule.objects.filter(date='26-02-2016').order_by('startingtime'):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['Time'] = k.startingtime
+		time=str(k.startingtime)
+		if len(time) == 3:
+			time= time[:1] + ':' + time[1:]
+		elif len(time) == 4:
+			time= time[:2] + ':'+ time[2:]
+		itemdict['Time'] = time
 		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
@@ -746,11 +730,16 @@ def schedule_json(request):
 	tempx['UniqueId'] = "27Feb"
 	tempx['Title'] = "27Feb"
 	tempx['SubItems']= []
-	for k in Schedule.objects.filter(date='27-02-2016'):
+	for k in Schedule.objects.filter(date='27-02-2016').order_by('startingtime'):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['Time'] = k.startingtime
+		time=str(k.startingtime)
+		if len(time) == 3:
+			time= time[:1] + ':' + time[1:]
+		elif len(time) == 4:
+			time= time[:2] + ':'+ time[2:]
+		itemdict['Time'] = time
 		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
@@ -759,11 +748,16 @@ def schedule_json(request):
 	tempx['UniqueId'] = "28Feb"
 	tempx['Title'] = "28Feb"
 	tempx['SubItems']= []
-	for k in Schedule.objects.filter(date='28-02-2016'):
+	for k in Schedule.objects.filter(date='28-02-2016').order_by('startingtime'):
 		itemdict={}
 		itemdict['UniqueId'] = k.event.name
 		itemdict['Title'] = k.event.name
-		itemdict['Time'] = k.startingtime
+		time=str(k.startingtime)
+		if len(time) == 3:
+			time= time[:1] + ':' + time[1:]
+		elif len(time) == 4:
+			time= time[:2] + ':'+ time[2:]
+		itemdict['Time'] = time
 		itemdict['Venue'] = k.venue
 		tempx['SubItems'].append(itemdict)
 	temp['Items'].append(tempx)
