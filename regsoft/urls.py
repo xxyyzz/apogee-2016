@@ -56,6 +56,7 @@ urlpatterns = [
 	url(r'^recnacc/room_list/$', recnacc_room_list),
 	url(r'^recnacc/room_details/(?P<room_id>\d+)$', recnacc_room_details),
 
+	url(r'^certi_gen/$', certi_gen_txt),
 
 # 	url(r'^recnacc/home/$', recnacc_home),
 # 	url(r'^recnacc/home/(?P<pid>\d+)$', recnacc_dashboard),

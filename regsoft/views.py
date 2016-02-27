@@ -1,5 +1,6 @@
 from backend.models import *
 from regsoft.models import *
+from ems.models import *
 # from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -682,6 +683,20 @@ def controlz_view_bill(request, billid):
 
 
 
+
+def certi_gen_txt(request):
+    fopen =  open('/home/dvm/satwik_certitest/event_win.txt', 'w')
+    # event_ob = Event.objects.get(name = 'Street Dance')
+    levels_ob = Level.objects.filter(position=1)
+    team_list=[]
+    for t in levels_ob:
+        team_list.append(t.teams.all())
+    for tm in team_list:
+        for team in tm:
+            members_ob = team.members.all()
+            for k in members_ob:
+                fopen.write(str(k.name.upper() ) + '$' + str(k.college.name) + '$' + str(team.event.name) +'$' + str(team.comments)+'\n'  )
+    fopen.close()
 
 
 
