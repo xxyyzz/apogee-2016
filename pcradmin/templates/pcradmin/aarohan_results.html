@@ -1,25 +1,12 @@
 {% extends "pcradmin/base.html" %}
 {% block body %}
 <h1 align = "center"> Aarohan Results</h1>
-	<table class="u-full-width">
-	<thead>
-		<tr>
-			<th>Name of the Group leader</th>
-			<th>Name of the College</th>
-			<th>Change the Individual team limit</th>
-		</tr>
-    </thead>
-	<tbody>	
-	<form action="./changelimit" method="POST">
+
+	<form action="./submit" method="POST">
 	{% csrf_token %}
 			<input type="text" name="roll_no">
-			<th><input type="radio" name="uid" value={{p.id}} /></th>
-		</tr>
-	{% endfor %}
-	
-	</tbody>
-	</table>
+
+
 	<button type="submit" align="center">submit</button>
-	<br><a class="button" href="./dashboard">dashboard</a>
 	</form>
 {% endblock body %}
