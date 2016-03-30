@@ -23,10 +23,10 @@ def soft12(request) :
 
 def results(request):
 	if request.POST:
-		roll_no= int(request.POST['roll_no'])
 		try:
+			roll_no= int(request.POST['roll_no'])
 			res_ob= Results.objects.get(roll_no=roll_no)
 		except:
-			return HttpResponse('Error: Not Found')
+			return render(request, '../../pcradmin/templates/pcradmin/error_aarohan.html')
 		return render(request,'../../pcradmin/templates/pcradmin/res_details.html',{'res':res_ob})
 	return render(request,'../../pcradmin/templates/pcradmin/aarohan_results.html')
