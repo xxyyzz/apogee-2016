@@ -23,7 +23,7 @@ def soft12(request) :
 
 def results(request):
 	if request.POST:
-		roll_no= int(request.POST['roll'])
+		roll_no= int(request.POST['roll_no'])
 		try:
 			res_ob= Results.objects.get(roll_no=roll_no)
 		except:
