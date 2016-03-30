@@ -4,7 +4,7 @@ from django.template import Context
 from django.http import HttpResponse, JsonResponse
 import string, random, os
 from apogee16.settings import *
-
+from aarohan.models import *
 
 def website(request) :
 	return render(request, "aarohan/index.html")
