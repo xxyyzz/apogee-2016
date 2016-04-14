@@ -684,7 +684,7 @@ def controlz_view_bill(request, billid):
 
 
 
-def creti_gen_txt(request):
+def certi_gen_txt(request):
     fopen =  open('/home/dvm/satwik_certitest/event_part.txt', 'w')
     # event_ob = Event.objects.get(name = 'Street Dance')
     levels_ob = Level.objects.all()
