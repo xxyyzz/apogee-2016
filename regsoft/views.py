@@ -684,10 +684,10 @@ def controlz_view_bill(request, billid):
 
 
 
-def certi_gen_txt(request):
+def creti_gen_txt(request):
     fopen =  open('/home/dvm/satwik_certitest/event_win.txt', 'w')
     # event_ob = Event.objects.get(name = 'Street Dance')
-    levels_ob = Level.objects.filter(position=1)
+    levels_ob = Level.objects.all()
     team_list=[]
     for t in levels_ob:
         team_list.append(t.teams.all())
