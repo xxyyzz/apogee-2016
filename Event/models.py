@@ -5,12 +5,13 @@ from ckeditor.fields import RichTextField
 
 
 class EventCategory(models.Model):
-    name = models.CharField(max_length = 50)
-    weight = models.IntegerField(help_text= 'Heavier items sink to the bottom of the menu.')
-    def __unicode__(self):
-        return self.name
-    class Meta:
-        verbose_name_plural = 'Event Categories'
+	app_label='EventCategory'
+	name = models.CharField(max_length = 50)
+	weight = models.IntegerField(help_text= 'Heavier items sink to the bottom of the menu.')
+	def __unicode__(self):
+		return self.name
+	class Meta:
+		verbose_name_plural = 'Event Categories'
 
 
 class Tag(models.Model):
