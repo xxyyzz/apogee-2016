@@ -685,18 +685,20 @@ def controlz_view_bill(request, billid):
 
 
 def certi_gen_txt(request):
-    fopen =  open('/home/dvm/satwik_certitest/event_part.txt', 'w')
+    fopen =  open('/home/dvm/satwik_certitest/event_part_rem.txt', 'w')
     # event_ob = Event.objects.get(name = 'Street Dance')
-    levels_ob = Level.objects.all()
-    team_list=[]
-    for t in levels_ob:
-        team_list.append(t.teams.all())
-    for tm in team_list:
-        for team in tm:
-            fopen.write(str(team.leader.name.upper() ) + '$' + str(team.leader.college.name) + '$' + str(team.event.name) +'$' + str(team.comments)+'\n'  )
-            members_ob = team.members.all()
-            for k in members_ob:
-                fopen.write(str(k.name.upper() ) + '$' + str(k.college.name) + '$' + str(team.event.name) +'$' + str(team.comments)+'\n'  )
+    parts = iot.models.Participant.objects.all()
+    for k in parts:
+        fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'INTERNET OF THINGS'+'\n'  )
+    parts = registrations.models.Participant.objects.all()
+    for k in parts:
+        fopen.write(str(k.name.upper() ) + '$' + str(k.college.name.upper()) + '$' + 'PAPER & PROJECT PRESENTATION'+'\n'  )
+    parts = revengg.models.Participant.objects.all()
+    for k in parts:
+        fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'REVERSE ENGINEERING'+'\n'  )
+    parts = aic2016.models.Participant.objects.all()
+    for k in parts:
+        fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'APOGEE INNOVATION CHALLENGE 2016'+'\n'  )
     fopen.close()
     return HttpResponse('Done')
 
