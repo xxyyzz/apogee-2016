@@ -691,13 +691,16 @@ def certi_gen_txt(request):
     parts = Participant.objects.all()
     for k in parts:
         fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'INTERNET OF THINGS'+'\n'  )
-    parts = registrations.models.Participant.objects.all()
+    from registrations.models import Participant
+    parts = Participant.objects.all()
     for k in parts:
         fopen.write(str(k.name.upper() ) + '$' + str(k.college.name.upper()) + '$' + 'PAPER & PROJECT PRESENTATION'+'\n'  )
-    parts = revengg.models.Participant.objects.all()
+    from revengg.models import Participant
+    parts = Participant.objects.all()
     for k in parts:
         fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'REVERSE ENGINEERING'+'\n'  )
-    parts = aic2016.models.Participant.objects.all()
+    from aic2016.models import Participant
+    parts = Participant.objects.all()
     for k in parts:
         fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'APOGEE INNOVATION CHALLENGE 2016'+'\n'  )
     fopen.close()
