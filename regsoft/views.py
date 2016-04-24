@@ -695,10 +695,6 @@ def certi_gen_txt(request):
     parts = Participant.objects.all()
     for k in parts:
         fopen.write(str(k.name.upper() ) + '$' + str(k.college.name.upper()) + '$' + 'PAPER & PROJECT PRESENTATION'+'\n'  )
-    from revengg.models import Participant
-    parts = Participant.objects.all()
-    for k in parts:
-        fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'REVERSE ENGINEERING'+'\n'  )
     from aic2016.models import Participant
     parts = Participant.objects.all()
     for k in parts:
