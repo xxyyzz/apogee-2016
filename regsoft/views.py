@@ -687,7 +687,8 @@ def controlz_view_bill(request, billid):
 def certi_gen_txt(request):
     fopen =  open('/home/dvm/satwik_certitest/event_part_rem.txt', 'w')
     # event_ob = Event.objects.get(name = 'Street Dance')
-    parts = iot.models.Participant.objects.all()
+    from iot.models import Participant
+    parts = Participant.objects.all()
     for k in parts:
         fopen.write(str(k.name.upper() ) + '$' + str(k.college.upper()) + '$' + 'INTERNET OF THINGS'+'\n'  )
     parts = registrations.models.Participant.objects.all()
