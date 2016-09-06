@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.shortcuts import render
 from registrations.models import *
+from registrations.models import Participant as Participantr
 from Event.models import *
 from backend.models import *
 # from events.models import *
@@ -784,7 +785,7 @@ def lev_partlist(require):
     workbook = xlsxwriter.Workbook(output)
     worksheet = workbook.add_worksheet('part_apogee')
 
-    plist = Participant.objects.all()
+    plist = Participantr.objects.all()
 
     worksheet.write(0, 0, "Name")
     worksheet.write(0, 1, "phone")
