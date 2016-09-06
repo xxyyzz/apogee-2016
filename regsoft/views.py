@@ -18,6 +18,7 @@ import json
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
+from backend.models import *
 
 
 
@@ -1557,8 +1558,44 @@ def recnacc_bill_list(request):
     return render_to_response('regsoft/controlz_recnacc_bill_print.html', context_dict, context)
 
 
+def lev_partflist(request):
+    import xlsxwriter
+
+    try:
+        import cStringIO as StringIO
+    except ImportError:
+        import StringIO
+    a_list = []
 
 
+    output = StringIO.StringIO()
+    workbook = xlsxwriter.Workbook(output)
+    worksheet = workbook.add_worksheet('part_apogee')
+
+    plist = Participant.objects.filter(firewallzo = True)
+
+    worksheet.write(0, 0, "Name")
+    worksheet.write(0, 1, "phone")
+    worksheet.write(0, 2, "email")    
+    worksheet.write(0, 3, "college")
+
+    rowno = 1
+
+    for x in plist:
+        collegep = x.college
+        colno = 1
+        worksheet.write(rowno, 0, x.name)
+        worksheet.write(rowno, 1, x.phone_one)
+        worksheet.write(rowno, 2, x.email)
+        worksheet.write(rowno, 3, collegep.name)
+        rowno+=1
+
+    workbook.close()
+    filename = 'part_apogee.xlsx'
+    output.seek(0)
+    response = HttpResponse(output.read(), content_type="application/ms-excel")
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
 
 
 
