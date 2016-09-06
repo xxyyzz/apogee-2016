@@ -774,9 +774,9 @@ def lev_partlist(require):
     import xlsxwriter
 
         try:
-                        import cStringIO as StringIO
+            import cStringIO as StringIO
         except ImportError:
-                        import StringIO
+            import StringIO
         a_list = []
 
 
