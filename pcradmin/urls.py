@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^mail_approved/$', views.mail_approved),
     url(r'^initreg/$', views.initial_registration),
     url(r'^part_list/$', views.part_list),
+    url(r'^part_list_xlsx/$', views.lev_partlist),    
     url(r'^part_list/(?P<part_id>\d+)/$', views.part_details),
     url(r'^participantxlsx/$', utilities.participant_stats_xlsx),
     url(r'^part_act/$', views.part_act),
