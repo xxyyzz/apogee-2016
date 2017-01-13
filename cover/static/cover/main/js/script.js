@@ -239,7 +239,7 @@ $(window).load(function(){
 });
 function getUserInfo(){
 	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/user/',
+		url:'https://bits-apogee.org'+imgpre+'/api/user/',
 		method:'GET',
         crossDomain: true,
         success:function(response){
@@ -270,7 +270,7 @@ function getUserInfo(){
 }
 function logout(){
 	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/logout/',
+		url:'https://bits-apogee.org'+imgpre+'/api/logout/',
 		method:'GET',
         crossDomain: true,
         success:function(response){
@@ -299,7 +299,7 @@ $(document).on('submit','#create_a_team',function(e){
     $('.create_team').text('Creating ...');
     $('.create_team').prop('disabled', true);
     $.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/',
+		url:'https://bits-apogee.org'+imgpre+'/api/events/team/register/'+events_list[cur_cat].events[cur_event].id+'/',
 		method:'POST',
         crossDomain: true,
 		data:formData,
@@ -328,7 +328,7 @@ $('#login-form').submit(function(e){
 					};
 	// console.log(login_data);
 	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/login/',
+		url:'https://bits-apogee.org'+imgpre+'/api/login/',
 		method:'POST',
         crossDomain: true,
 		data:login_data,
@@ -391,7 +391,7 @@ $('#reg-form').submit(function(e){
 		$('#submit_r').prop('disabled', true);
 		$('#submit_r').html('Registering...');
 		$.ajax({
-			url:'http://bits-apogee.org'+imgpre+'/api/register/',
+			url:'https://bits-apogee.org'+imgpre+'/api/register/',
 			method:"POST",
 			// crossDomain: true,
 			// datatype: 'jsonp',
@@ -439,7 +439,7 @@ window.onload = function() {
 		var js,fjs=d.getElementsByTagName(s)[0];
 		if(!d.getElementById(id)){
 			js=d.createElement(s);
-			js.id=id;js.src="http://platform.twitter.com/widgets.js";
+			js.id=id;js.src="https://platform.twitter.com/widgets.js";
 			fjs.parentNode.insertBefore(js,fjs);
 		}
 	}(document,"script","twitter-wjs");
@@ -451,7 +451,7 @@ window.onload = function() {
 			return;
 		js = d.createElement(s);
 		js.id = id;
-		js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1";
+		js.src = "https://connect.facebook.net/en_US/all.js#xfbml=1";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 }
@@ -762,7 +762,7 @@ function prev_eve(){
 }
 function summaryGet(){
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/events/summary/',
+		url: 'https://bits-apogee.org'+imgpre+'/events/summary/',
 		method: "GET",
 		success: function(data){
 			events_list = data;
@@ -775,7 +775,7 @@ function summaryGet(){
 }
 function eve_reg_info(){
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/events/status/',
+		url: 'https://bits-apogee.org'+imgpre+'/api/events/status/',
 		method: "GET",
 		success: function(data){
 			for(var i=0;i<data.data.length;i++){
@@ -796,7 +796,7 @@ function create_my_team(id,put){
 	}
 	else{
 		$.ajax({
-			url: 'http://bits-apogee.org'+imgpre+'/api/participant/'+id+'/',
+			url: 'https://bits-apogee.org'+imgpre+'/api/participant/'+id+'/',
 			method: "GET",
 			success: function(data){
 				if(data.status==1)
@@ -815,7 +815,7 @@ function create_my_team(id,put){
 }
 function register_for_event(id){
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/events/register/'+id+'/',
+		url: 'https://bits-apogee.org'+imgpre+'/api/events/register/'+id+'/',
 		method: "GET",
 		success: function(data){
 			$('.se_descr').html(data.message);
@@ -881,7 +881,7 @@ function get_event_detail(id,call_back){
 		return;
 	}
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/events/get_event/'+id+'/',
+		url: 'https://bits-apogee.org'+imgpre+'/events/get_event/'+id+'/',
 		method: "GET",
 		success: function(data){
 			event_data[id] = data;
@@ -1103,7 +1103,7 @@ $("g.struct").on('mousedown', function (evt) {
 var map_ele_info = {
 	'thinkAgainConclave'	:		{
 										ename:'Think Again Conclave',
-										content:'<p>The <b>Think Again conclave</b>, the out of the box guest lecture series of APOGEE, has been an integral component of the fest ever since its inception in 2012. Featuring talks by some of the brightest and most creative minds on the planet, the conclave has always inspired the students and attendees to rediscover and refurbish their minds and ambitions, and quite aptly, to “Think Again”. </p> <p>The series, over the years, has showcased a vast number of orators who have left the audience in raptures with their sheer brilliance on stage. Walter Lewin, Ryan Woodward, Jeff Lieberman, Mansoor Khan, David J. Peterson and Walter Bender are just some of the many names, who have instilled a sense of novelty in the minds of the audience and added a different dimension to their thinking. The Think Again Conclave was also the proud host of the first ever Ig Nobel Laureates’ Conference.</p> <p style="font-size:25px;font-weight:900">Present Speakers...</p> <p> <div style="display:inline-block;vertical-align:top;width:290px;padding:5px 25px;text-align:center;"> <b>Dr. Richard Stallman</b><br> Father of the Free Software Movement, Founder GNU will be speaking on Net Neutrality on 26th February 2016. </div> <div style="display:inline-block;vertical-align:top;width:290px;padding:5px 25px;text-align:center;"> <b>Mobasshar Javed Akbar</b><br> A Columnist, Editor, Author will be speaking on the relationship between India and Pakistan on 27th February 2016. </div> <div style="display:inline-block;vertical-align:top;width:290px;padding:5px 25px;text-align:center;"> <b>Rohit Gupta</b><br>Mathematics and Religion - a Talk by Compasswallah and is also a columnist for The Hindu Businessline on 28th February 2016. </div> </p><br><a class="lb_a" href="http://bits-apogee.org/thinkagain/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										content:'<p>The <b>Think Again conclave</b>, the out of the box guest lecture series of APOGEE, has been an integral component of the fest ever since its inception in 2012. Featuring talks by some of the brightest and most creative minds on the planet, the conclave has always inspired the students and attendees to rediscover and refurbish their minds and ambitions, and quite aptly, to “Think Again”. </p> <p>The series, over the years, has showcased a vast number of orators who have left the audience in raptures with their sheer brilliance on stage. Walter Lewin, Ryan Woodward, Jeff Lieberman, Mansoor Khan, David J. Peterson and Walter Bender are just some of the many names, who have instilled a sense of novelty in the minds of the audience and added a different dimension to their thinking. The Think Again Conclave was also the proud host of the first ever Ig Nobel Laureates’ Conference.</p> <p style="font-size:25px;font-weight:900">Present Speakers...</p> <p> <div style="display:inline-block;vertical-align:top;width:290px;padding:5px 25px;text-align:center;"> <b>Dr. Richard Stallman</b><br> Father of the Free Software Movement, Founder GNU will be speaking on Net Neutrality on 26th February 2016. </div> <div style="display:inline-block;vertical-align:top;width:290px;padding:5px 25px;text-align:center;"> <b>Mobasshar Javed Akbar</b><br> A Columnist, Editor, Author will be speaking on the relationship between India and Pakistan on 27th February 2016. </div> <div style="display:inline-block;vertical-align:top;width:290px;padding:5px 25px;text-align:center;"> <b>Rohit Gupta</b><br>Mathematics and Religion - a Talk by Compasswallah and is also a columnist for The Hindu Businessline on 28th February 2016. </div> </p><br><a class="lb_a" href="https://bits-apogee.org/thinkagain/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/thinkAgain.svg',
 										func:content_link,
 									},
@@ -1228,7 +1228,7 @@ var map_ele_info = {
 
 	'archives'				:		{
 										ename:'Archives',
-										content:'<div class="archive_data"><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap14.jpg" class="arch-img"/><a class="arch-lnk" href="http://bits-apogee.org/2014/" target="_blank"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2014</a></div><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap15i.jpg" class="arch-img"/><a class="arch-lnk" href="http://bits-apogee.org/u/intro" target="_blank"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2015 Intro<a></div><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap15.jpg" class="arch-img"/><a class="arch-lnk" target="_blank" href="http://bits-apogee.org/u/2015"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2015 </a></div><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap16i.jpg" class="arch-img"/><a class="arch-lnk" target="_blank" href="/intro/"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2016 Intro</a></div></div>',
+										content:'<div class="archive_data"><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap14.jpg" class="arch-img"/><a class="arch-lnk" href="https://bits-apogee.org/2014/" target="_blank"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2014</a></div><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap15i.jpg" class="arch-img"/><a class="arch-lnk" href="https://bits-apogee.org/u/intro" target="_blank"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2015 Intro<a></div><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap15.jpg" class="arch-img"/><a class="arch-lnk" target="_blank" href="https://bits-apogee.org/u/2015"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2015 </a></div><div class="archive-holder"><img src="'+imgpre+'/static/cover/main/img/archive/ap16i.jpg" class="arch-img"/><a class="arch-lnk" target="_blank" href="/intro/"><i class="fa fa-globe"></i>&nbsp;&nbsp;APOGEE 2016 Intro</a></div></div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/archives.svg',
 										func:content_link,
 									},
@@ -1256,7 +1256,7 @@ var map_ele_info = {
 
 	'campusAmbassador'		:		{
 										ename:'Campus Ambassador',
-										content:'<span style="font-size:25px"><b>What is a Campus Ambassador ?</b></span><p>A Campus Ambassador is responsible for publicity for APOGEE, the annual technical extravaganza of BITS Pilani, Pilani Campus, and is responsible for introducing and encouraging student participation in the fest, in his/her area or college.</p><p>To APOGEE he/she is the chief student representative of the college and is the coordinator for any relevant activity conducted in his/her college for publicity through social media, College notice boards, Root-mails etc.</p><span style="font-size:25px"><b>Why be a Campus Ambassador ?</b></span><p>Campus Ambassador Program, this time is powered by YOUTH4WORK, an established talent assessment company. A Campus Ambassador will get an official certificate through BITS-Pilani for pursuing a Marketing Internship Programme for 2 months recognized by YOUTH4WORK.</p><p>Moreover, he/she will be entitled to awards and special incentives like exemptions from registration fees, exclusive merchandise, recommendations etc. based on their performance in the programme.</p><br><a class="lb_a" href="http://bits-apogee.org/campusambassador/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
+										content:'<span style="font-size:25px"><b>What is a Campus Ambassador ?</b></span><p>A Campus Ambassador is responsible for publicity for APOGEE, the annual technical extravaganza of BITS Pilani, Pilani Campus, and is responsible for introducing and encouraging student participation in the fest, in his/her area or college.</p><p>To APOGEE he/she is the chief student representative of the college and is the coordinator for any relevant activity conducted in his/her college for publicity through social media, College notice boards, Root-mails etc.</p><span style="font-size:25px"><b>Why be a Campus Ambassador ?</b></span><p>Campus Ambassador Program, this time is powered by YOUTH4WORK, an established talent assessment company. A Campus Ambassador will get an official certificate through BITS-Pilani for pursuing a Marketing Internship Programme for 2 months recognized by YOUTH4WORK.</p><p>Moreover, he/she will be entitled to awards and special incentives like exemptions from registration fees, exclusive merchandise, recommendations etc. based on their performance in the programme.</p><br><a class="lb_a" href="https://bits-apogee.org/campusambassador/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to know more</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/campus.svg',
 										func:content_link,
 									},
@@ -1318,7 +1318,7 @@ var map_ele_info = {
 									},
 	'armageddon'			:		{
 										ename:'Armageddon',
-										content:'<p><b>Armageddon</b> is the traditional online gaming competition, being one of the primary attraction of APOGEE 2016. The event sees the participation of the best gaming societies from all over the country, that compete neck and neck in a spectrum of games that include FIFA, BLUR, Age of Empires etc. </p><p>This year, we present the version 2.0 of this grand event. An overnight competition for the first time, it promises to be bigger and better in present instance !</p><p><b>The games happening this year are : </b><br><ul><li>AOE II : Conquerers\' Expansion</li><li>COD 4 : Modern Warfare</li><li>Counter Strike 1.6</li><li>DOTA 2</li><li>FIFA 14</li><li>Need for Speed Most Wanted</li><li>BLUR</li></ul></p><br><a class="lb_a" href="http://bits-apogee.org/armageddon/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register !</b></a>',
+										content:'<p><b>Armageddon</b> is the traditional online gaming competition, being one of the primary attraction of APOGEE 2016. The event sees the participation of the best gaming societies from all over the country, that compete neck and neck in a spectrum of games that include FIFA, BLUR, Age of Empires etc. </p><p>This year, we present the version 2.0 of this grand event. An overnight competition for the first time, it promises to be bigger and better in present instance !</p><p><b>The games happening this year are : </b><br><ul><li>AOE II : Conquerers\' Expansion</li><li>COD 4 : Modern Warfare</li><li>Counter Strike 1.6</li><li>DOTA 2</li><li>FIFA 14</li><li>Need for Speed Most Wanted</li><li>BLUR</li></ul></p><br><a class="lb_a" href="https://bits-apogee.org/armageddon/" target="_blank"><b><i class="fa fa-external-link"></i>&nbsp;&nbsp;Click here to register !</b></a>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/arma.png',
 										func:content_link,
 									},									
@@ -1326,7 +1326,7 @@ var map_ele_info = {
 										ename:'Blog',
 										content:'<div class="c_soon">Coming soon...</div>',
 										icon: imgpre+'/static/cover/main/img/lb-icons/workshops.svg',
-										func:function() { window.open('http://bits-apogee.org/blog', '_blank');  },
+										func:function() { window.open('https://bits-apogee.org/blog', '_blank');  },
 									},
 	'kernel'			:		{
 										ename:'Kernel Events',
@@ -1344,7 +1344,7 @@ var map_ele_info = {
 
 function schedule_gen(b_icon,b_name,b_content){
 	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/schedule_json/',
+		url:'https://bits-apogee.org'+imgpre+'/schedule_json/',
 		method:'GET',
         crossDomain: true,
 		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
@@ -1388,7 +1388,7 @@ function content_link(b_icon,b_name,b_content){
 
 $('#updates-wrapper').click(function(){
 	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/getupdatedata/',
+		url:'https://bits-apogee.org'+imgpre+'/api/getupdatedata/',
 		method:'GET',
         crossDomain: true,
 		// headers : { "X-CSRFToken" : getCookie('csrftoken') },
@@ -1427,7 +1427,7 @@ $('#login_instrs').click(function(){
 var profile_info;
 function openProfile(){
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/profile/',
+		url: 'https://bits-apogee.org'+imgpre+'/api/profile/',
 		method: "GET",
 		success: function(data){
 			profile_info =data;
@@ -1442,7 +1442,7 @@ function openProfile(){
 			$('textarea[name="address"]').val(data.address);
 			$('.update_bank').prop('disabled',false);
 			$('.update_bank').text('Update');
-			$('.conf_url').click(function(){window.open('http://bits-apogee.org/2016/pcradmin/vpdf/'+data["id"]+'/','_blank')});
+			$('.conf_url').click(function(){window.open('https://bits-apogee.org/2016/pcradmin/vpdf/'+data["id"]+'/','_blank')});
 			if(!data.pcr_approval){
 				$('.approved').addClass('unapproved');
 				$('.unapproved').text('Account Unapproved');
@@ -1492,7 +1492,7 @@ function openProfile(){
 function unreg_eve(id){
 	$('.unreg_eve').prop('disabled',true);
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
+		url: 'https://bits-apogee.org'+imgpre+'/api/events/unregister/'+id+'/',
 		method: "POST",
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
@@ -1506,7 +1506,7 @@ function unreg_eve(id){
 function leave_team(id){
 	$('.leave_team').prop('disabled',true);
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
+		url: 'https://bits-apogee.org'+imgpre+'/api/events/team/unregister/'+id+'/',
 		method: "POST",
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
@@ -1519,7 +1519,7 @@ function leave_team(id){
 function delete_team(id){
 	$('.delete_team').prop('disabled',true);
 	$.ajax({
-		url: 'http://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
+		url: 'https://bits-apogee.org'+imgpre+'/api/events/team/delete/'+id+'/',
 		method: "POST",
 		crossDomain: true,
 		headers : { "X-CSRFToken" : getCookie('csrftoken') },
@@ -1535,7 +1535,7 @@ $('#pro_detail_form').submit(function(e){
 	$('.update_bank').text('Updating..');
 	var formData = $(this).serializeArray();
 	$.ajax({
-		url:'http://bits-apogee.org'+imgpre+'/api/profile/update/',
+		url:'https://bits-apogee.org'+imgpre+'/api/profile/update/',
 		method:'POST',
         crossDomain: true,
 		data:formData,
