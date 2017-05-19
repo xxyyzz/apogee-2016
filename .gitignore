@@ -3,4 +3,5 @@ database_config.py
 db.sqlite3
 *.pyc
 /media/
+/static/
 activate
