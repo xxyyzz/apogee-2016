@@ -31,17 +31,27 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'Event.apps.EventConfig',
+    'Event',
     'regsoft',
     'backend',
     'registrations',
+    'pcradmin',
+    'cover',
+    'cms',
+    'ems',
+    'dhiti',
+    'revengg',
+    'lacuna',
+    'youthcon',
+    'aic2016',
+    'aarohan',
+    'iot',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pcradmin',
 )
 
 MIDDLEWARE_CLASSES = (

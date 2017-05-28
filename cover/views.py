@@ -11,13 +11,13 @@ def preIntro(request) :
 	return render(request, "pre/index.html")
 
 def intro(request) :
-	return render(request, "intro/index.html")	
+	return render(request, "intro/index.html")
 
 def spons(request):
 	return render(request,"main/sponsors.html")
 
 def wallpaper(request) :
-	return render(request, "main/wallpaper.html")	
+	return render(request, "main/wallpaper.html")
 
 @ensure_csrf_cookie
 def main(request) :
